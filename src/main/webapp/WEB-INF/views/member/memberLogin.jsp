@@ -3,20 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Get It :: 로그인</title>
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
-
-<!-- 부트스트랩관련 라이브러리 -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<!-- 사용자작성 css -->
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
-</head>
+<fmt:requestEncoding value="UTF-8" />
+<jsp:include page="/WEB-INF/views/common/sHeader.jsp">
+	<jsp:param value="Get It :: 로그인" name="pageTitle" />
+</jsp:include>
 <style>
 .content-container{
 	width: 100%;
@@ -31,41 +21,8 @@
 	width: 300px;
 	margin: 0 auto;
 }
-.header-container{
-	border-bottom: 1px solid gray;
-	width: 100%;
-	height: 100px;
-	display: flex;
-	justify-content: space-between;
-}
-.header-left, .header-right{
-	display: inline-block;
-}
-.header-right{
-	margin-left: 40%;
-	font-size: 14px;
-}
-.header-left div, .header-right div{
-	border: 1px solid black;
-	width: 100px;
-	height: 60px;
-	vertical-align: middle;
-	display: inline-block;
-}
-.header-right .moveEnroll{
-	width: 200px;
-}
 </style>
-<div class="header-container">
-	<div class="header-left">
-	<div class="logo"><a href="">로고</a></div>
-	<div class="logo-next">로그인하기</div>
-	</div>
-	<div class="header-right">
-	<div class="moveEnroll"><a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a></div>
-	<div class="customer-center"><a href="">고객센터</a></div>
-	</div>
-</div>
+
 	<div class="content-container">
 		<div class="login-container">
 			<div class="login-text">
@@ -73,9 +30,9 @@
 			</div>
 			<div class="login-link">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-action"><a href="">페이스북 로그인</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">gmail로그인</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡 로그인</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">페이스북으로 로그인</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 로그인</a></li>
 			</ul>
 			</div>
 			<span>또는</span>

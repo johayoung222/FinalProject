@@ -4,12 +4,81 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="회원등록" name="pageTitle" />
+<jsp:include page="/WEB-INF/views/common/sHeader.jsp">
+	<jsp:param value="Get It :: 회원가입" name="pageTitle" />
 </jsp:include>
 <style>
-	div#enroll-container{width:400px; margin:0 auto; text-align:center;}
-	div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
+.enroll-table{
+	border: 1px solid black;
+	text-align: center;
+}
+.enroll-table div{
+	display: inline-block;
+}
+</style>
+<div class="total-container">
+	<div class="enroll-table">
+		<div class="select-first">1.약관동의</div>
+		<div class="select-second">2.가입 방법 선택</div>
+		<div class="select-third">3.정보입력</div>
+	</div>
+	
+<div class="agree-container">
+	<div class="agree-text"></div>
+</div>
+<!-- ---------------------------------------------------------------------------------------------------------------- -->
+<style>
+.content-container{
+	width: 100%;
+	display: none;
+}
+.login-container{
+	border: 1px solid black;
+	margin: 0 auto;
+	width: 700px;
+	text-align: center;
+}
+.list-group{
+	width: 300px;
+	margin: 0 auto;
+}
+</style>
+<div class="content-container">
+		<div class="login-container">
+			<div class="login-text">
+				<span>회원가입</span>
+			</div>
+			<div class="login-link">
+			<ul class="list-group">
+				<li class="list-group-item list-group-item-action"><a href="">페이스북으로 시작하기</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">구글로 시작하기</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 시작하기</a></li>
+			</ul>
+			</div>
+			<span>또는</span>
+			<div class="login-form">
+				<form action="${pageContext.request.contextPath }/member/memberLogin.do">
+				<label for="memberId">아이디 : </label>
+				<input type="text" id="memberId" name="memberId"/><br />
+				<label for="password">비밀번호: </label>
+				<input type="password" id="password" name="password"/><br />
+				<input type="submit" value="로그인"/>
+				</form>
+			</div>
+			<a href="">비밀번호를 잊어버리셨나요?</a>
+		</div>
+	</div>
+<!-- ------------------------------------------------------------------------------------------------------------ -->
+<style>
+	div#enroll-container{
+	width:400px; 
+	margin:0 auto; 
+	text-align:center;
+	display: none;
+	}
+	div#enroll-container input, div#enroll-container select {
+	margin-bottom:10px;
+	}
 	
 	/* 중복아이디 체크관련 */
 	div#memberId-container{
@@ -73,6 +142,10 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="reset" class="btn btn-outline-success" value="취소">
 	</form>
 </div>
+
+
+
+</div><!-- total-container End -->
 <script>
 /**
  * 아이디 최소 4자리

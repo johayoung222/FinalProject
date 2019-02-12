@@ -45,7 +45,7 @@
 			    <c:if test="${memberLoggedIn == null }">
 				    <!-- 로그인,회원가입 버튼 -->
 			        <!--https://getbootstrap.com/docs/4.1/components/buttons/#outline-buttons-->
-			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
+			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberMoveLogin.do'">로그인</button>
 			        &nbsp;
 			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			    </c:if>
