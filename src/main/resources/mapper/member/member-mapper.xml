@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<insert id="insertMember">
+	insert into member values(#{memberId} ,
+							  #{password} ,
+							  #{memberName} ,
+							  #{gender} ,
+							  #{age} ,
+							  #{email} ,
+							  #{phone} ,
+							  #{address} ,
+							  #{hobby , typeHandler=com.kh.spring.common.typehandler.StringArrayTypeHandler} ,
+							  sysdate)
+	</insert>
+	
+	<select id="selectOneMember" resultMap="selectOneMember" >
+	select * from member where memberid = #{memberId}
+	</select>
+	<resultMap type="m" id="selectOneMember">
+		<result column="hobby" property="hobby" typeHandler="strArrTypeHandler"/>
+	</resultMap>
+	
+	<update id="memberUpdate">
+	update member set membername = #{memberName} ,
+					  gender = #{gender} ,
+					  age = #{age} ,
+					  email = #{email} ,
+					  phone = #{phone} ,
+					  address = #{address} ,
+					  hobby = #{hobby , typeHandler=com.kh.spring.common.typehandler.StringArrayTypeHandler}
+	where memberid = #{memberId}
+	</update>
+	
+	
+	
+</mapper>
