@@ -6,6 +6,7 @@
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/sHeader.jsp">
 	<jsp:param value="Get It :: 로그인" name="pageTitle" />
+	<jsp:param value="1" name="pageName"/>
 </jsp:include>
 <style>
 .content-container{

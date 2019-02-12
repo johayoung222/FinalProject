@@ -38,18 +38,25 @@
 	vertical-align: middle;
 	display: inline-block;
 }
-.header-right .moveEnroll{
+.header-right .moveEnroll, .header-left .logo-next{
 	width: 200px;
 }
 </style>
 </head>
 <div class="header-container">
 	<div class="header-left">
-	<div class="logo"><a href="">로고</a></div>
-	<div class="logo-next">로그인하기</div>
+	<div class="logo"><a href="${pageContext.request.contextPath }">로고</a></div>
+	<div class="logo-next">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
 	</div>
 	<div class="header-right">
-	<div class="moveEnroll"><a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a></div>
+	<div class="moveEnroll">
+	<c:if test="${param.pageName==0 }">
+	<a href="${pageContext.request.contextPath }/member/memberMoveLogin.do">회원이신가요? 로그인하러가기</a>
+	</c:if>
+	<c:if test="${param.pageName==1 }">
+	<a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a>
+	</c:if>
+	</div>
 	<div class="customer-center"><a href="">고객센터</a></div>
 	</div>
 </div>
