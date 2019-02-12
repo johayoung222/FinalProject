@@ -17,15 +17,14 @@ public class LoginLoggerAdvice {
 	
 	Logger logger = Logger.getLogger(getClass());
 	
-	@AfterReturning(pointcut="execution(* com.kh.spring.member..*Controller.*Login(..))" ,
-					returning="returnObj")
-	public void advice(JoinPoint joinPoint , Object returnObj) {
-		ModelAndView mav = (ModelAndView)returnObj;
-		Map<String, Object> map = mav.getModel();
-		if(map.containsKey("memberLoggedIn")) {
-			Member m = (Member)map.get("memberLoggedIn");
-			logger.info("["+m.getMemberId()+"]가 로그인하였습니다.");
-		}
-		
-	}
+//	@AfterReturning(pointcut="execution(* com.kh.spring.member..*Controller.*Login(..))" ,
+//					returning="returnObj")
+//	public void advice(JoinPoint joinPoint , Object returnObj) {
+//		ModelAndView mav = (ModelAndView)returnObj;
+//		Map<String, Object> map = mav.getModel();
+//		if(map.containsKey("memberLoggedIn")) {
+//			Member m = (Member)map.get("memberLoggedIn");
+//			logger.info("["+m.getMemberId()+"]가 로그인하였습니다.");
+//		}
+//	}
 }
