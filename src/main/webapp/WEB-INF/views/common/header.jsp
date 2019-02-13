@@ -33,6 +33,7 @@
 	height: 50px;
 	/* margin-left: 200px; */
 	margin-left: 21%;
+	
 	border: 2px solid blue;
 }
 
@@ -81,7 +82,7 @@ border-right: 1px solid lightgray; float: right; width:12.5%; height:40px; text-
 			</div>
 			</div>
 	</div>
-	<br><br>
+	
 	<div id="header-container">
 		<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" width="100px" height="80px	">
 			 <input type="text" name="search" placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
