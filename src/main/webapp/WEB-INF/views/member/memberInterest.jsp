@@ -31,9 +31,8 @@
 		<span>관심 상품을 선택해주세요.</span>
 	</div>
 	<div class="interest-content">
-		<c:forEach items="${list }" var="c" varStatus="vs">
-		<span>${c[vs].CATEGORY_MACRO }</span>
-		<span>${c[vs].CATEGPRY_NAME }</span>
+		<c:forEach items="${category }" var="c" varStatus="vs">
+		<span>${c.CATEGORY_NAME }</span><br />
 		</c:forEach>
 	</div>
 </div>
