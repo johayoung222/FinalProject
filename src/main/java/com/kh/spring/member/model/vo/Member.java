@@ -21,22 +21,22 @@ public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int seq_member_no;
 	private String memberId;
-	private String password;
+	private String memberPassword;
 	private String memberName;
 	private String gender;
 	private String memberBirth;
-	private String address;	
-	private String phone;
-	private String interest;
-	private String alarm;
-	private String milage;
-	private String mailNo;
-	private String email;
-	private String isAdmin;
-	private String seller;
-	private String snsAccount;
-	private String report;
-	private String status;
-	private Date enrollDate;
+	private String memberAddress;	
+	private String memberPhone;
+	private String memberInterest;
+	private String memberAlarm;
+	private String memberMilage;
+	private String memberMailNo;
+	private String memberEmail;
+	private String memberIsAdmin;
+	private String memberSeller;
+	private String memberSnsAccount;
+	private String memberReport;
+	private String memberStatus;
+	private Date memberEnrollDate;
 	
 }
