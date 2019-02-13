@@ -38,7 +38,7 @@
 			</div>
 			<span>또는</span>
 			<div class="login-form">
-				<form action="${pageContext.request.contextPath }/member/memberLogin.do">
+				<form action="${pageContext.request.contextPath }/member/memberLogin.do" method="post">
 				<label for="memberId">아이디 : </label>
 				<input type="text" id="memberId" name="memberId"/><br />
 				<label for="password">비밀번호: </label>
