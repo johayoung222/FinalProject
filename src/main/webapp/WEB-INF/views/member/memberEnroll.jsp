@@ -882,6 +882,8 @@ function next2(){
 	$(".content-container").hide();
 	$("#enroll-container").show();
 	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
+	var alarm = $("#agree4").prop("checked");
+	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
 }
 </script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
@@ -924,6 +926,7 @@ Bootstrap 폼태그 작성 시 유의할 것
  -->
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
+		<input type="hidden" name="memberAlarm"/>
 		
 		<div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
@@ -933,30 +936,17 @@ Bootstrap 폼태그 작성 시 유의할 것
 			<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0" />
 		</div>
 		
-		<input type="password" class="form-control" placeholder="비밀번호" name="password" id="password_" required>
+		<input type="password" class="form-control" placeholder="비밀번호" name="memberPassword" id="password_" required>
 		<input type="password" class="form-control" placeholder="비밀번호확인" id="password2" required>
-		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName" required>
-		<input type="number" class="form-control" placeholder="생년월일" name="age" id="age">
-		<input type="email" class="form-control" placeholder="이메일" name="email" id="email" required>
-		<input type="text" class="form-control" placeholder="주소" name="address" id="address">
+		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName">
+		<input type="text" class="form-control" placeholder="ex)940214" name="memberBirth" id="memberBirth">
+		<input type="email" class="form-control" placeholder="이메일" name="memberEmail" id="email">
+		<input type="text" class="form-control" placeholder="주소" name="memberAddress" id="address">
 		<select class="form-control" name="gender" required>
 			<option value="" disabled selected>성별</option>
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select>
-		<div class="form-check-inline form-check">
-			관심상품 : &nbsp; 
-			<input type="checkbox" class="form-check-input" name="hobby" id="hobby0" value="">
-			<label for="hobby0" class="form-check-label">전자제품</label>&nbsp;
-			<input type="checkbox" class="form-check-input" name="hobby" id="hobby1" value="">
-			<label for="hobby1" class="form-check-label">생활용품</label>&nbsp;
-			<input type="checkbox" class="form-check-input" name="hobby" id="hobby2" value="">
-			<label for="hobby2" class="form-check-label">헬스용품</label>&nbsp;
-			<input type="checkbox" class="form-check-input" name="hobby" id="hobby3" value="">
-			<label for="hobby3" class="form-check-label">식음료품</label>&nbsp;
-			<input type="checkbox" class="form-check-input" name="hobby" id="hobby4" value="">
-			<label for="hobby4" class="form-check-label">여행용품</label>&nbsp;
-		</div>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
