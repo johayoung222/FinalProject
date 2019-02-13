@@ -143,46 +143,11 @@ border-right: 1px solid lightgray; float: right; width:12.5%; height:40px; text-
 			</ul>
 
 		</div>
-<<<<<<< HEAD
-		<!-- bootstrap 4.1 navbar -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">
-				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" alt="스프링로고" width="50px" />
-			</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-		  	</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<!-- 좌우 정렬을 위해 .mr-auto추가 -->
-				<ul class="navbar-nav mr-auto">
-			      <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}">Home</a></li>
-			      <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/demo/demo.do">데모</a></li>
-			      <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/demo/demoList.do">Dev목록</a></li>
-			      <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/memo/memo.do">메모</a></li>
-			      <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/boardList.do">게시판</a></li>
-			    </ul>
-			    
-			    <c:if test="${memberLoggedIn == null }">
-				    <!-- 로그인,회원가입 버튼 -->
-			        <!--https://getbootstrap.com/docs/4.1/components/buttons/#outline-buttons-->
-			        <a class="nav-link" href="${pageContext.request.contextPath}/thing/thing.do" style="">안쓰는 물건 판매하기</a> 
-			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
-			        &nbsp;
-			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
-			    </c:if>
-			    <c:if test="${memberLoggedIn != null }">
-			    	<a class="nav-link" href="${pageContext.request.contextPath}/thing/thing.do" style="">안쓰는 물건 판매하기</a> 
-			    	<a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName }님, 안녕하세요 :)</a>
-			    	&nbsp;
-			    	<button class="btn btn-outline-success" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
-			    </c:if>
-			 </div>
-		</nav>
-=======
+		<a class="nav-link" href="${pageContext.request.contextPath}/thing/thing.do" style="">안쓰는 물건 판매하기</a> 
+	
 
 	</nav>
-
->>>>>>> 73a4266bd5945565069c47b257622b99996a72a9
+ 
 	</header>
 
 	<!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
