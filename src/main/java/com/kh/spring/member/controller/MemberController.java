@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,11 +59,11 @@ public class MemberController {
 			logger.debug("회원등록 요청");			
 		}
 
-		System.out.println("암호화전 : "+m.getPassword());
-		String temp = m.getPassword();
+		System.out.println("암호화전 : "+m.getMemberPassword());
+		String temp = m.getMemberPassword();
 		// BCrypt방식 암호화
-		m.setPassword(bcryptPasswordEncoder.encode(temp));
-		System.out.println("암호화후 : "+m.getPassword());
+		m.setMemberPassword(bcryptPasswordEncoder.encode(temp));
+		System.out.println("암호화후 : "+m.getMemberPassword());
 		
 		int result = memberService.insertMember(m);
 		System.out.println(result > 0?"회원등록성공":"회원등록실패");
@@ -139,6 +140,7 @@ public class MemberController {
 
 		// 아이디를 통해서 selectOne메소드 호출결과 Member객체를 가져온다.
 		Member m = memberService.selectOneMember(memberId);
+		logger.debug(m);
 		String msg = "";
 		String view = "common/msg";
 		String loc = "";
@@ -150,7 +152,7 @@ public class MemberController {
 			mav.addObject("msg" , msg);
 			mav.addObject("loc" , loc);
 		} else {
-			if(bcryptPasswordEncoder.matches(password, m.getPassword())) {
+			if(bcryptPasswordEncoder.matches(password, m.getMemberPassword())) {
 				// 세션 - 상태유지
 				// session.setAttribute("memberLoggedIn", m);
 				mav.addObject("memberLoggedIn" , m);
@@ -234,6 +236,17 @@ public class MemberController {
 		boolean isUsable = m == null?true:false;
 		map.put("isUsable", isUsable);
 		return map;
+	}
+	
+	@RequestMapping("/member/memberInterest.do")
+	public ModelAndView selectInterest(ModelAndView mav) {
+		
+		List<Map<String,String>> list = memberService.selectAllCategory();
+		
+		mav.addObject("category",list);
+		mav.setViewName("/member/memberInterest");
+		
+		return mav;
 	}
 	
 }
