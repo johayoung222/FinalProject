@@ -1,0 +1,121 @@
+@charset "UTF-8";
+.mp-container {
+    display: inline-block;
+    margin: 0 0 36px 36px;
+    width: 500px;
+}
+
+.mp-title {
+    font-size: 20px;
+    line-height: 23px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ececec;
+}
+
+.real-content-container {
+    width: 200px;
+    padding-top: 48px;
+    display: inline-block;
+    margin-left: 250px;
+}
+
+
+/* profile 부분 css */
+.mypage-profile-body {
+    padding: 40px 60px 12px;
+    min-width: 880px;
+}
+
+.mypage-profile-body+.mypage-profile-body {
+    border-top: 1px solid #ececec;
+}
+
+.profedit-body-title {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    color: #1f1f1f;
+    width: 160px;
+    font-weight: bold;
+}
+
+.profedit-form-label {
+    width: 70px;
+    margin: 7px 12px 7px 0;
+    font-weight: normal;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    float: left;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.profedit-body-content {
+    display: inline-block;
+}
+
+.profedit-form-input {
+    margin-bottom: 34px;
+    width: 300px;
+}
+
+.form-control {
+    display: inline;
+    width: 300px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 0px;
+}
+
+/* 주소 검색 버튼 css */
+.profedit-search-btn {
+    display: inline-block;
+    margin-left: 7px;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #7151FC;
+    border-color: #7151FC;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 0px;
+}
+
+.profedit-form-input {
+    margin-bottom: 34px;
+    width: 300px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.profedit-addr-form {
+    display: inline-block;
+    width: 300px;
+    margin-bottom: 17px;
+}
