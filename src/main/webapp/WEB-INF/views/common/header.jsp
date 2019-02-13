@@ -66,10 +66,20 @@ border-right: 1px solid lightgray; float: right; width:12.5%; height:40px; text-
 	<div id="container">
 		<div id="box-link">
 			<div  class="box-link1" >
+				<c:if test="${memberLoggedIn == null }">
 				<a class="item-link" href="${pageContext.request.contextPath }/member/memberMoveLogin.do">로그인</a>
+				</c:if>
+				<c:if test="${memberLoggedIn != null }">
+				<a class="item-link" href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a>
+				</c:if>
 			</div>
 			<div  class="box-link2">
+				<c:if test="${memberLoggedIn == null }">
 				<a class="item-link" href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
+				</c:if>
+				<c:if test="${memberLoggedIn != null }">
+				<a class="item-link" href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a>
+				</c:if>
 			</div>
 			<div  class="box-link3" >
 				<a class="item-link" href="#">고객센터▼</a>
