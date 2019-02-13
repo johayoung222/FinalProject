@@ -6,6 +6,7 @@
 }
 
 .mp-title {
+	width:880px;
     font-size: 20px;
     line-height: 23px;
     padding-bottom: 20px;
@@ -111,11 +112,41 @@ label {
 }
 
 .dropdown {
-    position: relative;
+    width: 400px;
 }
 
 .profedit-addr-form {
     display: inline-block;
     width: 300px;
     margin-bottom: 17px;
+}
+
+.profedit-addr-wrapper {
+    margin-left: 68px;
+}
+/* order 서브메뉴 css */
+.mp-submenu-item {
+    color: #c2c2c2;
+    font-size: 14px;
+    padding: 0 21px 9px;
+    line-height: 16px;
+}
+
+.mp-submenu-item.active {
+    color: #7151FC;
+    border-bottom: 2px solid #7151FC;
+}
+
+.mp-submenu {
+    margin-top: 14px;
+    border-bottom: 2px solid #ececec;
+    height: 30px;
+}
+
+.mypage-body {
+    padding: 33px;
+}
+
+.mypage-content-absent {
+    font-size: 16px;
 }
