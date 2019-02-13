@@ -148,7 +148,7 @@ public class MemberController {
 		// 로그인처리
 		if(m == null) {
 			msg = "아이디가 존재하지 않습니다.";
-			loc = "/";
+			loc = "/member/memberMoveLogin.do";
 			mav.addObject("msg" , msg);
 			mav.addObject("loc" , loc);
 		} else {
@@ -160,7 +160,7 @@ public class MemberController {
 				view ="redirect:/";
 			} else {
 				msg = "비밀번호가 틀렸습니다.";
-				loc = "/";
+				loc = "/member/memberMoveLogin.do";
 				mav.addObject("msg" , msg);
 				mav.addObject("loc" , loc);
 			}
