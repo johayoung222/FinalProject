@@ -15,10 +15,10 @@
 	</insert>
 	
 	<select id="selectOneMember" resultMap="selectOneMember" >
-	select * from member where memberid = #{memberId}
+	select * from member where member_id = #{memberId}
 	</select>
 	<resultMap type="m" id="selectOneMember">
-		<result column="hobby" property="hobby" typeHandler="strArrTypeHandler"/>
+		<result column="interest" property="interest" typeHandler="strArrTypeHandler"/>
 	</resultMap>
 	
 	<update id="memberUpdate">
