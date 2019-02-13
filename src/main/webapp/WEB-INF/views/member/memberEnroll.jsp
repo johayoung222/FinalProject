@@ -947,6 +947,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select>
+		<input type="hidden" name="memberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
@@ -978,7 +979,12 @@ Bootstrap 폼태그 작성 시 유의할 것
     	 return false;
      }
      
-     return true;
+     var interest = false;
+     /* 관심상품 팝업 */
+     open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+    		 "width=500,height=400,left=200,top=200");
+     
+     return false;
 }
 
 $("#memberId_").on("keyup" , function(){
