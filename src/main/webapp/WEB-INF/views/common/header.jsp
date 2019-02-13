@@ -143,7 +143,9 @@ border-right: 1px solid lightgray; float: right; width:12.5%; height:40px; text-
 			</ul>
 
 		</div>
+
 	</nav>
+
 	</header>
 
 	<!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
