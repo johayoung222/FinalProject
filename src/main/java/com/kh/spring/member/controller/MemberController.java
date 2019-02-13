@@ -33,6 +33,11 @@ public class MemberController {
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
 	
+	@RequestMapping("/member/memberMoveLogin.do")
+	public String memberLogin() {
+		
+		return "member/memberLogin";
+	}
 	/**
 	 * 
 	 * 회원가입 요청이 들어왔을 시 처리
