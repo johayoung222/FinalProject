@@ -72,6 +72,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 </style>
 </head>
 <body>
+<<<<<<< HEAD
     <div id="container">
         <div id="box-link">
             <div  class="box-link1" >

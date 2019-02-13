@@ -31,13 +31,19 @@
 		<div class="mypage-profile-body">
 			<div class="profedit-body-title">배송정보</div>
 					<div class="profedit-body-content">
-						<div class="dropdown">
-							<label for="address" class="profedit-form-label">주소</label>
-							<input autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-keypress="keypress($event)" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text">
-							<a class="btn profedit-search-btn profedit-search-btn btn-primary" ng-click="searchAddress()">검색</a>  <br />
-						</div> 
-						<input class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly">  <br /> <br />
-						<input class="form-control profedit-addr-form ng-pristine ng-valid" id="user-addr2" ng-model="profile.addr2" placeholder="상세주소">
+						<label class="profedit-form-label">주소</label>
+						<div class="form-group profedit-addr-wrapper">
+							<div class="dropdown">
+								<input autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text">
+								<a class="btn profedit-search-btn profedit-search-btn btn-primary">검색</a>
+							</div>
+							<div>
+								<input class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly">  <br /> <br />							
+							</div>
+							<div>
+								<input class="form-control profedit-addr-form ng-pristine ng-valid" id="user-addr2" ng-model="profile.addr2" placeholder="상세주소">							
+							</div>
+						</div>
 					</div>		
 		</div>
 		<div class="mypage-profile-body">
@@ -46,4 +52,9 @@
 		</div>
 	</div>
 </div>
+<script>
+$(function(){
+	$(".profile").css("background" , "gray");
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

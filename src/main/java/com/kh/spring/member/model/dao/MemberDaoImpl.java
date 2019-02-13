@@ -1,5 +1,8 @@
 package com.kh.spring.member.model.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +28,13 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int memberUpdate(Member temp) {
 		return SqlSession.update("member.memberUpdate" , temp);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAllCategory() {
+		List<Map<String,String>> list = SqlSession.selectList("system.selectAllCategory");
+		System.out.println(list);
+		return list;
 	}
 
 }
