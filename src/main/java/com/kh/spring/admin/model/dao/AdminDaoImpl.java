@@ -56,4 +56,26 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countregist");
 	}
 
+	@Override
+	public List<Map<String, String>> productList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.productList",null,rowBounds);
+	}
+
+	@Override
+	public int countproductList() {
+		return sqlSession.selectOne("admin.countproductList");
+	}
+
+	@Override
+	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.questionAnswer",null, rowBounds);
+	}
+
+	@Override
+	public int countquestionAnswer() {
+		return sqlSession.selectOne("admin.countquestionAnswer");
+	}
+
 }

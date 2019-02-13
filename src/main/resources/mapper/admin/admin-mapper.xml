@@ -27,4 +27,22 @@
 	<select id="countregist" resultType="_int">
 		select count(*) from regist
 	</select>
+	
+	<!-- 상품 리스트 -->
+	<select id="productList" resultMap="productListMap">
+		select * from product order by seq_product_no
+	</select>
+	<resultMap type="map" id="productListMap"></resultMap>	
+	<select id="countproductList" resultType="_int">
+		select count(*) from product
+	</select>
+	
+	<!-- 1:1질문답변 -->
+	<select id="questionAnswer" resultMap="questionAnswerMap">
+		select * from question order by seq_question_no
+	</select>
+	<resultMap type="map" id="questionAnswerMap"></resultMap>	
+	<select id="countquestionAnswer" resultType="_int">
+		select count(*) from question
+	</select>
 </mapper>

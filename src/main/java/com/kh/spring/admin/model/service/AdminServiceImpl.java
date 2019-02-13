@@ -43,4 +43,24 @@ public class AdminServiceImpl implements AdminService {
 	public int countregist() {
 		return adminDao.countregist();
 	}
+
+	@Override
+	public List<Map<String, String>> productList(int cPage, int numPerPage) {
+		return adminDao.productList(cPage, numPerPage);
+	}
+
+	@Override
+	public int countproductList() {
+		return adminDao.countproductList();
+	}
+
+	@Override
+	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
+		return adminDao.questionAnswer(cPage, numPerPage);
+	}
+
+	@Override
+	public int countquestionAnswer() {
+		return adminDao.countquestionAnswer();
+	}
 }

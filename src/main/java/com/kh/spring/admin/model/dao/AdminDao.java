@@ -17,4 +17,12 @@ public interface AdminDao {
 
 	int countregist();
 
+	List<Map<String, String>> productList(int cPage, int numPerPage);
+
+	int countproductList();
+
+	List<Map<String, String>> questionAnswer(int cPage, int numPerPage);
+
+	int countquestionAnswer();
+
 }
