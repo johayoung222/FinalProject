@@ -21,6 +21,14 @@ public class ThingController {
 		return "thing/thingView";
 	}
 	
+	@RequestMapping("/thing/sell.do")
+	public String sell() {
+		
+		
+		
+		return "";
+	}
+	
 	
 	
 	
