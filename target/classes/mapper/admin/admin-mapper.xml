@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+	<!-- 회원 리스트조회	 -->
+	<select id="allMember" resultMap="memberMap">
+		select * from member order by seq_member_no
+	</select>
+	<resultMap type="map" id="memberMap"></resultMap>	
+	<select id="countallMember" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<!-- 결제된 상품 리스트 -->
+	<select id="paidProduct" resultMap="padiProductMap">
+		select * from product_io order by seq_product_no
+	</select>
+	<resultMap type="map" id="padiProductMap"></resultMap>	
+	<select id="countpaidProduct" resultType="_int">
+		select count(*) from product_io
+	</select>
+	
+	<!-- 판매 신청 리스트 -->
+	<select id="regist" resultMap="registMap">
+		select * from regist order by seq_regist_no
+	</select>
+	<resultMap type="map" id="registMap"></resultMap>	
+	<select id="countregist" resultType="_int">
+		select count(*) from regist
+	</select>
+</mapper>
