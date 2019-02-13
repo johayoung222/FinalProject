@@ -45,11 +45,13 @@
 			    <c:if test="${memberLoggedIn == null }">
 				    <!-- 로그인,회원가입 버튼 -->
 			        <!--https://getbootstrap.com/docs/4.1/components/buttons/#outline-buttons-->
+			        <a class="nav-link" href="${pageContext.request.contextPath}/thing/thing.do" style="">안쓰는 물건 판매하기</a> 
 			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
 			        &nbsp;
 			        <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			    </c:if>
 			    <c:if test="${memberLoggedIn != null }">
+			    	<a class="nav-link" href="${pageContext.request.contextPath}/thing/thing.do" style="">안쓰는 물건 판매하기</a> 
 			    	<a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName }님, 안녕하세요 :)</a>
 			    	&nbsp;
 			    	<button class="btn btn-outline-success" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
