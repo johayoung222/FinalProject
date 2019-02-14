@@ -18,7 +18,20 @@
 </style>
 <br />
 <section id="productList-container" class="productList-container">
-<p>상품 리스트</p>
+<nav class="navbar navbar-light bg-light">
+	<p>상품 리스트</p>
+	  <form class="form-inline" action="${pageContext.request.contextPath }/admin/productListSearch.do">
+		<select class="form-control" name="type">
+  			<option value="product_name" selected="selected">상품명</option>
+  			<option value="product_onsale">판매여부</option>
+  			<option value="product_manufacturer">제조사명</option>
+  			<option value="category_micro">소분류코드</option>
+		</select>
+		&nbsp;&nbsp;
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+	  </form>
+	</nav>
 <hr />
 	<table id="tbl-productList" class="table table-striped table-hover">
 		<tr>

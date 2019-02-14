@@ -10,6 +10,24 @@
 		select count(*) from member
 	</select>
 	
+	<!-- 회원 리스트조회 -id검색 기능 -->
+	<select id="idSearch" parameterType="map" resultMap="idSearchMap">
+		select * from member where member_id like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="idSearchMap"></resultMap>
+	<select id="countidSearch" resultType="_int">
+		select count(*) from member where member_id like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 회원 리스트조회 -name검색 기능 -->
+	<select id="nameSearch" parameterType="map" resultMap="nameSearchMap">
+		select * from member where member_name like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="nameSearchMap"></resultMap>	
+	<select id="countnameSearch" resultType="_int">
+		select count(*) from member where member_name like '%'||#{search}||'%'
+	</select>	
+	
 	<!-- 결제된 상품 리스트 -->
 	<select id="paidProduct" resultMap="padiProductMap">
 		select * from product_io order by seq_product_no
@@ -18,6 +36,33 @@
 	<select id="countpaidProduct" resultType="_int">
 		select count(*) from product_io
 	</select>
+	
+	<!-- 결제된 상품 리스트 -name검색 -->
+	<select id="paidProductNameSerach" resultMap="paidProductNameSerachMap">
+		select * from product_io where product_name like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="paidProductNameSerachMap"></resultMap>
+	<select id="countpaidProductNameSerach" resultType="_int">
+		select count(*) from product_io where product_name like '%'||#{search}||'%'
+	</select>
+		
+	<!-- 결제된 상품 리스트 -구매자검색 -->
+	<select id="paidProductBuyerSerach" resultMap="paidProductBuyerSerachMap">
+		select * from product_io where product_buyer like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="paidProductBuyerSerachMap"></resultMap>
+	<select id="countpaidProductBuyerSerach" resultType="_int">
+		select count(*) from product_io where product_buyer like '%'||#{search}||'%'
+	</select>
+		
+	<!-- 결제된 상품 리스트 -카테고리검색 -->
+	<select id="paidProductCategorySerach" resultMap="paidProductCategorySerachMap">
+		select * from product_io where product_category like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="paidProductCategorySerachMap"></resultMap>
+	<select id="countpaidProductCategorySerach" resultType="_int">
+		select count(*) from product_io where product_category like '%'||#{search}||'%'
+	</select>	
 	
 	<!-- 판매 신청 리스트 -->
 	<select id="regist" resultMap="registMap">
@@ -37,6 +82,42 @@
 		select count(*) from product
 	</select>
 	
+	<!-- 상품 리스트-상품명 검색 -->
+	<select id="productListNameSearch" resultMap="productListNameSearchMap">
+		select * from product where product_name like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="productListNameSearchMap"></resultMap>	
+	<select id="countproductListNameSearch" resultType="_int">
+		select count(*) from product where product_name like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 상품 리스트-판매여부 검색 -->
+	<select id="productListOnsaleSearch" resultMap="productListOnsaleSearchMap">
+		select * from product where product_onsale like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="productListOnsaleSearchMap"></resultMap>	
+	<select id="countproductListOnsaleSearch" resultType="_int">
+		select count(*) from product where product_onsale like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 상품 리스트-제조사명 검색 -->
+	<select id="productListManufacturerSearch" resultMap="productListManufacturerSearchMap">
+		select * from product where product_manufacturer like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="productListManufacturerSearchMap"></resultMap>	
+	<select id="countproductListManufacturerSearch" resultType="_int">
+		select count(*) from product where product_manufacturer like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 상품 리스트-소분류코드 검색 -->
+	<select id="productListCategorymiSearch" resultMap="productListCategorymiSearchMap">
+		select * from product where category_micro like '%'||#{search}||'%'
+	</select>
+	<resultMap type="map" id="productListCategorymiSearchMap"></resultMap>	
+	<select id="countproductListCategorymiSearch" resultType="_int">
+		select count(*) from product where category_micro like '%'||#{search}||'%'
+	</select>
+	
 	<!-- 1:1질문답변 -->
 	<select id="questionAnswer" resultMap="questionAnswerMap">
 		select * from question order by seq_question_no
@@ -44,5 +125,23 @@
 	<resultMap type="map" id="questionAnswerMap"></resultMap>	
 	<select id="countquestionAnswer" resultType="_int">
 		select count(*) from question
+	</select>
+	
+	<!-- 경매 상품 현황 -->
+	<select id="auctionStatus" resultMap="auctionStatusMap">
+		select * from auction order by seq_auction_no
+	</select>
+	<resultMap type="map" id="auctionStatusMap"></resultMap>	
+	<select id="countauctionStatus" resultType="_int">
+		select count(*) from auction
+	</select>
+	
+	<!-- 신고 접수 리스트 -->
+	<select id="reportList" resultMap="reportListMap">
+		select * from report order by seq_report_no
+	</select>
+	<resultMap type="map" id="reportListMap"></resultMap>	
+	<select id="countreportList" resultType="_int">
+		select count(*) from report
 	</select>
 </mapper>

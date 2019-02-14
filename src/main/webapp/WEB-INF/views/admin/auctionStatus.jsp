@@ -11,41 +11,41 @@
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
 <style>
-.questionAnswer-container{
+.auctionStatus-container{
 	position:relative;
 	margin-left:180px;
 }
 </style>
 <br />
-<section id="questionAnswer-container" class="questionAnswer-container">
-<p>1:1 질문 답변</p>
+<section id="auctionStatus-container" class="auctionStatus-container">
+<p>경매 상품 현황</p>
 <hr />
-	<table id="tbl-questionAnswer" class="table table-striped table-hover">
+	<table id="tbl-auctionStatus" class="table table-striped table-hover">
 		<tr>
-			<th>고유번호</th>
-			<th>문의내용</th>
-			<th>문의종류</th>
-			<th>상세분류</th>
-			<th>회원코드</th>
-			<th>답변여부</th>
-			<th>답변</th>			
+			<th>경매번호</th>
+			<th>경매물품</th>
+			<th>경매시작가</th>
+			<th>경매시작일</th>
+			<th>경매끝일</th>
+			<th>경매결과</th>
+			<th>경매가</th>			
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
-			<td colspan="7">질문이 없습니다.</td>
+			<td colspan="7">경매 물품이 없습니다.</td>
 		</tr>
 		</c:if>
 		
 		<c:if test="${not empty list }">
-			<c:forEach items="${list }" var="q">
+			<c:forEach items="${list }" var="a">
 			<tr>				
-				<th>${q.SEQ_QUESTION_NO}</th>
-				<th>${q.QUESTION_CONTENT}</th>
-				<th>${q.QUESTION_KINDS}</th>
-				<th>${q.QUESTION}</th>
-				<th>${q.SEQ_MEMBER_NO}</th>
-				<th>${q.QUESTION_RESULT}</th>
-				<th>${q.QUESTION_ANSWER}</th>						
+				<th>${a.SEQ_AUCTION_NO}</th>
+				<th>${a.AUCTION_NAME}</th>
+				<th>${a.AUCTION_START}</th>
+				<th>${a.AUCTION_START_DATE}</th>
+				<th>${a.AUCTION_END_DATE}</th>
+				<th>${a.AUCTION_RESULT}</th>
+				<th>${a.AUCTION_PRICE}</th>							
 			</tr>			
 			</c:forEach>
 		</c:if>
@@ -55,7 +55,7 @@
 		int numPerPage = (int)request.getAttribute("numPerPage");
 		int cPage = (int)request.getAttribute("cPage");
 	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "questionAnswer.do") %>
+	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "auctionStatus.do") %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
