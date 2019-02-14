@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
 @Controller
-@SessionAttributes(value = {"memberLoggedIn"})
+@SessionAttributes(value = {""})
 public class MemberController {
 	Logger logger = Logger.getLogger(getClass());
 
@@ -100,8 +101,8 @@ public class MemberController {
 		} else {
 			if(bcryptPasswordEncoder.matches(password, m.getPassword())) {
 				// 세션 - 상태유지
-				// session.setAttribute("memberLoggedIn", m);
-				model.addAttribute("memberLoggedIn" , m);
+				// session.setAttribute("", m);
+				model.addAttribute("" , m);
 				
 				view ="redirect:/";
 			} else {
@@ -153,8 +154,8 @@ public class MemberController {
 		} else {
 			if(bcryptPasswordEncoder.matches(password, m.getMemberPassword())) {
 				// 세션 - 상태유지
-				// session.setAttribute("memberLoggedIn", m);
-				mav.addObject("memberLoggedIn" , m);
+				// session.setAttribute("", m);
+				mav.addObject("" , m);
 				
 				view ="redirect:/";
 			} else {
@@ -235,6 +236,17 @@ public class MemberController {
 		boolean isUsable = m == null?true:false;
 		map.put("isUsable", isUsable);
 		return map;
+	}
+	
+	@RequestMapping("/member/memberInterest.do")
+	public ModelAndView selectInterest(ModelAndView mav) {
+		
+		List<Map<String,String>> list = memberService.selectAllCategory();
+		
+		mav.addObject("category",list);
+		mav.setViewName("/member/memberInterest");
+		
+		return mav;
 	}
 	
 }
