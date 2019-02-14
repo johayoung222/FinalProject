@@ -18,6 +18,7 @@
     display: inline-block;
     width: 144px;
     margin-bottom: 36px;
+   	margin-right: 5%;
 }
 .sidebar1{
 	color: #666666;
@@ -50,13 +51,26 @@
     line-height: 23px;
     padding-bottom: 20px;
     border-bottom: 2px solid #ececec;
+    margin-bottom: 2%;
 }
 .content{
 	display: inline-block;
-	width:70%;
+	width:80%;
 }
+#news{
+
+	border-bottom:2px solid #ececec;
+	height: 50px;
+	width:100%;
+}
+.newscontent{
+	border-bottom:2px solid #ececec;
+	background: #e9e9e9;
+}
+
 </style>
-	<div class="content-container">	
+
+<div class="content-container">	
 		<div class="sidebar">
 			<div class="sidebar1">
 				고객센터
@@ -74,15 +88,58 @@
 				<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 			</div>
 		</div>
-		<!-- 콘텐츠 상단 이미지 -->
 		<div class="content">
 			<div class="headline">
-				여기 소개 헤드라인
+				여기 소식 헤드라인
 			</div>
-			<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" class="img-fluid" alt="Responsive image">
-			<div class="main">
-			여기는 블라블라 하는곳
-			</div>	
+			<section>
+				<div class="news1" id="news" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">	
+				이걸...
+				</div>
+				<div class="collapse" id="collapseExample1">
+				  <div class="newscontent">
+					내용이다
+				  </div>
+				</div>
+				
+				<div class="news2" id="news" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">	
+				이걸...
+				</div>
+				<div class="collapse" id="collapseExample2">
+				  <div class="newscontent">
+					내용2
+				  </div>
+				</div>
+				
+				<div class="news3" id="news" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">	
+				이걸...
+				</div>
+				<div class="collapse" id="collapseExample3">
+				  <div class="newscontent">
+					내용3
+				  </div>
+				</div>
+				
+				<div class="news4" id="news" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">	
+				이걸...
+				</div>
+				<div class="collapse" id="collapseExample4">
+				  <div class="newscontent">
+					내용4
+				  </div>
+				</div>
+				
+				<div class="news5" id="news" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">	
+				이걸...
+				</div>
+				<div class="collapse" id="collapseExample5">
+				  <div class="newscontent">
+					내용5
+				  </div>
+				</div>
+				
+				
+			</section>
 		</div>
-	</div>
+</div>		
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
