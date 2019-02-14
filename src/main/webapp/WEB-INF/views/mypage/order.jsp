@@ -34,9 +34,12 @@
 <script>
 /* 온로드 함수 */
 $(function(){
-	$(".order").css("background" , "gray");
+	$(".order").css("color" , "#7151FC");
+	$(".order").css("font-weight" , "bold");
+	$(".order").css("background" , "#f2f2f2");
 	$(".active").css("color" , "7151FC");
 	$(".active").css("border-bottom" , "2px solid #7151FC");
+	
 	/* 바로 판매내역으로 이동시켜야 한다. */
 	// window.location.href = $(".active").attr("href");
 });

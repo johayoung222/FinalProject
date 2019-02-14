@@ -54,7 +54,9 @@
 </div>
 <script>
 $(function(){
-	$(".profile").css("background" , "gray");
+	$(".profile").css("color" , "#7151FC");
+	$(".profile").css("font-weight" , "bold");
+	$(".profile").css("background" , "#f2f2f2");
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
