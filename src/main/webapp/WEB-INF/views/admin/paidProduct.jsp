@@ -18,7 +18,19 @@
 </style>
 <br />
 <section id="paidProduct-container" class="paidProduct-container">
-<p>결제된 상품 리스트</p>
+<nav class="navbar navbar-light bg-light">
+	<p>결제된 상품 리스트</p>
+	  <form class="form-inline" action="${pageContext.request.contextPath }/admin/paidProductSearch.do">
+		<select class="form-control" name="type">
+  			<option value="product_name" selected="selected">상품명</option>
+  			<option value="product_buyer">구매자아이디</option>
+  			<option value="product_category">상품카테고리</option>
+		</select>
+		&nbsp;&nbsp;
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+	  </form>
+	</nav>
 <hr />
 	<table id="tbl-paidProduct" class="table table-striped table-hover">
 		<tr>

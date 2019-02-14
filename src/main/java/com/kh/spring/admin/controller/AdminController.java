@@ -1,9 +1,8 @@
 package com.kh.spring.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +69,34 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("/admin/memberSearch.do")
+	public ModelAndView memberSearch(ModelAndView mav, 
+			@RequestParam(value="type")String type, 
+			@RequestParam(value="search")String search,
+			@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		//System.out.println("controller type:"+type);
+		//System.out.println("controller search:"+search);
+		System.out.println("memeberSearch메소드가 요청되었습니다.");
+		int numPerPage= 7;
+		int totalContents =0;
+		List<Map<String, String>> list =null;
+		if("member_id".equals(type)) {
+			list = adminService.idSearch(search,cPage,numPerPage);
+			totalContents =adminService.countidSearch(search);
+		}else if("member_name".equals(type)) {
+			list = adminService.nameSearch(search,cPage,numPerPage);
+			totalContents =adminService.countnameSearch(search);
+		}
+		
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/allMember");
+		
+		return mav;
+	}
+	
 	@RequestMapping("/admin/paidProduct.do")
 	public ModelAndView paidProduct(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
 		System.out.println("paidProduct메소드 실행!!");
@@ -86,6 +113,37 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("/admin/paidProductSearch.do")
+	public ModelAndView paidProductSearch(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage,
+			@RequestParam(value="type")String type,
+			@RequestParam(value="search")String search) {
+		System.out.println("paidProductSearch메소드 실행!!");
+		List<Map<String, String>> list = null;
+		int numPerPage = 7;
+		int totalContents=0;
+		if("product_name".equals(type)) {
+			list = adminService.paidProductNameSerach(search,cPage, numPerPage);
+			totalContents = adminService.countpaidProductNameSerach(search);
+		}else if("product_buyer".equals(type)) {
+			list = adminService.paidProductBuyerSerach(search,cPage, numPerPage);
+			totalContents = adminService.countpaidProductBuyerSerach(search);
+		}else if("product_category".equals(type)) {
+			list = adminService.paidProductCategorySerach(search,cPage, numPerPage);
+			totalContents = adminService.countpaidProductCategorySerach(search);
+		}
+		
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
+		mav.addObject("list",list);
+		mav.setViewName("admin/paidProduct");
+		
+		return mav;
+	}
+	
+	
+	
 	@RequestMapping("/admin/regist.do")
 	public ModelAndView regist(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
 		System.out.println("regist메소드 실행!!");
@@ -101,15 +159,7 @@ public class AdminController {
 		
 		return mav;
 	}
-	
-	@RequestMapping("/admin/memberFind.do")
-	public ModelAndView memberFind(ModelAndView mav, @RequestParam String type
-			,@RequestParam(value="search")String search) {
 		
-		
-		return mav;
-	}
-	
 	@RequestMapping("/admin/productList.do")
 	public ModelAndView productList(ModelAndView mav, 
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
@@ -126,14 +176,45 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping("/admin/questionAnswer.do")
-	public ModelAndView questionAnswer(ModelAndView mav, 
-			@RequestParam(value="cPage", defaultValue="1")int cPage) {
-		System.out.println("questionAnswer메소드 실행!!");
+	@RequestMapping("/admin/productListSearch.do")
+	public ModelAndView productListSearch(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage,
+			@RequestParam(value="type")String type,
+			@RequestParam(value="search")String search) {
+		System.out.println("productListSearch메소드 실행!!");
 		int numPerPage =7;
-		List<Map<String, String>> list = adminService.questionAnswer(cPage, numPerPage);
-		int totalContents = adminService.countquestionAnswer();
+		int totalContents=0;
+		List<Map<String, String>> list =null;
+				
+		if("product_name".equals(type)) {
+			list = adminService.productListNameSearch(search,cPage, numPerPage);
+			totalContents = adminService.countproductListNameSearch(search);
+		}else if("product_onsale".equals(type)) {
+			list = adminService.productListOnsaleSearch(search,cPage, numPerPage);
+			totalContents = adminService.countproductListOnsaleSearch(search);
+		}else if("product_manufacturer".equals(type)) {
+			list = adminService.productListManufacturerSearch(search,cPage, numPerPage);
+			totalContents = adminService.countproductListManufacturerSearch(search);
+		}else if("category_micro".equals(type)) {
+			list = adminService.productListCategorymiSearch(search,cPage, numPerPage);
+			totalContents = adminService.countproductListCategorymiSearch(search);
+		}
 		
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/productList");
+		return mav;
+	}
+	
+	@RequestMapping("/admin/questionAnswer.do")
+	public ModelAndView questionAnswer(ModelAndView mav
+			,@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		System.out.println("questionAnswer메소드 실행!!");
+		int numPerPage = 7;
+		List<Map<String, String>> list = adminService.questionAnswer(cPage,numPerPage);
+		int totalContents = adminService.countquestionAnswer();
 		mav.addObject("cPage",cPage);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
@@ -142,5 +223,59 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("/admin/acutionStatus.do")
+	public ModelAndView actionStatus(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		System.out.println("actionStatus메소드 실행!!");
+		int numPerPage =7;
+		List<Map<String, String>> list = adminService.acutionStatus(cPage, numPerPage);
+		int totalContents = adminService.countauctionStatus();
+		
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/auctionStatus");
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping("/admin/reportList.do")
+	public ModelAndView reportList(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		System.out.println("reportList메소드 실행!!");
+		int numPerPage =7;
+		List<Map<String, String>> list = adminService.reportList(cPage, numPerPage);
+		int totalContents = adminService.countreportList();
+		
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/reportList");		
+		
+		return mav;
+	}
+	
+	/*
+	@RequestMapping("/admin/siteStatistics.do")
+	public ModelAndView siteStatistics(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		System.out.println("siteStatistics메소드 실행!!");
+		int numPerPage =7;
+		List<Map<String, String>> list = adminService.siteStatistics(cPage, numPerPage);
+		int totalContents = adminService.countsiteStatistics();
+		
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/questionAnswer");
+		
+		
+		return mav;
+	}
+	*/
 	
 }
