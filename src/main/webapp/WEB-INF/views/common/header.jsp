@@ -72,7 +72,6 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 </style>
 </head>
 <body>
-
     <div id="container">
         <div id="box-link">
             <div  class="box-link1" >
@@ -101,13 +100,13 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
   				|<a href="#" style="color:purple">프로모션</a>
   				|<a href="#" style="color:pink">내 정보</a>
   				|<a href="#" style="color:black">알림 설정</a>
-  				</div>
+				</div>
 				</div>
 			</div>
                 </c:if>
             </div>
             <div  class="box-link3" >
-                <a class="item-link" href="#">고객센터▼</a>
+                <a class="item-link" href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
             </div>
             <div id="box-link4">
                 <i class="fa fa-truck"></i>
