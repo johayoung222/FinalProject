@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -235,6 +236,17 @@ public class MemberController {
 		boolean isUsable = m == null?true:false;
 		map.put("isUsable", isUsable);
 		return map;
+	}
+	
+	@RequestMapping("/member/memberInterest.do")
+	public ModelAndView selectInterest(ModelAndView mav) {
+		
+		List<Map<String,String>> list = memberService.selectAllCategory();
+		
+		mav.addObject("category",list);
+		mav.setViewName("/member/memberInterest");
+		
+		return mav;
 	}
 	
 }

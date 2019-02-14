@@ -926,7 +926,7 @@ Bootstrap 폼태그 작성 시 유의할 것
  -->
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
-		<input type="hidden" name="alarm"/>
+		<input type="hidden" name="memberAlarm"/>
 		
 		<div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
@@ -936,17 +936,18 @@ Bootstrap 폼태그 작성 시 유의할 것
 			<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0" />
 		</div>
 		
-		<input type="password" class="form-control" placeholder="비밀번호" name="password" id="password_" required>
+		<input type="password" class="form-control" placeholder="비밀번호" name="memberPassword" id="password_" required>
 		<input type="password" class="form-control" placeholder="비밀번호확인" id="password2" required>
 		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName">
 		<input type="text" class="form-control" placeholder="ex)940214" name="memberBirth" id="memberBirth">
-		<input type="email" class="form-control" placeholder="이메일" name="email" id="email">
-		<input type="text" class="form-control" placeholder="주소" name="address" id="address">
+		<input type="email" class="form-control" placeholder="이메일" name="memberEmail" id="email">
+		<input type="text" class="form-control" placeholder="주소" name="memberAddress" id="address">
 		<select class="form-control" name="gender" required>
 			<option value="" disabled selected>성별</option>
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select>
+		<input type="hidden" name="memberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
@@ -978,7 +979,12 @@ Bootstrap 폼태그 작성 시 유의할 것
     	 return false;
      }
      
-     return true;
+     var interest = false;
+     /* 관심상품 팝업 */
+     open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+    		 "width=500,height=400,left=200,top=200");
+     
+     return false;
 }
 
 $("#memberId_").on("keyup" , function(){
