@@ -28,9 +28,9 @@
 </div>
 <script>
 $(function(){
-	$(".bookmarks").css("color" , "#7151FC");
-	$(".bookmarks").css("font-weight" , "bold");
-	$(".bookmarks").css("background" , "#f2f2f2");
+	$(".coupons").css("color" , "#7151FC");
+	$(".coupons").css("font-weight" , "bold");
+	$(".coupons").css("background" , "#f2f2f2");
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body {
+    font-family: "NanumBarunGothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .mp-container {
     display: inline-block;
     margin: 0 0 36px 36px;
@@ -149,4 +153,6 @@ label {
 
 .mypage-content-absent {
     font-size: 16px;
+    width: 1000px;
 }
+
