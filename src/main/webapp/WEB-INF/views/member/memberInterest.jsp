@@ -54,7 +54,7 @@
 		</c:forEach>
 		<br />
 		<input type="submit" value="선택 완료" />
-		<input type="button" value="건너뛰기" />
+		<button onclick="skip();">건너뛰기</button>
 		</form>
 	</div>
 </div>
@@ -70,6 +70,12 @@ function interestEnd(){
 	console.log(interest);
 	
 	opener.memberEnrollFrm.memberInterest.value = interest;
+	opener.memberEnrollFrm.submit();
+	self.close();
+}
+function skip(){
+	opener.memberEnrollFrm.submit();
+	self.close();
 }
 </script>
 </body>
