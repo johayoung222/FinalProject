@@ -1,5 +1,8 @@
 package com.kh.spring.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -19,6 +22,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.kh.spring.member.model.vo.Member;
 
 public class FacebookController {
 	Logger logger = Logger.getLogger(getClass());
@@ -30,18 +37,47 @@ public class FacebookController {
     private OAuth2Parameters oAuth2Parameters;
  
 //   뷰로 매핑
-    @RequestMapping(value = "/member/facebook.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String join(HttpServletResponse response, Model model) {
-        
-        OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-        String facebook_url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, oAuth2Parameters);
+	/*
+	 * @RequestMapping(value = "/member/facebookLogin.do", method = {
+	 * RequestMethod.GET, RequestMethod.POST }) public String
+	 * join(HttpServletResponse response, Model model) {
+	 * 
+	 * OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
+	 * String facebook_url =
+	 * oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE,
+	 * oAuth2Parameters);
+	 * 
+	 * model.addAttribute("facebook_url", facebook_url);
+	 * System.out.println("/facebook" + facebook_url);
+	 * 
+	 * return "/member/memberMoveLogin.do";
+	 * 
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
     
-        model.addAttribute("facebook_url", facebook_url);
-        System.out.println("/facebook" + facebook_url);
- 
-        return "/member/memberLogin.do";
+    
+    
 	
-   }
+	 
+	/*
+	 * @RequestMapping("/member/facebookLogin.do")
+	 * 
+	 * @ResponseBody public ModelAndView facebookLogin(@RequestParam("userinfo")
+	 * String userinfo , ModelAndView mav){
+	 * 
+	 * logger.debug("facebook 정보 : " + userinfo); Map<String, Object> map = new
+	 * HashMap<>(); System.out.println("값이 들어오십니까? faceBooKLogin");
+	 * 
+	 * 
+	 * mav.setViewName("member/memberLogin");
+	 * 
+	 * return mav;
+	 * 
+	 * }
+	 */
     
     @RequestMapping(value = "/facebookSignInCallback", method = { RequestMethod.GET, RequestMethod.POST })
     public String facebookSignInCallback(@RequestParam String code) throws Exception {

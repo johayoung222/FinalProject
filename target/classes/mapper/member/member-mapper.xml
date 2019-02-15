@@ -25,5 +25,11 @@
 	</update>
 	
 	
+		<insert id="insertFaceBookMember">
+	insert into member (seq_member_no, member_id, member_password, member_name, Gender, member_birth, member_email, member_sns_account ) 
+				values( seq_member_no.nextval, #{memberId}, 'facebook',  #{memberName}, #{gender}, #{memberBirth},#{memberEmail}, 'y' )
+	</insert>
+	
+	
 	
 </mapper>

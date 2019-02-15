@@ -40,10 +40,11 @@
                                 
                                 
 				<li class="list-group-item list-group-item-action">
-       <fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
-    data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
-       FaceBook login
+   				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
+        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();">
+              FaceBook으로 로그인하기
        </fb:login-button>
+   
 				
 				</li>
 				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
@@ -64,61 +65,101 @@
 		</div>
 	</div>
 	
-<script type="text/javascript">
-     window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1302299029947046',
-          xfbml      : true,
-          version    : 'v3.2'
-        });
-        FB.AppEvents.logPageView();
-      
-         FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-              
-          }
-          else {
-             FB.login(function(response) {
-              // handle the response
-            }, {scope: 'public_profile, email, user_birthday '});
-          }
-        });
-         
-      };
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-      
-        function checkLoginState() {
-            FB.getLoginStatus(function(response) {
-                statusChangeCallback(response);
-              });
-        }
-      function statusChangeCallback(response) {
-        if (response.status === 'connected') {
-          testAPI();
-        } 
+
+<script  type="text/javascript">
+function next2(){
+	$(".content-container").hide();
+	$("#enroll-container").show();
+	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
+	var alarm = $("#agree4").prop("checked");
+	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
+}
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1302299029947046',
+      xfbml      : true,
+      version    : 'v3.2'
+    });
+    FB.AppEvents.logPageView();
+    console.log("찍힌다3");
+  
+     FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+    	  console.log("찍힌다2");
+          
       }
-     function testAPI() {
-        FB.api('/me?fields=id,name,email',  function(response) {        	
-        	 /*  console.log(response.id);
-              console.log(response.name);
-              console.log(response.email); */
-              //console.log(JSON.stringify(response));
-              var userinfo = JSON.stringify(response);
-              console.log(userinfo);
-             
-        });
-        
-       
+      else {
+         FB.login(function(response) {
+          // handle the response
+        }, {scope: 'public_profile, email, user_birthday '});
       }
+    });
      
-</script>
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            console.log("찍힌다1");
+          });
+    }
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+    	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
+    	     
+             // console.log(JSON.stringify(response));
+             console.log(response.gender);
 	
+                  
+                 var memberId = response.id;
+                 var memberName = response.name;
+                 var memberEmail = response.email;  
+               
+               
+                  console.log("----------------");
+                  console.log(memberId);
+                  console.log(memberName);
+                  console.log(memberEmail);
+              
+              
+            
+        
+              
+               
+            $.ajax({
+          		url: "${pageContext.request.contextPath}/member/facebookLogin",
+          		method:"post",
+          		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
+          		success: function(data){
+          		
+          			console.log("ajax요청 성공");
+
+          		},
+          		error:function(){
+          			console.log("ajax요청 실패 에러!");
+          		}
+          	}); 
+              
+       
+      })
+    	
+    } 
+  }
+
+
+
+
+
+
+</script>
 	
 	
 	

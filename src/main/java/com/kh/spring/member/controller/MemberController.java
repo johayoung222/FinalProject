@@ -249,4 +249,94 @@ public class MemberController {
 		return mav;
 	}
 	
+	
+	
+	/*
+	 * 페이스북 관련:
+	 */
+	     @RequestMapping("/member/facebookLogin") 
+		 @ResponseBody
+		 public ModelAndView facebookLogin(@RequestParam("memberId") String memberId,@RequestParam("memberName") String memberName
+				 ,@RequestParam("memberEmail") String memberEmail, ModelAndView mav){
+			
+			
+		       
+		  
+		      System.out.println("faceBookID:"+memberId);
+		      System.out.println("faceBookName:"+memberName);
+		      System.out.println("faceBookmemberEmail:"+memberEmail);
+		      
+		      
+		        
+		       
+		       
+		       
+		        mav.setViewName("member/memberLogin");
+			 
+			 return mav;
+			 
+		 }
+
+	 	
+	 	/*
+	 	 * 페이스북 관련: 로그인하면 컨테이너 떨어짐 ajax로 넘기기
+	 	 */
+	     @RequestMapping("/member/facebookEnroll") 
+		 @ResponseBody
+		 public ModelAndView facebookEnroll(@RequestParam("fbId") String fbId,@RequestParam("fbName") String fbName
+				 ,@RequestParam("fbEmail") String fbEmail, ModelAndView mav){
+			
+			
+		       
+		  
+		      System.out.println("faceBookID:"+fbId);
+		      System.out.println("faceBookName:"+fbName);
+		      System.out.println("faceBookmemberEmail:"+fbEmail);
+		       
+		       
+		       
+		        mav.setViewName("member/memberEnroll");
+			 
+			 return mav;
+			 
+		 }  
+	     
+	     /* 
+	      * facebook 가입 ajax 창으로 받은거 넘겨주기...
+	      */
+	  @RequestMapping("/member/facebookEnrollEnd") 
+	  @ResponseBody 
+	  public ModelAndView facebookEnrollEnd(@RequestParam("fbId") String fbId,
+			  @RequestParam("fbName") String fbName, @RequestParam("fbBirth") String fbBirth,
+			  @RequestParam("fbEmail") String fbEmail,
+			  @RequestParam("gender") String gender, ModelAndView mav){
+		
+		  System.out.println("faceBookID:"+fbId);
+		  System.out.println("faceBookName:"+fbName);
+		  System.out.println("faceBookmemberEmail:"+fbBirth);
+		  System.out.println("faceBookmemberEmail:"+fbEmail);
+		  System.out.println("faceBookmembergender:"+gender);
+		 
+		
+		  Member m = new Member(); 
+		  m.setMemberId(fbId);
+		  m.setMemberName(fbName);
+		  m.setMemberBirth(fbBirth);
+		  m.setMemberEmail(fbEmail);
+		  m.setGender(gender);
+		
+		  int result = memberService.insertFacebookMember(m); System.out.println(result> 0?"회원등록성공":"회원등록실패");
+		 
+		  
+		  
+		  
+		  
+		  
+		  
+		  mav.setViewName("member/memberEnroll");
+		  
+		  return mav;
+		  
+	  }
+	
 }
