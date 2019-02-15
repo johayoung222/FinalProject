@@ -24,7 +24,7 @@ import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
 @Controller
-@SessionAttributes(value = {""})
+@SessionAttributes(value = {"memberLoggedIn"})
 public class MemberController {
 	Logger logger = Logger.getLogger(getClass());
 
@@ -148,19 +148,19 @@ public class MemberController {
 		// 로그인처리
 		if(m == null) {
 			msg = "아이디가 존재하지 않습니다.";
-			loc = "/";
+			loc = "/member/memberMoveLogin.do";
 			mav.addObject("msg" , msg);
 			mav.addObject("loc" , loc);
 		} else {
 			if(bcryptPasswordEncoder.matches(password, m.getMemberPassword())) {
 				// 세션 - 상태유지
 				// session.setAttribute("", m);
-				mav.addObject("" , m);
+				mav.addObject("memberLoggedIn" , m);
 				
 				view ="redirect:/";
 			} else {
 				msg = "비밀번호가 틀렸습니다.";
-				loc = "/";
+				loc = "/member/memberMoveLogin.do";
 				mav.addObject("msg" , msg);
 				mav.addObject("loc" , loc);
 			}

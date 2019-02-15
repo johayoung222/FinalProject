@@ -883,7 +883,7 @@ function next2(){
 	$("#enroll-container").show();
 	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
 	var alarm = $("#agree4").prop("checked");
-	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
+	memberEnrollFrm.memberAlarm.value = alarm==true?"1":"0";
 }
 </script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
@@ -927,7 +927,6 @@ Bootstrap 폼태그 작성 시 유의할 것
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<input type="hidden" name="memberAlarm"/>
-		
 		<div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
 			<!-- 중복체크관련태그 -->
