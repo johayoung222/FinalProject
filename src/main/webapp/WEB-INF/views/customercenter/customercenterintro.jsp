@@ -68,10 +68,10 @@
 				<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 			</div>
 			<div class="sidebar4" id="sidebar">
-				<a href="">1:1 문의</a>
+				<a href="${pageContext.request.contextPath}/customercenter/ccinquiry.do">1:1 문의</a>
 			</div>
 			<div class="sidebar5" id="sidebar">
-				<a href="">자주 묻는 질문</a>
+				<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 			</div>
 		</div>
 		<!-- 콘텐츠 상단 이미지 -->

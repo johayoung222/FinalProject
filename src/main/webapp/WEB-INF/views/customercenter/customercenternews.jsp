@@ -82,10 +82,10 @@
 				<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 			</div>
 			<div class="sidebar4" id="sidebar">
-				<a href="">1:1 문의</a>
+				<a href="${pageContext.request.contextPath}/customercenter/ccinquiry.do">1:1 문의</a>
 			</div>
 			<div class="sidebar5" id="sidebar">
-				<a href="">자주 묻는 질문</a>
+				<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 			</div>
 		</div>
 		<div class="content">
@@ -93,50 +93,18 @@
 				여기 소식 헤드라인
 			</div>
 			<section>
-				<div class="news1" id="news" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">	
-				이걸...
+			
+			<c:forEach items="${list}" var="b">
+				<div class="news1" id="news" data-toggle="collapse" data-target="#${b.SEQ_BOARD_NO}" aria-expanded="false" aria-controls="collapseExample">	
+				${b.BOARD_TITLE} 
+				${b.BOARD_DATE}
 				</div>
-				<div class="collapse" id="collapseExample1">
+				<div class="collapse" id="${b.SEQ_BOARD_NO}">
 				  <div class="newscontent">
-					내용이다
+					${b.BOARD_CONTENT}
 				  </div>
 				</div>
-				
-				<div class="news2" id="news" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">	
-				이걸...
-				</div>
-				<div class="collapse" id="collapseExample2">
-				  <div class="newscontent">
-					내용2
-				  </div>
-				</div>
-				
-				<div class="news3" id="news" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">	
-				이걸...
-				</div>
-				<div class="collapse" id="collapseExample3">
-				  <div class="newscontent">
-					내용3
-				  </div>
-				</div>
-				
-				<div class="news4" id="news" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">	
-				이걸...
-				</div>
-				<div class="collapse" id="collapseExample4">
-				  <div class="newscontent">
-					내용4
-				  </div>
-				</div>
-				
-				<div class="news5" id="news" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">	
-				이걸...
-				</div>
-				<div class="collapse" id="collapseExample5">
-				  <div class="newscontent">
-					내용5
-				  </div>
-				</div>
+			</c:forEach>
 				
 				
 			</section>

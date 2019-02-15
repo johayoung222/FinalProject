@@ -20,13 +20,13 @@
 <section id="allMember-container" class="allMember-container">
 	<nav class="navbar navbar-light bg-light">
 	<p>회원 리스트조회</p>
-	  <form class="form-inline" action="${pageContext.request.contextPath }/admin/memberFind.do">
-		<select class="form-control">
-  			<option value="memberId">아이디</option>
-  			<option value="memberName">이름</option>
+	  <form class="form-inline" action="${pageContext.request.contextPath }/admin/memberSearch.do">
+		<select class="form-control" name="type">
+  			<option value="member_id" selected="selected">아이디</option>
+  			<option value="member_name">이름</option>
 		</select>
 		&nbsp;&nbsp;
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
 	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 	  </form>
 	</nav>

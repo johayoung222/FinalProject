@@ -69,4 +69,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<Attachment> selectList(int boardNo) {
 		return boardDao.selectList(boardNo);
 	}
+
+	@Override
+	public int selectCountBoard() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

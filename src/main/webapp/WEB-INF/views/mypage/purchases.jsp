@@ -28,7 +28,9 @@
 </div>
 <script>
 $(function(){
-	$(".purchases").css("background" , "gray");
+	$(".purchases").css("color" , "#7151FC");
+	$(".purchases").css("font-weight" , "bold");
+	$(".purchases").css("background" , "#f2f2f2");
 });
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

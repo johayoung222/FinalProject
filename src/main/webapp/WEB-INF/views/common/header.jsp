@@ -114,7 +114,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">
-                <a class="item-link" href="#">관리자페이지</a>
+                <a class="item-link" href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
                 </c:if>
             </div>
         </div>
@@ -146,7 +146,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                  aria-expanded="false">전체 카테고리</a>
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                  <div>
-                 <a class="dropdown-item" href="#">Action</a>
+                 <a class="dropdown-item" href="${pageContext.request.contextPath }/item/item.do">핸드폰</a>
                  <a class="dropdown-item" href="#">Another action</a>
                  <a class="dropdown-item" href="#">Something else here</a>
                  </div>
