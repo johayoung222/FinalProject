@@ -1067,8 +1067,8 @@ Bootstrap 폼태그 작성 시 유의할 것
 
 <!-- ------------------------facebook관련 회원가입!-------------------------------------------- -->
 <div id="facebookenroll-container">
-	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" onsubmit="return fbidvalidate();" >
-		<input type="hidden" name="memberAlarm"/>
+	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" onsubmit="return fbidvalidate();" >
+		<input type="hidden" name="fmemberAlarm"/>
 		
 		 <div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
@@ -1080,12 +1080,12 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="text" class="form-control" placeholder="이름" name="fbName" id="fbName" readonly>
 		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="fbBirth" id="fbBirth" required>
 		<input type="email" class="form-control" placeholder="이메일" name="fbEmail" id="fbEmail" readonly>
-		<select class="form-control" name="gender" required> 
+		<select class="form-control" name="fgender" required> 
 			<option value="" disabled selected>성별</option>
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select>
-		<input type="hidden" name="memberInterest"/>
+		<input type="hidden" name="fmemberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
