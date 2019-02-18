@@ -19,9 +19,9 @@ function perchaseProduct(){
 	
 IMP.request_pay({ // param
     pg: "html5_inicis",
-    pay_method: "card",
+    pay_method: perchaseFrm.payMethod.value,
     merchant_uid: "ORD20180131-0000011",
-    name: "갤럭시 S10+",
+    name: perchaseFrm.pName.value,
     amount: perchaseFrm.payAmount.value,
     buyer_email: "gildong@gmail.com",
     buyer_name: perchaseFrm.dName,
@@ -114,8 +114,9 @@ IMP.request_pay({ // param
 				<div class="perchase-method">
 					<div class="perchase-text"><span>결제 수단</span></div>
 					<div class="perchase-box">
-						<button>신용카드</button>
-						<button>무통장입금</button>
+						<button id="payCard" type="button">신용카드</button>
+						<button id="payVbank" type="button">무통장입금</button>
+						<input type="hidden" name="payMethod"/>
 					</div>
 				</div>
 			</div>
@@ -123,12 +124,12 @@ IMP.request_pay({ // param
 		<div class="payment-container">
 			<div class="productInfo-container">
 				<div class="product-text"><span>결제상품</span></div>
-				<div class="productInfo">갤럭시 S10+</div>
+				<div class="productInfo"><input type="text" name="pName" value="${product.productName }" disabled/></div>
 			</div>
 			<hr />
 			<div class="payment-price">
 				<span>상품금액</span>
-				<span>1,290,000원</span>
+				<span>${product.productPrice }원</span>
 			</div>
 			<div class="payment-coupon">
 				<span>쿠폰 사용</span>
@@ -151,7 +152,7 @@ IMP.request_pay({ // param
 			<hr />
 			<div class="payment-result">
 				<span>결제하실 금액</span>
-				<input type="number" name="payAmount" disabled value="1290000" id="payAmount"/>원<br />
+				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br />
 				<button type="button" onclick="perchaseProduct();">결제하기</button>
 			</div>
 		</div>
@@ -206,5 +207,13 @@ $("#findAddress").on('click',function(){
             perchaseFrm.dAddressInfo.focus();
         }
     }).open();
+});
+
+$("#payCard").on('click',function(){
+	perchaseFrm.payMethod.value = "card";
+});
+
+$("#payVbank").on('click',function(){
+	perchaseFrm.payMethod.value = "vbank";
 });
 </script>
