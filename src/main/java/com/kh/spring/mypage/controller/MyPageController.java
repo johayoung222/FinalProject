@@ -82,8 +82,38 @@ public class MyPageController {
 	}
 	
 	
-	@RequestMapping("/mypage/profile.do")
-	public String profile() {
-		return "mypage/profile";
+	@RequestMapping("/mypage/profile/edit.do")
+	public String profileEdit() {
+		return "mypage/profileEdit";
+	}
+	
+	@RequestMapping("/mypage/coupons.do")
+	public String coupons(Model model) {
+		List<String> list = new ArrayList<>();
+		
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "지급된 쿠폰이 없습니다.");			
+		}
+		
+		model.addAttribute("list" , list);
+		return "mypage/coupons";
+	}
+	
+	@RequestMapping("/mypage/profile/credit.do")
+	public String profileCredit() {
+		return "mypage/profileCredit";
+	}
+	
+	@RequestMapping("/mypage/wishlist.do")
+	public String wishlist(Model model) {
+		List<String> list = new ArrayList<>();
+		
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "등록한 알림이 없습니다.");			
+		}
+		
+		model.addAttribute("list" , list);
+		
+		return "mypage/wishlist";
 	}
 }
