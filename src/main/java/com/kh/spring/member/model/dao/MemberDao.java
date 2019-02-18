@@ -17,4 +17,8 @@ public interface MemberDao {
 
 	int insertFaceBookMember(Member m);
 
+	Member selectOneFBMember(String fbIdcheck);
+
+	
+
 }

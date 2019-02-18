@@ -941,7 +941,7 @@ window.fbAsyncInit = function() {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	     
              // console.log(JSON.stringify(response));
-             console.log(response.gender);
+                 console.log(response.gender);
 	
                   
                  var fbId = response.id;
@@ -960,18 +960,12 @@ window.fbAsyncInit = function() {
           		method:"post",
           		data: {fbId : fbId, fbName : fbName, fbEmail : fbEmail }, 
           		success: function(data){
-          		
+          		        			
           			
-          			//console.log(data);
           		$("#facebookenroll-container").show();
           		$('input[name=fbId]').attr('value',fbId); 
           		$('input[name=fbName]').attr('value',fbName); 
           		$('input[name=fbEmail]').attr('value',fbEmail); 
-
-          	
-          		
-          		
-
           		},
           		error:function(){
           			console.log("ajax요청 실패 에러!");
@@ -983,10 +977,6 @@ window.fbAsyncInit = function() {
     	
     } 
   }
-
-
-
-
 
 
 </script>
@@ -1025,6 +1015,17 @@ window.fbAsyncInit = function() {
 	margin:0 auto; 
 	text-align:center;
 	display: none;
+	}
+	
+	div#memberId-container span.fbguide{
+		display: none;
+		font-size: 12px;
+		position: absolute;
+		top: 12px;
+		right: 10px;
+	}
+	div#facebookenroll-container input[name=fbsubmit]{
+	 	display: none;
 	}
 </style>
 <!-- 
@@ -1065,29 +1066,29 @@ Bootstrap 폼태그 작성 시 유의할 것
 
 
 
-<!-- ------------------------facebook관련 회원가입!-------------------------------------------- -->
+<!-- ----------------------------facebook관련 회원가입!-------------------------------------------------->
 <div id="facebookenroll-container">
-	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" onsubmit="return fbidvalidate();" >
+	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return fbvalidate();" >
 		<input type="hidden" name="memberAlarm"/>
-		
 		 <div id="memberId-container">
-			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
+			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
 		<!-- 	중복체크관련태그 -->
-			<span class="guide ok">이 아이디는 사용가능합니다.</span>
-			<span class="guide error">이 아이디는  이미 등록된  아이디입니다</span>
+			      <span class="fbguide ok">이 아이디는 사용가능합니다.</span>
+			      <span class="fbguide error">이 아이디는  이미 등록된  아이디입니다</span> 
 			<input type="hidden" name="fbidDuplicateCheck" id="fbidDuplicateCheck" value="0" />
+			<input type="button" value="등록된 회원인지 확인하기"  onclick="fbvalidate();"/>
 		</div> 
 		<input type="text" class="form-control" placeholder="이름" name="fbName" id="fbName" readonly>
 		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="fbBirth" id="fbBirth" required>
 		<input type="email" class="form-control" placeholder="이메일" name="fbEmail" id="fbEmail" readonly>
-		<select class="form-control" name="gender" required> 
+		<select class="form-control" name="fgender" required> 
 			<option value="" disabled selected>성별</option>
 			<option value="M">남</option>
 			<option value="F">여</option>
 		</select>
-		<input type="hidden" name="memberInterest"/>
+		<input type="hidden" name="fmemberInterest"/>
 		<br />
-		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
+		<input type="submit" name="fbsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
 	</form>
 </div>
@@ -1135,6 +1136,7 @@ $("#memberId_").on("keyup" , function(){
 		return;
 	}
 	
+	
 	// ajax요청
 	$.ajax({
 		url: "${pageContext.request.contextPath}/member/checkDuplicate.do" ,
@@ -1150,7 +1152,8 @@ $("#memberId_").on("keyup" , function(){
 				$(".guide.error").hide();
 				$(".guide.ok").show();
 				$("#idDuplicateCheck").val(1);				
-			} else {
+			}else{
+				
 				$(".guide.ok").hide();
 				$(".guide.error").show();
 				$("#idDuplicateCheck").val(0);								
@@ -1164,19 +1167,39 @@ $("#memberId_").on("keyup" , function(){
 });
 
 
-function fbidvalidate() {
+function fbvalidate(){
 	
-    var fbId = document.getElementById("fbId").value;
-    console.log("fbidvalidate()의 fbId"+fbId);
+    var fbIdcheck = document.getElementById("fbId").value;
     
-    
-    
-
-   
-   // var interest = false;
+    $.ajax({
+		url: "${pageContext.request.contextPath}/member/facebookCheckDuplicate.do",
+		method: "get",
+		data: {fbIdcheck : fbIdcheck} ,
+		success: function(data) {
+			console.log("ajax요청 성공 facebookID check확인 할게요!!");
+			
+			 if(data.FBisUsable == true) {
+				alert("등록이가능합니다");
+				$("#facebookenroll-container").show();
+				$("input[name=fbsubmit]").show();
+			
+			}else{
+				alert("이미 등록된 회원이 있습니다 ");	
+				$("input[name=fbsubmit]").hide();
+				
+			} 
+			
+		
+	
+		},
+		error: function() {
+			console.log("ajax요청 에러!");
+		}
+	});
+ 
+    // var interest = false;
     /* 관심상품 팝업 */
-   // open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-    
+    // open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
     //return false;
 }
 
