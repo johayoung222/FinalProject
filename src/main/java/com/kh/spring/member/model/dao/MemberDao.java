@@ -15,4 +15,6 @@ public interface MemberDao {
 
 	List<Map<String, String>> selectAllCategory();
 
+	int insertFaceBookMember(Member m);
+
 }

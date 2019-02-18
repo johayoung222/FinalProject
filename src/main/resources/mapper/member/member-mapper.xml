@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
 	<insert id="insertMember">
-	insert into member (seq_member_no, member_id, member_password, member_name, gender, member_alarm ) 
-				values( seq_member_no.nextval, #{memberId}, #{memberPassword}, #{memberName}, #{gender}, #{memberAlarm} )
+	insert into member (seq_member_no, member_id, member_password, member_name, gender, member_alarm, member_interest ) 
+				values( seq_member_no.nextval, #{memberId}, #{memberPassword}, #{memberName}, #{gender}, #{memberAlarm}, 
+				#{memberInterest} )
 	</insert>
 	
 	<select id="selectOneMember" resultMap="selectOneMember" >
@@ -23,6 +24,12 @@
 					  hobby = #{hobby , typeHandler=com.kh.spring.common.typehandler.StringArrayTypeHandler}
 	where memberid = #{memberId}
 	</update>
+	
+	
+		<insert id="insertFaceBookMember">
+	insert into member (seq_member_no, member_id, member_password, member_name, Gender, member_birth, member_email, member_sns_account ) 
+				values( seq_member_no.nextval, #{memberId}, 'facebook',  #{memberName}, #{gender}, #{memberBirth},#{memberEmail}, 'y' )
+	</insert>
 	
 	
 	
