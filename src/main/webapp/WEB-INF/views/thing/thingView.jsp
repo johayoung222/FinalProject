@@ -37,25 +37,280 @@
         <h4 class="modal-title" id="myModalLabel">판매 등록</h4> 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
-      <div class="modal-body">
-        <div id="accordion" role="tablist">
+   <div class="modal-body">
+     <div id="accordion" role="tablist">
+   		<div id="accordion" role="tablist">
+   		<label for="">카테고리</label> 
   <div class="card">
     <div class="card-header" role="tab" id="headingOne">
       <h5 class="mb-0">
         <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          	스마트폰
+          	전자기기
         </a>
       </h5>
     </div>
 
     <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
-		스마트폰
+			<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'A'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button> 
+			</tr>			
+			</c:if>
+			</c:forEach>
       </div>
     </div>
   </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			의류
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+			<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'B'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+			신발/가방/악세서리
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'C'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingFour">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+			화장품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'D'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingFive">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+			스포츠용품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'E'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingFour">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+			생필품/아동류
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSix" class="collapse" role="tabpanel" aria-labelledby="headingSix" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'F'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingSeven">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+			문구/사무용품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="collapse" role="tabpanel" aria-labelledby="headingSeven" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'G'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingEight">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+			명품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseEight" class="collapse" role="tabpanel" aria-labelledby="headingEight" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'H'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingNine">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+			자동차
+        </a>
+      </h5>
+    </div>
+    <div id="collapseNine" class="collapse" role="tabpanel" aria-labelledby="headingNine" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'I'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTen">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+			도서/음반
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'J'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingEleven">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+			침실가구/주방용품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseEleven" class="collapse" role="tabpanel" aria-labelledby="headingEleven" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'K'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwelve">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+			상품권
+        </a>
+      </h5>
+    </div>
+    <div id="collapseTwelve" class="collapse" role="tabpanel" aria-labelledby="headingTwelve" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'L'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThirteen">
+      <h5 class="mb-0">
+        <a class="collapsed" data-toggle="collapse" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+			자동차/생활용품
+        </a>
+      </h5>
+    </div>
+    <div id="collapseThirteen" class="collapse" role="tabpanel" aria-labelledby="headingThirteen" data-parent="#accordion">
+      <div class="card-body">
+		<c:forEach items="${categoryList}" var="c">
+			<c:if test="${c.categoryMacro eq 'M'}">
+			<tr>
+				<button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
+			</tr>			
+			</c:if>
+			</c:forEach>
+      </div> 
+    </div>
+  </div>
+</div>  
+	<br /><br /> <hr />
+	<label for="">상품명을 입력해 주세요 : </label>
+	<input type="text" value=""/>
+	<br /><br />
+	<label for="">가격을 입력해 주세요  : </label> 
+	<input type="text" /> 
+   		
    
-  
 </div> 
       </div>
       <div class="modal-footer">
@@ -165,6 +420,19 @@
   </div>
 </div>
 </div>
+
+<script>
+	function categoryClick(type){
+		console.log(type); 
+//		var category = $('#'+type).val();  
+		
+		$("button[name=category]").prop("disabled", true);	
+		
+	}
+	
+	
+</script>
+
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

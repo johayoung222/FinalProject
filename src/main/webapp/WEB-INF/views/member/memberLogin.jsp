@@ -41,10 +41,10 @@
                                 
 				<li class="list-group-item list-group-item-action">
    				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();">
+        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"onlogin="checkLoginState();">
               FaceBook으로 로그인하기
        </fb:login-button>
-   
+  
 				
 				</li>
 				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
@@ -82,11 +82,11 @@ window.fbAsyncInit = function() {
       version    : 'v3.2'
     });
     FB.AppEvents.logPageView();
-    console.log("찍힌다3");
+   
   
      FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-    	  console.log("찍힌다2");
+    	
           
       }
       else {
@@ -116,7 +116,7 @@ window.fbAsyncInit = function() {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	     
              // console.log(JSON.stringify(response));
-             console.log(response.gender);
+           
 	
                   
                  var memberId = response.id;
@@ -129,10 +129,6 @@ window.fbAsyncInit = function() {
                   console.log(memberName);
                   console.log(memberEmail);
               
-              
-            
-        
-              
                
             $.ajax({
           		url: "${pageContext.request.contextPath}/member/facebookLogin",
@@ -140,7 +136,12 @@ window.fbAsyncInit = function() {
           		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
           		success: function(data){
           		
-          			console.log("ajax요청 성공");
+          		if(data){
+          			
+          		 alert("로그인성공");
+   				 window.location.href = "/spring";
+          		}
+          		
 
           		},
           		error:function(){

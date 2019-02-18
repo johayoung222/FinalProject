@@ -252,28 +252,36 @@ public class MemberController {
 	
 	
 	/*
-	 * 페이스북 관련:
+	 * 페이스북 관련: 로그인 관련
 	 */
 	     @RequestMapping("/member/facebookLogin") 
 		 @ResponseBody
-		 public ModelAndView facebookLogin(@RequestParam("memberId") String memberId,@RequestParam("memberName") String memberName
-				 ,@RequestParam("memberEmail") String memberEmail, ModelAndView mav){
+		 public ModelAndView facebookLogin(@RequestParam("memberId") String memberId, 
+				 ModelAndView mav,  HttpSession session){
 			
-			
-		       
-		  
-		      System.out.println("faceBookID:"+memberId);
-		      System.out.println("faceBookName:"+memberName);
-		      System.out.println("faceBookmemberEmail:"+memberEmail);
-		      
-		      
-		        
-		       
-		       
-		       
-		        mav.setViewName("member/memberLogin");
-			 
-			 return mav;
+
+	 		// 아이디를 통해서 selectOne메소드 호출결과 Member객체를 가져온다.
+	 		Member m = memberService.selectOneMember(memberId);
+	 		logger.debug(m);
+	 	//	System.out.println("member:"+m);
+	 		String msg = "";
+	 		String view = "common/msg";
+	 		String loc = "";
+	 		
+	 		
+	 		// 로그인처리
+	 		if(m == null) {
+	 			msg = "아이디가 존재하지 않습니다.";
+	 			loc = "/member/memberMoveLogin.do";
+	 			mav.addObject("msg" , msg);
+	 			mav.addObject("loc" , loc);
+	 		} 
+	 	
+	 	     mav.addObject("memberLoggedIn" , m);
+			 view ="redirect:/";
+	 		
+	 	      	mav.setViewName(view);
+	 		    return mav;
 			 
 		 }
 
@@ -289,14 +297,15 @@ public class MemberController {
 			
 		       
 		  
-		      System.out.println("faceBookID:"+fbId);
-		      System.out.println("faceBookName:"+fbName);
-		      System.out.println("faceBookmemberEmail:"+fbEmail);
+		/*
+		 * System.out.println("faceBookID:"+fbId);
+		 * System.out.println("faceBookName:"+fbName);
+		 * System.out.println("faceBookmemberEmail:"+fbEmail);
+		 */
 		       
 		       
 		       
-		        mav.setViewName("member/memberEnroll");
-			 
+		     mav.setViewName("member/memberEnroll");
 			 return mav;
 			 
 		 }  
@@ -309,14 +318,7 @@ public class MemberController {
 	  public ModelAndView facebookEnrollEnd(@RequestParam("fbId") String fbId,
 			  @RequestParam("fbName") String fbName, @RequestParam("fbBirth") String fbBirth,
 			  @RequestParam("fbEmail") String fbEmail,
-			  @RequestParam("gender") String gender, ModelAndView mav){
-		
-		  System.out.println("faceBookID:"+fbId);
-		  System.out.println("faceBookName:"+fbName);
-		  System.out.println("faceBookmemberEmail:"+fbBirth);
-		  System.out.println("faceBookmemberEmail:"+fbEmail);
-		  System.out.println("faceBookmembergender:"+gender);
-		 
+			  @RequestParam("fgender") String gender, ModelAndView mav){
 		
 		  Member m = new Member(); 
 		  m.setMemberId(fbId);
@@ -325,18 +327,38 @@ public class MemberController {
 		  m.setMemberEmail(fbEmail);
 		  m.setGender(gender);
 		
-		  int result = memberService.insertFacebookMember(m); System.out.println(result> 0?"회원등록성공":"회원등록실패");
-		 
+		  int result = memberService.insertFacebookMember(m); 
+		  System.out.println(result> 0?"회원등록성공":"회원등록실패");
 		  
-		  
-		  
-		  
-		  
-		  
-		  mav.setViewName("member/memberEnroll");
+		  mav.addObject("result",result);
+		  mav.setViewName("member/memberLogin");
 		  
 		  return mav;
 		  
 	  }
+	  
+	     /* 
+	      * facebook 폼안에 있는 아이디값 중복검사! 
+	      */
+	     @RequestMapping("/member/facebookCheckDuplicate.do") 
+	     @ResponseBody 
+		 public Map<String , Object>facebookCheckDuplicate(@RequestParam("fbIdcheck") String fbIdcheck
+				){
+			
+		       
+		        logger.debug("검사할 faceBookID : "+fbIdcheck);
+		      
+		        Map<String , Object> map = new HashMap<>();
+		        Member m = memberService.selectOneFBMember(fbIdcheck);
+	    		boolean FBisUsable = m == null?true:false;
+	    		System.out.println("검사할건!"+FBisUsable);
+	    		map.put("FBisUsable",FBisUsable);
+	   		   
+				return map;
+			 
+		 }  
+	     
+	   
+	     
 	
 }

@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
-Built-By: ekzmd
+<<<<<<< HEAD
+Built-By: KKK
+Build-Jdk: 10.0.2
+=======
+Built-By: johay
 Build-Jdk: 1.8.0_181
+>>>>>>> custom
 Created-By: Maven Integration for Eclipse
 
