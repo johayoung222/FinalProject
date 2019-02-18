@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.member.model.dao.MemberDao;
 import com.kh.spring.member.model.vo.Member;
@@ -34,5 +35,27 @@ public class MemberServiceImpl implements MemberService {
 	public List<Map<String, String>> selectAllCategory() {
 		return memberDao.selectAllCategory();
 	}
+
+	
+	@Override
+	public int insertFacebookMember(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.insertFaceBookMember(m);
+	}
+
+	@Override
+	public int insertMember(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Member selectOneFBMember(String fbIdcheck) {
+		// TODO Auto-generated method stub
+		return memberDao.selectOneFBMember(fbIdcheck);
+	}
+
+	
+	
 
 }
