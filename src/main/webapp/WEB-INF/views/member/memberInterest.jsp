@@ -25,18 +25,59 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.interest-text{
+	border: 1px solid black;
+	text-align: center;
+}
+.interest-content{
+	text-align: center;
+	border: 1px solid black;
+}
+</style>
 <body>
 <div class="interest-container">
 	<div class="interest-text">
-		<span>관심 상품을 선택해주세요.</span>
+		<span>관심 카테고리를 선택해주세요.</span>
 	</div>
 	<div class="interest-content">
-		<c:forEach items="${list }" var="c" varStatus="vs">
-		<span>${c[vs].CATEGORY_MACRO }</span>
-		<span>${c[vs].CATEGPRY_NAME }</span>
+		<form action="javascript:interestEnd();" name="interestFrm">
+		<c:forEach items="${category }" var="c" varStatus="vs">
+		<c:if test="${vs.count%3==0 }">
+		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
+		<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label><br />
+		</c:if>
+		<c:if test="${vs.count%3!=0 }">
+		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
+		<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label>
+		</c:if>
 		</c:forEach>
+		<br />
+		<input type="submit" value="선택 완료" />
+		<button onclick="skip();">건너뛰기</button>
+		</form>
 	</div>
 </div>
+<script>
+function interestEnd(){
+	var category = $("[name='categoryMacro']");
+	var interest = "";
+	category.each(function(idx, item){
+		if($(item).prop("checked") == true){
+			interest += $(item).val();
+		}
+	});
+	console.log(interest);
+	
+	opener.memberEnrollFrm.memberInterest.value = interest;
+	opener.memberEnrollFrm.submit();
+	self.close();
+}
+function skip(){
+	opener.memberEnrollFrm.submit();
+	self.close();
+}
+</script>
 </body>
 </html>
 

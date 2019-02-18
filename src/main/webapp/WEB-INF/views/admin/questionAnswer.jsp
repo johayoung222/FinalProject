@@ -44,7 +44,7 @@
 				<th>${q.QUESTION_KINDS}</th>
 				<th>${q.QUESTION}</th>
 				<th>${q.SEQ_MEMBER_NO}</th>
-				<th>${q.QUESTION_RESUL}</th>
+				<th>${q.QUESTION_RESULT}</th>
 				<th>${q.QUESTION_ANSWER}</th>						
 			</tr>			
 			</c:forEach>

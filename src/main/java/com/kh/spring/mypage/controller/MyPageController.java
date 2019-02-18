@@ -68,9 +68,52 @@ public class MyPageController {
 		return "mypage/purchases";
 	}
 	
+	@RequestMapping("/mypage/bookmarks.do")
+	public String bookmarks(Model model) {
+		List<String> list = new ArrayList<>();
+		
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "등록한 찜 상품이 없습니다. 제품 상세 페이지에서 찜하기 버튼을 이용하여 상품을 등록해 보세요.");			
+		}
+		
+		model.addAttribute("list" , list);
+		
+		return "mypage/bookmarks";
+	}
 	
-	@RequestMapping("/mypage/profile.do")
-	public String profile() {
-		return "mypage/profile";
+	
+	@RequestMapping("/mypage/profile/edit.do")
+	public String profileEdit() {
+		return "mypage/profileEdit";
+	}
+	
+	@RequestMapping("/mypage/coupons.do")
+	public String coupons(Model model) {
+		List<String> list = new ArrayList<>();
+		
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "지급된 쿠폰이 없습니다.");			
+		}
+		
+		model.addAttribute("list" , list);
+		return "mypage/coupons";
+	}
+	
+	@RequestMapping("/mypage/profile/credit.do")
+	public String profileCredit() {
+		return "mypage/profileCredit";
+	}
+	
+	@RequestMapping("/mypage/wishlist.do")
+	public String wishlist(Model model) {
+		List<String> list = new ArrayList<>();
+		
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "등록한 알림이 없습니다.");			
+		}
+		
+		model.addAttribute("list" , list);
+		
+		return "mypage/wishlist";
 	}
 }

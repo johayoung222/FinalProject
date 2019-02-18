@@ -68,4 +68,16 @@
         <aop:pointcut id="serviceMethod" expression="execution(* com.kh.spring..*ServiceImpl.*(..)))"/>
         <aop:advisor id="transactionAdvisor" advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
     </aop:config>
+    <!--  facebook login 연동 관련-->
+    <bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="1302299029947046" />
+        <constructor-arg value="78c687769cc4a531ac90e4c940ae7fca" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email,id,gender" />
+        <property name="redirectUri" value="https://localhost:8443/spring/" />
+    </bean>
 </beans>

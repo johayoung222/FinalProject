@@ -48,6 +48,7 @@
 			</div>
 			<div class="login-link" >
 			<ul class="list-group">
+
 				<li class="list-group-item list-group-item-action" style="border:0">
 				<a href="">
 				<img src="${pageContext.request.contextPath }/resources/images/facelogin.PNG"  width="100%" height="100%"/>
@@ -63,6 +64,7 @@
 					<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/>
 				</a>
 				</li>
+
 			</ul>
 			</div>
 			<br>
@@ -78,4 +80,105 @@
 			<a href="" id="font2">비밀번호를 잊어버리셨나요?</a>
 		</div>
 	</div>
+	
+
+<script  type="text/javascript">
+function next2(){
+	$(".content-container").hide();
+	$("#enroll-container").show();
+	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
+	var alarm = $("#agree4").prop("checked");
+	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
+}
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1302299029947046',
+      xfbml      : true,
+      version    : 'v3.2'
+    });
+    FB.AppEvents.logPageView();
+   
+  
+     FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+    	
+          
+      }
+      else {
+         FB.login(function(response) {
+          // handle the response
+        }, {scope: 'public_profile, email, user_birthday '});
+      }
+    });
+     
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+  
+    function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+            console.log("찍힌다1");
+          });
+    }
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+    	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
+    	     
+             // console.log(JSON.stringify(response));
+           
+	
+                  
+                 var memberId = response.id;
+                 var memberName = response.name;
+                 var memberEmail = response.email;  
+               
+               
+                  console.log("----------------");
+                  console.log(memberId);
+                  console.log(memberName);
+                  console.log(memberEmail);
+              
+               
+            $.ajax({
+          		url: "${pageContext.request.contextPath}/member/facebookLogin",
+          		method:"post",
+          		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
+          		success: function(data){
+          		
+          		if(data){
+          			
+          		 alert("로그인성공");
+   				 window.location.href = "/spring";
+          		}
+          		
+
+          		},
+          		error:function(){
+          			console.log("ajax요청 실패 에러!");
+          		}
+          	}); 
+              
+       
+      })
+    	
+    } 
+  }
+
+
+
+
+
+
+</script>
+	
+	
+	
+	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

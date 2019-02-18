@@ -114,7 +114,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">
-                <a class="item-link" href="#">관리자페이지</a>
+                <a class="item-link" href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
                 </c:if>
             </div>
         </div>

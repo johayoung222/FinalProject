@@ -37,4 +37,18 @@ public class MemberDaoImpl implements MemberDao {
 		return list;
 	}
 
+	@Override
+	public int insertFaceBookMember(Member m) {
+		// TODO Auto-generated method stub
+		return SqlSession.insert("member.insertFaceBookMember" , m);
+	}
+
+	@Override
+	public Member selectOneFBMember(String fbIdcheck) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectOne("member.selectOneMember", fbIdcheck);
+	}
+
+	
+
 }

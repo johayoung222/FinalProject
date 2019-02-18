@@ -49,6 +49,7 @@ public class BoardController {
 		// 1. 게시글리스트(페이징 적용)
 		List<Map<String , String>> list = boardService.selectBoardList(cPage , numPerPage);
 		logger.debug("list : "+list);
+		
 		// 2. 전체컨텐츠수
 		int totalContents = boardService.countBoardList();
 		mav.addObject("totalContents" , totalContents);

@@ -36,6 +36,8 @@
     /* border-bottom: 2px solid #7151FC; */
     
 }
+
+
 </style>
 <div class="content-container">
 	<div class="mp-menu">
@@ -46,19 +48,18 @@
 			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 				<a class="nav-link order" id="v-pills-home-tab" href="${pageContext.request.contextPath}/mypage/order.do" role="tab" aria-controls="v-pills-home" aria-selected="true">판매내역</a>
 				<a class="nav-link purchases" id="v-pills-profile-tab" href="${pageContext.request.contextPath}/mypage/purchases.do" role="tab" aria-controls="v-pills-profile" aria-selected="false">구매내역</a>
-				<a class="nav-link " id="v-pills-messages-tab" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false">찜한 상품</a>
-				<a class="nav-link " id="v-pills-settings-tab" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">내 쿠폰</a>
-				<a class="nav-link " id="v-pills-settings-tab" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">프로모션</a>
-				<a class="nav-link profile" id="v-pills-settings-tab" href="${pageContext.request.contextPath}/mypage/profile.do" role="tab" aria-controls="v-pills-settings" aria-selected="false">내 정보</a>
-				<a class="nav-link " id="v-pills-settings-tab" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">알림 설정</a>
+				<a class="nav-link bookmarks" id="v-pills-messages-tab" href="${pageContext.request.contextPath}/mypage/bookmarks.do" role="tab" aria-controls="v-pills-messages" aria-selected="false">찜한 상품</a>
+				<a class="nav-link coupons" id="v-pills-settings-tab" href="${pageContext.request.contextPath}/mypage/coupons.do" role="tab" aria-controls="v-pills-settings" aria-selected="false">내 쿠폰</a>
+				<a class="nav-link profileCredit" id="v-pills-settings-tab" href="${pageContext.request.contextPath}/mypage/profile/credit.do" role="tab" aria-controls="v-pills-settings" aria-selected="false">프로모션</a>
+				<a class="nav-link profileEdit" id="v-pills-settings-tab" href="${pageContext.request.contextPath}/mypage/profile/edit.do" role="tab" aria-controls="v-pills-settings" aria-selected="false">내 정보</a>
+				<a class="nav-link wishlist" id="v-pills-settings-tab" href="${pageContext.request.contextPath}/mypage/wishlist.do" role="tab" aria-controls="v-pills-settings" aria-selected="false">알림 설정</a>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
 $(function(){
-	$(".action").css("background" , "gray");
-});
 
+});
 
 </script>
