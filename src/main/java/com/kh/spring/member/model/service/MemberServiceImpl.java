@@ -49,6 +49,13 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
+	@Override
+	public Member selectOneFBMember(String fbIdcheck) {
+		// TODO Auto-generated method stub
+		return memberDao.selectOneFBMember(fbIdcheck);
+	}
+
+	
 	
 
 }

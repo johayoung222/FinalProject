@@ -21,4 +21,8 @@ public interface MemberService {
 
 	int insertFacebookMember(Member m);
 
+	Member selectOneFBMember(String fbIdcheck);
+
+	
+
 }

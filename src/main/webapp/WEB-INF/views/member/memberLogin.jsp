@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
+
 <jsp:include page="/WEB-INF/views/common/sHeader.jsp">
 	<jsp:param value="Get It :: 로그인" name="pageTitle" />
 	<jsp:param value="1" name="pageName"/>
@@ -22,46 +23,61 @@
 	width: 300px;
 	margin: 0 auto;
 }
+#memberId_{
+	margin-left:16px;
+	border: 1px solid black;
+}
+#password{
+	border:1px solid black;
+}
+#login_{
+	background-color:#f8f9fa;
+	
+}
+#font2{
+	color:lightgray;
+	
+}
+
 </style>
 
-	<div class="content-container">
-		<div class="login-container">
+	<div class="content-container" >
+		<div class="login-container" style="border:0">
 			<div class="login-text">
-				<span>Welcome Login!</span>
+				<span id="font1"><strong>Welcome Login!</strong></span>
 			</div>
-			<div class="login-link">
+			<div class="login-link" >
 			<ul class="list-group">
-			<%-- <a href="${facebook_url}"><button
-                                    class="btn btn-primary btn-round" style="width: 100%">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
-                                </button></a>  --%>
-                                
-                                
-                                
-                                
-				<li class="list-group-item list-group-item-action">
-   				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();">
-              FaceBook으로 로그인하기
-       </fb:login-button>
-   
-				
+
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+				<img src="${pageContext.request.contextPath }/resources/images/facelogin.PNG"  width="100%" height="100%"/>
+				</a>
 				</li>
-				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 로그인</a></li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/googlelog.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+
 			</ul>
 			</div>
-			<span>또는</span>
+			<br>
 			<div class="login-form">
 				<form action="${pageContext.request.contextPath }/member/memberLogin.do" method="post">
-				<label for="memberId">아이디 : </label>
-				<input type="text" id="memberId" name="memberId"/><br />
-				<label for="password">비밀번호: </label>
+				<label for="memberId">아이디</label>
+				<input type="text" id="memberId_" name="memberId"/><br />
+				<label for="password">비밀번호</label>
 				<input type="password" id="password" name="password"/><br />
-				<input type="submit" value="로그인"/>
+				<input type="submit" id="login_" value="로그인"/>
 				</form>
 			</div>
-			<a href="">비밀번호를 잊어버리셨나요?</a>
+			<a href="" id="font2">비밀번호를 잊어버리셨나요?</a>
 		</div>
 	</div>
 	
@@ -82,11 +98,11 @@ window.fbAsyncInit = function() {
       version    : 'v3.2'
     });
     FB.AppEvents.logPageView();
-    console.log("찍힌다3");
+   
   
      FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-    	  console.log("찍힌다2");
+    	
           
       }
       else {
@@ -116,7 +132,7 @@ window.fbAsyncInit = function() {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	     
              // console.log(JSON.stringify(response));
-             console.log(response.gender);
+           
 	
                   
                  var memberId = response.id;
@@ -129,10 +145,6 @@ window.fbAsyncInit = function() {
                   console.log(memberName);
                   console.log(memberEmail);
               
-              
-            
-        
-              
                
             $.ajax({
           		url: "${pageContext.request.contextPath}/member/facebookLogin",
@@ -140,7 +152,12 @@ window.fbAsyncInit = function() {
           		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
           		success: function(data){
           		
-          			console.log("ajax요청 성공");
+          		if(data){
+          			
+          		 alert("로그인성공");
+   				 window.location.href = "/spring";
+          		}
+          		
 
           		},
           		error:function(){
