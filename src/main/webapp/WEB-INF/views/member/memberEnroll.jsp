@@ -864,23 +864,23 @@ $("#all").on('click', function(){
 </style>
 <div class="content-container">
 		<div class="login-container">
-			<div class="login-link">
+			<div class="login-link" >
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-action">  
-		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
-                data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
-              FaceBook으로 시작하기
-       </fb:login-button> -->
-       
-       <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();">
-              FaceBook으로 시작하기
-       </fb:login-button>
-       
-       
-       </li>
-				<li class="list-group-item list-group-item-action"><a href="">구글로 시작하기</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 시작하기</a></li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+				<img src="${pageContext.request.contextPath }/resources/images/facelogin.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/googlelog.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
 			</ul>
 			</div>
 			<span>또는</span>
@@ -889,96 +889,14 @@ $("#all").on('click', function(){
 			</div>
 		</div>
 	</div>
-
-<script  type="text/javascript">
+<script>
 function next2(){
 	$(".content-container").hide();
 	$("#enroll-container").show();
 	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
 	var alarm = $("#agree4").prop("checked");
-	memberEnrollFrm.memberAlarm.value = alarm==true?"1":"0";
+	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
 }
-
-<!-- facebook회원가입 -->
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1302299029947046',
-      xfbml      : true,
-      version    : 'v3.2'
-    });
-    FB.AppEvents.logPageView();
-  
-  
-     FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-    	 
-          
-      }
-      else {
-         FB.login(function(response) {
-          // handle the response
-        }, {scope: 'public_profile, email, user_birthday '});
-      }
-    });
-     
-  };
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-  
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-          
-          });
-    }
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-    	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
-    	     
-             // console.log(JSON.stringify(response));
-                 console.log(response.gender);
-	
-                  
-                 var fbId = response.id;
-                 var fbName = response.name;
-                 var fbEmail = response.email;  
-               
-               
-                  console.log("페이스북에 담기는 것들!");
-                  console.log(fbId);
-                  console.log(fbName);
-                  console.log(fbEmail);
-              
-
-            $.ajax({
-          		url: "${pageContext.request.contextPath}/member/facebookEnroll",
-          		method:"post",
-          		data: {fbId : fbId, fbName : fbName, fbEmail : fbEmail }, 
-          		success: function(data){
-          		        			
-          			
-          		$("#facebookenroll-container").show();
-          		$('input[name=fbId]').attr('value',fbId); 
-          		$('input[name=fbName]').attr('value',fbName); 
-          		$('input[name=fbEmail]').attr('value',fbEmail); 
-          		},
-          		error:function(){
-          			console.log("ajax요청 실패 에러!");
-          		}
-          	}); 
-              
-       
-      })
-    	
-    } 
-  }
-
-
 </script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
 <style>
@@ -1010,23 +928,6 @@ window.fbAsyncInit = function() {
 	div#memberId-container span.error{
 		color:red;
 	}
-	div#facebookenroll-container{
-	width:400px; 
-	margin:0 auto; 
-	text-align:center;
-	display: none;
-	}
-	
-	div#memberId-container span.fbguide{
-		display: none;
-		font-size: 12px;
-		position: absolute;
-		top: 12px;
-		right: 10px;
-	}
-	div#facebookenroll-container input[name=fbsubmit]{
-	 	display: none;
-	}
 </style>
 <!-- 
 Bootstrap 폼태그 작성 시 유의할 것
@@ -1038,6 +939,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<input type="hidden" name="memberAlarm"/>
+		
 		<div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
 			<!-- 중복체크관련태그 -->
@@ -1060,38 +962,6 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="hidden" name="memberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="reset" class="btn btn-outline-success" value="취소">
-	</form>
-</div>
-
-
-
-<!-- ----------------------------facebook관련 회원가입!-------------------------------------------------->
-<div id="facebookenroll-container">
-
-	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" onsubmit="return fbidvalidate();" >
-		<input type="hidden" name="fmemberAlarm"/>
-		
-
-		 <div id="memberId-container">
-			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
-		<!-- 	중복체크관련태그 -->
-			      <span class="fbguide ok">이 아이디는 사용가능합니다.</span>
-			      <span class="fbguide error">이 아이디는  이미 등록된  아이디입니다</span> 
-			<input type="hidden" name="fbidDuplicateCheck" id="fbidDuplicateCheck" value="0" />
-			<input type="button" value="등록된 회원인지 확인하기"  onclick="fbvalidate();"/>
-		</div> 
-		<input type="text" class="form-control" placeholder="이름" name="fbName" id="fbName" readonly>
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="fbBirth" id="fbBirth" required>
-		<input type="email" class="form-control" placeholder="이메일" name="fbEmail" id="fbEmail" readonly>
-		<select class="form-control" name="fgender" required> 
-			<option value="" disabled selected>성별</option>
-			<option value="M">남</option>
-			<option value="F">여</option>
-		</select>
-		<input type="hidden" name="fmemberInterest"/>
-		<br />
-		<input type="submit" name="fbsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
 		<input type="reset" class="btn btn-outline-success" value="취소">
 	</form>
 </div>
@@ -1139,7 +1009,6 @@ $("#memberId_").on("keyup" , function(){
 		return;
 	}
 	
-	
 	// ajax요청
 	$.ajax({
 		url: "${pageContext.request.contextPath}/member/checkDuplicate.do" ,
@@ -1155,8 +1024,7 @@ $("#memberId_").on("keyup" , function(){
 				$(".guide.error").hide();
 				$(".guide.ok").show();
 				$("#idDuplicateCheck").val(1);				
-			}else{
-				
+			} else {
 				$(".guide.ok").hide();
 				$(".guide.error").show();
 				$("#idDuplicateCheck").val(0);								
@@ -1168,44 +1036,6 @@ $("#memberId_").on("keyup" , function(){
 		}
 	});
 });
-
-
-function fbvalidate(){
-	
-    var fbIdcheck = document.getElementById("fbId").value;
-    
-    $.ajax({
-		url: "${pageContext.request.contextPath}/member/facebookCheckDuplicate.do",
-		method: "get",
-		data: {fbIdcheck : fbIdcheck} ,
-		success: function(data) {
-			console.log("ajax요청 성공 facebookID check확인 할게요!!");
-			
-			 if(data.FBisUsable == true) {
-				alert("등록이가능합니다");
-				$("#facebookenroll-container").show();
-				$("input[name=fbsubmit]").show();
-			
-			}else{
-				alert("이미 등록된 회원이 있습니다 ");	
-				$("input[name=fbsubmit]").hide();
-				
-			} 
-			
-		
-	
-		},
-		error: function() {
-			console.log("ajax요청 에러!");
-		}
-	});
- 
-    // var interest = false;
-    /* 관심상품 팝업 */
-    // open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-    //return false;
-}
-
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

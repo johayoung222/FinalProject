@@ -42,7 +42,7 @@
 		</tr>
 		<tr>
 			<th colspan="2">
-			[새상품]애플 데스크탑
+			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
 			</th>
 		</tr>
 		<tr>
@@ -51,7 +51,7 @@
 			</th>
 		</tr>
 		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
+			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
 			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
 		</tr>
 		
