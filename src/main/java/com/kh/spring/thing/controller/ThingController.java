@@ -6,11 +6,14 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.Product;
 
 @Controller
 public class ThingController {
@@ -49,10 +52,16 @@ public class ThingController {
 		return "";
 	}
 	
-	@RequestMapping("/item/perchase")
-	public String movePerchase() {
+	@RequestMapping(value="/item/perchase/{productNo}", method=RequestMethod.GET)
+	public ModelAndView movePerchase(@PathVariable("productNo") int productNo,
+							ModelAndView mav) {
 		
-		return "item/perchase";
+		Product p = thingService.selectOne(productNo);
+		
+		mav.addObject("product",p);
+		mav.setViewName("item/perchase");
+		
+		return mav;
 	}
 	
 	
