@@ -8,10 +8,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.thing.model.vo.ProductIo;
 
 /**
  * @controller클래스 메소드가 가질 수 있는 파라미터
@@ -113,33 +116,22 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping("/admin/paidProductSearch.do")
-	public ModelAndView paidProductSearch(ModelAndView mav, 
+	@RequestMapping(value="/admin/paidProductSearch.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<ProductIo> paidProductSearch(
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="type")String type,
 			@RequestParam(value="search")String search) {
-		System.out.println("paidProductSearch메소드 실행!!");
-		List<Map<String, String>> list = null;
+		logger.debug("paidProductSearch메소드 실행!!");
 		int numPerPage = 7;
-		int totalContents=0;
-		if("product_name".equals(type)) {
-			list = adminService.paidProductNameSerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductNameSerach(search);
-		}else if("product_buyer".equals(type)) {
-			list = adminService.paidProductBuyerSerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductBuyerSerach(search);
-		}else if("product_category".equals(type)) {
-			list = adminService.paidProductCategorySerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductCategorySerach(search);
-		}
+		Map<String,String> map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
 		
-		mav.addObject("totalContents", totalContents);
-		mav.addObject("cPage", cPage);
-		mav.addObject("numPerPage", numPerPage);
-		mav.addObject("list",list);
-		mav.setViewName("admin/paidProduct");
-		
-		return mav;
+		List<ProductIo> list = adminService.paidProductSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countpaidProductSearch2(map);
+		logger.debug(totalContents);
+		return list;
 	}
 	
 	

@@ -3,6 +3,8 @@ package com.kh.spring.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spring.thing.model.vo.ProductIo;
+
 public interface AdminService {
 
 	List<Map<String, String>> allMember(int cPage, int numPerPage);
@@ -68,6 +70,10 @@ public interface AdminService {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
+	int countpaidProductSearch2(Map<String, String> map);
+
+	List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map);
 
 	
 

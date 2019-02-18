@@ -144,4 +144,13 @@
 	<select id="countreportList" resultType="_int">
 		select count(*) from report
 	</select>
+	
+	
+	<select id="paidProductSearch" resultMap="paidProductSearch">
+		select * from product_io where ${type} like '%'||#{search}||'%' order by seq_product_no desc
+	</select>
+	<resultMap type="productIo" id="paidProductSearch"></resultMap>
+	<select id="countpaidProductSearch2" resultType="_int">
+		select count(*) from product_io
+	</select>
 </mapper>

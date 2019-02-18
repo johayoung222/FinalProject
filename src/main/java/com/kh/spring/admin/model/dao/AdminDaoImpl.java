@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.thing.model.vo.ProductIo;
+
 @Repository
 public class AdminDaoImpl implements AdminDao {
 	
@@ -197,6 +199,17 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int countreportList() {
 		return sqlSession.selectOne("admin.countreportList");
+	}
+
+	@Override
+	public int countpaidProductSearch2(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countpaidProductSearch2");
+	}
+
+	@Override
+	public List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.paidProductSearch",map,rowBounds);
 	}
 
 

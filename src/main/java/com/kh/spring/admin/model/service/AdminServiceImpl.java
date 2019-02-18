@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.model.dao.AdminDao;
+import com.kh.spring.thing.model.vo.ProductIo;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -172,6 +173,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int countreportList() {
 		return adminDao.countreportList();
+	}
+
+	@Override
+	public int countpaidProductSearch2(Map<String, String> map) {
+		return adminDao.countpaidProductSearch2(map);
+	}
+
+	@Override
+	public List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
+		return adminDao.paidProductSearch(cPage,numPerPage,map);
 	}
 
 
