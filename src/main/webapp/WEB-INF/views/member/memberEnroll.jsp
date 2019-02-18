@@ -1068,8 +1068,11 @@ Bootstrap 폼태그 작성 시 유의할 것
 
 <!-- ----------------------------facebook관련 회원가입!-------------------------------------------------->
 <div id="facebookenroll-container">
-	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return fbvalidate();" >
-		<input type="hidden" name="memberAlarm"/>
+
+	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" onsubmit="return fbidvalidate();" >
+		<input type="hidden" name="fmemberAlarm"/>
+		
+
 		 <div id="memberId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
 		<!-- 	중복체크관련태그 -->
