@@ -46,6 +46,13 @@ public class ThingController {
 		return "";
 	}
 	
+	@RequestMapping("/thing/thingEnd.do")
+	public String thingEnd() {
+	
+		return "";
+	}
+	
+	
 	
 	
 	

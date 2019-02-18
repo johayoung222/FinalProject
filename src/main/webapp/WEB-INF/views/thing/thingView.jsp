@@ -41,6 +41,7 @@
      <div id="accordion" role="tablist">
    		<div id="accordion" role="tablist">
    		<label for="">카테고리</label> 
+
   <div class="card">
     <div class="card-header" role="tab" id="headingOne">
       <h5 class="mb-0">
@@ -309,7 +310,25 @@
 	<br /><br />
 	<label for="">가격을 입력해 주세요  : </label> 
 	<input type="text" /> 
-   		
+	<br /><br /> 
+	<label for="">경매 상품으로 등록 하시겠습니까?</label>&nbsp;&nbsp;예.  
+	<input type="checkbox" name="auction"/> 아니오.
+	<input type="checkbox" name="auction"/>  
+   	<br /><br />
+   	<form action="fileUpload.jsp" method="post" enctype="Multipart/form-data">
+    &nbsp;&nbsp;파일명1 : <input type="file" name="fileName1" /><br/>
+    &nbsp;&nbsp;파일명2 : <input type="file" name="fileName2" /><br/>
+    &nbsp;&nbsp;파일명3 : <input type="file" name="fileName3" /><br/>
+    &nbsp;&nbsp;파일명4 : <input type="file" name="fileName4" /><br/>
+    </form>
+	
+	<br /><br /> 
+	<label for="">수량을 적어주세요 : </label>
+	<input type="number" />
+	<br /><br />
+	<label for="">상품 설명을 적어주세요.</label>
+	<textarea rows="5" cols="30" name="contents"></textarea>
+
    
 </div> 
       </div>
@@ -320,7 +339,9 @@
     </div>
   </div>
 </div>
+
 </div> 
+
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/직접.PNG"  alt="Card image cap">
   <div class="card-body">
@@ -414,13 +435,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('thingEnrollFrm').submit();">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 </div>
-
+<form name="thingEnrollFrm" action="${pageContext.request.contextPath}/thing/thingEnd.do">
+	
+</form>
 <script>
 	function categoryClick(type){
 		console.log(type); 
