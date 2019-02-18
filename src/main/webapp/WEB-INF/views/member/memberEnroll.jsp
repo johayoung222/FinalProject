@@ -864,11 +864,23 @@ $("#all").on('click', function(){
 </style>
 <div class="content-container">
 		<div class="login-container">
-			<div class="login-link">
+			<div class="login-link" >
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-action"><a href="">페이스북으로 시작하기</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">구글로 시작하기</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 시작하기</a></li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+				<img src="${pageContext.request.contextPath }/resources/images/facelogin.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/googlelog.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
+				<li class="list-group-item list-group-item-action" style="border:0">
+				<a href="">
+					<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/>
+				</a>
+				</li>
 			</ul>
 			</div>
 			<span>또는</span>
