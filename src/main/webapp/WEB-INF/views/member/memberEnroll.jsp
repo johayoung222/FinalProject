@@ -865,8 +865,9 @@ $("#all").on('click', function(){
 </style>
 <div class="content-container">
 		<div class="login-container">
-			<div class="login-link">
+			<div class="login-link" >
 			<ul class="list-group">
+<<<<<<< HEAD
 				<li class="list-group-item list-group-item-action">  
 		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
                 data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
@@ -884,6 +885,7 @@ $("#all").on('click', function(){
 				<li class="list-group-item list-group-item-action">
 				<a id="kakao-login-btn">Kakao로 시작하기</a>
                  <a href="http://developers.kakao.com/logout"></a>
+
 				</li>
 			</ul>
 			</div>
@@ -893,15 +895,15 @@ $("#all").on('click', function(){
 			</div>
 		</div>
 	</div>
-
-<script  type="text/javascript">
+<script>
 function next2(){
 	$(".content-container").hide();
 	$("#enroll-container").show();
 	$(".select-second").css({"color":"black","border-bottom":"none"}).next().css({"color":"#007bff","border-bottom":"2px solid #007bff"});
 	var alarm = $("#agree4").prop("checked");
-	memberEnrollFrm.memberAlarm.value = alarm==true?"1":"0";
+	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
 }
+
 
 <!-- facebook회원가입 -->
  window.fbAsyncInit = function() {
@@ -1002,6 +1004,7 @@ function next2(){
 
 
 
+
 </script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
 <style>
@@ -1033,23 +1036,6 @@ function next2(){
 	div#memberId-container span.error{
 		color:red;
 	}
-	div#facebookenroll-container{
-	width:400px; 
-	margin:0 auto; 
-	text-align:center;
-	display: none;
-	}
-	
-	div#memberId-container span.fbguide{
-		display: none;
-		font-size: 12px;
-		position: absolute;
-		top: 12px;
-		right: 10px;
-	}
-	div#facebookenroll-container input[name=fbsubmit]{
-	 	display: none;
-	}
 </style>
 <!-- 
 Bootstrap 폼태그 작성 시 유의할 것
@@ -1061,6 +1047,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<input type="hidden" name="memberAlarm"/>
+		
 		<div id="memberId-container">
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
 			<!-- 중복체크관련태그 -->
@@ -1086,6 +1073,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="reset" class="btn btn-outline-success" value="취소">
 	</form>
 </div>
+
 
 
 
@@ -1118,6 +1106,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="button" class="btn btn-outline-success" value="취소" onclick="gotomain();">
 	</form>
 </div>
+
 
 
 
@@ -1162,7 +1151,6 @@ $("#memberId_").on("keyup" , function(){
 		return;
 	}
 	
-	
 	// ajax요청
 	$.ajax({
 		url: "${pageContext.request.contextPath}/member/checkDuplicate.do" ,
@@ -1178,8 +1166,7 @@ $("#memberId_").on("keyup" , function(){
 				$(".guide.error").hide();
 				$(".guide.ok").show();
 				$("#idDuplicateCheck").val(1);				
-			}else{
-				
+			} else {
 				$(".guide.ok").hide();
 				$(".guide.error").show();
 				$("#idDuplicateCheck").val(0);								
@@ -1191,6 +1178,7 @@ $("#memberId_").on("keyup" , function(){
 		}
 	});
 });
+
 
 
 function fbvalidate(){
@@ -1235,6 +1223,7 @@ function gotomain(){
 	 window.location.href = "/spring";
 	
 }
+
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

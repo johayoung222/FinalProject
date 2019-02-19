@@ -110,7 +110,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
             </div>
             <div id="box-link4">
                 <i class="fa fa-truck"></i>
-                <a class="item-link" href="#">장바구니▼</a>
+                <a class="item-link" href="${pageContext.request.contextPath }/item/basket.do">장바구니▼</a>
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -197,6 +197,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 </div>
                 <!--로그인폼 : https://getbootstrap.com/docs/4.1/components/forms/#overview -->
                 <form
+                
                     action="${pageContext.request.contextPath}/member/memberLogin.do"
                     method="post">
                     <div class="modal-body">

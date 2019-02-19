@@ -145,9 +145,11 @@ label {
     margin-top: 14px;
     border-bottom: 2px solid #ececec;
     height: 30px;
+    width: 880px;
 }
 
 .mypage-body {
+	width: 880px;
     padding: 33px;
 }
 
@@ -156,3 +158,213 @@ label {
     width: 1000px;
 }
 
+.mypage-container {
+	min-height: 400px;
+}
+
+/* 내 쿠폰 css */
+
+.credit-list-table {
+    padding: 24px 14px;
+}
+
+.credit-instruction {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+/* 프로모션 css */
+/* 버튼 */
+.credit-apply-btn-space {
+    float: right;
+    width: 160px;
+    height: 42px;
+    border: 1px solid #7151FC;
+    border-radius: 3px;
+}
+
+.credit-apply-btn-plus-image {
+    float: left;
+    margin: 13px 0px 0px 12px;
+    width: 14px;
+    height: 16px;
+}
+
+.credit-apply-btn-text{
+    float: right;
+    margin-right: 5px;
+    padding: 12px 5px 0 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.promo-title-image {
+    width: 78px;
+    height: 78px;
+    margin-left: 350px;
+}
+
+.promo-title-image-container {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.promo-title-text {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.promo-desc {
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.promo-desc span {
+    color: #7151FC;
+}
+
+.row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+
+.promo-share-desc {
+    font-weight: bold;
+    text-align: center;
+}
+
+.col-xs-offset-3 {
+    margin-left: 25%;
+}
+.col-xs-6 {
+    width: 50%;
+}
+
+.promo-share-icon {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.col-xs-4 {
+    width: 200px;
+}
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+    float: left;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.credit-title {
+    text-align: center;
+    font-size: 18px;
+    width: 200px;
+    margin: 0 auto 48px auto;
+    padding: 20px;
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+}
+
+.credit-label {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+
+.credit-list-table {
+    padding: 24px 14px;
+}
+
+.credit-list-row.title {
+    font-size: 14px;
+}
+
+.credit-list-row {
+    font-size: 12px;
+    border-bottom: 1px solid #ececec;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.col-xs-2 {
+    width: 16.66667%;
+}
+
+.col-xs-8 {
+    width: 66.66667%;
+}
+
+.credit-instruction {
+    font-size: 12px;
+    line-height: 20px;
+}
+/* 알림설정 페이지 css */
+.mypage-profile-body {
+    padding: 40px 60px 12px;
+}
+
+.wish-body-title {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 16px;
+    color: #1f1f1f;
+    width: 160px;
+    font-weight: bold;
+}
+
+.wish-body-content {
+    display: inline-block;
+    width: 595px;
+}
+
+.wish-checkbox-wrapper {
+    line-height: 30px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin: 4px 0 0;
+    margin-top: 1px \9;
+    line-height: normal;
+}
+input[type="checkbox"], input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+.wish-form-checkbox {
+    margin-top: 9px !important;
+    margin-right: 8px !important;
+    float: left;
+}
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.wish-no-item-wrapper {
+    font-size: 14px;
+    padding: 20px;
+}
+
+.wish-no-item-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.wish-items-wrapper {
+    border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    margin: 20px 0 30px 0;
+}
