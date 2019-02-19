@@ -20,5 +20,10 @@ public class CustomerDaoImpl implements CustomerDao {
 		return sqlSession.selectList("news.selectNewsList" , null , rowBounds);
 	}
 
+	@Override
+	public int countNewsList() {
+		return sqlSession.selectOne("news.countNewsList");
+	}
+
 	
 }

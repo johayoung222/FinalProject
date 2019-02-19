@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle"/>
@@ -12,6 +13,7 @@
     width: 1060px;
     margin-left: 110px;
     padding-top: 48px;
+    margin-bottom: 50px;
 }
 .sidebar{
     vertical-align: top;
@@ -58,15 +60,27 @@
 	width:80%;
 }
 #news{
-
-	border-bottom:2px solid #ececec;
+	border-bottom:1px solid #ececec;
 	height: 50px;
-	width:100%;
+	width:90%;
+	margin: 0 auto;
+	cursor: pointer;
 }
 .newscontent{
-	border-bottom:2px solid #ececec;
+	margin: 0 auto;
+	border-bottom:1px solid #ececec;
 	background: #e9e9e9;
+	width:90%;
 }
+.title{
+	margin-top: 10px;
+	font-weight:bold;
+}
+.date{
+	font-size: 10px;
+	display:inline-block;
+}
+
 
 </style>
 
@@ -90,24 +104,36 @@
 		</div>
 		<div class="content">
 			<div class="headline">
-				여기 소식 헤드라인
+				겟잇 공지사항
 			</div>
-			<section>
+
 			
 			<c:forEach items="${list}" var="b">
-				<div class="news1" id="news" data-toggle="collapse" data-target="#${b.SEQ_BOARD_NO}" aria-expanded="false" aria-controls="collapseExample">	
-				${b.BOARD_TITLE} 
-				${b.BOARD_DATE}
+				<div class="news1" id="news" data-toggle="collapse" data-target="#${b.SEQ_BOARD_NO}" aria-expanded="false" aria-controls="collapseExample">
+				<div class="title ng-binding">
+					${b.BOARD_TITLE} 
+				</div>	
+				<div class="date  ng-binding">
+				<fmt:formatDate value="${b.BOARD_DATE}" pattern="yyyy.MM.dd" />	
+				</div>
 				</div>
 				<div class="collapse" id="${b.SEQ_BOARD_NO}">
 				  <div class="newscontent">
 					${b.BOARD_CONTENT}
 				  </div>
 				</div>
+				
 			</c:forEach>
-				
-				
-			</section>
+		<br />
+		<br />
+		<%
+		int totalContent = (int)request.getAttribute("totalContents");
+		int numPerPage = (int)request.getAttribute("numPerPage");
+		int cPage = (int)request.getAttribute("cPage");
+		%>
+		<div class="page">
+			<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "ccnews.do") %>		
 		</div>
-</div>		
+	</div>	
+</div>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
