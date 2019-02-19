@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
+	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
 <style>
 .table-bordered{

@@ -991,12 +991,11 @@ Bootstrap 폼태그 작성 시 유의할 것
     	 return false;
      }
      
-     var interest = false;
      /* 관심상품 팝업 */
      open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
     		 "width=500,height=400,left=200,top=200");
      
-     return false;
+     return true;
 }
 
 $("#memberId_").on("keyup" , function(){

@@ -7,12 +7,14 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 
 @Controller
@@ -60,6 +62,16 @@ public class ThingController {
 		
 		mav.addObject("product",p);
 		mav.setViewName("item/perchase");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="/item/perchase/complete", method=RequestMethod.POST)
+	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
+		
+		logger.debug(order);
+		
+		mav.setViewName("/mypage/order");
 		
 		return mav;
 	}
