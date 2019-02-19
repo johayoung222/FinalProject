@@ -30,6 +30,7 @@
 </button>
 
 <!-- Modal -->
+<form action="${pageContext.request.contextPath}/thing/sell.do" method="post" enctype="Multipart/form-data">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -41,7 +42,6 @@
      <div id="accordion" role="tablist">
    		<div id="accordion" role="tablist">
    		<label for="">카테고리</label> 
-
   <div class="card">
     <div class="card-header" role="tab" id="headingOne">
       <h5 class="mb-0">
@@ -306,39 +306,56 @@
 </div>  
 	<br /><br /> <hr />
 	<label for="">상품명을 입력해 주세요 : </label>
-	<input type="text" value=""/>
+	<input type="text" name="name"/>
 	<br /><br />
 	<label for="">가격을 입력해 주세요  : </label> 
-	<input type="text" /> 
+	<input type="text" name="price"/> 
 	<br /><br /> 
 	<label for="">경매 상품으로 등록 하시겠습니까?</label>&nbsp;&nbsp;예.  
-	<input type="checkbox" name="auction"/> 아니오.
-	<input type="checkbox" name="auction"/>  
+	<input type="radio" name="auction" id="auction" value="True"/> 아니오.
+	<input type="radio" name="auction" id="auction" value="False"/>   
    	<br /><br />
-   	<form action="fileUpload.jsp" method="post" enctype="Multipart/form-data">
-    &nbsp;&nbsp;파일명1 : <input type="file" name="fileName1" /><br/>
-    &nbsp;&nbsp;파일명2 : <input type="file" name="fileName2" /><br/>
-    &nbsp;&nbsp;파일명3 : <input type="file" name="fileName3" /><br/>
-    &nbsp;&nbsp;파일명4 : <input type="file" name="fileName4" /><br/>
-    </form>
+   	
+   	
+    <div class="input-group mb-3" style="padding:0px;">
+		  <div class="input-group-prepend" style="padding:0px;">
+		    <span class="input-group-text">첨부파일1</span>
+		  </div>
+		  <div class="custom-file">
+		    <input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple>
+		    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+		  </div>
+		</div>
+		
+		<div class="input-group mb-3" style="padding:0px;">
+		  <div class="input-group-prepend" style="padding:0px;">
+		    <span class="input-group-text">첨부파일2</span>
+		  </div>
+		  <div class="custom-file">
+		    <input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple>
+		    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+		  </div>
+		</div>
 	
 	<br /><br /> 
 	<label for="">수량을 적어주세요 : </label>
-	<input type="number" />
+	<input type="number" name="amount"/>
 	<br /><br />
 	<label for="">상품 설명을 적어주세요.</label>
-	<textarea rows="5" cols="30" name="contents"></textarea>
+	<textarea rows="5" cols="30" name="description"></textarea>
 
    
 </div> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        <input type="submit" value="Save changes" class="btn btn-primary" />
       </div>
     </div>
   </div>
 </div>
+</form>
 
 </div> 
 
@@ -452,6 +469,16 @@
 		$("button[name=category]").prop("disabled", true);	
 		
 	}
+	//부트스트랩 파일변경시 파일명 보이기
+	$(function(){
+		$("[name=upFile]").on('change',function(){
+			//var fileName = $(this).val();
+			console.log($(this));
+			var fileName = $(this).prop("files")[0].name;
+			$(this).next(".custom-file-label").html(fileName);
+		});
+	});
+
 	
 	
 </script>
