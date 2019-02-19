@@ -8,6 +8,7 @@
 	<jsp:param value="Get It :: 로그인" name="pageTitle" />
 	<jsp:param value="1" name="pageName"/>
 </jsp:include>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 .content-container{
 	width: 100%;
@@ -41,14 +42,19 @@
                                 
 				<li class="list-group-item list-group-item-action">
    				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"onlogin="checkLoginState();">
-              FaceBook으로 로그인하기
+        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"onlogin="checkLoginState();">
+              FaceBook으로 로그인
        </fb:login-button>
   
 				
 				</li>
 				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 로그인</a></li>
+				<li class="list-group-item list-group-item-action"><a href="">
+				
+			    <a id="kakao-login-btn"></a>
+                 <a href="http://developers.kakao.com/logout"></a>
+				
+				</li>
 			</ul>
 			</div>
 			<span>또는</span>
@@ -116,19 +122,13 @@ window.fbAsyncInit = function() {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	     
              // console.log(JSON.stringify(response));
-           
-	
+  
                   
                  var memberId = response.id;
                  var memberName = response.name;
                  var memberEmail = response.email;  
                
                
-                  console.log("----------------");
-                  console.log(memberId);
-                  console.log(memberName);
-                  console.log(memberEmail);
-              
                
             $.ajax({
           		url: "${pageContext.request.contextPath}/member/facebookLogin",
@@ -155,6 +155,31 @@ window.fbAsyncInit = function() {
     } 
   }
 
+  /*    카카오 */
+  // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('2cfa4996f60f8a89b4e138305aa0842e');
+  // 카카오 로그인 버튼을 생성합니다.
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      // 로그인 성공시, API를 호출합니다.
+      Kakao.API.request({
+        url: '/v1/user/me',
+        success: function(res) {
+          console.log(JSON.stringify(res.account_email));
+          console.log(JSON.stringify(res.id));
+          console.log(JSON.stringify(res.properties.profile_image));
+          console.log(JSON.stringify(res.properties.nickname));
+        },
+        fail: function(error) {
+          alert(JSON.stringify(error));
+        }
+      });
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err));
+    }
+  });
 
 
 

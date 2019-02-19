@@ -8,6 +8,7 @@
 	<jsp:param value="Get It :: 회원가입" name="pageTitle" />
 	<jsp:param value="0" name="pageName"/>
 </jsp:include>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
 .enroll-table{
 	text-align: center;
@@ -873,14 +874,17 @@ $("#all").on('click', function(){
        </fb:login-button> -->
        
        <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();">
+        data-show-faces="false" data-use-continue-as="false"onlogin="checkLoginState();" >
               FaceBook으로 시작하기
        </fb:login-button>
        
        
        </li>
 				<li class="list-group-item list-group-item-action"><a href="">구글로 시작하기</a></li>
-				<li class="list-group-item list-group-item-action"><a href="">카카오톡으로 시작하기</a></li>
+				<li class="list-group-item list-group-item-action">
+				<a id="kakao-login-btn">Kakao로 시작하기</a>
+                 <a href="http://developers.kakao.com/logout"></a>
+				</li>
 			</ul>
 			</div>
 			<span>또는</span>
@@ -900,7 +904,7 @@ function next2(){
 }
 
 <!-- facebook회원가입 -->
-window.fbAsyncInit = function() {
+ window.fbAsyncInit = function() {
     FB.init({
       appId      : '1302299029947046',
       xfbml      : true,
@@ -940,21 +944,12 @@ window.fbAsyncInit = function() {
     if (response.status === 'connected') {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	     
-             // console.log(JSON.stringify(response));
-                 console.log(response.gender);
-	
-                  
+             // console.log(JSON.stringify(response
                  var fbId = response.id;
                  var fbName = response.name;
                  var fbEmail = response.email;  
                
-               
-                  console.log("페이스북에 담기는 것들!");
-                  console.log(fbId);
-                  console.log(fbName);
-                  console.log(fbEmail);
-              
-
+           
             $.ajax({
           		url: "${pageContext.request.contextPath}/member/facebookEnroll",
           		method:"post",
@@ -977,6 +972,34 @@ window.fbAsyncInit = function() {
     	
     } 
   }
+  
+  
+          /*    카카오 */
+  // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  Kakao.init('2cfa4996f60f8a89b4e138305aa0842e');
+  // 카카오 로그인 버튼을 생성합니다.
+  Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      // 로그인 성공시, API를 호출합니다.
+      Kakao.API.request({
+        url: '/v1/user/me',
+        success: function(res) {
+          console.log(JSON.stringify(res.kaccount_email));
+          console.log(JSON.stringify(res.id));
+          console.log(JSON.stringify(res.properties.profile_image));
+          console.log(JSON.stringify(res.properties.nickname));
+        },
+        fail: function(error) {
+          alert(JSON.stringify(error));
+        }
+      });
+    },
+    fail: function(err) {
+      alert(JSON.stringify(err));
+    }
+  });
+
 
 
 </script>
@@ -1089,7 +1112,7 @@ Bootstrap 폼태그 작성 시 유의할 것
 		<input type="hidden" name="fmemberInterest"/>
 		<br />
 		<input type="submit" name="fbsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="reset" class="btn btn-outline-success" value="취소">
+		<input type="button" class="btn btn-outline-success" value="취소" onclick="gotomain();">
 	</form>
 </div>
 
@@ -1185,6 +1208,7 @@ function fbvalidate(){
 			
 			}else{
 				alert("이미 등록된 회원이 있습니다 ");	
+				$("#facebookenroll-container").hide();
 				$("input[name=fbsubmit]").hide();
 				
 			} 
@@ -1197,12 +1221,17 @@ function fbvalidate(){
 		}
 	});
  
-    // var interest = false;
+   var interest = false;
     /* 관심상품 팝업 */
-    // open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-    //return false;
+   open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
+   return false;
 }
-
+function gotomain(){
+	
+	
+	 window.location.href = "/spring";
+	
+}
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
