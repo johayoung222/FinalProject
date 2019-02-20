@@ -71,7 +71,6 @@ public class ThingController {
 			String saveDirectory = req.getSession().getServletContext().getRealPath("/resources/upload/thing");
 			logger.debug("saveDirectory = "+saveDirectory);
 			
-			List<Attachment> attachList = new ArrayList<>();
 			
 			//MultipartFile 처리
 			
@@ -96,11 +95,6 @@ public class ThingController {
 						e.printStackTrace();
 					}
 					
-					//첨부파일 객체 생성. 리스트에 추가
-					Attachment attach = new Attachment();
-					attach.setOriginalFileName(originalFileName);
-					attach.setRenamedFileName(renamedFileName);
-					attachList.add(attach);
 				}
 			}
 			//2. 업무로직
