@@ -63,6 +63,7 @@ public class ThingController {
 		}
 		
 		
+		
 		try{
 			//1. 파일업로드
 			String saveDirectory = req.getSession().getServletContext().getRealPath("/resources/upload/thing");
