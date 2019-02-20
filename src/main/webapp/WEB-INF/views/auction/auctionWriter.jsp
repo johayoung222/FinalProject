@@ -7,36 +7,18 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
-<script>
-// onload함수에 summernote 적용부분
 
-$(function() {
-	$("#summernote").summernote({
-		/* ※ Popovers
-		☞ 팝 오버는 툴팁과 동일한 효과를 구현할 수 있지만, 더 많은 내용을 보여줄 수 있다.
-		
-		☞ 제목과 content 길이가 0일 경우, 보여지지 않는 것 또한 툴팁과 동일하다.
-		
-		☞ 반드시 Bootstrap의 툴팁 플러그인이 포함되어 있어야 한다.
-		
-		☞ 툴팁과 마찬가지로, 4가지의 방향(왼쪽, 상단, 하단, 오른쪽)으로 표시할 수 있다. */
-		popover: false,
-		height : 300, 		// 기본 높이값
-		minHeight : null, 	// 최소 높이값(null은 제한 없음)
-		maxHeight : null, 	// 최대 높이값(null은 제한 없음)
-		focus : false, 		// 페이지가 열릴때 포커스를 지정함
-		lang : 'ko-KR', 	// 한국어 지정(기본값은 en-US)
-		callbacks: {
-        	onImageUpload: function(files, editor, welEditable) {
-                for (var i = files.length - 1; i >= 0; i--) {
-                  sendFile(files[i], this);
-                }
-        	}
-        }
 
-	});
-});
-</script>
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/datepicker/moment.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/datepicker/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/write.css" />
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/dist/summernote.css" />
+<script type="text/javascript" charset="UTF-8" src="${pageContext.request.contextPath }/resources/dist/summernote.js"></script>
+<script src="${pageContext.request.contextPath }/resources/dist/lang/summernote-ko-KR.js"></script>
+
 
 <div class="container"> 
 	
@@ -46,11 +28,10 @@ $(function() {
 		
 			<label for="field1">
 			<span>카테고리: </span>
-		 
 						<select class="select-field" id="lctg" name="lctg" onchange="fn_next(this.value)">
 							<option value="" hidden="true">대분류</option>
-							<c:forEach var="rs" items="${resultList}" varStatus="status">
-								<option value="${rs.ctgcd}">${rs.ctgnm}</option>
+							<c:forEach var="rs" items="${ctgList}" varStatus="status">
+								<option value="${rs.categoryMacro}">${rs.categoryName}</option>
 							</c:forEach>
 						</select> 
 						
@@ -120,7 +101,7 @@ $(function() {
 				<select class="select-field" name="dw" id="dw" onchange="fee(this.value)">
 							<option value="">선택</option>
 							<option value="0">택배</option>
-							<option value="1">직접수령</option>
+							<option value="1">회사로 직접 방문</option>
 				</select>
 			</label>
 			<p id="dwchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
@@ -162,9 +143,6 @@ $(function() {
 							<option value="">선택</option>
 							<option value="010">010</option>
 							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="011">017</option>
-							<option value="011">019</option>
 			</select> -
 			<input type="text" class="tel-number-field" id="phone2" name="phone2" value="" maxlength="4"
 			onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' /> -
@@ -180,9 +158,107 @@ $(function() {
 			<p id="adchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 		
 			<input type="button" id="saveBtn" value="입력"/>
-			
-	</div>
+		</div>
 	</form>
-	
 </div>
+
+
+<script type="text/javascript">
+
+//daterangepicker 적용부분
+
+	$(function() {
+		$('input[name="dateRange"]').daterangepicker({
+			
+			timePicker : true,
+			timePickerIncrement : 30,
+			locale : {
+				format : 'YYYY-MM-DD H:mm A',
+				cancelLabel : 'clear'
+			}
+			
+		});
+		$('input[name="dateRange"]').on(
+				'apply.daterangepicker',
+				function(ev, picker) {
+					$(this).val(
+							picker.startDate.format('YYYY-MM-DD H:mm A')
+									+ ' ~ '
+									+ picker.endDate
+											.format('YYYY-MM-DD H:mm A'));
+				});
+
+		$('input[name="dateRange"]').on('cancel.daterangepicker',
+				function(ev, picker) {
+					$(this).val('');
+				});
+
+	});
+	
+</script>
+
+<script>
+// onload함수에 summernote 적용부분
+
+$(function() {
+	$("#summernote").summernote({
+		/* ※ Popovers
+		☞ 팝 오버는 툴팁과 동일한 효과를 구현할 수 있지만, 더 많은 내용을 보여줄 수 있다.
+		
+		☞ 제목과 content 길이가 0일 경우, 보여지지 않는 것 또한 툴팁과 동일하다.
+		
+		☞ 반드시 Bootstrap의 툴팁 플러그인이 포함되어 있어야 한다.
+		
+		☞ 툴팁과 마찬가지로, 4가지의 방향(왼쪽, 상단, 하단, 오른쪽)으로 표시할 수 있다. */
+		popover: false,
+		height : 300, 		// 기본 높이값
+		minHeight : null, 	// 최소 높이값(null은 제한 없음)
+		maxHeight : null, 	// 최대 높이값(null은 제한 없음)
+		focus : false, 		// 페이지가 열릴때 포커스를 지정함
+		lang : 'ko-KR', 	// 한국어 지정(기본값은 en-US)
+		callbacks: {
+        	onImageUpload: function(files, editor, welEditable) {
+                for (var i = files.length - 1; i >= 0; i--) {
+                  sendFile(files[i], this);
+                }
+        	}
+        }
+
+	});
+});
+
+//write 페이지에 대분류 선택하면 중분류 뽑아오는 함수
+
+function fn_next(ctgcode) {
+	
+	var data = "ctgcode=" + ctgcode;
+
+	$.ajax({
+		type : 'POST',
+		data : data,
+		url : "${pageContext.request.contextPath}/selectMlist",
+		dataType : "json",
+		success : function(data) {
+			if(data.resultMList != null) {
+				$('#mctg').children("option").remove();
+				//data.rows 에 코드, 이름 형태로 되어있다고 가정.
+				var codeList = data.resultMList;
+				$('#mctg').append( "<option value='' hidden='true'>중분류</option>");
+				
+				for (var i = 0; i < codeList.length; i++) {
+					var option = "<option value='" + codeList[i].categoryMacro + "'>"
+							+ codeList[i].categoryName + "</option>";
+					//대상 콤보박스에 추가
+					$('#mctg').append(option);
+				}
+			}
+		},
+		error : function(xhr, status, error) {
+			alert("ajax처리오류!");
+		}
+	});
+}
+
+</script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

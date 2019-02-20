@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.thing.model.dao.ThingDao;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Service
 public class ThingServiceImpl implements ThingService {
@@ -28,6 +29,12 @@ public class ThingServiceImpl implements ThingService {
 	@Override
 	public Product selectOne(int productNo) {
 		return thingDao.selectOne(productNo);
+	}
+
+
+	@Override
+	public int sell(Regist regist) {
+		return thingDao.sell(regist);
 	}
 
 }
