@@ -72,7 +72,6 @@
 </section>
 <script>
 $("#form-inline .btn-send").on("click",function(){
-	alert("클릭했다");
 	$("#tbl-paidProduct").css("display","none");
 	
 	$.ajax({
@@ -81,7 +80,6 @@ $("#form-inline .btn-send").on("click",function(){
 		dataType:"json",
 		type:"get",
 		success : function(data){
-			alert("ajax 성공!!");
 			 console.log(data);
              var html = "<table class=table>";
              html+="<tr><th>제품코드</th><th>상품명</th><th>매출액</th><th>판매량</th><th>구매자아이디</th><th>상품카테고리</th><th>주문번호</th></tr>";
