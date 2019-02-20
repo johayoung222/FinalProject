@@ -11,6 +11,9 @@
 <div class="sell-title" style="text-align: center;font-style: oblique;">겟잇의 모든 중고 거래는 안전거래입니다!</div>
 
 <div style="display: inline-flex; text-align: center; margin-left: 32%;">  
+
+
+
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/대신.PNG" alt="Card image cap">
   <div class="card-body">
@@ -377,6 +380,10 @@
   판매하기
 </button>
 
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -396,6 +403,25 @@
   </div>
 </div> 
 </div> 
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/경매1.png"  alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">겟잇 옥션</h5>
+    <p class="card-text"></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">한번에 1개 제품 등록</li>
+    <li class="list-group-item">경매 시작 가격 직접 입력</li>
+    <li class="list-group-item">구매자 응대 X</li>
+    <li class="list-group-item">편의점 택배 서비스 이용</li>
+    <li class="list-group-item">매입 X</li> 
+  </ul>
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
+  판매하기
+</button>
+</div>
 
 </div> 
 <hr /> 
@@ -457,6 +483,16 @@
     </div>
   </div>
 </div>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">안녕! 겟잇 옥션</h1>
+  <hr class="my-4">
+  <p class="lead">1. 팔 물건은 있는데, 판매하기가 귀찮다.</p> 
+  <p class="lead">2. 색다르게, 가격경쟁을 통해 팔고싶다.</p> 
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
+  겟잇 옥션으로 판매하기
+</button>
 </div>
 <form name="thingEnrollFrm" action="${pageContext.request.contextPath}/thing/thingEnd.do">
 	
