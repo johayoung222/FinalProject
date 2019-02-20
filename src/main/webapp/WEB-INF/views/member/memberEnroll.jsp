@@ -870,10 +870,7 @@ $("#all").on('click', function(){
 		<div class="login-container">
 			<div class="login-link">
 			<ul class="list-group">
-<<<<<<< HEAD
-=======
 
->>>>>>> 22a5e9b4836214eb7e16d03953e7797fa3501328
 				<li class="list-group-item list-group-item-action">  
 		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
                 data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
@@ -881,7 +878,7 @@ $("#all").on('click', function(){
        </fb:login-button> -->
        
        <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();" >
+        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"onlogin="checkLoginState();" >
               FaceBook으로 시작
        </fb:login-button>
        

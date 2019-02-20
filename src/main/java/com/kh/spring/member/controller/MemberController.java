@@ -230,35 +230,27 @@ public class MemberController {
 	 * 페이스북 관련: 로그인 관련
 	 */
 	@RequestMapping("/member/facebookLogin")
-	@ResponseBody
-	public ModelAndView facebookLogin(@RequestParam("memberId") String memberId, ModelAndView mav,
+	 @ResponseBody
+	public Map<String, Object> facebookLogin(@RequestParam("memberId") String memberId, 
 			HttpSession session) {
 
 		Map<String, Object> map = new HashMap<>();
 		Member m = memberService.selectOneMember(memberId);
-		boolean FBisUsable = m == null ? true : false;
+		boolean fbisUsable = m == null ? true : false;
 		logger.debug(m);
+		logger.debug(fbisUsable);
 		
-		
-		 String msg = ""; 
-		 String view = "common/msg";
-		 String loc = "";
-		 
-		// 로그인처리
-		if ( FBisUsable == false) {
-		
-			loc = "/member/memberMoveLogin.do";
-			
-			mav.addObject("loc", loc);
-			mav.addObject("FBisUsable",FBisUsable);
-			mav.addObject("memberLoggedIn", m);
-		
-			view = "redirect:/";
-			mav.setViewName(view);
+	       
+		if(fbisUsable == false) {
+			  session.setAttribute("memberLoggedIn", m);
+	         //map.put("memberLoggedIn", m);
 		}
-
-
-		return mav;
+		
+		
+	        
+	      map.put("fbisUsable", fbisUsable);
+	      return map;
+		
 
 	}
 
@@ -269,12 +261,6 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView facebookEnroll(@RequestParam("fbId") String fbId, @RequestParam("fbName") String fbName,
 			@RequestParam("fbEmail") String fbEmail, ModelAndView mav) {
-
-		/*
-		 * System.out.println("faceBookID:"+fbId);
-		 * System.out.println("faceBookName:"+fbName);
-		 * System.out.println("faceBookmemberEmail:"+fbEmail);
-		 */
 
 		mav.setViewName("member/memberEnroll");
 		return mav;
@@ -330,31 +316,26 @@ public class MemberController {
 
 	@RequestMapping("/member/kakaoLogin")
 	@ResponseBody
-	public ModelAndView kakaoLogin(@RequestParam("kakaoId") String kakaoId, ModelAndView mav, HttpSession session) {
+	public Map<String, Object> kakaoLogin(@RequestParam("kakaoId") String kakaoId, HttpSession session) {
 
-		// 아이디를 통해서 selectOne메소드 호출결과 Member객체를 가져온다.
+	
 		Member m = memberService.selectOneMember(kakaoId);
-		boolean FBisUsable = m == null ? true : false;
+	
+		Map<String, Object> map = new HashMap<>();
+		
+		boolean kisUsable = m == null ? true : false;
 		logger.debug(m);
-		// System.out.println("member:"+m);
-		String msg = "";
-		String view = "common/msg";
-		String loc = "";
-
-		// 로그인처리
-		if (m == null) {
-			msg = "아이디가 존재하지 않습니다.";
-			loc = "/member/memberMoveLogin.do";
-			mav.addObject("msg", msg);
-			mav.addObject("loc", loc);
+		logger.debug(kisUsable);
+		
+	       
+		if(kisUsable == false) {
+			  session.setAttribute("memberLoggedIn", m);
+	         //map.put("memberLoggedIn", m);
 		}
-
-		mav.addObject("memberLoggedIn", m);
-		mav.addObject("FBisUsable",FBisUsable);
-		view = "redirect:/";
-
-		mav.setViewName(view);
-		return mav;
+		
+		
+	      map.put("kisUsable", kisUsable);
+	      return map;
 
 	}
 	/* kakao 회원 등록하기 */
