@@ -50,17 +50,11 @@
 			<div class="login-link" >
 			<ul class="list-group">
 
-			<%-- <a href="${facebook_url}"><button
-                                    class="btn btn-primary btn-round" style="width: 100%">
-                                    <i class="fa fa-facebook" aria-hidden="true"></i>Facebook Login
-                                </button></a>  --%>
-                                
-                                
                                 
                                 
 				<li class="list-group-item list-group-item-action">
    				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"onlogin="checkLoginState();">
+        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="flase"onlogin="checkLoginState();">
               FaceBook으로 로그인
        </fb:login-button>
   
@@ -133,7 +127,7 @@ window.fbAsyncInit = function() {
     function checkLoginState() {
         FB.getLoginStatus(function(response) {
             statusChangeCallback(response);
-            console.log("찍힌다1");
+            
           });
     }
   function statusChangeCallback(response) {
@@ -155,10 +149,16 @@ window.fbAsyncInit = function() {
           		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
           		success: function(data){
           		
-          		if(data){
+          		console.log(data.FBisUsable);
+          		if(data.FBisUsable==false){
           			
           		 alert("로그인성공");
    				 window.location.href = "/spring";
+          		}else{
+          			
+          			 alert("회원가입 먼저 해주세요!");
+       				 window.location.href = "/spring";
+          			
           		}
           		
 
@@ -176,7 +176,7 @@ window.fbAsyncInit = function() {
 
   /*    카카오 */
   // 사용할 앱의 JavaScript 키를 설정해 주세요.
-  Kakao.init('2cfa4996f60f8a89b4e138305aa0842e');
+   Kakao.init('ce5b973783f3c9e19db9e51f9c823d4b');
   // 카카오 로그인 버튼을 생성합니다.
   Kakao.Auth.createLoginButton({
     container: '#kakao-login-btn',
@@ -185,10 +185,38 @@ window.fbAsyncInit = function() {
       Kakao.API.request({
         url: '/v1/user/me',
         success: function(res) {
-          console.log(JSON.stringify(res.account_email));
+ 
+       /*    console.log(JSON.stringify(res.id));
+          console.log(JSON.stringify(res.properties.nickname)); */
           console.log(JSON.stringify(res.id));
-          console.log(JSON.stringify(res.properties.profile_image));
           console.log(JSON.stringify(res.properties.nickname));
+          
+          
+          var kakaoId = JSON.stringify(res.id);
+          var kakaoName = JSON.stringify(res.properties.nickname);
+          
+          
+          $.ajax({
+        		url: "${pageContext.request.contextPath}/member/kakaoLogin",
+        		method:"post",
+        		data: {kakaoId : kakaoId, kakaoName : kakaoName}, 
+        		success: function(data){
+        		
+        	
+        			
+        		 alert("로그인성공");
+ 				 window.location.href = "/spring";
+        		
+
+        		},
+        		error:function(){
+        			console.log("ajax요청 실패 에러!");
+        		}
+        	}); 
+            
+          
+          
+          
         },
         fail: function(error) {
           alert(JSON.stringify(error));

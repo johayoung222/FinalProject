@@ -55,6 +55,18 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectOneFBMember(fbIdcheck);
 	}
 
+	@Override
+	public Member selectOnekakaoMember(String kIdcheck) {
+		// TODO Auto-generated method stub
+		return memberDao.selectOnekakaoMember(kIdcheck);
+	}
+
+	@Override
+	public int insertKakaoMember(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.insertKakaoMember(m);
+	}
+
 	
 	
 
