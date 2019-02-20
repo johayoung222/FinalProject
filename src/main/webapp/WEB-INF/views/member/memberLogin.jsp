@@ -146,22 +146,20 @@ window.fbAsyncInit = function() {
             $.ajax({
           		url: "${pageContext.request.contextPath}/member/facebookLogin",
           		method:"post",
-          		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail }, 
+          		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail },
+          		dataType: "json",
           		success: function(data){
           		
-          		console.log(data.FBisUsable);
-          		if(data.FBisUsable==false){
           			
+          			
+          		if(data.fbisUsable == false){     
           		 alert("로그인성공");
    				 window.location.href = "/spring";
           		}else{
-          			
-          			 alert("회원가입 먼저 해주세요!");
-       				 window.location.href = "/spring";
-          			
+          			alert("회원가입먼저 해주세요");
+          			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
           		}
-          		
-
+          		 
           		},
           		error:function(){
           			console.log("ajax요청 실패 에러!");
@@ -202,10 +200,18 @@ window.fbAsyncInit = function() {
         		data: {kakaoId : kakaoId, kakaoName : kakaoName}, 
         		success: function(data){
         		
-        	
+        		
+        			if(data.kisUsable == false){     
+                 		 alert("로그인성공");
+          				 window.location.href = "/spring";
+                 	}else{
+                 			alert("회원가입먼저 해주세요");
+                 			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
+                 	}
         			
-        		 alert("로그인성공");
- 				 window.location.href = "/spring";
+        			
+        			
+        		
         		
 
         		},
