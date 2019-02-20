@@ -120,17 +120,12 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <br><br>
-    <div id="header-container">
-        <img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" width="100px" height="80px  ">
+    <div id="header-container" style="margin-left: 300px;">        
              <input type="text" name="search" placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
             id="search2"></i>
     </div>
     <!--https://getbootstrap.com/docs/4.1/components/navbar/-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-        <a class="navbar-brand" href="#"> <img
-            src="${pageContext.request.contextPath }/resources/images/logo-spring.png"
-            alt="스프링로고" width="50px" />
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_"> 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">

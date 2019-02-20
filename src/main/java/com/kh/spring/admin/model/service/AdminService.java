@@ -3,35 +3,18 @@ package com.kh.spring.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.ProductIo;
+
 public interface AdminService {
 
 	List<Map<String, String>> allMember(int cPage, int numPerPage);
 
 	int countallMember();
 	
-	List<Map<String, String>> idSearch(String search, int cPage, int numPerPage);
-
-	int countidSearch(String search);
-	
-	List<Map<String, String>> nameSearch(String search, int cPage, int numPerPage);
-
-	int countnameSearch(String search);
-
 	List<Map<String, String>> paidProduct(int cPage, int numPerPage);
 
 	int countpaidProduct();
-	
-	List<Map<String, String>> paidProductNameSerach(String search, int cPage, int numPerPage);
-
-	int countpaidProductNameSerach(String search);
-
-	List<Map<String, String>> paidProductBuyerSerach(String search, int cPage, int numPerPage);
-	
-	int countpaidProductBuyerSerach(String search);
-
-	List<Map<String, String>> paidProductCategorySerach(String search, int cPage, int numPerPage);
-
-	int countpaidProductCategorySerach(String search);
 	
 	List<Map<String, String>> regist(int cPage, int numPerPage);
 
@@ -41,22 +24,6 @@ public interface AdminService {
 
 	int countproductList();
 	
-	List<Map<String, String>> productListNameSearch(String search, int cPage, int numPerPage);
-
-	int countproductListNameSearch(String search);
-
-	List<Map<String, String>> productListOnsaleSearch(String search, int cPage, int numPerPage);
-
-	int countproductListOnsaleSearch(String search);
-
-	List<Map<String, String>> productListManufacturerSearch(String search, int cPage, int numPerPage);
-
-	int countproductListManufacturerSearch(String search);
-
-	List<Map<String, String>> productListCategorymiSearch(String search, int cPage, int numPerPage);
-
-	int countproductListCategorymiSearch(String search);
-
 	List<Map<String, String>> questionAnswer(int cPage, int numPerPage);
 
 	int countquestionAnswer();
@@ -68,6 +35,15 @@ public interface AdminService {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
+	int countpaidProductSearch2(Map<String, String> map);
+
+	List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map);
+
+
+
+
+
 
 	
 
