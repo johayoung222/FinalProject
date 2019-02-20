@@ -133,14 +133,11 @@ window.fbAsyncInit = function() {
   function statusChangeCallback(response) {
     if (response.status === 'connected') {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
-    	     
-             // console.log(JSON.stringify(response));
-  
-                  
+    	   
                  var memberId = response.id;
                  var memberName = response.name;
-                 var memberEmail = response.email;  
-               
+                 var memberEmail = response.email; 
+                
                
                
             $.ajax({
@@ -149,11 +146,8 @@ window.fbAsyncInit = function() {
           		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail },
           		dataType: "json",
           		success: function(data){
-          		
-          			
-          			
           		if(data.fbisUsable == false){     
-          		 alert("로그인성공");
+          		 alert("FaceBook로그인성공");
    				 window.location.href = "/spring";
           		}else{
           			alert("회원가입먼저 해주세요");
@@ -172,8 +166,7 @@ window.fbAsyncInit = function() {
     } 
   }
 
-  /*    카카오 */
-  // 사용할 앱의 JavaScript 키를 설정해 주세요.
+  /*    카카오로그인 */// 사용할 앱의 JavaScript 키를 설정해 주세요.
    Kakao.init('ce5b973783f3c9e19db9e51f9c823d4b');
   // 카카오 로그인 버튼을 생성합니다.
   Kakao.Auth.createLoginButton({
@@ -202,25 +195,17 @@ window.fbAsyncInit = function() {
         		
         		
         			if(data.kisUsable == false){     
-                 		 alert("로그인성공");
+                 		 alert("카카오 로그인성공");
           				 window.location.href = "/spring";
                  	}else{
                  			alert("회원가입먼저 해주세요");
                  			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
                  	}
-        			
-        			
-        			
-        		
-        		
-
         		},
         		error:function(){
         			console.log("ajax요청 실패 에러!");
         		}
         	}); 
-            
-          
           
           
         },
