@@ -12,4 +12,17 @@
 		select count(*) from board where board_kinds = 1
 	</select>
 	
+	<insert id="insertNews" parameterType="news">
+    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,1,21 )
+    </insert>
+    
+    <update id="updateNews">
+    	update board set board_title = #{boardtitle},
+    					 board_content = #{boardcontent}
+    	where seq_board_no = #{seq_board_no}
+    </update>
+    <delete id="deleteNews">
+    	delete from board where seq_board_no = #{seq_board_no} 
+    </delete>
+	
 </mapper>
