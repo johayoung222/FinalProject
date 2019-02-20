@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Repository
 public class ThingDaoImpl implements ThingDao {
@@ -35,6 +36,12 @@ public class ThingDaoImpl implements ThingDao {
 		Product p = sqlSession.selectOne("thing.selectOne",productNo);
 		logger.debug(p);
 		return p;
+	}
+
+
+	@Override
+	public int sell(Regist regist) {
+		return sqlSession.insert("thing.sell", regist);
 	}
 
 }

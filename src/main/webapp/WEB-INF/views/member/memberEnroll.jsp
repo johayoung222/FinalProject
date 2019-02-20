@@ -870,6 +870,10 @@ $("#all").on('click', function(){
 		<div class="login-container">
 			<div class="login-link">
 			<ul class="list-group">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 22a5e9b4836214eb7e16d03953e7797fa3501328
 				<li class="list-group-item list-group-item-action">  
 		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
                 data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
@@ -1205,12 +1209,11 @@ window.fbAsyncInit = function() {
     	 return false;
      }
      
-     var interest = false;
      /* 관심상품 팝업 */
      open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
     		 "width=500,height=400,left=200,top=200");
      
-     return false;
+     return true;
 }
 
 $("#memberId_").on("keyup" , function(){

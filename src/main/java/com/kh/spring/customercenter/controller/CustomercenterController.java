@@ -27,10 +27,10 @@ public class CustomercenterController {
 	}
 	
 	//@RequestMapping("/customercenter/ccnews.do")
-	public String customercenternews() {
-		System.out.println("ccnews메소드가 요청되었습니다.");
-		return "customercenter/customercenternews";	//	/WEB-INF/views/demo/demo.jsp
-	}
+	//public String customercenternews() {
+	//	System.out.println("ccnews메소드가 요청되었습니다.");
+	//	return "customercenter/customercenternews";	//	/WEB-INF/views/demo/demo.jsp
+	//}
 	
 	@RequestMapping("/customercenter/ccinquiry.do")
 	public String customercenterinquiry() {
@@ -57,12 +57,15 @@ public class CustomercenterController {
 		logger.debug("list=="+list);
 		
 		//2.전체컨텐츠수
-		//int totalContents = boardService.selectCountBoard();
-		//logger.debug("totalC=="+totalContents);
+		int totalContents = customerService.countNewsList();
+		logger.debug("totalC=="+totalContents);
 		
+		mav.addObject("totalContents", totalContents);
 		mav.addObject("list", list);
-		//mav.addObject("totalContents",totalContents);
 		mav.setViewName("customercenter/customercenternews");
+		
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
 		
 		
 		return mav;
