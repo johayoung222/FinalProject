@@ -31,6 +31,7 @@
 			<th>판매수량</th>
 			<th>상품설명</th>
 			<th>신청날짜</th>
+			<th></th>
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
@@ -40,17 +41,18 @@
 		
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="r">
-			<tr>				
-				<th>${r.SEQ_REGIST_NO }</th>
-				<th>${r.REGIST_NAME }</th>
-				<th>${r.REGIST_PRICE }</th>
-				<th>${r.REGIST_AUCTION }</th>
-				<th>${r.REGIST_IMAGE }</th>
-				<th>${r.REGIST_REAL_IMAGE }</th>
-				<th>${r.REGIST_AMOUNT }</th>
-				<th>${r.REGIST_DESCRIPTION }</th>
-				<th>${r.REGIST_DATE }</th>
-			</tr>			
+			<tr class="tableTr">				
+				<td id="registNo">${r.SEQ_REGIST_NO }</td>
+				<td>${r.REGIST_NAME }</td>
+				<td>${r.REGIST_PRICE }</td>
+				<td>${r.REGIST_AUCTION }</td>
+				<td>${r.REGIST_IMAGE }</td>
+				<td>${r.REGIST_REAL_IMAGE }</td>
+				<td>${r.REGIST_AMOUNT }</td>
+				<td>${r.REGIST_DESCRIPTION }</td>
+				<td>${r.REGIST_DATE }</td>
+			</tr>
+			<div class="result" id="regist-result"></div>
 			</c:forEach>
 		</c:if>
 	</table>
@@ -61,5 +63,15 @@
 	%>
 	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "regist.do") %>
 </section> 
+<script>
+$(".tableTr").on("click",function(){
+	//$("#tbl-regist").css("display","none");
+	var registNo = $(this).children("td:first").text();
+	var win = window.open("${pageContext.request.contextPath}/admin/category.do?registNo="+registNo, "대/소분류 선택", "width=300,height=300,location=no,status=no,top=250,left=600");
+
+
+	
+});
+</script> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

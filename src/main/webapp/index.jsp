@@ -88,13 +88,13 @@
 <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/flower1.PNG" alt="First slide">
+      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/캡처1.PNG" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/flower2.PNG" alt="Second slide">
+      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/캡처2.PNG" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/flower3.PNG" alt="Third slide">
+      <img class="indexphoto" src="${pageContext.request.contextPath }/resources/images/캡처3.PNG" alt="Third slide">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
@@ -106,25 +106,40 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+ 
+<div style="text-align: center;">
 <div>
 	<h3><bold>인기 카테고리</bold></h3>
 </div>
 <div id="favorite">
 <div>
+<a href="${pageContext.request.contextPath}/category/laptopPc">
 <img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="120px" height="100px"/>
+</a>
+<a href="${pageContext.request.contextPath}/category/Phone">
 <img src="${pageContext.request.contextPath }/resources/images/phone.PNG" id="favorite2" width="120px" height="100px"/>
+</a>
+<a href="${pageContext.request.contextPath}/category/appliance">
 <img src="${pageContext.request.contextPath }/resources/images/electronic.PNG" id="favorite3" width="120px" height="100px"/>
+</a>
+<a href="${pageContext.request.contextPath}/category/lifeFood">
 <img src="${pageContext.request.contextPath }/resources/images/food.PNG" id="favorite4" width="120px" height="100px"/>
+</a>
+<a href="${pageContext.request.contextPath}/category/lifeHousehold">
 <img src="${pageContext.request.contextPath }/resources/images/kitchen.PNG" id="favorite5" width="120px" height="100px"/>
-<div><pre><strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong></pre></div>
+</a>
+<div><pre><strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong></pre></div> 
+</div>
 </div>
 </div>
 <div id="sell_">
 <br><br>
 	<h6 class="font_">이벤트 당첨되었는데 안 쓰는 물건, 자리만 차지하고 있는 쓸모없는 물건...</h6>
 	<h3 class="font_"><strong>겟잇으로 팔아야 잘 산다!</strong></h3>
-	<h4 id="sell2"><a href="#" id="sell3"><strong>겟잇으로 물건 판매하기</strong></a></h4>
-</div>
+	<h4 id="sell2"><a href="${pageContext.request.contextPath}/thing/thing.do" id="sell3"><strong>겟잇으로 물건 판매하기</strong></a></h4>
+</div>  
+
 <div >
 	<div id="box1" style="text-align:center">
 	<a href="#"><img src="${pageContext.request.contextPath }/resources/images/sound.PNG" id="sound_" width="120px" height="100px"/></a>
