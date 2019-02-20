@@ -23,7 +23,13 @@
 			<id>datanucleus-repo</id>
 			<url>http://www.datanucleus.org/downloads/maven2/</url>
 		</repository>
+		<!-- import 관련 -->
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
 	</repositories>
+	
 
 	<dependencies>
 		<!-- Spring -->
@@ -237,6 +243,12 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		    <version>LATEST</version>
+		</dependency>
+		<!-- 아임포트 관련 의존 -->
+		<dependency>
+		    <groupId>com.github.iamport</groupId>
+		    <artifactId>iamport-rest-client-java-hc</artifactId>
+		    <version>0.0.2</version>
 		</dependency>
 		
 		<dependency>
