@@ -8,4 +8,6 @@ import java.util.Map;
 public interface CustomerDao {
 
 	List<Map<String, String>> selectNewsList(int cPage, int numPerPage);
+
+	int countNewsList();
 }

@@ -23,6 +23,10 @@ public interface MemberService {
 
 	Member selectOneFBMember(String fbIdcheck);
 
+	Member selectOnekakaoMember(String kIdcheck);
+
+	int insertKakaoMember(Member m);
+
 	
 
 }

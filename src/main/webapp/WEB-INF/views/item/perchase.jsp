@@ -9,33 +9,105 @@
 </jsp:include>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!-- bootpay -->
+<script src="https://cdn.bootpay.co.kr/js/bootpay-2.0.20.min.js" type="application/javascript"></script>
 <!-- Daum Address API -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script>
-IMP.init("imp25216490");
 
 function perchaseProduct(){
+	
+	BootPay.request({
+		price: perchaseFrm.payAmount.value, //실제 결제되는 가격
+		application_id: "5c6beb72b6d49c7cd4505f60",
+		name: perchaseFrm.pName.value, //결제창에서 보여질 이름
+		pg: 'inicis',
+		method: perchaseFrm.payMethod.value, //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
+		show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
+		items: [
+			{
+				item_name: perchaseFrm.pName.value, //상품명
+				qty: 1, //수량
+				unique: '123', //해당 상품을 구분짓는 primary key
+				price: perchaseFrm.payAmount.value, //상품 단가
+			}
+		],
+		user_info: {
+			username: perchaseFrm.dName.value,
+			email: perchaseFrm.dEmail.value,
+			addr: perchaseFrm.dAddress.value,
+			phone: perchaseFrm.dPhone.value
+		},
+		order_id: 'order'+new Date().getTime(), //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
+		params: {callback1: '1', callback2: '2'},
+		account_expire_at: '2019-03-15', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
+		extra: {
+	        vbank_result: 1, // 가상계좌 사용시 사용, 가상계좌 결과창을 볼지(1), 말지(0), 미설정시 봄(1)
+	        quota: '0,2,3' // 결제금액이 5만원 이상시 할부개월 허용범위를 설정할 수 있음, [0(일시불), 2개월, 3개월] 허용, 미설정시 12개월까지 허용
+		}
+	}).error(function (data) {
+		//결제 진행시 에러가 발생하면 수행됩니다.
+		console.log(data);
+	}).cancel(function (data) {
+		//결제가 취소되면 수행됩니다.
+		console.log(data);
+	}).ready(function (data) {
+		// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
+		console.log(data);
+	}).confirm(function (data) {
+		//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
+		//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
+		console.log(data);
+		if (is_somthing) { // 재고 수량 관리 로직 혹은 다른 처리
+			this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
+		} else {
+			this.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
+		}
+	}).close(function (data) {
+	    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
+	    console.log(data);
+	}).done(function (data) {
+		//결제가 정상적으로 완료되면 수행됩니다
+		//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
+		console.log(data);
+	});
+	
+/* IMP.init("imp25216490");
 	
 IMP.request_pay({ // param
     pg: "html5_inicis",
     pay_method: perchaseFrm.payMethod.value,
-    merchant_uid: "ORD20180131-0000011",
+    merchant_uid: "ORD"+ new Date().getTime(),
     name: perchaseFrm.pName.value,
     amount: perchaseFrm.payAmount.value,
-    buyer_email: "gildong@gmail.com",
-    buyer_name: perchaseFrm.dName,
+    buyer_name: perchaseFrm.dName.value,
+    buyer_email : perchaseFrm.dEmail.value,
     buyer_tel: perchaseFrm.dPhone.value,
     buyer_addr: perchaseFrm.dAddress.value,
     buyer_postcode: perchaseFrm.dfAddress.value
 }, function (rsp) { // callback
-    if (rsp.success) {
-        // 결제 성공 시 로직,
+        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+        // jQuery로 HTTP 요청
+        var param = {
+                "impUid" : rsp.imp_uid,
+                "merchantUid" : rsp.merchant_uid
+            };
+        var jParam = JSON.stringify(param);
+        $.ajax({
+            url: "${pageContext.request.contextPath}/item/perchase/complete", // 가맹점 서버
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            data: jParam
+        }).done(function (data) {
+			console.log(data);
+        })
     } else {
         // 결제 실패 시 로직,
+        console.log(rsp.imp_uid, rsp.merchant_uid);
         alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
     }
-});
+}); */
 }
 
 </script>

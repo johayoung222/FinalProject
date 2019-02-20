@@ -12,15 +12,17 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.3.1.js"></script>
 
 <!-- 부트스트랩관련 라이브러리 -->
+<link href="https://fonts.googleapis.com/css?family=Anton|Do+Hyeon" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
+
 <style>
 .header-container{
 	border-bottom: 1px solid gray;
 	width: 100%;
-	height: 100px;
+	height: 70px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -28,7 +30,6 @@
 	display: inline-block;
 }
 .header-right{
-	margin-left: 40%;
 	font-size: 14px;
 }
 .header-left div, .header-right div{
@@ -39,17 +40,26 @@
 	display: inline-block;
 }
 .header-right .moveEnroll, .header-left .logo-next{
-	width: 200px;
+	width: 250px;
+	
 }
+#login2_{
+	text-align:center;
+	padding-right:160px;
+	padding-top:35px;
+	border:0px;
+font-family: 'Do Hyeon', sans-serif;
+}
+
 </style>
 </head>
 <div class="header-container">
 	<div class="header-left">
-	<div class="logo"><a href="${pageContext.request.contextPath }">로고</a></div>
-	<div class="logo-next">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
+	<div class="logo" style="border:0"><a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/logo-spring.png"  width="100%" height="100%"/></a></div>
+	<div class="logo-next" id="login2_" style="background:white;">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
 	</div>
 	<div class="header-right">
-	<div class="moveEnroll">
+	<div class="moveEnroll" style="border:0">
 	<c:if test="${param.pageName==0 }">
 	<a href="${pageContext.request.contextPath }/member/memberMoveLogin.do">회원이신가요? 로그인하러가기</a>
 	</c:if>
@@ -57,6 +67,6 @@
 	<a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a>
 	</c:if>
 	</div>
-	<div class="customer-center"><a href="">고객센터</a></div>
+	<div class="customer-center" style="border:0"><a href="">고객센터</a></div>
 	</div>
 </div>

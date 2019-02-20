@@ -18,6 +18,7 @@
     display: inline-block;
     width: 144px;
     margin-bottom: 36px;
+    margin-right: 5%;
 }
 .sidebar1{
 	color: #666666;

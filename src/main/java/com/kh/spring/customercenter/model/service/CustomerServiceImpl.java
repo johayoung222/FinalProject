@@ -22,6 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.selectNewsList(cPage , numPerPage);
 	}
 
+	@Override
+	public int countNewsList() {
+		return customerDao.countNewsList();
+	}
+
 
 	
 }

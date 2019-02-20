@@ -23,6 +23,7 @@
 		<typeAlias type="com.kh.spring.thing.model.vo.Product" alias="product"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.ProductIo" alias="productIo"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Category" alias="category"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
 		
 	</typeAliases>
 </configuration>

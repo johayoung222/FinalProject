@@ -15,7 +15,7 @@ public class Utils {
 		int startPage = ((cPage-1)/pageBarSize) * pageBarSize + 1;
 		int endPage = startPage + pageBarSize - 1;
 						
-		pageBar += "<nav aria-label='Page navigation example'><ul class='pagination'>";
+		pageBar += "<nav aria-label='Page navigation example' ><ul class='pagination justify-content-center'>";
 		// 증감변수 pageNo
 		int pageNo = startPage;
 		// [이전] section
