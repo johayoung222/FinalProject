@@ -1,7 +1,6 @@
 package com.kh.spring.thing.controller;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +26,9 @@ import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
+import com.siot.IamportRestHttpClientJava.IamportClient;
+import com.siot.IamportRestHttpClientJava.response.IamportResponse;
+import com.siot.IamportRestHttpClientJava.response.Payment;
 
 @Controller
 public class ThingController {
@@ -150,6 +152,21 @@ public class ThingController {
 		
 		logger.debug(order);
 		
+		IamportClient client = new IamportClient("2323934020171529","WsJ375morCLmYfngly3v4kslRHxv8ty5Vi83nvrP7dc6tzmO8pjdKMyBt56CyFHuXQxllZatcmzFWWt4");
+		
+		String token;
+		try {
+			token = client.getToken();
+			logger.debug("token : "+token);
+			
+			IamportResponse<Payment> response = client.paymentByImpUid(order.getImpUid());
+			logger.debug("response : "+response.getResponse());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		logger.debug("실행 안되겠지?");
 		mav.setViewName("/mypage/order");
 		
 		return mav;
