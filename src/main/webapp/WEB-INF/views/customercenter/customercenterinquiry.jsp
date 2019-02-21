@@ -9,8 +9,7 @@
 </jsp:include>
 <style>
 .content-container {
-	width: 1060px;
-	margin-left: 110px;
+	padding-left: 110px;
 	padding-top: 48px;
 }
 
@@ -55,6 +54,7 @@
 }
 
 .headline {
+	width:100%;
 	font-size: 20px;
 	line-height: 23px;
 	padding-bottom: 20px;
@@ -64,19 +64,40 @@
 
 .content {
 	display: inline-block;
-	width: 80%;
+	width: 70%;
+		
+}
+.quirycontent{
+	width:100%;
 }
 
-#news {
-	border-bottom: 2px solid #ececec;
-	height: 50px;
-	width: 100%;
+#selone{
+	margin-left:24%;
+	margin-right:1%;
+	width:25%;
+	display: inline-block;
+	border: 1px solid black;
+
+}
+#seltwo{
+	width:25%;
+	display: inline-block;
+	border: 1px solid black;
+}
+.main{
+	margin-left:24%;
+	margin-bottom:10px;
+	width:51.5%;
+	height:200px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+.btn-outline-primary{
+	margin-left:24%;
+	width:51.5%;
+	margin-bottom:50px;
 }
 
-.newscontent {
-	border-bottom: 2px solid #ececec;
-	background: #e9e9e9;
-}
 </style>
 
 <div class="content-container">
@@ -103,22 +124,77 @@
 	</div>
 	<div class="content">
 		<div class="headline">1:1 문의다</div>
-		<div class="insertinquiry">
-
-			<div class="btn-group">
-				<button type="button" class="btn btn-secondary dropdown-toggle"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					문의 종류를 선택 해주세요.</button>
-				<div class="dropdown-menu dropdown-menu-right">
-					<button class="dropdown-item" type="button">구매</button>
-					<button class="dropdown-item" type="button">판매</button>
-					<button class="dropdown-item" type="button">제품문의</button>
-					<button class="dropdown-item" type="button">기타 </button>
+		<div class="quirycontent">
+			<form action="">
+				<div class="select">
+					<select class="form-control form-control-sm" name="selone"
+						id="selone" onchange="doChange(this,'seltwo')">
+						<option value="default">문의종류를 선택해주세요.</option>
+						<option value="buy">구매</option>
+						<option value="sell">판매</option>
+						<option value="cate">제품</option>
+						<option value="other">기타</option>
+					</select> 
+					<select class="form-control form-control-sm" name="seltwo"
+						id="seltwo">
+						<option value="default">상세분류를 선택해주세요.</option>
+					</select>
 				</div>
-			</div>
-			
+				<br />
+				<div class="quirymain">
+					<input type="text" class="main" />
+				</div>
+				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
+			</form>
 		</div>
-
 	</div>
 </div>
+<script>
+	function doChange(srcE, targetId) {
+		var val = srcE.options[srcE.selectedIndex].value;
+		var targetE = document.getElementById(targetId);
+
+		removeAll(targetE);
+
+		if (val == 'buy') {
+			addOption('결제', targetE);
+			addOption('환불/취소', targetE);
+			addOption('배송', targetE);
+			addOption('제품문의', targetE);
+			addOption('A/S', targetE);
+			addOption('기타', targetE);
+
+		} else if (val == 'sell') {
+			addOption('제품등록', targetE);
+			addOption('가격', targetE);
+			addOption('배송', targetE);
+			addOption('입금', targetE);
+			addOption('기타', targetE);
+		} else if (val == 'cate') {
+			addOption('가전', targetE);
+			addOption('의류', targetE);
+			addOption('잡화', targetE);
+			addOption('기타', targetE);
+		} else if (val == 'other') {
+			addOption('계정', targetE);
+			addOption('불편사항', targetE);
+			addOption('기타', targetE);
+		}
+	}
+
+	function addOption(value, e) {
+		var o = new Option(value);
+		try {
+			e.add(o);
+		} catch (ee) {
+			e.add(o, null);
+		}
+	}
+
+	function removeAll(e) {
+		for (var i = 0, limit = e.options.length; i < limit - 1; ++i) {
+			e.remove(1);
+		}
+	}
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -9,9 +9,8 @@
 </jsp:include>
 <style>
 .content-container {
-    width: 1060px;
-    margin-left: 110px;
-    padding-top: 48px;
+    padding-left: 110px;
+	padding-top: 48px;
 }
 .sidebar{
     vertical-align: top;
@@ -47,10 +46,12 @@
     color: #1f1f1f;
 }
 .headline{
+	width:100%;
 	font-size: 20px;
     line-height: 23px;
     padding-bottom: 20px;
     border-bottom: 2px solid #ececec;
+    margin-bottom: 2%;
 }
 .content{
 	display: inline-block;
