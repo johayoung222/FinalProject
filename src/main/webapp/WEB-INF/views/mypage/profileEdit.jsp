@@ -9,6 +9,13 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
+
+<form action="${pageContext.request.contextPath}/mypage/smscheck.do"
+	  			 method="get"
+	  			 name="checkSmsCertifiedFrm">
+			<input type="hidden" name="memberPhone" value=""/>
+			<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+	</form>
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
@@ -20,8 +27,10 @@
 				<div class="profedit-body-title">기본정보</div>
 						<div class="profedit-body-content">
 							<div class="form-group">
-								<label for="tel" class="profedit-form-label">전화번호</label>
-								<input type="tel" name="tel" class="form-control profedit-form-input ng-pristine ng-valid" id="tel" />
+									<label for="tel" class="profedit-form-label">전화번호</label>
+									<input type="tel" name="tel" class="form-control profedit-form-input ng-pristine ng-valid" id="memberPhone" name="memberPhone" />
+									<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
+									<input type="hidden" name="target" id="result" value="0"/>
 							</div>
 							<div class="form-group">	 
 								<label for="email" class="profedit-form-label">이메일</label>
@@ -60,5 +69,25 @@ $(function(){
 	$(".profileEdit").css("font-weight" , "bold");
 	$(".profileEdit").css("background" , "#f2f2f2");
 });
+
+function sendSms(){
+	  var memberPhone = $("#memberPhone").val();
+	  if(memberPhone.trim().length == 0){
+		  alert("전화번호를 입력하세요.");
+		  return false;
+	  }
+	  //팝업창을 target으로 폼전송
+		var target = "smscheck";
+		//첫번째 인자 url은 생략, form의 action값이 이를 대신한다.
+		var popup = open("", target, "left=300px, top=100px, height=135px, width=470px");
+		//폼의 대상을 작성한 popup을 가리키게 한다. 
+		checkSmsCertifiedFrm.target = target;
+		
+		//console.log(memberEmail);
+		
+		checkSmsCertifiedFrm.memberPhone.value = memberPhone;
+		checkSmsCertifiedFrm.submit();		
+}
+$("")
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

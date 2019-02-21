@@ -25,7 +25,7 @@ public class CustomercenterController {
 	
 	@RequestMapping("/customercenter/ccintro.do")
 	public String customercenterintro() {
-		System.out.println("ccintro메소드가 요청되었습니다.");
+		//System.out.println("ccintro메소드가 요청되었습니다.");
 		return "customercenter/customercenterintro";	//	/WEB-INF/views/demo/demo.jsp
 	}
 	
@@ -37,13 +37,13 @@ public class CustomercenterController {
 	
 	@RequestMapping("/customercenter/ccinquiry.do")
 	public String customercenterinquiry() {
-		System.out.println("ccinquiry메소드가 요청되었습니다.");
+		//System.out.println("ccinquiry메소드가 요청되었습니다.");
 		return "customercenter/customercenterinquiry";	//	/WEB-INF/views/demo/demo.jsp
 	}
 	
 	@RequestMapping("/customercenter/ccqna.do")
 	public String customercenternewsqna() {
-		System.out.println("ccqna메소드가 요청되었습니다.");
+		//System.out.println("ccqna메소드가 요청되었습니다.");
 		return "customercenter/customercenternewsqna";	//	/WEB-INF/views/demo/demo.jsp
 	}
 	//////////////////////////////////////////////////////////////////////////////////////
@@ -150,5 +150,4 @@ public class CustomercenterController {
 
 		return mav;
 	}
-
 }

@@ -27,6 +27,4 @@ public interface MemberService {
 
 	int insertKakaoMember(Member m);
 
-	
-
 }
