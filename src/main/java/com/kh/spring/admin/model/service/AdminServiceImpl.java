@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.model.dao.AdminDao;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -95,6 +98,22 @@ public class AdminServiceImpl implements AdminService {
 	public List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
 		return adminDao.paidProductSearch(cPage,numPerPage,map);
 	}
+
+	@Override
+	public List<CategoryMacro> categoryMa() {
+		return adminDao.categoryMa();
+	}
+
+	@Override
+	public List<Category> categoryMi(String macro) {
+		return adminDao.categoryMi(macro);
+	}
+
+	@Override
+	public Regist registOne(int registNo) {
+		return adminDao.registOne(registNo);
+	}
+
 
 	
 
