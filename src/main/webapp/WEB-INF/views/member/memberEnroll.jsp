@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+ <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="297674585572-kqfeb0ueu63g0o5qtoip4pcivfds9dpr.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/sHeader.jsp">
 	<jsp:param value="Get It :: 회원가입" name="pageTitle" />
@@ -877,13 +880,17 @@ $("#all").on('click', function(){
        </fb:login-button> -->
        
        <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();" >
+        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"onlogin="checkLoginState();" >
               FaceBook으로 시작
        </fb:login-button>
        
        
        </li>
-				<li class="list-group-item list-group-item-action"><a href="">구글로 시작</a></li>
+				<li class="list-group-item list-group-item-action">
+			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40" data-theme="dark">
+			    google로 시작하기
+			</div>
+				</li>
 				<li class="list-group-item list-group-item-action">
 				<a id="kakao-login-btn"><img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/></a>
                  <a href="http://developers.kakao.com/logout"></a>
@@ -973,6 +980,7 @@ window.fbAsyncInit = function() {
     
    
   }
+ 
   
   
           /*    카카오 */
@@ -1021,6 +1029,41 @@ window.fbAsyncInit = function() {
       alert(JSON.stringify(err));
     }
   });
+  
+  /* 구글 로그인 */
+  function Googlelogin(googleUser) {
+       // Useful data for your client-side scripts:
+       var profile = googleUser.getBasicProfile();
+    /*    console.log("ID: " + profile.getId()); 
+       console.log('Full Name: ' + profile.getName());
+       console.log("Email: " + profile.getEmail()); */
+       var gId = profile.getId();
+       var gName = profile.getName();
+       var gEmail = profile.getEmail();
+
+ 
+       var id_token = googleUser.getAuthResponse().id_token;
+       
+       
+       
+       $.ajax({
+   		url: "${pageContext.request.contextPath}/member/googleEnroll",
+   		method:"post",
+   		data: {gId : gId, gName : gName, gEmail : gEmail}, 
+   		success: function(data){
+   			
+   			$("#googleEnroll-container").show();
+    		$('input[name=gId]').attr('value',gId); 
+    		$('input[name=gName]').attr('value',gName); 	
+    		$('input[name=gEmail]').attr('value',gEmail); 	
+   		},
+   		error:function(){
+   			console.log("ajax요청 실패 에러!");
+   		}
+   	}); 
+     
+     }
+  
 
 
 
@@ -1067,8 +1110,13 @@ window.fbAsyncInit = function() {
 	margin:0 auto; 
 	text-align:center;
 	display: none;
-	
-	 }
+	}
+	div#googleEnroll-container{
+	width:400px; 
+	margin:0 auto; 
+	text-align:center;
+	display: none;
+	}
 	
 	div#memberId-container span.fbguide{
 		display: none;
@@ -1087,12 +1135,27 @@ window.fbAsyncInit = function() {
 		right: 10px;
 	}
 	
+		div#memberId-container span.gguide{
+		display: none;
+		font-size: 12px;
+		position: absolute;
+		top: 12px;
+		right: 10px;
+	}
+	
 	div#facebookenroll-container input[name=fbsubmit]{
 	 	display: none;
 	}
 	div#kakaoenroll-container input[name=ksubmit]{
 	 	display: none;
 	}
+	div#googleEnroll-container input[name=gsubmit]{
+	 	display: none;
+	}
+	.g-signin2{
+	margin: 0 auto;
+	padding: 15px;
+    }
 </style>
 
 <div id="enroll-container">
@@ -1179,6 +1242,33 @@ window.fbAsyncInit = function() {
 		<input type="button" class="btn btn-outline-success" value="취소" onclick="kakaoCancel();">
 	</form>
 </div>
+
+
+<!-- ----------------------------google관련 회원가입!-------------------------------------------------->
+<div id="googleEnroll-container">
+	<form name="gmemberEnrollFrm" action="${pageContext.request.contextPath}/member/googleEnrollEnd" method="post" method="post" onsubmit="return googleIdValidate();" >
+		<input type="hidden" name="memberAlarm"/>
+		 <div id="kakaoId-container">
+			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="gId" id="gId" readonly>
+		<!-- 	중복체크관련태그 -->
+			<input type="hidden" name="googleDuplicateCheck" id="googleDuplicateCheck" value="0" />
+			<input type="button" value="구글로 등록된 회원인지 확인하기"  onclick="googleIdValidate();"/>
+		</div> 
+		<input type="text" class="form-control" placeholder="이름" name="gName" id="gName" readonly>
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="gBirth" id="gBirth" required>
+		<input type="email" class="form-control" placeholder="이메일을 입력해주세요" name="gEmail" id="gEmail" readonly>
+		<select class="form-control" name="ggender" required> 
+			<option value="" disabled selected>성별</option>
+			<option value="M">남</option>
+			<option value="F">여</option>
+		</select>
+		<input type="hidden" name="gmemberInterest"/>
+		<br />
+		<input type="submit" name="gsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
+		<input type="button" class="btn btn-outline-success" value="취소" onclick="googleCancel();">
+	</form>
+</div>
+
 
 
 
@@ -1327,6 +1417,44 @@ function fbvalidate(){
 		});
 	 
 	}
+
+//구글 회원 등록
+function googleIdValidate(){
+	
+	 var gIdcheck = document.getElementById("gId").value;
+	    
+	    $.ajax({
+			url: "${pageContext.request.contextPath}/member/googleCheckDuplicate.do",
+			method: "get",
+			data: {gIdcheck : gIdcheck} ,
+			success: function(data) {
+				console.log("ajax요청 성공 googlecheck확인 할게요!!");
+				
+				 if(data.gisUsable == true) {
+					alert("등록이가능합니다");
+					$("#googleEnroll-container").show();
+					$("input[name=gsubmit]").show();
+	               var interest = false;
+	            /* 관심상품 팝업 */
+	             open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
+	             return false;
+				
+				}else{
+					alert("이미 등록된 회원이 있습니다 ");	
+					$("#googleEnroll-container").hide();
+					$("input[name=gsubmit]").hide();
+					window.location.href ="${pageContext.request.contextPath}/member/memberMoveLogin.do";	
+					
+				} 
+				
+			
+		
+			},
+			error: function() {
+				console.log("ajax요청 에러!");
+			}
+		});
+}
  
  
 function fbCancel(){
@@ -1337,6 +1465,9 @@ function fbCancel(){
 function kakaoCancel(){
 	$("#kakaoenroll-container").hide();
 	
+}
+function googleCancel(){
+	$("#googleEnroll-container").hide();
 	
 }
 

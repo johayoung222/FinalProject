@@ -67,6 +67,18 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.insertKakaoMember(m);
 	}
 
+	@Override
+	public int insertgoogleMember(Member m) {
+		// TODO Auto-generated method stub
+		return memberDao.insertgoogleMember(m);
+	}
+
+	@Override
+	public Member selectOnegoogleMember(String gIdcheck) {
+		// TODO Auto-generated method stub
+		return memberDao.selectOnegoogleMember(gIdcheck);
+	}
+
 	
 	
 

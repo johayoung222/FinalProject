@@ -230,35 +230,27 @@ public class MemberController {
 	 * 페이스북 관련: 로그인 관련
 	 */
 	@RequestMapping("/member/facebookLogin")
-	@ResponseBody
-	public ModelAndView facebookLogin(@RequestParam("memberId") String memberId, ModelAndView mav,
+	 @ResponseBody
+	public Map<String, Object> facebookLogin(@RequestParam("memberId") String memberId, 
 			HttpSession session) {
 
 		Map<String, Object> map = new HashMap<>();
 		Member m = memberService.selectOneMember(memberId);
-		boolean FBisUsable = m == null ? true : false;
+		boolean fbisUsable = m == null ? true : false;
 		logger.debug(m);
+		logger.debug(fbisUsable);
 		
-		
-		 String msg = ""; 
-		 String view = "common/msg";
-		 String loc = "";
-		 
-		// 로그인처리
-		if ( FBisUsable == false) {
-		
-			loc = "/member/memberMoveLogin.do";
-			
-			mav.addObject("loc", loc);
-			mav.addObject("FBisUsable",FBisUsable);
-			mav.addObject("memberLoggedIn", m);
-		
-			view = "redirect:/";
-			mav.setViewName(view);
+	       
+		if(fbisUsable == false) {
+			  session.setAttribute("memberLoggedIn", m);
+	         //map.put("memberLoggedIn", m);
 		}
-
-
-		return mav;
+		
+		
+	        
+	      map.put("fbisUsable", fbisUsable);
+	      return map;
+		
 
 	}
 
@@ -269,12 +261,6 @@ public class MemberController {
 	@ResponseBody
 	public ModelAndView facebookEnroll(@RequestParam("fbId") String fbId, @RequestParam("fbName") String fbName,
 			@RequestParam("fbEmail") String fbEmail, ModelAndView mav) {
-
-		/*
-		 * System.out.println("faceBookID:"+fbId);
-		 * System.out.println("faceBookName:"+fbName);
-		 * System.out.println("faceBookmemberEmail:"+fbEmail);
-		 */
 
 		mav.setViewName("member/memberEnroll");
 		return mav;
@@ -327,34 +313,29 @@ public class MemberController {
 	}
 
 	/* 카카오 관련 code */
-
+	//카카오 로그인
 	@RequestMapping("/member/kakaoLogin")
 	@ResponseBody
-	public ModelAndView kakaoLogin(@RequestParam("kakaoId") String kakaoId, ModelAndView mav, HttpSession session) {
+	public Map<String, Object> kakaoLogin(@RequestParam("kakaoId") String kakaoId, HttpSession session) {
 
-		// 아이디를 통해서 selectOne메소드 호출결과 Member객체를 가져온다.
+	
 		Member m = memberService.selectOneMember(kakaoId);
-		boolean FBisUsable = m == null ? true : false;
+	
+		Map<String, Object> map = new HashMap<>();
+		
+		boolean kisUsable = m == null ? true : false;
 		logger.debug(m);
-		// System.out.println("member:"+m);
-		String msg = "";
-		String view = "common/msg";
-		String loc = "";
-
-		// 로그인처리
-		if (m == null) {
-			msg = "아이디가 존재하지 않습니다.";
-			loc = "/member/memberMoveLogin.do";
-			mav.addObject("msg", msg);
-			mav.addObject("loc", loc);
+		logger.debug(kisUsable);
+		
+	       
+		if(kisUsable == false) {
+			  session.setAttribute("memberLoggedIn", m);
+	         //map.put("memberLoggedIn", m);
 		}
-
-		mav.addObject("memberLoggedIn", m);
-		mav.addObject("FBisUsable",FBisUsable);
-		view = "redirect:/";
-
-		mav.setViewName(view);
-		return mav;
+		
+		
+	      map.put("kisUsable", kisUsable);
+	      return map;
 
 	}
 	/* kakao 회원 등록하기 */
@@ -411,5 +392,82 @@ public class MemberController {
 			return map;
 
 		}
+		
+		/* 구글 관련 */
+		/* 구글에서 정보 뽑아오기 */
+		@RequestMapping("/member/googleLogin")
+		@ResponseBody
+		public Map<String, Object> googleLogin(@RequestParam("googleId") String googleId, HttpSession session) {
+
+		
+			Member m = memberService.selectOneMember(googleId);
+		
+			Map<String, Object> map = new HashMap<>();
+			
+			boolean gisUsable = m == null ? true : false;
+			logger.debug(m);
+			logger.debug(gisUsable);
+			
+		       
+			if(gisUsable == false) {
+				  session.setAttribute("memberLoggedIn", m);
+		         //map.put("memberLoggedIn", m);
+			}
+			
+			
+		      map.put("gisUsable", gisUsable);
+		      return map;
+
+		}
+		
+		/* 구글 버튼 누를시 가입 창이 나온다 */
+		 @RequestMapping("/member/googleEnroll") 
+	      public ModelAndView googleEnroll(@RequestParam("gId") String gId,
+	    		  @RequestParam("gName") String gName ,@RequestParam("gEmail") String
+		 gEmail,  ModelAndView mav){
+		  
+		   mav.setViewName("member/memberEnroll"); 
+		   return mav;
+		 
+		 }
+		 
+		//구글로 회원 가입하기
+		 @RequestMapping("/member/googleEnrollEnd")
+		public ModelAndView googleEnrollEnd(@RequestParam("gId") String gId, @RequestParam("gName") String gName,
+					@RequestParam("gBirth") String gBirth, @RequestParam("gEmail") String gEmail,
+					@RequestParam("ggender") String ggender, ModelAndView mav) {
+
+				Member m = new Member();
+				m.setMemberId(gId);
+				m.setMemberName(gName);
+				m.setMemberBirth(gBirth);
+				m.setMemberEmail(gEmail);
+				m.setGender(ggender);
+
+				int result = memberService.insertgoogleMember(m);
+				System.out.println(result > 0 ? "회원등록성공" : "회원등록실패");
+
+				mav.addObject("result", result);
+				mav.setViewName("member/memberLogin");
+
+				return mav;
+
+			}
+		 
+		 
+		    @RequestMapping("/member/googleCheckDuplicate.do")
+			@ResponseBody
+			public Map<String, Object> googleCheckDuplicate(@RequestParam("gIdcheck") String gIdcheck) {
+
+				logger.debug("검사할 건 googleID : " + gIdcheck);
+				Map<String, Object> map = new HashMap<>();
+				Member m = memberService.selectOnegoogleMember(gIdcheck);
+				boolean gisUsable = m == null ? true : false;
+				System.out.println("검사할건!" + gisUsable);
+				map.put("gisUsable", gisUsable);
+				return map;
+
+			}
+	
 	
 }

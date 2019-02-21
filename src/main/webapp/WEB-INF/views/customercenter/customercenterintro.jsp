@@ -9,9 +9,8 @@
 </jsp:include>
 <style>
 .content-container {
-    width: 1060px;
-    margin-left: 110px;
-    padding-top: 48px;
+    padding-left: 110px;
+	padding-top: 48px;
 }
 .sidebar{
     vertical-align: top;
@@ -47,10 +46,12 @@
     color: #1f1f1f;
 }
 .headline{
+	width:100%;
 	font-size: 20px;
     line-height: 23px;
     padding-bottom: 20px;
     border-bottom: 2px solid #ececec;
+    margin-bottom: 2%;
 }
 .content{
 	display: inline-block;
@@ -68,8 +69,8 @@
 			<div class="sidebar3" id="sidebar">
 				<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 			</div>
-			<div class="sidebar4" id="sidebar">
-				<a href="${pageContext.request.contextPath}/customercenter/ccinquiry.do">1:1 문의</a>
+			<div class="sidebar4" id="sidebar" onclick="hh('${memberLoggedIn.memberId}')">
+				<a href="#">1:1 문의</a>
 			</div>
 			<div class="sidebar5" id="sidebar">
 				<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
@@ -86,4 +87,14 @@
 			</div>	
 		</div>
 	</div>
+<script>
+ function hh(memberLoggedIn){
+	 console.log(memberLoggedIn);
+	 if(memberLoggedIn == ''){
+		location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";
+	 }else{
+		location.href="${pageContext.request.contextPath}/customercenter/ccinquiry.do";
+	 }
+ }
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

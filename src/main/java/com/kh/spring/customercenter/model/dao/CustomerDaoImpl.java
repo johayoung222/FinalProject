@@ -8,6 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.board.model.vo.Attachment;
+import com.kh.spring.customercenter.model.vo.Board;
+
+
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 	
@@ -24,6 +28,25 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int countNewsList() {
 		return sqlSession.selectOne("news.countNewsList");
 	}
+
+	@Override
+	public int insertNews(Board board) {
+		int result = sqlSession.insert("news.insertNews", board);
+		return result;
+	}
+	
+	@Override
+	public int updateNews(Board board) {
+		int result = sqlSession.update("news.updateNews",board);
+		return result;
+	}
+
+	@Override
+	public int deleteNews(Board board) {
+		int result = sqlSession.delete("news.deleteNews",board);
+		return result;
+	}
+
 
 	
 }

@@ -93,13 +93,13 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <div class="collapse" id="collapseExample">
   				<div class="card card-body">
   				<div><a class="item-link" href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a></div>
-				<div><a href="#" style="color:red">판매내역</a>
-  				|<a href="#" style="color:orange">구매내역</a>
-  				|<a href="#" style="color:green">찜한상품</a>
-  				|<a href="#" style="color:blue">쿠폰</a>
-  				|<a href="#" style="color:purple">프로모션</a>
-  				|<a href="#" style="color:pink">내 정보</a>
-  				|<a href="#" style="color:black">알림 설정</a>
+				<div><a href="${pageContext.request.contextPath}/mypage/order.do" style="color:red">판매내역</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/purchases.do" style="color:orange">구매내역</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/bookmarks.do" style="color:green">찜한상품</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/coupons.do" style="color:blue">쿠폰</a> <br />
+  				<a href="${pageContext.request.contextPath}/mypage/profile/credit.do" style="color:purple">프로모션</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/profile/edit.do" style="color:pink">내 정보</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/wishlist.do" style="color:black">알림 설정</a>
 				</div>
 				</div>
 			</div>

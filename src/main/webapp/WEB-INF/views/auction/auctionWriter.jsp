@@ -28,7 +28,6 @@
 		
 			<label for="field1">
 			<span>카테고리: </span>
-		 
 						<select class="select-field" id="lctg" name="lctg" onchange="fn_next(this.value)">
 							<option value="" hidden="true">대분류</option>
 							<c:forEach var="rs" items="${ctgList}" varStatus="status">
@@ -102,7 +101,7 @@
 				<select class="select-field" name="dw" id="dw" onchange="fee(this.value)">
 							<option value="">선택</option>
 							<option value="0">택배</option>
-							<option value="1">직접수령</option>
+							<option value="1">회사로 직접 방문</option>
 				</select>
 			</label>
 			<p id="dwchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
@@ -144,9 +143,6 @@
 							<option value="">선택</option>
 							<option value="010">010</option>
 							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="011">017</option>
-							<option value="011">019</option>
 			</select> -
 			<input type="text" class="tel-number-field" id="phone2" name="phone2" value="" maxlength="4"
 			onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' /> -
