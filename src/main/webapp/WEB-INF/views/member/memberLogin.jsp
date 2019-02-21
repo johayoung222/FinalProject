@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="297674585572-kqfeb0ueu63g0o5qtoip4pcivfds9dpr.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <fmt:requestEncoding value="UTF-8" />
 
 <jsp:include page="/WEB-INF/views/common/sHeader.jsp">
@@ -39,6 +42,11 @@
 	color:lightgray;
 	
 }
+.g-signin2{
+	margin: 0 auto;
+	padding: 15px;
+
+}
 
 </style>
 
@@ -54,15 +62,20 @@
                                 
 				<li class="list-group-item list-group-item-action">
    				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="flase"onlogin="checkLoginState();">
+               data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="flase"onlogin="checkLoginState();">
               FaceBook으로 로그인
        </fb:login-button>
   
 				
 				</li>
-				<li class="list-group-item list-group-item-action"><a href="">구글로 로그인</a></li>
+				<li class="list-group-item list-group-item-action">
+			
+			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40"
+			data-auto-logout-link="false" data-theme="dark" value="google로 로그인">
+			</div>
+		 		
+				 </li>
 				<li class="list-group-item list-group-item-action"><a href="">
-				
 			    <a id="kakao-login-btn"></a>
                  <a href="http://developers.kakao.com/logout"></a>
 				
@@ -220,6 +233,44 @@ window.fbAsyncInit = function() {
   });
 
 
+  /* 구글 로그인 */
+   function Googlelogin(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+     /*    console.log("ID: " + profile.getId()); 
+        console.log('Full Name: ' + profile.getName());
+        console.log("Email: " + profile.getEmail()); */
+        var googleId = profile.getId();
+        var googleName = profile.getName();
+        var googleEmail = profile.getEmail();
+
+        
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        
+        
+        
+        $.ajax({
+    		url: "${pageContext.request.contextPath}/member/googleLogin",
+    		method:"post",
+    		data: {googleId : googleId, googleName : googleName, googleEmail : googleEmail}, 
+    		success: function(data){
+    		
+    		
+    			if(data.gisUsable == false){     
+             		 alert("구글 로그인성공");
+      				 window.location.href = "/spring";
+             	}else{
+             			alert("회원가입먼저 해주세요");
+             			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
+             	}
+    		},
+    		error:function(){
+    			console.log("ajax요청 실패 에러!");
+    		}
+    	}); 
+      
+      }
 
 
 

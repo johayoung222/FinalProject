@@ -27,4 +27,8 @@ public interface MemberService {
 
 	int insertKakaoMember(Member m);
 
+	int insertgoogleMember(Member m);
+
+	Member selectOnegoogleMember(String gIdcheck);
+
 }
