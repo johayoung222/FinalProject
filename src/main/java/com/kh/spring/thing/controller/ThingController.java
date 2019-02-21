@@ -1,6 +1,7 @@
 package com.kh.spring.thing.controller;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +47,6 @@ public class ThingController {
 		categoryList = thingService.selectCategorys();
 		
 		System.out.println("ThingController@categoryList="+categoryList);
-		
-		
-		
-		
-		
-		
 		
 		mav.addObject("categoryList", categoryList);
 		mav.setViewName("thing/thingView");

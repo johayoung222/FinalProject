@@ -61,6 +61,19 @@ public class MemberDaoImpl implements MemberDao {
 		return SqlSession.insert("member.insertKakaoMember" , m);
 	}
 
+	@Override
+	public int insertgoogleMember(Member m) {
+		// TODO Auto-generated method stub
+		return SqlSession.insert("member.insertgoogleMember",m);
+		
+	}
+
+	@Override
+	public Member selectOnegoogleMember(String gIdcheck) {
+		// TODO Auto-generated method stub
+		return SqlSession.selectOne("member.selectOneMember",gIdcheck);
+	}
+
 	
 
 }
