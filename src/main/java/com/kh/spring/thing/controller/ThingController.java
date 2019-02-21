@@ -73,16 +73,29 @@ public class ThingController {
 			
 			
 			//MultipartFile 처리
+			String originalName = null;
+			String realName = null;
 			
 			for(MultipartFile f : upFiles) {
 				if(!f.isEmpty()) {
 					//파일명(업로드)
 					String originalFileName = f.getOriginalFilename();
-					regist.setImage(originalFileName);
+					regist.setRegistImage(originalFileName);
+					
+					if(originalName != null)
+						originalName = originalName + "," + originalFileName;
+					else
+						originalName = originalFileName;
 					
 					//파일명(서버저장용)
 					String renamedFileName = Utils.getRenamedFileName(originalFileName);
-					regist.setRealImage(renamedFileName);
+					regist.setRegistRealImage(renamedFileName);
+					
+					if(realName !=null)
+						realName = realName + "," + renamedFileName;
+					else
+						realName = renamedFileName;
+					
 					logger.debug("renamedFileName ="+renamedFileName);
 					//실제 서버에 파일저장
 					try {
@@ -97,6 +110,10 @@ public class ThingController {
 					
 				}
 			}
+			regist.setRegistImage(originalName);
+			regist.setRegistRealImage(realName);
+			
+			
 			//2. 업무로직
 			System.out.println("regist@Controller="+regist);
 			int result=thingService.sell(regist);
