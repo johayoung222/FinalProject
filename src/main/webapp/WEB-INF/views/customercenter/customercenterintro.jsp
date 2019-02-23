@@ -69,8 +69,8 @@
 			<div class="sidebar3" id="sidebar">
 				<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 			</div>
-			<div class="sidebar4" id="sidebar">
-				<a href="${pageContext.request.contextPath}/customercenter/ccinquiry.do">1:1 문의</a>
+			<div class="sidebar4" id="sidebar" onclick="hh('${memberLoggedIn.memberId}')">
+				<a href="#">1:1 문의</a>
 			</div>
 			<div class="sidebar5" id="sidebar">
 				<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
@@ -87,4 +87,14 @@
 			</div>	
 		</div>
 	</div>
+<script>
+ function hh(memberLoggedIn){
+	 console.log(memberLoggedIn);
+	 if(memberLoggedIn == ''){
+		location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";
+	 }else{
+		location.href="${pageContext.request.contextPath}/customercenter/ccinquiry.do";
+	 }
+ }
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

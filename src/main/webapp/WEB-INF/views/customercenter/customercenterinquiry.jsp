@@ -91,6 +91,7 @@
 	height:200px;
 	border: 1px solid black;
 	border-radius: 4px;
+	resize: none;
 }
 .btn-outline-primary{
 	margin-left:24%;
@@ -125,7 +126,7 @@
 	<div class="content">
 		<div class="headline">1:1 문의다</div>
 		<div class="quirycontent">
-			<form action="">
+			<form action="${pageContext.request.contextPath}/customercenter/insertInquiry.do">
 				<div class="select">
 					<select class="form-control form-control-sm" name="selone"
 						id="selone" onchange="doChange(this,'seltwo')">
@@ -142,8 +143,10 @@
 				</div>
 				<br />
 				<div class="quirymain">
-					<input type="text" class="main" />
+					<!-- <input type="text" class="main" /> -->
+					<textarea rows="25" cols="15" class="main"></textarea>
 				</div>
+				<input type="hidden" name="seq_member_no"/>
 				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
 			</form>
 		</div>
@@ -157,28 +160,46 @@
 		removeAll(targetE);
 
 		if (val == 'buy') {
-			addOption('결제', targetE);
+			$("#seltwo").append("<option value='buypay'>결제</option>");
+			$("#seltwo").append("<option value='can'>환불/취소</option>");
+			$("#seltwo").append("<option value='buydeliver'>배송</option>");
+			$("#seltwo").append("<option value='prod'>제품문의</option>");
+			$("#seltwo").append("<option value='as'>A/S</option>");
+			$("#seltwo").append("<option value='buyother'>기타</option>");
+			/* addOption('결제', targetE);
 			addOption('환불/취소', targetE);
 			addOption('배송', targetE);
 			addOption('제품문의', targetE);
 			addOption('A/S', targetE);
-			addOption('기타', targetE);
+			addOption('기타', targetE); */
 
 		} else if (val == 'sell') {
-			addOption('제품등록', targetE);
+			$("#seltwo").append("<option value='prodenroll'>제품등록</option>");
+			$("#seltwo").append("<option value='price'>가격</option>");
+			$("#seltwo").append("<option value='selldeliver'>배송</option>");
+			$("#seltwo").append("<option value='sellpay'>결제</option>");
+			$("#seltwo").append("<option value='sellother'>기타</option>");
+			/* addOption('제품등록', targetE);
 			addOption('가격', targetE);
 			addOption('배송', targetE);
 			addOption('입금', targetE);
-			addOption('기타', targetE);
+			addOption('기타', targetE); */
 		} else if (val == 'cate') {
-			addOption('가전', targetE);
+			$("#seltwo").append("<option value='elec'>가전제품</option>");
+			$("#seltwo").append("<option value='cloth'>의류</option>");
+			$("#seltwo").append("<option value='stuff'>잡화</option>");
+			$("#seltwo").append("<option value='cateother'>기타</option>");
+			/* addOption('가전', targetE);
 			addOption('의류', targetE);
 			addOption('잡화', targetE);
-			addOption('기타', targetE);
+			addOption('기타', targetE); */
 		} else if (val == 'other') {
-			addOption('계정', targetE);
+			$("#seltwo").append("<option value='account'>계정</option>");
+			$("#seltwo").append("<option value='incon'>불편사항</option>");
+			$("#seltwo").append("<option value='xother'>기타</option>");
+			/* addOption('계정', targetE);
 			addOption('불편사항', targetE);
-			addOption('기타', targetE);
+			addOption('기타', targetE); */
 		}
 	}
 
@@ -196,5 +217,14 @@
 			e.remove(1);
 		}
 	}
+
+	 function hh(memberLoggedIn){
+		 console.log(memberLoggedIn);
+		 if(memberLoggedIn == ''){
+			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";
+		 }else{
+			location.href="${pageContext.request.contextPath}/customercenter/ccinquiry.do";
+		 }
+	 }
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

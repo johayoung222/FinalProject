@@ -873,7 +873,6 @@ $("#all").on('click', function(){
 		<div class="login-container">
 			<div class="login-link">
 			<ul class="list-group">
-
 				<li class="list-group-item list-group-item-action">  
 		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
                 data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">

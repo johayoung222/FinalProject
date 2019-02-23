@@ -15,7 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
+import com.kh.spring.thing.model.vo.Regist;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONSerializer;
 
 /**
  * @controller클래스 메소드가 가질 수 있는 파라미터
@@ -249,19 +255,46 @@ public class AdminController {
 	public ModelAndView category(ModelAndView mav 
 			,@RequestParam(value="registNo")int registNo) {
 		System.out.println("category메소드 실행!!");
-
+		logger.debug(registNo);
+		
 		mav.addObject("registNo",registNo);
 		mav.setViewName("admin/category");
 		return mav;
 	} 
 	
-	@RequestMapping(value="/admin/categoryMa.do",method=RequestMethod.POST)
+	@RequestMapping("/admin/categoryMa.do")
 	@ResponseBody
-	public ModelAndView categoryMa(ModelAndView mav) {
+	public List<CategoryMacro> categoryMa() {
 		System.out.println("categoryMa메소드 실행!!!!");
-
-		mav.setViewName("admin/category");
-		return mav;
+		
+		List<CategoryMacro> list = adminService.categoryMa();
+		//System.out.println(list);
+		
+		return list;
 	} 
+	
+	@RequestMapping(value="/admin/categoryMi.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Category> categoryMi(@RequestParam(value="macro")String macro) {
+		System.out.println("categoryMi메소드 실행!!!!");
+		System.out.println(macro);
+		List<Category> list = adminService.categoryMi(macro);
+		
+		return list;
+	} 
+	
+	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
+	@ResponseBody
+	public Regist registOne(@RequestParam(value="registNo")int registNo) {
+		System.out.println("registOne메소드 실행!!");
+		System.out.println("ServiceImpl registNo:"+registNo);
+		Regist regist = adminService.registOne(registNo);
+		System.out.println(regist);
+		return regist;
+		
+	}
+	
+	
+	
 	
 }

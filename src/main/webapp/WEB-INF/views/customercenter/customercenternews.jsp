@@ -150,9 +150,20 @@
 		});
 	});
 	function deleteok(){
-		confirm("정말 삭제하시겠습니까?");
-		return false;
+		if(confirm("정말 삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
 	}
+	function hh(memberLoggedIn){
+		 console.log(memberLoggedIn);
+		 if(memberLoggedIn == ''){
+			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";
+		 }else{
+			location.href="${pageContext.request.contextPath}/customercenter/ccinquiry.do";
+		 }
+	 }
 </script>
 
 <div class="content-container">
@@ -167,10 +178,8 @@
 			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇
 				소식</a>
 		</div>
-		<div class="sidebar4" id="sidebar">
-			<a
-				href="${pageContext.request.contextPath}/customercenter/ccinquiry.do">1:1
-				문의</a>
+		<div class="sidebar4" id="sidebar" onclick="hh('${memberLoggedIn.memberId}')">
+			<a href="#">1:1 문의</a>
 		</div>
 		<div class="sidebar5" id="sidebar">
 			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주
@@ -205,8 +214,8 @@
 
 							<div class="modal-body">
 								<input type="text" id="inserttitle" name="boardtitle"
-									placeholder="제목을 입력하세요" /> <br /> <br /> <input type="text"
-									id="insertcontent" name="boardcontent" placeholder="내용을 입력하세요" />
+									placeholder="제목을 입력하세요" /> <br /> <br /> 
+									<textarea id="insertcontent" name="boardcontent" placeholder="내용을 입력하세요"></textarea>
 							</div>
 
 							<div class="input-group mb-3" style="padding: 0px;">
@@ -269,7 +278,7 @@
 										<input type="hidden" name="seq_board_no"value="${b.SEQ_BOARD_NO}" /> 
 										<input type="text" id="inserttitle" name="boardtitle" value="${b.BOARD_TITLE}" />
 										<br /> <br /> 
-										<input type="text" id="insertcontent"name="boardcontent" value="${b.BOARD_CONTENT}" />
+										<textarea id="insertcontent"name="boardcontent" >${b.BOARD_CONTENT}</textarea>
 									</div>
 
 									<div class="input-group mb-3" style="padding: 0px;">
@@ -297,9 +306,8 @@
 					<form name="NewsDelFrm" action="${pageContext.request.contextPath}/customercenter/deleteNews.do" method="post">
 						<!-- <input type="submit" id="delete" class="btn btn-primary3" value="삭제"> -->
 						<input type="submit" class="btn btn-outline-danger" value="삭제" onclick="return deleteok();">
-						<input type="hidden" name="seq_board_no"value="${b.SEQ_BOARD_NO}" />  
+						<input type="hidden" name="seq_board_no"value="${b.SEQ_BOARD_NO}" /> 
 					</form>
-				<%-- </c:if> --%>
 
 				</div>
 			<div class="collapse" id="${b.SEQ_BOARD_NO}">
