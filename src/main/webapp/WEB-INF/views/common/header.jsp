@@ -71,6 +71,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
     padding: 0px;
 }
 
+
  	
 </style>
 </head>
@@ -82,7 +83,9 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath }/member/memberMoveLogin.do">로그인</a>
                 </c:if>
                 <c:if test="${memberLoggedIn != null }">
-                <a class="item-link" href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a>
+              <a class="item-link" id="logout"href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a> 
+          
+             
                 </c:if>
             </div>
             <div  class="box-link2">
@@ -214,3 +217,16 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <section id="content">
+   <script>
+   
+      
+   
+    
+    function logout(){
+    	
+    	window.locatiom.href="${pageContext.request.contextPath }/member/memberLogout.do";
+    	
+    }
+   
+   
+   </script>

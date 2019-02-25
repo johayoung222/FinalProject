@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
+import com.kh.spring.thing.model.vo.Regist;
 
 public interface AdminService {
 
@@ -39,6 +42,13 @@ public interface AdminService {
 	int countpaidProductSearch2(Map<String, String> map);
 
 	List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map);
+
+	List<CategoryMacro> categoryMa();
+
+	List<Category> categoryMi(String macro);
+
+	Regist registOne(int registNo);
+
 
 
 

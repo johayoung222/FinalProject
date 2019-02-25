@@ -18,7 +18,7 @@
 
 function perchaseProduct(){
 	
-	BootPay.request({
+/* 	BootPay.request({
 		price: perchaseFrm.payAmount.value, //실제 결제되는 가격
 		application_id: "5c6beb72b6d49c7cd4505f60",
 		name: perchaseFrm.pName.value, //결제창에서 보여질 이름
@@ -48,32 +48,32 @@ function perchaseProduct(){
 		}
 	}).error(function (data) {
 		//결제 진행시 에러가 발생하면 수행됩니다.
-		console.log(data);
+		console.log("error",data);
 	}).cancel(function (data) {
 		//결제가 취소되면 수행됩니다.
-		console.log(data);
+		console.log("cancel",data);
 	}).ready(function (data) {
 		// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
-		console.log(data);
+		console.log("ready",data);
 	}).confirm(function (data) {
 		//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
 		//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-		console.log(data);
-		if (is_somthing) { // 재고 수량 관리 로직 혹은 다른 처리
+		console.log("confirm",data);
+		if (true) { // 재고 수량 관리 로직 혹은 다른 처리
 			this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
 		} else {
 			this.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
 		}
 	}).close(function (data) {
 	    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-	    console.log(data);
+	    console.log("close",data);
 	}).done(function (data) {
 		//결제가 정상적으로 완료되면 수행됩니다
 		//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-		console.log(data);
-	});
+		console.log("done",data);
+	}); */
 	
-/* IMP.init("imp25216490");
+IMP.init("imp25216490");
 	
 IMP.request_pay({ // param
     pg: "html5_inicis",
@@ -89,6 +89,12 @@ IMP.request_pay({ // param
 }, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
         // jQuery로 HTTP 요청
+         var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+        msg += '카드 승인번호 : ' + rsp.apply_num;
+        
         var param = {
                 "impUid" : rsp.imp_uid,
                 "merchantUid" : rsp.merchant_uid
@@ -107,7 +113,9 @@ IMP.request_pay({ // param
         console.log(rsp.imp_uid, rsp.merchant_uid);
         alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
     }
-}); */
+    
+        alert(msg);
+});
 }
 
 </script>
