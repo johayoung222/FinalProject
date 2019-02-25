@@ -1214,7 +1214,7 @@ label{
 		<input type="hidden" name="memberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="reset" class="btn btn-outline-success" value="취소">
+		<input type="reset" class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}'" value="취소">
 	</form>
 </div>
 
@@ -1329,7 +1329,7 @@ label{
      open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
     		 "width=500,height=400,left=200,top=200");
      
-     return true;
+     return false;
 }
 
 $("#memberId_").on("keyup" , function(){

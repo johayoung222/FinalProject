@@ -14,10 +14,10 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
     crossorigin="anonymous">
-<script
+<!-- <script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
 <!-- 사용자작성 css -->
 <link rel="stylesheet"
     href="${pageContext.request.contextPath }/resources/css/style.css" />
@@ -43,7 +43,7 @@
     border-right: 1px solid lightgray;
 }
 .box-link1{
-border-right: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
+border-ight: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
 }
 .box-link2{
 border-right: 1px solid lightgray; float: right; width: 10%; height:40px; text-align:center;
