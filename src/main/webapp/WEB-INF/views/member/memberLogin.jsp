@@ -83,7 +83,7 @@
 				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="90%" height="8%"
 				onclick="kakaoLogin()"/>
 				</li>
-
+				
 			</ul>
 			</div>
 			<br>
@@ -148,6 +148,9 @@ function next2(){
         	
         }
       }
+      
+     
+
      function Login() {
     	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
     	
@@ -182,6 +185,7 @@ function next2(){
         
      
 </script>
+ 
 <script>
   /*
    function Googlelogin(googleUser) {
@@ -275,9 +279,7 @@ function next2(){
 		  	        				alert("기존 카카오 회원 로그인 성공");
 		  	        				window.location.href ="/spring";
 		  	        				
-		  	        			}
-		  	        			
-		  	          				 
+		  	        			}			 
 		  	        		},
 		  	        		error:function(){
 		  	        			console.log("ajax요청 실패 에러!");
@@ -290,10 +292,6 @@ function next2(){
 		            }
 		        });
 		    };
-
-	
- 
-
 
 </script>
 

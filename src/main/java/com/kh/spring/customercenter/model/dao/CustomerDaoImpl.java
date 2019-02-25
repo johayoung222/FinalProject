@@ -21,30 +21,55 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Map<String, String>> selectNewsList(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		return sqlSession.selectList("news.selectNewsList" , null , rowBounds);
+		return sqlSession.selectList("cc.selectNewsList" , null , rowBounds);
 	}
 
 	@Override
 	public int countNewsList() {
-		return sqlSession.selectOne("news.countNewsList");
+		return sqlSession.selectOne("cc.countNewsList");
 	}
 
 	@Override
 	public int insertNews(Board board) {
-		int result = sqlSession.insert("news.insertNews", board);
+		int result = sqlSession.insert("cc.insertNews", board);
 		return result;
 	}
 	
 	@Override
 	public int updateNews(Board board) {
-		int result = sqlSession.update("news.updateNews",board);
+		int result = sqlSession.update("cc.updateNews",board);
 		return result;
 	}
 
 	@Override
 	public int deleteNews(Board board) {
-		int result = sqlSession.delete("news.deleteNews",board);
+		int result = sqlSession.delete("cc.deleteNews",board);
 		return result;
+	}
+	
+	
+	//자주묻는질문 페이지바
+	 @Override 
+	 public List<Map<String, String>> selectQnaList(int cPage, int numPerPage) { 
+		 RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage); 
+		 return sqlSession.selectList("cc.selectQnaList" , null ,rowBounds); 
+	}
+	
+	//서치키워드
+	@Override
+	public List<Map<String, String>> selectSearchList(int cPage, int numPerPage, String searchkeyword) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage);
+		return sqlSession.selectList("cc.selectSearchList", searchkeyword, rowBounds);
+	}
+
+	@Override
+	public int countQnaList(String searchkeyword) {
+		return sqlSession.selectOne("cc.countQnaList", searchkeyword);
+	}
+
+	@Override
+	public List<Board> selectMainList() {
+		return sqlSession.selectList("cc.selectMainList");
 	}
 
 
