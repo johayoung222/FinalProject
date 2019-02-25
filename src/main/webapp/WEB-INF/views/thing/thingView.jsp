@@ -496,7 +496,7 @@
     <li class="list-group-item">매입 X</li> 
   </ul>
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
+<button type="button" class="btn btn-primary btn-lg auctionbtn" onclick="auctionV();" data-toggle="modal" data-target="#auctionModalPhone">
   판매하기
 </button>
 </div>
@@ -573,10 +573,53 @@
   <p class="lead">1. 팔 물건은 있는데, 판매하기가 귀찮다.</p> 
   <p class="lead">2. 색다르게, 가격경쟁을 통해 팔고싶다.</p> 
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
+<button type="button" class="btn btn-primary btn-lg auctionbtn" onclick="auctionV();" data-toggle="modal" data-target="#auctionModalPhone">
   겟잇 옥션으로 판매하기
 </button>
 </div>
+
+<!-- 휴대폰인증 팝업 모달 -->
+<div class="modal" tabindex="-1" role="dialog" id="auctionModalPhone">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">판매하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>휴대폰 인증을 하지 않은 회원은 겟잇 옥션 이용이 불가합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/mypage/profile/edit.do'">휴대폰 인증하러가기</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 회원가입 권유 팝업 모달 -->
+<div class="modal" tabindex="-1" role="dialog" id="auctionModalEnroll">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">판매하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>회원가입을 하지 않은 회원은 겟잇 옥션 이용이 불가합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/member/memberEnroll.do';">회원가입 하러가기</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <form name="thingEnrollFrm"
    action="${pageContext.request.contextPath}/thing/thingEnd.do"></form>
 <script>
@@ -595,12 +638,25 @@
          var fileName = $(this).prop("files")[0].name;
          $(this).next(".custom-file-label").html(fileName);
       });
+      
+      /* 휴대폰 인증이 된 회원인 경우에 버튼의 data-target 값을 변경한다. */
+      if(${memberLoggedIn == null}) {
+		$(".auctionbtn").attr("data-target","#auctionModalEnroll");    	  
+      } else if(${memberLoggedIn.memberPhone != null}) {
+		$(".auctionbtn").attr("data-target","");
+      }
+      
    });
 
    
+   /* 핸드폰 인증이 안된 회원일시에 confirm창 뛰우기 */
+	function auctionV() {
+		if(${memberLoggedIn.memberPhone != null}) {
+			location.href='${pageContext.request.contextPath }/auctionWriter.do';
+		}
+		
+	}
    
 </script>
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
