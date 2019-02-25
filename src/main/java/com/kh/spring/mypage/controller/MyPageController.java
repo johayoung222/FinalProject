@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.mypage.model.service.MyPageService;
 
 import net.nurigo.java_sdk.api.Message;
@@ -125,13 +127,13 @@ public class MyPageController {
 		return "mypage/wishlist";
 	}
 	
-	 @RequestMapping("/mypage/smscheck.do")
+	/*@RequestMapping("/mypage/smscheck.do")
 	  public String sendSms(HttpServletRequest request,Model model) throws Exception {
 
 		 String memberPhone = request.getParameter("memberPhone");
-		 //String memberId = request.getParameter("memberId");
+		 String memberId = request.getParameter("memberId");
 		 logger.debug("memberPhone=="+memberPhone);
-		 //logger.debug("memberId=="+memberId);
+		 logger.debug("memberId=="+memberId);
 
 	    String api_key = "NCSFQJJ9HCHO2HEE";
 	    String api_secret = "TMVG7ETX4WMP6I1OI4XPMFSCZJBOO0FK";
@@ -146,7 +148,7 @@ public class MyPageController {
 		 * set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
 		 * set.put("type","sms"); // 문자 타입 set.put("app_version", "test app 1.2"); //
 		 * application nameand version
-		 */		 
+		 		 
 	    System.out.println(set);
 
 	    try {
@@ -158,9 +160,30 @@ public class MyPageController {
 	      }
 	    model.addAttribute("certified",certified);
 	    model.addAttribute("memberPhone",memberPhone);
-	    //model.addAttribute("memberId",memberId);
-	   
-
+	    model.addAttribute("memberId",memberId);
+	    
+	    
 	    return "mypage/sendSms";
 	  }
+	 
+	 @RequestMapping("/mypage/updatephone.do")
+		public ModelAndView updatephone(HttpServletRequest request,ModelAndView mav) {
+			 String memberPhone = request.getParameter("memberPhone");
+			 String memberId = request.getParameter("memberId");
+			 logger.debug("memberPhone=="+memberPhone);
+			 logger.debug("memberId=="+memberId);
+			 
+		 
+			Member m = new Member();
+		    m.setMemberId(memberId);
+		    m.setMemberPhone(memberPhone);
+		    
+		    logger.debug("member=="+m);
+		    int result = myPageService.updatephone(m);
+			
+			
+			return mav;
+		}
+	 */
+
 }

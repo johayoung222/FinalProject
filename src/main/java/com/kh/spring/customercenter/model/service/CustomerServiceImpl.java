@@ -53,6 +53,26 @@ public class CustomerServiceImpl implements CustomerService {
 		return result;
 	}
 
-
 	
+	 @Override 
+	 public List<Map<String, String>> selectQnaList(int cPage, int numPerPage) { 
+		 return customerDao.selectQnaList(cPage , numPerPage); 
+	}
+
+	@Override
+	public List<Map<String, String>> selectSearchList(int cPage, int numPerPage, String searchkeyword) {
+		return customerDao.selectSearchList(cPage,numPerPage,searchkeyword);
+	}
+
+	@Override
+	public int countQnaList(String searchkeyword) {
+		return customerDao.countQnaList(searchkeyword);
+	}
+
+	@Override
+	public List<Board> selectMainList() {
+		return customerDao.selectMainList();
+	}
+
+	 
 }

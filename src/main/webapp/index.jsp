@@ -193,8 +193,7 @@
 
 
 <div id="sell_">
-	<br>
-	<br>
+	<br> <br>
 	<h6 class="font_">이벤트 당첨되었는데 안 쓰는 물건, 자리만 차지하고 있는 쓸모없는 물건...</h6>
 	<h3 class="font_">
 		<strong>겟잇으로 팔아야 잘 산다!</strong>

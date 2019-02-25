@@ -83,9 +83,11 @@
 		select* from category_micro where category_macro = #{macro} 
 	</select>
 	
-	<select id="registOne" resultType="regist">
+	<select id="registOne" resultMap="registVOMap">
 		select * from regist where seq_regist_no = #{registNo}
 	</select>
-	
+	<resultMap type="regist" id="registVOMap">
+		<result column="seq_regist_no" property="no"/>
+	</resultMap>
 	
 </mapper>
