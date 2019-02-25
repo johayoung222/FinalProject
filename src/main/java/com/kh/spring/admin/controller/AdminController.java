@@ -1,5 +1,6 @@
 package com.kh.spring.admin.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,8 +21,6 @@ import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.ProductIo;
 import com.kh.spring.thing.model.vo.Regist;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONSerializer;
 
 /**
  * @controller클래스 메소드가 가질 수 있는 파라미터
@@ -277,7 +276,7 @@ public class AdminController {
 	@ResponseBody
 	public List<Category> categoryMi(@RequestParam(value="macro")String macro) {
 		System.out.println("categoryMi메소드 실행!!!!");
-		System.out.println(macro);
+		//System.out.println(macro);
 		List<Category> list = adminService.categoryMi(macro);
 		
 		return list;
@@ -287,12 +286,41 @@ public class AdminController {
 	@ResponseBody
 	public Regist registOne(@RequestParam(value="registNo")int registNo) {
 		System.out.println("registOne메소드 실행!!");
-		System.out.println("ServiceImpl registNo:"+registNo);
+		//System.out.println("ServiceImpl registNo:"+registNo);
 		Regist regist = adminService.registOne(registNo);
-		System.out.println(regist);
+		//System.out.println("DATE		"+regist.getRegistDate());
 		return regist;
 		
 	}
+	
+	@RequestMapping(value="/admin/inProduct.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int insertP(@RequestParam(value="registNo")int registNo
+			,@RequestParam(value="registName")String registName
+			,@RequestParam(value="registPrice")int registPrice
+			,@RequestParam(value="registAmount")int registAmount
+			,@RequestParam(value="registDate")Date registDate
+			,@RequestParam(value="registDescription")String registDescription
+			,@RequestParam(value="registImage")String registImage
+			,@RequestParam(value="registRealImage")String registRealImage
+			,@RequestParam(value="cMa")String cMa
+			,@RequestParam(value="cMi")String cMi) {
+		int result = 0;
+		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(registNo+","+
+		registName+","+
+		registPrice+","+
+		registAmount+","+
+		registDate+","+
+		registDescription+","+
+		registImage+","+
+		registRealImage+","+
+		cMa+","+
+		cMi);
+		
+		return result;
+	}
+
 	
 	
 	

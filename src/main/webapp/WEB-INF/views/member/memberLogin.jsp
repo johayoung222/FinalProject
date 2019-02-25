@@ -6,6 +6,7 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="297674585572-kqfeb0ueu63g0o5qtoip4pcivfds9dpr.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
 <fmt:requestEncoding value="UTF-8" />
 
 <jsp:include page="/WEB-INF/views/common/sHeader.jsp">
@@ -47,7 +48,13 @@
 	padding: 15px;
 
 }
+.list-group-item list-group-item-action>#status{
+    margin: 0 auto;
 
+}
+.login-link{
+	border: 0px;
+}
 </style>
 
 	<div class="content-container" >
@@ -61,29 +68,26 @@
                                 
                                 
 				<li class="list-group-item list-group-item-action">
-   				<fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-               data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="flase"onlogin="checkLoginState();">
-              FaceBook으로 로그인
-       </fb:login-button>
-  
-				
+   	          <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
+               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();">
+                 FaceBook으로 로그인
+              </fb:login-button>
+							
 				</li>
-				<li class="list-group-item list-group-item-action">
-			
+			<!-- 	<li class="list-group-item list-group-item-action">
 			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40"
-			data-auto-logout-link="false" data-theme="dark" value="google로 로그인">
-			</div>
-		 		
-				 </li>
-				<li class="list-group-item list-group-item-action"><a href="">
-			    <a id="kakao-login-btn"></a>
-                 <a href="http://developers.kakao.com/logout"></a>
-				
+			data-auto-logout-link="true" data-theme="dark" value="google로 로그인">
+			</div> -->
+		     </li>
+				 <li class="list-group-item list-group-item-action">
+				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="90%" height="8%"
+				onclick="kakaoLogin()"/>
 				</li>
-
+				
 			</ul>
 			</div>
 			<br>
+			또는
 			<div class="login-form">
 				<form action="${pageContext.request.contextPath }/member/memberLogin.do" method="post">
 				<label for="memberId">아이디</label>
@@ -106,140 +110,90 @@ function next2(){
 	var alarm = $("#agree4").prop("checked");
 	memberEnrollFrm.alarm.value = alarm==true?"1":"0";
 }
+</script>
 
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '1302299029947046',
-      xfbml      : true,
-      version    : 'v3.2'
-    });
-    FB.AppEvents.logPageView();
-   
-  
-     FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-    	
-          
-      }
-      else {
-         FB.login(function(response) {
-          // handle the response
-        }, {scope: 'public_profile, email, user_birthday '});
-      }
-    });
-     
-  };
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-  
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-            
-          });
-    }
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-    	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
-    	   
-                 var memberId = response.id;
-                 var memberName = response.name;
-                 var memberEmail = response.email; 
-                
-               
-               
-            $.ajax({
-          		url: "${pageContext.request.contextPath}/member/facebookLogin",
-          		method:"post",
-          		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail },
-          		dataType: "json",
-          		success: function(data){
-          		if(data.fbisUsable == false){     
-          		 alert("FaceBook로그인성공");
-   				 window.location.href = "/spring";
-          		}else{
-          			alert("회원가입먼저 해주세요");
-          			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
-          		}
-          		 
-          		},
-          		error:function(){
-          			console.log("ajax요청 실패 에러!");
-          		}
-          	}); 
-              
-       
-      })
-    	
-    } 
-  }
+<script type="text/javascript">
+     window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1302299029947046',
+          xfbml      : true,
+          version    : 'v3.2'
+        });
+        FB.AppEvents.logPageView();
 
-  /*    카카오로그인 */// 사용할 앱의 JavaScript 키를 설정해 주세요.
-   Kakao.init('ce5b973783f3c9e19db9e51f9c823d4b');
-  // 카카오 로그인 버튼을 생성합니다.
-  Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      // 로그인 성공시, API를 호출합니다.
-      Kakao.API.request({
-        url: '/v1/user/me',
-        success: function(res) {
- 
-       /*    console.log(JSON.stringify(res.id));
-          console.log(JSON.stringify(res.properties.nickname)); */
-          console.log(JSON.stringify(res.id));
-          console.log(JSON.stringify(res.properties.nickname));
-          
-          
-          var kakaoId = JSON.stringify(res.id);
-          var kakaoName = JSON.stringify(res.properties.nickname);
-          
-          
-          $.ajax({
-        		url: "${pageContext.request.contextPath}/member/kakaoLogin",
-        		method:"post",
-        		data: {kakaoId : kakaoId, kakaoName : kakaoName}, 
-        		success: function(data){
-        		
-        		
-        			if(data.kisUsable == false){     
-                 		 alert("카카오 로그인성공");
-          				 window.location.href = "/spring";
-                 	}else{
-                 			alert("회원가입먼저 해주세요");
-                 			window.location.href ="${pageContext.request.contextPath}/member/memberEnroll.do";	
-                 	}
-        		},
-        		error:function(){
-        			console.log("ajax요청 실패 에러!");
-        		}
-        	}); 
-          
-          
-        },
-        fail: function(error) {
-          alert(JSON.stringify(error));
+         FB.getLoginStatus(function(response) {	
+      
+        });  
+         
+      };
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+      
+        function checkLoginState() {
+            FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+              });
         }
-      });
-    },
-    fail: function(err) {
-      alert(JSON.stringify(err));
-    }
-  });
+      function statusChangeCallback(response) {
+    	  
+        if (response.status === 'connected') {
+        	
+             Login();
+        	
+        	
+        }
+      }
+      
+     
 
-
-  /* 구글 로그인 */
+     function Login() {
+    	 FB.api('/me?fields=id,name,email,gender',  function(response) {        	
+    	
+             var memberId = response.id;
+             var memberName = response.name;
+             var memberEmail = response.email; 
+            
+           
+        $.ajax({
+      		url: "${pageContext.request.contextPath}/member/facebookLogin",
+      		method:"post",
+      		data: {memberId : memberId, memberName : memberName, memberEmail : memberEmail },
+      		dataType: "json",
+      		success: function(data){
+      		if(data.fbisUsable == false){     
+      		 alert("FaceBook 기존 회원 로그인성공");
+				 window.location.href = "/spring";
+      		}else{
+      			 alert("FaceBook 신규 회원 로그인성공");
+   				 window.location.href = "/spring";
+      		}
+      		 
+      		},
+      		error:function(){
+      			console.log("ajax요청 실패 에러!");
+      		}
+      	 });  
+           
+      });  
+	  
+  }
+        
+     
+</script>
+ 
+<script>
+  /*
    function Googlelogin(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-     /*    console.log("ID: " + profile.getId()); 
+       console.log("ID: " + profile.getId()); 
         console.log('Full Name: ' + profile.getName());
-        console.log("Email: " + profile.getEmail()); */
+        console.log("Email: " + profile.getEmail()); 
         var googleId = profile.getId();
         var googleName = profile.getName();
         var googleEmail = profile.getEmail();
@@ -272,9 +226,77 @@ window.fbAsyncInit = function() {
       
       }
 
-
+ */
 
 </script>
+
+<script>
+/* kakao로그인 관련 script */
+	   Kakao.init('ce5b973783f3c9e19db9e51f9c823d4b');
+	   function kakaoLogin() {
+		     // 로그인 창을 띄웁니다.
+		        Kakao.Auth.loginForm({
+		            
+		            // 세션이 종료된 이후에도 토큰을 유지.
+		            persistAccessToken: true,
+		            // 세션이 종료된 이후에도 refresh토큰을 유지.
+		            persistRefreshToken: true,
+		            
+		            success: function(authObj) {
+		                userGetProfile();
+		            },
+		            fail: function(err) {
+		                alert("로그인 에러");
+		                console.log(err);
+		            }
+		        });
+		   };    
+
+		    /* 카카오 api로 로그인 */
+		   function userGetProfile(){
+		        Kakao.API.request({
+		        	url: '/v1/user/me',
+		            success : function(res){
+		                console.log(res);
+		                console.log(res.id);
+		                console.log(res.kaccount_email);
+		                console.log(res.properties.nickname); 
+		               
+		                
+		              var kakaoId = res.id;
+		  	          var kakaoName = res.properties.nickname;
+		  	           
+		  	          
+		  	          $.ajax({
+		  	        		url: "${pageContext.request.contextPath}/member/kakaoLogin",
+		  	        		method:"post",
+		  	        		data: {kakaoId : kakaoId, kakaoName : kakaoName}, 
+		  	        		success: function(data){
+		  	        			if(data.kisUsable == true){
+		  	                 		 alert("카카오 신규 회원 로그인 성공");
+		  	          				 window.location.href = "/spring";                
+		  	        			}else{
+		  	        				alert("기존 카카오 회원 로그인 성공");
+		  	        				window.location.href ="/spring";
+		  	        				
+		  	        			}			 
+		  	        		},
+		  	        		error:function(){
+		  	        			console.log("ajax요청 실패 에러!");
+		  	        		}
+		  	        	}); 
+		                
+		                
+		                
+		                
+		            }
+		        });
+		    };
+
+</script>
+
+
+
 	
 	
 	

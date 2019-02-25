@@ -19,15 +19,16 @@
     crossorigin="anonymous"></script>
 
 </head>
+
 <body>
 	<div id="emailcertified-container">
 		<label for="certified">인증번호 : </label>
 		<input type="text"name="certified" id="certified"class="certified"/>
-		<input type="button" value="확인" id="check" onclick="check();"/>
+		<input type="button" value="확인" id="check"  onclick="check();"/>
 	</div>
-	<form action="${pageContext.request.contextPath}/member/updatephone.do"name="updatephone">
-		<input type="hidden" name="memberPhone" value="${memberPhone}" />
-		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+	<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
+		<input type="hidden" name="memberPhone" id="memberPhone"value="${memberPhone}" />
+		<input type="hidden" name="memberId" value="${memberId}" />
 	</form>
 </body>
 <script>
@@ -36,6 +37,7 @@ function check(){
 	console.log(certified);
 	var certifiedNum = ${certified};
 	console.log(certifiedNum);
+	var memberPhone = $("#memberPhone").val();
 
 	
 	
@@ -46,15 +48,15 @@ function check(){
 		alert("인증번호가 틀렸습니다. 인증번호를 다시입력해주세요.");
 		return false;
 	}else{
-		updatephone.submit();
 		alert("인증 완료");
+		opener.$('#updatephone').submit();
 		opener.document.getElementById("result").value = "1";
 		opener.document.getElementById("smsclear").value = "인증완료";
 		opener.document.getElementById("memberPhone").readOnly = "true";
 		opener.document.getElementById("smsclear").disabled="true";
 		
 		
-
+		//opener.parent.location.reload();
 		self.close();
 	}
 } 

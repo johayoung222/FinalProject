@@ -868,32 +868,31 @@ $("#all").on('click', function(){
 	margin: 0 auto;
 	border: 0;
 }
+.list-group-item list-group-item-action{
+   border: 0;
+
+}
 </style>
 <div class="content-container">
 		<div class="login-container">
 			<div class="login-link">
 			<ul class="list-group">
 				<li class="list-group-item list-group-item-action">  
-		<!-- 		<fb:login-button id="status" scope="public_profile,email" data-size="large" data-button-type="login_with" 
-                data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false"onlogin="checkLoginState();">
-              FaceBook으로 시작하기
-       </fb:login-button> -->
+	
        
-       <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-        data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"onlogin="checkLoginState();" >
-              FaceBook으로 시작
-       </fb:login-button>
-       
-       
-       </li>
+   		     <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
+               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();">
+                 FaceBook으로 시작
+              </fb:login-button>
+ 			       </li>
+			<!-- 	<li class="list-group-item list-group-item-action">
+			     <div class="g-signin2" data-onsuccess="Googlelogin" data-width="220" data-height="40" data-theme="dark">
+			    google로 시작
+			         </div>
+				</li> -->
 				<li class="list-group-item list-group-item-action">
-			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40" data-theme="dark">
-			    google로 시작하기
-			</div>
-				</li>
-				<li class="list-group-item list-group-item-action">
-				<a id="kakao-login-btn"><img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="100%"/></a>
-                 <a href="http://developers.kakao.com/logout"></a>
+			   <img src="${pageContext.request.contextPath }/resources/images/kakaostart.PNG"  width="80%" height="8%"
+				onclick="EnrollfromKakao()"/>
 				</li>
 			</ul>
 			</div>
@@ -913,6 +912,8 @@ function next2(){
 	memberEnrollFrm.memberAlarm.value = alarm==true?"1":"0";
 }
 
+</script>
+<script>
 <!-- facebook회원가입 -->
 window.fbAsyncInit = function() {
     FB.init({
@@ -920,16 +921,16 @@ window.fbAsyncInit = function() {
       xfbml      : true,
       version    : 'v3.2'
     });
-    FB.AppEvents.logPageView();
+   // FB.AppEvents.logPageView();
 
      FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
           
       }
       else {
-         FB.login(function(response) {
+     /*     FB.login(function(response) {
           // handle the response
-        }, {scope: 'public_profile, email, user_birthday '});
+        }, {scope: 'public_profile, email, user_birthday '}); */
       }
     });
      
@@ -952,88 +953,82 @@ window.fbAsyncInit = function() {
       testAPI();
     } 
   }
+  // facebook 로그인 성공했을때 나오는 것들
  function testAPI() {
     FB.api('/me?fields=id,name,email',  function(response) {        	
         var fbId = response.id;
         var fbName = response.name;
         var fbEmail = response.email;  
-          //console.log(JSON.stringify(response));
-          
-          
-        $.ajax({
-      		url: "${pageContext.request.contextPath}/member/facebookEnroll",
-      		method:"post",
-      		data: {fbId : fbId, fbName : fbName, fbEmail : fbEmail }, 
-      		success: function(data){        			
-      			
+          //console.log(JSON.stringify(response)); 			
       		$("#facebookenroll-container").show();
       		$('input[name=fbId]').attr('value',fbId); 
       		$('input[name=fbName]').attr('value',fbName); 
       		$('input[name=fbEmail]').attr('value',fbEmail); 
-      		},
-      		error:function(){
-      			console.log("ajax요청 실패 에러!");
-      		}
-      	}); 
+     
          
     });
     
    
   }
- 
+ </script> 
   
-  
-          /*    카카오 */
+  <script>
+  /*    카카오 */
   // 사용할 앱의 JavaScript 키를 설정해 주세요.
   Kakao.init('ce5b973783f3c9e19db9e51f9c823d4b');
   // 카카오 로그인 버튼을 생성합니다.
-  Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      // 로그인 성공시, API를 호출
-      Kakao.API.request({
-        url: '/v1/user/me',
-        success: function(res) {
+  function EnrollfromKakao(){
+	  
+  Kakao.Auth.loginForm({
+	  
+      persistAccessToken: true,
+      persistRefreshToken: true,
       
-          
-          var kId =   JSON.stringify(res.id);
-          var kName = JSON.stringify(res.properties.nickname);
-          	
-          
-          
-          $.ajax({
-        		url: "${pageContext.request.contextPath}/member/kakaoEnroll",
-        		method:"post",
-        		data: {kId : kId, kName : kName}, 
-        		success: function(data){
-        		        			
-        			
-        		$("#kakaoenroll-container").show();
-        		$('input[name=kId]').attr('value',kId); 
-        		$('input[name=kName]').attr('value',kName); 
-       
-        		},
-        		error:function(){
-        			console.log("ajax요청 실패 에러!");
-        		}
-        	}); 
-          
-          
-        },
-        fail: function(error) {
-          alert(JSON.stringify(error));
-        }
-      });
-    },
-    fail: function(err) {
-      alert(JSON.stringify(err));
-    }
-  });
+      success: function(authObj) {
+          userGetProfile();
+      },
+      fail: function(err) {
+          alert("로그인 에러");
+          console.log(err);
+      }   
+      
+  });	 
+
+  };
   
+  
+  function userGetProfile(){
+      Kakao.API.request({
+      	url: '/v1/user/me',
+          success : function(res){
+           
+              console.log(res.id);
+              console.log(res.kaccount_email);
+              console.log(res.properties.nickname); 
+                
+	          var kId =   JSON.stringify(res.id);
+	          var kName = JSON.stringify(res.properties.nickname);
+
+	        		        			
+
+	        		$("#kakaoenroll-container").show();
+	        		$('input[name=kId]').attr('value',kId); 
+	        		$('input[name=kName]').attr('value',kName); 
+               
+              
+          }
+      });
+  };
+  </script>
+
+  
+
+  <script>
   /* 구글 로그인 */
   function Googlelogin(googleUser) {
        // Useful data for your client-side scripts:
        var profile = googleUser.getBasicProfile();
+  
     /*    console.log("ID: " + profile.getId()); 
        console.log('Full Name: ' + profile.getName());
        console.log("Email: " + profile.getEmail()); */
@@ -1041,10 +1036,7 @@ window.fbAsyncInit = function() {
        var gName = profile.getName();
        var gEmail = profile.getEmail();
 
- 
        var id_token = googleUser.getAuthResponse().id_token;
-       
-       
        
        $.ajax({
    		url: "${pageContext.request.contextPath}/member/googleEnroll",
@@ -1063,10 +1055,6 @@ window.fbAsyncInit = function() {
    	}); 
      
      }
-  
-
-
-
 </script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
 <style>
@@ -1154,14 +1142,57 @@ window.fbAsyncInit = function() {
 	}
 	.g-signin2{
 	margin: 0 auto;
-	padding: 15px;
+	padding: 10px;
     }
+  #checkID{
+  border-radius: 10px;
+  margin: 5px;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:1.6em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none; 		
+    }
+    
+    #checkID:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+#checkID:before,#checkID:after{
+ border-radius: 10px;
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#checkID:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#checkID:hover:before,#checkID:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+label{
+	display: inline-blcok;
+}
 </style>
 
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="${pageContext.request.contextPath}/member/memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<input type="hidden" name="memberAlarm"/>
 		<div id="memberId-container">
+		
 			<input type="text" class="form-control" placeholder="아이디 (4글자이상)" name="memberId" id="memberId_" required>
 			<!-- 중복체크관련태그 -->
 			      <span class="guide ok">이 아이디는 사용가능합니다.</span>
@@ -1169,11 +1200,10 @@ window.fbAsyncInit = function() {
 			
 			<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0" />
 		</div>
-		
 		<input type="password" class="form-control" placeholder="비밀번호" name="memberPassword" id="password_" required>
 		<input type="password" class="form-control" placeholder="비밀번호확인" id="password2" required>
 		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName">
-		<input type="text" class="form-control" placeholder="ex)940214" name="memberBirth" id="memberBirth">
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940512" name="memberBirth" id="memberBirth">
 		<input type="email" class="form-control" placeholder="이메일" name="memberEmail" id="email">
 		<input type="text" class="form-control" placeholder="주소" name="memberAddress" id="address">
 		<select class="form-control" name="gender" required>
@@ -1192,7 +1222,7 @@ window.fbAsyncInit = function() {
 
 <!-- ----------------------------facebook관련 회원가입!-------------------------------------------------->
 <div id="facebookenroll-container">
-	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return fbvalidate();" >
+	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return snsValidate();" >
 		<input type="hidden" name="memberAlarm"/>
 		 <div id="memberId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
@@ -1200,7 +1230,7 @@ window.fbAsyncInit = function() {
 			      <span class="fbguide ok">이 아이디는 사용가능합니다.</span>
 			      <span class="fbguide error">이 아이디는  이미 등록된  아이디입니다</span> 
 			<input type="hidden" name="fbidDuplicateCheck" id="fbidDuplicateCheck" value="0" />
-			<input type="button" value="등록된 회원인지 확인하기"  onclick="fbvalidate();"/>
+			<input type="button" id="checkID" value="등록된 회원인지 확인하기"  onclick="fbvalidate();"/>
 		</div> 
 		<input type="text" class="form-control" placeholder="이름" name="fbName" id="fbName" readonly>
 		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="fbBirth" id="fbBirth" required>
@@ -1219,17 +1249,17 @@ window.fbAsyncInit = function() {
 
 <!-- ----------------------------KAKAO관련 회원가입!-------------------------------------------------->
 <div id="kakaoenroll-container">
-	<form name="kmemberEnrollFrm" action="${pageContext.request.contextPath}/member/kakaoEnrollEnd" method="post" method="post" onsubmit="return kakaovalidate();" >
+	<form name="kmemberEnrollFrm" action="${pageContext.request.contextPath}/member/kakaoEnrollEnd" method="post" method="post" onsubmit="return snsValidate();" >
 		<input type="hidden" name="memberAlarm"/>
 		 <div id="kakaoId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="kId" id="kId" readonly>
 		<!-- 	중복체크관련태그 -->
 			     
 			<input type="hidden" name="kakaoDuplicateCheck" id="kakaoDuplicateCheck" value="0" />
-			<input type="button" value="등록된 회원인지 확인하기"  onclick="kakaovalidate();"/>
+			<input type="button" id="checkID" value="등록된 회원인지 확인하기"  onclick="kakaovalidate();"/>
 		</div> 
 		<input type="text" class="form-control" placeholder="이름" name="kName" id="kName" readonly>
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="kBirth" id="kBirth" required>
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940214" name="kBirth" id="kBirth" required>
 		<input type="email" class="form-control" placeholder="이메일을 입력해주세요" name="kEmail" id="kEmail" >
 		<select class="form-control" name="kgender" required> 
 			<option value="" disabled selected>성별</option>
@@ -1360,8 +1390,7 @@ function fbvalidate(){
 				$("input[name=fbsubmit]").show();
                var interest = false;
             /* 관심상품 팝업 */
-            open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-             return false;
+           
 			
 			}else{
 				alert("이미 등록된 회원이 있습니다 ");	
@@ -1380,7 +1409,6 @@ function fbvalidate(){
  
 }
 /* 카카오 회원 등록... */
- 
  function kakaovalidate(){
 		
 	    var kIdcheck = document.getElementById("kId").value;
@@ -1407,8 +1435,6 @@ function fbvalidate(){
 					$("input[name=ksubmit]").hide();
 					
 				} 
-				
-			
 		
 			},
 			error: function() {
@@ -1468,6 +1494,15 @@ function kakaoCancel(){
 }
 function googleCancel(){
 	$("#googleEnroll-container").hide();
+	
+}
+
+function snsValidate(){
+	 /* 관심상품 팝업 */
+    open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+   		 "width=500,height=400,left=200,top=200");
+    return true;
+	
 	
 }
 
