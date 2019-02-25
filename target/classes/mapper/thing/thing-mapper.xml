@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="thing">
+	
+	<select id="selectCategorys" resultType="Category">
+		
+		select * from CATEGORY_MICRO
+	
+	</select>
+	
+	<select id="selectOne" resultType="product">
+		select * from product where seq_product_no = #{productNo}
+	</select>
+	
+	<insert id="sell">
+		insert into regist(	SEQ_REGIST_NO , regist_name , regist_price, regist_auction , regist_image, regist_real_image, regist_amount, regist_description, regist_date) values(seq_regist_no.nextval, #{name}, #{price} , #{auction},#{image},#{realImage},#{amount},#{description},SYSDATE)
+	
+	</insert>
+	
+</mapper>

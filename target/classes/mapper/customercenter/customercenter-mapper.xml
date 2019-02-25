@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="news">
+	<select id="selectNewsList" resultMap="newsMap">
+		select * from board where board_kinds = 1 order by seq_board_no desc
+	</select>
+	<resultMap type="Map" id="newsMap">
+	
+	</resultMap>
+	
+	<select id="countNewsList" resultType="_int">
+		select count(*) from board where board_kinds = 1
+	</select>
+	
+	<insert id="insertNews" parameterType="news">
+    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,1,1 )
+    </insert>
+    
+    <update id="updateNews">
+    	update board set board_title = #{boardtitle},
+    					 board_content = #{boardcontent}
+    	where seq_board_no = #{seq_board_no}
+    </update>
+    <delete id="deleteNews">
+    	delete from board where seq_board_no = #{seq_board_no} 
+    </delete>
+	
+</mapper>
