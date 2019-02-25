@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+		"-//mybatis.org//DTD Config 3.0//EN" 
+		"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	<settings>
+		<!-- 북마크한 Mybatis API에 정리되어 있다. -->
+		<!-- http://www.mybatis.org/mybatis-3/ko/configuration.html#settings -->
+		<!-- 데이터가 null이라면 NULL이라는 문자열로 치환해서 넣어주는 셋팅 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- 실제데이터의 타입을 풀패키지로 적어주어야 한다. 그것을 위한 별칭처리 -->
+	<typeAliases>
+		<typeAlias type="com.kh.spring.demo.model.vo.Dev" alias="dev"/>
+		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="m"/>		
+		<typeAlias type="com.kh.spring.memo.model.vo.Memo" alias="memo"/>		
+		<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler" alias="strArrTypeHandler"/>
+		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.kh.spring.customercenter.model.vo.Board" alias="news"></typeAlias>
+		<typeAlias type="com.kh.spring.board.model.vo.Attachment" alias="attachment"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.Product" alias="product"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.ProductIo" alias="productIo"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.Category" alias="category"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.Regist" alias="regist"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
+		
+	</typeAliases>
+</configuration>
