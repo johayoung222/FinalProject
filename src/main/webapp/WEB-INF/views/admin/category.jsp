@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.sql.Date"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -41,7 +41,7 @@
 
 <div class="alert alert-primary" role="alert">판매 신청 리스트</div>
 <div class="alert">
-	<form action="${pageContext.request.contextPath }/admin/insertP.do" onsubmit="return categoryCheck();">
+	<form id="inProduct">
 		<select id="categoryMa" class="form-control form-control-sm">
 			<option value="" disabled selected>대분류</option>
 		</select>
@@ -69,7 +69,7 @@
 		</div><br />
 		<input type="hidden" id="registImage" value="" />
 		<input type="hidden" id="registRealImage" value=""/>
-		<input type="submit" value="신청YES" />
+		<input type="button" id="btn" value="신청YES"  />
 		<input type="reset" value="신청NO" onclick="window.close()" />
 	</form>
 </div>
@@ -84,17 +84,17 @@ $(function(){
 		type:"get",
 		success : function(data){
 			console.log(data);
-			//$("#registName").val(data[0].name);
-			//$("#registPrice").val(data[0].price);
-			//$("#registAmount").val(data[0].amount);
-			//$("#registDate").val(data[0].date);
-			//$("#exampleFormControlTextarea1").html(data[0].description);
+			$("#registName").val(data.registName);
+			$("#registPrice").val(data.registPrice);
+			$("#registAmount").val(data.registAmount);
+			$("#registDate").val(Date(data.registDate));
+			$("#exampleFormControlTextarea1").html(data.registDescription);
 		},error:function(){
 			console.log("ajax요청 실패");
 		}
 	});
 	
-	/* $.ajax({
+	$.ajax({
 		url : "${pageContext.request.contextPath}/admin/categoryMa.do",
 		dataType : "json",
 		success : function(data){
@@ -106,7 +106,7 @@ $(function(){
 		},error : function(){
 			console.log("ajax 요청 실패!!");
 		}
-	}); */
+	}); 
 });
 
 $("#categoryMa").on("change",function(){
@@ -118,12 +118,12 @@ $("#categoryMa").on("change",function(){
 		url : "${pageContext.request.contextPath}/admin/categoryMi.do",
 		data : {macro:macro},
 		type : "get",
-		dateType : "json",
+		dataType : "json",
 		success :function(data){
 			$('#categoryMi').children("option").remove();
 			var html ="<option value='' disabled selected>소분류</option>";
 			for(var i in data){
-			html += "<option class='cMi' value="+data[i].categoryMacro+">"+data[i].categoryName+"</option>";
+			html += "<option class='cMi' value="+data[i].categoryName+">"+data[i].categoryName+"</option>";
 			}
 			$("#categoryMi").append(html);
 		},error : function(){
@@ -133,23 +133,47 @@ $("#categoryMa").on("change",function(){
 	
 });
 
-function categoryCheck(){
+$("#btn").on('click',function(){
 	var cMa = $("#categoryMa option:selected").val();
-	console.log(cMa);
 	var cMi = $("#categoryMi option:selected").val();
-	console.log(cMi);
 	
-	if(cMa == ""){
-		alert("대분류를 선택해 주세요.");
-		return false;
-	}else if(cMi == ""){
-		alert("소분류를 선택해 주세요.");
-		return false;
-	}
 	alert("판매신청OK 판매리스트로 이동!");
-	window.close();	
-	return true;
-}
+	//opener.parent.location.reload();
+	//window.close();
+	var registNo = $("#registNo").val();
+	var registName = $("#registName").val();
+	var registPrice = $("#registPrice").val();
+	var registAmount = $("#registAmount").val();
+	var registDate = $("#registDate").val();
+	var registDescription = $("#exampleFormControlTextarea1").text();
+	var registImage = $("#registImage").val();
+	var registRealImage = $("#registRealImage").val();
+	
+	var param = {
+			registNo:registNo,
+			registName:registName,
+			registPrice:registPrice,
+			registAmount:registAmount,
+			registDate:registDate,
+			registDescription:registDescription,
+			registImage:registImage,
+			registRealImage:registRealImage,
+			cMa:cMa,
+			cMi:cMi};
+	console.log(param);
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/inProduct.do",
+		data : param,
+		type : "POST",
+		dataType : "json",
+		success :function(data){
+			console.log(data);
+		},error : function(){
+			console.log("ajax 요청 실패!!");
+		}
+	});
+});
 
 
 
