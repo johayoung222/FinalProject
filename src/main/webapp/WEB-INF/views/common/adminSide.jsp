@@ -27,18 +27,18 @@
 	position:absolute;
 	
 }
-.nav-link{
-	width:157px;	
-}
 div.col-3 a:hover{
 	color: #fff;
     background-color: #343a40;
 }
+#container2{
+	width:15%;
+}
 </style>
 
 <br />
-<div class="row">
-  <div class="col-3">
+<div id="container2">
+  <div class="col-2.5">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <p class="nav-link">관리자 페이지</p>
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/allMember.do" title="회원리스트조회">회원 리스트조회</a>

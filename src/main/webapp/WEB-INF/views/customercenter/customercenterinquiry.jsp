@@ -54,10 +54,7 @@
 }
 
 .headline {
-<<<<<<< HEAD
-=======
-	width:100%;
->>>>>>> c34163a08c43c6619344d9513576d2f87693831f
+
 	font-size: 20px;
 	line-height: 23px;
 	padding-bottom: 20px;
@@ -68,21 +65,9 @@
 .content {
 	display: inline-block;
 	width: 70%;
-<<<<<<< HEAD
+
 }
 
-#news {
-	border-bottom: 2px solid #ececec;
-	height: 50px;
-	width: 100%;
-}
-
-.newscontent {
-	border-bottom: 2px solid #ececec;
-	background: #e9e9e9;
-=======
-		
-}
 .quirycontent{
 	width:100%;
 }
@@ -113,7 +98,7 @@
 	margin-left:24%;
 	width:51.5%;
 	margin-bottom:50px;
->>>>>>> c34163a08c43c6619344d9513576d2f87693831f
+
 }
 </style>
 
@@ -140,53 +125,7 @@
 		</div>
 	</div>
 	<div class="content">
-<<<<<<< HEAD
-		<div class="headline">여기 소식 헤드라인</div>
-		<section>
 
-			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button"
-					id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false" style="width: 70.6%;">문의 종류를 선택해주세요.
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Action</a> <a
-						class="dropdown-item" href="#">Another action</a> <a
-						class="dropdown-item" href="#">Something else here</a>
-				</div>
-				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"
-						style="width: 35%; margin-top: 10px;">문의 분류</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Action</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="#">Something else here</a>
-					</div>
-					<button class="btn btn-secondary dropdown-toggle" type="button"
-						id="dropdownMenuButton" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"
-						style="width: 35%; margin-top: 10px;">상세 분류</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a class="dropdown-item" href="#">Action</a> <a
-							class="dropdown-item" href="#">Another action</a> <a
-							class="dropdown-item" href="#">Something else here</a>
-					</div>
-				</div>
-				<div class="form-group" style="width: 70.5%">
-					<label for="exampleFormControlTextarea1"></label>
-					<textarea class="form-control" id="exampleFormControlTextarea1"
-						rows="5"></textarea>
-				</div>
-				<button type="submit" class="btn btn-primary" style="width: 70.6%">문의
-					등록하기</button>
-					
-		</section>
-		
-	</div>
-</div>
-=======
 		<div class="headline">1:1 문의다</div>
 		<div class="quirycontent">
 			<form action="${pageContext.request.contextPath}/customercenter/insertInquiry.do">
@@ -290,5 +229,5 @@
 		 }
 	 }
 </script>
->>>>>>> c34163a08c43c6619344d9513576d2f87693831f
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

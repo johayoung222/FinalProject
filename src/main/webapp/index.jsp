@@ -151,8 +151,7 @@
 				id="favorite5" width="120px" height="100px" />
 			</a>
 			<div>
-				<pre>
-					<strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
+				<pre><strong>컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
 		</div>
