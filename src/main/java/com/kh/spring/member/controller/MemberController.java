@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -230,40 +231,41 @@ public class MemberController {
 	 * 페이스북 관련: 로그인 관련
 	 */
 	@RequestMapping("/member/facebookLogin")
-	@ResponseBody
-	public Map<String, Object> facebookLogin(@RequestParam("memberId") String memberId, HttpSession session) {
+	 @ResponseBody
+	public Map<String, Object> facebookLogin(@RequestParam("memberId") String memberId, 
+			@RequestParam("memberName") String memberName, @RequestParam("memberEmail") String memberEmail,
+			HttpSession session) {
 
 		Map<String, Object> map = new HashMap<>();
 		Member m = memberService.selectOneMember(memberId);
 		boolean fbisUsable = m == null ? true : false;
 		logger.debug(m);
 		logger.debug(fbisUsable);
-
-		if (fbisUsable == false) {
-			session.setAttribute("memberLoggedIn", m);
-			// map.put("memberLoggedIn", m);
-		}
-
-		map.put("fbisUsable", fbisUsable);
-		return map;
-
-	}
-
-	/*
-	 * 페이스북 관련: 로그인하면 컨테이너 떨어짐 ajax로 넘기기
-	 */
-	@RequestMapping("/member/facebookEnroll")
-	@ResponseBody
-	public ModelAndView facebookEnroll(@RequestParam("fbId") String fbId, @RequestParam("fbName") String fbName,
-			@RequestParam("fbEmail") String fbEmail, ModelAndView mav) {
-
-		mav.setViewName("member/memberEnroll");
-		return mav;
+		
+	       
+		if(fbisUsable == true) {
+			  Member nm = new Member();
+		      nm.setMemberId(memberId);
+		      nm.setMemberName(memberName);
+		      nm.setMemberEmail(memberEmail);
+		      int result = memberService.insertFacebookMember(nm);
+			  session.setAttribute("memberLoggedIn",nm);
+			}else {
+				
+				session.setAttribute("memberLoggedIn", m);
+				
+			}
+		
+	        
+	      map.put("fbisUsable", fbisUsable);
+	      return map;
+		
 
 	}
 
+
 	/*
-	 * facebook 가입 ajax 창으로 받은거 넘겨주기...
+	 * facebook으로 시작하기
 	 */
 	@RequestMapping("/member/facebookEnrollEnd")
 	@ResponseBody
@@ -308,29 +310,38 @@ public class MemberController {
 	}
 
 	/* 카카오 관련 code */
-	// 카카오 로그인
+	//카카오 로그인
 	@RequestMapping("/member/kakaoLogin")
 	@ResponseBody
-	public Map<String, Object> kakaoLogin(@RequestParam("kakaoId") String kakaoId, HttpSession session) {
+	public Map<String, Object> kakaoLogin(@RequestParam("kakaoId") String kakaoId,
+			@RequestParam("kakaoName") String kakaoName ,HttpSession session) {
 
+	
 		Member m = memberService.selectOneMember(kakaoId);
-
+	
 		Map<String, Object> map = new HashMap<>();
-
+		
 		boolean kisUsable = m == null ? true : false;
-		logger.debug(m);
-		logger.debug(kisUsable);
-
-		if (kisUsable == false) {
+	
+	       
+		if(kisUsable == true) {
+		  Member nm = new Member();
+	      nm.setMemberId(kakaoId);
+	      nm.setMemberName(kakaoName);
+	      int result = memberService.insertKakaoMember(nm);
+		
+		  session.setAttribute("memberLoggedIn",nm);
+		}else {
+			
 			session.setAttribute("memberLoggedIn", m);
-			// map.put("memberLoggedIn", m);
+			
 		}
-
-		map.put("kisUsable", kisUsable);
-		return map;
+		
+		
+	      map.put("kisUsable", kisUsable);
+	      return map;
 
 	}
-
 	/* kakao 회원 등록하기 */
 	@RequestMapping("/member/kakaoEnrollEnd")
 	@ResponseBody
@@ -355,104 +366,90 @@ public class MemberController {
 
 	}
 
-	@RequestMapping("/member/kakaoEnroll")
-	@ResponseBody
-	public ModelAndView kakaoEnroll(@RequestParam("kId") String kId, @RequestParam("kName") String kName,
-			ModelAndView mav) {
+	 /*
+		 * kakao 폼안에 있는 아이디값 중복검사!
+		 */
+		@RequestMapping("/member/kakaoCheckDuplicate.do")
+		@ResponseBody
+		public Map<String, Object> kakaoCheckDuplicate(@RequestParam("kIdcheck") String kIdcheck) {
 
-		mav.setViewName("member/memberEnroll");
-		return mav;
+			logger.debug("검사할 kakaoID : " + kIdcheck);
 
-	}
+			Map<String, Object> map = new HashMap<>();
+			Member m = memberService.selectOnekakaoMember(kIdcheck);
+			boolean kisUsable = m == null ? true : false;
+			System.out.println("검사할건!" + kisUsable);
+			map.put("kisUsable", kisUsable);
+			
+			return map;
 
-	/*
-	 * kakao 폼안에 있는 아이디값 중복검사!
-	 */
-	@RequestMapping("/member/kakaoCheckDuplicate.do")
-	@ResponseBody
-	public Map<String, Object> kakaoCheckDuplicate(@RequestParam("kIdcheck") String kIdcheck) {
-
-		logger.debug("검사할 kakaoID : " + kIdcheck);
-
-		Map<String, Object> map = new HashMap<>();
-		Member m = memberService.selectOnekakaoMember(kIdcheck);
-		boolean kisUsable = m == null ? true : false;
-		System.out.println("검사할건!" + kisUsable);
-		map.put("kisUsable", kisUsable);
-
-		return map;
-
-	}
-
-	/* 구글 관련 */
-	/* 구글에서 정보 뽑아오기 */
-	@RequestMapping("/member/googleLogin")
-	@ResponseBody
-	public Map<String, Object> googleLogin(@RequestParam("googleId") String googleId, HttpSession session) {
-
-		Member m = memberService.selectOneMember(googleId);
-
-		Map<String, Object> map = new HashMap<>();
-
-		boolean gisUsable = m == null ? true : false;
-		logger.debug(m);
-		logger.debug(gisUsable);
-
-		if (gisUsable == false) {
-			session.setAttribute("memberLoggedIn", m);
-			// map.put("memberLoggedIn", m);
 		}
+		
+		/* 구글 관련 */
+		/* 구글에서 정보 뽑아오기 */
+		@RequestMapping("/member/googleLogin")
+		@ResponseBody
+		public Map<String, Object> googleLogin(@RequestParam("googleId") String googleId, HttpSession session) {
 
-		map.put("gisUsable", gisUsable);
-		return map;
+		
+			Member m = memberService.selectOneMember(googleId);
+		
+			Map<String, Object> map = new HashMap<>();
+			
+			boolean gisUsable = m == null ? true : false;
+			logger.debug(m);
+			logger.debug(gisUsable);
+			
+		       
+			if(gisUsable == false) {
+				  session.setAttribute("memberLoggedIn", m);
+		         //map.put("memberLoggedIn", m);
+			}
+			
+			
+		      map.put("gisUsable", gisUsable);
+		      return map;
 
-	}
+		}
+		
+		 
+		//구글로 회원 가입하기
+		 @RequestMapping("/member/googleEnrollEnd")
+		public ModelAndView googleEnrollEnd(@RequestParam("gId") String gId, @RequestParam("gName") String gName,
+					@RequestParam("gBirth") String gBirth, @RequestParam("gEmail") String gEmail,
+					@RequestParam("ggender") String ggender, ModelAndView mav) {
 
-	/* 구글 버튼 누를시 가입 창이 나온다 */
-	@RequestMapping("/member/googleEnroll")
-	public ModelAndView googleEnroll(@RequestParam("gId") String gId, @RequestParam("gName") String gName,
-			@RequestParam("gEmail") String gEmail, ModelAndView mav) {
+				Member m = new Member();
+				m.setMemberId(gId);
+				m.setMemberName(gName);
+				m.setMemberBirth(gBirth);
+				m.setMemberEmail(gEmail);
+				m.setGender(ggender);
 
-		mav.setViewName("member/memberEnroll");
-		return mav;
+				int result = memberService.insertgoogleMember(m);
+				System.out.println(result > 0 ? "회원등록성공" : "회원등록실패");
 
-	}
+				mav.addObject("result", result);
+				mav.setViewName("member/memberLogin");
 
-	// 구글로 회원 가입하기
-	@RequestMapping("/member/googleEnrollEnd")
-	public ModelAndView googleEnrollEnd(@RequestParam("gId") String gId, @RequestParam("gName") String gName,
-			@RequestParam("gBirth") String gBirth, @RequestParam("gEmail") String gEmail,
-			@RequestParam("ggender") String ggender, ModelAndView mav) {
+				return mav;
 
-		Member m = new Member();
-		m.setMemberId(gId);
-		m.setMemberName(gName);
-		m.setMemberBirth(gBirth);
-		m.setMemberEmail(gEmail);
-		m.setGender(ggender);
+			}
+		 
+		 
+		    @RequestMapping("/member/googleCheckDuplicate.do")
+			@ResponseBody
+			public Map<String, Object> googleCheckDuplicate(@RequestParam("gIdcheck") String gIdcheck) {
 
-		int result = memberService.insertgoogleMember(m);
-		System.out.println(result > 0 ? "회원등록성공" : "회원등록실패");
+				logger.debug("검사할 건 googleID : " + gIdcheck);
+				Map<String, Object> map = new HashMap<>();
+				Member m = memberService.selectOnegoogleMember(gIdcheck);
+				boolean gisUsable = m == null ? true : false;
+				System.out.println("검사할건!" + gisUsable);
+				map.put("gisUsable", gisUsable);
+				return map;
 
-		mav.addObject("result", result);
-		mav.setViewName("member/memberLogin");
-
-		return mav;
-
-	}
-
-	@RequestMapping("/member/googleCheckDuplicate.do")
-	@ResponseBody
-	public Map<String, Object> googleCheckDuplicate(@RequestParam("gIdcheck") String gIdcheck) {
-
-		logger.debug("검사할 건 googleID : " + gIdcheck);
-		Map<String, Object> map = new HashMap<>();
-		Member m = memberService.selectOnegoogleMember(gIdcheck);
-		boolean gisUsable = m == null ? true : false;
-		System.out.println("검사할건!" + gisUsable);
-		map.put("gisUsable", gisUsable);
-		return map;
-
-	}
-
+			}
+	
+	
 }

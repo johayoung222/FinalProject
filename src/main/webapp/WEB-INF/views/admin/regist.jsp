@@ -25,7 +25,6 @@
 			<th>고유번호</th>
 			<th>상품명</th>
 			<th>판매가격</th>
-			<th>경매여부</th>
 			<th>상품이미지</th>
 			<th>상품이미지2</th>
 			<th>판매수량</th>
@@ -45,7 +44,6 @@
 				<td id="registNo">${r.SEQ_REGIST_NO }</td>
 				<td>${r.REGIST_NAME }</td>
 				<td>${r.REGIST_PRICE }</td>
-				<td>${r.REGIST_AUCTION }</td>
 				<td>${r.REGIST_IMAGE }</td>
 				<td>${r.REGIST_REAL_IMAGE }</td>
 				<td>${r.REGIST_AMOUNT }</td>
@@ -67,10 +65,8 @@
 $(".tableTr").on("click",function(){
 	//$("#tbl-regist").css("display","none");
 	var registNo = $(this).children("td:first").text();
-	var win = window.open("${pageContext.request.contextPath}/admin/category.do?registNo="+registNo, "대/소분류 선택", "width=300,height=300,location=no,status=no,top=250,left=600");
+	var win = window.open("${pageContext.request.contextPath}/admin/category.do?registNo="+registNo, "대/소분류 선택", "width=400,height=500,location=no,status=no,top=150,left=600");
 
-
-	
 });
 </script> 
 
