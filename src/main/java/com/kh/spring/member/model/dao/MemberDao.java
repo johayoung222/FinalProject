@@ -19,6 +19,14 @@ public interface MemberDao {
 
 	Member selectOneFBMember(String fbIdcheck);
 
+	Member selectOnekakaoMember(String kIdcheck);
+
+	int insertKakaoMember(Member m);
+
+	int insertgoogleMember(Member m);
+
+	Member selectOnegoogleMember(String gIdcheck);
+
 	
 
 }

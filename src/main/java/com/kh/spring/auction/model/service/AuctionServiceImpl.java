@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.auction.model.dao.AuctionDao;
+import com.kh.spring.thing.model.vo.CategoryMacro;
 
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -19,6 +20,11 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public List<String> selectctgList() {
 		return auctionDao.selectctgList();
+	}
+
+	@Override
+	public List<CategoryMacro> selectctgmlist(String ctgcode) {
+		return auctionDao.selectctgmlist(ctgcode);
 	}
 	
 }

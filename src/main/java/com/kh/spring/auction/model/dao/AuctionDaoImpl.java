@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.thing.model.vo.CategoryMacro;
+
 @Repository
 public class AuctionDaoImpl implements AuctionDao {
 
@@ -15,5 +17,10 @@ public class AuctionDaoImpl implements AuctionDao {
 	@Override
 	public List<String> selectctgList() {
 		return sqlSession.selectList("auction.selectctgList");
+	}
+
+	@Override
+	public List<CategoryMacro> selectctgmlist(String ctgcode) {
+		return sqlSession.selectList("auction.selectctgmlist" , ctgcode);
 	}
 }

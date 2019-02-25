@@ -68,6 +68,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 	width:360px;
 }
 
+
  	
 </style>
 </head>
@@ -79,7 +80,9 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath }/member/memberMoveLogin.do">로그인</a>
                 </c:if>
                 <c:if test="${memberLoggedIn != null }">
-                <a class="item-link" href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a>
+              <a class="item-link" id="logout"href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a> 
+          
+             
                 </c:if>
             </div>
             <div  class="box-link2">
@@ -93,13 +96,13 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <div class="collapse" id="collapseExample">
   				<div class="card card-body">
   				<div><a class="item-link" href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a></div>
-				<div><a href="#" style="color:red">판매내역</a>
-  				|<a href="#" style="color:orange">구매내역</a>
-  				|<a href="#" style="color:green">찜한상품</a>
-  				|<a href="#" style="color:blue">쿠폰</a>
-  				|<a href="#" style="color:purple">프로모션</a>
-  				|<a href="#" style="color:pink">내 정보</a>
-  				|<a href="#" style="color:black">알림 설정</a>
+				<div><a href="${pageContext.request.contextPath}/mypage/order.do" style="color:red">판매내역</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/purchases.do" style="color:orange">구매내역</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/bookmarks.do" style="color:green">찜한상품</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/coupons.do" style="color:blue">쿠폰</a> <br />
+  				<a href="${pageContext.request.contextPath}/mypage/profile/credit.do" style="color:purple">프로모션</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/profile/edit.do" style="color:pink">내 정보</a>
+  				| <a href="${pageContext.request.contextPath}/mypage/wishlist.do" style="color:black">알림 설정</a>
 				</div>
 				</div>
 			</div>
@@ -120,17 +123,12 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <br><br>
-    <div id="header-container">
-        <img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" width="100px" height="80px  ">
+    <div id="header-container" style="margin-left: 300px;">        
              <input type="text" name="search" placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
             id="search2"></i>
     </div>
     <!--https://getbootstrap.com/docs/4.1/components/navbar/-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-        <a class="navbar-brand" href="#"> <img
-            src="${pageContext.request.contextPath }/resources/images/logo-spring.png"
-            alt="스프링로고" width="50px" />
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_"> 
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -216,3 +214,16 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <section id="content">
+   <script>
+   
+      
+   
+    
+    function logout(){
+    	
+    	window.locatiom.href="${pageContext.request.contextPath }/member/memberLogout.do";
+    	
+    }
+   
+   
+   </script>

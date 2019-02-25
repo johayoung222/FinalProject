@@ -1,5 +1,6 @@
 package com.kh.spring.admin.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.ProductIo;
+import com.kh.spring.thing.model.vo.Regist;
+
 
 /**
  * @controller클래스 메소드가 가질 수 있는 파라미터
@@ -70,31 +79,19 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/memberSearch.do")
-	public ModelAndView memberSearch(ModelAndView mav, 
+	public List<Member> memberSearch(ModelAndView mav, 
 			@RequestParam(value="type")String type, 
 			@RequestParam(value="search")String search,
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
-		//System.out.println("controller type:"+type);
-		//System.out.println("controller search:"+search);
 		System.out.println("memeberSearch메소드가 요청되었습니다.");
 		int numPerPage= 7;
-		int totalContents =0;
-		List<Map<String, String>> list =null;
-		if("member_id".equals(type)) {
-			list = adminService.idSearch(search,cPage,numPerPage);
-			totalContents =adminService.countidSearch(search);
-		}else if("member_name".equals(type)) {
-			list = adminService.nameSearch(search,cPage,numPerPage);
-			totalContents =adminService.countnameSearch(search);
-		}
+		Map<String, String> map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
 		
-		mav.addObject("cPage",cPage);
-		mav.addObject("numPerPage",numPerPage);
-		mav.addObject("totalContents",totalContents);
-		mav.addObject("list",list);
-		mav.setViewName("admin/allMember");
+		List<Member> list = null;
 		
-		return mav;
+		return list;
 	}
 	
 	@RequestMapping("/admin/paidProduct.do")
@@ -113,33 +110,22 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping("/admin/paidProductSearch.do")
-	public ModelAndView paidProductSearch(ModelAndView mav, 
+	@RequestMapping(value="/admin/paidProductSearch.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<ProductIo> paidProductSearch(
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="type")String type,
 			@RequestParam(value="search")String search) {
-		System.out.println("paidProductSearch메소드 실행!!");
-		List<Map<String, String>> list = null;
+		logger.debug("paidProductSearch메소드 실행!!");
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
+		int totalContents = adminService.countpaidProductSearch2(map);
+		
 		int numPerPage = 7;
-		int totalContents=0;
-		if("product_name".equals(type)) {
-			list = adminService.paidProductNameSerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductNameSerach(search);
-		}else if("product_buyer".equals(type)) {
-			list = adminService.paidProductBuyerSerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductBuyerSerach(search);
-		}else if("product_category".equals(type)) {
-			list = adminService.paidProductCategorySerach(search,cPage, numPerPage);
-			totalContents = adminService.countpaidProductCategorySerach(search);
-		}
-		
-		mav.addObject("totalContents", totalContents);
-		mav.addObject("cPage", cPage);
-		mav.addObject("numPerPage", numPerPage);
-		mav.addObject("list",list);
-		mav.setViewName("admin/paidProduct");
-		
-		return mav;
+		List<ProductIo> list = adminService.paidProductSearch(cPage,numPerPage,map);
+		return list;
 	}
 	
 	
@@ -186,20 +172,6 @@ public class AdminController {
 		int totalContents=0;
 		List<Map<String, String>> list =null;
 				
-		if("product_name".equals(type)) {
-			list = adminService.productListNameSearch(search,cPage, numPerPage);
-			totalContents = adminService.countproductListNameSearch(search);
-		}else if("product_onsale".equals(type)) {
-			list = adminService.productListOnsaleSearch(search,cPage, numPerPage);
-			totalContents = adminService.countproductListOnsaleSearch(search);
-		}else if("product_manufacturer".equals(type)) {
-			list = adminService.productListManufacturerSearch(search,cPage, numPerPage);
-			totalContents = adminService.countproductListManufacturerSearch(search);
-		}else if("category_micro".equals(type)) {
-			list = adminService.productListCategorymiSearch(search,cPage, numPerPage);
-			totalContents = adminService.countproductListCategorymiSearch(search);
-		}
-		
 		mav.addObject("cPage",cPage);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
@@ -277,5 +249,80 @@ public class AdminController {
 		return mav;
 	}
 	*/
+	
+	@RequestMapping("/admin/category.do")
+	public ModelAndView category(ModelAndView mav 
+			,@RequestParam(value="registNo")int registNo) {
+		System.out.println("category메소드 실행!!");
+		logger.debug(registNo);
+		
+		mav.addObject("registNo",registNo);
+		mav.setViewName("admin/category");
+		return mav;
+	} 
+	
+	@RequestMapping("/admin/categoryMa.do")
+	@ResponseBody
+	public List<CategoryMacro> categoryMa() {
+		System.out.println("categoryMa메소드 실행!!!!");
+		
+		List<CategoryMacro> list = adminService.categoryMa();
+		//System.out.println(list);
+		
+		return list;
+	} 
+	
+	@RequestMapping(value="/admin/categoryMi.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Category> categoryMi(@RequestParam(value="macro")String macro) {
+		System.out.println("categoryMi메소드 실행!!!!");
+		//System.out.println(macro);
+		List<Category> list = adminService.categoryMi(macro);
+		
+		return list;
+	} 
+	
+	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
+	@ResponseBody
+	public Regist registOne(@RequestParam(value="registNo")int registNo) {
+		System.out.println("registOne메소드 실행!!");
+		//System.out.println("ServiceImpl registNo:"+registNo);
+		Regist regist = adminService.registOne(registNo);
+		//System.out.println("DATE		"+regist.getRegistDate());
+		return regist;
+		
+	}
+	
+	@RequestMapping(value="/admin/inProduct.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int insertP(@RequestParam(value="registNo")int registNo
+			,@RequestParam(value="registName")String registName
+			,@RequestParam(value="registPrice")int registPrice
+			,@RequestParam(value="registAmount")int registAmount
+			,@RequestParam(value="registDate")Date registDate
+			,@RequestParam(value="registDescription")String registDescription
+			,@RequestParam(value="registImage")String registImage
+			,@RequestParam(value="registRealImage")String registRealImage
+			,@RequestParam(value="cMa")String cMa
+			,@RequestParam(value="cMi")String cMi) {
+		int result = 0;
+		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
+		System.out.println(registNo+","+
+		registName+","+
+		registPrice+","+
+		registAmount+","+
+		registDate+","+
+		registDescription+","+
+		registImage+","+
+		registRealImage+","+
+		cMa+","+
+		cMi);
+		
+		return result;
+	}
+
+	
+	
+	
 	
 }
