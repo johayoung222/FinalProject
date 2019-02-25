@@ -3,84 +3,98 @@ package com.kh.spring.thing.model.vo;
 import java.sql.Date;
 
 public class Regist {
-	private String name;
-	private int price;
-	private boolean auction;
-	private String image;
-	private String realImage;
-	private int amount;
-	private String description;
-	private Date date;
+	private int seqRegistNo;
+	private String registName;
+	private int registPrice;
+	private boolean regitstAuction;
+	private String registImage="";
+	private String registRealImage="";
+	private int registAmount;
+	private String registDescription;
+	private Date registDate;
 	public Regist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Regist(String name, int price, boolean auction, String image, String realImage, int amount,
-			String description, Date date) {
+	public Regist(int seqRegistNo, String registName, int registPrice, boolean regitstAuction, String registImage,
+			String registRealImage, int registAmount, String registDescription, Date registDate) {
 		super();
-		this.name = name;
-		this.price = price;
-		this.auction = auction;
-		this.image = image;
-		this.realImage = realImage;
-		this.amount = amount;
-		this.description = description;
-		this.date = date;
+		this.seqRegistNo = seqRegistNo;
+		this.registName = registName;
+		this.registPrice = registPrice;
+		this.regitstAuction = regitstAuction;
+		this.registImage = registImage;
+		this.registRealImage = registRealImage;
+		this.registAmount = registAmount;
+		this.registDescription = registDescription;
+		this.registDate = registDate;
 	}
-	public String getName() {
-		return name;
+	public int getSeqRegistNo() {
+		return seqRegistNo;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSeqRegistNo(int seqRegistNo) {
+		this.seqRegistNo = seqRegistNo;
 	}
-	public int getPrice() {
-		return price;
+	public String getRegistName() {
+		return registName;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setRegistName(String registName) {
+		this.registName = registName;
 	}
-	public boolean isAuction() {
-		return auction;
+	public int getRegistPrice() {
+		return registPrice;
 	}
-	public void setAuction(boolean auction) {
-		this.auction = auction;
+	public void setRegistPrice(int registPrice) {
+		this.registPrice = registPrice;
 	}
-	public String getImage() {
-		return image;
+	public boolean isRegitstAuction() {
+		return regitstAuction;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setRegitstAuction(boolean regitstAuction) {
+		this.regitstAuction = regitstAuction;
 	}
-	public String getRealImage() {
-		return realImage;
+	public String getRegistImage() {
+		return registImage;
 	}
-	public void setRealImage(String realImage) {
-		this.realImage = realImage;
+	public void setRegistImage(String registImage) {
+		this.registImage = registImage;
 	}
-	public int getAmount() {
-		return amount;
+	public String getRegistRealImage() {
+		return registRealImage;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setRegistRealImage(String registRealImage) {
+		this.registRealImage = registRealImage;
 	}
-	public String getDescription() {
-		return description;
+	public int getRegistAmount() {
+		return registAmount;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRegistAmount(int registAmount) {
+		this.registAmount = registAmount;
 	}
-	public Date getDate() {
-		return date;
+	public String getRegistDescription() {
+		return registDescription;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setRegistDescription(String registDescription) {
+		this.registDescription = registDescription;
+	}
+	public Date getRegistDate() {
+		return registDate;
+	}
+	public void setRegistDate(Date registDate) {
+		this.registDate = registDate;
 	}
 	@Override
 	public String toString() {
-		return "[name=" + name + ", price=" + price + ", auction=" + auction + ", image=" + image
-				+ ", realImage=" + realImage + ", amount=" + amount + ", description=" + description + ", date=" + date
-				+ "]";
+		return "[seqRegistNo=" + seqRegistNo + ", registName=" + registName + ", registPrice=" + registPrice
+				+ ", regitstAuction=" + regitstAuction + ", registImage=" + registImage + ", registRealImage="
+				+ registRealImage + ", registAmount=" + registAmount + ", registDescription=" + registDescription
+				+ ", registDate=" + registDate + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

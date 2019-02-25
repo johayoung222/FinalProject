@@ -76,7 +76,7 @@ function perchaseProduct(){
 IMP.init("imp25216490");
 	
 IMP.request_pay({ // param
-    pg: "kakaopay",
+    pg: "html5_inicis",
     pay_method: perchaseFrm.payMethod.value,
     merchant_uid: "ORD"+ new Date().getTime(),
     name: perchaseFrm.pName.value,
@@ -107,7 +107,8 @@ IMP.request_pay({ // param
             msg += '카드 승인번호 : ' + rsp.apply_num;
             
             alert(msg);
-			console.log(data);
+            console.log(data);
+            location.href = "${pageContext.request.contextPath}/mypage/order";
         })
     } else {
         // 결제 실패 시 로직,

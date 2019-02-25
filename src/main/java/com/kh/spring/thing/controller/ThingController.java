@@ -9,26 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.board.model.exception.BoardException;
-import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.common.util.Utils;
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
-import com.siot.IamportRestHttpClientJava.IamportClient;
-import com.siot.IamportRestHttpClientJava.response.IamportResponse;
-import com.siot.IamportRestHttpClientJava.response.Payment;
 
 @Controller
 public class ThingController {
@@ -46,12 +44,6 @@ public class ThingController {
 		categoryList = thingService.selectCategorys();
 		
 		System.out.println("ThingController@categoryList="+categoryList);
-		
-		
-		
-		
-		
-		
 		
 		mav.addObject("categoryList", categoryList);
 		mav.setViewName("thing/thingView");
@@ -73,19 +65,31 @@ public class ThingController {
 			String saveDirectory = req.getSession().getServletContext().getRealPath("/resources/upload/thing");
 			logger.debug("saveDirectory = "+saveDirectory);
 			
-			List<Attachment> attachList = new ArrayList<>();
 			
 			//MultipartFile 처리
+			String originalName = null;
+			String realName = null;
 			
 			for(MultipartFile f : upFiles) {
 				if(!f.isEmpty()) {
 					//파일명(업로드)
 					String originalFileName = f.getOriginalFilename();
-					regist.setImage(originalFileName);
+					regist.setRegistImage(originalFileName);
+					
+					if(originalName != null)
+						originalName = originalName + "," + originalFileName;
+					else
+						originalName = originalFileName;
 					
 					//파일명(서버저장용)
 					String renamedFileName = Utils.getRenamedFileName(originalFileName);
-					regist.setRealImage(renamedFileName);
+					regist.setRegistRealImage(renamedFileName);
+					
+					if(realName !=null)
+						realName = realName + "," + renamedFileName;
+					else
+						realName = renamedFileName;
+					
 					logger.debug("renamedFileName ="+renamedFileName);
 					//실제 서버에 파일저장
 					try {
@@ -98,13 +102,12 @@ public class ThingController {
 						e.printStackTrace();
 					}
 					
-					//첨부파일 객체 생성. 리스트에 추가
-					Attachment attach = new Attachment();
-					attach.setOriginalFileName(originalFileName);
-					attach.setRenamedFileName(renamedFileName);
-					attachList.add(attach);
 				}
 			}
+			regist.setRegistImage(originalName);
+			regist.setRegistRealImage(realName);
+			
+			
 			//2. 업무로직
 			System.out.println("regist@Controller="+regist);
 			int result=thingService.sell(regist);
@@ -152,7 +155,8 @@ public class ThingController {
 		
 		logger.debug(order);
 		
-		mav.setViewName("/mypage/order");
+		mav.addObject("order", order);
+		mav.setViewName("mypage/order");
 		
 		return mav;
 	}
