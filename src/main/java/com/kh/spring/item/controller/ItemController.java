@@ -29,16 +29,16 @@ public class ItemController {
 		String userId = (String)session.getAttribute("userId");
 		vo.setUserId(userId);
 		
-		int count = basketService.countBasket(vo.getProductId(),userId);
+//		int count = basketService.countBasket(vo.getProductId(),userId);
 		//count == 0 ? basketService.updateBasket(vo): basketService.insert(vo);
-		if(count == 0) {
-			basketService.insert(vo);
-		}else {
-			basketService.updateBasket(vo);
-			
-		}
+//		if(count == 0) {
+//			basketService.insert(vo);
+//		}else {
+//			basketService.updateBasket(vo);
+//			
+//		}
 		
-		return "redirect:/item/basket.do";
+		return "redirect:/item/basket";
 	}
 	@RequestMapping("/item/iteminformation.do")
 	public String iteminformation() {
