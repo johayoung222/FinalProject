@@ -10,7 +10,7 @@
 <table border="1">
 	<tr>
 		<td>
-			<img src="${path}/images/${vo.productUrl}" width="340" height="300" >
+			<img src="${pageContext.request.contextPath}/images/${vo.productUrl}" width="340" height="300" >
 		</td>
 		<td>
 		 	<table border="1" style="height:300px; width:400px;">

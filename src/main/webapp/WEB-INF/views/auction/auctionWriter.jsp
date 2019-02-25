@@ -218,7 +218,6 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
             </div>
         </div>
     </div>
-    <section id="content">
    <script>
    
       
@@ -298,7 +297,7 @@ function sendFile(file, el) {
     $.ajax({
       data: form_data,
       type: "POST",
-      url: '/image',
+      url: '${pageContext.request.contextPath}/image',
       cache: false,
       contentType: false,
       enctype: 'multipart/form-data',
