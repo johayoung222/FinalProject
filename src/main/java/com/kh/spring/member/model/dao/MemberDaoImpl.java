@@ -74,6 +74,13 @@ public class MemberDaoImpl implements MemberDao {
 		return SqlSession.selectOne("member.selectOneMember",gIdcheck);
 	}
 
+	@Override
+	public int updatePhone(Member member) {
+		int result = 0;
+		result = SqlSession.update("member.updatePhone",member);
+		return result;
+	}
+
 	
 
 }

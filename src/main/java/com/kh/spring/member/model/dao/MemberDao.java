@@ -27,6 +27,8 @@ public interface MemberDao {
 
 	Member selectOnegoogleMember(String gIdcheck);
 
+	int updatePhone(Member member);
+
 	
 
 }

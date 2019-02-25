@@ -18,14 +18,14 @@
 		<typeAlias type="com.kh.spring.memo.model.vo.Memo" alias="memo"/>		
 		<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler" alias="strArrTypeHandler"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="board"/>
-		<typeAlias type="com.kh.spring.customercenter.model.vo.Board" alias="news"></typeAlias>
+		<typeAlias type="com.kh.spring.customercenter.model.vo.Board" alias="cc"></typeAlias>
+		<typeAlias type="com.kh.spring.customercenter.model.vo.Qna" alias="qna"></typeAlias>
 		<typeAlias type="com.kh.spring.board.model.vo.Attachment" alias="attachment"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Product" alias="product"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.ProductIo" alias="productIo"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Category" alias="category"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Regist" alias="regist"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
-		<typeAlias type="com.kh.spring.thing.model.vo.Regist" alias="regist"/>
 		
 	</typeAliases>
 </configuration>

@@ -31,4 +31,5 @@ public interface MemberService {
 
 	Member selectOnegoogleMember(String gIdcheck);
 
+
 }
