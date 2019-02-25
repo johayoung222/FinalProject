@@ -59,7 +59,6 @@
 	padding-bottom: 20px;
 	border-bottom: 2px solid #ececec;
 	margin-bottom: 2%;
-	
 }
 
 .content {
@@ -67,43 +66,6 @@
 	width: 70%;
 }
 
-.qnatable {
-	width: 80%;
-	margin-bottom: 50px;
-	margin-left: 10%;
-	
-	/* th간격띄우는 css */
-	border-collapse: separate;
-  	border-spacing: 0 15px;
-}
-
-.qnatable th {
-	
-}
-
-.qnatable td {
-	cursor: pointer;
-	color:#e19a40;
-	font-size:18px;	
-}
-.qnatable td:hover{
-	/* 호버시 밑줄 */
-	text-decoration: underline;
-}
-.butt{
-	margin:20px auto;
-	height: 150px;
-}
-.btn-outline-primary{
-	width:70%;
-	height:100px;
-}
-
-.qnatable th, td {
-	/* border: 1px solid red; */
-	text-align: center;
-	height: 45px;
-}
 
 .searchkeyword {
 	margin: 0 auto;
@@ -113,6 +75,29 @@
 	display: inline-block;
 	float:right;
 }
+.qnaall{
+	width:80%;
+	margin-left:10%;
+	margin-bottom:10px;
+	border-bottom:1px solid blue;
+	height: 70px;
+}
+.qnatitle{
+	font-size:20px;
+	margin-bottom:10px;
+	font-weight: bold;
+}
+.qnatitle:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.qnacontent{
+	overflow: hidden;
+	height: 23px;
+}
+
+
+
 </style>
 
 <div class="content-container">
@@ -138,42 +123,33 @@
 	</div>
 	<div class="content">
 		<div class="headline">
-			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm" class="navbar-search pull-left">
-						<input type="text" name="searchkeyword" id="searchkeyword" class="search-query" placeholder="검색" />
-						<input type="submit" value="검색"/>
-					</form>	
-		</div>
-		
-		<table class="qnatable">
-			<%-- <tr>
-				<th colspan="3">
-					<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do">
-						<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword"/>
-						<input type="submit" value="검색"/>
+			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
+						<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword" value="${searchkeyword}"/>						 
+						<input type="submit" value="검색" />
 					</form>
-				</th>
-			</tr> --%>
-			<tr >
-				<td class="butt"><button type="button" class="btn btn-outline-primary">GetIt 사용법</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">구매 관련</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">판매 관련</button></td>
-			</tr>
-			<c:set var="i" value="0" />
-			<c:set var="j" value="3" />
-			<c:forEach items="${list}" var="q" varStatus="status">
-				<c:if test="${i%j==0}">
-					<tr>
-				</c:if>
-				<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
-					<td onclick="gogo();">${q.BOARD_TITLE}</td>
-					<input type="hidden" name="seq_board_no"value="${q.SEQ_BOARD_NO}" />
-				</form>
-				<c:if test="${i%j==j-1}">
-					</tr>
-				</c:if>
-				<c:set var="i" value="${i+1}" />
+		</div>
+			<c:forEach items="${list}" var="s" varStatus="status">
+			<div class="qnaall">
+				<div class="qnatitle" onclick="gogo();">
+					${s.BOARD_TITLE}
+					<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
+						<input type="hidden" name="seq_board_no"value="${s.SEQ_BOARD_NO}" />
+					</form>
+				</div>
+				<div class="qnacontent">
+					${s.BOARD_CONTENT}
+				</div>
+			</div>
 			</c:forEach>
-		</table>
+		<br /> <br />
+		<%
+			int totalContent = (int) request.getAttribute("totalContents");
+			int numPerPage = (int) request.getAttribute("numPerPage");
+			int cPage = (int) request.getAttribute("cPage");
+		%>
+		<div class="page">
+			<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, "searchKeyword.do")%>
+		</div>
 
 	</div>
 </div>
@@ -186,8 +162,8 @@
 			location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 		}
 	}
-function gogo(){
-	$("#gomain").submit();
-}
+	function gogo(){
+		$("#gomain").submit();
+	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

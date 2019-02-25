@@ -182,8 +182,7 @@
 			<a href="#">1:1 문의</a>
 		</div>
 		<div class="sidebar5" id="sidebar">
-			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주
-				묻는 질문</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
 	</div>
 	<div class="content">
