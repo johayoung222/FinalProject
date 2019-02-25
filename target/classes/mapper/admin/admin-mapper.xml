@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+	<!-- 회원 리스트조회	 -->
+	<select id="allMember" resultMap="memberMap">
+		select * from member order by seq_member_no
+	</select>
+	<resultMap type="map" id="memberMap"></resultMap>	
+	<select id="countallMember" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<!-- 결제된 상품 리스트 -->
+	<select id="paidProduct" resultMap="padiProductMap">
+		select * from product_io order by seq_product_no
+	</select>
+	<resultMap type="map" id="padiProductMap"></resultMap>	
+	<select id="countpaidProduct" resultType="_int">
+		select count(*) from product_io
+	</select>
+	
+	<!-- 판매 신청 리스트 -->
+	<select id="regist" resultMap="registMap">
+		select * from regist where regist_auction = 'N' order by seq_regist_no
+	</select>
+	<resultMap type="map" id="registMap"></resultMap>	
+	<select id="countregist" resultType="_int">
+		select count(*) from regist where regist_auction = 'N'
+	</select>
+	
+	<!-- 상품 리스트 -->
+	<select id="productList" resultMap="productListMap">
+		select * from product order by seq_product_no
+	</select>
+	<resultMap type="map" id="productListMap"></resultMap>	
+	<select id="countproductList" resultType="_int">
+		select count(*) from product
+	</select>
+	
+	<!-- 1:1질문답변 -->
+	<select id="questionAnswer" resultMap="questionAnswerMap">
+		select * from question order by seq_question_no
+	</select>
+	<resultMap type="map" id="questionAnswerMap"></resultMap>	
+	<select id="countquestionAnswer" resultType="_int">
+		select count(*) from question
+	</select>
+	
+	<!-- 경매 상품 현황 -->
+	<select id="auctionStatus" resultMap="auctionStatusMap">
+		select * from auction order by seq_auction_no
+	</select>
+	<resultMap type="map" id="auctionStatusMap"></resultMap>	
+	<select id="countauctionStatus" resultType="_int">
+		select count(*) from auction
+	</select>
+	
+	<!-- 신고 접수 리스트 -->
+	<select id="reportList" resultMap="reportListMap">
+		select * from report order by seq_report_no
+	</select>
+	<resultMap type="map" id="reportListMap"></resultMap>	
+	<select id="countreportList" resultType="_int">
+		select count(*) from report
+	</select>
+	
+	
+	<select id="paidProductSearch" resultMap="paidProductSearch">
+		select * from product_io where ${type} like '%'||#{search}||'%' order by seq_product_no desc
+	</select>
+	<resultMap type="productIo" id="paidProductSearch"></resultMap>
+	<select id="countpaidProductSearch2" resultType="_int">
+		select count(*) from product_io
+	</select>
+	
+	<!-- category_macro 호출 -->
+	<select id="categoryMa" resultType="categoryMacro">
+		select* from category_macro
+	</select>
+	
+	<!-- category_micro 호출 -->
+	<select id="categoryMi" resultType="category">
+		select* from category_micro where category_macro = #{macro} 
+	</select>
+	
+	<select id="registOne" resultMap="registVOMap">
+		select * from regist where seq_regist_no = #{registNo}
+	</select>
+	<resultMap type="regist" id="registVOMap">
+		<result column="seq_regist_no" property="no"/>
+	</resultMap>
+	
+</mapper>
