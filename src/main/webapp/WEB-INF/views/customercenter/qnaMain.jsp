@@ -59,7 +59,6 @@
 	padding-bottom: 20px;
 	border-bottom: 2px solid #ececec;
 	margin-bottom: 2%;
-	
 }
 
 .content {
@@ -68,50 +67,32 @@
 }
 
 .qnatable {
-	width: 80%;
-	margin-bottom: 50px;
-	margin-left: 10%;
-	
-	/* th간격띄우는 css */
-	border-collapse: separate;
-  	border-spacing: 0 15px;
-}
-
-.qnatable th {
-	
-}
-
-.qnatable td {
-	cursor: pointer;
-	color:#e19a40;
-	font-size:18px;	
-}
-.qnatable td:hover{
-	/* 호버시 밑줄 */
-	text-decoration: underline;
-}
-.butt{
-	margin:20px auto;
-	height: 150px;
-}
-.btn-outline-primary{
-	width:70%;
-	height:100px;
+	width: 100%;
+	border: 1px solid red;
 }
 
 .qnatable th, td {
-	/* border: 1px solid red; */
+	border: 1px solid red;
 	text-align: center;
 	height: 45px;
 }
 
 .searchkeyword {
 	margin: 0 auto;
-	width: 80%;
+	width: 50%;
 }
-#searchFrm{
-	display: inline-block;
-	float:right;
+.maintitle{
+	width:100%;
+	border: 1px solid red;
+	height: 50px;
+	font-size: 25px;
+	font-weight: bold;
+}
+.maincontent{
+	width:100%;
+	border: 1px solid blue;
+	height: 250px;
+	margin-bottom: 50px;
 }
 </style>
 
@@ -137,44 +118,28 @@
 		</div>
 	</div>
 	<div class="content">
-		<div class="headline">
-			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm" class="navbar-search pull-left">
-						<input type="text" name="searchkeyword" id="searchkeyword" class="search-query" placeholder="검색" />
-						<input type="submit" value="검색"/>
-					</form>	
-		</div>
-		
+		<div class="headline">자주 묻는 질문</div>
+
 		<table class="qnatable">
-			<%-- <tr>
+			<tr>
 				<th colspan="3">
-					<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do">
-						<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword"/>
-						<input type="submit" value="검색"/>
+					<form
+						action="${pageContext.request.contextPath}/customercenter/searchKeyword.do">
+						<%
+							String searchKeyword = (String) request.getAttribute("searchKeyword");
+						%>
+						<input type="text" class="searchkeyword" name="searchkeyword"id="searchkeyword" />
+						<input type="submit" value="검색" />
 					</form>
 				</th>
-			</tr> --%>
-			<tr >
-				<td class="butt"><button type="button" class="btn btn-outline-primary">GetIt 사용법</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">구매 관련</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">판매 관련</button></td>
 			</tr>
-			<c:set var="i" value="0" />
-			<c:set var="j" value="3" />
-			<c:forEach items="${list}" var="q" varStatus="status">
-				<c:if test="${i%j==0}">
-					<tr>
-				</c:if>
-				<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
-					<td onclick="gogo();">${q.BOARD_TITLE}</td>
-					<input type="hidden" name="seq_board_no"value="${q.SEQ_BOARD_NO}" />
-				</form>
-				<c:if test="${i%j==j-1}">
-					</tr>
-				</c:if>
-				<c:set var="i" value="${i+1}" />
-			</c:forEach>
 		</table>
-
+		<div class="maintitle">
+			제에에에에에에에에에에에에에에에에에에에에엥목
+		</div>
+		<div class="maincontent">
+			내요요요요요요요요요요요요요요요요요요요용
+		</div>
 	</div>
 </div>
 <script>
@@ -186,8 +151,5 @@
 			location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 		}
 	}
-function gogo(){
-	$("#gomain").submit();
-}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

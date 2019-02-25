@@ -217,16 +217,3 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <section id="content">
-   <script>
-   
-      
-   
-    
-    function logout(){
-    	
-    	window.locatiom.href="${pageContext.request.contextPath }/member/memberLogout.do";
-    	
-    }
-   
-   
-   </script>

@@ -10,12 +10,17 @@
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
 
-<form action="${pageContext.request.contextPath}/mypage/smscheck.do"
+<!-- 폰 인증 -->
+<%-- <form action="${pageContext.request.contextPath}/mypage/smscheck.do"
 	  			 method="get"
 	  			 name="checkSmsCertifiedFrm">
 			<input type="hidden" name="memberPhone" value=""/>
 			<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
-	</form>
+</form>
+<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
+		<input type="hidden" name="memberPhone" value="" />
+		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" /> --%>
+</form>
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
@@ -86,6 +91,7 @@ function sendSms(){
 		//console.log(memberEmail);
 		
 		checkSmsCertifiedFrm.memberPhone.value = memberPhone;
+		updatephone.memberPhone.value=memberPhone;
 		checkSmsCertifiedFrm.submit();		
 }
 $("")
