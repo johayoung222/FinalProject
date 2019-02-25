@@ -6,11 +6,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spring.customercenter.model.service.CustomerService;
 import com.kh.spring.item.model.service.BasketService;
 import com.kh.spring.item.model.vo.Basket;
+import com.kh.spring.thing.model.vo.Product;
 
 @Controller
 public class ItemController {
@@ -40,10 +42,18 @@ public class ItemController {
 		
 		return "redirect:/item/basket";
 	}
-	@RequestMapping("/item/iteminformation.do")
-	public String iteminformation() {
+	
+	
+	@RequestMapping("/item/iteminformation/{productNo}")
+	public ModelAndView iteminformation(ModelAndView mav, @PathVariable("productNo") int num) {
 		
-		return "item/iteminformation";
+		Product product = basketService.selectOneProduct(num);
+		logger.debug(product);
+
+		mav.addObject("product", product);
+		mav.setViewName("item/iteminformation");
+		
+		return mav;
 	}
 	
 }

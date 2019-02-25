@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.spring.item.model.dao.BasketDao;
 import com.kh.spring.item.model.vo.Basket;
+import com.kh.spring.thing.model.vo.Product;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -30,6 +31,11 @@ public class BasketServiceImpl implements BasketService {
 	public void updateBasket(Basket vo) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Product selectOneProduct(int num) {
+		return basketDao.selectOneProduct(num);
 	}
 
 

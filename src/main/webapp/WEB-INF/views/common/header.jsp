@@ -70,10 +70,8 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 .card-body1 {
     padding: 0px;
 }
-
-
- 	
 </style>
+
 </head>
 <body>
     <div id="container">
