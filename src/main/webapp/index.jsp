@@ -151,8 +151,7 @@
 				id="favorite5" width="120px" height="100px" />
 			</a>
 			<div>
-				<pre>
-					<strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
+				<pre><strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
 		</div>
@@ -175,22 +174,41 @@
 			success : function(data) {
 				console.log(data);
 				
+				var attImage;
+				attImage=data[0].registRealImage.split(',');
 				
+				var attCopy= attImage[1];
 				
+				for(var i=1; i<data.length; i++){
+					attImage=data[i].registRealImage.split(',');
+					attCopy= attCopy +","+ attImage[1]; 
+					console.log(attCopy);
+				}
+				
+				var realImage=attCopy.split(',');
+				console.log(realImage);
+				
+				var html="";
+				for(var i=realImage.length-1; i>=0; i--){
+					var newThing = document.getElementById("newThing");
+					html = html + "<a href='${pageContext.request.contextPath}/category/laptopPc'> <img "+
+					 "src='${pageContext.request.contextPath }/resources/upload/thing/"+realImage[i]+"' "+
+					 "id='favorite1' width='120px' height='100px' />";
+				}
+				newThing.innerHTML = html;				
 				
 				
 			}
 
 			});
 
-			var newThing = document.getElementById("newThing");
-			newThing.innerHTML = "<b><font color='red'>" + Math.random()
-					+ "</font></b>";
+			
 
 		}
 	</script>
 
 </div>
+<br /><br />
 
 
 <div id="sell_">

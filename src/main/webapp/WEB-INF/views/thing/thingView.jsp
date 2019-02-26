@@ -31,9 +31,25 @@
       </ul>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg"
-         data-toggle="modal" data-target="#myModal">판매하기</button>
+         data-toggle="modal" data-target="" id="myBtn">판매하기</button>
+	  <script>
+	  $(document).ready(function(){
+	      $("#myBtn").click(function(){
+	    	  if(${memberLoggedIn == null }){
+	          alert("로그인 해 주세요.");
+	          
+	    	  }
+	    	  else{
+	    		  var myModal = $('#myBtn');
+	    		  myModal.attr('data-target', '#myModal')
+	    	  }
+	      });
+	  });
+	  </script>
+
 
       <!-- Modal -->
+      
       <form action="${pageContext.request.contextPath}/thing/sell.do"
          method="post" enctype="Multipart/form-data">
          <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -355,13 +371,16 @@
                         <br />
                         <br />
                         <hr />
+                        
+                        <input type="hidden" name="seqMemberNo" value="${memberLoggedIn.getSeq_member_no()}"/>
+                        <input type="hidden" name="registAuction" value="F"/>
                         <label for="">상품명을 입력해 주세요 : </label> <input type="text"
-                           name="name" /> <br />
+                           name="registName" /> <br />
                         <br /> <label for="">가격을 입력해 주세요 : </label> <input type="text"
-                           name="price" /> <br />
-                        <br /> <label for="">경매 상품으로 등록 하시겠습니까?</label>&nbsp;&nbsp;예. <input
-                           type="radio" name="auction" id="auction" value="True" /> 아니오. <input
-                           type="radio" name="auction" id="auction" value="False" /> <br />
+                           name="registPrice" /> <br />
+                        <br /> <label for="">중고 상품이십니까?</label>&nbsp;&nbsp;예. <input
+                           type="radio" name="registKinds" id="auction" value="T" /> 아니오. <input
+                           type="radio" name="registKinds" id="auction" value="F" /> <br />
                         <br />
 
 
@@ -420,9 +439,9 @@
 
                         <br />
                         <br /> <label for="">수량을 적어주세요 : </label> <input type="number"
-                           name="amount" /> <br />
+                           name="registAmount" /> <br />
                         <br /> <label for="">상품 설명을 적어주세요.</label>
-                        <textarea rows="5" cols="30" name="description"></textarea>
+                        <textarea rows="5" cols="30" name="registDescription"></textarea>
 
 
                      </div>
@@ -457,8 +476,9 @@
       </ul>
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg"
-         data-toggle="modal" data-target="#myModal">판매하기</button>
-
+         data-toggle="modal" data-target="#myModal" id="myBtn" >판매하기</button>
+	
+		
       <!-- Modal -->
       <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
@@ -496,7 +516,7 @@
     <li class="list-group-item">매입 X</li> 
   </ul>
   <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
+<button type="button" class="btn btn-primary btn-lg" id="myBtn" onclick="location.href='${pageContext.request.contextPath }/auctionWriter.do'">
   판매하기
 </button>
 </div>
@@ -542,7 +562,7 @@
    <p class="lead">2. 네고, 직거래 없이 안전거래 하고 싶다.</p>
    <!-- Button trigger modal -->
    <button type="button" class="btn btn-primary btn-lg"
-      data-toggle="modal" data-target="#myModal">직접 판매하기</button>
+      data-toggle="modal" data-target="#myModal" id="myBtn" >직접 판매하기</button>
 
    <!-- Modal -->
    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
