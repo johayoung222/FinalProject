@@ -20,15 +20,15 @@
 <section id="productList-container" class="productList-container">
 <nav class="navbar navbar-light bg-light">
 	<p>상품 리스트</p>
-	  <form class="form-inline" action="${pageContext.request.contextPath }/admin/productListSearch.do">
+	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/productListSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
-  			<option value="product_name" selected="selected">상품명</option>
-  			<option value="product_onsale">판매여부</option>
-  			<option value="product_manufacturer">제조사명</option>
-  			<option value="category_micro">소분류코드</option>
+  			<option value="product_name" ${type == "product_name"?"selected":"" }>상품명</option>
+  			<option value="product_onsale" ${type == "product_onsale"?"selected":"" }>판매여부</option>
+  			<option value="product_manufacturer" ${type == "product_manufacturer"?"selected":"" }>제조사명</option>
+  			<option value="category_macro" ${type == "product_macro"?"selected":"" }>대분류코드</option>
 		</select>
 		&nbsp;&nbsp;
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search}>
 	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 	  </form>
 	</nav>
@@ -91,8 +91,11 @@
 		int totalContent = (int)request.getAttribute("totalContents");
 		int numPerPage = (int)request.getAttribute("numPerPage");
 		int cPage = (int)request.getAttribute("cPage");
+		String type = (String)request.getAttribute("type");
+		String search = (String)request.getAttribute("search");
+		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "productList.do") %>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

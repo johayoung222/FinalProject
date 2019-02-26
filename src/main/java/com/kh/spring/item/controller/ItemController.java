@@ -5,45 +5,38 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spring.customercenter.model.service.CustomerService;
-import com.kh.spring.item.model.service.BasketService;
-import com.kh.spring.item.model.vo.Basket;
+import com.kh.spring.item.model.service.ItemService;
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.Product;
 
 @Controller
 public class ItemController {
 	Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	BasketService basketService;
+	ItemService basketService;
 	
-	@RequestMapping("/item/item.do")
-	public String item() {
+	@RequestMapping("/item/iteminformation/{productNo}")
+	public ModelAndView iteminformation(ModelAndView mav, @PathVariable("productNo") int num) {
 		
-		return "item/item";
-	}
-	@RequestMapping("/item/basket.do")
-	public String basket(@ModelAttribute Basket vo, HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
-		vo.setUserId(userId);
+		Product product = basketService.selectOneProduct(num);
+		logger.debug(product);
 		
-//		int count = basketService.countBasket(vo.getProductId(),userId);
-		//count == 0 ? basketService.updateBasket(vo): basketService.insert(vo);
-//		if(count == 0) {
-//			basketService.insert(vo);
-//		}else {
-//			basketService.updateBasket(vo);
-//			
-//		}
+		Member member = basketService.selectJoinMember(product.getSellerNo());
 		
-		return "redirect:/item/basket";
-	}
-	@RequestMapping("/item/iteminformation.do")
-	public String iteminformation() {
+		String cMacro = product.getCategoryMacro();
+		String cMicro = product.getCategoryMicro();
+		logger.debug(cMacro+"/"+cMicro);
+
+		mav.addObject("member", member);
+		mav.addObject("product", product);
+		mav.setViewName("item/iteminformation");
 		
-		return "item/iteminformation";
+		return mav;
 	}
 	
 }

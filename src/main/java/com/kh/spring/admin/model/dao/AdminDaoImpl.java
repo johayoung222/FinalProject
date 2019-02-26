@@ -21,101 +21,62 @@ public class AdminDaoImpl implements AdminDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
+	//회원 리스트 조회----------------------------------------------------------
 	@Override
 	public List<Map<String, String>> allMember(int cPage, int numPerPage) {
-		//System.out.println("Dao allMember cPage :"+cPage+", "+numPerPage);
 		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
 		List<Map<String, String>> list = sqlSession.selectList("admin.allMember",null, rowBounds);
-		//System.out.println("Dao allMember list : "+list);
 		return list;
 	}
-	
 	@Override
 	public int countallMember() {
 		return sqlSession.selectOne("admin.countallMember");
 	}
 
 	@Override
+	public List<Map<String, String>> memberSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.memberSearch",map,rowBounds);
+	}
+	@Override
+	public int countmemberSearch(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countmemberSearch",map);
+	}
+
+	
+	//결제된 상품 리스트----------------------------------------------------------------
+	@Override
 	public List<Map<String, String>> paidProduct(int cPage, int numPerPage) {
-		//System.out.println("Dao paidProduct cPage :"+cPage+", "+numPerPage);
 		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
 		List<Map<String, String>> list = sqlSession.selectList("admin.paidProduct",null, rowBounds);
-		//System.out.println("Dao paidProduct list : "+list);
 		return list;
 	}
-	
 	@Override
 	public int countpaidProduct() {
 		return sqlSession.selectOne("admin.countpaidProduct");
 	}
-
+	
 	@Override
-	public List<Map<String, String>> regist(int cPage, int numPerPage) {
-		//System.out.println("Dao regist cPage :"+cPage+", "+numPerPage);
+	public List<Map<String,String>> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.paidProductSearch",map,rowBounds);
+	}
+	@Override
+	public int countpaidProductSearch(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countpaidProductSearch",map);
+	}
+
+	
+	//판매 신청 리스트-----------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> regist(int cPage, int numPerPage) {
 		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		List<Map<String, String>> list = sqlSession.selectList("admin.regist",null, rowBounds);
-		//System.out.println("Dao regist list : "+list);
-		return list;
+		return sqlSession.selectList("admin.regist",null, rowBounds);
 	}
 
 	@Override
 	public int countregist() {
 		return sqlSession.selectOne("admin.countregist");
-	}
-
-	@Override
-	public List<Map<String, String>> productList(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
-		return sqlSession.selectList("admin.productList",null,rowBounds);
-	}
-
-	@Override
-	public int countproductList() {
-		return sqlSession.selectOne("admin.countproductList");
-	}
-
-	@Override
-	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("admin.questionAnswer",null, rowBounds);
-	}
-
-	@Override
-	public int countquestionAnswer() {
-		return sqlSession.selectOne("admin.countquestionAnswer");
-	}
-
-	@Override
-	public List<Map<String, String>> auctionStatus(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("admin.auctionStatus",null, rowBounds);
-	}
-
-	@Override
-	public int countauctionStatus() {
-		return sqlSession.selectOne("admin.countauctionStatus");
-	}
-
-	@Override
-	public List<Map<String, String>> reportList(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("admin.reportList",null, rowBounds);
-	}
-
-	@Override
-	public int countreportList() {
-		return sqlSession.selectOne("admin.countreportList");
-	}
-
-	@Override
-	public int countpaidProductSearch2(Map<String, String> map) {
-		return sqlSession.selectOne("admin.countpaidProductSearch2");
-	}
-
-	@Override
-	public List<ProductIo> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
-		return sqlSession.selectList("admin.paidProductSearch",map,rowBounds);
 	}
 
 	@Override
@@ -129,9 +90,97 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public Regist registOne(int registNo) {
-		return sqlSession.selectOne("admin.registOne",registNo);
+	public List<Map<String, Object>> registOne(int registNo) {
+		List<Map<String, Object>> list = sqlSession.selectList("admin.registOne",registNo);
+		//System.out.println("Dao regist list : "+list);
+		return list; 
 	}
+
+	@Override
+	public Regist registOne1(int registNo) {
+		return sqlSession.selectOne("admin.registOne1",registNo);
+	}
+
+	@Override
+	public int insertProduct(Map<String, Object> map) {
+		return sqlSession.insert("admin.insertProduct",map);
+	}
+
+	@Override
+	public void updateRegist(int registNo) {
+		sqlSession.update("admin.updateRegist",registNo);
+	}
+	
+	
+	
+	//상품 리스트--------------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> productList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.productList",null,rowBounds);
+	}
+
+	@Override
+	public int countproductList() {
+		return sqlSession.selectOne("admin.countproductList");
+	}
+	
+	@Override
+	public List<Map<String, String>> productListSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.productListSearch",map,rowBounds);
+	}
+	@Override
+	public int countproductListSearch(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countproductListSearch",map);
+	}
+
+	
+	
+	//1:1질문 답변-------------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.questionAnswer",null, rowBounds);
+	}
+
+	@Override
+	public int countquestionAnswer() {
+		return sqlSession.selectOne("admin.countquestionAnswer");
+	}
+
+	//경매 상품 현황-------------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> auctionStatus(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.auctionStatus",null, rowBounds);
+	}
+
+	@Override
+	public int countauctionStatus() {
+		return sqlSession.selectOne("admin.countauctionStatus");
+	}
+
+	
+	//신고 접수 리스트-----------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> reportList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.reportList",null, rowBounds);
+	}
+
+	@Override
+	public int countreportList() {
+		return sqlSession.selectOne("admin.countreportList");
+	}
+	
+
+	
+
+	
+
+	
+	
 
 	
 	

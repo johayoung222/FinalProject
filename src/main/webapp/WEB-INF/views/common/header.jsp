@@ -67,6 +67,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 	right:210px;
 	width:360px;
 }
+<<<<<<< HEAD
 
 .nav-link:hover{
 	color: #7151FC;
@@ -80,7 +81,13 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
     border-bottom: 2px solid #7151FC;
 }
 
+=======
+.card-body1 {
+    padding: 0px;
+}
+>>>>>>> ce707323948f9e58cbc2c42a4d65c4afea4464a7
 </style>
+
 </head>
 <body>
     <div id="container">
@@ -122,8 +129,10 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
             </div>
             <div id="box-link4">
+              <c:if test="${memberLoggedIn != null }">
                 <i class="fa fa-truck"></i>
                 <a class="item-link" href="${pageContext.request.contextPath }/item/basket.do">장바구니▼</a>
+             </c:if>
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">

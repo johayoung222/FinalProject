@@ -10,6 +10,17 @@
 		select count(*) from member
 	</select>
 	
+	<!-- 회원 리스트 조회 검색(type/search) -->
+	<select id="memberSearch" resultMap="memberMap">
+		select * from member where ${type} like '%'||#{search}||'%'
+	</select>
+	<select id="countmemberSearch" resultType="_int">
+		select count(*) from member where ${type} like '%'||#{search}||'%'
+	</select>
+	
+	
+	
+	
 	<!-- 결제된 상품 리스트 -->
 	<select id="paidProduct" resultMap="padiProductMap">
 		select * from product_io order by seq_product_no
@@ -19,14 +30,70 @@
 		select count(*) from product_io
 	</select>
 	
+	<!-- 결제된 상품리스트 검색(type/search) -->
+	<select id="paidProductSearch" resultMap="paidProductSearch">
+		select * from product_io where ${type} like '%'||#{search}||'%' order by seq_product_no desc
+	</select>
+	<resultMap type="map" id="paidProductSearch"></resultMap>
+	<select id="countpaidProductSearch" resultType="_int">
+		select count(*) from product_io where ${type} like '%'||#{search}||'%'
+	</select>
+	
+	
+	
+	
 	<!-- 판매 신청 리스트 -->
 	<select id="regist" resultMap="registMap">
 		select * from regist where regist_auction = 'N' order by seq_regist_no
 	</select>
-	<resultMap type="map" id="registMap"></resultMap>	
+	<resultMap type="map" id="registMap">
+		<result column="REGIST_DATE" property="registDate" javaType="String"></result>
+	</resultMap>	
 	<select id="countregist" resultType="_int">
 		select count(*) from regist where regist_auction = 'N'
 	</select>
+	
+	<!-- 하나의 판매신청 가져오기 Map타입 -->
+	<select id="registOne" resultMap="registMap">
+		select * from regist where seq_regist_no = #{registNo}
+	</select>
+	
+	<!-- 하나의 판매신청 가져오기 VO타입(regist) -->
+	<select id="registOne1" resultType="regist">
+		select * from regist where seq_regist_no = #{registNo}
+	</select>
+	
+	<!-- category_macro 호출 -->
+	<select id="categoryMa" resultType="categoryMacro">
+		select* from category_macro
+	</select>
+	
+	<!-- category_micro 호출 -->
+	<select id="categoryMi" resultType="category">
+		select* from category_micro where category_macro = #{macro} 
+	</select>
+	
+	<!-- 판매신청 승인, Reigst테이블 >> Product테이블 insert -->
+	<insert id="insertProduct" parameterType="map">
+		insert into product(SEQ_PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_AUCTION, 
+	PRODUCT_ONSALE, PRODUCT_MANUFACTURER, PRODUCT_STOCK, PRODUCT_IMAGE, 
+	PRODUCT_REAL_IMAGE, PRODUCT_MILEGE, PRODUCT_DESCRIPTION, PRODUCT_EVENT, 
+	PRODUCT_ENROLL_DATE, PRODUCT_RECOMMEND, PRODUCT_KINDS, CATEGORY_MICRO, 
+	CATEGORY_MACRO, SELLER_NO,SEQ_AUCTION_NO) 
+		values(seq_product_no.nextval,#{registName},#{registPrice},'Y',
+		'N',#{registManufacturer},#{registAmount},#{registImage},
+		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
+		,#{registDate},'N','Y',#{cMi},#{cMa},21,
+		SEQ_AUCTION_NO.nextval)
+	</insert>
+	
+	<!-- 판매신청 승인시, regist테이블 reigst_auction값 Y로 update -->
+	<update id="updateRegist">
+		update regist set regist_auction = 'Y' where seq_regist_no= #{registNo}
+	</update>
+	
+	
+	
 	
 	<!-- 상품 리스트 -->
 	<select id="productList" resultMap="productListMap">
@@ -36,6 +103,17 @@
 	<select id="countproductList" resultType="_int">
 		select count(*) from product
 	</select>
+	
+	
+	<select id="productListSearch" resultMap="productListMap">
+		select * from product where ${type} like '%'||#{search}||'%'
+	</select>
+	<select id="countproductListSearch" resultType="_int">
+		select count(*) from product where ${type} like '%'||#{search}||'%'
+	</select>
+	
+	
+	
 	
 	<!-- 1:1질문답변 -->
 	<select id="questionAnswer" resultMap="questionAnswerMap">
@@ -65,27 +143,15 @@
 	</select>
 	
 	
-	<select id="paidProductSearch" resultMap="paidProductSearch">
-		select * from product_io where ${type} like '%'||#{search}||'%' order by seq_product_no desc
-	</select>
-	<resultMap type="productIo" id="paidProductSearch"></resultMap>
-	<select id="countpaidProductSearch2" resultType="_int">
-		select count(*) from product_io
-	</select>
 	
-	<!-- category_macro 호출 -->
-	<select id="categoryMa" resultType="categoryMacro">
-		select* from category_macro
-	</select>
 	
-	<!-- category_micro 호출 -->
-	<select id="categoryMi" resultType="category">
-		select* from category_micro where category_macro = #{macro} 
-	</select>
 	
+<<<<<<< HEAD
 	<select id="registOne" resultType="regist">
 		select * from regist where seq_regist_no = #{registNo}
 	</select>
 	
+=======
+>>>>>>> ce707323948f9e58cbc2c42a4d65c4afea4464a7
 	
 </mapper>

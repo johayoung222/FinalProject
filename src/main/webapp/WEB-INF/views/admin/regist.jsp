@@ -14,6 +14,20 @@
 .regist-container{
 	position:relative;
 	margin-left:180px;
+	
+}
+#tbl-regist{
+	table-layout: fixed;
+}
+.tbl-tr th{
+	width:100px;
+}
+.tableTr td{
+	width:100px;
+	height:70px;
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
 }
 </style>
 <br />
@@ -21,53 +35,51 @@
 <p>판매 신청 리스트</p>
 <hr />
 	<table id="tbl-regist" class="table table-striped table-hover">
-		<tr>
+		<tr class="tbl-tr">
 			<th>고유번호</th>
 			<th>상품명</th>
 			<th>판매가격</th>
 			<th>상품이미지</th>
-			<th>상품이미지2</th>
+			<th>상품이미지</th>
 			<th>판매수량</th>
 			<th>상품설명</th>
 			<th>신청날짜</th>
-			<th></th>
 		</tr>
-		<c:if test="${empty list }">
-		<tr>
-			<td colspan="9">판매 신청이 없습니다.</td>
-		</tr>
-		</c:if>
-		
-		<c:if test="${not empty list }">
-			<c:forEach items="${list }" var="r">
-			<tr class="tableTr">				
-				<td id="registNo">${r.SEQ_REGIST_NO }</td>
-				<td>${r.REGIST_NAME }</td>
-				<td>${r.REGIST_PRICE }</td>
-				<td>${r.REGIST_IMAGE }</td>
-				<td>${r.REGIST_REAL_IMAGE }</td>
-				<td>${r.REGIST_AMOUNT }</td>
-				<td>${r.REGIST_DESCRIPTION }</td>
-				<td>${r.REGIST_DATE }</td>
-			</tr>
-			<div class="result" id="regist-result"></div>
-			</c:forEach>
-		</c:if>
 	</table>
-	<%
-		int totalContent = (int)request.getAttribute("totalContents");
-		int numPerPage = (int)request.getAttribute("numPerPage");
-		int cPage = (int)request.getAttribute("cPage");
-	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "regist.do") %>
 </section> 
+
 <script>
-$(".tableTr").on("click",function(){
+$(function(){
+	$.ajax({
+		url : "${pageContext.request.contextPath}/admin/regist.do",
+		dataType : "json",
+		success : function(data){
+			console.log(data);
+			var html ="";
+			for(var i in data){
+				html += "<tr class='tableTr'>";
+				html += "<td>"+data[i].SEQ_REGIST_NO+"</td>";
+				html += "<td>"+data[i].REGIST_NAME+"</td>";
+				html += "<td>"+data[i].REGIST_PRICE+"</td>";
+				html += "<td>"+data[i].REGIST_IMAGE+"</td>";
+				html += "<td>"+data[i].REGIST_REAL_IMAGE+"</td>";
+				html += "<td>"+data[i].REGIST_AMOUNT+"</td>";
+				html += "<td>"+data[i].REGIST_DESCRIPTION+"</td>";
+				html += "<td>"+data[i].registDate+"</td></tr>";
+			}
+			$("#tbl-regist").append(html);
+		},error : function(){
+			console.log("ajax 요청 실패!!");
+		}
+	}); 
+});
+
+$(document).on('click','.tableTr',function(){
 	//$("#tbl-regist").css("display","none");
 	var registNo = $(this).children("td:first").text();
 	var win = window.open("${pageContext.request.contextPath}/admin/category.do?registNo="+registNo, "대/소분류 선택", "width=400,height=500,location=no,status=no,top=150,left=600");
-
 });
+
 </script> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

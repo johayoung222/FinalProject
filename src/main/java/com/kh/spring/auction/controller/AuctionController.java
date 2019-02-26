@@ -51,20 +51,20 @@ public class AuctionController {
 	public void profileUpload(String email, MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
+		// 업로드할 폴더 경로
 		String realFolder = request.getSession().getServletContext().getRealPath("/resources/upload/auction");
-		UUID uuid = UUID.randomUUID();
+		// UUID uuid = UUID.randomUUID();
 		
 		System.out.println(realFolder);
 
 		// 업로드할 파일 이름
 		String org_filename = file.getOriginalFilename();
-		String str_filename = uuid.toString() + org_filename;
+		// String str_filename = uuid.toString() + org_filename;
 
 //		System.out.println("원본 파일명 : " + org_filename);
 //		System.out.println("저장할 파일명 : " + str_filename);
 		
-		String filepath = realFolder + "\\" + str_filename;
+		String filepath = realFolder + "\\" + org_filename;
 //		System.out.println("파일경로 : " + filepath);
 
 		File f = new File(filepath);
@@ -73,7 +73,7 @@ public class AuctionController {
 		}
 		
 		file.transferTo(f);
-		out.println("/resources/upload/auction"+str_filename);
+		out.println("auction/"+org_filename);
 		out.close();
 	}
 }
