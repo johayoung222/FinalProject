@@ -9,19 +9,18 @@ import com.kh.spring.basket.model.service.BasketService;
 @Controller
 public class BasketContoller {
 
-	
-	@Autowired BasketService basketservice;
-	
-	
-	@RequestMapping("/item/basket.do")
-	public String gotoBasket() {
-		
-		
-		return "item/basket";	
-		
-	}
-	
-	
-	
-	
+	@Autowired
+	BasketService basketservice;
+
+
+	 
+	  @RequestMapping("/item/basket.do")
+       public String gotoBasket() {
+	 
+	  
+	  return "item/basket";
+	  
+	  }
+	 
+
 }
