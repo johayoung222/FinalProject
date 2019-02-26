@@ -303,9 +303,11 @@ function sendFile(file, el) {
       enctype: 'multipart/form-data',
       processData: false,
       success: function(url) {
-        $(el).summernote('editor.insertImage', url);
+		alert(el);
+		alert(url);
+        $(el).summernote('editor.insertImage', "${pageContext.request.contextPath}/resources/upload/"+url);
         $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        $('textarea[name="aucdetail"]').html($('#summernote').code());
+        $('div[name="aucdetail"]').html($('#summernote').summernote());
       }
     });
   }
