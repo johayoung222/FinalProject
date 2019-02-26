@@ -1227,6 +1227,7 @@ label{
 		 <div id="memberId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
 		<!-- 	중복체크관련태그 -->
+		
 			      <span class="fbguide ok">이 아이디는 사용가능합니다.</span>
 			      <span class="fbguide error">이 아이디는  이미 등록된  아이디입니다</span> 
 			<input type="hidden" name="fbidDuplicateCheck" id="fbidDuplicateCheck" value="0" />
@@ -1274,30 +1275,7 @@ label{
 </div>
 
 
-<!-- ----------------------------google관련 회원가입!-------------------------------------------------->
-<div id="googleEnroll-container">
-	<form name="gmemberEnrollFrm" action="${pageContext.request.contextPath}/member/googleEnrollEnd" method="post" method="post" onsubmit="return googleIdValidate();" >
-		<input type="hidden" name="memberAlarm"/>
-		 <div id="kakaoId-container">
-			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="gId" id="gId" readonly>
-		<!-- 	중복체크관련태그 -->
-			<input type="hidden" name="googleDuplicateCheck" id="googleDuplicateCheck" value="0" />
-			<input type="button" value="구글로 등록된 회원인지 확인하기"  onclick="googleIdValidate();"/>
-		</div> 
-		<input type="text" class="form-control" placeholder="이름" name="gName" id="gName" readonly>
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="gBirth" id="gBirth" required>
-		<input type="email" class="form-control" placeholder="이메일을 입력해주세요" name="gEmail" id="gEmail" readonly>
-		<select class="form-control" name="ggender" required> 
-			<option value="" disabled selected>성별</option>
-			<option value="M">남</option>
-			<option value="F">여</option>
-		</select>
-		<input type="hidden" name="gmemberInterest"/>
-		<br />
-		<input type="submit" name="gsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="button" class="btn btn-outline-success" value="취소" onclick="googleCancel();">
-	</form>
-</div>
+
 
 
 
@@ -1388,8 +1366,7 @@ function fbvalidate(){
 				alert("등록이가능합니다");
 				$("#facebookenroll-container").show();
 				$("input[name=fbsubmit]").show();
-               var interest = false;
-            /* 관심상품 팝업 */
+           
            
 			
 			}else{
@@ -1424,10 +1401,8 @@ function fbvalidate(){
 					alert("등록이가능합니다");
 					$("#kakaoenroll-container").show();
 					$("input[name=ksubmit]").show();
-	               var interest = false;
-	            /* 관심상품 팝업 */
-	            open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-	             return false;
+	              
+	      
 				
 				}else{
 					alert("이미 등록된 회원이 있습니다 ");	
@@ -1498,10 +1473,11 @@ function googleCancel(){
 }
 
 function snsValidate(){
-	 /* 관심상품 팝업 */
-    open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
-   		 "width=500,height=400,left=200,top=200");
-    return true;
+	  /* 관심상품 팝업 */
+	/*  open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+	 "width=500,height=400,left=200,top=200");
+
+     return false;  */
 	
 	
 }
