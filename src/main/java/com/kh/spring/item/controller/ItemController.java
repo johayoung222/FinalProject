@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.item.model.service.BasketService;
-import com.kh.spring.item.model.vo.Basket;
 import com.kh.spring.thing.model.vo.Product;
 
 @Controller
@@ -27,9 +26,9 @@ public class ItemController {
 		return "item/item";
 	}
 	@RequestMapping("/item/basket.do")
-	public String basket(@ModelAttribute Basket vo, HttpSession session) {
+	public String basket(HttpSession session) {
 		String userId = (String)session.getAttribute("userId");
-		vo.setUserId(userId);
+//		vo.setUserId(userId);
 		
 //		int count = basketService.countBasket(vo.getProductId(),userId);
 		//count == 0 ? basketService.updateBasket(vo): basketService.insert(vo);
