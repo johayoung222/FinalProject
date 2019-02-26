@@ -51,6 +51,10 @@ public interface AdminService {
 
 	Regist registOne1(int registNo);
 
+	int insertProduct(Map<String, Object> map);
+
+	void updateRegist(int registNo);
+
 
 
 

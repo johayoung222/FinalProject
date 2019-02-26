@@ -126,7 +126,7 @@ $("#categoryMa").on("change",function(){
 			$('#categoryMi').children("option").remove();
 			var html ="<option value='' disabled selected>소분류</option>";
 			for(var i in data){
-			html += "<option class='cMi' value="+data[i].categoryName+">"+data[i].categoryName+"</option>";
+			html += "<option class='cMi' value="+data[i].categoryMicro+">"+data[i].categoryName+"</option>";
 			}
 			$("#categoryMi").append(html);
 		},error : function(){
@@ -171,12 +171,13 @@ $("#btn").on('click',function(){
 		url : "${pageContext.request.contextPath}/admin/inProduct.do",
 		data : {registNo:registNo,
 			cMa:cMa,
-			cMi,cMi,
+			cMi:cMi,
 			registManufacturer:registManufacturer},
 		type : "GET",
 		dataType : "json",
 		success :function(data){
-			console.log(data);
+			opener.parent.location.reload();
+			window.close();
 		},error : function(){
 			console.log("ajax 요청 실패!!");
 		}

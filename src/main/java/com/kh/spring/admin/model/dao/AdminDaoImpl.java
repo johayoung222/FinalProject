@@ -140,6 +140,16 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.registOne1",registNo);
 	}
 
+	@Override
+	public int insertProduct(Map<String, Object> map) {
+		return sqlSession.insert("admin.insertProduct",map);
+	}
+
+	@Override
+	public void updateRegist(int registNo) {
+		sqlSession.update("admin.updateRegist",registNo);
+	}
+
 	
 
 	

@@ -91,22 +91,27 @@
 		select* from category_micro where category_macro = #{macro} 
 	</select>
 	
-	<insert id="insertP" parameterType="hashmap" >
-	 	insert into product(SEQ_PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_AUCTION, 
-	PRODUCT_ONSALE, PRODUCT_MANUFACTURER, PRODUCT_STOCK, PRODUCT_IMAGE, 
-	PRODUCT_REAL_IMAGE, PRODUCT_MILEGE, PRODUCT_DESCRIPTION, PRODUCT_EVENT, 
-	PRODUCT_ENROLL_DATE, PRODUCT_RECOMMEND, PRODUCT_KINDS, CATEGORY_MICRO, 
-	CATEGORY_MACRO, SELLER_NO,SEQ_AUCTION_NO) 
-		values(seq_product_no.nextval,#{REGIST_NAME},#{regist_price},'Y',
-		'N',#{registManufacturer},#{regist_amount},#{regist_image},
-		#{regist_realimage},#{regist_price}*0.001,#{regist_descroption},'N'
-		,#{registDate},'N',#{regist_kinds},#{cMi},#{cMa},#{seq_member_no},
-		SEQ_AUCTION_NO.nextval)
-	</insert>
-	
 	<select id="registOne1" resultType="regist">
 		select * from regist where seq_regist_no = #{registNo}
 	</select>
 	
+	<!-- 판매신청 승인, Reigst테이블 >> Product테이블 insert -->
+	<insert id="insertProduct" parameterType="map">
+		insert into product(SEQ_PRODUCT_NO, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_AUCTION, 
+	PRODUCT_ONSALE, PRODUCT_MANUFACTURER, PRODUCT_STOCK, PRODUCT_IMAGE, 
+	PRODUCT_REAL_IMAGE, PRODUCT_MILEGE, PRODUCT_DESCRIPTION, PRODUCT_EVENT, 
+	PRODUCT_ENROLL_DATE, PRODUCT_RECOMMEND, PRODUCT_KINDS, CATEGORY_MICRO, 
+	CATEGORY_MACRO, SELLER_NO,SEQ_AUCTION_NO) 
+		values(seq_product_no.nextval,#{registName},#{registPrice},'Y',
+		'N',#{registManufacturer},#{registAmount},#{registImage},
+		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
+		,#{registDate},'N','Y',#{cMi},#{cMa},21,
+		SEQ_AUCTION_NO.nextval)
+	</insert>
+	
+	<!-- 판매신청 승인시, regist테이블 reigst_auction값 Y로 update -->
+	<update id="updateRegist">
+		update regist set regist_auction = 'Y' where seq_regist_no= #{registNo}
+	</update>
 	
 </mapper>

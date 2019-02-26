@@ -1,5 +1,6 @@
 package com.kh.spring.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,6 @@ import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
-import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductIo;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -301,9 +301,28 @@ public class AdminController {
 		
 		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
 		Regist regist = adminService.registOne1(registNo);
-		Product product = new Product();
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("seqRegistNo",regist.getSeqRegistNo());
+		map.put("registName",regist.getRegistName());
+		map.put("registPrice",regist.getRegistPrice());
+		//map.put("regitstAuction",regist.getRegitstAuction());
+		map.put("registManufacturer",registManufacturer);
+		map.put("registAmount",regist.getRegistAmount());
+		map.put("registImage",regist.getRegistImage());
+		map.put("registRealImage",regist.getRegistRealImage());
+		map.put("registDescription",regist.getRegistDescription());
+		map.put("registDate",regist.getRegistDate());
+		//map.put("registKinds",regist.getReigstKinds());
+		map.put("cMi",cMi);
+		map.put("cMa",cMa);
+		System.out.println("insertP map :"+map);
 				
-		int result = adminService.insertProduct(product);
+		int result = adminService.insertProduct(map);
+		
+		if(result ==1) {
+			adminService.updateRegist(registNo);
+		}
 		return result;
 	}
 

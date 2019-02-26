@@ -121,6 +121,16 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.registOne1(registNo);
 	}
 
+	@Override
+	public int insertProduct(Map<String, Object> map) {
+		return adminDao.insertProduct(map);
+	}
+
+	@Override
+	public void updateRegist(int registNo) {
+		adminDao.updateRegist(registNo);
+	}
+
 
 
 	
