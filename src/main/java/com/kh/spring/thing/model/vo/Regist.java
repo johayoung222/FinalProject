@@ -3,31 +3,42 @@ package com.kh.spring.thing.model.vo;
 import java.sql.Date;
 
 public class Regist {
+	private int seqMemberNo;
 	private int seqRegistNo;
 	private String registName;
 	private int registPrice;
-	private boolean regitstAuction;
+	private String registAuction;
 	private String registImage="";
 	private String registRealImage="";
 	private int registAmount;
 	private String registDescription;
+	private String registKinds;
 	private Date registDate;
 	public Regist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Regist(int seqRegistNo, String registName, int registPrice, boolean regitstAuction, String registImage,
-			String registRealImage, int registAmount, String registDescription, Date registDate) {
+	public Regist(int seqMemberNo, int seqRegistNo, String registName, int registPrice, String registAuction,
+			String registImage, String registRealImage, int registAmount, String registDescription, String registKinds,
+			Date registDate) {
 		super();
+		this.seqMemberNo = seqMemberNo;
 		this.seqRegistNo = seqRegistNo;
 		this.registName = registName;
 		this.registPrice = registPrice;
-		this.regitstAuction = regitstAuction;
+		this.registAuction = registAuction;
 		this.registImage = registImage;
 		this.registRealImage = registRealImage;
 		this.registAmount = registAmount;
 		this.registDescription = registDescription;
+		this.registKinds = registKinds;
 		this.registDate = registDate;
+	}
+	public int getSeqMemberNo() {
+		return seqMemberNo;
+	}
+	public void setSeqMemberNo(int seqMemberNo) {
+		this.seqMemberNo = seqMemberNo;
 	}
 	public int getSeqRegistNo() {
 		return seqRegistNo;
@@ -47,11 +58,11 @@ public class Regist {
 	public void setRegistPrice(int registPrice) {
 		this.registPrice = registPrice;
 	}
-	public boolean isRegitstAuction() {
-		return regitstAuction;
+	public String getRegistAuction() {
+		return registAuction;
 	}
-	public void setRegitstAuction(boolean regitstAuction) {
-		this.regitstAuction = regitstAuction;
+	public void setRegistAuction(String registAuction) {
+		this.registAuction = registAuction;
 	}
 	public String getRegistImage() {
 		return registImage;
@@ -77,6 +88,12 @@ public class Regist {
 	public void setRegistDescription(String registDescription) {
 		this.registDescription = registDescription;
 	}
+	public String getRegistKinds() {
+		return registKinds;
+	}
+	public void setRegistKinds(String registKinds) {
+		this.registKinds = registKinds;
+	}
 	public Date getRegistDate() {
 		return registDate;
 	}
@@ -85,10 +102,10 @@ public class Regist {
 	}
 	@Override
 	public String toString() {
-		return "[seqRegistNo=" + seqRegistNo + ", registName=" + registName + ", registPrice=" + registPrice
-				+ ", regitstAuction=" + regitstAuction + ", registImage=" + registImage + ", registRealImage="
-				+ registRealImage + ", registAmount=" + registAmount + ", registDescription=" + registDescription
-				+ ", registDate=" + registDate + "]";
+		return "[seqMemberNo=" + seqMemberNo + ", seqRegistNo=" + seqRegistNo + ", registName=" + registName
+				+ ", registPrice=" + registPrice + ", registAuction=" + registAuction + ", registImage=" + registImage
+				+ ", registRealImage=" + registRealImage + ", registAmount=" + registAmount + ", registDescription="
+				+ registDescription + ", registKinds=" + registKinds + ", registDate=" + registDate + "]";
 	}
 	
 	
