@@ -97,8 +97,6 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 </c:if>
                 <c:if test="${memberLoggedIn != null }">
               <a class="item-link" id="logout"href="${pageContext.request.contextPath }/member/memberLogout.do">로그아웃</a> 
-          
-             
                 </c:if>
             </div>
             <div  class="box-link2">
