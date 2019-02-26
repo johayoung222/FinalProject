@@ -4,17 +4,17 @@ package com.kh.spring.item.model.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.kh.spring.item.model.dao.BasketDao;
+import com.kh.spring.item.model.dao.ItemDao;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
 @Service
-public class BasketServiceImpl implements BasketService {
+public class ItemServiceImpl implements ItemService {
 
 	Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	BasketDao basketDao;
+	ItemDao basketDao;
 
 	@Override
 	public int countBasket(int productId, String userId) {

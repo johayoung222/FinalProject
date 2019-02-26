@@ -6,7 +6,7 @@ import java.util.Map;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
-public interface BasketDao {
+public interface ItemDao {
 
 	Product selectOneProduct(int num);
 

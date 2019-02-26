@@ -2,7 +2,7 @@ package com.kh.spring.item.model.service;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
-public interface BasketService {
+public interface ItemService {
 
 	int countBasket(int productId, String userId);
 
