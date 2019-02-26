@@ -50,11 +50,11 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<Map<String, String>> regist(int cPage, int numPerPage) {
+	public List<Map<String, Object>> regist(int cPage, int numPerPage) {
 		//System.out.println("Dao regist cPage :"+cPage+", "+numPerPage);
 		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		List<Map<String, String>> list = sqlSession.selectList("admin.regist",null, rowBounds);
-		//System.out.println("Dao regist list : "+list);
+		List<Map<String, Object>> list = sqlSession.selectList("admin.regist",null, rowBounds);
+		System.out.println("Dao regist list : "+list);
 		return list;
 	}
 
@@ -129,9 +129,18 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public Regist registOne(int registNo) {
-		return sqlSession.selectOne("admin.registOne",registNo);
+	public List<Map<String, Object>> registOne(int registNo) {
+		List<Map<String, Object>> list = sqlSession.selectList("admin.registOne",registNo);
+		//System.out.println("Dao regist list : "+list);
+		return list; 
 	}
+
+	@Override
+	public Regist registOne1(int registNo) {
+		return sqlSession.selectOne("admin.registOne1",registNo);
+	}
+
+	
 
 	
 	

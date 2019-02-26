@@ -19,7 +19,7 @@ public interface AdminDao {
 	
 	int countpaidProduct();
 
-	List<Map<String, String>> regist(int cPage, int numPerPage);
+	List<Map<String, Object>> regist(int cPage, int numPerPage);
 
 	int countregist();
 
@@ -47,7 +47,9 @@ public interface AdminDao {
 
 	List<Category> categoryMi(String macro);
 
-	Regist registOne(int registNo);
+	List<Map<String, Object>> registOne(int registNo);
+
+	Regist registOne1(int registNo);
 
 
 

@@ -40,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public List<Map<String, String>> regist(int cPage, int numPerPage) {
+	public List<Map<String, Object>> regist(int cPage, int numPerPage) {
 		return adminDao.regist(cPage, numPerPage);
 	}
 
@@ -110,9 +110,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public Regist registOne(int registNo) {
+	public List<Map<String, Object>> registOne(int registNo) {
 		return adminDao.registOne(registNo);
 	}
+
+	
+
+	@Override
+	public Regist registOne1(int registNo) {
+		return adminDao.registOne1(registNo);
+	}
+
 
 
 	

@@ -1,6 +1,5 @@
 package com.kh.spring.admin.controller;
 
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +17,7 @@ import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductIo;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -110,7 +110,7 @@ public class AdminController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/admin/paidProductSearch.do",method=RequestMethod.GET)
+	@RequestMapping("/admin/paidProductSearch.do")
 	@ResponseBody
 	public List<ProductIo> paidProductSearch(
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
@@ -128,22 +128,22 @@ public class AdminController {
 		return list;
 	}
 	
-	
-	
-	@RequestMapping("/admin/regist.do")
-	public ModelAndView regist(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
-		System.out.println("regist메소드 실행!!");
-		int numPerPage = 7;
-		List<Map<String, String>> list = adminService.regist(cPage, numPerPage);
-		System.out.println("Controller regist list : "+list);
-		int totalContents = adminService.countregist();
-		mav.addObject("totalContents", totalContents);
-		mav.addObject("cPage", cPage);
-		mav.addObject("numPerPage", numPerPage);
-		mav.addObject("list",list);
+	@RequestMapping("/admin/registList.do")
+	public ModelAndView registList(ModelAndView mav) {
 		mav.setViewName("admin/regist");
-		
 		return mav;
+	}
+	
+	
+	@RequestMapping(value="/admin/regist.do")
+	@ResponseBody
+	public List<Map<String, Object>> regist() {
+		System.out.println("regist메소드 실행!!");
+		int cPage = 1;
+		int numPerPage = 7;
+		List<Map<String, Object>> list = adminService.regist(cPage, numPerPage);
+				
+		return list;
 	}
 		
 	@RequestMapping("/admin/productList.do")
@@ -284,40 +284,26 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
 	@ResponseBody
-	public Regist registOne(@RequestParam(value="registNo")int registNo) {
+	public List<Map<String, Object>> registOne(@RequestParam(value="registNo")int registNo) {
 		System.out.println("registOne메소드 실행!!");
 		//System.out.println("ServiceImpl registNo:"+registNo);
-		Regist regist = adminService.registOne(registNo);
-		//System.out.println("DATE		"+regist.getRegistDate());
-		return regist;
+		List<Map<String, Object>> list = adminService.registOne(registNo);
+		return list;
 		
 	}
 	
-	@RequestMapping(value="/admin/inProduct.do",method=RequestMethod.POST)
+	@RequestMapping(value="/admin/inProduct.do", method=RequestMethod.GET)
 	@ResponseBody
-	public int insertP(@RequestParam(value="registNo")int registNo
-			,@RequestParam(value="registName")String registName
-			,@RequestParam(value="registPrice")int registPrice
-			,@RequestParam(value="registAmount")int registAmount
-			,@RequestParam(value="registDate")Date registDate
-			,@RequestParam(value="registDescription")String registDescription
-			,@RequestParam(value="registImage")String registImage
-			,@RequestParam(value="registRealImage")String registRealImage
-			,@RequestParam(value="cMa")String cMa
-			,@RequestParam(value="cMi")String cMi) {
-		int result = 0;
-		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
-		System.out.println(registNo+","+
-		registName+","+
-		registPrice+","+
-		registAmount+","+
-		registDate+","+
-		registDescription+","+
-		registImage+","+
-		registRealImage+","+
-		cMa+","+
-		cMi);
+	public int insertP(@RequestParam(value="registNo")int registNo,
+			@RequestParam(value="cMa")String cMa,
+			@RequestParam(value="cMi")String cMi,
+			@RequestParam(value="registManufacturer")String registManufacturer) {
 		
+		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
+		Regist regist = adminService.registOne1(registNo);
+		Product product = new Product();
+				
+		int result = adminService.insertProduct(product);
 		return result;
 	}
 
