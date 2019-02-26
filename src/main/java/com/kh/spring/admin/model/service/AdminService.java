@@ -19,7 +19,7 @@ public interface AdminService {
 
 	int countpaidProduct();
 	
-	List<Map<String, String>> regist(int cPage, int numPerPage);
+	List<Map<String, Object>> regist(int cPage, int numPerPage);
 
 	int countregist();
 
@@ -47,7 +47,13 @@ public interface AdminService {
 
 	List<Category> categoryMi(String macro);
 
-	Regist registOne(int registNo);
+	List<Map<String, Object>> registOne(int registNo);
+
+	Regist registOne1(int registNo);
+
+	int insertProduct(Map<String, Object> map);
+
+	void updateRegist(int registNo);
 
 
 
