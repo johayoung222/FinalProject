@@ -8,9 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>${param.pageTitle}</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.js"></script>
 <!-- 부트스트랩관련 라이브러리 -->
 <link rel="stylesheet"
@@ -34,6 +31,7 @@
     /* margin-left: 200px; */
     margin-left: 21%;
     border: 2px solid blue;
+    margin-bottom: 25px;
 }
 #search2 {
     padding: 10px;
@@ -45,10 +43,10 @@
     border-right: 1px solid lightgray;
 }
 .box-link1{
-border-right: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
+border-ight: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
 }
 .box-link2{
-border-right: 1px solid lightgray; float: right; width: 8.5%; height:40px; text-align:center;
+border-right: 1px solid lightgray; float: right; width: 10%; height:40px; text-align:center;
 }
 .box-link3{
 border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-align:center;
@@ -61,16 +59,19 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 }
 #button_{
 	background:white;
+	border-color: white;
+	outline: 0;
 }
 #collapseExample{
 	position:relative;
 	right:210px;
 	width:360px;
 }
-
-
- 	
+.card-body1 {
+    padding: 0px;
+}
 </style>
+
 </head>
 <body>
     <div id="container">
@@ -90,11 +91,11 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
                 </c:if>
                 <c:if test="${memberLoggedIn != null }">
-               <a id="button_" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
- 				마이페이지
+               <a class="item-link" onfocus="blur()" id="button_" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+ 				마이페이지▼
  			   </a>
                 <div class="collapse" id="collapseExample">
-  				<div class="card card-body">
+  				<div class="card card-body1">
   				<div><a class="item-link" href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a></div>
 				<div><a href="${pageContext.request.contextPath}/mypage/order.do" style="color:red">판매내역</a>
   				| <a href="${pageContext.request.contextPath}/mypage/purchases.do" style="color:orange">구매내역</a>
@@ -112,8 +113,10 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
             </div>
             <div id="box-link4">
+              <c:if test="${memberLoggedIn != null }">
                 <i class="fa fa-truck"></i>
                 <a class="item-link" href="${pageContext.request.contextPath }/item/basket.do">장바구니▼</a>
+             </c:if>
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -123,12 +126,17 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <br><br>
-    <div id="header-container" style="margin-left: 300px;">        
+    <div id="header-container" >  
+    <img src="${pageContext.request.contextPath }/resources/images/Getit.PNG" width="100px" height="80px	">      
              <input type="text" name="search" placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
             id="search2"></i>
     </div>
     <!--https://getbootstrap.com/docs/4.1/components/navbar/-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_"> 
+        	<a class="navbar-brand" href="#"> <img
+			src="${pageContext.request.contextPath }/resources/images/Getit.PNG"
+			alt="스프링로고" width="50px" />
+		</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -214,16 +222,3 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <section id="content">
-   <script>
-   
-      
-   
-    
-    function logout(){
-    	
-    	window.locatiom.href="${pageContext.request.contextPath }/member/memberLogout.do";
-    	
-    }
-   
-   
-   </script>

@@ -1,6 +1,7 @@
 package com.kh.spring.member.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -450,5 +451,9 @@ public class MemberController {
 
 			}
 	
+    @RequestMapping(value="/member/findAccount", method=RequestMethod.GET)
+    public String moveFindPopup() {
+    	return "member/findAccount";
+    }
 	
 }
