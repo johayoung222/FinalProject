@@ -4,4 +4,7 @@
 	<select id="selectOneProduct" resultType="product">
 		select * from product where seq_product_no = #{num}
 	</select>
+	<select id="selectJoinMember" resultType="m">
+		select * from member where seq_member_no = #{sellerNo}
+	</select>
 </mapper>

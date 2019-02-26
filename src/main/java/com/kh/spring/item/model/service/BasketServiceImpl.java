@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.kh.spring.item.model.dao.BasketDao;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
 @Service
@@ -23,6 +24,11 @@ public class BasketServiceImpl implements BasketService {
 	@Override
 	public Product selectOneProduct(int num) {
 		return basketDao.selectOneProduct(num);
+	}
+
+	@Override
+	public Member selectJoinMember(int sellerNo) {
+		return basketDao.selectJoinMember(sellerNo);
 	}
 
 

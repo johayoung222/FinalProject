@@ -41,6 +41,10 @@
 			<td>
 			 	<table border="1" style="height:300px; width:400px;">
 			 		<tr align="center">
+			 			<td>판매자</td>
+			 			<td>${member.memberName }</td>
+			 		</tr>
+			 		<tr align="center">
 			 			<td>상품명</td>
 			 			<td>${product.productName}</td>
 			 		</tr>
@@ -53,13 +57,13 @@
 			 			<td>${product.productDescription}</td>
 			 		</tr>
 			 		<tr align="center">
+			 			<td>수량</td>
+			 			<td>1</td>
+			 		</tr>
+			 		<tr align="center">
 			 			<td colspan="2">
-			 				<form name="form1" method="post" action="#">
-			 				<select name="amount">
-			 					<option value="1" selected label="1">
-			 				</select>&nbsp;개
-			 				<input type="submit" value="장바구니에 담기">
-			 				</form>
+			 				<button onclick="">장바구니 담기</button>
+			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'">구매하기</button>
 			 			</td>
 			 		</tr>
 			 	</table>
@@ -71,6 +75,9 @@
 <style>
 .productInfo-content{
 	border: 1px solid red;
+}
+.productInfo-content>div{
+	margin-bottom: 20px;
 }
 .info-text{
 	border: 1px solid black;
@@ -87,14 +94,34 @@
 .power-link{
 	border: 1px solid black;
 }
+.ask-header{
+	display: flex;
+	justify-content: space-between;
+}
+.ask-content{
+	border-top: 1px solid lightgray;
+	text-align: center;
+}
 </style>
 <div class="productInfo-content">
 
 	<div class="info-text">상품 정보</div>
 	
-	<div class="info-delivery">배송정보</div>
+	<div class="info-delivery">
+		<span>배송정보</span><br />
+		<span>1. 판매자가 제품을 발송하면 택배사, 송장번호를 안내해드립니다.</span><br />
+		<span>2. 결제 후 3일내 판매자가 제품을 발송하지 않으면 거래가 자동 취소됩니다.</span>
+	</div>
 	
-	<div class="product-ask">상품문의</div>
+	<div class="product-ask">
+		<div class="ask-header">
+			<span>상품문의</span>
+			<button onclick="alert('문의되었습니닼');">문의하기</button>
+		</div>
+		<div class="ask-content">
+			<span>문의하신 내역이 없습니다.</span>
+		</div>
+	</div>
 	
 	<div class="product-recommend">이런 상품은 어때요?</div>
 	
