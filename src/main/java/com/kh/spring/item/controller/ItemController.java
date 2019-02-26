@@ -26,6 +26,8 @@ public class ItemController {
 		
 		return "item/item";
 	}
+	
+	
 	/*
 	 * @RequestMapping("/item/basket.do") public String basket(HttpSession session)
 	 * { String userId = (String)session.getAttribute("userId"); //

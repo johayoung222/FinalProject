@@ -89,15 +89,9 @@ public class Basket implements Serializable {
 	}
 
 
-
-
 	public int getProductPrice() {
 		return productPrice;
 	}
-
-
-
-
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
