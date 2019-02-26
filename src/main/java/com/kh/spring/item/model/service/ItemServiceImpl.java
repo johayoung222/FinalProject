@@ -1,6 +1,5 @@
 package com.kh.spring.item.model.service;
 
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +16,6 @@ public class ItemServiceImpl implements ItemService {
 	ItemDao basketDao;
 
 	@Override
-	public int countBasket(int productId, String userId) {
-		return 0;
-	}
-
-	@Override
 	public Product selectOneProduct(int num) {
 		return basketDao.selectOneProduct(num);
 	}
@@ -30,9 +24,6 @@ public class ItemServiceImpl implements ItemService {
 	public Member selectJoinMember(int sellerNo) {
 		return basketDao.selectJoinMember(sellerNo);
 	}
-
-
-
 
 	
 }

@@ -54,57 +54,67 @@ public class AdminController {
 	
 	@RequestMapping("/admin/adminView.do")
 	public String adminView() {
-		System.out.println("adminView메소드가 요청되었습니다.");
+		logger.debug("adminView메소드가 요청되었습니다.");
 		return "admin/adminView";	//	/WEB-INF/views/admin/adminView.jsp
 	}
 	
 	@RequestMapping("/admin/allMember.do")
 	public ModelAndView allMember(@RequestParam(value="cPage" , defaultValue="1") int cPage ,
 			ModelAndView mav) {
-		System.out.println("allMember메소드가 요청되었습니다.");
-				
+		logger.debug("allMember메소드 실행!!");
 		int numPerPage = 7;
-		
 		List<Map<String, String>> list = adminService.allMember(cPage , numPerPage);
-		System.out.println("Controller allMember list : "+list);
 		int totalContents = adminService.countallMember();
+		String view = "allMember.do";
 		
 		mav.addObject("totalContents", totalContents);
 		mav.addObject("cPage", cPage);
 		mav.addObject("numPerPage", numPerPage);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
 		mav.setViewName("admin/allMember");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/admin/memberSearch.do")
-	public List<Member> memberSearch(ModelAndView mav, 
+	public ModelAndView memberSearch(ModelAndView mav, 
 			@RequestParam(value="type")String type, 
 			@RequestParam(value="search")String search,
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
-		System.out.println("memeberSearch메소드가 요청되었습니다.");
+		logger.debug("memeberSearch메소드가 요청되었습니다.");
+		String view = "memberSearch.do";
 		int numPerPage= 7;
 		Map<String, String> map = new HashMap<>();
 		map.put("type",type);
 		map.put("search",search);
+		logger.debug(map);
+		List<Map<String,String>> list = adminService.memberSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countmemberSearch(map);
 		
-		List<Member> list = null;
-		
-		return list;
+		mav.addObject("cPage",cPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("type",type);
+		mav.addObject("search",search);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.setViewName("admin/allMember");
+		return mav;
 	}
 	
 	@RequestMapping("/admin/paidProduct.do")
 	public ModelAndView paidProduct(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
-		System.out.println("paidProduct메소드 실행!!");
 		int numPerPage = 7;
 		List<Map<String, String>> list = adminService.paidProduct(cPage, numPerPage);
-		System.out.println("Controller paidProduct list : "+list);
 		int totalContents = adminService.countpaidProduct();
+		String view = "paidProduct.do";
+		
 		mav.addObject("totalContents", totalContents);
 		mav.addObject("cPage", cPage);
 		mav.addObject("numPerPage", numPerPage);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
 		mav.setViewName("admin/paidProduct");
 				
 		return mav;
@@ -112,20 +122,30 @@ public class AdminController {
 	
 	@RequestMapping("/admin/paidProductSearch.do")
 	@ResponseBody
-	public List<ProductIo> paidProductSearch(
+	public ModelAndView paidProductSearch(ModelAndView mav,
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="type")String type,
 			@RequestParam(value="search")String search) {
 		logger.debug("paidProductSearch메소드 실행!!");
-		
+		String view = "paidProductSearch.do";
 		Map<String,String> map = new HashMap<>();
 		map.put("type",type);
 		map.put("search",search);
-		int totalContents = adminService.countpaidProductSearch2(map);
 		
 		int numPerPage = 7;
-		List<ProductIo> list = adminService.paidProductSearch(cPage,numPerPage,map);
-		return list;
+		List<Map<String, String>> list = adminService.paidProductSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countpaidProductSearch(map);
+		logger.debug(list);
+		mav.addObject("cPage",cPage);
+		mav.addObject("type",type);
+		mav.addObject("search",search);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.setViewName("admin/paidProduct");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/admin/registList.do")
@@ -145,11 +165,74 @@ public class AdminController {
 				
 		return list;
 	}
+	
+	@RequestMapping("/admin/category.do")
+	public ModelAndView category(ModelAndView mav 
+			,@RequestParam(value="registNo")int registNo) {
+		logger.debug(registNo);
+		
+		mav.addObject("registNo",registNo);
+		mav.setViewName("admin/category");
+		return mav;
+	} 
+	
+	@RequestMapping("/admin/categoryMa.do")
+	@ResponseBody
+	public List<CategoryMacro> categoryMa() {
+		List<CategoryMacro> list = adminService.categoryMa();
+		return list;
+	} 
+	
+	@RequestMapping(value="/admin/categoryMi.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Category> categoryMi(@RequestParam(value="macro")String macro) {
+		List<Category> list = adminService.categoryMi(macro);
+		return list;
+	} 
+	
+	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> registOne(@RequestParam(value="registNo")int registNo) {
+		List<Map<String, Object>> list = adminService.registOne(registNo);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/inProduct.do", method=RequestMethod.GET)
+	@ResponseBody
+	public int insertP(@RequestParam(value="registNo")int registNo,
+			@RequestParam(value="cMa")String cMa,
+			@RequestParam(value="cMi")String cMi,
+			@RequestParam(value="registManufacturer")String registManufacturer) {
+		
+		Regist regist = adminService.registOne1(registNo);
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("seqRegistNo",regist.getSeqRegistNo());
+		map.put("registName",regist.getRegistName());
+		map.put("registPrice",regist.getRegistPrice());
+		//map.put("regitstAuction",regist.getRegitstAuction());
+		map.put("registManufacturer",registManufacturer);
+		map.put("registAmount",regist.getRegistAmount());
+		map.put("registImage",regist.getRegistImage());
+		map.put("registRealImage",regist.getRegistRealImage());
+		map.put("registDescription",regist.getRegistDescription());
+		map.put("registDate",regist.getRegistDate());
+		//map.put("registKinds",regist.getReigstKinds());
+		map.put("cMi",cMi);
+		map.put("cMa",cMa);
+				
+		int result = adminService.insertProduct(map);
+		if(result ==1) {
+			adminService.updateRegist(registNo);
+		}
+		return result;
+	}
 		
 	@RequestMapping("/admin/productList.do")
 	public ModelAndView productList(ModelAndView mav, 
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
 		System.out.println("productList메소드 실행!!");
+		String view = "productList.do";
 		int numPerPage =7;
 		List<Map<String, String>> list = adminService.productList(cPage, numPerPage);
 		int totalContents = adminService.countproductList();
@@ -158,6 +241,7 @@ public class AdminController {
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
 		mav.setViewName("admin/productList");
 		return mav;
 	}
@@ -167,15 +251,22 @@ public class AdminController {
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="type")String type,
 			@RequestParam(value="search")String search) {
-		System.out.println("productListSearch메소드 실행!!");
+		logger.debug("productListSearch메소드 실행!!");
+		String view = "productListSearch.do";
 		int numPerPage =7;
-		int totalContents=0;
-		List<Map<String, String>> list =null;
-				
+		Map<String, String>map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
+		List<Map<String, String>> list =adminService.productListSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countproductListSearch(map);
+		
 		mav.addObject("cPage",cPage);
+		mav.addObject("type",type);
+		mav.addObject("search",search);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
 		mav.setViewName("admin/productList");
 		return mav;
 	}
@@ -250,81 +341,7 @@ public class AdminController {
 	}
 	*/
 	
-	@RequestMapping("/admin/category.do")
-	public ModelAndView category(ModelAndView mav 
-			,@RequestParam(value="registNo")int registNo) {
-		System.out.println("category메소드 실행!!");
-		logger.debug(registNo);
-		
-		mav.addObject("registNo",registNo);
-		mav.setViewName("admin/category");
-		return mav;
-	} 
 	
-	@RequestMapping("/admin/categoryMa.do")
-	@ResponseBody
-	public List<CategoryMacro> categoryMa() {
-		System.out.println("categoryMa메소드 실행!!!!");
-		
-		List<CategoryMacro> list = adminService.categoryMa();
-		//System.out.println(list);
-		
-		return list;
-	} 
-	
-	@RequestMapping(value="/admin/categoryMi.do",method=RequestMethod.GET)
-	@ResponseBody
-	public List<Category> categoryMi(@RequestParam(value="macro")String macro) {
-		System.out.println("categoryMi메소드 실행!!!!");
-		//System.out.println(macro);
-		List<Category> list = adminService.categoryMi(macro);
-		
-		return list;
-	} 
-	
-	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
-	@ResponseBody
-	public List<Map<String, Object>> registOne(@RequestParam(value="registNo")int registNo) {
-		System.out.println("registOne메소드 실행!!");
-		//System.out.println("ServiceImpl registNo:"+registNo);
-		List<Map<String, Object>> list = adminService.registOne(registNo);
-		return list;
-		
-	}
-	
-	@RequestMapping(value="/admin/inProduct.do", method=RequestMethod.GET)
-	@ResponseBody
-	public int insertP(@RequestParam(value="registNo")int registNo,
-			@RequestParam(value="cMa")String cMa,
-			@RequestParam(value="cMi")String cMi,
-			@RequestParam(value="registManufacturer")String registManufacturer) {
-		
-		System.out.println("insertP 메소드 실행!!!!!!!!!!!!!!!!!!!!!");
-		Regist regist = adminService.registOne1(registNo);
-		Map<String, Object> map = new HashMap<>();
-
-		map.put("seqRegistNo",regist.getSeqRegistNo());
-		map.put("registName",regist.getRegistName());
-		map.put("registPrice",regist.getRegistPrice());
-		//map.put("regitstAuction",regist.getRegitstAuction());
-		map.put("registManufacturer",registManufacturer);
-		map.put("registAmount",regist.getRegistAmount());
-		map.put("registImage",regist.getRegistImage());
-		map.put("registRealImage",regist.getRegistRealImage());
-		map.put("registDescription",regist.getRegistDescription());
-		map.put("registDate",regist.getRegistDate());
-		//map.put("registKinds",regist.getReigstKinds());
-		map.put("cMi",cMi);
-		map.put("cMa",cMa);
-		System.out.println("insertP map :"+map);
-				
-		int result = adminService.insertProduct(map);
-		
-		if(result ==1) {
-			adminService.updateRegist(registNo);
-		}
-		return result;
-	}
 
 	
 	
