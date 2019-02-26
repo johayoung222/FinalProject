@@ -26,22 +26,18 @@ public class ItemController {
 		
 		return "item/item";
 	}
-	@RequestMapping("/item/basket.do")
-	public String basket(HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
-//		vo.setUserId(userId);
-		
-//		int count = basketService.countBasket(vo.getProductId(),userId);
-		//count == 0 ? basketService.updateBasket(vo): basketService.insert(vo);
-//		if(count == 0) {
-//			basketService.insert(vo);
-//		}else {
-//			basketService.updateBasket(vo);
-//			
-//		}
-		
-		return "redirect:/item/basket";
-	}
+	/*
+	 * @RequestMapping("/item/basket.do") public String basket(HttpSession session)
+	 * { String userId = (String)session.getAttribute("userId"); //
+	 * vo.setUserId(userId);
+	 * 
+	 * // int count = basketService.countBasket(vo.getProductId(),userId); //count
+	 * == 0 ? basketService.updateBasket(vo): basketService.insert(vo); // if(count
+	 * == 0) { // basketService.insert(vo); // }else { //
+	 * basketService.updateBasket(vo); // // }
+	 * 
+	 * return "redirect:/item/basket"; }
+	 */
 	
 	
 	@RequestMapping("/item/iteminformation/{productNo}")
