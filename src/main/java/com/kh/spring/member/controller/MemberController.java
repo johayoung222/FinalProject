@@ -451,5 +451,9 @@ public class MemberController {
 
 			}
 	
+    @RequestMapping(value="/member/findAccount", method=RequestMethod.GET)
+    public String moveFindPopup() {
+    	return "member/findAccount";
+    }
 	
 }

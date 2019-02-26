@@ -97,10 +97,18 @@
 				<input type="submit" id="login_" value="로그인"/>
 				</form>
 			</div>
-			<a href="" id="font2">비밀번호를 잊어버리셨나요?</a>
+			<a href="javascript: findAccount();" id="font2">비밀번호를 잊어버리셨나요?</a>
 		</div>
 	</div>
+<script>
+/* 아이디/비밀번호 찾기 팝업 스크립트 */
+function findAccount(){
+	open("${pageContext.request.contextPath}/member/findAccount","_blank","width=500,height=400,left=200,top=200");
 	
+}
+</script>
+
+
 
 <script  type="text/javascript">
 function next2(){
