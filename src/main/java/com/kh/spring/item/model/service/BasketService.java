@@ -1,6 +1,7 @@
 package com.kh.spring.item.model.service;
 
 import com.kh.spring.item.model.vo.Basket;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
 public interface BasketService {
@@ -12,5 +13,7 @@ public interface BasketService {
 	void updateBasket(Basket vo);
 
 	Product selectOneProduct(int num);
+
+	Member selectJoinMember(int sellerNo);
 
 }

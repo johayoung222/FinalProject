@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.item.model.service.BasketService;
 import com.kh.spring.item.model.vo.Basket;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
 @Controller
@@ -49,7 +50,14 @@ public class ItemController {
 		
 		Product product = basketService.selectOneProduct(num);
 		logger.debug(product);
+		
+		Member member = basketService.selectJoinMember(product.getSellerNo());
+		
+		String cMacro = product.getCategoryMacro();
+		String cMicro = product.getCategoryMicro();
+		logger.debug(cMacro+"/"+cMicro);
 
+		mav.addObject("member", member);
 		mav.addObject("product", product);
 		mav.setViewName("item/iteminformation");
 		
