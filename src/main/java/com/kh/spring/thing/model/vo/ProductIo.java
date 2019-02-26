@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ProductIo {
-	private int productNo;
+	private int seqProductNo;
 	private String productName;
 	private int productIoPrice;
 	private int productIoAmount;
