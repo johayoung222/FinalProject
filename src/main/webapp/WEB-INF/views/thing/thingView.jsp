@@ -7,24 +7,32 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
    <jsp:param value="" name="pageTitle" />
 </jsp:include>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<style>
+.card-title{
+	color:rgb(103, 105, 201);
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+</style>
 <div class="sell-title"
    style="text-align: center; font-style: oblique; font-size: xx-large;">먼저,
    판매 방법을 선택하세요.</div>
 <div class="sell-title" style="text-align: center; font-style: oblique;">겟잇의
    모든 중고 거래는 안전거래입니다!</div>
 
-<div style="display: inline-flex; text-align: center; margin-left: 32%;">
+<div style="display: inline-flex; text-align: center; margin-left:11%;">
    <div class="card" style="width: 18rem;">
       <img class="card-img-top"
          src="${pageContext.request.contextPath }/resources/images/대신.PNG"
          alt="Card image cap">
       <div class="card-body">
-         <h5 class="card-title">겟잇 베이직</h5>
+         <h5 class="card-title" id="card-title"><strong>겟잇 베이직</strong></h5>
          <p class="card-text"></p>
       </div>
       <ul class="list-group list-group-flush">
          <li class="list-group-item">한번에 1개 제품 등록</li>
-         <li class="list-group-item">컨시지어가 판매가격 제안</li>
+         <li class="list-group-item" >컨시지어가 판매가격 제안</li>
          <li class="list-group-item">구매자 응대 X</li>
          <li class="list-group-item">무료 배송 지원</li>
          <li class="list-group-item">안 팔리면 겟잇이 매입</li>
@@ -445,7 +453,7 @@
          src="${pageContext.request.contextPath }/resources/images/직접.PNG"
          alt="Card image cap">
       <div class="card-body">
-         <h5 class="card-title">직접 판매</h5>
+         <h5 class="card-title"><strong>직접 판매</strong></h5>
          <p class="card-text"></p>
       </div>
       <ul class="list-group list-group-flush">
@@ -485,7 +493,7 @@
 	<div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/경매1.png"  alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">겟잇 옥션</h5>
+    <h5 class="card-title"><strong>겟잇 옥션</strong></h5>
     <p class="card-text"></p>
   </div>
   <ul class="list-group list-group-flush">

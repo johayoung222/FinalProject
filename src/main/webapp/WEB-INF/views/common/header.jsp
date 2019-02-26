@@ -8,16 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>${param.pageTitle}</title>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.js"></script>
 <!-- 부트스트랩관련 라이브러리 -->
 <link rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
     crossorigin="anonymous">
-<!-- <script
+<script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-    crossorigin="anonymous"></script> -->
+    crossorigin="anonymous"></script>
 <!-- 사용자작성 css -->
 <link rel="stylesheet"
     href="${pageContext.request.contextPath }/resources/css/style.css" />
@@ -31,7 +34,6 @@
     /* margin-left: 200px; */
     margin-left: 21%;
     border: 2px solid blue;
-    margin-bottom: 25px;
 }
 #search2 {
     padding: 10px;
@@ -43,10 +45,10 @@
     border-right: 1px solid lightgray;
 }
 .box-link1{
-border-ight: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
+border-right: 1px solid lightgray; float: right; width: 7%; height:40px; text-align:center;
 }
 .box-link2{
-border-right: 1px solid lightgray; float: right; width: 10%; height:40px; text-align:center;
+border-right: 1px solid lightgray; float: right; width: 8.5%; height:40px; text-align:center;
 }
 .box-link3{
 border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-align:center;
@@ -59,20 +61,25 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 }
 #button_{
 	background:white;
-	border-color: white;
-	outline: 0;
 }
 #collapseExample{
 	position:relative;
 	right:210px;
 	width:360px;
 }
-.card-body1 {
-    padding: 0px;
+
+.nav-link:hover{
+	color: #7151FC;
+    border-bottom: 2px solid #7151FC;
+}
+.item-link{
+	color:black;
+}
+.item-link:hover{
+	color: #7151FC;
+    border-bottom: 2px solid #7151FC;
 }
 
-
- 	
 </style>
 </head>
 <body>
@@ -93,11 +100,11 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
                 </c:if>
                 <c:if test="${memberLoggedIn != null }">
-               <a class="item-link" onfocus="blur()" id="button_" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
- 				마이페이지▼
+               <a id="button_" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+ 				마이페이지
  			   </a>
                 <div class="collapse" id="collapseExample">
-  				<div class="card card-body1">
+  				<div class="card card-body">
   				<div><a class="item-link" href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a></div>
 				<div><a href="${pageContext.request.contextPath}/mypage/order.do" style="color:red">판매내역</a>
   				| <a href="${pageContext.request.contextPath}/mypage/purchases.do" style="color:orange">구매내역</a>
@@ -133,9 +140,9 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
     </div>
     <!--https://getbootstrap.com/docs/4.1/components/navbar/-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_"> 
-        	<a class="navbar-brand" href="#"> <img
-			src="${pageContext.request.contextPath }/resources/images/Getit.PNG"
-			alt="스프링로고" width="50px" />
+        	<a class="navbar-brand" href="#"> 
+        	<img src="${pageContext.request.contextPath }/resources/images/Getit2.PNG"
+			alt="스프링로고" width="50px" style="border-radius:50px;" />
 		</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
@@ -149,7 +156,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="nav-link" href="#" 
                  role="button" id="dropdownMenuLink" 
                  data-toggle="dropdown" aria-haspopup="true" 
-                 aria-expanded="false">전체 카테고리</a>
+                 aria-expanded="false" >전체 카테고리</a>
                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                  <div>
                  <a class="dropdown-item" href="${pageContext.request.contextPath }/item/item.do">핸드폰</a>
@@ -174,7 +181,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                  </div>
                  
                  </li>
-                <li class="nav-item"><a class="nav-link"
+                <li class="nav-item" ><a class="nav-link"
                     href="#">관심상품</a></li>
                 <li class="nav-item"><a class="nav-link"
                     href="#">추천상품</a></li>
@@ -222,3 +229,16 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
         </div>
     </div>
     <section id="content">
+   <script>
+   
+      
+   
+    
+    function logout(){
+    	
+    	window.locatiom.href="${pageContext.request.contextPath }/member/memberLogout.do";
+    	
+    }
+   
+   
+   </script>

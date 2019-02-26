@@ -13,6 +13,7 @@
 			<img src="${pageContext.request.contextPath}/images/${vo.productUrl}" width="340" height="300" >
 		</td>
 		<td>
+		 	
 		 	<table border="1" style="height:300px; width:400px;">
 		 		<tr align="center">
 		 			<td>상품명</td>
