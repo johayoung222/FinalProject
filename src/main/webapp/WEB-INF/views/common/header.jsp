@@ -115,8 +115,10 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
                 <a class="item-link" href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
             </div>
             <div id="box-link4">
+              <c:if test="${memberLoggedIn != null }">
                 <i class="fa fa-truck"></i>
                 <a class="item-link" href="${pageContext.request.contextPath }/item/basket.do">장바구니▼</a>
+             </c:if>
             </div>
             <div id="box-link5">
              <c:if test="${memberLoggedIn.memberIsAdmin != null }">
