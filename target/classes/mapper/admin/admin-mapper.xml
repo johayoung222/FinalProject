@@ -146,12 +146,5 @@
 	
 	
 	
-<<<<<<< HEAD
-	<select id="registOne" resultType="regist">
-		select * from regist where seq_regist_no = #{registNo}
-	</select>
-	
-=======
->>>>>>> ce707323948f9e58cbc2c42a4d65c4afea4464a7
 	
 </mapper>

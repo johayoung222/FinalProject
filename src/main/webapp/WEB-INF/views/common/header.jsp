@@ -28,6 +28,9 @@
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+body{
+width:100%;
+}
 #search_ {
     width: 400px;
     height: 50px;
@@ -67,7 +70,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
 	right:210px;
 	width:360px;
 }
-<<<<<<< HEAD
+
 
 .nav-link:hover{
 	color: #7151FC;
@@ -81,11 +84,7 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
     border-bottom: 2px solid #7151FC;
 }
 
-=======
-.card-body1 {
-    padding: 0px;
-}
->>>>>>> ce707323948f9e58cbc2c42a4d65c4afea4464a7
+
 </style>
 
 </head>
