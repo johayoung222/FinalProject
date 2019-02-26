@@ -4,8 +4,6 @@ import com.kh.spring.thing.model.vo.Product;
 
 public interface ItemService {
 
-	int countBasket(int productId, String userId);
-
 	Product selectOneProduct(int num);
 
 	Member selectJoinMember(int sellerNo);
