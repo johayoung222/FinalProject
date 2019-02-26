@@ -1214,7 +1214,7 @@ label{
 		<input type="hidden" name="memberInterest"/>
 		<br />
 		<input type="submit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="reset" class="btn btn-outline-success" value="취소">
+		<input type="reset" class="btn btn-outline-success" onclick="location.href='${pageContext.request.contextPath}'" value="취소">
 	</form>
 </div>
 
@@ -1222,7 +1222,7 @@ label{
 
 <!-- ----------------------------facebook관련 회원가입!-------------------------------------------------->
 <div id="facebookenroll-container">
-	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return fbvalidate();" >
+	<form name="fmemberEnrollFrm" action="${pageContext.request.contextPath}/member/facebookEnrollEnd" method="post" method="post" onsubmit="return snsValidate();" >
 		<input type="hidden" name="memberAlarm"/>
 		 <div id="memberId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
@@ -1249,7 +1249,7 @@ label{
 
 <!-- ----------------------------KAKAO관련 회원가입!-------------------------------------------------->
 <div id="kakaoenroll-container">
-	<form name="kmemberEnrollFrm" action="${pageContext.request.contextPath}/member/kakaoEnrollEnd" method="post" method="post" onsubmit="return kakaovalidate();" >
+	<form name="kmemberEnrollFrm" action="${pageContext.request.contextPath}/member/kakaoEnrollEnd" method="post" method="post" onsubmit="return snsValidate();" >
 		<input type="hidden" name="memberAlarm"/>
 		 <div id="kakaoId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="kId" id="kId" readonly>
@@ -1329,7 +1329,7 @@ label{
      open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
     		 "width=500,height=400,left=200,top=200");
      
-     return true;
+     return false;
 }
 
 $("#memberId_").on("keyup" , function(){
@@ -1494,6 +1494,15 @@ function kakaoCancel(){
 }
 function googleCancel(){
 	$("#googleEnroll-container").hide();
+	
+}
+
+function snsValidate(){
+	 /* 관심상품 팝업 */
+    open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+   		 "width=500,height=400,left=200,top=200");
+    return true;
+	
 	
 }
 

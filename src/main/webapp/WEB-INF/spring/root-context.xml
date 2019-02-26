@@ -78,6 +78,6 @@
     <bean id="oAuth2Parameters"
         class="org.springframework.social.oauth2.OAuth2Parameters">
         <property name="scope" value="email,id,gender" />
-        <property name="redirectUri" value="https://localhost:8443/spring/" />
+        <property name="redirectUri" value="https://localhost:9999/spring/" />
     </bean>
 </beans>

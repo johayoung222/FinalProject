@@ -20,4 +20,13 @@ public interface CustomerDao {
 	int updateNews(Board board);
 
 	int deleteNews(Board board);
+
+	List<Map<String, String>> selectQnaList(int cPage, int numPerPage);
+
+	List<Map<String, String>> selectSearchList(int cPage, int numPerPage, String searchkeyword);
+
+	int countQnaList(String searchkeyword);
+
+	List<Board> selectMainList();
+
 }

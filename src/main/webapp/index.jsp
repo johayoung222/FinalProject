@@ -151,8 +151,7 @@
 				id="favorite5" width="120px" height="100px" />
 			</a>
 			<div>
-				<pre>
-					<strong>    컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
+				<pre><strong>컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
 		</div>
@@ -194,8 +193,7 @@
 
 
 <div id="sell_">
-	<br>
-	<br>
+	<br> <br>
 	<h6 class="font_">이벤트 당첨되었는데 안 쓰는 물건, 자리만 차지하고 있는 쓸모없는 물건...</h6>
 	<h3 class="font_">
 		<strong>겟잇으로 팔아야 잘 산다!</strong>
