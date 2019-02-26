@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Nanum+Pen+Script" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="" name="pageTitle"/>
@@ -28,6 +29,10 @@
    float: right;
 }
 
+.mp-container{
+font-family: 'Nanum Gothic', sans-serif;
+}
+
 </style>
 <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
@@ -49,13 +54,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-    </tr>
+    <c:if test="${empty list }">
+		<tr>
+			<td colspan="5">장바구니에 물품이 없습니다.</td>
+		</tr>
+	</c:if>
+		
+		<c:if test="${not empty list }">
+			<c:forEach items="${list }" var="b">
+			<tr>				
+				<th>${p.SEQ_PRODUCT_NO}</th>				
+			</tr>			
+			</c:forEach>
+		</c:if>
   
   </tbody>
 </table>

@@ -44,7 +44,6 @@
 		<div class="mp-menu-title">
 			장바구니
 		</div>
-		
 	</div>
 </div>
 <script>
