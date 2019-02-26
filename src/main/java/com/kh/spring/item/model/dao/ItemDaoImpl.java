@@ -13,7 +13,7 @@ import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
 @Repository
-public class BasketDaoImpl implements BasketDao {
+public class ItemDaoImpl implements ItemDao {
 	
 	@Autowired
 	SqlSession sqlSession;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spring.item.model.service.BasketService;
+import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 
@@ -19,7 +19,7 @@ public class ItemController {
 	Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	BasketService basketService;
+	ItemService basketService;
 	
 	@RequestMapping("/item/item.do")
 	public String item() {
