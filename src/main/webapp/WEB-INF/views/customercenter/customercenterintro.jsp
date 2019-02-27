@@ -56,6 +56,7 @@
 .content{
 	display: inline-block;
 	width:70%;
+	margin-bottom:10%;
 }
 </style>
 	<div class="content-container">	
@@ -69,7 +70,7 @@
 			<div class="sidebar3" id="sidebar">
 				<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 			</div>
-			<div class="sidebar4" id="sidebar" onclick="hh('${memberLoggedIn.memberId}')">
+			<div class="sidebar4" id="sidebar" onclick="logincheck('${memberLoggedIn.memberId}')">
 				<a href="#">1:1 문의</a>
 			</div>
 			<div class="sidebar5" id="sidebar">
@@ -88,7 +89,7 @@
 		</div>
 	</div>
 <script>
- function hh(memberLoggedIn){
+ function logincheck(memberLoggedIn){
 	 console.log(memberLoggedIn);
 	 if(memberLoggedIn == ''){
 		location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";

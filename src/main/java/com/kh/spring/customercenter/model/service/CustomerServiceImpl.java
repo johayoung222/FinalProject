@@ -74,5 +74,60 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.selectMainList();
 	}
 
+	@Override
+	public Board selectQnaMain(Board board) {
+		return customerDao.selectQnaMain(board);
+	}
+
+	@Override
+	public List<Map<String, String>> selectTutorialList(int cPage, int numPerPage) {
+		return customerDao.selectTutorialList(cPage , numPerPage); 
+	}
+
+	@Override
+	public int countTutorialList() {
+		return customerDao.countTutorialList();
+	}
+	
+	@Override
+	public List<Map<String, String>> selectbuyTutorialList(int cPage, int numPerPage) {
+		return customerDao.selectbuyTutorialList(cPage , numPerPage); 
+	}
+	
+	@Override
+	public int countbuyTutorialList() {
+		return customerDao.countbuyTutorialList();
+	}
+	@Override
+	public List<Map<String, String>> selectsellTutorialList(int cPage, int numPerPage) {
+		return customerDao.selectsellTutorialList(cPage , numPerPage); 
+	}
+	
+	@Override
+	public int countsellTutorialList() {
+		return customerDao.countsellTutorialList();
+	}
+
+	@Override
+	public int insertQna(Board board) {
+		int result = 0;
+		result = customerDao.insertQna(board);
+		return result;
+	}
+
+	@Override
+	public int updateQna(Board board) {
+		int result = 0;
+		result = customerDao.updateQna(board);
+		return result;
+	}
+
+	@Override
+	public int deleteQna(Board board) {
+		int result = 0;
+		result = customerDao.deleteQna(board);
+		return result;
+	}
+
 	 
 }

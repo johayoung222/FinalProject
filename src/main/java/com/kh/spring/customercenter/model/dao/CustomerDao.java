@@ -29,4 +29,24 @@ public interface CustomerDao {
 
 	List<Board> selectMainList();
 
+	Board selectQnaMain(Board board);
+
+	List<Map<String, String>> selectTutorialList(int cPage, int numPerPage);
+
+	int countTutorialList();
+	
+	List<Map<String, String>> selectbuyTutorialList(int cPage, int numPerPage);
+	
+	int countbuyTutorialList();
+	
+	List<Map<String, String>> selectsellTutorialList(int cPage, int numPerPage);
+	
+	int countsellTutorialList();
+
+	int insertQna(Board board);
+
+	int updateQna(Board board);
+
+	int deleteQna(Board board);
+
 }

@@ -191,14 +191,172 @@ public class CustomercenterController {
 		mav.addObject("searchkeyword",searchkeyword);
 		return mav;
 	}
-	@RequestMapping("/customercenter/qnamain.do")
-	public ModelAndView qnaMain(ModelAndView mav) {
-		Board board = new Board();
-		logger.debug(board);
+
+	/* 사용법카테고리 */
+	@RequestMapping("/customercenter/mainTutorial.do")
+	public ModelAndView mainTutorial(ModelAndView mav,
+									@RequestParam(value = "cPage", defaultValue = "1") int cPage) {
+		int numPerPage = 5;
+		//업무로직 
+		//1.게시글 리스트(페이징적용)
+		List<Map<String, String>> list = customerService.selectTutorialList(cPage, numPerPage);
+		logger.debug("list==" + list);
 		
+		//2.전체컨텐츠수
+		int totalContents = customerService.countTutorialList();
+		//logger.debug("totalC==" + totalContents);
+		
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.setViewName("customercenter/searchKeyword");
+		
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
+		return mav;
+	} 
+
+	/* 구매카테고리 */
+	@RequestMapping("/customercenter/buyTutorial.do")
+	public ModelAndView buyTutorial(ModelAndView mav,
+			@RequestParam(value = "cPage", defaultValue = "1") int cPage) {
+		int numPerPage = 5;
+		//업무로직 
+		//1.게시글 리스트(페이징적용)
+		List<Map<String, String>> list = customerService.selectbuyTutorialList(cPage, numPerPage);
+		logger.debug("list==" + list);
+		
+		//2.전체컨텐츠수
+		int totalContents = customerService.countbuyTutorialList();
+		//logger.debug("totalC==" + totalContents);
+		
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.setViewName("customercenter/searchKeyword");
+		
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
+		return mav;
+	} 
+
+	/* 판매카테고리 */
+	@RequestMapping("/customercenter/sellTutorial.do")
+	public ModelAndView sellTutorial(ModelAndView mav,
+			@RequestParam(value = "cPage", defaultValue = "1") int cPage) {
+		int numPerPage = 5;
+		//업무로직 
+		//1.게시글 리스트(페이징적용)
+		List<Map<String, String>> list = customerService.selectsellTutorialList(cPage, numPerPage);
+		logger.debug("list==" + list);
+		
+		//2.전체컨텐츠수
+		int totalContents = customerService.countsellTutorialList();
+		//logger.debug("totalC==" + totalContents);
+		
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("list", list);
+		mav.setViewName("customercenter/searchKeyword");
+		
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
+		return mav;
+	} 
+	
+	/* 질문 상세페이지 */
+	@RequestMapping("/customercenter/qnamain.do")
+	public ModelAndView qnaMain(Board board,ModelAndView mav,@RequestParam(name="seq_board_no") int seq_board_no) {
+		
+		logger.debug("+=+"+board);
+		logger.debug("seq_board_no"+seq_board_no);
+		board.setSeq_board_no(seq_board_no);
+		board = customerService.selectQnaMain(board);
+		
+		
+		mav.addObject("seq_board_no", seq_board_no);
+		mav.addObject("board",board);
 		mav.setViewName("customercenter/qnaMain");
 		return mav;
 	}
+	
+	// 관리자일시 자주 묻는 질문 등록
+		@RequestMapping("/customercenter/insertQna.do")
+		public ModelAndView insertQna(Board board,
+									  @RequestParam(name="catradio") String catradio,
+									  ModelAndView mav) {
+
+			logger.debug("board=" + board);
+			logger.debug("catradio=" + catradio);
+			
+			board.setBoardkinds(catradio);
+
+			// 2. 업무로직
+			int result = customerService.insertQna(board);
+			logger.debug("result" + result);
+
+			// 3. 뷰단처리
+			String loc = "/customercenter/ccqna.do";
+			String msg = "";
+
+			if (result > 0) {
+				msg = "게시물 등록 성공";
+			} else {
+				msg = "게시물 등록 실패";
+			}
+
+			mav.addObject("loc", loc);
+			mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
+
+			return mav;
+		}
+		//공지사항 수정
+		@RequestMapping("/customercenter/updateQna.do")
+		public ModelAndView updateQna(Board board, ModelAndView mav,@RequestParam(name="seq_board_no") int seq_board_no) {
+			logger.debug("upboard="+board);
+
+			int result = customerService.updateQna(board);
+			logger.debug("cont result" + result);
+
+			// 3. 뷰단처리
+			String loc = "/customercenter/qnamain.do?seq_board_no="+seq_board_no;
+			String msg = "";
+
+			if (result > 0) {
+				msg = "게시물 수정 성공";
+			} else {
+				msg = "게시물 수정 실패";
+			}
+
+			mav.addObject("loc", loc);
+			mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
+
+			return mav;
+		}
+		
+		//공지사항 삭제
+		@RequestMapping("/customercenter/deleteQna.do")
+		public ModelAndView deleteQna(Board board, ModelAndView mav) {
+			logger.debug("delboard=" + board);
+
+			int result = customerService.deleteNews(board);
+
+			String loc = "/customercenter/ccqna.do";
+			String msg = "";
+
+			if (result > 0) {
+				msg = "게시물 삭제 성공";
+			} else {
+				msg = "게시물 삭제 실패";
+			}
+
+			mav.addObject("loc", loc);
+			mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
+
+			return mav;
+		}
+	
+	
 		
 		
 	

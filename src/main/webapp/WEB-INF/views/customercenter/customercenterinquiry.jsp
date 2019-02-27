@@ -218,7 +218,7 @@
 		}
 	}
 
-	 function hh(memberLoggedIn){
+	 function logincheck(memberLoggedIn){
 		 console.log(memberLoggedIn);
 		 if(memberLoggedIn == ''){
 			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";

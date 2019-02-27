@@ -65,21 +65,18 @@
 	display: inline-block;
 	width: 70%;
 }
-
-.qnatable {
-	width: 100%;
-	border: 1px solid red;
-}
-
-.qnatable th, td {
-	border: 1px solid red;
-	text-align: center;
-	height: 45px;
+.main{
+	width:80%;
+	margin-left: 10%;
 }
 
 .searchkeyword {
 	margin: 0 auto;
-	width: 50%;
+	width: 80%;
+}
+#searchFrm{
+	display: inline-block;
+	float:right;
 }
 .maintitle{
 	width:100%;
@@ -93,6 +90,46 @@
 	border: 1px solid blue;
 	height: 250px;
 	margin-bottom: 50px;
+}
+
+
+/* 모달css */
+#inserttitle {
+	width: 100%;
+	font-size: 18px;
+}
+
+#insertcontent {
+	width: 100%;
+	overflow: auto;
+	height: 200px;
+	resize: none;
+	font-size: 15px;
+	font-weight: normal;
+}
+/* 모달안에 버튼 */
+.btn-primary{
+	float: right;
+	background-color: white;
+	color: gray;
+	border: 1px solid lightgray;
+}
+
+/* 수정버튼 */
+.btn-outline-primary{
+	display: inline;
+	float: right;
+	position: relative;
+	top:-32px;
+	left:-70px;
+}
+/* 삭제버튼 */
+.btn-outline-danger{
+	display: inline;
+	float: right;
+	position: relative;
+	top: -32px;
+    left: 45px;	
 }
 </style>
 
@@ -109,7 +146,7 @@
 				소식</a>
 		</div>
 		<div class="sidebar4" id="sidebar"
-			onclick="hh('${memberLoggedIn.memberId}')">
+			onclick="logincheck('${memberLoggedIn.memberId}')">
 			<a href="#">1:1 문의</a>
 		</div>
 		<div class="sidebar5" id="sidebar">
@@ -118,37 +155,83 @@
 		</div>
 	</div>
 	<div class="content">
-		<div class="headline">자주 묻는 질문</div>
-
-		<table class="qnatable">
-			<tr>
-				<th colspan="3">
-					<form
-						action="${pageContext.request.contextPath}/customercenter/searchKeyword.do">
-						<%
-							String searchKeyword = (String) request.getAttribute("searchKeyword");
-						%>
-						<input type="text" class="searchkeyword" name="searchkeyword"id="searchkeyword" />
+		<div class="headline">
+			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
+						<input type="text" class="searchkeyword" name="searchkeyword"id="searchkeyword" placeholder="검색"/>
 						<input type="submit" value="검색" />
 					</form>
-				</th>
-			</tr>
-		</table>
-		<div class="maintitle">
-			제에에에에에에에에에에에에에에에에에에에에엥목
 		</div>
-		<div class="maincontent">
-			내요요요요요요요요요요요요요요요요요요요용
+		<div class="main">
+			<div class="maintitle">
+				${board.boardtitle}
+				
+				<%-- <c:if test="${memberLoggedIn.memberIsAdmin != null }"> --%>
+				<div class="ng-binding">
+					<button type="button" id="update" class="btn btn-outline-primary"
+						data-toggle="modal"
+						data-target="#exampleModalLong${board.seq_board_no}">수정</button>
+					
+					<!-- 수정폼 -->
+					<div class="modal fade" id="exampleModalLong${board.seq_board_no}"
+						tabindex="-1" role="dialog"
+						aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">자주 묻는 질문 수정</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form
+									action="${pageContext.request.contextPath}/customercenter/updateQna.do"
+									method="get">
+
+									<div class="modal-body">
+										<input type="hidden" name="seq_board_no" value="${seq_board_no}" /> 
+										<input type="text" id="inserttitle" name="boardtitle" value="${board.boardtitle}" />
+										<br /> <br /> 
+										<textarea id="insertcontent"name="boardcontent" >${board.boardcontent}</textarea>
+									</div>
+
+									<div class="modal-footer">
+										<input type="submit" class="btn btn-primary" value="수정">
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">닫기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<form name="NewsDelFrm" action="${pageContext.request.contextPath}/customercenter/deleteQna.do" method="post">
+					<!-- <input type="submit" id="delete" class="btn btn-primary3" value="삭제"> -->
+					<input type="submit" class="btn btn-outline-danger" value="삭제" onclick="return deleteok();">
+					<input type="hidden" name="seq_board_no"value="${seq_board_no}" /> 
+				</form>
+			</div>
+			<div class="maincontent">
+				${board.boardcontent}
+			</div>
 		</div>
 	</div>
 </div>
 <script>
-	function hh(memberLoggedIn) {
+	function logincheck(memberLoggedIn) {
 		console.log(memberLoggedIn);
 		if (memberLoggedIn == '') {
 			location.href = "${pageContext.request.contextPath}/member/memberMoveLogin.do";
 		} else {
 			location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
+		}
+	}
+	function deleteok(){
+		if(confirm("정말 삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
 		}
 	}
 </script>

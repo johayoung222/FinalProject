@@ -84,6 +84,15 @@
 }
 .qnatitle{
 	font-size:20px;
+	/* margin-bottom:10px; */
+	font-weight: bold;
+}
+#subm{	
+	background-color:transparent;  
+	border:0px transparent solid;
+	cursor: pointer;
+	color:#e19a40;
+	font-size:20px;
 	margin-bottom:10px;
 	font-weight: bold;
 }
@@ -94,6 +103,9 @@
 .qnacontent{
 	overflow: hidden;
 	height: 23px;
+}
+#space{
+	margin-left: 1%;
 }
 
 
@@ -123,21 +135,25 @@
 	</div>
 	<div class="content">
 		<div class="headline">
-			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
-						<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword" value="${searchkeyword}"/>						 
-						<input type="submit" value="검색" />
-					</form>
+			자주 묻는 질문
+			<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
+				<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword" value="${searchkeyword}" placeholder="검색"/>						 
+				<input type="submit" value="검색" />
+			</form>
+			
 		</div>
-			<c:forEach items="${list}" var="s" varStatus="status">
+			<c:forEach items="${list}" var="s" varStatus="vs" >
 			<div class="qnaall">
-				<div class="qnatitle" onclick="gogo();">
-					${s.BOARD_TITLE}
-					<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
-						<input type="hidden" name="seq_board_no"value="${s.SEQ_BOARD_NO}" />
+				<div class="qnatitle">
+					<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" >
+					<input type="submit"id="subm" value="${s.BOARD_TITLE}" />
+						<input type="hidden" name="seq_board_no" value="${s.SEQ_BOARD_NO}" />
 					</form>
 				</div>
 				<div class="qnacontent">
-					${s.BOARD_CONTENT}
+					<div id="space">
+						${s.BOARD_CONTENT}
+					</div>
 				</div>
 			</div>
 			</c:forEach>
@@ -152,6 +168,7 @@
 		</div>
 
 	</div>
+	
 </div>
 <script>
 	function hh(memberLoggedIn) {
@@ -161,9 +178,6 @@
 		} else {
 			location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 		}
-	}
-	function gogo(){
-		$("#gomain").submit();
 	}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
