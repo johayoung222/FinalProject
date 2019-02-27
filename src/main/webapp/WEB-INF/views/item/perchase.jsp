@@ -89,12 +89,6 @@ IMP.request_pay({ // param
 }, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
         // jQuery로 HTTP 요청
-         var msg = '결제가 완료되었습니다.';
-        msg += '고유ID : ' + rsp.imp_uid;
-        msg += '상점 거래ID : ' + rsp.merchant_uid;
-        msg += '결제 금액 : ' + rsp.paid_amount;
-        msg += '카드 승인번호 : ' + rsp.apply_num;
-        
         var param = {
                 "impUid" : rsp.imp_uid,
                 "merchantUid" : rsp.merchant_uid
@@ -106,15 +100,21 @@ IMP.request_pay({ // param
             headers: { "Content-Type": "application/json" },
             data: jParam
         }).done(function (data) {
-			console.log(data);
+        	var msg = '결제가 완료되었습니다.';
+            msg += '고유ID : ' + rsp.imp_uid;
+            msg += '상점 거래ID : ' + rsp.merchant_uid;
+            msg += '결제 금액 : ' + rsp.paid_amount;
+            msg += '카드 승인번호 : ' + rsp.apply_num;
+            
+            alert(msg);
+            console.log(data);
+            location.href = "${pageContext.request.contextPath}/mypage/order";
         })
     } else {
         // 결제 실패 시 로직,
         console.log(rsp.imp_uid, rsp.merchant_uid);
         alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
     }
-    
-        alert(msg);
 });
 }
 

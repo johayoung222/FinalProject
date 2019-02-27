@@ -1,13 +1,23 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="basket">
-	<insert id="insertBasket">
-		insert into tbl_cart()
-			cart_id, user_id, product_id, amount
-			)
-			values(
-			seq_cart.NEXTVAL, #{userId}, #{productId},#{amount} 
-		)
-	</insert>
-
+	<select id="selectOneProduct" resultType="product">
+		select * from product where seq_product_no = #{num}
+	</select>
+	<select id="selectJoinMember" resultType="m">
+		select * from member where seq_member_no = #{sellerNo}
+	</select>
+	
+	<!--장바구니 리스트 -->
+	<select id="basketList" resultMap="basketListMap">
+		select * from basket order by seq_basket_no
+	</select>
+	<resultMap type="map" id="basketListMap"></resultMap>
+	
+	<!-- pageing을 위한  수 세기	 -->
+	<select id="countbasketList" resultType="_int">
+		select count(*) from basket
+	</select>
+	
+	
 </mapper>

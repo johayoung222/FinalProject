@@ -244,12 +244,12 @@ public class MemberController {
 		
 	       
 		if(fbisUsable == true) {
-			  Member nm = new Member();
-		      nm.setMemberId(memberId);
-		      nm.setMemberName(memberName);
-		      nm.setMemberEmail(memberEmail);
-		      int result = memberService.insertFacebookMember(nm);
-			  session.setAttribute("memberLoggedIn",nm);
+			  m = new Member();
+		      m.setMemberId(memberId);
+		      m.setMemberName(memberName);
+		      m.setMemberEmail(memberEmail);
+		      int result = memberService.insertFacebookMember(m);
+			  session.setAttribute("memberLoggedIn",m);
 			}else {
 				
 				session.setAttribute("memberLoggedIn", m);
@@ -325,12 +325,12 @@ public class MemberController {
 	
 	       
 		if(kisUsable == true) {
-		  Member nm = new Member();
-	      nm.setMemberId(kakaoId);
-	      nm.setMemberName(kakaoName);
-	      int result = memberService.insertKakaoMember(nm);
+		  m = new Member();
+	      m.setMemberId(kakaoId);
+	      m.setMemberName(kakaoName);
+	      int result = memberService.insertKakaoMember(m);
 		
-		  session.setAttribute("memberLoggedIn",nm);
+		  session.setAttribute("memberLoggedIn",m);
 		}else {
 			
 			session.setAttribute("memberLoggedIn", m);
@@ -451,5 +451,9 @@ public class MemberController {
 
 			}
 	
+    @RequestMapping(value="/member/findAccount", method=RequestMethod.GET)
+    public String moveFindPopup() {
+    	return "member/findAccount";
+    }
 	
 }

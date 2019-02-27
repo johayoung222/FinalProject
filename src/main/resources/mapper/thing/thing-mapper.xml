@@ -13,7 +13,7 @@
 	</select>
 	
 	<insert id="sell">
-		insert into regist(	SEQ_REGIST_NO , regist_name , regist_price, regist_auction , regist_image, regist_real_image, regist_amount, regist_description, regist_date) values(seq_regist_no.nextval, #{name}, #{price} , #{auction},#{image},#{realImage},#{amount},#{description},SYSDATE)
+		insert into regist(	SEQ_REGIST_NO , regist_name , regist_price, regist_auction , regist_image, regist_real_image, regist_amount, regist_description, regist_date, seq_member_no, regist_kinds) values(seq_regist_no.nextval, #{registName}, #{registPrice} , #{registAuction},#{registImage},#{registRealImage},#{registAmount},#{registDescription}, SYSDATE,#{seqMemberNo},#{registKinds})
 	
 	</insert>
 	

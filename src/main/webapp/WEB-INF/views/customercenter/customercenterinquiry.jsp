@@ -54,7 +54,7 @@
 }
 
 .headline {
-	width:100%;
+
 	font-size: 20px;
 	line-height: 23px;
 	padding-bottom: 20px;
@@ -65,8 +65,9 @@
 .content {
 	display: inline-block;
 	width: 70%;
-		
+
 }
+
 .quirycontent{
 	width:100%;
 }
@@ -97,8 +98,8 @@
 	margin-left:24%;
 	width:51.5%;
 	margin-bottom:50px;
-}
 
+}
 </style>
 
 <div class="content-container">
@@ -124,6 +125,7 @@
 		</div>
 	</div>
 	<div class="content">
+
 		<div class="headline">1:1 문의다</div>
 		<div class="quirycontent">
 			<form action="${pageContext.request.contextPath}/customercenter/insertInquiry.do">
@@ -227,4 +229,5 @@
 		 }
 	 }
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

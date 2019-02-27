@@ -14,7 +14,7 @@
 	integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 	crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.js"></script>
-
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <style>
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: #fff;
@@ -27,18 +27,22 @@
 	position:absolute;
 	
 }
-.nav-link{
-	width:157px;	
-}
-div.col-3 a:hover{
+div.col-2.5 a:hover{
 	color: #fff;
     background-color: #343a40;
+}
+#container2{
+	width:14%;
+}
+.nav-link{
+	color:black;
+	font-family: 'Nanum Gothic', sans-serif;
 }
 </style>
 
 <br />
-<div class="row">
-  <div class="col-3">
+<div id="container2">
+  <div class="col-2.5">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <p class="nav-link">관리자 페이지</p>
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/allMember.do" title="회원리스트조회">회원 리스트조회</a>

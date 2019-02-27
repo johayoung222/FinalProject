@@ -55,6 +55,9 @@
 		<label for="registNo">상품명</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="registName" type="text" readonly> <br />
 		
+		<label for="registNo">제조사</label>&nbsp;&nbsp;
+		<input class="form-control form-control-sm" id="registManufacturer" type="text" placeholder="입력하세요"> <br />
+		
 		<label for="registNo">상품가격</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="registPrice" type="text" readonly> <br />
 		
@@ -84,11 +87,11 @@ $(function(){
 		type:"get",
 		success : function(data){
 			console.log(data);
-			$("#registName").val(data.registName);
-			$("#registPrice").val(data.registPrice);
-			$("#registAmount").val(data.registAmount);
-			$("#registDate").val(Date(data.registDate));
-			$("#exampleFormControlTextarea1").html(data.registDescription);
+			$("#registName").val(data[0].REGIST_NAME);
+			$("#registPrice").val(data[0].REGIST_PRICE);
+			$("#registAmount").val(data[0].REGIST_AMOUNT);
+			$("#registDate").val(data[0].registDate);
+			$("#exampleFormControlTextarea1").html(data[0].REGIST_DESCRIPTION);
 		},error:function(){
 			console.log("ajax요청 실패");
 		}
@@ -123,7 +126,7 @@ $("#categoryMa").on("change",function(){
 			$('#categoryMi').children("option").remove();
 			var html ="<option value='' disabled selected>소분류</option>";
 			for(var i in data){
-			html += "<option class='cMi' value="+data[i].categoryName+">"+data[i].categoryName+"</option>";
+			html += "<option class='cMi' value="+data[i].categoryMicro+">"+data[i].categoryName+"</option>";
 			}
 			$("#categoryMi").append(html);
 		},error : function(){
@@ -136,39 +139,45 @@ $("#categoryMa").on("change",function(){
 $("#btn").on('click',function(){
 	var cMa = $("#categoryMa option:selected").val();
 	var cMi = $("#categoryMi option:selected").val();
-	
+	var registManufacturer = $("#registManufacturer").val();
 	alert("판매신청OK 판매리스트로 이동!");
 	//opener.parent.location.reload();
 	//window.close();
 	var registNo = $("#registNo").val();
-	var registName = $("#registName").val();
-	var registPrice = $("#registPrice").val();
-	var registAmount = $("#registAmount").val();
-	var registDate = $("#registDate").val();
-	var registDescription = $("#exampleFormControlTextarea1").text();
-	var registImage = $("#registImage").val();
-	var registRealImage = $("#registRealImage").val();
 	
-	var param = {
-			registNo:registNo,
-			registName:registName,
-			registPrice:registPrice,
-			registAmount:registAmount,
-			registDate:registDate,
-			registDescription:registDescription,
-			registImage:registImage,
-			registRealImage:registRealImage,
-			cMa:cMa,
-			cMi:cMi};
-	console.log(param);
+	//var registName = $("#registName").val();
+	//var registPrice = $("#registPrice").val();
+	//var registAmount = $("#registAmount").val();
+	//var registDate = $("#registDate").val();
+	//var registDescription = $("#exampleFormControlTextarea1").text();
+	//var registImage = $("#registImage").val();
+	//var registRealImage = $("#registRealImage").val();
+	
+	
+	//var param = {
+	//		registNo:registNo,
+	//		registName:registName,
+	//		registPrice:registPrice,
+	//		registAmount:registAmount,
+	//		registDate:registDate,
+	//		registDescription:registDescription,
+	//		registImage:registImage,
+	//		registRealImage:registRealImage,
+	//		cMa:cMa,
+	//		cMi:cMi};
+	//console.log(param);
 	
 	$.ajax({
 		url : "${pageContext.request.contextPath}/admin/inProduct.do",
-		data : param,
-		type : "POST",
+		data : {registNo:registNo,
+			cMa:cMa,
+			cMi:cMi,
+			registManufacturer:registManufacturer},
+		type : "GET",
 		dataType : "json",
 		success :function(data){
-			console.log(data);
+			opener.parent.location.reload();
+			window.close();
 		},error : function(){
 			console.log("ajax 요청 실패!!");
 		}

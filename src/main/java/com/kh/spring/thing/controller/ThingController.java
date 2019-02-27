@@ -1,7 +1,6 @@
 package com.kh.spring.thing.controller;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,26 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.board.model.exception.BoardException;
-import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.common.util.Utils;
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
-import com.siot.IamportRestHttpClientJava.IamportClient;
-import com.siot.IamportRestHttpClientJava.response.IamportResponse;
-import com.siot.IamportRestHttpClientJava.response.Payment;
 
 @Controller
 public class ThingController {
@@ -60,6 +57,7 @@ public class ThingController {
 			logger.debug("fileName="+upFiles[i].getOriginalFilename());
 			logger.debug("size="+upFiles[i].getSize());
 		}
+		
 		
 		
 		
@@ -126,6 +124,8 @@ public class ThingController {
 			}
 			
 			
+			
+			
 			mav.addObject("loc", loc);
 			mav.addObject("msg", msg);
 			mav.setViewName("common/msg");
@@ -158,22 +158,8 @@ public class ThingController {
 		
 		logger.debug(order);
 		
-		IamportClient client = new IamportClient("2323934020171529","WsJ375morCLmYfngly3v4kslRHxv8ty5Vi83nvrP7dc6tzmO8pjdKMyBt56CyFHuXQxllZatcmzFWWt4");
-		
-		String token;
-		try {
-			token = client.getToken();
-			logger.debug("token : "+token);
-			
-			IamportResponse<Payment> response = client.paymentByImpUid(order.getImpUid());
-			logger.debug("response : "+response.getResponse());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		logger.debug("실행 안되겠지?");
-		mav.setViewName("/mypage/order");
+		mav.addObject("order", order);
+		mav.setViewName("mypage/order");
 		
 		return mav;
 	}
