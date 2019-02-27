@@ -100,6 +100,20 @@
 	margin-bottom:50px;
 
 }
+.inquirylist{
+	width:80%;
+	margin-left:10%;
+	margin-bottom:2%;
+}
+.inquirycontent{
+	margin-bottom:5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.answer{
+	margin-bottom:15px;
+	border-bottom: 2px solid #ececec;
+}
 </style>
 
 <div class="content-container">
@@ -153,12 +167,18 @@
 			</form>
 		</div>
 		<div class="inquirylist">
-			<div class="inquirycontent">
-				여기는 문의한 내용
-			</div>
-			<div class="answer">
-				여기는 답변 내용
-			</div>
+			<c:forEach items="${list}" var="q">
+				<fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy.MM.dd"/>
+				<div class="inquirycontent">
+					${q.QUESTION_CONTENT}
+				</div>
+				<div class="answer">
+					<c:if test="${q.QUESTION_ANSWER  == null}">
+						답변을 기다리는중 입니다.
+					</c:if>
+					${q.QUESTION_ANSWER}
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>

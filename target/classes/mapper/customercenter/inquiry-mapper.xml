@@ -1,8 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="question">
+    <select id="selectinquiryList" resultMap="inquiryMap">
+    	select * from question where seq_member_no = #{seq_member_no} order by question_date desc
+    </select>
+	<resultMap type="Map" id="inquiryMap">
+	
+	</resultMap>
+	
 	<!-- 1:1문의 등록 -->
     <insert id="insertInquiry" parameterType="question">
-    	insert into question values(seq_question_no.nextval,#{question_lkinds},#{question_mkinds},#{question_content},#{seq_member_no},default,null)
+    	insert into question 
+    	values(seq_question_no.nextval,#{question_lkinds},#{question_mkinds},#{question_content},#{seq_member_no},default,null,sysdate)
     </insert>
+    
+	
+	
 </mapper>

@@ -3,6 +3,8 @@ package com.kh.spring.customercenter.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spring.customercenter.model.service.CustomerService;
 import com.kh.spring.customercenter.model.vo.Board;
 import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class CustomercenterController {
@@ -34,17 +37,17 @@ public class CustomercenterController {
 	// return "customercenter/customercenternews"; // /WEB-INF/views/demo/demo.jsp
 	// }
 
-	@RequestMapping("/customercenter/ccinquiry.do")
-	public String customercenterinquiry() {
+	//@RequestMapping("/customercenter/ccinquiry.do")
+	//public String customercenterinquiry() {
 		// System.out.println("ccinquiry메소드가 요청되었습니다.");
-		return "customercenter/customercenterinquiry"; // /WEB-INF/views/demo/demo.jsp
-	}
+	//	return "customercenter/customercenterinquiry"; // /WEB-INF/views/demo/demo.jsp
+	//}
 
-//	@RequestMapping("/customercenter/ccqna.do")
-//	public String customercenternewsqna() {
-//		//System.out.println("ccqna메소드가 요청되었습니다.");
-//		return "customercenter/customercenterqna";	//	/WEB-INF/views/demo/demo.jsp
-//	}
+	//	@RequestMapping("/customercenter/ccqna.do")
+	//	public String customercenternewsqna() {
+	//		//System.out.println("ccqna메소드가 요청되었습니다.");
+	//		return "customercenter/customercenterqna";	//	/WEB-INF/views/demo/demo.jsp
+	//	}
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	//공지사항 페이지 리스트
@@ -359,17 +362,35 @@ public class CustomercenterController {
 			return mav;
 		}
 	//1:1문의-----------------------------------------------------------------------------------------
-	
+		@RequestMapping("/customercenter/ccinquiry.do")
+		public ModelAndView selectinquiryList(HttpSession session,
+											  ModelAndView mav) {
+			Member m = (Member)session.getAttribute("memberLoggedIn");
+			Question q = new Question();
+			q.setSeq_member_no(m.getSeqmemberNo());
+			logger.debug("1234==="+m);
+			// 업무로직
+			// 1.게시글 리스트(페이징적용)
+			List<Map<String, String>> list = customerService.selectinquiryList(q);
+			logger.debug("list==" + list);
+
+			mav.addObject("list", list);
+			mav.setViewName("customercenter/customercenterinquiry");
+
+			return mav;
+		}
+		
+		
 		@RequestMapping("/customercenter/insertInquiry.do")
 		public ModelAndView insertInquiry(ModelAndView mav,
 										  @RequestParam(name="selone") String selone,
 										  @RequestParam(name="seltwo") String seltwo,
 										  @RequestParam(name="incontent") String incontent,
 										  @RequestParam(name="seq_member_no") int seq_member_no) {
-			logger.debug("1234---"+selone);
-			logger.debug("1234---"+seltwo);
-			logger.debug("1234---"+incontent);
-			logger.debug("1234---"+seq_member_no);
+		/*
+		 * logger.debug("1234---"+selone); logger.debug("1234---"+seltwo);
+		 * logger.debug("1234---"+incontent); logger.debug("1234---"+seq_member_no);
+		 */
 			
 			
 			Question q = new Question();
@@ -384,9 +405,9 @@ public class CustomercenterController {
 			String msg = "";
 
 			if (result > 0) {
-				msg = "게시물 삭제 성공";
+				msg = "1:1문의 등록을 완료하였습니다 답변을 기다려주세요~ :)";
 			} else {
-				msg = "게시물 삭제 실패";
+				msg = "1:1문의 실패";
 			}
 			
 			mav.addObject("loc", loc);

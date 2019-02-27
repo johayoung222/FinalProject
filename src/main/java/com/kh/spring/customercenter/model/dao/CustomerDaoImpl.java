@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
 import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 
 @Repository
@@ -133,6 +134,11 @@ public class CustomerDaoImpl implements CustomerDao {
 	public int insertInquiry(Question q) {
 		int result = sqlSession.insert("question.insertInquiry", q);
 		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> selectinquiryList(Question q) {
+		 return sqlSession.selectList("question.selectinquiryList" ,q); 
 	}
 
 

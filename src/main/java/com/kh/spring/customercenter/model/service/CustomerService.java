@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
 import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 
 
@@ -51,5 +52,8 @@ public interface CustomerService {
 	int deleteQna(Board board);
 
 	int insertInquiry(Question q);
+
+	List<Map<String, String>> selectinquiryList(Question q);
+
 
 }

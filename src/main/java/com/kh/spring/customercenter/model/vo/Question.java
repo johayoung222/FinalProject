@@ -1,5 +1,7 @@
 package com.kh.spring.customercenter.model.vo;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,4 +17,5 @@ public class Question {
 	private int seq_member_no;
 	private String question_result;
 	private String question_answer;
+	private Date question_date;
 }

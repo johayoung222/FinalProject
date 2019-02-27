@@ -14,6 +14,7 @@ import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.dao.CustomerDao;
 import com.kh.spring.customercenter.model.vo.Board;
 import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -135,6 +136,11 @@ public class CustomerServiceImpl implements CustomerService {
 		int result = 0;
 		result = customerDao.insertInquiry(q);
 		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> selectinquiryList(Question q) {
+		return customerDao.selectinquiryList(q);
 	}
 
 	 
