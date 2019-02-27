@@ -1,6 +1,7 @@
 package com.kh.spring.category.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	public List<Regist> laptopPcEnd() {
 		return sqlSession.selectList("regist.laptopPcEnd");
+	}
+
+
+	@Override
+	public List<Map<String, String>> selectMacro() {
+		return sqlSession.selectList("product.selectAll");
 	}
 
 }
