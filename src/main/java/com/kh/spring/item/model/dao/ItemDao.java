@@ -12,4 +12,8 @@ public interface ItemDao {
 
 	Member selectJoinMember(int sellerNo);
 
+	void insertAsk(String askContent);
+
+	void updateMember(Map<String, String> map);
+
 }

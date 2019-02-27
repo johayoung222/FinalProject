@@ -131,7 +131,7 @@
 			<textarea rows="3" cols="100" id="askContent"></textarea>
 			<button onclick="itemAsk();">작성</button>
 		</div>
-		<div class="ask-content">
+		<div class="ask-content" id="askList">
 			<span>문의하신 내역이 없습니다.</span>
 		</div>
 	</div>
@@ -141,14 +141,31 @@
 		$(".ask-comment").show();
 	}
 	function itemAsk(){
-		var param = {"askContent":$("#askContent").val()};
+		
+		if($("#askContent").val().trim().length == 0){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+		
+		var asker = ${member.seqMemberNo};
+		var param = {"askContent":$("#askContent").val(),
+					"asker":asker};
 		
 		$.ajax({
 			url: "${pageContext.request.contextPath}/item/ask",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			dataType: "json",
 			data: param,
-			type: "get",
+			type: "post",
 			success: function(data){
 				console.log(data);
+				
+				if(data.length > 0){
+				var html = "<span>"+data+"</span>";
+				$("#askContent").val("");
+				
+				$("#askList").html(html);
+				}
 			},
 			error: function(){
 				console.log("ajax요청 에러!");

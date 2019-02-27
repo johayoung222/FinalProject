@@ -1,6 +1,8 @@
 package com.kh.spring.item.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,8 +47,19 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/item/ask")
-	public void productAsk(@RequestParam(value="askContent") String askContent, HttpServletResponse response) throws JsonIOException, IOException {
+	public void productAsk(@RequestParam(value="askContent") String askContent, HttpServletResponse response,
+						@RequestParam(value="asker") int asker) throws JsonIOException, IOException {
+		logger.debug(askContent+"/"+asker);
 		
+		basketService.insertAsk(askContent);
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("asker", String.valueOf(asker));
+		map.put("askContent", askContent);
+		
+		basketService.updateMember(map);
+		
+		response.setContentType("application/json;charset=UTF-8"); 
 		new Gson().toJson(askContent, response.getWriter());
 	}
 	

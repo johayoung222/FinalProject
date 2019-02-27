@@ -7,4 +7,8 @@
 	<select id="selectJoinMember" resultType="m">
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
+	<insert id="insertAsk">
+		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate )
+	</insert>
+	
 </mapper>

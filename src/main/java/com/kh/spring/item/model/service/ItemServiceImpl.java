@@ -1,5 +1,7 @@
 package com.kh.spring.item.model.service;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Member selectJoinMember(int sellerNo) {
 		return basketDao.selectJoinMember(sellerNo);
+	}
+
+	@Override
+	public void insertAsk(String askContent) {
+		basketDao.insertAsk(askContent);
+	}
+
+	@Override
+	public void updateMember(Map<String, String> map) {
+		basketDao.updateMember(map);
 	}
 
 	

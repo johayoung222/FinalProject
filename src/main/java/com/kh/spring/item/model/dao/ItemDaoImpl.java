@@ -1,5 +1,7 @@
 package com.kh.spring.item.model.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,16 @@ public class ItemDaoImpl implements ItemDao {
 	public Member selectJoinMember(int sellerNo) {
 		Member m = sqlSession.selectOne("basket.selectJoinMember", sellerNo);
 		return m;
+	}
+
+	@Override
+	public void insertAsk(String askContent) {
+		sqlSession.insert("basket.insertAsk",askContent);
+	}
+
+	@Override
+	public void updateMember(Map<String, String> map) {
+		sqlSession.update("basket.updateMember",map);
 	}
 
 	
