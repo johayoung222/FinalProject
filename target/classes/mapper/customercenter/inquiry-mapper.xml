@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="question">
+	<!-- 1:1문의 등록 -->
+    <insert id="insertInquiry" parameterType="question">
+    	insert into question values(seq_question_no.nextval,#{question_lkinds},#{question_mkinds},#{question_content},#{seq_member_no},default,null)
+    </insert>
+</mapper>

@@ -10,7 +10,7 @@ import lombok.ToString;
 public class Question {
 	private int seq_question_no;
 	private String question_lkinds;
-	private String question_skinds;
+	private String question_mkinds;
 	private String question_content;
 	private int seq_member_no;
 	private String question_result;

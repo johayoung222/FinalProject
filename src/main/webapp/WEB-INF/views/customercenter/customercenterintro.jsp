@@ -56,7 +56,11 @@
 .content{
 	display: inline-block;
 	width:70%;
-	margin-bottom:10%;
+}
+.main{
+	width: 80%;
+    margin-bottom: 50px;
+    margin-left: 10%;
 }
 </style>
 	<div class="content-container">	
@@ -82,9 +86,11 @@
 			<div class="headline">
 				여기 소개 헤드라인
 			</div>
-			<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" class="img-fluid" alt="Responsive image">
 			<div class="main">
-			여기는 블라블라 하는곳
+				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" class="img-fluid" alt="Responsive image">
+					<div class="main2">
+						여기는 블라블라 하는곳
+					</div>
 			</div>	
 		</div>
 	</div>

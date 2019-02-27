@@ -13,6 +13,7 @@ import com.kh.spring.board.model.exception.BoardException;
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.dao.CustomerDao;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -126,6 +127,13 @@ public class CustomerServiceImpl implements CustomerService {
 	public int deleteQna(Board board) {
 		int result = 0;
 		result = customerDao.deleteQna(board);
+		return result;
+	}
+
+	@Override
+	public int insertInquiry(Question q) {
+		int result = 0;
+		result = customerDao.insertInquiry(q);
 		return result;
 	}
 

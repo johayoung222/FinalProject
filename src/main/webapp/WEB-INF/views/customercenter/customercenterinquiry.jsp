@@ -146,11 +146,19 @@
 				<br />
 				<div class="quirymain">
 					<!-- <input type="text" class="main" /> -->
-					<textarea rows="25" cols="15" class="main"></textarea>
+					<textarea rows="25" cols="15" class="main" name="incontent"></textarea>
 				</div>
-				<input type="hidden" name="seq_member_no"/>
+				<input type="hidden" name="seq_member_no" value="${memberLoggedIn.seqmemberNo}"/>
 				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
 			</form>
+		</div>
+		<div class="inquirylist">
+			<div class="inquirycontent">
+				여기는 문의한 내용
+			</div>
+			<div class="answer">
+				여기는 답변 내용
+			</div>
 		</div>
 	</div>
 </div>

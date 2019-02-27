@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
 
 
 
@@ -48,5 +49,7 @@ public interface CustomerService {
 	int updateQna(Board board);
 
 	int deleteQna(Board board);
+
+	int insertInquiry(Question q);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
 
 
 @Repository
@@ -125,6 +126,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public int deleteQna(Board board) {
 		int result = sqlSession.insert("cc.deleteQna", board);
+		return result;
+	}
+
+	@Override
+	public int insertInquiry(Question q) {
+		int result = sqlSession.insert("question.insertInquiry", q);
 		return result;
 	}
 

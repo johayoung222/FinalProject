@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.customercenter.model.service.CustomerService;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
 
 @Controller
 public class CustomercenterController {
@@ -144,6 +145,8 @@ public class CustomercenterController {
 
 		return mav;
 	}
+	
+	//자주묻는질문--------------------------------------------------------------------------------------------
 	
 	//자주묻는질문페이지 리스트
 	@RequestMapping("/customercenter/ccqna.do")
@@ -308,7 +311,7 @@ public class CustomercenterController {
 
 			return mav;
 		}
-		//공지사항 수정
+		//자주묻는질문 수정
 		@RequestMapping("/customercenter/updateQna.do")
 		public ModelAndView updateQna(Board board, ModelAndView mav,@RequestParam(name="seq_board_no") int seq_board_no) {
 			logger.debug("upboard="+board);
@@ -333,7 +336,7 @@ public class CustomercenterController {
 			return mav;
 		}
 		
-		//공지사항 삭제
+		//자주묻는질문 삭제
 		@RequestMapping("/customercenter/deleteQna.do")
 		public ModelAndView deleteQna(Board board, ModelAndView mav) {
 			logger.debug("delboard=" + board);
@@ -355,8 +358,43 @@ public class CustomercenterController {
 
 			return mav;
 		}
+	//1:1문의-----------------------------------------------------------------------------------------
 	
-	
+		@RequestMapping("/customercenter/insertInquiry.do")
+		public ModelAndView insertInquiry(ModelAndView mav,
+										  @RequestParam(name="selone") String selone,
+										  @RequestParam(name="seltwo") String seltwo,
+										  @RequestParam(name="incontent") String incontent,
+										  @RequestParam(name="seq_member_no") int seq_member_no) {
+			logger.debug("1234---"+selone);
+			logger.debug("1234---"+seltwo);
+			logger.debug("1234---"+incontent);
+			logger.debug("1234---"+seq_member_no);
+			
+			
+			Question q = new Question();
+			q.setQuestion_lkinds(selone);
+			q.setQuestion_mkinds(seltwo);
+			q.setQuestion_content(incontent);
+			q.setSeq_member_no(seq_member_no);
+			
+			int result = customerService.insertInquiry(q);
+			
+			String loc = "/customercenter/ccinquiry.do";
+			String msg = "";
+
+			if (result > 0) {
+				msg = "게시물 삭제 성공";
+			} else {
+				msg = "게시물 삭제 실패";
+			}
+			
+			mav.addObject("loc", loc);
+			mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
+			
+			return mav;
+		}
 		
 		
 	
