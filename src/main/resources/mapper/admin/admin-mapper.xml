@@ -17,9 +17,33 @@
 	<select id="countmemberSearch" resultType="_int">
 		select count(*) from member where ${type} like '%'||#{search}||'%'
 	</select>
+
+	<!-- 회원 1명 정보  -->	
+	<select id="memberOne" resultMap="memberMap">
+		select * from member where member_id = #{memberId}
+	</select>
 	
+	<!-- 쿠폰 다 가져오기 -->
+	<select id="couponAll" resultMap="couponAllMap">
+		select * from coupon
+	</select>
+	<resultMap type="map" id="couponAllMap"></resultMap>
 	
+	<!-- 쿠폰지급 > 쿠폰리스트 테이블에 insert -->
+	<insert id="couponPlus" parameterType="map">
+		insert into coupon_listt values(#{memberNo},sysdate,#{couponNo},'N')
+	</insert>
 	
+	<!-- 개인 쿠폰 지급 내역 -->
+	<select id="couponList" resultMap="couponAllMap">
+		select C.*,l.coupon_status from coupon c join  coupon_listt l on c.seq_coupon_no = l.seq_coupon_no
+   		where l.seq_member_no = #{memberNo} order by coupon_date desc
+	</select>
+	
+	<!-- 관리자가 고객 쿠폰 삭제 -->
+	<delete id="deleteCoupon" >
+		delete from coupon_listt where seq_member_no = #{memberNo} and seq_coupon_no = #{seqcouponNo}
+	</delete>
 	
 	<!-- 결제된 상품 리스트 -->
 	<select id="paidProduct" resultMap="padiProductMap">
