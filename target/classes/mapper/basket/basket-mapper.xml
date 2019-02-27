@@ -7,4 +7,17 @@
 	<select id="selectJoinMember" resultType="m">
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
+	
+	<!--장바구니 리스트 -->
+	<select id="basketList" resultMap="basketListMap">
+		select * from basket order by seq_basket_no
+	</select>
+	<resultMap type="map" id="basketListMap"></resultMap>
+	
+	<!-- pageing을 위한  수 세기	 -->
+	<select id="countbasketList" resultType="_int">
+		select count(*) from basket
+	</select>
+	
+	
 </mapper>
