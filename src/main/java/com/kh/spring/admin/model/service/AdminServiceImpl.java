@@ -39,6 +39,33 @@ public class AdminServiceImpl implements AdminService {
 	public int countmemberSearch(Map<String, String> map) {
 		return adminDao.countmemberSearch(map);
 	}
+	
+	@Override
+	public List<Map<String, Object>> memberOne(String memberId) {
+		return adminDao.memberOne(memberId);
+	}
+	
+	@Override
+	public List<Map<String, Object>> couponAll() {
+		return adminDao.couponAll();
+	}
+	
+	@Override
+	public int couponPlus(Map<String, Object> map) {
+		return adminDao.couponPlus(map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> couponList(int memberNo) {
+		return adminDao.couponList(memberNo);
+	}
+	
+	@Override
+	public int deleteCoupon(Map<String, Object> map) {
+		return adminDao.deleteCoupon(map);
+	}
+
+
 
 	
 	//결제된 상품 리스트----------------------------------------------------------------
@@ -65,8 +92,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	//판매 신청 리스트----------------------------------------------------------------
 	@Override
-	public List<Map<String, Object>> regist(int cPage, int numPerPage) {
-		return adminDao.regist(cPage, numPerPage);
+	public List<Map<String, Object>> regist() {
+		return adminDao.regist();
 	}
 
 	@Override
@@ -161,6 +188,13 @@ public class AdminServiceImpl implements AdminService {
 	public int countreportList() {
 		return adminDao.countreportList();
 	}
+
+
+
+	
+
+	
+	
 
 	
 	

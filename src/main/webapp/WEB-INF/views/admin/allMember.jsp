@@ -12,13 +12,27 @@
 
 <style>
 .allMember-container{
+	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
+.tableTr td{
+	height:70px;
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+}
+input[type=submit].btn-block {
+    width: 100px;
+    color:#007bff;
+}
+
 </style>
 <br />
 <section id="allMember-container" class="allMember-container">
-	<nav class="navbar navbar-light bg-light">
+	<nav class="navbar navbar-light bg-light nav-link">
 	<p>회원 리스트조회</p>
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
@@ -56,7 +70,7 @@
 		</c:if>
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="m">
-			<tr>				
+			<tr class="tableTr"  >				
 				<td>${m.MEMBER_ID }</td>
 				<td>${m.MEMBER_NAME }</td>
 				<td>
@@ -94,6 +108,13 @@
 	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section> 
 <script>
+
+$(document).on('click','.tableTr',function(){
+	var memberId = $(this).children("td:first").text();
+	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=400");
+});
+
+
 /*
 $("#form-inline .btn-send").on("click",function(){
 	alert("클릭했다");

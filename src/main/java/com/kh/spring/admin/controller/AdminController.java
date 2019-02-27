@@ -103,6 +103,74 @@ public class AdminController {
 		return mav;
 	}
 	
+	@RequestMapping("/admin/memberPage.do")
+	public ModelAndView memberPage(ModelAndView mav
+			,@RequestParam(value="memberId")String memberId) {
+		logger.debug("memberPage 메소드 실행!!");
+		mav.addObject("memberId",memberId);
+		mav.setViewName("admin/memberPage");
+		return mav;
+	}
+	
+	@RequestMapping(value="/admin/memberOne.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> memberOne(@RequestParam(value="memberId")String memberId){
+		List<Map<String,Object>> list = adminService.memberOne(memberId);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/couponAll.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> couponAll(){
+		logger.debug("couponAll메소드 실행!!");
+		List<Map<String, Object>> list = adminService.couponAll(); 
+		logger.debug(list);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/couponPlus.do",method=RequestMethod.GET)
+	@ResponseBody
+	public int couponPlus(@RequestParam(value="memberNo")int memberNo,
+			@RequestParam(value="couponNo")int couponNo) {
+		int result = 0;
+		logger.debug("couponPlus메소드 실행!!");
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberNo",memberNo);
+		map.put("couponNo",couponNo);
+		logger.debug(map);
+		result = adminService.couponPlus(map);
+		return result;
+	}
+	
+	@RequestMapping(value="/admin/couponList.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String,Object>> couponList(@RequestParam(value="memberNo")int memberNo){
+		logger.debug("couponList메소드 실행!!");
+		logger.debug(memberNo);
+		
+		List<Map<String, Object>> list = adminService.couponList(memberNo);
+		logger.debug(list);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/deleteCoupon.do",method=RequestMethod.GET)
+	@ResponseBody
+	public int deleteCoupon(@RequestParam(value="seqcouponNo")int seqcouponNo,
+			@RequestParam(value="memberNo")int memberNo) {
+		int result = 0;
+		//logger.debug("deleteCoupon메소드 실행!!");
+		//logger.debug(seqcouponNo+","+memberNo);
+		Map<String, Object> map = new HashMap<>();
+		map.put("seqcouponNo",seqcouponNo);
+		map.put("memberNo",memberNo);
+		
+		result = adminService.deleteCoupon(map);
+		
+		
+		return result;
+	}
+	
+	
 	@RequestMapping("/admin/paidProduct.do")
 	public ModelAndView paidProduct(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
 		int numPerPage = 7;
@@ -158,11 +226,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/regist.do")
 	@ResponseBody
 	public List<Map<String, Object>> regist() {
-		System.out.println("regist메소드 실행!!");
-		int cPage = 1;
-		int numPerPage = 7;
-		List<Map<String, Object>> list = adminService.regist(cPage, numPerPage);
-				
+		//logger.debug("regist메소드 실행!!");
+		List<Map<String, Object>> list = adminService.regist();
+		//logger.debug(list);
 		return list;
 	}
 	
@@ -193,7 +259,9 @@ public class AdminController {
 	@RequestMapping(value="/admin/registOne.do", method=RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> registOne(@RequestParam(value="registNo")int registNo) {
+		logger.debug("registOne메소드 실행");
 		List<Map<String, Object>> list = adminService.registOne(registNo);
+		logger.debug(list);
 		return list;
 	}
 	
@@ -226,6 +294,12 @@ public class AdminController {
 			adminService.updateRegist(registNo);
 		}
 		return result;
+	}
+	
+	@RequestMapping("/admin/auctionList.do")
+	public ModelAndView auctionList(ModelAndView mav) {
+		mav.setViewName("admin/auctionList");
+		return mav;
 	}
 		
 	@RequestMapping("/admin/productList.do")

@@ -12,8 +12,10 @@
 
 <style>
 .regist-container{
+	width:1300px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 	
 }
 #tbl-regist{
