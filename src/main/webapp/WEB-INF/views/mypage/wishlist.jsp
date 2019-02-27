@@ -14,11 +14,14 @@
 </style>
 <div class="mypage-container">
 	<div class="real-content-container">
-		<div class="mp-container">
-			<div class="mp-title">
+		<div class="mp-container" style="margin-left:100px;">
+			<div class="mp">
+			<strong style="font-size:20px;">
 			알림 설정
+			</strong>
 			</div>
-			<div class="mypage-profile-body">
+			<hr style="width:130%;">
+			<div class="mypage-profile">
 				<div class="wish-body-title">
 					앱 알림
 				</div>
@@ -62,10 +65,11 @@
 								제품 상세 페이지에서 알림 받기를 클릭하시면 추후 동일한 제품이 등록될 때 셀잇 앱 알림을 보내드립니다.
 							</div>
 						</div>
+						<hr style="width: 110%;">
 					</div>
 				</div>
 			</div>
-			<div class="mypage-profile-body">
+			<div class="mypage-profile">
 				<div class="wish-body-title">
 					이메일
 				</div>

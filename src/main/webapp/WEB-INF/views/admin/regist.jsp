@@ -14,6 +14,7 @@
 .regist-container{
 	position:relative;
 	margin-left:180px;
+	
 }
 #tbl-regist{
 	table-layout: fixed;

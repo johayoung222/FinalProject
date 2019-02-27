@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
 </jsp:include>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <style>
 .productInfo-container{
@@ -22,6 +23,7 @@
 	margin: 0 auto;
 }
 </style>
+
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
