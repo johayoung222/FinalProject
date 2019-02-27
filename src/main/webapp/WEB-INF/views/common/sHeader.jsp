@@ -55,7 +55,7 @@ font-family: 'Do Hyeon', sans-serif;
 </head>
 <div class="header-container">
 	<div class="header-left">
-	<div class="logo" style="border:0"><a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/logo-spring.png"  width="100%" height="100%"/></a></div>
+	<div class="logo" style="border:0"><a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit.PNG"  width="100%" height="100%"/></a></div>
 	<div class="logo-next" id="login2_" style="background:white;">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
 	</div>
 	<div class="header-right">

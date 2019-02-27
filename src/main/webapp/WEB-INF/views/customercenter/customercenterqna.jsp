@@ -85,6 +85,7 @@
 	cursor: pointer;
 	color:#e19a40;
 	font-size:18px;	
+	
 }
 .qnatable td:hover{
 	/* 호버시 밑줄 */
@@ -106,12 +107,41 @@
 }
 
 .searchkeyword {
+	width: 60%;
 	margin: 0 auto;
-	width: 80%;
 }
 #searchFrm{
 	display: inline-block;
 	float:right;
+}
+
+/* 버튼|서브밋 */
+#subm{
+	background-color:transparent;  
+	border:0px transparent solid;
+	cursor: pointer;
+	color:#e19a40;
+	font-size:18px;	
+}
+
+
+/* 모달css */
+#inserttitle {
+	width: 100%;
+}
+
+#insertcontent {
+	width: 100%;
+	overflow: auto;
+	height: 200px;
+	resize: none;
+}
+/* 모달안에 버튼 */
+.btn-primary{
+	float: right;
+	background-color: white;
+	color: gray;
+	border: 1px solid lightgray;
 }
 </style>
 
@@ -128,7 +158,7 @@
 				소식</a>
 		</div>
 		<div class="sidebar4" id="sidebar"
-			onclick="hh('${memberLoggedIn.memberId}')">
+			onclick="logincheck('${memberLoggedIn.memberId}')">
 			<a href="#">1:1 문의</a>
 		</div>
 		<div class="sidebar5" id="sidebar">
@@ -138,25 +168,54 @@
 	</div>
 	<div class="content">
 		<div class="headline">
-			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm" class="navbar-search pull-left">
-						<input type="text" name="searchkeyword" id="searchkeyword" class="search-query" placeholder="검색" />
-						<input type="submit" value="검색"/>
-					</form>	
+			자주 묻는 질문
+			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
+				data-target="#exampleModalLong">자주 묻는 질문 쓰기</button>
+				
+				<div class="modal fade" id="exampleModalLong" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLongTitle"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">공지사항</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form
+							action="${pageContext.request.contextPath}/customercenter/insertQna.do"
+							method="get">
+							<div class="modal-body">
+								<input type="radio" name="catradio" value="2t"/>사용법
+								<input type="radio" name="catradio" value="2b"/>구매
+								<input type="radio" name="catradio" value="2s"/>판매
+								<br /><br />
+								<input type="text" id="inserttitle" name="boardtitle"
+									placeholder="제목을 입력하세요" /> <br /> <br /> 
+									<textarea id="insertcontent" name="boardcontent" placeholder="내용을 입력하세요"></textarea>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary" value="등록">
+								<button type="button" class="btn btn-secondary"data-dismiss="modal">닫기</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+				
+			<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm" class="navbar-search pull-left">
+				<input type="text" name="searchkeyword" id="searchkeyword" class="search-query" placeholder="검색" />
+				<input type="submit" value="검색"/>
+			</form>	
 		</div>
 		
 		<table class="qnatable">
-			<%-- <tr>
-				<th colspan="3">
-					<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do">
-						<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword"/>
-						<input type="submit" value="검색"/>
-					</form>
-				</th>
-			</tr> --%>
 			<tr >
-				<td class="butt"><button type="button" class="btn btn-outline-primary">GetIt 사용법</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">구매 관련</button></td>
-				<td class="butt"><button type="button" class="btn btn-outline-primary">판매 관련</button></td>
+				<td class="butt"><button type="button" id="catbtn1" name="catbtn1" class="btn btn-outline-primary">GetIt 사용법</button></td>
+				<td class="butt"><button type="button" id="catbtn2" name="catbtn2" class="btn btn-outline-primary">구매 관련</button></td>
+				<td class="butt"><button type="button" id="catbtn3" name="catbtn3" class="btn btn-outline-primary">판매 관련</button></td>
 			</tr>
 			<c:set var="i" value="0" />
 			<c:set var="j" value="3" />
@@ -165,7 +224,7 @@
 					<tr>
 				</c:if>
 				<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
-					<td onclick="gogo();">${q.BOARD_TITLE}</td>
+					<td><input type="submit" id="subm" value="${q.BOARD_TITLE}"/></td>
 					<input type="hidden" name="seq_board_no"value="${q.SEQ_BOARD_NO}" />
 				</form>
 				<c:if test="${i%j==j-1}">
@@ -178,7 +237,7 @@
 	</div>
 </div>
 <script>
-	function hh(memberLoggedIn) {
+	function logincheck(memberLoggedIn) {
 		console.log(memberLoggedIn);
 		if (memberLoggedIn == '') {
 			location.href = "${pageContext.request.contextPath}/member/memberMoveLogin.do";
@@ -186,8 +245,15 @@
 			location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 		}
 	}
-function gogo(){
-	$("#gomain").submit();
-}
+	$("#catbtn1").on('click',function(){
+		location.href = "${pageContext.request.contextPath}/customercenter/mainTutorial.do";
+	})
+	$("#catbtn2").on('click',function(){
+		location.href = "${pageContext.request.contextPath}/customercenter/buyTutorial.do";
+	})
+	$("#catbtn3").on('click',function(){
+		location.href = "${pageContext.request.contextPath}/customercenter/sellTutorial.do";
+	})
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

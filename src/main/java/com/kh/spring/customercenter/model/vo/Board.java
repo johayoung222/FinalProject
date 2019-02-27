@@ -23,6 +23,7 @@ public class Board implements Serializable{
 	private Date boarddate;
 	private String boardwriter;
 	private String boardkinds;
+	private int board_readcount;
 	private int seq_member_no;
 	
 	

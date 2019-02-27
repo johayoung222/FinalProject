@@ -71,8 +71,7 @@
    	          <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
                data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();">
                  FaceBook으로 로그인
-              </fb:login-button>
-							
+              </fb:login-button>						
 				</li>
 			<!-- 	<li class="list-group-item list-group-item-action">
 			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40"
@@ -82,8 +81,7 @@
 				 <li class="list-group-item list-group-item-action">
 				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="90%" height="8%"
 				onclick="kakaoLogin()"/>
-				</li>
-				
+			  </li>		
 			</ul>
 			</div>
 			<br>

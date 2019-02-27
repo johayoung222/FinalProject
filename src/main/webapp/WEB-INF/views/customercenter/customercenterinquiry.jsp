@@ -100,6 +100,20 @@
 	margin-bottom:50px;
 
 }
+.inquirylist{
+	width:80%;
+	margin-left:10%;
+	margin-bottom:2%;
+}
+.inquirycontent{
+	margin-bottom:5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.answer{
+	margin-bottom:15px;
+	border-bottom: 2px solid #ececec;
+}
 </style>
 
 <div class="content-container">
@@ -146,11 +160,25 @@
 				<br />
 				<div class="quirymain">
 					<!-- <input type="text" class="main" /> -->
-					<textarea rows="25" cols="15" class="main"></textarea>
+					<textarea rows="25" cols="15" class="main" name="incontent"></textarea>
 				</div>
-				<input type="hidden" name="seq_member_no"/>
+				<input type="hidden" name="seq_member_no" value="${memberLoggedIn.seqmemberNo}"/>
 				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
 			</form>
+		</div>
+		<div class="inquirylist">
+			<c:forEach items="${list}" var="q">
+				<fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy.MM.dd"/>
+				<div class="inquirycontent">
+					${q.QUESTION_CONTENT}
+				</div>
+				<div class="answer">
+					<c:if test="${q.QUESTION_ANSWER  == null}">
+						답변을 기다리는중 입니다.
+					</c:if>
+					${q.QUESTION_ANSWER}
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
@@ -220,7 +248,7 @@
 		}
 	}
 
-	 function hh(memberLoggedIn){
+	 function logincheck(memberLoggedIn){
 		 console.log(memberLoggedIn);
 		 if(memberLoggedIn == ''){
 			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";

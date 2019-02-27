@@ -12,23 +12,26 @@
 
 <style>
 .paidProduct-container{
+	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
 </style>
 <br />
 <section id="paidProduct-container" class="paidProduct-container">
 <nav class="navbar navbar-light bg-light">
 	<p>결제된 상품 리스트</p>
-	  <form class="form-inline" id="form-inline">
+	  <form class="form-inline" id="form-inline" action='${pageContext.request.contextPath }/admin/paidProductSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" id="type" name="type">
-  			<option value="product_name" selected="selected">상품명</option>
-  			<option value="product_buyer">구매자아이디</option>
-  			<option value="product_category">상품카테고리</option>
+  			<option value="product_name" ${type == "product_name"?"selected":""  }>상품명</option>
+  			<option value="product_buyer" ${type == "product_buyer"?"selected":""  }>구매자아이디</option>
+  			<option value="product_category" ${type == "product_category"?"selected":""  }>상품카테고리</option>
 		</select>
 		&nbsp;&nbsp;
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" ">
-	    <input type="button" class="btn btn-block btn-outline-success btn-send" value="전송" >
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search}>
+	    <input type="submit" class="btn btn-block btn-outline-success btn-send" value="전송" >
 	  </form>
 	</nav>
 <hr />
@@ -51,13 +54,13 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="p">
 			<tr>				
-				<th>${p.SEQ_PRODUCT_NO }</th>
-				<th>${p.PRODUCT_NAME }</th>
-				<th>${p.PRODUCT_IO_PRICE }</th>
-				<th>${p.PRODUCT_IO_AMOUNT }</th>
-				<th>${p.PRODUCT_BUYER }</th>
-				<th>${p.PRODUCT_CATEGORY }</th>
-				<th>${p.PRODUCT_ORDER_NO }</th>
+				<td>${p.SEQ_PRODUCT_NO }</td>
+				<td>${p.PRODUCT_NAME }</td>
+				<td>${p.PRODUCT_IO_PRICE }</td>
+				<td>${p.PRODUCT_IO_AMOUNT }</td>
+				<td>${p.PRODUCT_BUYER }</td>
+				<td>${p.PRODUCT_CATEGORY }</td>
+				<td>${p.PRODUCT_ORDER_NO }</td>
 			</tr>			
 			</c:forEach>
 		</c:if>
@@ -67,13 +70,20 @@
 		int totalContent = (int)request.getAttribute("totalContents");
 		int numPerPage = (int)request.getAttribute("numPerPage");
 		int cPage = (int)request.getAttribute("cPage");
+		String type = (String)request.getAttribute("type");
+		String search = (String)request.getAttribute("search");
+		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "paidProduct.do") %>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section>
 <script>
-$("#form-inline .btn-send").on("click",function(){
-	$("#tbl-paidProduct").css("display","none");
+
+//$("#form-inline .btn-send").on("click",function(){
+	//$("#tbl-paidProduct").css("display","none");
 	
+	
+	
+	/*
 	$.ajax({
 		url:"${pageContext.request.contextPath}/admin/paidProductSearch.do",
 		data:$("#form-inline").serialize(),
@@ -99,8 +109,9 @@ $("#form-inline .btn-send").on("click",function(){
 		}
 		
 	});
-	
-});
+	*/
+
+//});
 </script> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

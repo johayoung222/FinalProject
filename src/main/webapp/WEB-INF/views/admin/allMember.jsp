@@ -12,26 +12,40 @@
 
 <style>
 .allMember-container{
-	position:absolute;
+	width:1300px;
+	height:750px;
+	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
+.tableTr td{
+	height:70px;
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+}
+input[type=submit].btn-block {
+    width: 100px;
+    color:#007bff;
+}
+
 </style>
 <br />
 <section id="allMember-container" class="allMember-container">
-	<nav class="navbar navbar-light bg-light">
+	<nav class="navbar navbar-light bg-light nav-link">
 	<p>회원 리스트조회</p>
-	  <form class="form-inline">
+	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
-  			<option value="member_id" selected="selected">아이디</option>
-  			<option value="member_name">이름</option>
+  			<option value="member_id" ${type == "member_id"?"selected":""  }>아이디</option>
+  			<option value="member_name" ${type == "member_name"?"selected":""  }>이름</option>
 		</select>
 		&nbsp;&nbsp;
-	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
-	    <input type="button" class="btn btn-block btn-outline-success btn-send" value="전송" >
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search }>
+	    <input type="submit" class="btn btn-block btn-outline-success btn-send" value="전송" >
 	  </form>
 	</nav>
 <hr />
-	<table id="tbl-allMember" class="table table-striped table-hover">
+	<table id="tbl-allMember" class="table table-striped table-hover" >
 		<tr>
 			<th>아이디</th>
 			<th>이름</th>
@@ -56,28 +70,28 @@
 		</c:if>
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="m">
-			<tr>				
-				<th>${m.MEMBER_ID }</th>
-				<th>${m.MEMBER_NAME }</th>
-				<th>
+			<tr class="tableTr"  >				
+				<td>${m.MEMBER_ID }</td>
+				<td>${m.MEMBER_NAME }</td>
+				<td>
 				${m.GENDER  == 'Y'?"남자":"여자"}				
-				</th>
-				<th>${m.MEMBER_BIRTH }</th>
-				<th>${m.MEMBER_ADDRESS }</th>
-				<th>${m.MEMBER_MAIL_NO }</th>
-				<th>${m.MEMBER_PHONE }</th>
-				<th>${m.MEMBER_EMAIL }</th>
+				</td>
+				<td>${m.MEMBER_BIRTH }</td>
+				<td>${m.MEMBER_ADDRESS }</td>
+				<td>${m.MEMBER_MAIL_NO }</td>
+				<td>${m.MEMBER_PHONE }</td>
+				<td>${m.MEMBER_EMAIL }</td>
 				<td>
 					<c:forEach items="${m.MEMBER_INTEREST }" var="l" varStatus="vs">
 						${l }${!vs.last?",":"" }
 					</c:forEach>
 				</td>
-				<th>${m.MEMBER_MILEGE }</th>
-				<th>${m.MEMBER_ISADMIN }</th>
-				<th>${m.MEMBER_SELLER }</th>
-				<th>${m.MEMBER_SNS_ACCOUNT }</th>
-				<th>${m.MEMBER_REPORT }</th>
-				<th>${MEMBER_STATUS }</th>
+				<td>${m.MEMBER_MILEGE }</td>
+				<td>${m.MEMBER_ISADMIN }</td>
+				<td>${m.MEMBER_SELLER }</td>
+				<td>${m.MEMBER_SNS_ACCOUNT }</td>
+				<td>${m.MEMBER_REPORT }</td>
+				<td>${MEMBER_STATUS }</td>
 			</tr>			
 			</c:forEach>
 		</c:if>
@@ -87,10 +101,23 @@
 		int totalContent = (int)request.getAttribute("totalContents");
 		int numPerPage = (int)request.getAttribute("numPerPage");
 		int cPage = (int)request.getAttribute("cPage");
+		String type = (String)request.getAttribute("type");
+		String search = (String)request.getAttribute("search");
+		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "allMember.do") %>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
+
 </section> 
+
 <script>
+
+$(document).on('click','.tableTr',function(){
+	var memberId = $(this).children("td:first").text();
+	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=400");
+});
+
+
+/*
 $("#form-inline .btn-send").on("click",function(){
 	alert("클릭했다");
 	$("#tbl-allMember").css("display","none");
@@ -131,7 +158,7 @@ $("#form-inline .btn-send").on("click",function(){
 		
 	});
 	
-});
+});*/
 </script> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

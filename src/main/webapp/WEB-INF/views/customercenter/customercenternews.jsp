@@ -131,6 +131,7 @@
 	width: 100%;
 	overflow: auto;
 	height: 200px;
+	resize: none;
 }
 
 .mb-3 {
@@ -156,7 +157,7 @@
 			return false;
 		}
 	}
-	function hh(memberLoggedIn){
+	function logincheck(memberLoggedIn){
 		 console.log(memberLoggedIn);
 		 if(memberLoggedIn == ''){
 			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";
@@ -178,7 +179,7 @@
 			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇
 				소식</a>
 		</div>
-		<div class="sidebar4" id="sidebar" onclick="hh('${memberLoggedIn.memberId}')">
+		<div class="sidebar4" id="sidebar" onclick="logincheck('${memberLoggedIn.memberId}')">
 			<a href="#">1:1 문의</a>
 		</div>
 		<div class="sidebar5" id="sidebar">
@@ -216,18 +217,6 @@
 									placeholder="제목을 입력하세요" /> <br /> <br /> 
 									<textarea id="insertcontent" name="boardcontent" placeholder="내용을 입력하세요"></textarea>
 							</div>
-
-							<div class="input-group mb-3" style="padding: 0px;">
-								<div class="input-group-prepend" style="padding: 0px;">
-									<span class="input-group-text">첨부파일</span>
-								</div>
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" name="upFile"
-										id="upFile1" multiple> <label
-										class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-								</div>
-							</div>
-
 							<div class="modal-footer">
 								<input type="submit" class="btn btn-primary" value="등록">
 								<button type="button" class="btn btn-secondary"
@@ -278,17 +267,6 @@
 										<input type="text" id="inserttitle" name="boardtitle" value="${b.BOARD_TITLE}" />
 										<br /> <br /> 
 										<textarea id="insertcontent"name="boardcontent" >${b.BOARD_CONTENT}</textarea>
-									</div>
-
-									<div class="input-group mb-3" style="padding: 0px;">
-										<div class="input-group-prepend" style="padding: 0px;">
-											<span class="input-group-text">첨부파일</span>
-										</div>
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" name="upFile"
-												id="upFile1" multiple> <label
-												class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-										</div>
 									</div>
 
 									<div class="modal-footer">

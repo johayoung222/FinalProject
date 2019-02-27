@@ -1,6 +1,10 @@
 package com.kh.spring.basket.model.dao;
 
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -10,6 +14,19 @@ public class BasketDaoImpl implements BasketDao {
 
 	
 	@Autowired SqlSessionTemplate  sqlSession;
+
+	@Override
+	public List<Map<String, String>> basketList(int cPage, int numPerPage) {
+		// TODO Auto-generated method stub
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("basket.basketList",null,rowBounds);
+	}
+
+	@Override
+	public int countbasketList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("basket.countbasketList");
+	}
 	
 	
 	

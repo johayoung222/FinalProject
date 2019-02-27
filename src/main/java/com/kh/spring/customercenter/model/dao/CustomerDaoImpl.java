@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 
 @Repository
@@ -70,6 +72,73 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Override
 	public List<Board> selectMainList() {
 		return sqlSession.selectList("cc.selectMainList");
+	}
+
+	@Override
+	public Board selectQnaMain(Board board) {
+		return sqlSession.selectOne("cc.selectQnaMain",board);
+	}
+
+	@Override
+	public List<Map<String, String>> selectTutorialList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage); 
+		 return sqlSession.selectList("cc.selectTutorialList" , null ,rowBounds); 
+	}
+
+	@Override
+	public int countTutorialList() {
+		return sqlSession.selectOne("cc.countTutorialList");
+	}
+	
+	@Override
+	public List<Map<String, String>> selectbuyTutorialList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage); 
+		return sqlSession.selectList("cc.selectbuyTutorialList" , null ,rowBounds); 
+	}
+	
+	@Override
+	public int countbuyTutorialList() {
+		return sqlSession.selectOne("cc.countbuyTutorialList");
+	}
+	
+	@Override
+	public List<Map<String, String>> selectsellTutorialList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage); 
+		return sqlSession.selectList("cc.selectsellTutorialList" , null ,rowBounds); 
+	}
+	
+	@Override
+	public int countsellTutorialList() {
+		return sqlSession.selectOne("cc.countsellTutorialList");
+	}
+	
+	@Override
+	public int insertQna(Board board) {
+		int result = sqlSession.insert("cc.insertQna", board);
+		return result;
+	}
+
+	@Override
+	public int updateQna(Board board) {
+		int result = sqlSession.insert("cc.updateQna", board);
+		return result;
+	}
+
+	@Override
+	public int deleteQna(Board board) {
+		int result = sqlSession.insert("cc.deleteQna", board);
+		return result;
+	}
+
+	@Override
+	public int insertInquiry(Question q) {
+		int result = sqlSession.insert("question.insertInquiry", q);
+		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> selectinquiryList(Question q) {
+		 return sqlSession.selectList("question.selectinquiryList" ,q); 
 	}
 
 
