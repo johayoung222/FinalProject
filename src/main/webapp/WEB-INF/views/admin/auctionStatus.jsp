@@ -12,8 +12,11 @@
 
 <style>
 .auctionStatus-container{
+	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
 </style>
 <br />
