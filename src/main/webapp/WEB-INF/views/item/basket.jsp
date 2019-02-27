@@ -50,7 +50,7 @@ font-family: 'Nanum Gothic', sans-serif;
       <th scope="col">상품정보</th>
       <th scope="col">수량</th>
       <th scope="col">상품금액</th>
-      <th scope="col">구매</th>
+      <th scope="col">선택</th>
     </tr>
   </thead>
   <tbody>
@@ -63,33 +63,39 @@ font-family: 'Nanum Gothic', sans-serif;
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="b">
 			<tr>				
-				<th>${p.SEQ_PRODUCT_NO}</th>				
+				<th>${b.SEQ_BASKET_NO}</th>				
 			</tr>			
 			</c:forEach>
 		</c:if>
   
   </tbody>
 </table>
-	<button type="button" class="btn btn-danger" onclick="deleteAllBasket();">전체 삭제</button>
+	<%-- <div class="result" id="allMemberSearch-result"></div>
+	<%
+		int totalContent = (int)request.getAttribute("totalContents");
+		int numPerPage = (int)request.getAttribute("numPerPage");
+		int cPage = (int)request.getAttribute("cPage");
+	%>
+	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "basketList.do") %> --%>
 				
 		      <div class="buy-container">
 		 	 	<h4>상품구매 금액 합계:</h4>
 		 	 	<br />
 		      <button type="button" id="buyButton" class="btn btn-primary btn-lg">구매하기</button>
 		   </div>
-			</div>
+		  </div>
 		</div>	
 	</div>
 </div>
 <script>
 
 
-function deleteAllBasket(){
-	
-	console.log("앙 전체 삭제띠");
-	a.location.href="#"
-	
-}
+
+
+
+
+
+
 
 
 </script>

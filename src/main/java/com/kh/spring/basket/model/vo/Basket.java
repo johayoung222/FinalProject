@@ -7,81 +7,50 @@ import java.util.List;
 
 public class Basket implements Serializable {
 
-	private int basketNo;
-	private int productNo;
-	private int memberNo;
+	private int seqBasketNo;
+	private int seqProductNo;
+	private int seqMemberNo;
 	private String productName;
 	private int productPrice;
-	private int amount;
+	private int productAmount;
 	
-	
-	
-	
-	public Basket(int basketNo, int productNo, int memberNo, String productName, int productPrice, int amount) {
-		super();
-		this.basketNo = basketNo;
-		this.productNo = productNo;
-		this.memberNo = memberNo;
-		this.productName = productName;
-		this.productPrice = productPrice;
-		this.amount = amount;
-	}
-
-
-
 
 	public Basket() {}
 
 
-
-
-	public int getBasketNo() {
-		return basketNo;
+	public int getSeqBasketNo() {
+		return seqBasketNo;
 	}
 
 
-
-
-	public void setBasketNo(int basketNo) {
-		this.basketNo = basketNo;
+	public void setSeqBasketNo(int seqBasketNo) {
+		this.seqBasketNo = seqBasketNo;
 	}
 
 
-
-
-	public int getProductNo() {
-		return productNo;
+	public int getSeqProductNo() {
+		return seqProductNo;
 	}
 
 
-
-
-	public void setProductNo(int productNo) {
-		this.productNo = productNo;
+	public void setSeqProductNo(int seqProductNo) {
+		this.seqProductNo = seqProductNo;
 	}
 
 
-
-
-	public int getMemberNo() {
-		return memberNo;
+	public int getSeqMemberNo() {
+		return seqMemberNo;
 	}
 
 
-
-
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public void setSeqMemberNo(int seqMemberNo) {
+		this.seqMemberNo = seqMemberNo;
 	}
-
-
 
 
 	public String getProductName() {
 		return productName;
 	}
-
-
 
 
 	public void setProductName(String productName) {
@@ -92,32 +61,30 @@ public class Basket implements Serializable {
 	public int getProductPrice() {
 		return productPrice;
 	}
+
+
 	public void setProductPrice(int productPrice) {
 		this.productPrice = productPrice;
 	}
 
 
-
-
-	public int getAmount() {
-		return amount;
+	public int getProductAmount() {
+		return productAmount;
 	}
 
 
-
-
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setProductAmount(int productAmount) {
+		this.productAmount = productAmount;
 	}
-
-
 
 
 	@Override
 	public String toString() {
-		return "Basket [basketNo=" + basketNo + ", productNo=" + productNo + ", memberNo=" + memberNo + ", productName="
-				+ productName + ", productPrice=" + productPrice + ", amount=" + amount + "]";
+		return "Basket [seqBasketNo=" + seqBasketNo + ", seqProductNo=" + seqProductNo + ", seqMemberNo=" + seqMemberNo
+				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productAmount=" + productAmount
+				+ "]";
 	}
+	
 	
 	
 }
