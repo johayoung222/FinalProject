@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.ProductAsk;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -28,13 +29,13 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public void insertAsk(String askContent) {
-		sqlSession.insert("basket.insertAsk",askContent);
+	public int insertAsk(ProductAsk pAsk) {
+		return sqlSession.insert("basket.insertAsk",pAsk);
 	}
 
 	@Override
-	public void updateMember(Map<String, String> map) {
-		sqlSession.update("basket.updateMember",map);
+	public void updateProduct(Map<String, String> map) {
+		sqlSession.update("basket.updateProduct",map);
 	}
 
 	

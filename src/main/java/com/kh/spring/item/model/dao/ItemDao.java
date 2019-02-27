@@ -1,10 +1,10 @@
 package com.kh.spring.item.model.dao;
 
-import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.ProductAsk;
 
 public interface ItemDao {
 
@@ -12,8 +12,8 @@ public interface ItemDao {
 
 	Member selectJoinMember(int sellerNo);
 
-	void insertAsk(String askContent);
+	int insertAsk(ProductAsk pAsk);
 
-	void updateMember(Map<String, String> map);
+	void updateProduct(Map<String, String> map);
 
 }

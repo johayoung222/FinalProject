@@ -3,6 +3,7 @@ import java.util.Map;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.ProductAsk;
 
 public interface ItemService {
 
@@ -10,8 +11,8 @@ public interface ItemService {
 
 	Member selectJoinMember(int sellerNo);
 
-	void insertAsk(String askContent);
+	int insertAsk(ProductAsk pAsk);
 
-	void updateMember(Map<String, String> map);
+	void updateProduct(Map<String, String> map);
 
 }

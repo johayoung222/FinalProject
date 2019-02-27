@@ -151,7 +151,8 @@
 		
 		var asker = ${member.seqMemberNo};
 		var param = {"askContent":$("#askContent").val(),
-					"asker":asker};
+					"asker":asker,
+					"productNo":${product.seqProductNo}};
 		
 		$.ajax({
 			url: "${pageContext.request.contextPath}/item/ask",

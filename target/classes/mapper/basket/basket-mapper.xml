@@ -7,8 +7,13 @@
 	<select id="selectJoinMember" resultType="m">
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
-	<insert id="insertAsk">
-		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate )
+	<insert id="insertAsk" parameterType="productAsk">
+		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser})
+		<selectKey order="AFTER" resultType="_int" keyProperty="seqAskNo">
+			select seq_ask_no.currval from dual
+		</selectKey>
 	</insert>
-	
+	<update id="updateProduct" parameterType="map">
+		update product set seq_ask_no = #{askNo} where seq_product_no = #{productNo}
+	</update>
 </mapper>

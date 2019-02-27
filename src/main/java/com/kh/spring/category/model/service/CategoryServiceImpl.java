@@ -1,6 +1,7 @@
 package com.kh.spring.category.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Regist> laptopPcEnd() {
 		return categoryDao.laptopPcEnd();
+	}
+
+	@Override
+	public List<Map<String, String>> selectMacro() {
+		return categoryDao.selectMacro();
 	}
 
 	
