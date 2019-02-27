@@ -367,7 +367,7 @@ public class CustomercenterController {
 											  ModelAndView mav) {
 			Member m = (Member)session.getAttribute("memberLoggedIn");
 			Question q = new Question();
-			q.setSeq_member_no(m.getSeqmemberNo());
+			q.setSeq_member_no(m.getSeqMemberNo());
 			logger.debug("1234==="+m);
 			// 업무로직
 			// 1.게시글 리스트(페이징적용)
