@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
 </jsp:include>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <style>
 .productInfo-container{
@@ -22,6 +23,7 @@
 	margin: 0 auto;
 }
 </style>
+
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
@@ -102,6 +104,15 @@
 	border-top: 1px solid lightgray;
 	text-align: center;
 }
+.ask-comment{
+	border: 1px solid red;
+	height: 100px;
+	text-align: center;
+	display: none;
+}
+.ask-comment textarea{
+	resize: none;
+}
 </style>
 <div class="productInfo-content">
 
@@ -116,16 +127,41 @@
 	<div class="product-ask">
 		<div class="ask-header">
 			<span>상품문의</span>
-			<button onclick="alert('문의되었습니닼');">문의하기</button>
+			<button onclick="ask();">문의하기</button>
+		</div>
+		<div class="ask-comment">
+			<textarea rows="3" cols="100" id="askContent"></textarea>
+			<button onclick="itemAsk();">작성</button>
 		</div>
 		<div class="ask-content">
 			<span>문의하신 내역이 없습니다.</span>
 		</div>
 	</div>
 	
+	<script>
+	function ask(){
+		$(".ask-comment").show();
+	}
+	function itemAsk(){
+		var param = {"askContent":$("#askContent").val()};
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/item/ask",
+			data: param,
+			type: "get",
+			success: function(data){
+				console.log(data);
+			},
+			error: function(){
+				console.log("ajax요청 에러!");
+			}
+		});
+	}
+	</script>
+	
 	<div class="product-recommend">이런 상품은 어때요?</div>
 	
-	<div class="power-link" ng-app="myApp">
+	<div class="power-link" ng-app="">
 		<div class="naver-ads ng-scope" id="naver-ads" ng-controller="NaverAdsCtrl">
 			<div class="ad-header">파워링크
 				<span class="iconsp ico_ad">ad</span>

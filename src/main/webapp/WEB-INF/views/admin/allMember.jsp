@@ -10,14 +10,9 @@
 
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
-<style>
-.allMember-container{
-	position:relative;
-	margin-left:180px;
-}
-</style>
-<br />
+
 <section id="allMember-container" class="allMember-container">
+	
 	<nav class="navbar navbar-light bg-light">
 	<p>회원 리스트조회</p>
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
@@ -31,7 +26,7 @@
 	  </form>
 	</nav>
 <hr />
-	<table id="tbl-allMember" class="table table-striped table-hover">
+	<table id="tbl-allMember" class="table table-striped table-hover" >
 		<tr>
 			<th>아이디</th>
 			<th>이름</th>
@@ -92,7 +87,9 @@
 		String view = (String)request.getAttribute("view");
 	%>
 	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
+
 </section> 
+
 <script>
 /*
 $("#form-inline .btn-send").on("click",function(){
