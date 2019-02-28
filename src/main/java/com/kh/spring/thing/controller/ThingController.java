@@ -162,7 +162,7 @@ public class ThingController {
 		logger.debug(order);
 		
 		mav.addObject("order", order);
-		mav.setViewName("mypage/order");
+		mav.setViewName("mypage/purchases");
 		
 		return mav;
 	}
