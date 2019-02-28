@@ -141,6 +141,18 @@ public class CustomerDaoImpl implements CustomerDao {
 		 return sqlSession.selectList("question.selectinquiryList" ,q); 
 	}
 
+	@Override
+	public int insertAnswer(Question q) {
+		int result = sqlSession.update("question.insertAnswer",q);
+		return result;
+	}
+
+	@Override
+	public int updateAnswer(Question q) {
+		int result = sqlSession.update("question.updateAnswer",q);
+		return result;
+	}
+
 
 	
 }

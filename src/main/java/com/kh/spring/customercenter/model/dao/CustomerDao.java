@@ -55,4 +55,8 @@ public interface CustomerDao {
 
 	List<Map<String, String>> selectinquiryList(Question q);
 
+	int insertAnswer(Question q);
+
+	int updateAnswer(Question q);
+
 }

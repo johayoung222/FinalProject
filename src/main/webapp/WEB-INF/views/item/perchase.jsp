@@ -122,11 +122,9 @@ IMP.request_pay({ // param
 		
 <style>
 .content-container{
-	border: 1px solid black;
 	height: 750px;
 }
 .perchase-container{
-	border: 1px solid black;
 	width: 1000px;
 	height: 100%;
 	margin: 0 auto;
@@ -135,18 +133,23 @@ IMP.request_pay({ // param
 	margin-top: 50px;
 }
 .deliverInfo-container{
-	border: 1px solid black;
 	height: 100%;
 	width: 59%;
 }
 .payment-container{
-	border: 1px solid black;
 	height: 90%;
 	width: 39%;
 }
+.payment-container>div{
+	margin-bottom: 20px;
+	font-size: 15px;
+}
 .order-text{
-	border: 1px solid black;
 	height: 100px;
+}
+.deliver-text{
+	font-size: 20px;
+	margin-bottom: 20px;
 }
 .order-text span{
 	margin-left: 30px;
@@ -160,80 +163,100 @@ IMP.request_pay({ // param
 	background-color: white;
 	color: red;
 }
+.text-success{
+	font-size: 16px;
+	font-style: oblique;
+}
+#payPoint{
+	width: 100px;
+}
+.payment-result [type=button]{
+	margin-left: 250px;
+}
+#dfAddress{
+	width: 200px;
+	display: inline-block;
+}
 </style>
 		
 <div class="content-container">
 	<form action="" name="perchaseFrm">
-	<div class="perchase-container">
-		<div class="deliverInfo-container">
+	<div class="perchase-container shadow-lg p-3 mb-5 bg-white rounded">
+		<div class="deliverInfo-container shadow-none p-3 mb-5 bg-light rounded">
 			<div class="order-text"><span>주문하기</span></div>
 			<div class="deliverInfo">
 				<div class="deliver-text"><span>배송정보</span></div>
 				<div class="deliver-name">
-					<label for="dName">이름</label><br />
-					<input type="text" id="dName" name="dName" />
+					<label for="dName" class="text-success font-weight-bold">이름</label><br />
+					<input type="text" id="dName" name="dName" class="form-control" value="${member.memberName }"/>
 				</div>
 				<div class="deliver-phone">
-					<label for="dPhone">전화번호</label>
-					<input type="text" id="dPhone" name="dPhone" />
+					<label for="dPhone" class="text-success font-weight-bold">전화번호</label>
+					<input type="text" id="dPhone" name="dPhone" class="form-control" value="${member.memberPhone }"/>
 				</div>
 				<div class="deliver-email">
-					<label for="dEmail">이메일</label>
-					<input type="email" id="dEmail" name="dEmail" />
+					<label for="dEmail" class="text-success font-weight-bold">이메일</label>
+					<input type="email" id="dEmail" name="dEmail" class="form-control" value="${member.memberEmail }"/>
 				</div>
 				<div class="deliver-address">
-					<label for="dfAddress">우편번호</label>
-					<input type="text" id="dfAddress" name="dfAddress" />
-					<input type="button" id="findAddress" value="검색"/><br />
-					<label for="dAddress">주소</label>
-					<input type="text" id="dAddress" name="dAddress" />
-					<label for="dAddressInfo">상세 주소</label>
-					<input type="text" id="dAddressInfo" name="dAddressInfo" />
+					<label for="dfAddress" class="text-success font-weight-bold">우편번호</label><br />
+					<input type="text" id="dfAddress" class="form-control" name="dfAddress" />
+					<input type="button" id="findAddress" value="검색" class="btn btn-outline-info"/><br />
+					<label for="dAddress" class="text-success font-weight-bold">주소</label>
+					<input type="text" id="dAddress" class="form-control" name="dAddress" />
+					<label for="dAddressInfo" class="text-success font-weight-bold">상세 주소</label>
+					<input type="text" id="dAddressInfo" class="form-control" name="dAddressInfo" />
 				</div>
 				<hr />
 				<div class="perchase-method">
-					<div class="perchase-text"><span>결제 수단</span></div>
+					<div class="perchase-text"><span class="text-success font-weight-bold">결제 수단</span></div>
 					<div class="perchase-box">
-						<button id="payCard" type="button">신용카드</button>
-						<button id="payVbank" type="button">무통장입금</button>
+						<button id="payCard" type="button" class="btn btn-outline-info">신용카드</button>
+						<button id="payVbank" type="button" class="btn btn-outline-info">무통장입금</button>
 						<input type="hidden" name="payMethod"/>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="payment-container">
+		<div class="payment-container shadow-none p-3 mb-5 bg-light rounded">
 			<div class="productInfo-container">
 				<div class="product-text"><span>결제상품</span></div>
-				<div class="productInfo"><input type="text" name="pName" value="${product.productName }" disabled/></div>
+				<div class="productInfo">
+					<input type="hidden" name="pName" value="${product.productName }"/>
+					<img src="" alt="제품이미지" />
+					<span class="font-weight-bold">${product.productName }</span>
+				</div>
 			</div>
 			<hr />
-			<div class="payment-price">
-				<span>상품금액</span>
-				<span>${product.productPrice }원</span>
+			<div class="payment-price clearfix">
+				<span class="float-left">상품금액</span>
+				<span class="float-right">${product.productPrice }원</span>
 			</div>
 			<div class="payment-coupon">
 				<span>쿠폰 사용</span>
 				<span>사용 가능한 쿠폰이 없습니다.</span>
 			</div>
-			<div class="payment-point">
-				<span>겟잇 포인트</span>
-				-<input type="number" name="payPoint" id="payPoint"/>
-				<label for="payPoint">원</label>
+			<div class="payment-point clearfix">
+				<span class="float-left">겟잇 포인트 사용</span>
+				<div class="float-right">
+				- <input type="number" name="payPoint" id="payPoint" step="1000" min="0" value="0"/>
+				<label for="payPoint" >원</label>
+				</div>
 			</div>
-			<div class="member-point">
-				<span>보유 포인트</span>
-				<span>0원</span>
-				<button>전액 사용</button>
+			<div class="member-point clearfix">
+				<span class="float-left">보유 포인트</span>&nbsp;&nbsp;
+				<span>${member.memberMilage==null?"0":member.memberMilage }원</span>
+				<button class="btn btn-outline-info float-right">전액 사용</button>
 			</div>
-			<div class="payment-deliverPay">
-				<span>배송료</span>
-				<span>0원</span>
+			<div class="payment-deliverPay clearfix">
+				<span class="float-left">배송료</span>
+				<span class="float-right">0원</span>
 			</div>
 			<hr />
 			<div class="payment-result">
 				<span>결제하실 금액</span>
-				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br />
-				<button type="button" onclick="perchaseProduct();">결제하기</button>
+				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br /><br />
+				<button type="button" onclick="perchaseProduct();" class="btn btn-outline-info">결제하기</button>
 			</div>
 		</div>
 	</div>
@@ -290,10 +313,12 @@ $("#findAddress").on('click',function(){
 });
 
 $("#payCard").on('click',function(){
+	$(this).addClass("active").next().removeClass("active");
 	perchaseFrm.payMethod.value = "card";
 });
 
 $("#payVbank").on('click',function(){
+	$(this).addClass("active").prev().removeClass("active");
 	perchaseFrm.payMethod.value = "vbank";
 });
 </script>
