@@ -34,7 +34,6 @@ font-family: 'Nanum Gothic', sans-serif;
 }
 
 </style>
-<jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
 <div class="mypage-container">
 	<div class="real-content-container">

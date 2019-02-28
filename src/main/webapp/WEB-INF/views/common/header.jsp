@@ -159,34 +159,11 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
             <!--     좌우정렬위해 .mr-auto추가 -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item" id="nav-item1" >
-                <a class="nav-link" href="#" 
-                 role="button" id="dropdownMenuLink" 
-                 data-toggle="dropdown" aria-haspopup="true" 
-                 aria-expanded="false" >전체 카테고리</a>
-                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                 <div>
-                 <a class="dropdown-item" href="${pageContext.request.contextPath }/item/item.do">핸드폰</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <a class="dropdown-item" href="#">Something else here</a>
-                 </div>
-                 <div>
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <a class="dropdown-item" href="#">Something else here</a>
-                 </div>
-                 <div>
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <a class="dropdown-item" href="#">Something else here</a>
-                 </div>
-                 <div>
-                 <a class="dropdown-item" href="#">Action</a>
-                 <a class="dropdown-item" href="#">Another action</a>
-                 <a class="dropdown-item" href="#">Something else here</a>
-                 </div>
-                 </div>
-                 
-                 </li>
+               		<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >전체 카테고리</a>
+                 	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						
+                 	</div>
+                </li>
                 <li class="nav-item" ><a class="nav-link"
                     href="#">관심상품</a></li>
                 <li class="nav-item"><a class="nav-link"

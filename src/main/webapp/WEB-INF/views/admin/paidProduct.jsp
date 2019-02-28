@@ -74,7 +74,6 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section>
 <script>
 
