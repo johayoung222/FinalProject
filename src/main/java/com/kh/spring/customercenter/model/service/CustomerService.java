@@ -55,5 +55,9 @@ public interface CustomerService {
 
 	List<Map<String, String>> selectinquiryList(Question q);
 
+	int insertAnswer(Question q);
+
+	int updateAnswer(Question q);
+
 
 }

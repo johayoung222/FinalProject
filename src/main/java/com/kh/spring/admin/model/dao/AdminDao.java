@@ -78,6 +78,9 @@ public interface AdminDao {
 
 	int countquestionAnswer();
 
+	List<Map<String, String>> questionAnswerY(int cPage, int numPerPage);
+	
+	int countquestionAnswerY();
 	
 	//경매 상품 현황
 	List<Map<String, String>> auctionStatus(int cPage, int numPerPage);
@@ -89,6 +92,7 @@ public interface AdminDao {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
 
 	
 

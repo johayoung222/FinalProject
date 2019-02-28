@@ -175,6 +175,16 @@ public class AdminDaoImpl implements AdminDao {
 	public int countquestionAnswer() {
 		return sqlSession.selectOne("admin.countquestionAnswer");
 	}
+	
+	@Override
+	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.questionAnswerY",null, rowBounds);
+	}
+	@Override
+	public int countquestionAnswerY() {
+		return sqlSession.selectOne("admin.countquestionAnswerY");
+	}
 
 	//경매 상품 현황-------------------------------------------------------------------
 	@Override
@@ -200,6 +210,7 @@ public class AdminDaoImpl implements AdminDao {
 	public int countreportList() {
 		return sqlSession.selectOne("admin.countreportList");
 	}
+	
 	
 	
 

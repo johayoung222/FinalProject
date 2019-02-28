@@ -78,7 +78,9 @@ public interface AdminService {
 
 	int countquestionAnswer();
 
+	List<Map<String, String>> questionAnswerY(int cPage, int numPerPage);
 	
+	int countquestionAnswerY();
 	//경매상품 현황
 	List<Map<String, String>> acutionStatus(int cPage, int numPerPage);
 
@@ -88,6 +90,7 @@ public interface AdminService {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
 
 	
 
