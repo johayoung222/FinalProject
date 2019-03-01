@@ -45,41 +45,52 @@ font-family: 'Nanum Gothic', sans-serif;
 			<div class="mypage-body">
 		<table class="table table-striped">
     <thead>
-    <tr>
-      <th scope="col">번호</th>
+    <tr>    
+     <!--  <th scope="col">장바구니번호</th> -->
+      <th scope="col">물품번호</th>
+      <th scope="col">상품이름</th>
       <th scope="col">상품정보</th>
-      <th scope="col">수량</th>
       <th scope="col">상품금액</th>
-      <th scope="col">선택</th>
+      <th scope="col">수량</th>
+      
+      <th scope="col">취소</th>
     </tr>
   </thead>
   <tbody>
-    <c:if test="${empty list }">
+    <c:if test="${ empty list }">
 		<tr>
-			<td colspan="5">장바구니에 물품이 없습니다.</td>
+			<td colspan="8">장바구니에 물품이 없습니다.</td>
 		</tr>
 	</c:if>
 		
 		<c:if test="${not empty list }">
-			<c:forEach items="${list }" var="b">
-			<tr>				
-				<th>${b.SEQ_BASKET_NO}</th>				
+			<c:forEach items="${list}" var="p">
+			<tr>
+				<%-- <td>${p.SEQ_BASKET_NO}</td>	 --%>			
+				<td>${p.SEQ_PRODUCT_NO}</td>	
+				<td>${p.PRODUCT_NAME}</td>	
+				<td>${p.PRODUCT_DESCRIPTION}</td>		
+				<td>${p.PRODUCT_PRICE}</td>	
+				<td>${p.PRODUCT_STOCK}</td>
+			<!-- 	<td><input id="basketSelect" type="checkbox" /></td> -->
+				<td>
+				 <button type="button" class="btn btn-danger" onclick="deleteBasket('${p.SEQ_BASKET_NO}')">취소</button>
+				 </td>	
 			</tr>			
 			</c:forEach>
 		</c:if>
   
   </tbody>
 </table>
-	<%-- <div class="result" id="allMemberSearch-result"></div>
-	<%
-		int totalContent = (int)request.getAttribute("totalContents");
-		int numPerPage = (int)request.getAttribute("numPerPage");
-		int cPage = (int)request.getAttribute("cPage");
-	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "basketList.do") %> --%>
-				
+<form name="basketDelFrm" action="deleteBasket.do" method="post">
+	<input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
+</form>
+
 		      <div class="buy-container">
-		 	 	<h4>상품구매 금액 합계:</h4>
+		      
+		 	 	<h4>상품구매 금액 합계:원</h4>
+		 	
+		     
 		 	 	<br />
 		      <button type="button" id="buyButton" class="btn btn-primary btn-lg">구매하기</button>
 		   </div>
@@ -89,14 +100,11 @@ font-family: 'Nanum Gothic', sans-serif;
 </div>
 <script>
 
-
-
-
-
-
-
-
-
+function deleteBasket(no){
+    var frm = document.basketDelFrm;
+    frm.no.value = no;
+    frm.submit();
+}
 
 </script>
 

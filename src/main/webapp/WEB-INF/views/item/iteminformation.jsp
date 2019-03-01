@@ -64,7 +64,11 @@
 			 		</tr>
 			 		<tr align="center">
 			 			<td colspan="2">
-			 				<button onclick="">장바구니 담기</button>
+			 			<form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
+			 				<input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqmemberNo()}"/>
+			 				<input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+			 				<input type="submit" id="insertBasket" value="장바구니"/>
+			 			</form>
 			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'">구매하기</button>
 			 			</td>
 			 		</tr>
@@ -156,6 +160,12 @@
 				console.log("ajax요청 에러!");
 			}
 		});
+	}
+	
+	function insertBasket(){
+	var seqMemberNo= ${memberLoggedIn.getSeqmemberNo()};
+		alert(seqMemberNo);
+		
 	}
 	</script>
 	

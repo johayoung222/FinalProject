@@ -8,16 +8,23 @@
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
 	
-	<!--장바구니 리스트 -->
-	<select id="basketList" resultMap="basketListMap">
-		select * from basket order by seq_basket_no
-	</select>
-	<resultMap type="map" id="basketListMap"></resultMap>
 	
-	<!-- pageing을 위한  수 세기	 -->
-	<select id="countbasketList" resultType="_int">
-		select count(*) from basket
-	</select>
+	<insert id="insertBasket">
+		insert into basket values (seq_basket_no.nextval, #{seqMemberNo}, #{seqProductNo})
+		
+	</insert>
 	
+	<select id="selectProductList" resultMap="basketMap">
+	select * from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="basketMap"></resultMap>
+	<delete id="deletBasketList">
+		delete from basket where seq_basket_no = #{seqBasketNo}
+	</delete>
+
+	<select  id="selectSum" resultMap="sumMap">
+	select sum(product_price) from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="sumMap"></resultMap>
 	
 </mapper>
