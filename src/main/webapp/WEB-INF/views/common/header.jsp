@@ -214,19 +214,23 @@ border-right: 1px solid lightgray; float: right; width:10%; height:40px; text-al
     <section id="content">
    <script>
    
-      
-   
-    
     function logout(){
     	
     	window.locatiom.href="${pageContext.request.contextPath}/member/memberLogout.do";
     	
     }
-   
-   $(document).ready(function(){
-	   
-	    var seqMemberNo = ${memberLoggedIn.getSeqmemberNo()};
-	   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
+    
+    
+    $(document).ready(function(){
+ 	   
+	    var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
 	 
-   });
+	   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
+	  
+   });   
+ 
+     
+
+   
    </script>
+ 

@@ -9,6 +9,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
+<jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
+
 <style>
 .productList-container{
 	position:relative;
@@ -98,7 +100,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	</div>
 </div>
 <script>
-
+//ajax로 처리
 function deleteBasket(no){
     var frm = document.basketDelFrm;
     frm.no.value = no;

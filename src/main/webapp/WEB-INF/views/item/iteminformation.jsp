@@ -45,6 +45,15 @@
 	width:150px;
 	height:50px;
 }
+#insertBasket{
+    border:1px solid white;
+	background:red;
+	color:white;
+	width:150px;
+	height:50px;
+
+
+}
 #float1{
 width:50px;
 height:50px; 
@@ -105,17 +114,15 @@ border-radius:50px;
 			 		
 			 		<tr align="center" >
 			 			<td colspan="2">
-<<<<<<< HEAD
-			 			<form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
-			 				<input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqmemberNo()}"/>
-			 				<input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
-			 				<input type="submit" id="insertBasket" value="장바구니"/>
-			 			</form>
-			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'">구매하기</button>
-=======
-			 				<button onclick="" id="bask">장바구니 담기</button>
+			 			
+	                      <!--   <input type="submit" id="insertBasket" value="장바구니"/> -->
+                        	
+                <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
+                    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
+	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+	                <input type="submit" id="insertBasket" value="장바구니"/>
+                 </form>	
 			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
->>>>>>> 6e415b7823f74c1a2d9544561127d90a021f71cf
 			 			</td>
 			 		</tr>
 			 	</table>
@@ -125,7 +132,7 @@ border-radius:50px;
 </div><!-- productInfo-header end -->
 
 <div>
-
+ 
 <h2>이미지 슬라이드</h2>
 </div>
 <style>
@@ -234,54 +241,46 @@ font-size:20px;
 		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
 	</div>
 	
-<script>
-function ask(){
-	$(".ask-comment").show();
-}
-function itemAsk(){
-		
-	if($("#askContent").val().trim().length == 0){
-		alert("내용을 입력해주세요.");
-		return;
+	<script>
+	function ask(){
+		$(".ask-comment").show();
 	}
-
-	
-	function insertBasket(){
-	var seqMemberNo= ${memberLoggedIn.getSeqmemberNo()};
-		alert(seqMemberNo);
+	function itemAsk(){
 		
-	}
-	
-
-	
-	var asker = ${member.seqMemberNo};
-	var param = {"askContent":$("#askContent").val(),
-				"asker":asker,
-				"productNo":${product.seqProductNo}};
-	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/item/ask",
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		dataType: "json",
-		data: param,
-		type: "post",
-		success: function(data){
-			console.log(data);
-			
-			if(data.length > 0){
-			var html = "<span>"+data+"</span>";
-			$("#askContent").val("");
-			
-			$("#askList").html(html);
-			}
-		},
-		error: function(){
-			console.log("ajax요청 에러!");
+		if($("#askContent").val().trim().length == 0){
+			alert("내용을 입력해주세요.");
+			return;
 		}
-	});
+		
+		var asker = ${member.seqMemberNo};
+		var param = {"askContent":$("#askContent").val(),
+					"asker":asker,
+					"productNo":${product.seqProductNo}};
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/item/ask",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			dataType: "json",
+			data: param,
+			type: "post",
+			success: function(data){
+				console.log(data);
+				
+				if(data.length > 0){
+				var html = "<span>"+data+"</span>";
+				$("#askContent").val("");
+				
+				$("#askList").html(html);
+				}
+			},
+			error: function(){
+				console.log("ajax요청 에러!");
+			}
+		});
+	}
+	}
 }
-}
-</script>
+	</script>
 
 	<div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
 	<div>
@@ -391,9 +390,14 @@ function itemAsk(){
 			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
 			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
 		</tr>
+		
 	</table>
+	
 </div>
+	
+	
 </div>
+
 </div>	
 	
 
