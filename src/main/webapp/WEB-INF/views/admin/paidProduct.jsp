@@ -12,8 +12,11 @@
 
 <style>
 .paidProduct-container{
+	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
 </style>
 <br />
@@ -71,7 +74,6 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section>
 <script>
 

@@ -43,6 +43,33 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countmemberSearch",map);
 	}
 
+	@Override
+	public List<Map<String, Object>> memberOne(String memberId) {
+		return sqlSession.selectList("admin.memberOne",memberId);
+	}
+	
+	@Override
+	public List<Map<String, Object>> couponAll() {
+		return sqlSession.selectList("admin.couponAll");
+	}
+	
+	@Override
+	public int couponPlus(Map<String, Object> map) {
+		return sqlSession.insert("admin.couponPlus",map);
+	}
+	
+	@Override
+	public List<Map<String, Object>> couponList(int memberNo) {
+		return sqlSession.selectList("admin.couponList",memberNo);
+	}
+	
+	@Override
+	public int deleteCoupon(Map<String, Object> map) {
+		return sqlSession.delete("admin.deleteCoupon",map);
+	}
+	
+	
+	
 	
 	//결제된 상품 리스트----------------------------------------------------------------
 	@Override
@@ -69,9 +96,9 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//판매 신청 리스트-----------------------------------------------------------
 	@Override
-	public List<Map<String, Object>> regist(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		return sqlSession.selectList("admin.regist",null, rowBounds);
+	public List<Map<String, Object>> regist() {
+		//RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin.regist");
 	}
 
 	@Override
@@ -148,6 +175,16 @@ public class AdminDaoImpl implements AdminDao {
 	public int countquestionAnswer() {
 		return sqlSession.selectOne("admin.countquestionAnswer");
 	}
+	
+	@Override
+	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
+		return sqlSession.selectList("admin.questionAnswerY",null, rowBounds);
+	}
+	@Override
+	public int countquestionAnswerY() {
+		return sqlSession.selectOne("admin.countquestionAnswerY");
+	}
 
 	//경매 상품 현황-------------------------------------------------------------------
 	@Override
@@ -173,6 +210,8 @@ public class AdminDaoImpl implements AdminDao {
 	public int countreportList() {
 		return sqlSession.selectOne("admin.countreportList");
 	}
+	
+	
 	
 
 	

@@ -100,6 +100,20 @@
 	margin-bottom:50px;
 
 }
+.inquirylist{
+	width:80%;
+	margin-left:10%;
+	margin-bottom:2%;
+}
+.inquirycontent{
+	margin-bottom:5px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.answer{
+	margin-bottom:15px;
+	border-bottom: 2px solid #ececec;
+}
 </style>
 
 <div class="content-container">
@@ -132,25 +146,39 @@
 				<div class="select">
 					<select class="form-control form-control-sm" name="selone"
 						id="selone" onchange="doChange(this,'seltwo')">
-						<option value="default">문의종류를 선택해주세요.</option>
-						<option value="buy">구매</option>
-						<option value="sell">판매</option>
-						<option value="cate">제품</option>
-						<option value="other">기타</option>
+						<option value="default" selected disabled hidden>문의종류를 선택해주세요.</option>
+						<option value="구매">구매</option>
+						<option value="판매">판매</option>
+						<option value="제품">제품</option>
+						<option value="기타">기타</option>
 					</select> 
 					<select class="form-control form-control-sm" name="seltwo"
 						id="seltwo">
-						<option value="default">상세분류를 선택해주세요.</option>
+						<option value="default" >상세분류를 선택해주세요.</option>
 					</select>
 				</div>
 				<br />
 				<div class="quirymain">
 					<!-- <input type="text" class="main" /> -->
-					<textarea rows="25" cols="15" class="main"></textarea>
+					<textarea rows="25" cols="15" class="main" name="incontent"></textarea>
 				</div>
-				<input type="hidden" name="seq_member_no"/>
+				<input type="hidden" name="seq_member_no" value="${memberLoggedIn.seqmemberNo}"/>
 				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
 			</form>
+		</div>
+		<div class="inquirylist">
+			<c:forEach items="${list}" var="q">
+				<fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy.MM.dd"/>
+				<div class="inquirycontent">
+					${q.QUESTION_CONTENT}
+				</div>
+				<div class="answer">
+					<c:if test="${q.QUESTION_ANSWER  == null}">
+						답변을 기다리는중 입니다.
+					</c:if>
+					${q.QUESTION_ANSWER}
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
@@ -161,13 +189,13 @@
 
 		removeAll(targetE);
 
-		if (val == 'buy') {
-			$("#seltwo").append("<option value='buypay'>결제</option>");
-			$("#seltwo").append("<option value='can'>환불/취소</option>");
-			$("#seltwo").append("<option value='buydeliver'>배송</option>");
-			$("#seltwo").append("<option value='prod'>제품문의</option>");
-			$("#seltwo").append("<option value='as'>A/S</option>");
-			$("#seltwo").append("<option value='buyother'>기타</option>");
+		if (val == '구매') {
+			$("#seltwo").append("<option value='결제'>결제</option>");
+			$("#seltwo").append("<option value='환불/취소'>환불/취소</option>");
+			$("#seltwo").append("<option value='배송'>배송</option>");
+			$("#seltwo").append("<option value='제품문의'>제품문의</option>");
+			$("#seltwo").append("<option value='A/S'>A/S</option>");
+			$("#seltwo").append("<option value='기타'>기타</option>");
 			/* addOption('결제', targetE);
 			addOption('환불/취소', targetE);
 			addOption('배송', targetE);
@@ -175,30 +203,30 @@
 			addOption('A/S', targetE);
 			addOption('기타', targetE); */
 
-		} else if (val == 'sell') {
-			$("#seltwo").append("<option value='prodenroll'>제품등록</option>");
-			$("#seltwo").append("<option value='price'>가격</option>");
-			$("#seltwo").append("<option value='selldeliver'>배송</option>");
-			$("#seltwo").append("<option value='sellpay'>결제</option>");
-			$("#seltwo").append("<option value='sellother'>기타</option>");
+		} else if (val == '판매') {
+			$("#seltwo").append("<option value='제품등록'>제품등록</option>");
+			$("#seltwo").append("<option value='가격'>가격</option>");
+			$("#seltwo").append("<option value='배송'>배송</option>");
+			$("#seltwo").append("<option value='결제'>결제</option>");
+			$("#seltwo").append("<option value='기타'>기타</option>");
 			/* addOption('제품등록', targetE);
 			addOption('가격', targetE);
 			addOption('배송', targetE);
 			addOption('입금', targetE);
 			addOption('기타', targetE); */
-		} else if (val == 'cate') {
-			$("#seltwo").append("<option value='elec'>가전제품</option>");
-			$("#seltwo").append("<option value='cloth'>의류</option>");
-			$("#seltwo").append("<option value='stuff'>잡화</option>");
-			$("#seltwo").append("<option value='cateother'>기타</option>");
+		} else if (val == '제품') {
+			$("#seltwo").append("<option value='가전제품'>가전제품</option>");
+			$("#seltwo").append("<option value='의류'>의류</option>");
+			$("#seltwo").append("<option value='잡화'>잡화</option>");
+			$("#seltwo").append("<option value='기타'>기타</option>");
 			/* addOption('가전', targetE);
 			addOption('의류', targetE);
 			addOption('잡화', targetE);
 			addOption('기타', targetE); */
-		} else if (val == 'other') {
-			$("#seltwo").append("<option value='account'>계정</option>");
-			$("#seltwo").append("<option value='incon'>불편사항</option>");
-			$("#seltwo").append("<option value='xother'>기타</option>");
+		} else if (val == '기타') {
+			$("#seltwo").append("<option value='계정'>계정</option>");
+			$("#seltwo").append("<option value='불편사항'>불편사항</option>");
+			$("#seltwo").append("<option value='기타'>기타</option>");
 			/* addOption('계정', targetE);
 			addOption('불편사항', targetE);
 			addOption('기타', targetE); */
@@ -220,7 +248,7 @@
 		}
 	}
 
-	 function hh(memberLoggedIn){
+	 function logincheck(memberLoggedIn){
 		 console.log(memberLoggedIn);
 		 if(memberLoggedIn == ''){
 			location.href="${pageContext.request.contextPath}/member/memberMoveLogin.do";

@@ -4,6 +4,7 @@
 	<!-- 공지사항 -->
 	<select id="selectNewsList" resultMap="newsMap">
 		select * from board where board_kinds = '1' order by seq_board_no desc
+		
 	</select>
 	<resultMap type="Map" id="newsMap">
 	
@@ -12,16 +13,17 @@
 	<select id="countNewsList" resultType="_int">
 		select count(*) from board where board_kinds = '1'
 	</select>
-	
+	<!-- 공지사항 작성 -->
 	<insert id="insertNews" parameterType="cc">
-    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,1,1 )
+    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,'1',1,0 )
     </insert>
-    
+    <!-- 공지사항 수정 -->
     <update id="updateNews">
     	update board set board_title = #{boardtitle},
     					 board_content = #{boardcontent}
     	where seq_board_no = #{seq_board_no}
     </update>
+    <!-- 공지사항 삭제 -->
     <delete id="deleteNews">
     	delete from board where seq_board_no = #{seq_board_no} 
     </delete>
@@ -29,32 +31,91 @@
     
     <!-- 자주묻는질문 -->
     <select id="selectQnaList" resultMap="qnaMap">
-		select * from board where board_kinds = '2' order by seq_board_no asc
+		select * from board where board_kinds like '%'||2||'%' order by seq_board_no asc
 	</select>
 	<resultMap type="Map" id="qnaMap">
 	
 	</resultMap>
 	
+	<!-- 자주묻는질문 검색 -->
     <select id="selectSearchList" resultMap="searchMap">
 		select * 
 		from board 
-		where board_kinds = '2' 
+		where board_kinds like '%'||2||'%' 
 		 and (board_title like '%'||#{searchKeyword}||'%' 
 		   or board_content like '%'||#{searchkeyword}||'%') 
 	</select>
 	<resultMap type="Map" id="searchMap">
 	
 	</resultMap>
+	<!-- 검색페이지페이징 -->
 	<select id="countQnaList" resultType="_int">
 		select count(*) 
 		from board 
-		where board_kinds = '2'
+		where board_kinds like '%'||2||'%'
 		and (board_title like '%'||#{searchKeyword}||'%' 
 		   or board_content like '%'||#{searchkeyword}||'%')
 	</select>
+	
 	<select id="selectMainList" resultType="cc">
 		select * from board where seq_board_no = #{seq_board_no}
 	</select>
+	
+	<select id="selectQnaMain" resultType="cc">
+		select * from board where seq_board_no = #{seq_board_no}
+	</select>
+	
+	<!-- 사용법 카테고리 -->
+	<select id="selectTutorialList" resultMap="tutoMap">
+		select * from board where board_kinds = '2t' order by seq_board_no desc
+	</select>
+	<resultMap type="Map" id="tutoMap">
+	
+	</resultMap>
+	<select id="countTutorialList" resultType="_int">
+		select count(*) from board where board_kinds = '2t'
+	</select>
+	
+	<!-- 구매 카테고리 -->
+	<select id="selectbuyTutorialList" resultMap="btutoMap">
+		select * from board where board_kinds = '2b' order by seq_board_no desc
+	</select>
+	<resultMap type="Map" id="btutoMap">
+	
+	</resultMap>
+	<select id="countbuyTutorialList" resultType="_int">
+		select count(*) from board where board_kinds = '2b'
+	</select>
+	
+	<!-- 판매 카테고리 -->
+	<select id="selectsellTutorialList" resultMap="stutoMap">
+		select * from board where board_kinds = '2s' order by seq_board_no desc
+	</select>
+	<resultMap type="Map" id="stutoMap">
+	
+	</resultMap>
+	<select id="countsellTutorialList" resultType="_int">
+		select count(*) from board where board_kinds = '2s'
+	</select>
+	
+	<!-- 자주묻는질문작성 -->
+	<insert id="insertQna" parameterType="cc">
+		insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,#{boardkinds},1,0 )
+	</insert>
+	
+	<!-- 자주묻는질문 수정 -->
+    <update id="updateQna">
+    	update board set board_title = #{boardtitle},
+    					 board_content = #{boardcontent}
+    	where seq_board_no = #{seq_board_no}
+    </update>
+    <!-- 자주묻는질문 삭제 -->
+    <delete id="deleteQna">
+    	delete from board where seq_board_no = #{seq_board_no} 
+    </delete>
+	
+	
+	
 	
 	
 </mapper>

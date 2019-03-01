@@ -4,6 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="YYYY-MM-dd" var="today" />
+
 <!-- header 시작 -->
 <!DOCTYPE html>
 <html>
@@ -303,8 +306,6 @@ function sendFile(file, el) {
       enctype: 'multipart/form-data',
       processData: false,
       success: function(url) {
-		alert(el);
-		alert(url);
         $(el).summernote('editor.insertImage', "${pageContext.request.contextPath}/resources/upload/"+url);
         $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
         $('div[name="aucdetail"]').html($('#summernote').summernote());
@@ -393,7 +394,7 @@ function sendFile(file, el) {
 			
 			<label for="field5">
 			<span>배송방법: </span>
-				<select class="select-field" name="dw" id="dw" onchange="fee(this.value)">
+				<select class="select-field" name="dw" id="dw">
 							<option value="">선택</option>
 							<option value="0">택배</option>
 							<option value="1">회사로 직접 방문</option>
@@ -401,31 +402,6 @@ function sendFile(file, el) {
 			</label>
 			<p id="dwchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
-			<script>
-			// 배송 방법 선택시 배송료 필드에 disabled 추가,제거 해주는 함수
-			function fee(dway) {
-				
-				var a = dway;
-				
-				if(a=="0"){
-					$("input[name=df]").attr("disabled",false);
-					
-				}else if(a=="1"){
-					$("input[name=df]").attr("disabled",true);
-					$("input[name=df]").val("");
-				}else{
-					$("input[name=df]").attr("disabled",true);
-					$("input[name=df]").val("");
-				}			
-			}
-			
-			</script>
-			
-			<label for="field6">
-			<span>배송료: </span>
-				<input type="text" class="input-field" name="df" id="df" disabled="" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' autocomplete="off" >
-			</label>
-			<p id="dfchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
 			<label for="field7">
 			<span>판매자: </span>
@@ -434,13 +410,6 @@ function sendFile(file, el) {
 			<p id="snchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
 			<label for="field8"><span>판매자연락처: </span>			
-			<!-- 
-			<select class="select-field" name="phone1" id="phone1" >
-							<option value="">선택</option>
-							<option value="010">010</option>
-							<option value="011">011</option>
-			</select>
-			 --> 
 			 
 			<input type="text" class="tel-number-field" id="phone1" name="phone1" value="${fn:substring(memberLoggedIn.memberPhone,0,3) }" maxlength="3" disabled="disabled" /> -
 			<input type="text" class="tel-number-field" id="phone2" name="phone2" value="${fn:substring(memberLoggedIn.memberPhone,3,7) }" maxlength="4" disabled="disabled" /> -
@@ -461,41 +430,69 @@ function sendFile(file, el) {
 </div>
 
 
-<script type="text/javascript">
+<script>
+
 
 //daterangepicker 적용부분
+var dateFlag = 0;	// 초기값으로 dateFlag값이 1이 될 경우에
+var dateFlagMsg = "";
 
-	$(function() {
-		$('input[name="dateRange"]').daterangepicker({
+$(function() {
+	
+	$('input[name="dateRange"]').daterangepicker({		
+		timePicker : true,
+		timePickerIncrement : 30,
+	    "singleDatePicker": true,
+		locale : {
+			format : 'YYYY-MM-DD H:mm A',
+			cancelLabel : 'clear'
+		}
+	
+	});
+	$('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
+		console.log(picker.startDate.format('YYYY-MM-DD H:mm A').substr(0,10));
+		
+		var startD = new Date(picker.startDate.format('YYYY-MM-DD H:mm A'));
+		var endD = new Date(picker.endDate.format('YYYY-MM-DD H:mm A'));
+		var todayD = new Date("${today}");
+		
+		// 경매기간 7일 split으로 잘라서 일 단위 계산
+		var endDateArray = picker.startDate.format('YYYY-MM-DD H:mm A').substr(0,10).split("-");
+		var todayDateArray = "${today}".split("-");
+		// alert("오늘날짜 일 : "+todayDateArray[2]+" 끝나는 날짜 일 : "+endDateArray[2]);
+		// alert("밀리세컨드 startDay = "+startD.getTime());
+		// alert("picker.start typeof"+typeof(picker.startDate));
+		var test = new Date(startD.getTime() + (1000*60*60*24*7)).toJSON();
+		// alert("test = "+test);
+		
+		if(startD < todayD) {
+			dateFlagMsg = "경매 등록 기간을 현재 날짜 이후여야 합니다.";
+			// var dateFlag = 0;
+			$(this).val("날짜를 다시 선택해주세요.").css("color" , "red");
+			alert(dateFlagMsg);
+		} else {
+			dateFlag = 1;
+			// alert(todayD);
+			// console.log("pickD = "+typeof(${today}));
 			
-			timePicker : true,
-			timePickerIncrement : 30,
-			locale : {
-				format : 'YYYY-MM-DD H:mm A',
-				cancelLabel : 'clear'
-			}
+			// 시간 , AM / PM 자르기
+			var temp = picker.startDate.format('YYYY-MM-DD H:mm A').substr(11,7);
 			
-		});
-		$('input[name="dateRange"]').on(
-				'apply.daterangepicker',
-				function(ev, picker) {
-					$(this).val(
-							picker.startDate.format('YYYY-MM-DD H:mm A')
-									+ ' ~ '
-									+ picker.endDate
-											.format('YYYY-MM-DD H:mm A'));
-				});
-
-		$('input[name="dateRange"]').on('cancel.daterangepicker',
-				function(ev, picker) {
-					$(this).val('');
-				});
-
+			$(this).val(picker.startDate.format('YYYY-MM-DD H:mm A')+ ' ~ '+ test.substr(0,10) + " " + temp).css("color" , "black");;			
+		}
 	});
 	
-</script>
+	
 
-<script>
+	$('input[name="dateRange"]').on('cancel.daterangepicker',
+			function(ev, picker) {
+				$(this).val('');
+			});
+
+});
+
+
+
 
 //write 페이지에 대분류 선택하면 소분류 뽑아오는 함수
 
@@ -516,8 +513,7 @@ function fn_next(ctgcode) {
 				$('#mctg').append( "<option value='' hidden='true'>소분류</option>");
 				
 				for (var i = 0; i < codeList.length; i++) {
-					var option = "<option value='" + codeList[i].categoryMacro + "'>"
-							+ codeList[i].categoryName + "</option>";
+					var option = "<option value='" + codeList[i].categoryMacro + "'>"+ codeList[i].categoryName + "</option>";
 					//대상 콤보박스에 추가
 					$('#mctg').append(option);
 				}
@@ -528,6 +524,63 @@ function fn_next(ctgcode) {
 		}
 	});
 }
+
+//파일 미리보기 구현 함수
+$(document).ready(
+	function() {
+		var fileTarget = $('.filebox .upload-hidden');
+
+		fileTarget.on('change', function() {
+			if (window.FileReader) {
+				// 파일명 추출
+				var filename = $(this)[0].files[0].name;
+			} else {
+				// Old IE 파일명 추출
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			;
+			var fileName;
+			fileName = filename.slice(filename.indexOf(".") + 1).toLowerCase();
+			if(fileName != "jpg" && fileName != "png" &&  fileName != "gif" &&  fileName != "bmp"){
+				alert("이미지 파일은 (jpg, png, gif, bmp) 형식만 등록 가능합니다.");
+				$(this).siblings('.upload-name').val("");
+				return;
+			}
+
+		
+			$(this).siblings('.upload-name').val(filename);
+		});
+
+		//preview image 
+		var imgTarget = $('.preview-image .upload-hidden');
+
+		imgTarget.on('change', function() {
+							var parent = $(this).parent();
+							parent.children('.upload-display').remove();
+
+							if (window.FileReader) {
+								//image 파일만
+								if (!$(this)[0].files[0].type.match(/image\//))
+									return;
+									
+
+								var reader = new FileReader();
+								reader.onload = function(e) {
+									var src = e.target.result;
+									parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+								}
+								reader.readAsDataURL($(this)[0].files[0]);
+							} else {
+								$(this)[0].select();
+								$(this)[0].blur();
+								var imgSrc = document.selection.createRange().text;
+								parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+
+								var img = $(this).siblings('.upload-display').find('img');
+								img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+ imgSrc + "\")";
+							}
+						});
+	});
 
 //글 저장 부분
 $(function() {
@@ -553,6 +606,12 @@ $(function() {
 	    }else{
 	    	document.getElementById("ctgchk").innerHTML = "";
 	    }
+		
+		if(dateFlag == 1) {
+			
+		} else {
+			alert("원하시는 날짜를 선택해주세요.");
+		}
 		
 	   	if (document.frm.auctitle.value=="") {
 	    	text = "상품명을 입력해주세용.";
@@ -590,42 +649,12 @@ $(function() {
 	    	document.getElementById("dwchk").innerHTML = "";
 	    }
 	   	
-	   	if(document.frm.dw.value=="0" && document.frm.df.value==""){
-	   		text = "배송료를 입력해주세요.";
-	   		document.getElementById("dfchk").innerHTML = text;
-	    	document.frm.df.focus();
-	        return;
-	   	}else{
-	    	document.getElementById("dfchk").innerHTML = "";
-	    }
-	   	
-	   	if (document.frm.sellername.value=="") {
-	    	text = "판매자를 입력해주세용.";
-	    	document.getElementById("snchk").innerHTML = text;
-	    	document.frm.sellername.focus();
-	        return;
-	    }else{
-	    	document.getElementById("snchk").innerHTML = "";
-	    }
-	    
-	   	if (document.frm.phone1.value=="" || document.frm.phone2.value=="" || document.frm.phone3.value=="") {
-	    	text = "전화번호를 입력해주세용.";
-	    	document.getElementById("pnchk").innerHTML = text;
-	    	document.frm.phone1.focus();
-	        return;
-	    }else if(document.frm.phone2.value.length<3 || document.frm.phone3.value.length<4){
-	    	text = "전화번호를 제대로 입력해주세용.";
-	    	document.getElementById("pnchk").innerHTML = text;
-	    	document.frm.phone1.focus();
-	        return;
-	    }else{
-	    	document.getElementById("pnchk").innerHTML = "";
-	    }
-	   	
-	   	if(document.frm.aucdetail.value==""){
+	   	var summernotehtml = $('#summernote').summernote('code');
+	   	console.log(summernotehtml);
+	   	if(summernotehtml=="<p><br></p>"){
 	   		text = "상세정보를 입력해주세요.";
 	   		document.getElementById("adchk").innerHTML = text;
-	    	document.frm.aucdetail.focus();
+	    	// document.frm.aucdetail.focus();
 	        return;
 	   	}else{
 	    	document.getElementById("adchk").innerHTML = "";

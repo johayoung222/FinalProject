@@ -7,13 +7,9 @@
 	<select id="selectJoinMember" resultType="m">
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
-	
-	
 	<insert id="insertBasket">
 		insert into basket values (seq_basket_no.nextval, #{seqMemberNo}, #{seqProductNo})
-		
 	</insert>
-	
 	<select id="selectProductList" resultMap="basketMap">
 	select * from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
 	</select>
@@ -27,4 +23,15 @@
 	</select>
 	<resultMap type="map" id="sumMap"></resultMap>
 	
+
+	<insert id="insertAsk" parameterType="productAsk">
+		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser})
+		<selectKey order="AFTER" resultType="_int" keyProperty="seqAskNo">
+			select seq_ask_no.currval from dual
+		</selectKey>
+	</insert>
+	<update id="updateProduct" parameterType="map">
+		update product set seq_ask_no = #{askNo} where seq_product_no = #{productNo}
+	</update>
+
 </mapper>

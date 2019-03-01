@@ -20,6 +20,14 @@ public interface AdminService {
 
 	int countmemberSearch(Map<String, String> map);
 	
+	List<Map<String, Object>> memberOne(String memberId);
+	
+	List<Map<String, Object>> couponAll();
+	
+	List<Map<String, Object>> couponList(int memberNo);
+	
+	int deleteCoupon(Map<String, Object> map);
+	
 	
 	//결제된 상품 리스트 
 	List<Map<String, String>> paidProduct(int cPage, int numPerPage);
@@ -30,10 +38,12 @@ public interface AdminService {
 
 	int countpaidProductSearch(Map<String, String> map);
 	
+	int couponPlus(Map<String, Object> map);
+	
 	
 	
 	//판매신청 리스트
-	List<Map<String, Object>> regist(int cPage, int numPerPage);
+	List<Map<String, Object>> regist();
 
 	int countregist();
 	
@@ -68,7 +78,9 @@ public interface AdminService {
 
 	int countquestionAnswer();
 
+	List<Map<String, String>> questionAnswerY(int cPage, int numPerPage);
 	
+	int countquestionAnswerY();
 	//경매상품 현황
 	List<Map<String, String>> acutionStatus(int cPage, int numPerPage);
 
@@ -78,6 +90,17 @@ public interface AdminService {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
+
+	
+
+	
+
+	
+
+	
+
+	
 
 	
 

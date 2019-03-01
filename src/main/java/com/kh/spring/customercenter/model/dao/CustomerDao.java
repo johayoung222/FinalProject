@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.kh.spring.board.model.vo.Attachment;
 import com.kh.spring.customercenter.model.vo.Board;
+import com.kh.spring.customercenter.model.vo.Question;
+import com.kh.spring.member.model.vo.Member;
 
 
 
@@ -28,5 +30,33 @@ public interface CustomerDao {
 	int countQnaList(String searchkeyword);
 
 	List<Board> selectMainList();
+
+	Board selectQnaMain(Board board);
+
+	List<Map<String, String>> selectTutorialList(int cPage, int numPerPage);
+
+	int countTutorialList();
+	
+	List<Map<String, String>> selectbuyTutorialList(int cPage, int numPerPage);
+	
+	int countbuyTutorialList();
+	
+	List<Map<String, String>> selectsellTutorialList(int cPage, int numPerPage);
+	
+	int countsellTutorialList();
+
+	int insertQna(Board board);
+
+	int updateQna(Board board);
+
+	int deleteQna(Board board);
+
+	int insertInquiry(Question q);
+
+	List<Map<String, String>> selectinquiryList(Question q);
+
+	int insertAnswer(Question q);
+
+	int updateAnswer(Question q);
 
 }

@@ -12,9 +12,20 @@
 
 <style>
 .productList-container{
+	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
+	top:-37px;
 }
+.tableTr td{
+	width:100px;
+	height:70px;
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+}
+
 </style>
 <br />
 <section id="productList-container" class="productList-container">
@@ -41,13 +52,13 @@
 			<th>경매여부</th>
 			<th>판매여부</th>
 			<th>제조사명</th>
-			<th>제품재고수량</th>
-			<th>상품이미지</th>
-			<th>상품이미지2</th>
+			<th>수량</th>
+			<th>이미지</th>
+			<th>이미지</th>
 			<th>마일리지</th>
 			<th>상품설명</th>
 			<th>이벤트여부</th>
-			<th>판매등록일자</th>
+			<th>등록일자</th>
 			<th>추천상품여부</th>
 			<th>중고여부</th>
 			<th>소분류코드</th>
@@ -63,26 +74,26 @@
 		
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="p">
-			<tr>				
-				<th>${p.SEQ_PRODUCT_NO}</th>
-				<th>${p.PRODUCT_NAME}</th>
-				<th>${p.PRODUCT_PRICE}</th>
-				<th>${p.PRODUCT_AUCTION}</th>
-				<th>${p.PRODUCT_ONSALE}</th>
-				<th>${p.PRODUCT_MANUFACTURER}</th>
-				<th>${p.PRODUCT_STOCK}</th>
-				<th>${p.PRODUCT_IMAGE}</th>
-				<th>${p.PRODUCT_REAL_IMAGE}</th>
-				<th>${p.PRODUCT_MILEGE}</th>
-				<th>${p.PRODUCT_DESCRIPTION}</th>
-				<th>${p.PRODUCT_EVENT}</th>
-				<th>${p.PRODUCT_ENROLL_DATE}</th>
-				<th>${p.PRODUCT_RECOMMEND}</th>
-				<th>${p.PRODUCT_KINDS}</th>
-				<th>${p.CATEGORY_MICRO}</th>
-				<th>${p.CATEGORY_MACRO}</th>
-				<th>${p.SELLER_NO}</th>
-				<th>${p.SEQ_AUCTION_NO}</th>				
+			<tr class="tableTr">				
+				<td>${p.SEQ_PRODUCT_NO}</td>
+				<td>${p.PRODUCT_NAME}</td>
+				<td>${p.PRODUCT_PRICE}</td>
+				<td>${p.PRODUCT_AUCTION}</td>
+				<td>${p.PRODUCT_ONSALE}</td>
+				<td>${p.PRODUCT_MANUFACTURER}</td>
+				<td>${p.PRODUCT_STOCK}</td>
+				<td>${p.PRODUCT_IMAGE}</td>
+				<td>${p.PRODUCT_REAL_IMAGE}</td>
+				<td>${p.PRODUCT_MILEGE}</td>
+				<td>${p.PRODUCT_DESCRIPTION}</td>
+				<td>${p.PRODUCT_EVENT}</td>
+				<td>${p.PRODUCT_ENROLL_DATE}</td>
+				<td>${p.PRODUCT_RECOMMEND}</td>
+				<td>${p.PRODUCT_KINDS}</td>
+				<td>${p.CATEGORY_MICRO}</td>
+				<td>${p.CATEGORY_MACRO}</td>
+				<td>${p.SELLER_NO}</td>
+				<td>${p.SEQ_AUCTION_NO}</td>				
 			</tr>			
 			</c:forEach>
 		</c:if>
@@ -95,7 +106,6 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage ,type,search, view) %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
