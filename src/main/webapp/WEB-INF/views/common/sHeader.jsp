@@ -17,7 +17,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 <!-- 사용자작성 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/style.css" />
-
+<!-- google font -->
+<link href="https://fonts.googleapis.com/css?family=Gamja+Flower" rel="stylesheet">
 <style>
 .header-container{
 	border-bottom: 1px solid gray;
@@ -25,48 +26,56 @@
 	height: 70px;
 	display: flex;
 	justify-content: space-between;
-}
-.header-left, .header-right{
-	display: inline-block;
+	font-family: 'Do Hyeon', sans-serif;
 }
 .header-right{
-	font-size: 14px;
+	display: flex;
+	justify-content: space-between;
 }
-.header-left div, .header-right div{
-	border: 1px solid black;
-	width: 100px;
+.header-right div{
+	padding-top: 20px;
+	font-size: 18px;
+	margin-right: 20px;
+	color: black;
+}
+.header-left div{
+	width: 80px;
 	height: 60px;
-	vertical-align: middle;
 	display: inline-block;
 }
-.header-right .moveEnroll, .header-left .logo-next{
+.moveEnroll{
 	width: 250px;
-	
 }
 #login2_{
-	text-align:center;
-	padding-right:160px;
-	padding-top:35px;
-	border:0px;
-font-family: 'Do Hyeon', sans-serif;
+	font-family: 'Do Hyeon', sans-serif;
+	text-align: center;
+	padding-top: 20px;
+	font-size: 22px;
+	width: 200px;
 }
-
+a{
+	color: black;
+}
 </style>
 </head>
 <div class="header-container">
 	<div class="header-left">
-	<div class="logo" style="border:0"><a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit.PNG"  width="100%" height="100%"/></a></div>
-	<div class="logo-next" id="login2_" style="background:white;">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
+		<div class="logo">
+			<a href="${pageContext.request.contextPath }">
+				<img src="${pageContext.request.contextPath }/resources/images/Getit.PNG"  width="100%" height="100%"/>
+			</a>
+		</div>
+		<div class="logo-next" id="login2_">${param.pageName==0?"회원가입하기":"로그인하기" }</div>
 	</div>
 	<div class="header-right">
-	<div class="moveEnroll" style="border:0">
-	<c:if test="${param.pageName==0 }">
-	<a href="${pageContext.request.contextPath }/member/memberMoveLogin.do">회원이신가요? 로그인하러가기</a>
-	</c:if>
-	<c:if test="${param.pageName==1 }">
-	<a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a>
-	</c:if>
-	</div>
-	<div class="customer-center" style="border:0"><a href="${pageContext.request.contextPath }/customercenter/ccintro.do">고객센터</a></div>
+		<div class="moveEnroll">
+			<c:if test="${param.pageName==0 }">
+			<a href="${pageContext.request.contextPath }/member/memberMoveLogin.do">회원이신가요? 로그인하러가기</a>
+			</c:if>
+			<c:if test="${param.pageName==1 }">
+			<a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a>
+			</c:if>
+		</div>
+		<div><a href="${pageContext.request.contextPath }/customercenter/ccintro.do">고객센터</a></div>
 	</div>
 </div>
