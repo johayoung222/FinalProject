@@ -89,7 +89,7 @@ font-family: 'Nanum Gothic', sans-serif;
 
 		      <div class="buy-container">
 		      
-		 	 	<h4>상품구매 금액 합계:원</h4>
+		 	 	<h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>
 		 	
 		     
 		 	 	<br />
