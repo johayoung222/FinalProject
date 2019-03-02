@@ -67,6 +67,6 @@ font-family: 'Do Hyeon', sans-serif;
 	<a href="${pageContext.request.contextPath }/member/memberEnroll.do">회원이 아니신가요? 회원가입하러가기</a>
 	</c:if>
 	</div>
-	<div class="customer-center" style="border:0"><a href="">고객센터</a></div>
+	<div class="customer-center" style="border:0"><a href="${pageContext.request.contextPath }/customercenter/ccintro.do">고객센터</a></div>
 	</div>
 </div>
