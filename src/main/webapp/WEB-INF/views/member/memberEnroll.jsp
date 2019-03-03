@@ -1202,8 +1202,8 @@ label{
 		</div>
 		<input type="password" class="form-control" placeholder="비밀번호" name="memberPassword" id="password_" required>
 		<input type="password" class="form-control" placeholder="비밀번호확인" id="password2" required>
-		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName">
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940512" name="memberBirth" id="memberBirth">
+		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName" required>
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940512" name="memberBirth" id="memberBirth" required>
 		<input type="email" class="form-control" placeholder="이메일" name="memberEmail" id="email">
 		<input type="text" class="form-control" placeholder="주소" name="memberAddress" id="address">
 		<select class="form-control" name="gender" required>
@@ -1350,6 +1350,16 @@ $("#memberId_").on("keyup" , function(){
 	});
 });
 
+$("#password2").on('blur',function(){
+	var pwd1 = $("#password_").val().trim();
+	var pwd2 = $(this).val().trim();
+	
+	if(pwd1 != pwd2){
+		alert("비밀번호가 일치하지 않습니다.");
+		$("#password_").val("").focus();
+		return;
+	}
+});
 
 function fbvalidate(){
 	

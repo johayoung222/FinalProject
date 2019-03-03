@@ -3,10 +3,11 @@ package com.kh.spring.basket.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.basket.model.service.BasketService;
 import com.kh.spring.basket.model.vo.Basket;
-import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class BasketContoller {
+	
+	Logger logger = Logger.getLogger(getClass());
 
 	@Autowired
 	BasketService basketService;
@@ -35,11 +37,19 @@ public class BasketContoller {
 		      
 		     List<Map<String, String>> list = basketService.selectProductList(b);
 		     System.out.println(list != null?"갖고오기성공":"갖고오기실패");
-		     int priceSum= basketService.selectSumProduct(b);
+
+		   //  List<Map<String, String>> sumList= basketService.selectSumProduct(b);
+		     int sum = 0;
+		     
+		     for(Map<String,String> map : list) {
+		    	 sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
+		     }
 		     
 		    
 		    
-		      mav.addObject("priceSum",priceSum);
+		 
+		      mav.addObject("sum", sum);
+
 	          mav.addObject("list",list);
 		      mav.setViewName("item/basket"); 
 	          return mav;

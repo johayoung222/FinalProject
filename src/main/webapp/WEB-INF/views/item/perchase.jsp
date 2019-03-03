@@ -91,7 +91,10 @@ IMP.request_pay({ // param
         // jQuery로 HTTP 요청
         var param = {
                 "impUid" : rsp.imp_uid,
-                "merchantUid" : rsp.merchant_uid
+                "merchantUid" : rsp.merchant_uid,
+                "orderMethod": perchaseFrm.payMethod.value,
+                "orderPrice": perchaseFrm.payAmount.value,
+                "orderResult": "Y"
             };
         var jParam = JSON.stringify(param);
         $.ajax({

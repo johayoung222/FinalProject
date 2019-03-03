@@ -10,11 +10,7 @@
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
-   <%
-	        int priceSum = (int) request.getAttribute("priceSum");
-	        
-	        
-    %>
+
 <style>
 .productList-container{
 	position:relative;
@@ -91,22 +87,8 @@ font-family: 'Nanum Gothic', sans-serif;
 	<input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
 </form>
 
-		      <div class="buy-container">
-		    <table class="table">
- 			 <tbody>
- 			
-    		 <tr>
-             <td><h4>상품구매 금액 합계:</h4></td>
-             <td><h4><%=priceSum%> 원</h4></td>
-             </tr>
-           
-   
-  </tbody>
-</table>
 	      
-		 	 
-		 	
-		     
+		 	 	<h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
 		 	 	<br />
 		      <button type="button" id="buyButton" class="btn btn-primary btn-lg">구매하기</button>
 		   </div>
