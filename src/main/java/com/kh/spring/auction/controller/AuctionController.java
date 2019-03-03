@@ -1,6 +1,7 @@
 package com.kh.spring.auction.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -87,11 +88,13 @@ public class AuctionController {
 	}
 	
 	
-	/*
+
 	@RequestMapping(value = "/uploadFileSave")
 	@ResponseBody
 	public Map<String, Object> multipartProcess(final MultipartHttpServletRequest multiRequest,
-			HttpServletResponse response, Auction auc, Model model, HttpServletRequest request,HttpSession session ) {
+			HttpServletResponse response, Auction auc, Model model, HttpServletRequest request,HttpSession session ) throws IllegalStateException, IOException {
+		
+		System.out.println("받아온 초기값 : "+auc);
 		
 		//사진 이름에 붙이기 위해 현재시간 가져옴
 		Calendar calendar = Calendar.getInstance();
@@ -99,24 +102,16 @@ public class AuctionController {
 		
 		String addTime = dateFormat.format(calendar.getTime());
 		Member m = (Member)session.getAttribute("memberLoggedIn");
-		int a;
-		int b;
-		int c;
 		
-		a = Integer.parseInt(vo.getDw());
+		auc.setAuctionMember(m.getMemberId());
+		auc.setSeqMemberNo(m.getSeqmemberNo());
+		auc.setAuctionPhone(m.getMemberPhone());
+		String auctionTitle = auc.getAuctionTitle();
+		auc.setAuctionTitle(new String(auctionTitle.getBytes("8859_1"),"utf-8"));
+
+		String auctionDetail = auc.getAuctiondetail();
+		auc.setAuctiondetail(new String(auctionDetail.getBytes("8859_1"),"utf-8"));
 		
-		if(vo.getDf()==null){
-			b = 0;
-		}else{
-			b = Integer.parseInt(vo.getDf());
-		}
-
-		c = Integer.parseInt(vo.getSp());
-
-		vo.setDeliveryway(a);
-		vo.setDeliveryfee(b);
-		vo.setSprice(c);
-
 		MultipartFile file;
 		String filePath = "";
 		int cnt = 0;
@@ -134,7 +129,7 @@ public class AuctionController {
 		}
 
 		Iterator<Entry<String, MultipartFile>> itr = files.entrySet().iterator();
-		*/
+
 		/*
 		 * 
 		 * MultipartFile 의 주요 메소드는 String getName()파라미터 이름을 구한다. String
@@ -144,7 +139,7 @@ public class AuctionController {
 		 * InputStream getInputStream()InputStrem을 구한다. void transferTo(File
 		 * dest)업로드 한 파일 데이터를 지정한 파일에 저장한다. --> 요고도 파일쓰는거다.
 		 */
-		/*
+
 		String filename = "";
 
 		while (itr.hasNext()) {
@@ -158,21 +153,21 @@ public class AuctionController {
 			}
 		}
 
-		String[] filelist = filename.split("／");
-
+		String[] filelist = filename.split("／");		
+		
 		for(int i=0;i<filelist.length;i++){
 			if(i==0){
-				vo.setAucimagemain(filelist[i]);
+				auc.setAuctionImageMain(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 			}else if(i==1){
-				vo.setAucimagesub1(filelist[i]);
+				auc.setAuctionImageSub1(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 			}else if(i==2){
-				vo.setAucimagesub2(filelist[i]);
+				auc.setAuctionImageSub2(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 			}else{
-				vo.setAucimagesub3(filelist[i]);
+				auc.setAuctionImageSub3(new String(filelist[i].getBytes("8859_1"),"utf-8"));
 			}
 		}
 		
-		String[] dr = vo.getDateRange().split(" ~ ");
+		String[] dr = auc.getDateRange().split(" ~ ");
 
 		try {
 			SimpleDateFormat org_frm = new SimpleDateFormat("yyyy-MM-dd H:mm a", Locale.US);
@@ -188,36 +183,38 @@ public class AuctionController {
 			String new_std = new_frm.format(std);
 			String new_end = new_frm.format(end);
 
-			vo.setSdate(new_std);
-			vo.setEdate(new_end);
+			auc.setSdate(new_std);
+			auc.setEdate(new_end);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		String fullphone = vo.getPhone1() + vo.getPhone2() + vo.getPhone3(); 
 		
-		vo.setSellerphone(fullphone);
 		
-		String result = "";
-
+		int result = 0;
+		System.out.println("인코딩설정 및 가져온 auc : "+auc);
+		
 		try {
-			result = kobayService.insertWrite(vo);
+			result = auctionService.insertAuctionRegist(auc);
+
 		} catch (Exception e) {
 			map.put("cnt", 0);
-//			e.printStackTrace();
+			e.printStackTrace();
+			System.out.println("익셉션에 걸립니까?");
 			return map;
 		}
 		
-
-		if (result == null) {
+		
+		if (result > 0) {
 			cnt = cnt + 1;
 		}
+		
 
 		map.put("cnt", cnt);
 		
-		return map;
+		System.out.println("제대로 리턴을 시킵니까?");
 		return map;
 	}
-		 */
+
 }
