@@ -39,7 +39,7 @@ public class BasketServiceImpl implements BasketService{
 	}
 
 	@Override
-	public List<Map<String, String>> selectSumProduct(Basket b) {
+	public int selectSumProduct(Basket b) {
 		// TODO Auto-generated method stub
 		return basketDao.selectSumProduct(b);
 	}

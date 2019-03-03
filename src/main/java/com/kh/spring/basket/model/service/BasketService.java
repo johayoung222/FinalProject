@@ -15,7 +15,7 @@ public interface BasketService{
 
 	int deleteBasket(Basket b);
 
-	List<Map<String, String>> selectSumProduct(Basket b);
+	int selectSumProduct(Basket b);
   
 	
 

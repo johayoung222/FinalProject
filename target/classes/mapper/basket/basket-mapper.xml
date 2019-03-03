@@ -18,10 +18,10 @@
 		delete from basket where seq_basket_no = #{seqBasketNo}
 	</delete>
 
-	<select  id="selectSum" resultMap="sumMap">
+	<select  id="selectSum" resultType="_int">
 	select sum(product_price) from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
 	</select>
-	<resultMap type="map" id="sumMap"></resultMap>
+	
 	
 
 	<insert id="insertAsk" parameterType="productAsk">

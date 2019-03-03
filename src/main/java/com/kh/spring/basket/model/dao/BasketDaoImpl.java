@@ -50,7 +50,7 @@ public class BasketDaoImpl implements BasketDao {
 
 
 	@Override
-	public List<Map<String, String>> selectSumProduct(Basket b) {
+	public int selectSumProduct(Basket b) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("basket.selectSum",b);
 	}

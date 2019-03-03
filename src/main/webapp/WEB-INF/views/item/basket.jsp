@@ -10,7 +10,11 @@
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
-
+   <%
+	        int priceSum = (int) request.getAttribute("priceSum");
+	        
+	        
+    %>
 <style>
 .productList-container{
 	position:relative;
@@ -88,8 +92,19 @@ font-family: 'Nanum Gothic', sans-serif;
 </form>
 
 		      <div class="buy-container">
-		      
-		 	 	<h4>상품구매 금액 합계:원</h4>
+		    <table class="table">
+ 			 <tbody>
+ 			
+    		 <tr>
+             <td><h4>상품구매 금액 합계:</h4></td>
+             <td><h4><%=priceSum%> 원</h4></td>
+             </tr>
+           
+   
+  </tbody>
+</table>
+	      
+		 	 
 		 	
 		     
 		 	 	<br />
@@ -100,7 +115,7 @@ font-family: 'Nanum Gothic', sans-serif;
 	</div>
 </div>
 <script>
-//ajax로 처리
+//
 function deleteBasket(no){
     var frm = document.basketDelFrm;
     frm.no.value = no;

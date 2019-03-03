@@ -35,11 +35,11 @@ public class BasketContoller {
 		      
 		     List<Map<String, String>> list = basketService.selectProductList(b);
 		     System.out.println(list != null?"갖고오기성공":"갖고오기실패");
-		   //  List<Map<String, String>> sumList= basketService.selectSumProduct(b);
+		     int priceSum= basketService.selectSumProduct(b);
 		     
 		    
 		    
-		    //  mav.addObject("sumList",sumList);
+		      mav.addObject("priceSum",priceSum);
 	          mav.addObject("list",list);
 		      mav.setViewName("item/basket"); 
 	          return mav;
@@ -69,7 +69,7 @@ public class BasketContoller {
             @RequestMapping("/item/deleteBasket.do")
             public ModelAndView deleteBasket(ModelAndView mav,@RequestParam("no") int no){
             	
-            	System.out.println("여기 들어와? deleteBasket.do");
+            
             	System.out.println("삭제할 장바구니no는:"+no);
             	
             	
