@@ -308,7 +308,7 @@ function sendFile(file, el) {
       success: function(url) {
         $(el).summernote('editor.insertImage', "${pageContext.request.contextPath}/resources/upload/"+url);
         $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        $('div[name="aucdetail"]').html($('#summernote').summernote());
+        $('div[name="auctiondetail"]').html($('#summernote').summernote());
       }
     });
   }
@@ -347,7 +347,7 @@ function sendFile(file, el) {
 			
 			<label for="field3">
 			<span>상품명: </span>
-				<input type="text" class="input-field" name="auctitle" id="auctitle" autocomplete="off" />
+				<input type="text" class="input-field" name="auctionTitle" id="auctionTitle" autocomplete="off" />
 			</label>
 			<p id="titchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
@@ -388,13 +388,13 @@ function sendFile(file, el) {
 			
 			<label for="field4">
 			<span>상품가격: </span>
-				<input type="text" class="input-field" name="sp" id="sp" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' autocomplete="off" >
+				<input type="text" class="input-field" name="auctionPrice" id="auctionPrice" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' autocomplete="off" >
 			</label>
 			<p id="spchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
 			<label for="field5">
 			<span>배송방법: </span>
-				<select class="select-field" name="dw" id="dw">
+				<select class="select-field" name="auctionStatus" id="auctionStatus">
 							<option value="">선택</option>
 							<option value="0">택배</option>
 							<option value="1">회사로 직접 방문</option>
@@ -405,7 +405,7 @@ function sendFile(file, el) {
 			
 			<label for="field7">
 			<span>판매자: </span>
-				<input type="text" class="input-field" name="sellername" id="sellername" autocomplete="off" value="${memberLoggedIn.memberId }" disabled="disabled" >
+				<input type="text" class="input-field" name="auctionMember" id="auctionMember" autocomplete="off" value="${memberLoggedIn.memberId }" disabled="disabled" >
 			</label>				
 			<p id="snchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 			
@@ -420,7 +420,7 @@ function sendFile(file, el) {
 			<label for="field9"><span>상세정보: </span>
 			<div class="float"></div>
 			<!-- <textarea class="textarea-field" id="summernote" name="aucdetail"></textarea> -->
-			<div class="textarea-field" id="summernote" name="aucdetail"></div>			
+			<textarea class="textarea-field" id="summernote" name="auctiondetail"></textarea>			
 			</label>
 			<p id="adchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
 		
@@ -613,10 +613,10 @@ $(function() {
 			alert("원하시는 날짜를 선택해주세요.");
 		}
 		
-	   	if (document.frm.auctitle.value=="") {
+	   	if (document.frm.auctionTitle.value=="") {
 	    	text = "상품명을 입력해주세용.";
 	    	document.getElementById("titchk").innerHTML = text;
-	    	document.frm.auctitle.focus();
+	    	document.frm.auctionTitle.focus();
 	        return;
 	    }else{
 	    	document.getElementById("titchk").innerHTML = "";
@@ -631,7 +631,7 @@ $(function() {
 	    	document.getElementById("mimgchk").innerHTML = "";
 	    }
 	   	
-	   	if (document.frm.sp.value=="") {
+	   	if (document.frm.auctionPrice.value=="") {
 	    	text = "상품가격을 등록해주세용.";
 	    	document.getElementById("spchk").innerHTML = text;
 	    	document.frm.sp.focus();
@@ -640,10 +640,10 @@ $(function() {
 	    	document.getElementById("spchk").innerHTML = "";
 	    }
 	   	
-	   	if (document.frm.dw.value=="") {
+	   	if (document.frm.auctionStatus.value=="") {
 	    	text = "배송방법을 선택해주세용.";
 	    	document.getElementById("dwchk").innerHTML = text;
-	    	document.frm.dw.focus();
+	    	document.frm.auctionStatus.focus();
 	        return;
 	    }else{
 	    	document.getElementById("dwchk").innerHTML = "";
@@ -654,7 +654,7 @@ $(function() {
 	   	if(summernotehtml=="<p><br></p>"){
 	   		text = "상세정보를 입력해주세요.";
 	   		document.getElementById("adchk").innerHTML = text;
-	    	// document.frm.aucdetail.focus();
+	    	// document.frm.auctiondetail.focus();
 	        return;
 	   	}else{
 	    	document.getElementById("adchk").innerHTML = "";
@@ -662,13 +662,15 @@ $(function() {
 		
 		var form = new FormData(document.getElementById('frm'));
 
+		console.log(form);
+		
 		$.ajax({
 			type : 'POST',
 			data : form,
 			url : "<c:url value='/uploadFileSave'/>",
 			dataType : "json",
 			processData: false,
-		 	contentType: false, 
+			contentType: false, 
 			success : function(data) {
 				if (data.cnt > 0) {
 					alert("저장됐습니다.");
