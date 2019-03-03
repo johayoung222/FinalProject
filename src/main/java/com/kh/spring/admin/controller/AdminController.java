@@ -359,6 +359,20 @@ public class AdminController {
 		mav.setViewName("admin/questionAnswer");
 		return mav;
 	}
+	@RequestMapping("/admin/questionAnswerY.do")
+	public ModelAndView questionAnswerY(ModelAndView mav
+			,@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		System.out.println("questionAnswer메소드 실행!!");
+		int numPerPage = 7;
+		List<Map<String, String>> list = adminService.questionAnswerY(cPage,numPerPage);
+		int totalContents = adminService.countquestionAnswer();
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.setViewName("admin/questionAnswer");
+		return mav;
+	}
 	
 	@RequestMapping("/admin/acutionStatus.do")
 	public ModelAndView actionStatus(ModelAndView mav, 

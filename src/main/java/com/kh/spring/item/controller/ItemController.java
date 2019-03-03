@@ -1,6 +1,8 @@
 package com.kh.spring.item.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +19,7 @@ import com.google.gson.JsonIOException;
 import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.ProductAsk;
 
 @Controller
 public class ItemController {
@@ -45,8 +48,25 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/item/ask")
-	public void productAsk(@RequestParam(value="askContent") String askContent, HttpServletResponse response) throws JsonIOException, IOException {
+	public void productAsk(@RequestParam(value="askContent") String askContent, HttpServletResponse response,
+						@RequestParam(value="asker") int asker,
+						@RequestParam(value="productNo") int productNo) throws JsonIOException, IOException {
+		logger.debug(askContent+"/"+asker);
+
+		ProductAsk pAsk = new ProductAsk();
+		pAsk.setAskUser(asker);
+		pAsk.setAskContent(askContent);
 		
+		int result = basketService.insertAsk(pAsk);
+		int askNo = pAsk.getSeqAskNo();
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("askNo", String.valueOf(askNo));
+		map.put("productNo",String.valueOf(productNo));
+		
+		basketService.updateProduct(map);
+		
+		response.setContentType("application/json;charset=UTF-8"); 
 		new Gson().toJson(askContent, response.getWriter());
 	}
 	

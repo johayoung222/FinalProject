@@ -367,7 +367,7 @@ public class CustomercenterController {
 											  ModelAndView mav) {
 			Member m = (Member)session.getAttribute("memberLoggedIn");
 			Question q = new Question();
-			q.setSeq_member_no(m.getSeqmemberNo());
+			q.setSeq_member_no(m.getSeqMemberNo());
 			logger.debug("1234==="+m);
 			// 업무로직
 			// 1.게시글 리스트(페이징적용)
@@ -415,6 +415,33 @@ public class CustomercenterController {
 			mav.setViewName("common/msg");
 			
 			return mav;
+		}
+		@RequestMapping("/customercenter/insertAnswer.do")
+		public ModelAndView insertAnswer(ModelAndView mav,
+										 @RequestParam(name="question_answer") String question_answer,
+										 @RequestParam(name="seq_member_no") int seq_member_no,
+										 @RequestParam(name="seq_question_no") int seq_question_no) {
+			Question q = new Question();
+			q.setSeq_question_no(seq_question_no);
+			q.setSeq_member_no(seq_member_no);
+			q.setQuestion_answer(question_answer);
+			
+			int result = customerService.insertAnswer(q);
+			
+			String loc = "/admin/questionAnswer.do";
+			String msg = "";
+			if (result > 0) {
+				msg = "1:1문의 답변을 등록 하였습니다~ :)";
+			} else {
+				msg = "1:1문의  답변 실패";
+			}
+			
+			mav.addObject("q",q);
+			mav.addObject("loc", loc);
+			mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
+			return mav;
+
 		}
 		
 		

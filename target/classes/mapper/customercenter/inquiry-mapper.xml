@@ -14,6 +14,15 @@
     	values(seq_question_no.nextval,#{question_lkinds},#{question_mkinds},#{question_content},#{seq_member_no},default,null,sysdate)
     </insert>
     
+    <update id="insertAnswer">
+    	update question set question_answer = #{question_answer},
+    					 	question_result = 'Y'
+    	where seq_question_no = #{seq_question_no}
+    </update>
+	<update id="updateAnswer">
+    	update question set question_answer = #{question_answer}
+    	where seq_question_no = #{seq_question_no}
+    </update>
 	
 	
 </mapper>

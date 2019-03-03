@@ -176,6 +176,16 @@ public class AdminServiceImpl implements AdminService {
 	public int countauctionStatus() {
 		return adminDao.countauctionStatus();
 	}
+	
+	@Override
+	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
+		return adminDao.questionAnswerY(cPage, numPerPage);
+	}
+
+	@Override
+	public int countquestionAnswerY() {
+		return adminDao.countquestionAnswerY();
+	}
 
 	
 	//신고접수 리스트----------------------------------------------------------------

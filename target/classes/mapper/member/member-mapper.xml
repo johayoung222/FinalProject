@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
 	<insert id="insertMember">
-	insert into member (seq_member_no, member_id, member_password, member_name, gender, member_alarm, member_interest ) 
+	insert into member (seq_member_no, member_id, member_password, member_name, gender, member_alarm, member_interest, member_birth, member_email, member_address ) 
 				values( seq_member_no.nextval, #{memberId}, #{memberPassword}, #{memberName}, #{gender}, #{memberAlarm}, 
-				#{memberInterest} )
+				#{memberInterest}, #{memberBirth}, #{memberEmail}, #{memberAddress} )
 	</insert>
 	
 	<select id="selectOneMember" resultMap="selectOneMember" >

@@ -141,11 +141,19 @@
 	
 	<!-- 1:1질문답변 -->
 	<select id="questionAnswer" resultMap="questionAnswerMap">
-		select * from question order by seq_question_no
+		select * from question where question_result = 'N' order by question_date desc
 	</select>
 	<resultMap type="map" id="questionAnswerMap"></resultMap>	
 	<select id="countquestionAnswer" resultType="_int">
-		select count(*) from question
+		select count(*) from question where question_result = 'N'
+	</select>
+	
+	<select id="questionAnswerY" resultMap="questionAnswerMapY">
+		select * from question where question_result = 'Y' order by question_date desc
+	</select>
+	<resultMap type="map" id="questionAnswerMapY"></resultMap>	
+	<select id="countquestionAnswerY" resultType="_int">
+		select count(*) from question where question_result = 'Y'
 	</select>
 	
 	<!-- 경매 상품 현황 -->

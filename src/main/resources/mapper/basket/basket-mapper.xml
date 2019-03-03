@@ -7,17 +7,31 @@
 	<select id="selectJoinMember" resultType="m">
 		select * from member where seq_member_no = #{sellerNo}
 	</select>
-	
-	<!--장바구니 리스트 -->
-	<select id="basketList" resultMap="basketListMap">
-		select * from basket order by seq_basket_no
+	<insert id="insertBasket">
+		insert into basket values (seq_basket_no.nextval, #{seqMemberNo}, #{seqProductNo})
+	</insert>
+	<select id="selectProductList" resultMap="basketMap">
+	select * from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
 	</select>
-	<resultMap type="map" id="basketListMap"></resultMap>
-	
-	<!-- pageing을 위한  수 세기	 -->
-	<select id="countbasketList" resultType="_int">
-		select count(*) from basket
+	<resultMap type="map" id="basketMap"></resultMap>
+	<delete id="deletBasketList">
+		delete from basket where seq_basket_no = #{seqBasketNo}
+	</delete>
+
+	<select  id="selectSum" resultType="_int">
+	select sum(product_price) from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
 	</select>
 	
 	
+
+	<insert id="insertAsk" parameterType="productAsk">
+		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser})
+		<selectKey order="AFTER" resultType="_int" keyProperty="seqAskNo">
+			select seq_ask_no.currval from dual
+		</selectKey>
+	</insert>
+	<update id="updateProduct" parameterType="map">
+		update product set seq_ask_no = #{askNo} where seq_product_no = #{productNo}
+	</update>
+
 </mapper>

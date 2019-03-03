@@ -6,22 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.board.model.exception.BoardException;
 import com.kh.spring.common.util.Utils;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
@@ -143,10 +143,13 @@ public class ThingController {
 
 	@RequestMapping(value="/item/perchase/{productNo}", method=RequestMethod.GET)
 	public ModelAndView movePerchase(@PathVariable("productNo") int productNo,
-							ModelAndView mav) {
+							ModelAndView mav,HttpSession session) {
 		
+		Member m = (Member) session.getAttribute("memberLoggedIn");
 		Product p = thingService.selectOne(productNo);
+		logger.debug(m);
 		
+		mav.addObject("member", m);
 		mav.addObject("product",p);
 		mav.setViewName("item/perchase");
 		
@@ -159,7 +162,7 @@ public class ThingController {
 		logger.debug(order);
 		
 		mav.addObject("order", order);
-		mav.setViewName("mypage/order");
+		mav.setViewName("mypage/purchases");
 		
 		return mav;
 	}

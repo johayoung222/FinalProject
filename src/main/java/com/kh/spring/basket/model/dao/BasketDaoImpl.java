@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.basket.model.vo.Basket;
+
 @Repository
 public class BasketDaoImpl implements BasketDao {
 
@@ -27,6 +29,33 @@ public class BasketDaoImpl implements BasketDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("basket.countbasketList");
 	}
+
+	@Override
+	public int insertBasket(Basket b) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("basket.insertBasket",b);
+	}
+
+	@Override
+	public List<Map<String, String>> selectProductList(Basket b) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("basket.selectProductList",b);
+	}
+
+	@Override
+	public int deleteBasket(Basket b) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("basket.deletBasketList",b);
+	}
+
+
+	@Override
+	public int selectSumProduct(Basket b) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("basket.selectSum",b);
+	}
+
+	
 	
 	
 	

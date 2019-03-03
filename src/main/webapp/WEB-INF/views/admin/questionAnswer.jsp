@@ -18,14 +18,29 @@
 	margin-left:180px;
 	top:-37px;
 }
+#insertcontent{
+	width: 100%;
+	overflow: auto;
+	height: 200px;
+	resize: none;
+}
 </style>
 <br />
 <section id="questionAnswer-container" class="questionAnswer-container">
 <p>1:1 질문 답변</p>
-<hr />
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="${pageContext.request.contextPath}/admin/questionAnswer.do">답변 대기</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="${pageContext.request.contextPath}/admin/questionAnswerY.do">답변 완료</a>
+  </li>
+</ul>
+<br />
 	<table id="tbl-questionAnswer" class="table table-striped table-hover">
 		<tr>
 			<th>고유번호</th>
+			<th>문의시간</th>
 			<th>문의내용</th>
 			<th>문의종류</th>
 			<th>상세분류</th>
@@ -43,13 +58,97 @@
 			<c:forEach items="${list }" var="q">
 			<tr>				
 				<th>${q.SEQ_QUESTION_NO}</th>
+				<th><fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy년MM월dd일 hh:mm"/></th>
+				<th>${q.QUESTION_LKINDS}</th>
+				<th>${q.QUESTION_MKINDS}</th>
 				<th>${q.QUESTION_CONTENT}</th>
-				<th>${q.QUESTION_KINDS}</th>
-				<th>${q.QUESTION}</th>
 				<th>${q.SEQ_MEMBER_NO}</th>
-				<th>${q.QUESTION_RESULT}</th>
-				<th>${q.QUESTION_ANSWER}</th>						
-			</tr>			
+				<th>${q.QUESTION_RESULT eq 'N '?"답변 대기":"답변 완료"}</th>
+				<th>
+					<c:if test="${q.QUESTION_RESULT eq 'N '}">
+						<button type="button" class="btn btn-outline-dark" data-toggle="modal"
+						data-target="#exampleModalLong${q.SEQ_QUESTION_NO}">답변등록</button>
+					</c:if>
+					<c:if test="${q.QUESTION_RESULT eq 'Y '}">
+						<button type="button" class="btn btn-outline-dark" data-toggle="modal"
+						data-target="#exampleModalLong1${q.SEQ_QUESTION_NO}">답변수정</button>
+					</c:if>
+				</th>						
+			</tr>
+			
+			<!-- N일시 답변하기 -->
+			<div class="modal fade" id="exampleModalLong${q.SEQ_QUESTION_NO}" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLongTitle"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">1:1문의 답변</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form
+							action="${pageContext.request.contextPath}/customercenter/insertAnswer.do"
+							method="get">
+
+							<div class="modal-body">
+								사용자 질문 내용
+								<textarea readonly="readonly" id="insertcontent">${q.QUESTION_CONTENT}</textarea>
+								 <br /> <br /> 
+								관리자 답변 내용
+								<textarea id="insertcontent" name="question_answer" placeholder="답변을 입력하세요"></textarea>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary" value="등록">
+								<input type="hidden" name="seq_member_no" value="${q.SEQ_MEMBER_NO}"/>
+								<input type="hidden" name="seq_question_no" value="${q.SEQ_QUESTION_NO}" />
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Y일시 답변 수정 -->
+			<div class="modal fade" id="exampleModalLong1${q.SEQ_QUESTION_NO}" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLongTitle"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">1:1문의 답변 수정</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<form
+							action="${pageContext.request.contextPath}/customercenter/insertAnswer.do"
+							method="get">
+
+							<div class="modal-body">
+								사용자 질문 내용
+								<textarea readonly="readonly" id="insertcontent">${q.QUESTION_CONTENT}</textarea>
+								 <br /> <br /> 
+								관리자 답변 내용
+								<textarea id="insertcontent" name="question_answer">${q.QUESTION_ANSWER}</textarea>
+							</div>
+							<div class="modal-footer">
+								<input type="submit" class="btn btn-primary" value="답변 수정">
+								<input type="hidden" name="seq_member_no" value="${q.SEQ_MEMBER_NO}"/>
+								<input type="hidden" name="seq_question_no" value="${q.SEQ_QUESTION_NO}" />
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">닫기</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+						
 			</c:forEach>
 		</c:if>
 	</table>

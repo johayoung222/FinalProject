@@ -26,6 +26,7 @@
 		<typeAlias type="com.kh.spring.thing.model.vo.Category" alias="category"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.Regist" alias="regist"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
+		<typeAlias type="com.kh.spring.thing.model.vo.ProductAsk" alias="productAsk"/>
 		
 	</typeAliases>
 </configuration>

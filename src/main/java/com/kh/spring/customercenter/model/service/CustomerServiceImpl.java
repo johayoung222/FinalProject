@@ -143,5 +143,19 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.selectinquiryList(q);
 	}
 
+	@Override
+	public int insertAnswer(Question q) {
+		int result = 0;
+		result = customerDao.insertAnswer(q);
+		return result;
+	}
+
+	@Override
+	public int updateAnswer(Question q) {
+		int result = 0;
+		result = customerDao.updateAnswer(q);
+		return result;
+	}
+
 	 
 }

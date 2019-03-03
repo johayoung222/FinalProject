@@ -67,8 +67,8 @@ public class MemberController {
 		m.setMemberPassword(bcryptPasswordEncoder.encode(temp));
 		System.out.println("암호화후 : " + m.getMemberPassword());
 
+		logger.debug(m);
 		int result = memberService.insertMember(m);
-		System.out.println(result > 0 ? "회원등록성공" : "회원등록실패");
 
 		String loc = "/";
 		String msg = "";
