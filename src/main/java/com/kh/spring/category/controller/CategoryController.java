@@ -86,7 +86,11 @@ public class CategoryController {
 		List<Map<String,String>> list = categoryService.selectMacro();
 		logger.debug(list);
 		
+<<<<<<< HEAD
 		mav.setViewName("index");
+=======
+		List<String> MainAuctionSelectList = categoryService.MainAuctionSelect();
+>>>>>>> custom
 		
 		return mav;
 	}
