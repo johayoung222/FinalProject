@@ -20,67 +20,68 @@
       <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
    </listener>
 
-   <!-- #3. url패턴 *.do요청은 appServlet(DispatcherServlet)이 처리한다. -->
-   <!-- Processes application requests -->
-   <servlet>
-      <servlet-name>appServlet</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-      <init-param>
-         <param-name>contextConfigLocation</param-name>
-         <param-value>
-            /WEB-INF/spring/appServlet/servlet-context.xml
-            <!-- #9.1 aop를 위한 설정파일 추가 -->
-            /WEB-INF/spring/appServlet/aspect-context.xml
-         </param-value>
-      </init-param>
-      <load-on-startup>1</load-on-startup>
-   </servlet>
-   
-    <servlet>
-      <servlet-name>appServlet2</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-         <init-param>
-         <param-name>contextConfigLocation</param-name>
-         <param-value>
-            /WEB-INF/spring/appServlet/servlet-context.xml
-            <!-- #9.1 aop를 위한 설정파일 추가 -->
-            /WEB-INF/spring/appServlet/aspect-context.xml
-         </param-value>
-      </init-param>
-   </servlet>
-      
-   <servlet-mapping>
-      <servlet-name>appServlet</servlet-name>
-      <url-pattern>/</url-pattern>
-   </servlet-mapping>
-   
-   <servlet-mapping>
-      <servlet-name>appServlet2</servlet-name>
-      <url-pattern>*.do</url-pattern>
-   </servlet-mapping>
-   
-   <!-- #4. post방식 인코딩 설정 UTF-8 필터 -->
-   <filter>
-      <filter-name>encodingFilter</filter-name>
-      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-      <init-param>
-         <param-name>encoding</param-name>
-         <param-value>utf-8</param-value>
-      </init-param>
-      <init-param>
-         <param-name>forceEncoding</param-name>
-         <param-value>true</param-value>
-      </init-param>         
-   </filter>
-     <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-     </filter-mapping>
-     
-     <!-- 공용에러페이지 등록 -->
-     <!-- <error-page>
-        <location>/WEB-INF/views/common/error.jsp</location>
-     </error-page> -->
-     
-     
+	<!-- #3. url패턴 *.do요청은 appServlet(DispatcherServlet)이 처리한다. -->
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				<!-- #9.1 aop를 위한 설정파일 추가 -->
+				/WEB-INF/spring/appServlet/aspect-context.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+ 	<servlet>
+		<servlet-name>appServlet2</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+			<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/appServlet/servlet-context.xml
+				<!-- #9.1 aop를 위한 설정파일 추가 -->
+				/WEB-INF/spring/appServlet/aspect-context.xml
+			</param-value>
+		</init-param>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>appServlet2</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- #4. post방식 인코딩 설정 UTF-8 필터 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>			
+	</filter>
+  	<filter-mapping>
+  		<filter-name>encodingFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  	
+  	<!-- 공용에러페이지 등록 -->
+  	<!-- <error-page>
+  		<location>/WEB-INF/views/common/error.jsp</location>
+  	</error-page> -->
+  	
+  	
 </web-app>
+

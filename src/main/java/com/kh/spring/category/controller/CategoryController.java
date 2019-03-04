@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -80,11 +79,14 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping("/")
 	public ModelAndView	categoryInHeader(ModelAndView mav) {
 //		첫 로딩시 category data를 header에 전달. interceptor / aop 가능성.
 		List<Map<String,String>> list = categoryService.selectMacro();
 		logger.debug(list);
+		
+		mav.setViewName("index");
+
 		
 		return mav;
 	}

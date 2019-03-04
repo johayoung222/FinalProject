@@ -29,4 +29,5 @@ public class AuctionDaoImpl implements AuctionDao {
 	public int insertAuctionRegist(Auction auc) {
 		return sqlSession.insert("auction.insertAuctionRegist" , auc);
 	}
+
 }

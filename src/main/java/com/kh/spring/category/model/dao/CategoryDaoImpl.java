@@ -26,4 +26,12 @@ public class CategoryDaoImpl implements CategoryDao {
 		return sqlSession.selectList("product.selectAll");
 	}
 
+
+	@Override
+	public List<String> MainAuctionSelect() {
+		// sqlSession.selectList("auction.MainAuctionSelect")
+		List<String> list = null;
+		return list;
+	}
+
 }
