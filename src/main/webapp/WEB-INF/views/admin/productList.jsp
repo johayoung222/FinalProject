@@ -106,6 +106,7 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage,type,search , view) %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

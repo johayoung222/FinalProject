@@ -51,6 +51,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public int updateisAdmin(Map<String, Object> map) {
+		return adminDao.updateisAdmin(map);
+	}
+
+	
+	@Override
 	public int couponPlus(Map<String, Object> map) {
 		return adminDao.couponPlus(map);
 	}
@@ -199,6 +205,18 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.countreportList();
 	}
 
+	//사이트 통계------------------------
+	@Override
+	public List<Map<String, Object>> memberGender() {
+		return adminDao.memberGender();
+	}
+
+	@Override
+	public List<Map<String, Object>> paidProductCategory() {
+		return adminDao.paidProductCategory();
+	}
+
+	
 
 
 	

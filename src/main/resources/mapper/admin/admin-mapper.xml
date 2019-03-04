@@ -29,6 +29,11 @@
 	</select>
 	<resultMap type="map" id="couponAllMap"></resultMap>
 	
+	<!-- 권한 부여 -->
+	<update id="updateisAdmin">
+		update member set member_isAdmin =#{isAdmin} where member_id = #{memberId}
+	</update>
+	
 	<!-- 쿠폰지급 > 쿠폰리스트 테이블에 insert -->
 	<insert id="couponPlus" parameterType="map">
 		insert into coupon_listt values(#{memberNo},sysdate,#{couponNo},'N')
@@ -174,9 +179,26 @@
 		select count(*) from report
 	</select>
 	
+	<!-- 사이트 통계 -->
+	<!-- 남/녀 비율 -->
+	<select resultMap="memberGenderMap" id="memberGender">
+		select count(*) as cnt from member group by gender
+	</select>
+	<resultMap id="memberGenderMap" type="map"/>
 	
-	
-	
+	<!-- 결제된 상품 비율 -->
+	<select id="paidProductCategory" resultMap="paidProductCategoryMap">
+		SELECT A.category_macro as macro, A.category_name as name, nvl(B.cnt, 0) as cnt
+		FROM category_macro A 
+ 		LEFT OUTER JOIN ( 
+   			SELECT 
+    		product_category, COUNT(*) AS cnt 
+     		FROM product_io 
+    		GROUP BY product_category
+  		) B on (A.category_macro = B.product_category)
+		
+	</select>
+	<resultMap type="map" id="paidProductCategoryMap"/>
 	
 	
 </mapper>

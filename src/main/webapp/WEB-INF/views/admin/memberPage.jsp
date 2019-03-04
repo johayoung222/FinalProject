@@ -70,13 +70,14 @@
 		<input class="form-control form-control-sm" id="memberEmail" type="text"  readonly> <br />
 		
 		<label for="memberIsadmin">관리자여부</label>&nbsp;&nbsp;
-		<select class="form-control" name="memberIsadmin" >
+		<select class="form-control" id="memberIsadmin" name="memberIsadmin" >
 			<option value="Y" class="memberIsadmin" >관리자</option>
 			<option value="N" class="memberIsadmin">고객</option>
-		</select><br />
+		</select>&nbsp;&nbsp;
+		<button type="button" id="isadmin" class="btn btn-primary" >권한</button><br />
 		
 		<label for="memberSnsaccount">SNS연동여부</label>&nbsp;&nbsp;
-		<select class="form-control" name="memberSnsaccount" >
+		<select class="form-control" id="memberSnsaccount" name="memberSnsaccount" >
 			<option value="Y" class="memberSnsaccount" >연동o</option>
 			<option value="N" class="memberSnsaccount" >연동x</option>
 		</select><br />
@@ -146,9 +147,8 @@ $(function(){
 			$("#memberInterest").val(data[0].MEMBER_INTEREST);
 			$("#memberMilege").val(data[0].MEMBER_MILEGE);
 			$("#memberEmail").val(data[0].MEMBER_EMAIL);
-			$(".memberIsadmin").val(data[0].MEMBER_ISADMIN).attr('selected','selected');
-			$(".memberSnsaccount").val(data[0].MEMBER_SNS_ACCOUNT).attr('selected','selected');
-			
+			$('#memberIsadmin option[value="'+ $.trim(data[0].MEMBER_ISADMIN) +'"]').attr('selected','selected');
+			$('#memberSnsaccount option[value="'+ $.trim(data[0].MEMBER_SNS_ACCOUNT) +'"]').attr('selected','selected');			
 		},error:function(){
 			console.log("ajax요청 실패!!");
 		}
@@ -168,6 +168,25 @@ $(function(){
 			console.log("ajax요청 실패!!");
 		}
 	});
+});
+
+$("#isadmin").on('click',function(){
+	//console.log("관리자 부여!");
+	var isAdmin = $("#memberIsadmin option:selected").val();
+	var memberId = $("#memberId").val();
+	 
+	$.ajax({
+		url:"${pageContext.request.contextPath}/admin/updateisAdmin.do",
+		data:{memberId:memberId,
+			isAdmin:isAdmin},
+		dataType:'json',
+		success:function(data){
+			//console.log(data);
+			alert("권한 부여 성공!");
+		},error:function(){
+			console.log("ajax요청 실패!!");
+		}
+	}); 
 });
 
 $("#couponPlus").on('click',function(){
@@ -253,6 +272,7 @@ $(document).on('click','.tableTr',function(){
 	}
 	
 });
+
 
 
 </script>

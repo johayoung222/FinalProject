@@ -43,6 +43,7 @@ div.col-2.5 a:hover{
 .nav-link{
 	color:black;
 	font-family: 'Nanum Gothic', sans-serif;
+	width:150px;
 }
 
 </style>
