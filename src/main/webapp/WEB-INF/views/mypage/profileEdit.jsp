@@ -12,6 +12,7 @@
 <style>
 #address_{
 	margin-left:3%;
+	
 }
 #user-addr2{
 	margin-left:3%;
@@ -55,7 +56,7 @@
 							<div class="form-group" id="info_">
 									<label for="tel" class="profedit-form-label">전화번호</label>
 									<input type="tel" name="tel" class="form-control profedit-form-input ng-pristine ng-valid" id="memberPhone" name="memberPhone" />
-									<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
+									<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();" style="background-color:#7151FC; color:white; border:1px solid white; width:75px; height:30px; font-size:13px;">
 									<input type="hidden" name="target" id="result" value="0"/>
 							</div>
 							<div class="form-group" id="info2_">	 
@@ -72,10 +73,10 @@
 							<div class="form-group profedit-addr-wrapper">
 								<div class="dropdown">
 									<input autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text">
-									<a class="btn profedit-search-btn profedit-search-btn btn-primary">검색</a>
+									<a class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;">검색</a>
 								</div>
 								<div>
-									<input class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_">  <br /> <br />							
+									<input class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_" >  <br /> <br />							
 								</div>
 								<div>
 									<input class="form-control profedit-addr-form ng-pristine ng-valid" id="user-addr2" ng-model="profile.addr2" placeholder="상세주소" >							

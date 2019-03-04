@@ -98,12 +98,12 @@ body {
 	<div id="container">
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 				<div id="box-link5">
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 					<a class="item-link"
 						href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-				</div>
 				</c:if>
+				</div>
 				<div id="box-link4">
 					<i class="fa fa-truck"></i>
 					<a class="item-link" id="gotobasket"
@@ -188,7 +188,7 @@ body {
 				<li class="nav-item" id="nav-item1"><a class="nav-link"
 					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
 
 					</div></li>
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
@@ -241,13 +241,20 @@ body {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 
 			}
-			
-			  $(document).ready(function(){
-			 	   
-				    var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-				 
-				   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
-				  
-			   });   
 
+			$(document).ready(
+					function() {
+
+						var seqMemberNo = $
+						{
+							memberLoggedIn.getSeqMemberNo()
+						}
+						;
+
+						$("#gotobasket").attr(
+								"href",
+								"${pageContext.request.contextPath}/item/basket.do?memberNo="
+										+ seqMemberNo);
+
+					});
 		</script>
