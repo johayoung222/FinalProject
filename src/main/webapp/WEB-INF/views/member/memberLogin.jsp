@@ -127,7 +127,7 @@ function next2(){
 <script type="text/javascript">
      window.fbAsyncInit = function() {
         FB.init({
-          appId      : '1302299029947046',
+          appId      : '247319539539549',
           xfbml      : true,
           version    : 'v3.2'
         });
