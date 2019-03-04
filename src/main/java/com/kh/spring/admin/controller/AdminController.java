@@ -116,6 +116,7 @@ public class AdminController {
 	@ResponseBody
 	public List<Map<String, Object>> memberOne(@RequestParam(value="memberId")String memberId){
 		List<Map<String,Object>> list = adminService.memberOne(memberId);
+		logger.debug(list);
 		return list;
 	}
 	
@@ -126,6 +127,19 @@ public class AdminController {
 		List<Map<String, Object>> list = adminService.couponAll(); 
 		logger.debug(list);
 		return list;
+	}
+	
+	@RequestMapping(value="/admin/updateisAdmin.do",method=RequestMethod.GET)
+	@ResponseBody
+	public int updateisAdmin(@RequestParam(value="isAdmin")String isAdmin,
+			@RequestParam(value="memberId")String memberId) {
+		logger.debug("updateisAdmin메소드 실행!!");
+		Map<String,Object> map = new HashMap<>();
+		map.put("isAdmin",isAdmin);
+		map.put("memberId",memberId);
+		int result = adminService.updateisAdmin(map);
+		return result;
+		
 	}
 	
 	@RequestMapping(value="/admin/couponPlus.do",method=RequestMethod.GET)
@@ -409,25 +423,31 @@ public class AdminController {
 		return mav;
 	}
 	
-	/*
 	@RequestMapping("/admin/siteStatistics.do")
-	public ModelAndView siteStatistics(ModelAndView mav, 
-			@RequestParam(value="cPage", defaultValue="1")int cPage) {
-		System.out.println("siteStatistics메소드 실행!!");
-		int numPerPage =7;
-		List<Map<String, String>> list = adminService.siteStatistics(cPage, numPerPage);
-		int totalContents = adminService.countsiteStatistics();
-		
-		mav.addObject("cPage",cPage);
-		mav.addObject("numPerPage",numPerPage);
-		mav.addObject("totalContents",totalContents);
-		mav.addObject("list",list);
-		mav.setViewName("admin/questionAnswer");
-		
-		
+	public ModelAndView siteStatistics(ModelAndView mav) {
+		logger.debug("siteStatistics메소드 실행!!");
+		mav.setViewName("admin/siteStatistics");
 		return mav;
 	}
-	*/
+	
+	@RequestMapping("/admin/memberGender.do")
+	@ResponseBody
+	public List<Map<String,Object>> memberGender(){
+		logger.debug("memberGender 메소드 실행!!");
+		List<Map<String, Object>> list = adminService.memberGender();
+		logger.debug(list);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/paidProductCategory.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> paidProductCategory(){
+		logger.debug("paidProductCategory메소드 실행!!");
+		List<Map<String, Object>> list = adminService.paidProductCategory();
+		logger.debug(list);
+		return list;
+	}
+	
 	
 	
 

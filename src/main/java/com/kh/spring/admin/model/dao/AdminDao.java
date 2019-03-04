@@ -23,6 +23,8 @@ public interface AdminDao {
 	
 	List<Map<String, Object>> couponAll();
 	
+	int updateisAdmin(Map<String, Object> map);
+	
 	int couponPlus(Map<String, Object> map);
 	
 	List<Map<String, Object>> couponList(int memberNo);
@@ -92,6 +94,14 @@ public interface AdminDao {
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
+	//사이트 통계
+	List<Map<String, Object>> memberGender();
+
+	List<Map<String, Object>> paidProductCategory();
+
+	
+	
 
 
 	

@@ -28,11 +28,14 @@ input[type=submit].btn-block {
     width: 100px;
     color:#007bff;
 }
+.form-inline{
+	display:inline-block;
+}
 
 </style>
 <br />
 <section id="allMember-container" class="allMember-container">
-	<nav class="navbar navbar-light bg-light nav-link">
+	<nav class="navbar navbar-light bg-light">
 	<p>회원 리스트조회</p>
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
@@ -105,7 +108,7 @@ input[type=submit].btn-block {
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
-
+<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage,type,search , view) %>
 </section> 
 
 <script>

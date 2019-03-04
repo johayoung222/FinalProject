@@ -380,7 +380,7 @@
                         <br />
                         <hr />
                         
-                        <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqmemberNo()}"/>
+                        <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
                         <input type="hidden" name="registAuction" value="F"/>
                         <label for="">상품명을 입력해 주세요 : </label> <input type="text"
                            name="registName" /> <br />

@@ -52,6 +52,11 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> couponAll() {
 		return sqlSession.selectList("admin.couponAll");
 	}
+
+	@Override
+	public int updateisAdmin(Map<String, Object> map) {
+		return sqlSession.update("admin.updateisAdmin",map);
+	}
 	
 	@Override
 	public int couponPlus(Map<String, Object> map) {
@@ -211,6 +216,15 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countreportList");
 	}
 	
+	//사이트 통계 -----------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> memberGender() {
+		return sqlSession.selectList("admin.memberGender");
+	}
+	@Override
+	public List<Map<String, Object>> paidProductCategory() {
+		return sqlSession.selectList("admin.paidProductCategory");
+	}
 	
 	
 
