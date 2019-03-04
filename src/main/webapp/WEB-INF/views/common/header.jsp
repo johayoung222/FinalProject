@@ -173,13 +173,32 @@ body {
 		</div>
 	</div>
 	<div id="header-container">
-		<img
-			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
-			width="200px" height="80px	"> <input type="text" name="search"
-			placeholder="상품명으로 검색해보세요." id="search_" /> <a
-			href="${pageContext.request.contextPath }/member/memberMoveLogin.do"><i
-			class="fa fa-search" id="search2"></i></a>
+		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
+		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" /> 
+			<i class="fa fa-search" id="search2"></i>
+		</form>
+		<a href="${pageContext.request.contextPath }/item/search">
+			<i class="fa fa-search" id="search2"></i>
+		</a>
 	</div>
+	<script>
+	$("#search_").on('keyup',function(){
+		var myData = JSON.stringify($("#search_").val().trim());
+		console.log(myData);
+		$.ajax({
+			url: "${pageContext.request.contextPath}/item/searchPad",
+			method: "get",
+			data: {"myData":myData},
+			success: function(data){
+				console.log(data);
+			},
+			error: function(){
+				console.log("ajax 요청 에러!!");
+			}
+		});
+	});
+	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
 		<a class="navbar-brand" href="#"> <img
