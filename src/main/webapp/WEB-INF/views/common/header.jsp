@@ -165,17 +165,16 @@ body {
 	<br>
 	<br>
 	<div id="header-container">
-		<img
-			src="${pageContext.request.contextPath }/resources/images/Getit.PNG"
-			width="100px" height="80px	"> <input type="text" name="search"
-			placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
-			id="search2"></i>
+		<img src="${pageContext.request.contextPath }/resources/images/Getit.PNG" width="100px" height="80px"> 
+		<form action="" name="MainSearchFrm">
+			<input type="text" name="search" placeholder="상품명으로 검색해보세요." id="search_" /> 
+		</form>
+			<i class="fa fa-search" id="search2"></i>
 	</div>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-		<a class="navbar-brand" href="#"> <img
-			src="${pageContext.request.contextPath }/resources/images/Getit2.PNG"
-			alt="스프링로고" width="50px" style="border-radius: 50px;" />
+		<a class="navbar-brand" href="${pageContext.request.contextPath }"> 
+		<img src="${pageContext.request.contextPath }/resources/images/Getit2.PNG" alt="스프링로고" width="50px" style="border-radius: 50px;" />
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
