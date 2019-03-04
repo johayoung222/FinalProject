@@ -62,7 +62,7 @@ a{
 	<div class="header-left">
 		<div class="logo">
 			<a href="${pageContext.request.contextPath }">
-				<img src="${pageContext.request.contextPath }/resources/images/Getit.PNG"  width="100%" height="100%"/>
+				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"  width="100%" height="100%"/>
 			</a>
 		</div>
 		<div class="logo-next" id="login2_">${param.pageName==0?"회원가입하기":"로그인하기" }</div>

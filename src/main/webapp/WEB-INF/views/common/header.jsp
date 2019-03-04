@@ -98,12 +98,12 @@ body {
 	<div id="container">
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 				<div id="box-link5">
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 					<a class="item-link"
 						href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-				</div>
 				</c:if>
+				</div>
 				<div id="box-link4">
 					<i class="fa fa-truck"></i>
 					<a class="item-link" id="gotobasket"
@@ -137,19 +137,19 @@ body {
 							</div>
 							<div>
 								<a href="${pageContext.request.contextPath}/mypage/order.do"
-									style="color: red">판매내역</a>  <a
+									style="color: red"><strong>판매내역</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/purchases.do"
-									style="color: orange">구매내역</a>  <a
+									style="color: orange">구매내역</a>|<br><a
 									href="${pageContext.request.contextPath}/mypage/bookmarks.do"
-									style="color: green">찜한상품</a>  <a
+									style="color: green">찜한상품</a>|<a
 									href="${pageContext.request.contextPath}/mypage/coupons.do"
-									style="color: blue">쿠폰</a> <br /> <a
+									style="color: blue"><strong>쿠폰</strong></a> <br /> <a
 									href="${pageContext.request.contextPath}/mypage/profile/credit.do"
-									style="color: purple">프로모션</a>  <a
+									style="color: purple"><strong>프로모션</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/edit.do"
-									style="color: pink">내 정보</a>  <a
+									style="color: pink">내 정보</a><br><a
 									href="${pageContext.request.contextPath}/mypage/wishlist.do"
-									style="color: black">알림 설정</a>
+									style="color: black"><strong>알림 설정</strong></a>
 							</div>
 						</div>
 					</div>
@@ -166,7 +166,7 @@ body {
 	<br>
 	<div id="header-container">
 		<img
-			src="${pageContext.request.contextPath }/resources/images/Getit.PNG"
+			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
 			width="100px" height="80px	"> <input type="text" name="search"
 			placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
 			id="search2"></i>
@@ -174,7 +174,7 @@ body {
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
 		<a class="navbar-brand" href="#"> <img
-			src="${pageContext.request.contextPath }/resources/images/Getit2.PNG"
+			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
 			alt="스프링로고" width="50px" style="border-radius: 50px;" />
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -188,7 +188,7 @@ body {
 				<li class="nav-item" id="nav-item1"><a class="nav-link"
 					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
 
 					</div></li>
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
@@ -241,13 +241,20 @@ body {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 
 			}
-			
-			  $(document).ready(function(){
-			 	   
-				    var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-				 
-				   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
-				  
-			   });   
 
+			$(document).ready(
+					function() {
+
+						var seqMemberNo = $
+						{
+							memberLoggedIn.getSeqMemberNo()
+						}
+						;
+
+						$("#gotobasket").attr(
+								"href",
+								"${pageContext.request.contextPath}/item/basket.do?memberNo="
+										+ seqMemberNo);
+
+					});
 		</script>
