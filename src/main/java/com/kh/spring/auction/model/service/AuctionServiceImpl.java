@@ -32,5 +32,6 @@ public class AuctionServiceImpl implements AuctionService {
 	public int insertAuctionRegist(Auction auc) {
 		return auctionDao.insertAuctionRegist(auc);
 	}
+
 	
 }

@@ -86,6 +86,8 @@ public class CategoryController {
 		List<Map<String,String>> list = categoryService.selectMacro();
 		logger.debug(list);
 		
+		List<String> MainAuctionSelectList = categoryService.MainAuctionSelect();
+		
 		return mav;
 	}
 
