@@ -63,8 +63,7 @@ public class BasketContoller {
 			,@RequestParam("seqProductNo") int seqProductNo ) {
     	
     	
-    	    System.out.println("지금들어온 사람의  시퀀스 넘버:"+seqMemberNo);
-    	    System.out.println("지금 관심 상품의 넘버:"+seqProductNo);
+    	  
     	   
     	    Basket b = new Basket();
     	    b.setSeqMemberNo(seqMemberNo);
@@ -76,25 +75,38 @@ public class BasketContoller {
     	    return mav;
     }
    
-            @RequestMapping("/item/deleteBasket.do")
-            public ModelAndView deleteBasket(ModelAndView mav,@RequestParam("no") int no){
-            	
-            
-            	System.out.println("삭제할 장바구니no는:"+no);
-            	
-            	
-            	Basket b = new Basket();
-            	b.setSeqBasketNo(no);
-         	   
-            	
-         	     int result = basketService.deleteBasket(b);
-         	     System.out.println(result>0?"삭제성공":"삭제실패");
-         	     mav.setViewName("/item/basket"); 
-				 return mav;
-            	
-
-            }
+    @RequestMapping("/item/deleteBasket.do")
+    public ModelAndView deleteBasket(ModelAndView mav,@RequestParam("no") int no, @RequestParam("memberNo") int memberNo){
+    	
+    	
     
+    	System.out.println("삭제할 장바구니no는:"+no);
+    	System.out.println("지금들어온 번호"+memberNo);
+    	Basket b = new Basket();
+    	b.setSeqBasketNo(no);
+    	b.setSeqMemberNo(memberNo);
+ 	   
+    	
+ 	     int rusult= basketService.deleteBasket(b);
+ 	  
+ 	     List<Map<String, String>> list = basketService.selectProductList(b);
+ 	    
+ 	     int sum = 0;
+	     for(Map<String,String> map : list) {
+	    	 sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
+	     }
+	     mav.addObject("sum", sum);
+         mav.addObject("list",list);
+ 	     
+ 	     mav.setViewName("/item/basket"); 
+		 return mav;
+    	
+
+    }
+
+
+
+		
 	 
 
 }

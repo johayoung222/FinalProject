@@ -102,7 +102,7 @@ public class AuctionController {
 		Member m = (Member)session.getAttribute("memberLoggedIn");
 		
 		auc.setAuctionMember(m.getMemberId());
-		auc.setSeqMemberNo(m.getSeqmemberNo());
+		auc.setSeqMemberNo(m.getSeqMemberNo());
 		auc.setAuctionPhone(m.getMemberPhone());
 		String auctionTitle = auc.getAuctionTitle();
 		// auc.setAuctionTitle(new String(auctionTitle.getBytes("8859_1"),"utf-8"));

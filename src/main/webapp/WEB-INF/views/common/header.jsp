@@ -98,12 +98,12 @@ body {
 	<div id="container">
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
-				<div id="box-link5">
 				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<div id="box-link5">
 					<a class="item-link"
 						href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-				</c:if>
 				</div>
+				</c:if>
 				<div id="box-link4">
 					<i class="fa fa-truck"></i>
 					<a class="item-link" id="gotobasket"
@@ -241,20 +241,13 @@ body {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 
 			}
+			
+			  $(document).ready(function(){
+			 	   
+				    var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
+				 
+				   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
+				  
+			   });   
 
-			$(document).ready(
-					function() {
-
-						var seqMemberNo = $
-						{
-							memberLoggedIn.getSeqMemberNo()
-						}
-						;
-
-						$("#gotobasket").attr(
-								"href",
-								"${pageContext.request.contextPath}/item/basket.do?memberNo="
-										+ seqMemberNo);
-
-					});
 		</script>

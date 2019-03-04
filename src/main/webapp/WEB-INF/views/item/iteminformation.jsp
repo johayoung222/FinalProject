@@ -51,9 +51,9 @@
 	color:white;
 	width:150px;
 	height:50px;
-
-
+	
 }
+
 #float1{
 width:50px;
 height:50px; 
@@ -67,7 +67,10 @@ border-radius:50px;
 	color:lightgray;
 	
 }
-
+form {
+    display: inline-block;
+   
+}
 </style>
 
 
@@ -115,13 +118,12 @@ border-radius:50px;
 			 		<tr align="center" >
 			 			<td colspan="2">
 			 			
-	                      <!--   <input type="submit" id="insertBasket" value="장바구니"/> -->
                         	
                 <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
                     <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
 	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
 	                <input type="submit" id="insertBasket" value="장바구니"/>
-                 </form>	
+                </form>	
 			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
 			 			</td>
 			 		</tr>

@@ -34,6 +34,9 @@
 .mp-container{
 font-family: 'Nanum Gothic', sans-serif;
 }
+#basketNo{
+dispaly:none;
+}
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
@@ -52,9 +55,8 @@ font-family: 'Nanum Gothic', sans-serif;
       <th scope="col">상품이름</th>
       <th scope="col">상품정보</th>
       <th scope="col">상품금액</th>
-      <th scope="col">수량</th>
-      
-      <th scope="col">취소</th>
+      <th scope="col">상품구매</th>
+      <th scope="col">상품취소</th>
     </tr>
   </thead>
   <tbody>
@@ -67,42 +69,50 @@ font-family: 'Nanum Gothic', sans-serif;
 		<c:if test="${not empty list }">
 			<c:forEach items="${list}" var="p">
 			<tr>
-				<%-- <td>${p.SEQ_BASKET_NO}</td>	 --%>			
+				<%-- <td id="basketNo">${p.SEQ_BASKET_NO}</td>	 --%>		
 				<td>${p.SEQ_PRODUCT_NO}</td>	
 				<td>${p.PRODUCT_NAME}</td>	
 				<td>${p.PRODUCT_DESCRIPTION}</td>		
 				<td>${p.PRODUCT_PRICE}</td>	
-				<td>${p.PRODUCT_STOCK}</td>
-			<!-- 	<td><input id="basketSelect" type="checkbox" /></td> -->
 				<td>
-				 <button type="button" class="btn btn-danger" onclick="deleteBasket('${p.SEQ_BASKET_NO}')">취소</button>
-				 </td>	
+				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${p.SEQ_PRODUCT_NO}'" class="btn btn-primary">구매</button></td>
+				<td>
+		 <%--  <button type="button" id="deleteBasket" class="btn btn-danger" onclick="deleteBasket('${p.SEQ_BASKET_NO}','${p.SEQ_MEMBER_NO}')">취소</button>  --%>
+		<form name="basketDelFrm" action="deleteBasket.do" method="post">
+		     <input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
+		     <input type="hidden" name="memberNo" value="${p.SEQ_MEMBER_NO}"/>
+		     <input type="submit"class="btn btn-danger"  value="취소"/> 
+          </form> 
+				 </td>
 			</tr>			
 			</c:forEach>
 		</c:if>
   
   </tbody>
 </table>
-<form name="basketDelFrm" action="deleteBasket.do" method="post">
-	<input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
-</form>
-
-	      
-		 	 	<h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
-		 	 	<br />
-		      <button type="button" id="buyButton" class="btn btn-primary btn-lg">구매하기</button>
+         
+				<div class="buy-container">
+		 	      <h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
+				</div>
 		   </div>
 		  </div>
 		</div>	
 	</div>
-</div>
+
 <script>
-//
-function deleteBasket(no){
+
+function deleteBasket(no,memberNo){
     var frm = document.basketDelFrm;
     frm.no.value = no;
+    frm.memerNo.value = memberNo;
     frm.submit();
+   
+
 }
+
+
+
+
 
 </script>
 
