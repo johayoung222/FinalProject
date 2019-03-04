@@ -80,11 +80,13 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping("/")
 	public ModelAndView	categoryInHeader(ModelAndView mav) {
 //		첫 로딩시 category data를 header에 전달. interceptor / aop 가능성.
 		List<Map<String,String>> list = categoryService.selectMacro();
 		logger.debug(list);
+		
+		mav.setViewName("index");
 		
 		return mav;
 	}
