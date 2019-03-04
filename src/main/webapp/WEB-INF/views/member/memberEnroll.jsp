@@ -70,10 +70,10 @@
 		<label for="agree4">세일 정보 푸시 알림 동의 (선택)</label><br />
 		</form>
 	</div>
-	<div class="nextPage">
-	<button class="nextBtn btn btn-outline-primary">다음</button>
+	<div class="nextPage" style="padding-bottom: 25px;">
+	<button class="nextBtn btn btn-outline-primary" >다음</button>
 	</div>
-	<div class="agree-content">
+	<div class="agree-content" >
 		<div class="agree1">
 			<pre>이용약관
 제 1 장 총 칙
@@ -770,7 +770,7 @@ MMS로 게시물을 등록할 경우 발생하는 요금은 이동통신사의 �
 
 다. 분쟁조정센터의 조정에 대하여 회원은 신의칙에 따라 성실히 응하여야 합니다.</pre>
 		</div>
-		<hr />
+		<hr style="border:2px solid gray; width:90%">
 		<div class="agree2">
 		<span>개인정보 수집 및 이용 동의</span>
 		<table class="table table-bordered">
@@ -792,7 +792,7 @@ MMS로 게시물을 등록할 경우 발생하는 요금은 이동통신사의 �
 			</tbody>
 		</table>
 		</div>
-		<hr />
+		<hr style="border:2px solid gray; width:90%">
 		<div class="agree3">
 			<span>개인정보 국외 이전 동의</span>
 			<pre>
@@ -873,15 +873,17 @@ $("#all").on('click', function(){
 
 }
 </style>
-<div class="content-container">
+<div class="content-container" >
 		<div class="login-container">
 			<div class="login-link">
 			<ul class="list-group">
-				<li class="list-group-item list-group-item-action">  
+				<li class="list-group-item list-group-item-action"
+				style="border:0">  
 	
        
    		     <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();">
+               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();"
+               style="padding-left: 8%; width:81%; height:9%;">
                  FaceBook으로 시작
               </fb:login-button>
  			       </li>
@@ -890,15 +892,16 @@ $("#all").on('click', function(){
 			    google로 시작
 			         </div>
 				</li> -->
-				<li class="list-group-item list-group-item-action">
-			   <img src="${pageContext.request.contextPath }/resources/images/kakaostart.PNG"  width="80%" height="8%"
+				<li class="list-group-item list-group-item-action"
+				style="border:0">
+			   <img src="${pageContext.request.contextPath }/resources/images/kakaostart.PNG"  width="86%" height="6%" style="border-radius:5px;"
 				onclick="EnrollfromKakao()"/>
 				</li>
 			</ul>
 			</div>
 			<span>또는</span>
-			<div class="nextPage">
-				<button class="btn btn-outline-primary nextBtn2" onclick="next2();">직접 가입</button>
+			<div class="nextPage" >
+				<button class="btn btn-outline-primary nextBtn2" style="width:222px" onclick="next2();">직접 가입</button>
 			</div>
 		</div>
 	</div>
@@ -1202,8 +1205,8 @@ label{
 		</div>
 		<input type="password" class="form-control" placeholder="비밀번호" name="memberPassword" id="password_" required>
 		<input type="password" class="form-control" placeholder="비밀번호확인" id="password2" required>
-		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName" required>
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940512" name="memberBirth" id="memberBirth" required>
+		<input type="text" class="form-control" placeholder="이름" name="memberName" id="memberName">
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요  ex)940512" name="memberBirth" id="memberBirth">
 		<input type="email" class="form-control" placeholder="이메일" name="memberEmail" id="email">
 		<input type="text" class="form-control" placeholder="주소" name="memberAddress" id="address">
 		<select class="form-control" name="gender" required>
@@ -1227,7 +1230,6 @@ label{
 		 <div id="memberId-container">
 			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="fbId" id="fbId" readonly>
 		<!-- 	중복체크관련태그 -->
-		
 			      <span class="fbguide ok">이 아이디는 사용가능합니다.</span>
 			      <span class="fbguide error">이 아이디는  이미 등록된  아이디입니다</span> 
 			<input type="hidden" name="fbidDuplicateCheck" id="fbidDuplicateCheck" value="0" />
@@ -1275,7 +1277,30 @@ label{
 </div>
 
 
-
+<!-- ----------------------------google관련 회원가입!-------------------------------------------------->
+<div id="googleEnroll-container">
+	<form name="gmemberEnrollFrm" action="${pageContext.request.contextPath}/member/googleEnrollEnd" method="post" method="post" onsubmit="return googleIdValidate();" >
+		<input type="hidden" name="memberAlarm"/>
+		 <div id="kakaoId-container">
+			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="gId" id="gId" readonly>
+		<!-- 	중복체크관련태그 -->
+			<input type="hidden" name="googleDuplicateCheck" id="googleDuplicateCheck" value="0" />
+			<input type="button" value="구글로 등록된 회원인지 확인하기"  onclick="googleIdValidate();"/>
+		</div> 
+		<input type="text" class="form-control" placeholder="이름" name="gName" id="gName" readonly>
+		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="gBirth" id="gBirth" required>
+		<input type="email" class="form-control" placeholder="이메일을 입력해주세요" name="gEmail" id="gEmail" readonly>
+		<select class="form-control" name="ggender" required> 
+			<option value="" disabled selected>성별</option>
+			<option value="M">남</option>
+			<option value="F">여</option>
+		</select>
+		<input type="hidden" name="gmemberInterest"/>
+		<br />
+		<input type="submit" name="gsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
+		<input type="button" class="btn btn-outline-success" value="취소" onclick="googleCancel();">
+	</form>
+</div>
 
 
 
@@ -1350,16 +1375,6 @@ $("#memberId_").on("keyup" , function(){
 	});
 });
 
-$("#password2").on('blur',function(){
-	var pwd1 = $("#password_").val().trim();
-	var pwd2 = $(this).val().trim();
-	
-	if(pwd1 != pwd2){
-		alert("비밀번호가 일치하지 않습니다.");
-		$("#password_").val("").focus();
-		return;
-	}
-});
 
 function fbvalidate(){
 	
@@ -1376,7 +1391,8 @@ function fbvalidate(){
 				alert("등록이가능합니다");
 				$("#facebookenroll-container").show();
 				$("input[name=fbsubmit]").show();
-           
+               var interest = false;
+            /* 관심상품 팝업 */
            
 			
 			}else{
@@ -1411,8 +1427,10 @@ function fbvalidate(){
 					alert("등록이가능합니다");
 					$("#kakaoenroll-container").show();
 					$("input[name=ksubmit]").show();
-	              
-	      
+	               var interest = false;
+	            /* 관심상품 팝업 */
+	            open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
+	             return false;
 				
 				}else{
 					alert("이미 등록된 회원이 있습니다 ");	
@@ -1483,14 +1501,15 @@ function googleCancel(){
 }
 
 function snsValidate(){
-	  /* 관심상품 팝업 */
-	/*  open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
-	 "width=500,height=400,left=200,top=200");
-
-     return false;  */
+	 /* 관심상품 팝업 */
+    open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
+   		 "width=500,height=400,left=200,top=200");
+    return true;
 	
 	
 }
 
 </script>
+
+<br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

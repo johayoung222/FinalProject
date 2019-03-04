@@ -37,6 +37,7 @@
 }
 #login_{
 	background-color:#f8f9fa;
+	font-weight:bold;
 	
 }
 #font2{
@@ -67,32 +68,37 @@
 
                                 
                                 
-				<li class="list-group-item list-group-item-action">
+				<li class="list-group-item list-group-item-action"
+				style="border:0">
    	          <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
-               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();">
+               data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();"
+                 style="padding-left: 20px;" >
                  FaceBook으로 로그인
-              </fb:login-button>						
+              </fb:login-button>
+							
 				</li>
 			<!-- 	<li class="list-group-item list-group-item-action">
 			<div class="g-signin2" data-onsuccess="Googlelogin" data-width="222" data-height="40"
 			data-auto-logout-link="true" data-theme="dark" value="google로 로그인">
 			</div> -->
 		     </li>
-				 <li class="list-group-item list-group-item-action">
-				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="90%" height="8%"
+				 <li class="list-group-item list-group-item-action"
+				 style="border:0">
+				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="6%" style="border-radius:5px; padding-left:7%; border-radius:5px;
 				onclick="kakaoLogin()"/>
-			  </li>		
+				</li>
+				
 			</ul>
 			</div>
-			<br>
-			또는
+			<h5><strong>또는</strong></h5>
 			<div class="login-form">
 				<form action="${pageContext.request.contextPath }/member/memberLogin.do" method="post">
 				<label for="memberId">아이디</label>
 				<input type="text" id="memberId_" name="memberId"/><br />
 				<label for="password">비밀번호</label>
-				<input type="password" id="password" name="password"/><br />
-				<input type="submit" id="login_" value="로그인"/>
+				<input type="password" id="password" name="password"/><br /><br>
+				<input type="submit" id="login_" value="로그인" 
+				style="width:250px; border:2px solid #007bff; color:#007bff; height:30px; border-radius:50px;" />
 				</form>
 			</div>
 			<a href="javascript: findAccount();" id="font2">비밀번호를 잊어버리셨나요?</a>
@@ -295,7 +301,7 @@ function next2(){
 		                
 		                
 		                
-		            }
+		            }	
 		        });
 		    };
 
