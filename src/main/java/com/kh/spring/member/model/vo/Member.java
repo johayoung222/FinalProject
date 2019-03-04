@@ -19,7 +19,7 @@ public class Member implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int seqmemberNo;
+	private int seqMemberNo;
 	private String memberId;
 	private String memberPassword;
 	private String memberName;

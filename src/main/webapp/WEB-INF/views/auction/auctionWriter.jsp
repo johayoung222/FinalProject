@@ -247,16 +247,6 @@ body {
 
 			}
 
-			$(document).ready(
-					function() {
-
-						var seqMemberNo = ${memberLoggedIn.getSeqmemberNo()};
-
-						$("#gotobasket").attr(
-								"href",
-								"${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo
-						)
-					});
 		</script>
 <!-- header 끝 -->
 
