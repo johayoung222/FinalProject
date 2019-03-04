@@ -917,7 +917,7 @@ function next2(){
 <!-- facebook회원가입 -->
 window.fbAsyncInit = function() {
     FB.init({
-      appId      :  '1302299029947046',
+      appId      :  '247319539539549',
       xfbml      : true,
       version    : 'v3.2'
     });
@@ -959,7 +959,7 @@ window.fbAsyncInit = function() {
         var fbId = response.id;
         var fbName = response.name;
         var fbEmail = response.email;  
-          //console.log(JSON.stringify(response)); 			
+          console.log(JSON.stringify(response)); 			
       		$("#facebookenroll-container").show();
       		$('input[name=fbId]').attr('value',fbId); 
       		$('input[name=fbName]').attr('value',fbName); 
