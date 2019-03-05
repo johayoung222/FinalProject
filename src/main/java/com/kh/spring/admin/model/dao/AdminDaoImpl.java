@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
@@ -179,6 +180,12 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.auctionRegistOne",auctionRegistNo);
 	}
 	
+	@Override
+	public Auction auctionRegistOne1(int auctionRegistNo) {
+		return sqlSession.selectOne("admin.auctionRegistOne1",auctionRegistNo);
+	}
+	
+	
 	
 	//경매 상품 현황---------------------------------------------------------------------
 	
@@ -226,6 +233,8 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> paidProductCategory() {
 		return sqlSession.selectList("admin.paidProductCategory");
 	}
+	
+	
 	
 	
 	

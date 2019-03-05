@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.model.dao.AdminDao;
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
@@ -171,6 +172,11 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.auctionRegistOne(auctionRegistNo);
 	}
 
+	@Override
+	public Auction auctionRegistOne1(int auctionRegistNo) {
+		return adminDao.auctionRegistOne1(auctionRegistNo);
+	}
+
 	//경매상품 현황---------------------------------------------------------------
 	
 	
@@ -221,6 +227,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.paidProductCategory();
 	}
 
+	
 	
 	
 

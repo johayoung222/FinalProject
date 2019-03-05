@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Regist;
@@ -401,8 +402,9 @@ public class AdminController {
 		map.put("cMa",cMa);
 		map.put("cMi",cMi);
 		
-		List<Map<String,Object>>list = adminService.auctionRegistOne(auctionRegistNo);
-		System.out.println(list);
+		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
+		System.out.println(auction);
+		
 		int result =0;
 		return result;
 		

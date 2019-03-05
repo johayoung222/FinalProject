@@ -148,10 +148,16 @@
 	</select>
 	<resultMap type="map" id="auctionRegistListMap"></resultMap>
 	
+	<!-- auction_regist Map으로 뽑음 -->
 	<select id="auctionRegistOne" resultMap="auctionRegistOneMap">
 		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
 	</select>
 	<resultMap type="map" id="auctionRegistOneMap"></resultMap>
+	
+	<!-- auction_regist Vo로 뽑음 -->
+	<select id="auctionRegistOne1" resultType="auction">
+		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
+	</select>
 	
 	<!-- 경매 상품 현황 -->
 	

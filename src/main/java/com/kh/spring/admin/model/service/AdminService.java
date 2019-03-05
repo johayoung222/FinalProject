@@ -3,6 +3,7 @@ package com.kh.spring.admin.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
@@ -76,6 +77,7 @@ public interface AdminService {
 	
 	List<Map<String, Object>> auctionRegistOne(int auctionRegistNo);
 	
+	Auction auctionRegistOne1(int auctionRegistNo);
 	
 	//경매 상품 현황
 	
@@ -100,6 +102,8 @@ public interface AdminService {
 	List<Map<String, Object>> memberGender();
 
 	List<Map<String, Object>> paidProductCategory();
+
+	
 
 	
 
