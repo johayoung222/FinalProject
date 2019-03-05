@@ -17,62 +17,48 @@
 <script>
 
 function perchaseProduct(){
-	
-/* 	BootPay.request({
-		price: perchaseFrm.payAmount.value, //실제 결제되는 가격
-		application_id: "5c6beb72b6d49c7cd4505f60",
-		name: perchaseFrm.pName.value, //결제창에서 보여질 이름
-		pg: 'inicis',
-		method: perchaseFrm.payMethod.value, //결제수단, 입력하지 않으면 결제수단 선택부터 화면이 시작합니다.
-		show_agree_window: 0, // 부트페이 정보 동의 창 보이기 여부
-		items: [
-			{
-				item_name: perchaseFrm.pName.value, //상품명
-				qty: 1, //수량
-				unique: '123', //해당 상품을 구분짓는 primary key
-				price: perchaseFrm.payAmount.value, //상품 단가
-			}
-		],
-		user_info: {
-			username: perchaseFrm.dName.value,
-			email: perchaseFrm.dEmail.value,
-			addr: perchaseFrm.dAddress.value,
-			phone: perchaseFrm.dPhone.value
-		},
-		order_id: 'order'+new Date().getTime(), //고유 주문번호로, 생성하신 값을 보내주셔야 합니다.
-		params: {callback1: '1', callback2: '2'},
-		account_expire_at: '2019-03-15', // 가상계좌 입금기간 제한 ( yyyy-mm-dd 포멧으로 입력해주세요. 가상계좌만 적용됩니다. )
-		extra: {
-	        vbank_result: 1, // 가상계좌 사용시 사용, 가상계좌 결과창을 볼지(1), 말지(0), 미설정시 봄(1)
-	        quota: '0,2,3' // 결제금액이 5만원 이상시 할부개월 허용범위를 설정할 수 있음, [0(일시불), 2개월, 3개월] 허용, 미설정시 12개월까지 허용
-		}
-	}).error(function (data) {
-		//결제 진행시 에러가 발생하면 수행됩니다.
-		console.log("error",data);
-	}).cancel(function (data) {
-		//결제가 취소되면 수행됩니다.
-		console.log("cancel",data);
-	}).ready(function (data) {
-		// 가상계좌 입금 계좌번호가 발급되면 호출되는 함수입니다.
-		console.log("ready",data);
-	}).confirm(function (data) {
-		//결제가 실행되기 전에 수행되며, 주로 재고를 확인하는 로직이 들어갑니다.
-		//주의 - 카드 수기결제일 경우 이 부분이 실행되지 않습니다.
-		console.log("confirm",data);
-		if (true) { // 재고 수량 관리 로직 혹은 다른 처리
-			this.transactionConfirm(data); // 조건이 맞으면 승인 처리를 한다.
-		} else {
-			this.removePaymentWindow(); // 조건이 맞지 않으면 결제 창을 닫고 결제를 승인하지 않는다.
-		}
-	}).close(function (data) {
-	    // 결제창이 닫힐때 수행됩니다. (성공,실패,취소에 상관없이 모두 수행됨)
-	    console.log("close",data);
-	}).done(function (data) {
-		//결제가 정상적으로 완료되면 수행됩니다
-		//비즈니스 로직을 수행하기 전에 결제 유효성 검증을 하시길 추천합니다.
-		console.log("done",data);
-	}); */
-	
+
+var dName = perchaseFrm.dName.value;
+var dPhone = perchaseFrm.dPhone.value;
+var dEmail = perchaseFrm.dEmail.value;
+var dAddress = perchaseFrm.dAddress.value;
+var dfAddress = perchaseFrm.dfAddress.value;
+var pName = perchaseFrm.pName.value;
+var payAmount = perchaseFrm.payAmount.value;
+var pay_method = perchaseFrm.payMethod.value;
+var dAddressInfo = perchaseFrm.dAddressInfo.value;
+var seqMemberNo = perchaseFrm.seqMemberNo.value;
+
+console.log(dName, dPhone, dEmail, dAddress, dfAddress, pName, payAmount, pay_method);
+
+if(pay_method == ""){
+	alert("결제 수단을 선택해 주세요.");
+	return;
+}
+if(dName == ""){
+	alert("이름을 입력해 주세요.");
+	return;
+}
+if(dPhone == ""){
+	alert("연락받을 번호를 입력해 주세요.");
+	return;
+}
+if(dAddress == ""){
+	alert("배송 받을 주소를 입력해주세요.");
+	return;
+}
+if(dfAddress == ""){
+	alert("우편번호를 입력해주세요.");
+	return;
+}
+if(dAddressInfo.trim() == ""){
+	alert("상세주소를 입력해주세요.");
+	return;
+}
+if(pName == "" || payAmount == ""){
+	alert("주문 정보가 올바르지 않습니다.");
+	return;
+}
 IMP.init("imp25216490");
 	
 IMP.request_pay({ // param
@@ -91,7 +77,11 @@ IMP.request_pay({ // param
         // jQuery로 HTTP 요청
         var param = {
                 "impUid" : rsp.imp_uid,
-                "merchantUid" : rsp.merchant_uid
+                "merchantUid" : rsp.merchant_uid,
+                "orderMethod": perchaseFrm.payMethod.value,
+                "orderPrice": perchaseFrm.payAmount.value,
+                "orderResult": "Y",
+                "seqMemberNo": seqMemberNo
             };
         var jParam = JSON.stringify(param);
         $.ajax({
@@ -122,11 +112,9 @@ IMP.request_pay({ // param
 		
 <style>
 .content-container{
-	border: 1px solid black;
 	height: 750px;
 }
 .perchase-container{
-	border: 1px solid black;
 	width: 1000px;
 	height: 100%;
 	margin: 0 auto;
@@ -135,18 +123,23 @@ IMP.request_pay({ // param
 	margin-top: 50px;
 }
 .deliverInfo-container{
-	border: 1px solid black;
 	height: 100%;
 	width: 59%;
 }
 .payment-container{
-	border: 1px solid black;
 	height: 90%;
 	width: 39%;
 }
+.payment-container>div{
+	margin-bottom: 20px;
+	font-size: 15px;
+}
 .order-text{
-	border: 1px solid black;
 	height: 100px;
+}
+.deliver-text{
+	font-size: 20px;
+	margin-bottom: 20px;
 }
 .order-text span{
 	margin-left: 30px;
@@ -160,80 +153,101 @@ IMP.request_pay({ // param
 	background-color: white;
 	color: red;
 }
+.text-success{
+	font-size: 16px;
+	font-style: oblique;
+}
+#payPoint{
+	width: 100px;
+}
+.payment-result [type=button]{
+	margin-left: 250px;
+}
+#dfAddress{
+	width: 200px;
+	display: inline-block;
+}
 </style>
 		
 <div class="content-container">
 	<form action="" name="perchaseFrm">
-	<div class="perchase-container">
-		<div class="deliverInfo-container">
+	<div class="perchase-container shadow-lg p-3 mb-5 bg-white rounded">
+		<div class="deliverInfo-container shadow-none p-3 mb-5 bg-light rounded">
 			<div class="order-text"><span>주문하기</span></div>
 			<div class="deliverInfo">
 				<div class="deliver-text"><span>배송정보</span></div>
 				<div class="deliver-name">
-					<label for="dName">이름</label><br />
-					<input type="text" id="dName" name="dName" />
+					<label for="dName" class="text-success font-weight-bold">이름</label><br />
+					<input type="text" id="dName" name="dName" class="form-control" value="${member.memberName }"/>
 				</div>
 				<div class="deliver-phone">
-					<label for="dPhone">전화번호</label>
-					<input type="text" id="dPhone" name="dPhone" />
+					<label for="dPhone" class="text-success font-weight-bold">전화번호</label>
+					<input type="text" id="dPhone" name="dPhone" class="form-control" value="${member.memberPhone }"/>
 				</div>
 				<div class="deliver-email">
-					<label for="dEmail">이메일</label>
-					<input type="email" id="dEmail" name="dEmail" />
+					<label for="dEmail" class="text-success font-weight-bold">이메일</label>
+					<input type="email" id="dEmail" name="dEmail" class="form-control" value="${member.memberEmail }"/>
 				</div>
 				<div class="deliver-address">
-					<label for="dfAddress">우편번호</label>
-					<input type="text" id="dfAddress" name="dfAddress" />
-					<input type="button" id="findAddress" value="검색"/><br />
-					<label for="dAddress">주소</label>
-					<input type="text" id="dAddress" name="dAddress" />
-					<label for="dAddressInfo">상세 주소</label>
-					<input type="text" id="dAddressInfo" name="dAddressInfo" />
+					<label for="dfAddress" class="text-success font-weight-bold">우편번호</label><br />
+					<input type="text" id="dfAddress" class="form-control" name="dfAddress" />
+					<input type="button" id="findAddress" value="검색" class="btn btn-outline-info"/><br />
+					<label for="dAddress" class="text-success font-weight-bold">주소</label>
+					<input type="text" id="dAddress" class="form-control" name="dAddress" />
+					<label for="dAddressInfo" class="text-success font-weight-bold">상세 주소</label>
+					<input type="text" id="dAddressInfo" class="form-control" name="dAddressInfo" />
 				</div>
 				<hr />
 				<div class="perchase-method">
-					<div class="perchase-text"><span>결제 수단</span></div>
+					<div class="perchase-text"><span class="text-success font-weight-bold">결제 수단</span></div>
 					<div class="perchase-box">
-						<button id="payCard" type="button">신용카드</button>
-						<button id="payVbank" type="button">무통장입금</button>
+						<button id="payCard" type="button" class="btn btn-outline-info">신용카드</button>
+						<button id="payVbank" type="button" class="btn btn-outline-info">무통장입금</button>
 						<input type="hidden" name="payMethod"/>
+						<input type="hidden" name="seqMemberNo" value="${member.seqMemberNo }" />
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="payment-container">
+		<div class="payment-container shadow-none p-3 mb-5 bg-light rounded">
 			<div class="productInfo-container">
 				<div class="product-text"><span>결제상품</span></div>
-				<div class="productInfo"><input type="text" name="pName" value="${product.productName }" disabled/></div>
+				<div class="productInfo">
+					<input type="hidden" name="pName" value="${product.productName }"/>
+					<img src="" alt="제품이미지" />
+					<span class="font-weight-bold">${product.productName }</span>
+				</div>
 			</div>
 			<hr />
-			<div class="payment-price">
-				<span>상품금액</span>
-				<span>${product.productPrice }원</span>
+			<div class="payment-price clearfix">
+				<span class="float-left">상품금액</span>
+				<span class="float-right">${product.productPrice }원</span>
 			</div>
 			<div class="payment-coupon">
 				<span>쿠폰 사용</span>
 				<span>사용 가능한 쿠폰이 없습니다.</span>
 			</div>
-			<div class="payment-point">
-				<span>겟잇 포인트</span>
-				-<input type="number" name="payPoint" id="payPoint"/>
-				<label for="payPoint">원</label>
+			<div class="payment-point clearfix">
+				<span class="float-left">겟잇 포인트 사용</span>
+				<div class="float-right">
+				- <input type="number" name="payPoint" id="payPoint" step="1000" min="0" value="0"/>
+				<label for="payPoint" >원</label>
+				</div>
 			</div>
-			<div class="member-point">
-				<span>보유 포인트</span>
-				<span>0원</span>
-				<button>전액 사용</button>
+			<div class="member-point clearfix">
+				<span class="float-left">보유 포인트</span>&nbsp;&nbsp;
+				<span>${member.memberMilage==null?"0":member.memberMilage }원</span>
+				<button class="btn btn-outline-info float-right">전액 사용</button>
 			</div>
-			<div class="payment-deliverPay">
-				<span>배송료</span>
-				<span>0원</span>
+			<div class="payment-deliverPay clearfix">
+				<span class="float-left">배송료</span>
+				<span class="float-right">0원</span>
 			</div>
 			<hr />
 			<div class="payment-result">
 				<span>결제하실 금액</span>
-				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br />
-				<button type="button" onclick="perchaseProduct();">결제하기</button>
+				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br /><br />
+				<button type="button" onclick="perchaseProduct();" class="btn btn-outline-info">결제하기</button>
 			</div>
 		</div>
 	</div>
@@ -290,10 +304,12 @@ $("#findAddress").on('click',function(){
 });
 
 $("#payCard").on('click',function(){
+	$(this).addClass("active").next().removeClass("active");
 	perchaseFrm.payMethod.value = "card";
 });
 
 $("#payVbank").on('click',function(){
+	$(this).addClass("active").prev().removeClass("active");
 	perchaseFrm.payMethod.value = "vbank";
 });
 </script>

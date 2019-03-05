@@ -10,12 +10,20 @@ public class Basket implements Serializable {
 	private int seqBasketNo;
 	private int seqProductNo;
 	private int seqMemberNo;
-	private String productName;
-	private int productPrice;
-	private int productAmount;
+	
 	
 
 	public Basket() {}
+
+
+
+	public Basket(int seqBasketNo, int seqProductNo, int seqMemberNo) {
+		super();
+		this.seqBasketNo = seqBasketNo;
+		this.seqProductNo = seqProductNo;
+		this.seqMemberNo = seqMemberNo;
+	}
+
 
 
 	public int getSeqBasketNo() {
@@ -23,9 +31,11 @@ public class Basket implements Serializable {
 	}
 
 
+
 	public void setSeqBasketNo(int seqBasketNo) {
 		this.seqBasketNo = seqBasketNo;
 	}
+
 
 
 	public int getSeqProductNo() {
@@ -33,9 +43,11 @@ public class Basket implements Serializable {
 	}
 
 
+
 	public void setSeqProductNo(int seqProductNo) {
 		this.seqProductNo = seqProductNo;
 	}
+
 
 
 	public int getSeqMemberNo() {
@@ -43,47 +55,20 @@ public class Basket implements Serializable {
 	}
 
 
+
 	public void setSeqMemberNo(int seqMemberNo) {
 		this.seqMemberNo = seqMemberNo;
 	}
 
 
-	public String getProductName() {
-		return productName;
-	}
-
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-
-	public int getProductPrice() {
-		return productPrice;
-	}
-
-
-	public void setProductPrice(int productPrice) {
-		this.productPrice = productPrice;
-	}
-
-
-	public int getProductAmount() {
-		return productAmount;
-	}
-
-
-	public void setProductAmount(int productAmount) {
-		this.productAmount = productAmount;
-	}
-
 
 	@Override
 	public String toString() {
 		return "Basket [seqBasketNo=" + seqBasketNo + ", seqProductNo=" + seqProductNo + ", seqMemberNo=" + seqMemberNo
-				+ ", productName=" + productName + ", productPrice=" + productPrice + ", productAmount=" + productAmount
 				+ "]";
 	}
+
+   
 	
 	
 	

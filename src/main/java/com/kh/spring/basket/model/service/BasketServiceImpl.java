@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.basket.model.dao.BasketDao;
+import com.kh.spring.basket.model.vo.Basket;
 
 @Service
 public class BasketServiceImpl implements BasketService{
@@ -14,16 +15,36 @@ public class BasketServiceImpl implements BasketService{
 	@Autowired BasketDao basketDao;
 
 	@Override
-	public List<Map<String, String>> basketList(int cPage, int numPerPage) {
-		// TODO Auto-generated method stub
-		return basketDao.basketList(cPage, numPerPage);
-	}
-
-	@Override
 	public int countbasketList() {
 		// TODO Auto-generated method stub
 		return basketDao.countbasketList();
 	}
+
+	@Override
+	public int insertBasket(Basket b) {
+		// TODO Auto-generated method stub
+		return basketDao.insertBasket(b);
+	}
+
+	@Override
+	public List<Map<String, String>> selectProductList(Basket b) {
+		// TODO Auto-generated method stub
+		return basketDao.selectProductList(b);
+	}
+
+	@Override
+	public int deleteBasket(Basket b) {
+		// TODO Auto-generated method stub
+		return basketDao.deleteBasket(b);
+	}
+
+	@Override
+	public int selectSumProduct(Basket b) {
+		// TODO Auto-generated method stub
+		return basketDao.selectSumProduct(b);
+	}
+
+	
 	
 	
 	

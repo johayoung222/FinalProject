@@ -7,4 +7,10 @@
 	<select id="selectctgmlist" parameterType="string" resultType="category">
 		select * from category_micro where category_macro = #{ctgcode}
 	</select>
+	<insert id="insertAuctionRegist">
+		insert into auction_regist values(seq_auction_regist_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
+										, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
+										, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail})
+	</insert>
+	
 </mapper>
