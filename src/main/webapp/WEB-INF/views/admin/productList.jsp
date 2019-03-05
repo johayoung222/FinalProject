@@ -30,7 +30,7 @@
 <br />
 <section id="productList-container" class="productList-container">
 <nav class="navbar navbar-light bg-light">
-	<p>상품 리스트</p>
+	<span>상품 리스트</span>
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/productListSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
   			<option value="product_name" ${type == "product_name"?"selected":"" }>상품명</option>

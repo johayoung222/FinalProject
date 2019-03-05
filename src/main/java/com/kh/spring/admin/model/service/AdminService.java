@@ -61,18 +61,23 @@ public interface AdminService {
 
 	void updateRegist(int registNo);
 	
-	
-	
 	//상품 리스트
 	List<Map<String, String>> productList(int cPage, int numPerPage);
-
+	
 	int countproductList();
 	
 	List<Map<String, String>> productListSearch(int cPage, int numPerPage, Map<String, String> map);
-
+	
 	int countproductListSearch(Map<String, String> map);
+		
+	
+	//경매신청 리스트
+	List<Map<String, Object>> auctionRegistList();
+	
+	List<Map<String, Object>> auctionRegistOne(int auctionRegistNo);
 	
 	
+	//경매 상품 현황
 	
 	
 	//1:1질문답변
@@ -83,20 +88,22 @@ public interface AdminService {
 	List<Map<String, String>> questionAnswerY(int cPage, int numPerPage);
 	
 	int countquestionAnswerY();
-	//경매상품 현황
-	List<Map<String, String>> acutionStatus(int cPage, int numPerPage);
-
-	int countauctionStatus();
+	
 
 	//신고접수 리스트
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
 
+	
 	//사이트 통계
 	List<Map<String, Object>> memberGender();
 
 	List<Map<String, Object>> paidProductCategory();
+
+	
+
+	
 
 	
 

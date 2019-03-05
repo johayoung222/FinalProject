@@ -174,7 +174,7 @@ $("#isadmin").on('click',function(){
 	//console.log("관리자 부여!");
 	var isAdmin = $("#memberIsadmin option:selected").val();
 	var memberId = $("#memberId").val();
-	 
+	if(confirm("정말 관리자 권한 부여를 하시겠습니까??")==true){
 	$.ajax({
 		url:"${pageContext.request.contextPath}/admin/updateisAdmin.do",
 		data:{memberId:memberId,
@@ -182,11 +182,15 @@ $("#isadmin").on('click',function(){
 		dataType:'json',
 		success:function(data){
 			//console.log(data);
-			alert("권한 부여 성공!");
+			alert("관리자 권한 부여 성공!!");
 		},error:function(){
 			console.log("ajax요청 실패!!");
 		}
 	}); 
+	}else{
+		alert("관리자 권한 부여 실패!!")
+	}
+	
 });
 
 $("#couponPlus").on('click',function(){

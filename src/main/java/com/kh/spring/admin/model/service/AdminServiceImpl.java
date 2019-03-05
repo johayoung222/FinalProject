@@ -160,6 +160,23 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
+	//경매신청 리스트---------------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> auctionRegistList() {
+		return adminDao.auctionRegistList();
+	}
+	
+	@Override
+	public List<Map<String, Object>> auctionRegistOne(int auctionRegistNo) {
+		return adminDao.auctionRegistOne(auctionRegistNo);
+	}
+
+	//경매상품 현황---------------------------------------------------------------
+	
+	
+	
+	
+	
 	//1:1질문 답변----------------------------------------------------------------
 	@Override
 	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
@@ -175,23 +192,11 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
 		return adminDao.questionAnswerY(cPage, numPerPage);
 	}
-	
+
 	@Override
 	public int countquestionAnswerY() {
 		return adminDao.countquestionAnswerY();
 	}
-	
-	//경매 상품 현황------------------------------------------------------------------
-	@Override
-	public List<Map<String, String>> acutionStatus(int cPage, int numPerPage) {
-		return adminDao.auctionStatus(cPage, numPerPage);
-	}
-
-	@Override
-	public int countauctionStatus() {
-		return adminDao.countauctionStatus();
-	}
-	
 
 	
 	//신고접수 리스트----------------------------------------------------------------
@@ -215,6 +220,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, Object>> paidProductCategory() {
 		return adminDao.paidProductCategory();
 	}
+
+	
+	
 
 	
 
