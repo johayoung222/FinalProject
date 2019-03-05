@@ -168,12 +168,12 @@ function regist(){
 <section id="siteStatistics-container" class="siteStatistics-container">
 <p>사이트 통계</p>
 <hr />
-<button type="button" class="btn btn-light" id="MF-btn" onclick="MF();">남/녀 비율</button>
-<button type="button" class="btn btn-light" id="paidProductCategory-btn" onclick="paidProductCategory();">결제된 상품 비율</button>
-<button type="button" class="btn btn-light" id="reigst-btn" onclick="regist();">판매신청 비율</button>
-<button type="button" class="btn btn-light">Info</button>
-<button type="button" class="btn btn-light">Info</button>
-<button type="button" class="btn btn-light">Info</button>
+<button type="button" class="btn btn-outline-dark" id="MF-btn" onclick="MF();">남/녀 비율</button>
+<button type="button" class="btn btn-outline-dark" id="paidProductCategory-btn" onclick="paidProductCategory();">결제된 상품 비율</button>
+<button type="button" class="btn btn-outline-dark" id="reigst-btn" onclick="regist();">판매신청 비율</button>
+<button type="button" class="btn btn-outline-dark">Info</button>
+<button type="button" class="btn btn-outline-dark">Info</button>
+<button type="button" class="btn btn-outline-dark">Info</button>
 <hr />
 <div id="MF"></div>
 

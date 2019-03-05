@@ -28,15 +28,16 @@ input[type=submit].btn-block {
     width: 100px;
     color:#007bff;
 }
-.form-inline{
-	display:inline-block;
+.from-inlin-div{
+	width:300px;
+	background-color:blue;
 }
-
 </style>
 <br />
 <section id="allMember-container" class="allMember-container">
 	<nav class="navbar navbar-light bg-light">
-	<p>회원 리스트조회</p>
+	<span>회원 리스트 조회</span>
+	<div id="from-inlin-div">
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
   			<option value="member_id" ${type == "member_id"?"selected":""  }>아이디</option>
@@ -44,8 +45,9 @@ input[type=submit].btn-block {
 		</select>
 		&nbsp;&nbsp;
 	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search }>
-	    <input type="submit" class="btn btn-block btn-outline-success btn-send" value="전송" >
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 	  </form>
+	  </div>
 	</nav>
 <hr />
 	<table id="tbl-allMember" class="table table-striped table-hover" >

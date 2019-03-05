@@ -31,7 +31,7 @@
 		</select>
 		&nbsp;&nbsp;
 	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search}>
-	    <input type="submit" class="btn btn-block btn-outline-success btn-send" value="전송" >
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 	  </form>
 	</nav>
 <hr />
