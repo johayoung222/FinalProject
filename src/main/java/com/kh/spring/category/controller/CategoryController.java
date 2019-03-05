@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.category.model.service.CategoryService;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -20,6 +21,9 @@ public class CategoryController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	AuctionService auctionService;
 	
 	
 	
@@ -85,6 +89,10 @@ public class CategoryController {
 		List<Map<String,String>> list = categoryService.selectMacro();
 		logger.debug(list);
 		
+		List<Map<String,String>> auctionList = auctionService.selectAuctionList();
+		System.out.println("경매물품리스트"+auctionList);
+
+		mav.addObject("auctionList" , auctionList);
 		mav.setViewName("index");
 
 		
