@@ -32,11 +32,14 @@ body {
 	width: 100%;
 }
 
+[name="MainSearchFrm"]{
+	display: inline-block;
+}
 #search_ {
 	width: 400px;
 	height: 50px;
 	/* margin-left: 200px; */
-	margin-left: 21%;
+	margin-left: 11%;
 	border: 2px solid blue;
 }
 
@@ -60,37 +63,48 @@ body {
 	color: #7151FC;
 	border-bottom: 2px solid #7151FC;
 }
-#container{
+
+#container {
 	padding-left: 45%;
 	border: 0px;
 }
-#box-link{
+
+#box-link {
 	display: flex;
 	justify-content: space-between;
-	background-color: pink;
+	background-color: rgb(246, 241, 252);
 	border-radius: 5px;
 	height: 30px;
 }
-#box-link>div{
+
+#box-link>div {
 	width: 100px;
 	text-align: center;
 	padding-top: 4px;
 	border-right: 1px solid white;
 }
-#box-link a{
+
+#box-link a {
 	text-decoration: none;
 }
-#box-link a:hover{
+
+#box-link a:hover {
 	color: white;
 }
-#collapseExample{
-	width: 200px;
+
+#collapseExample {
+	width: 260px;
 	margin-left: -40px;
 }
-#button_{
+
+#button_ {
 	cursor: pointer;
 	background-color: inherit;
 }
+.item-link{
+	color:gray;
+}
+
 </style>
 
 </head>
@@ -99,14 +113,13 @@ body {
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
-					<a class="item-link"
-						href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-				</c:if>
+					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+						<a class="item-link"
+							href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
+					</c:if>
 				</div>
 				<div id="box-link4">
-					<i class="fa fa-truck"></i>
-					<a class="item-link" id="gotobasket"
+					<i class="fa fa-truck"></i> <a class="item-link" id="gotobasket"
 						href="${pageContext.request.contextPath }/item/basket.do">장바구니</a>
 				</div>
 			</c:if>
@@ -139,17 +152,17 @@ body {
 								<a href="${pageContext.request.contextPath}/mypage/order.do"
 									style="color: red"><strong>판매내역</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/purchases.do"
-									style="color: orange">구매내역</a>|<br><a
+									style="color: orange">구매내역</a>|<a
 									href="${pageContext.request.contextPath}/mypage/bookmarks.do"
-									style="color: green">찜한상품</a>|<a
+									style="color: green">찜한상품</a>| <a
 									href="${pageContext.request.contextPath}/mypage/coupons.do"
-									style="color: blue"><strong>쿠폰</strong></a> <br /> <a
+									style="color: blue"><strong>쿠폰</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/credit.do"
 									style="color: purple"><strong>프로모션</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/edit.do"
-									style="color: pink">내 정보</a><br><a
+									style="color: pink">내정보</a>|<a
 									href="${pageContext.request.contextPath}/mypage/wishlist.do"
-									style="color: black"><strong>알림 설정</strong></a>
+									style="color: black"><strong>알림설정</strong></a>
 							</div>
 						</div>
 					</div>
@@ -159,18 +172,35 @@ body {
 				<a class="item-link"
 					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
 			</div>
-			
+
 		</div>
 	</div>
-	<br>
-	<br>
 	<div id="header-container">
-		<img
-			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
-			width="100px" height="80px	"> <input type="text" name="search"
-			placeholder="상품명으로 검색해보세요." id="search_" /> <i class="fa fa-search"
-			id="search2"></i>
+		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
+		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" /> 
+		<a href="${pageContext.request.contextPath }/item/search">
+			<i class="fa fa-search" id="search2"></i>
+		</a>
+		</form>
 	</div>
+	<script>
+	$("#search_").on('keyup',function(){
+		var myData = JSON.stringify($("#search_").val().trim());
+		console.log(myData);
+		$.ajax({
+			url: "${pageContext.request.contextPath}/item/searchPad",
+			method: "get",
+			data: {"myData":myData},
+			success: function(data){
+				console.log(data);
+			},
+			error: function(){
+				console.log("ajax 요청 에러!!");
+			}
+		});
+	});
+	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
 		<a class="navbar-brand" href="#"> <img
@@ -234,27 +264,17 @@ body {
 			</div>
 		</div>
 	</div>
+	
 	<section id="content">
 		<script>
 			function logout() {
-
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
-
 			}
-
 			$(document).ready(
 					function() {
+						var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
 
-						var seqMemberNo = $
-						{
-							memberLoggedIn.getSeqMemberNo()
-						}
-						;
-
-						$("#gotobasket").attr(
-								"href",
-								"${pageContext.request.contextPath}/item/basket.do?memberNo="
-										+ seqMemberNo);
+						$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
 
 					});
 		</script>

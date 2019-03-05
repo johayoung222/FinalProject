@@ -49,7 +49,7 @@
 	    	  }
 	    	  else{
 	    		  var myModal = $('#myBtn');
-	    		  myModal.attr('data-target', '#myModal')
+	    		  myModal.attr('data-target', '#myModal');
 	    	  }
 	      });
 	  });
@@ -159,9 +159,7 @@
                                     <c:forEach items="${categoryList}" var="c">
                                        <c:if test="${c.categoryMacro eq 'D'}">
                                           <tr>
-                                             <button id="${c.categoryName}" name="category"
-                                                onclick="categoryClick('${c.categoryName}');"
-                                                value="${c.categoryName}">${c.categoryName}</button>
+                                             <button id="${c.categoryName}" name="category" onclick="categoryClick('${c.categoryName}');" value="${c.categoryName}">${c.categoryName}</button>
                                           </tr>
                                        </c:if>
                                     </c:forEach>

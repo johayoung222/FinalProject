@@ -52,6 +52,11 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> couponAll() {
 		return sqlSession.selectList("admin.couponAll");
 	}
+
+	@Override
+	public int updateisAdmin(Map<String, Object> map) {
+		return sqlSession.update("admin.updateisAdmin",map);
+	}
 	
 	@Override
 	public int couponPlus(Map<String, Object> map) {
@@ -163,6 +168,19 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	
+	//경매신청 리슽---------------------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> auctionRegistList() {
+		return sqlSession.selectList("admin.auctionRegistList");
+	}
+	
+	@Override
+	public List<Map<String, Object>> auctionRegistOne(int auctionRegistNo) {
+		return sqlSession.selectList("admin.auctionRegistOne",auctionRegistNo);
+	}
+	
+	
+	//경매 상품 현황---------------------------------------------------------------------
 	
 	//1:1질문 답변-------------------------------------------------------------------
 	@Override
@@ -186,18 +204,6 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countquestionAnswerY");
 	}
 
-	//경매 상품 현황-------------------------------------------------------------------
-	@Override
-	public List<Map<String, String>> auctionStatus(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("admin.auctionStatus",null, rowBounds);
-	}
-
-	@Override
-	public int countauctionStatus() {
-		return sqlSession.selectOne("admin.countauctionStatus");
-	}
-
 	
 	//신고 접수 리스트-----------------------------------------------------------------
 	@Override
@@ -210,6 +216,17 @@ public class AdminDaoImpl implements AdminDao {
 	public int countreportList() {
 		return sqlSession.selectOne("admin.countreportList");
 	}
+	
+	//사이트 통계 -----------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> memberGender() {
+		return sqlSession.selectList("admin.memberGender");
+	}
+	@Override
+	public List<Map<String, Object>> paidProductCategory() {
+		return sqlSession.selectList("admin.paidProductCategory");
+	}
+	
 	
 	
 	

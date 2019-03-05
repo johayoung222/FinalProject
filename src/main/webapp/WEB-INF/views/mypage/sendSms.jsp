@@ -21,23 +21,36 @@
 </head>
 
 <body>
-	<div id="emailcertified-container">
-		<label for="certified">인증번호 : </label>
-		<input type="text"name="certified" id="certified"class="certified"/>
-		<input type="button" value="확인" id="check"  onclick="check();"/>
-	</div>
-	<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
-		<input type="hidden" name="memberPhone" id="memberPhone"value="${memberPhone}" />
-		<input type="hidden" name="memberId" value="${memberId}" />
+	<form action="${pageContext.request.contextPath}/mypage/sendSms.do"name="c">
+		<div id="emailcertified-container">
+			<label for="memberPhone">전화번호 : </label>
+			<input type="text" name="memberPhone" id="memberPhone"value="${memberPhone}" />
+			<input type="hidden" name="memberId" value="${m.memberId}" />
+			<!-- <input type="submit" value="인증번호요청" /> -->
+			<button onclick="c();">인증번호요청</button>
+		</div>
 	</form>
+	<c:if test="${memberPhone ne null}">
+		<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
+				<label for="certified">인증번호 : </label>
+				<input type="text"name="certified" id="certified"class="certified"/>
+				<input type="hidden" name="memberPhone" id="memberPhone"value="${memberPhone}" />
+				<input type="hidden" name="memberId" value="${memberId}" />
+				<!-- <input type="button" value="확인" id="check"  onclick="check();"/> -->
+		</form>
+				<button id="check" onclick="check();">확인</button>
+				<!-- <input type="submit" value="섭밋" onclick="check();" /> -->
+	</c:if>
 </body>
 <script>
+function c(){
+	document.c.submit();
+}
 function check(){
 	var certified = $("#certified").val().trim();
 	console.log(certified);
 	var certifiedNum = ${certified};
 	console.log(certifiedNum);
-	var memberPhone = $("#memberPhone").val();
 
 	
 	
@@ -49,15 +62,18 @@ function check(){
 		return false;
 	}else{
 		alert("인증 완료");
-		opener.$('#updatephone').submit();
-		opener.document.getElementById("result").value = "1";
-		opener.document.getElementById("smsclear").value = "인증완료";
-		opener.document.getElementById("memberPhone").readOnly = "true";
-		opener.document.getElementById("smsclear").disabled="true";
+		document.updatephone.submit();
+		
+		$.ajax({
+			url:"",
+			data:$('#updatephone').serialize(),
+			success:function(data){
+				opener.parent.location.reload();
+				self.close();				
+			}
+		});
 		
 		
-		//opener.parent.location.reload();
-		self.close();
 	}
 } 
 </script>
