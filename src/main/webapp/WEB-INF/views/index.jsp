@@ -215,26 +215,33 @@
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
 
-
-<div class="hm-good">
-	<a class="gdidx-good-info" href="">
-		<div class="gdidx-img">
-			<img src="https://d7gbrm2kdcmco.cloudfront.net/t_w240_h240_fill_jpg/wfv65x18501zfmzs51os.jpg">
-		<div class="gdidx-labels">
-
+<c:if test="${empty auctionList }">
+	<div class="hm-good">새로 등록된 경매 상품이 없습니다.</div>
+</c:if>
+<c:if test="${not empty auctionList }">
+	<c:forEach items="${auctionList }" var="a">
+		<div class="hm-good">
+			<a class="gdidx-good-info" href="">
+				<div class="gdidx-img">
+					<img src="https://d7gbrm2kdcmco.cloudfront.net/t_w240_h240_fill_jpg/wfv65x18501zfmzs51os.jpg">
+				<div class="gdidx-labels">
+		
+				</div>
+				<div class="gdidx-name ng-binding">[중고] 티지앤컴퍼니 루나 워치</div>
+				<div class="gdidx-prices-wrapper">
+					<div class="gdidx-discount-rate ng-binding ng-hide"
+						ng-show="item.prices.discount_rate != 0">
+						0<span>%</span>
+					</div>
+					<div class="gdidx-price ng-binding">${a.AUCTION_PRICE}<span class="gdidx-price-unit">원</span>
+					</div>
+				</div>
+		
+			</a>
 		</div>
-		<div class="gdidx-name ng-binding">[중고] 티지앤컴퍼니 루나 워치</div>
-		<div class="gdidx-prices-wrapper">
-			<div class="gdidx-discount-rate ng-binding ng-hide"
-				ng-show="item.prices.discount_rate != 0">
-				0<span>%</span>
-			</div>
-			<div class="gdidx-price ng-binding">50,000<span class="gdidx-price-unit">원</span>
-			</div>
-		</div>
+	</c:forEach>
+</c:if>
 
-	</a>
-</div>
 
 
 <div id="sell_">
