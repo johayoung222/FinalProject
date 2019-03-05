@@ -9,8 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
-
+<%-- <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>--%>
 <style>
 .productList-container{
 	position:relative;
@@ -37,11 +36,17 @@ font-family: 'Nanum Gothic', sans-serif;
 #basketNo{
 dispaly:none;
 }
+.prada{
+	height:1px;
+}
+form{
+width:20px;
+height:18px;
+}
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
-<div class="mypage-container">
-	<div class="real-content-container">
+<div class="mypage-container" >
 		<div class="mp-container">
 		 <div class="mp-title">
 			<h2>장바구니에 담긴 물품을 구매해 보세요!</h2>
@@ -51,7 +56,7 @@ dispaly:none;
     <thead>
     <tr>    
      <!--  <th scope="col">장바구니번호</th> -->
-      <th scope="col">물품번호</th>
+      <th scope="col" style="text-align:center;">물품번호</th>
       <th scope="col">상품이름</th>
       <th scope="col">상품정보</th>
       <th scope="col">상품금액</th>
@@ -70,18 +75,18 @@ dispaly:none;
 			<c:forEach items="${list}" var="p">
 			<tr>
 				<%-- <td id="basketNo">${p.SEQ_BASKET_NO}</td>	 --%>		
-				<td>${p.SEQ_PRODUCT_NO}</td>	
-				<td>${p.PRODUCT_NAME}</td>	
-				<td>${p.PRODUCT_DESCRIPTION}</td>		
-				<td>${p.PRODUCT_PRICE}</td>	
-				<td>
+				<td class="prada">${p.SEQ_PRODUCT_NO}</td>	
+				<td class="prada">${p.PRODUCT_NAME}</td>	
+				<td class="prada">${p.PRODUCT_DESCRIPTION}</td>		
+				<td class="prada">${p.PRODUCT_PRICE}</td>	
+				<td class="prada">
 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${p.SEQ_PRODUCT_NO}'" class="btn btn-primary">구매</button></td>
-				<td>
+				<td class="prada" style="width:50px; height:50px;">
 		 <%--  <button type="button" id="deleteBasket" class="btn btn-danger" onclick="deleteBasket('${p.SEQ_BASKET_NO}','${p.SEQ_MEMBER_NO}')">취소</button>  --%>
 		<form name="basketDelFrm" action="deleteBasket.do" method="post">
 		     <input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
 		     <input type="hidden" name="memberNo" value="${p.SEQ_MEMBER_NO}"/>
-		     <input type="submit"class="btn btn-danger"  value="취소"/> 
+		     <input type="submit"class="btn btn-danger"  value="취소" style="width:50px; height:33px;"/> 
           </form> 
 				 </td>
 			</tr>			
@@ -97,7 +102,7 @@ dispaly:none;
 		   </div>
 		  </div>
 		</div>	
-	</div>
+
 
 <script>
 
