@@ -171,6 +171,15 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.countquestionAnswer();
 	}
 
+	@Override
+	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
+		return adminDao.questionAnswerY(cPage, numPerPage);
+	}
+	
+	@Override
+	public int countquestionAnswerY() {
+		return adminDao.countquestionAnswerY();
+	}
 	
 	//경매 상품 현황------------------------------------------------------------------
 	@Override
@@ -183,15 +192,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.countauctionStatus();
 	}
 	
-	@Override
-	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
-		return adminDao.questionAnswerY(cPage, numPerPage);
-	}
-
-	@Override
-	public int countquestionAnswerY() {
-		return adminDao.countquestionAnswerY();
-	}
 
 	
 	//신고접수 리스트----------------------------------------------------------------

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -127,7 +128,18 @@ public class MyPageController {
 		return "mypage/wishlist";
 	}
 	
-	/*@RequestMapping("/mypage/smscheck.do")
+	@RequestMapping("/mypage/smscheck.do")
+	public ModelAndView sendSms(ModelAndView mav,@RequestParam(name="memberId") String memberId) {
+		Member m = new Member();
+		m.setMemberId(memberId);
+		
+		
+		mav.addObject("m",m);
+		mav.setViewName("mypage/sendSms");
+		return mav; // /WEB-INF/views/demo/demo.jsp
+	}
+	
+	@RequestMapping("/mypage/sendSms.do")
 	  public String sendSms(HttpServletRequest request,Model model) throws Exception {
 
 		 String memberPhone = request.getParameter("memberPhone");
@@ -143,11 +155,13 @@ public class MyPageController {
 
 	    HashMap<String, String> set = new HashMap<String, String>();
 		
+		
 		/*
 		 * set.put("to", memberPhone); // 수신번호 set.put("from", "01090294425"); // 발신번호
 		 * set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
 		 * set.put("type","sms"); // 문자 타입 set.put("app_version", "test app 1.2"); //
 		 * application nameand version
+		 */
 		 		 
 	    System.out.println(set);
 
@@ -167,23 +181,32 @@ public class MyPageController {
 	  }
 	 
 	 @RequestMapping("/mypage/updatephone.do")
-		public ModelAndView updatephone(HttpServletRequest request,ModelAndView mav) {
+		public ModelAndView updatephone(HttpServletRequest request,HttpSession session,ModelAndView mav) {
 			 String memberPhone = request.getParameter("memberPhone");
 			 String memberId = request.getParameter("memberId");
 			 logger.debug("memberPhone=="+memberPhone);
 			 logger.debug("memberId=="+memberId);
 			 
-		 
-			Member m = new Member();
+			Member m = (Member)session.getAttribute("memberLoggedIn");
+			//Member m = new Member();
 		    m.setMemberId(memberId);
 		    m.setMemberPhone(memberPhone);
 		    
 		    logger.debug("member=="+m);
 		    int result = myPageService.updatephone(m);
-			
-			
+		    String loc = "/mypage/profile/edit.do";
+			String msg = "";
+
+		/*
+		 * if (result > 0) { msg = "인증 성공"; } else { msg = "인증 실패"; }
+		 * 
+		 * mav.addObject("msg", msg);
+		 */
+			mav.addObject("loc", loc);
+			mav.setViewName("/mypage/profile/edit.do");
+		    
 			return mav;
 		}
-	 */
+	 
 
 }

@@ -169,9 +169,10 @@
 	<div class="content">
 		<div class="headline">
 			자주 묻는 질문
+			<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 				data-target="#exampleModalLong">자주 묻는 질문 쓰기</button>
-				
+			</c:if>
 				<div class="modal fade" id="exampleModalLong" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLongTitle"
 				aria-hidden="true">

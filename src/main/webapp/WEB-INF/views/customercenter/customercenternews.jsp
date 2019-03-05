@@ -191,11 +191,10 @@
 			겟잇 공지사항
 
 
-			<%-- <c:if test="${memberLoggedIn.memberIsAdmin != null }">
-			</c:if> --%>
+			<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 				data-target="#exampleModalLong">공지사항 쓰기</button>
-
+			</c:if>
 			<div class="modal fade" id="exampleModalLong" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLongTitle"
 				aria-hidden="true">
@@ -227,6 +226,7 @@
 				</div>
 			</div>
 		</div>
+		
 
 
 		<c:forEach items="${list}" var="b">
@@ -239,7 +239,7 @@
 				</div>
 				
 				
-				<%-- <c:if test="${memberLoggedIn.memberIsAdmin != null }"> --%>
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 				<div class="ng-binding">
 					<button type="button" id="update" class="btn btn-outline-primary"
 						data-toggle="modal"
@@ -285,7 +285,7 @@
 						<input type="submit" class="btn btn-outline-danger" value="삭제" onclick="return deleteok();">
 						<input type="hidden" name="seq_board_no"value="${b.SEQ_BOARD_NO}" /> 
 					</form>
-
+				</c:if>
 				</div>
 			<div class="collapse" id="${b.SEQ_BOARD_NO}">
 				<div class="newscontent">${b.BOARD_CONTENT}</div>
