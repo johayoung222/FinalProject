@@ -31,15 +31,15 @@
 }
 </style>
 <!-- 폰 인증 -->
-<%-- <form action="${pageContext.request.contextPath}/mypage/smscheck.do"
+<form action="${pageContext.request.contextPath}/mypage/smscheck.do"
 	  			 method="get"
 	  			 name="checkSmsCertifiedFrm">
-			<input type="hidden" name="memberPhone" value=""/>
+			<!-- <input type="hidden" name="memberPhone" value=""/> -->
 			<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
 </form>
 <form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
 		<input type="hidden" name="memberPhone" value="" />
-		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" /> --%>
+		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
 </form>
 <div class="mypage-container" >
 	<div class="real-content-container" style="margin-left:30%;" >
@@ -54,9 +54,15 @@
 						<div class="profedit-body">
 							<div class="form-group" id="info_">
 									<label for="tel" class="profedit-form-label">전화번호</label>
-									<input type="tel" name="tel" class="form-control profedit-form-input ng-pristine ng-valid" id="memberPhone" name="memberPhone" />
-									<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
-									<input type="hidden" name="target" id="result" value="0"/>
+									
+									<c:if test="${memberLoggedIn.memberPhone eq null}">
+										<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
+									</c:if>
+									<c:if test="${memberLoggedIn.memberPhone != null}">
+										<input type="text" class="form-control profedit-form-input ng-pristine ng-valid" value="${memberLoggedIn.memberPhone}" readonly/>
+										<button class="btn btn-success" disabled>인증완료</button>
+									</c:if>
+								
 							</div>
 							<div class="form-group" id="info2_">	 
 								<label for="email" class="profedit-form-label">이메일</label>
@@ -99,11 +105,11 @@ $(function(){
 });
 
 function sendSms(){
-	  var memberPhone = $("#memberPhone").val();
+	  /* var memberPhone = $("#memberPhone").val();
 	  if(memberPhone.trim().length == 0){
 		  alert("전화번호를 입력하세요.");
 		  return false;
-	  }
+	  } */
 	  //팝업창을 target으로 폼전송
 		var target = "smscheck";
 		//첫번째 인자 url은 생략, form의 action값이 이를 대신한다.
@@ -113,8 +119,8 @@ function sendSms(){
 		
 		//console.log(memberEmail);
 		
-		checkSmsCertifiedFrm.memberPhone.value = memberPhone;
-		updatephone.memberPhone.value=memberPhone;
+		//checkSmsCertifiedFrm.memberPhone.value = memberPhone;
+		//updatephone.memberPhone.value=memberPhone;
 		checkSmsCertifiedFrm.submit();		
 }
 $("")
