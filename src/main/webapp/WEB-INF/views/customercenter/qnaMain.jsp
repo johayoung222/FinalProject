@@ -80,14 +80,14 @@
 }
 .maintitle{
 	width:100%;
-	border: 1px solid red;
+	border-bottom: 1.5px solid #ececec;
+	margin-bottom:5px;
 	height: 50px;
 	font-size: 25px;
 	font-weight: bold;
 }
 .maincontent{
 	width:100%;
-	border: 1px solid blue;
 	height: 250px;
 	margin-bottom: 50px;
 }
@@ -165,12 +165,11 @@
 			<div class="maintitle">
 				${board.boardtitle}
 				
-				<%-- <c:if test="${memberLoggedIn.memberIsAdmin != null }"> --%>
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 				<div class="ng-binding">
 					<button type="button" id="update" class="btn btn-outline-primary"
 						data-toggle="modal"
 						data-target="#exampleModalLong${board.seq_board_no}">수정</button>
-					
 					<!-- 수정폼 -->
 					<div class="modal fade" id="exampleModalLong${board.seq_board_no}"
 						tabindex="-1" role="dialog"
@@ -211,6 +210,7 @@
 					<input type="submit" class="btn btn-outline-danger" value="삭제" onclick="return deleteok();">
 					<input type="hidden" name="seq_board_no"value="${seq_board_no}" /> 
 				</form>
+				</c:if>
 			</div>
 			<div class="maincontent">
 				${board.boardcontent}

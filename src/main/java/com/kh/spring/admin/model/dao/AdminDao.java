@@ -23,6 +23,8 @@ public interface AdminDao {
 	
 	List<Map<String, Object>> couponAll();
 	
+	int updateisAdmin(Map<String, Object> map);
+	
 	int couponPlus(Map<String, Object> map);
 	
 	List<Map<String, Object>> couponList(int memberNo);
@@ -58,7 +60,6 @@ public interface AdminDao {
 	void updateRegist(int registNo);
 	
 	
-	
 	//상품 리스트
 	List<Map<String, String>> productList(int cPage, int numPerPage);
 
@@ -69,7 +70,12 @@ public interface AdminDao {
 	int countproductListSearch(Map<String, String> map);
 	
 	
+	//경매 신청 리스트
+	List<Map<String, Object>> auctionRegistList();
 	
+	List<Map<String, Object>> auctionRegistOne(int auctionRegistNo);
+	
+	//경매 상품 현황
 	
 	
 	
@@ -82,16 +88,23 @@ public interface AdminDao {
 	
 	int countquestionAnswerY();
 	
-	//경매 상품 현황
-	List<Map<String, String>> auctionStatus(int cPage, int numPerPage);
-
-	int countauctionStatus();
-
 	
 	//신고접수 리스트
 	List<Map<String, String>> reportList(int cPage, int numPerPage);
 
 	int countreportList();
+
+	//사이트 통계
+	List<Map<String, Object>> memberGender();
+
+	List<Map<String, Object>> paidProductCategory();
+
+	
+
+	
+
+	
+	
 
 
 	

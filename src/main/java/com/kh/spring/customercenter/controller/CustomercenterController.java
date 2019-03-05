@@ -436,7 +436,7 @@ public class CustomercenterController {
 				msg = "1:1문의  답변 실패";
 			}
 			
-			mav.addObject("q",q);
+			mav.addObject("q",q); 
 			mav.addObject("loc", loc);
 			mav.addObject("msg", msg);
 			mav.setViewName("common/msg");
