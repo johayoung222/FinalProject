@@ -32,6 +32,9 @@ body {
 	width: 100%;
 }
 
+[name="MainSearchFrm"]{
+	display: inline-block;
+}
 #search_ {
 	width: 400px;
 	height: 50px;
@@ -176,11 +179,10 @@ body {
 		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" /> 
-			<i class="fa fa-search" id="search2"></i>
-		</form>
 		<a href="${pageContext.request.contextPath }/item/search">
 			<i class="fa fa-search" id="search2"></i>
 		</a>
+		</form>
 	</div>
 	<script>
 	$("#search_").on('keyup',function(){
