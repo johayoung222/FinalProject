@@ -36,5 +36,10 @@
 		select * from product where product_name like '%'||#{searchKeyword}||'%' and product_onsale = 'Y'
 	</select>
 	<resultMap type="map" id="searchMap"></resultMap>
+	
+	<select id="searchItemsAjax" resultMap="searchAjaxMap">
+		select * from product where product_name like '%'||#{myData}||'%' and product_onsale = 'Y'
+	</select>
+	<resultMap type="map" id="searchAjaxMap"></resultMap>
 
 </mapper>
