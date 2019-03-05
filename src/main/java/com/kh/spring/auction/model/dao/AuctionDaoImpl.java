@@ -1,6 +1,7 @@
 package com.kh.spring.auction.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class AuctionDaoImpl implements AuctionDao {
 	@Override
 	public int insertAuctionRegist(Auction auc) {
 		return sqlSession.insert("auction.insertAuctionRegist" , auc);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAuctionList() {
+		return sqlSession.selectList("auction.selectAuctionList");
 	}
 
 }

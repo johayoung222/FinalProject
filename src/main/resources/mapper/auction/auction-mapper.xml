@@ -12,5 +12,8 @@
 										, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 										, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail})
 	</insert>
-	
+	<select id="selectAuctionList" resultMap="selectAuctionList">
+		select * from auction where rownum <![CDATA[ < ]]> 5 order by auction_create_date
+	</select>
+	<resultMap type="map" id="selectAuctionList"></resultMap>
 </mapper>
