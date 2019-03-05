@@ -142,6 +142,19 @@
 	</select>
 	
 	
+	<!-- 경매 신청 리스트 -->
+	<select id="auctionRegistList" resultMap="auctionRegistListMap">
+		select * from auction_regist order by auction_regist_no
+	</select>
+	<resultMap type="map" id="auctionRegistListMap"></resultMap>
+	
+	<select id="auctionRegistOne" resultMap="auctionRegistOneMap">
+		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
+	</select>
+	<resultMap type="map" id="auctionRegistOneMap"></resultMap>
+	
+	<!-- 경매 상품 현황 -->
+	
 	
 	
 	<!-- 1:1질문답변 -->
@@ -161,14 +174,7 @@
 		select count(*) from question where question_result = 'Y'
 	</select>
 	
-	<!-- 경매 상품 현황 -->
-	<select id="auctionStatus" resultMap="auctionStatusMap">
-		select * from auction order by seq_auction_no
-	</select>
-	<resultMap type="map" id="auctionStatusMap"></resultMap>	
-	<select id="countauctionStatus" resultType="_int">
-		select count(*) from auction
-	</select>
+	
 	
 	<!-- 신고 접수 리스트 -->
 	<select id="reportList" resultMap="reportListMap">

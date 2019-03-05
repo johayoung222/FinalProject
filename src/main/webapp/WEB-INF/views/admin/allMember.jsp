@@ -28,9 +28,11 @@ input[type=submit].btn-block {
     width: 100px;
     color:#007bff;
 }
-.from-inlin-div{
-	width:300px;
-	background-color:blue;
+#from-inlin-div{
+	position: absolute;
+	left:70%;
+	width: 100%;
+	height: 100%;
 }
 </style>
 <br />

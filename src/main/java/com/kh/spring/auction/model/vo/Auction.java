@@ -32,9 +32,10 @@ public class Auction implements Serializable{
 	private String auctionImageSub3;	// 서브 이미지3
 	private int auctionPrice;	// 상품 가격
 	private int auctionStatus;	// 배송 방법
-	private String auctionMember;		// 판매자
+	private String auctionMember;		// 판매자id
 	private String auctionPhone;		// 판매자 연락처
 	private String auctiondetail;		// 상세정보
+	private String auctionCheck;
 	
 
 }

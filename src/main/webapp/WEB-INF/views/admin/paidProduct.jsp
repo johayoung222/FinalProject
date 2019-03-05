@@ -22,7 +22,7 @@
 <br />
 <section id="paidProduct-container" class="paidProduct-container">
 <nav class="navbar navbar-light bg-light">
-	<p>결제된 상품 리스트</p>
+	<span>결제된 상품 리스트</span>
 	  <form class="form-inline" id="form-inline" action='${pageContext.request.contextPath }/admin/paidProductSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" id="type" name="type">
   			<option value="product_name" ${type == "product_name"?"selected":""  }>상품명</option>

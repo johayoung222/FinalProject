@@ -24,6 +24,19 @@
 	height: 200px;
 	resize: none;
 }
+#tbl-questionAnswer{
+	table-layout: fixed;
+}
+.tbl-tr th{
+	width:100px;
+}
+.tableTr td{
+	width:100px;
+	height:70px;
+	overflow:hidden;
+	white-space : nowrap;
+	text-overflow: ellipsis;
+}
 </style>
 <br />
 <section id="questionAnswer-container" class="questionAnswer-container">
@@ -38,7 +51,7 @@
 </ul>
 <br />
 	<table id="tbl-questionAnswer" class="table table-striped table-hover">
-		<tr>
+		<tr class="tbl-tr">
 			<th>고유번호</th>
 			<th>문의시간</th>
 			<th>문의내용</th>
@@ -56,15 +69,15 @@
 		
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="q">
-			<tr>				
-				<th>${q.SEQ_QUESTION_NO}</th>
-				<th><fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy년MM월dd일 hh:mm"/></th>
-				<th>${q.QUESTION_LKINDS}</th>
-				<th>${q.QUESTION_MKINDS}</th>
-				<th>${q.QUESTION_CONTENT}</th>
-				<th>${q.SEQ_MEMBER_NO}</th>
-				<th>${q.QUESTION_RESULT eq 'N '?"답변 대기":"답변 완료"}</th>
-				<th>
+			<tr class="tableTr">				
+				<td>${q.SEQ_QUESTION_NO}</td>
+				<td><fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy년MM월dd일 hh:mm"/></td>
+				<td>${q.QUESTION_LKINDS}</td>
+				<td>${q.QUESTION_MKINDS}</td>
+				<td>${q.QUESTION_CONTENT}</td>
+				<td>${q.SEQ_MEMBER_NO}</td>
+				<td>${q.QUESTION_RESULT eq 'N '?"답변 대기":"답변 완료"}</td>
+				<td>
 					<c:if test="${q.QUESTION_RESULT eq 'N '}">
 						<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 						data-target="#exampleModalLong${q.SEQ_QUESTION_NO}">답변등록</button>
@@ -73,7 +86,7 @@
 						<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 						data-target="#exampleModalLong1${q.SEQ_QUESTION_NO}">답변수정</button>
 					</c:if>
-				</th>						
+				</td>						
 			</tr>
 			
 			<!-- N일시 답변하기 -->
