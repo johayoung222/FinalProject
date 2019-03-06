@@ -8,6 +8,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="안녕 스프링!" name="pageTitle" />
 </jsp:include>
+<c:set scope="application" var="allCategory" value="${categoryList }" />
+
 <style>
 .indexphoto {
 	width: 100%;
