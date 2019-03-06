@@ -29,7 +29,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 	@Override
 	public List<String> MainAuctionSelect() {
-		// sqlSession.selectList("auction.MainAuctionSelect")
+		sqlSession.selectList("auction.MainAuctionSelect");
 		List<String> list = null;
 		return list;
 	}
