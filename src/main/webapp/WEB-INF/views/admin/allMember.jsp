@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -12,7 +12,6 @@
 
 <style>
 .allMember-container{
-	width:1300px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
@@ -28,18 +27,13 @@ input[type=submit].btn-block {
     width: 100px;
     color:#007bff;
 }
-#from-inlin-div{
-	position: absolute;
-	left:70%;
-	width: 100%;
-	height: 100%;
-}
+
 </style>
 <br />
 <section id="allMember-container" class="allMember-container">
-	<nav class="navbar navbar-light bg-light">
+	<nav class="navbar navbar-light bg-light" style="width:100%;">
 	<span>회원 리스트 조회</span>
-	<div id="from-inlin-div">
+	<div id="from">
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/memberSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
   			<option value="member_id" ${type == "member_id"?"selected":""  }>아이디</option>
@@ -63,12 +57,7 @@ input[type=submit].btn-block {
 			<th>전화번호</th>
 			<th>이메일</th>
 			<th>관심상품</th>
-			<th>적립포인트</th>
-			<th>관리자속성</th>
-			<th>판매자번호</th>
-			<th>sns연동여부</th>
-			<th>신고제제여부</th>
-			<th>휴먼계정여부</th>
+			
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
@@ -93,12 +82,7 @@ input[type=submit].btn-block {
 						${l }${!vs.last?",":"" }
 					</c:forEach>
 				</td>
-				<td>${m.MEMBER_MILEGE }</td>
-				<td>${m.MEMBER_ISADMIN }</td>
-				<td>${m.MEMBER_SELLER }</td>
-				<td>${m.MEMBER_SNS_ACCOUNT }</td>
-				<td>${m.MEMBER_REPORT }</td>
-				<td>${MEMBER_STATUS }</td>
+				
 			</tr>			
 			</c:forEach>
 		</c:if>

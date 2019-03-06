@@ -51,6 +51,7 @@ body {
 
 .nav-link {
 	border-right: 1px solid lightgray;
+	width:50px;
 }
 
 #button_ {
@@ -192,6 +193,7 @@ body {
 		background-color: lightgray;
 		cursor: pointer;
 	}
+	
 	</style>
 	<div id="header-container">
 		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
@@ -251,19 +253,19 @@ body {
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item" id="nav-item1"><a class="nav-link"
 					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
+					aria-haspopup="true" aria-expanded="false" style="width:105px;">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
 
 					</div></li>
-				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">새로 등록된 상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="width:73px;">관심상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="width:73px;">추천상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="width:73px;">추가할인</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="width:125px;">새로 등록된 상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="width:105px;">판매예정상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
-			href="${pageContext.request.contextPath}/thing/thing.do">안쓰는 물건
+			href="${pageContext.request.contextPath}/thing/thing.do" style="width:157px;">안쓰는 물건
 			판매하기</a>
 	</nav>
 
