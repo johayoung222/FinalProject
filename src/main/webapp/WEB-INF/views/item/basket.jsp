@@ -9,7 +9,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
-<jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>
+<%-- <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include> --%>
 
 <style>
 .productList-container{
@@ -55,8 +55,8 @@ dispaly:none;
       <th scope="col">상품이름</th>
       <th scope="col">상품정보</th>
       <th scope="col">상품금액</th>
-      <th scope="col">상품구매</th>
-      <th scope="col">상품취소</th>
+      <th scope="col">구매</th>
+      <th scope="col">취소</th>
     </tr>
   </thead>
   <tbody>
@@ -77,12 +77,11 @@ dispaly:none;
 				<td>
 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${p.SEQ_PRODUCT_NO}'" class="btn btn-primary">구매</button></td>
 				<td>
-		 <%--  <button type="button" id="deleteBasket" class="btn btn-danger" onclick="deleteBasket('${p.SEQ_BASKET_NO}','${p.SEQ_MEMBER_NO}')">취소</button>  --%>
-		<form name="basketDelFrm" action="deleteBasket.do" method="post">
+		     <form name="basketDelFrm" action="deleteBasket.do" method="post">
 		     <input type="hidden" name="no" value="${p.SEQ_BASKET_NO}"/>
 		     <input type="hidden" name="memberNo" value="${p.SEQ_MEMBER_NO}"/>
 		     <input type="submit"class="btn btn-danger"  value="취소"/> 
-          </form> 
+             </form> 
 				 </td>
 			</tr>			
 			</c:forEach>
@@ -106,8 +105,6 @@ function deleteBasket(no,memberNo){
     frm.no.value = no;
     frm.memerNo.value = memberNo;
     frm.submit();
-   
-
 }
 
 

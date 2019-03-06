@@ -121,7 +121,7 @@ function next2(){
 <script type="text/javascript">
      window.fbAsyncInit = function() {
         FB.init({
-          appId      : '1302299029947046',
+          appId      : '247319539539549',
           xfbml      : true,
           version    : 'v3.2'
         });
@@ -146,12 +146,9 @@ function next2(){
               });
         }
       function statusChangeCallback(response) {
-    	  
         if (response.status === 'connected') {
         	
              Login();
-        	
-        	
         }
       }
       
@@ -164,7 +161,7 @@ function next2(){
              var memberName = response.name;
              var memberEmail = response.email; 
             
-           
+     
         $.ajax({
       		url: "${pageContext.request.contextPath}/member/facebookLogin",
       		method:"post",
@@ -291,20 +288,10 @@ function next2(){
 		  	        			console.log("ajax요청 실패 에러!");
 		  	        		}
 		  	        	}); 
-		                
-		                
-		                
-		                
+		           	                
 		            }
 		        });
 		    };
 
-</script>
-
-
-
-	
-	
-	
-	
+</script>	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

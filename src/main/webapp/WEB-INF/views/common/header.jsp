@@ -237,17 +237,14 @@ body {
 	<section id="content">
 		<script>
 			function logout() {
-
-				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
-
+           	window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
 			
 			  $(document).ready(function(){
 			 	   
-				    var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-				 
+				   var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
 				   $("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+seqMemberNo);
-				  
+				   
 			   });   
 
 		</script>
