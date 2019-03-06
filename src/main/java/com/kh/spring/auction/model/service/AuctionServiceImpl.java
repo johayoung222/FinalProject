@@ -39,5 +39,30 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.selectAuctionList();
 	}
 
+	@Override
+	public List<Map<String, String>> selectAuction(int auctionNo) {
+		return auctionDao.selectAuction(auctionNo);
+	}
+
+	@Override
+	public String selectCtgMacroName(String string) {
+		return auctionDao.selectCtgMacroName(string);
+	}
+
+	@Override
+	public String selectCtgMicroName(Map<String, Object> ctg) {
+		return auctionDao.selectCtgMicroName(ctg);
+	}
+
+	@Override
+	public Map<String, Object> selectAuctionHistory(String string) {
+		return auctionDao.selectAuctionHistory(string);
+	}
+
+	@Override
+	public Map<String, String> selectMyHistory(Map<String, Object> temp) {
+		return auctionDao.selectMyHistory(temp);
+	}
+
 	
 }

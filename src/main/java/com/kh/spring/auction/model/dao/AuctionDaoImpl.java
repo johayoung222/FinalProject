@@ -36,4 +36,30 @@ public class AuctionDaoImpl implements AuctionDao {
 		return sqlSession.selectList("auction.selectAuctionList");
 	}
 
+	@Override
+	public List<Map<String, String>> selectAuction(int auctionNo) {
+		return sqlSession.selectList("auction.selectAuction" , auctionNo);
+	}
+
+	@Override
+	public String selectCtgMacroName(String string) {
+		return sqlSession.selectOne("auction.selectCtgMacroName", string);
+	}
+
+	@Override
+	public String selectCtgMicroName(Map<String, Object> ctg) {
+		return sqlSession.selectOne("auction.selectCtgMicroName", ctg);
+	}
+
+	@Override
+	public Map<String, Object> selectAuctionHistory(String string) {
+		int auctionNo = Integer.parseInt(string);
+		return sqlSession.selectOne("auction.selectAuctionHistory" , auctionNo);
+	}
+
+	@Override
+	public Map<String, String> selectMyHistory(Map<String, Object> temp) {
+		return sqlSession.selectOne("auction.selectMyHistory" , temp);
+	}
+
 }
