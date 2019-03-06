@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.mypage.model.service.MyPageService;
@@ -30,6 +34,8 @@ public class MyPageController {
 	
 	@Autowired
 	MyPageService myPageService;
+	@Autowired
+    private JavaMailSender mailSender;
 
 	@RequestMapping(value= {"/mypage/order.do" , "/mypage/order"})
 	public String order(Model model , @RequestParam(name="filter" , required=false) String filter) {
@@ -138,6 +144,72 @@ public class MyPageController {
 		mav.setViewName("mypage/sendSms");
 		return mav; // /WEB-INF/views/demo/demo.jsp
 	}
+	@RequestMapping("/mypage/emailcheck.do")
+	public ModelAndView sendEmail(ModelAndView mav,@RequestParam(name="memberId") String memberId) {
+		Member m = new Member();
+		m.setMemberId(memberId);
+		
+		
+		mav.addObject("m",m);
+		mav.setViewName("mypage/sendEmail");
+		return mav;
+	}
+	@RequestMapping("/mypage/sendEmail.do")
+	public String mailSending(HttpServletRequest request,Model model) {
+		 String memberEmail = request.getParameter("memberEmail");
+		 String memberId = request.getParameter("memberId");
+		 logger.debug("memberPhone=="+memberEmail);
+		 logger.debug("memberId=="+memberId);
+		int certified = ((int) (Math.random() * 899999)+100000);
+		
+	    String setfrom = "7sscheduler@gmail.com";         
+	    String tomail  = memberEmail;     // 받는 사람 이메일
+	    String title   = "Get!t 인증번호 입니다!";      // 제목
+	    String content = "인증번호는 ["+certified+"] 입니다 :)";    // 내용
+	   
+	    try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }
+	    model.addAttribute("certified",certified);
+	    model.addAttribute("memberEmail",memberEmail);
+	    model.addAttribute("memberId",memberId);
+	   
+	    return "mypage/sendEmail";
+	  }
+	
+	@RequestMapping("/mypage/updateemail.do")
+	public ModelAndView updateemail(HttpServletRequest request,HttpSession session,ModelAndView mav) {
+		 String memberEmail = request.getParameter("memberEmail");
+		 String memberId = request.getParameter("memberId");
+		 logger.debug("memberPhone=="+memberEmail);
+		 logger.debug("memberId=="+memberId);
+		 
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		//Member m = new Member();
+	    m.setMemberId(memberId);
+	    m.setMemberEmail(memberEmail);
+	    
+	    
+	    logger.debug("member=="+m);
+	    int result = myPageService.updateemail(m);
+	    String loc = "/mypage/profile/edit.do";
+		
+		mav.addObject("loc", loc);
+		mav.setViewName("common/msg");
+	    
+		return mav;
+	}
 	
 	@RequestMapping("/mypage/sendSms.do")
 	  public String sendSms(HttpServletRequest request,Model model) throws Exception {
@@ -195,7 +267,7 @@ public class MyPageController {
 		    logger.debug("member=="+m);
 		    int result = myPageService.updatephone(m);
 		    String loc = "/mypage/profile/edit.do";
-			String msg = "";
+			//String msg = "";
 
 		/*
 		 * if (result > 0) { msg = "인증 성공"; } else { msg = "인증 실패"; }
@@ -203,7 +275,8 @@ public class MyPageController {
 		 * mav.addObject("msg", msg);
 		 */
 			mav.addObject("loc", loc);
-			mav.setViewName("/mypage/profile/edit.do");
+			//mav.addObject("msg", msg);
+			mav.setViewName("common/msg");
 		    
 			return mav;
 		}
