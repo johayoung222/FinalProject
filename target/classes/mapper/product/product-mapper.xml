@@ -7,6 +7,10 @@
 		order by 1, 3
 	</select>
 	<resultMap type="map" id="categoryMap">
-	
 	</resultMap>
+	
+	<select id="selectByCategory" resultMap="cMap">
+		select * from product where category_macro = #{cmKey} and category_micro = #{ciKey}
+	</select>
+	<resultMap type="list" id="cMap"></resultMap>
 </mapper>
