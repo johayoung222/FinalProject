@@ -6,4 +6,6 @@ public interface MyPageDao {
 
 	int updatephone(Member m);
 
+	int updateemail(Member m);
+
 }
