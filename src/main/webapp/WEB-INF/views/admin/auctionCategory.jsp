@@ -147,9 +147,8 @@ $("#btn").on('click',function(){
 		type : "GET",
 		dataType : "json",
 		success :function(data){
-			console.log(data);
-			//opener.parent.location.reload();
-			//window.close();
+			opener.parent.location.reload();
+			window.close();
 		},error : function(){
 			console.log("ajax 요청 실패!!");
 		}

@@ -18,4 +18,6 @@ public interface ItemService {
 
 	List<Map<String, String>> searchItem(String searchKeyword);
 
+	List<Map<String, String>> searchItemAjax(String myData);
+
 }

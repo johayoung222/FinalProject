@@ -45,5 +45,10 @@ public class ItemServiceImpl implements ItemService {
 		return basketDao.searchItem(searchKeyword);
 	}
 
+	@Override
+	public List<Map<String, String>> searchItemAjax(String myData) {
+		return basketDao.searchItemAjax(myData);
+	}
+
 	
 }

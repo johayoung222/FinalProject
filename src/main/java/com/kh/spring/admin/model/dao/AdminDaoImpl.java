@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
@@ -168,7 +169,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	
-	//경매신청 리슽---------------------------------------------------------------------
+	//경매신청 리스트---------------------------------------------------------------------
 	@Override
 	public List<Map<String, Object>> auctionRegistList() {
 		return sqlSession.selectList("admin.auctionRegistList");
@@ -179,8 +180,42 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.auctionRegistOne",auctionRegistNo);
 	}
 	
+	@Override
+	public Auction auctionRegistOne1(int auctionRegistNo) {
+		return sqlSession.selectOne("admin.auctionRegistOne1",auctionRegistNo);
+	}
+	
+	@Override
+	public int inAuction(Map<String, Object> map) {
+		return sqlSession.insert("admin.inAuction",map);
+	}
+	@Override
+	public int updateAuctionRegist(int auctionRegistNo) {
+		return sqlSession.update("admin.updateAuctionRegist",auctionRegistNo);
+	}
+	
 	
 	//경매 상품 현황---------------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> auctionList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.auctionList",rowBounds);
+	}
+	@Override
+	public int countauctionList() {
+		return sqlSession.selectOne("admin.countauctionList");
+	}
+	
+	@Override
+	public List<Map<String, String>> auctionListSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.auctionListSearch",map,rowBounds);
+	}
+	@Override
+	public int countauctionListSearch(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countauctionListSearch",map);
+	}
+	
 	
 	//1:1질문 답변-------------------------------------------------------------------
 	@Override
@@ -226,6 +261,13 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> paidProductCategory() {
 		return sqlSession.selectList("admin.paidProductCategory");
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

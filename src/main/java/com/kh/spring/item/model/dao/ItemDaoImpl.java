@@ -44,6 +44,11 @@ public class ItemDaoImpl implements ItemDao {
 		return sqlSession.selectList("basket.searchItems", searchKeyword);
 	}
 
+	@Override
+	public List<Map<String, String>> searchItemAjax(String myData) {
+		return sqlSession.selectList("basket.searchItemsAjax", myData);
+	}
+
 	
 
 	

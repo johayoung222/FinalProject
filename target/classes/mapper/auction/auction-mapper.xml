@@ -10,7 +10,8 @@
 	<insert id="insertAuctionRegist">
 		insert into auction_regist values(seq_auction_regist_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 										, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
-										, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail} , default)
+										, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail},default)
+
 	</insert>
 	<select id="selectAuctionList" resultMap="selectAuctionList">
 		SELECT * FROM (SELECT * FROM auction ORDER BY auction_no DESC) WHERE ROWNUM <![CDATA[ < ]]> 5
