@@ -31,12 +31,13 @@
 body {
 	width: 100%;
 }
-
+[name="MainSearchFrm"]{
+	display: inline-block;
+}
 #search_ {
 	width: 400px;
 	height: 50px;
 	/* margin-left: 200px; */
-	margin-left: 11%;
 	border: 2px solid blue;
 }
 
@@ -172,26 +173,59 @@ body {
 
 		</div>
 	</div>
+	<style>
+	#searchList{
+		width: 400px;
+		position: absolute;
+		left: 20.4%;
+		z-index: 1000;
+		background-color: white;
+	}
+	#searchList table{
+		border-collapse: collapse;
+		width: 400px;
+		border: 1px solid black;
+	}
+	#searchList table tr:hover{
+		background-color: lightgray;
+		cursor: pointer;
+	}
+	</style>
 	<div id="header-container">
 		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
-			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" /> 
-			<i class="fa fa-search" id="search2"></i>
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
+			<div class="searchList" id="searchList"></div>
+			<a href="${pageContext.request.contextPath }/item/search">
+				<i class="fa fa-search" id="search2"></i>
+			</a>
 		</form>
-		<a href="${pageContext.request.contextPath }/item/search">
-			<i class="fa fa-search" id="search2"></i>
-		</a>
 	</div>
 	<script>
 	$("#search_").on('keyup',function(){
-		var myData = JSON.stringify($("#search_").val().trim());
+		var myData = $("#search_").val().trim();
+		
+		if(myData == ""){
+			return;
+		}
 		console.log(myData);
 		$.ajax({
 			url: "${pageContext.request.contextPath}/item/searchPad",
 			method: "get",
-			data: {"myData":myData},
+			data: "myData="+myData,
 			success: function(data){
 				console.log(data);
+				
+				var table = $("<table></table>");
+				
+				var html = "";
+				
+				for(i=0; i<data.length; i++){
+					html += "<tr><td>"+data[i]['PRODUCT_NAME']+"</td></tr>";
+				}
+				table.html(html);
+				$("#searchList").html(table);
+				
 			},
 			error: function(){
 				console.log("ajax 요청 에러!!");
@@ -201,7 +235,7 @@ body {
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-		<a class="navbar-brand" href="#"> <img
+		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img
 			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
 			alt="스프링로고" width="50px" style="border-radius: 50px;" />
 		</a>

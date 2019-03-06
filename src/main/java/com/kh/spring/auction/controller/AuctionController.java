@@ -220,5 +220,13 @@ public class AuctionController {
 		System.out.println("제대로 리턴을 시킵니까?");
 		return map;
 	}
+	
+	@RequestMapping("/auctionDetail.do")
+	public String auctionDetail(Model model) {
+		
+		
+		
+		return "auction/auctionDetail";
+	}
 
 }

@@ -91,6 +91,63 @@
 .font2_ {
 	left: 30%;
 }
+
+.hm-good {
+	display: inline-block;
+}
+
+.hm-good {
+    width: 271px;
+    height: 344px;
+    padding: 8px 18px;
+}
+
+.gdidx-img img {
+    width: 234px;
+    height: 234px;
+}
+
+.gdidx-name {
+    height: 42px;
+    line-height: 21px;
+    font-size: 14px;
+    color: #1f1f1f;
+    margin-bottom: 12px;
+}
+
+.gdidx-prices-wrapper {
+    height: 38px;
+    margin-bottom: 20px;
+}
+
+.gdidx-good-info {
+    display: block;
+    height: 364px;
+}
+
+a {
+    cursor: pointer;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gdidx-price {
+    color: #1f1f1f;
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: bold;
+}
+
+.gdidx-original-price {
+    color: #c2c2c2;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 2px;
+    text-decoration: line-through;
+}
+
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -215,25 +272,35 @@
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
 
-
-<div class="hm-good">
-	<a class="gdidx-good-info" href="">
-		<div class="gdidx-img">
-			<img src="https://d7gbrm2kdcmco.cloudfront.net/t_w240_h240_fill_jpg/wfv65x18501zfmzs51os.jpg">
-		<div class="gdidx-labels">
-
-		</div>
-		<div class="gdidx-name ng-binding">[중고] 티지앤컴퍼니 루나 워치</div>
-		<div class="gdidx-prices-wrapper">
-			<div class="gdidx-discount-rate ng-binding ng-hide"
-				ng-show="item.prices.discount_rate != 0">
-				0<span>%</span>
+<c:if test="${empty auctionList }">
+	<div>새로 등록된 경매 상품이 없습니다.</div>
+</c:if>
+<div class="hm-container">
+<c:if test="${not empty auctionList }">
+	<c:forEach items="${auctionList }" var="a">
+			<div class="hm-good">
+				<a class="gdidx-good-info"
+					href="#">
+					<div class="gdidx-img">
+						<img src="https://d103rzmewwjpod.cloudfront.net/t_w240_h240_fill_jpg/zfwagui2bqoviims7ldr.jpg">
+						<div class="gdidx-on-hold ng-hide">다른 사용자가 구매중 , 경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-labels">
+						</div>
+					</div>
+					<div class="gdidx-name ng-binding">${a.AUCTION_TITLE }</div>
+					<div class="gdidx-prices-wrapper">
+						<div class="gdidx-discount-rate ng-binding ng-hide">0<span>%</span></div>
+						<div class="gdidx-price ng-binding">
+							154,800<span class="gdidx-price-unit">원</span>
+							<div class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
+						</div>
+						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price">152,100원</div>
+						<div class="gdidx-original-price ng-binding ng-hide"></div>
+					</div></a>
 			</div>
-			<div class="gdidx-price ng-binding">50,000<span class="gdidx-price-unit">원</span>
-			</div>
-		</div>
-
-	</a>
+		</c:forEach>
+</c:if>
 </div>
 
 

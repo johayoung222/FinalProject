@@ -119,11 +119,11 @@ form {
 			 			<td colspan="2">
 			 			
                         	
-                <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
+             <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
                     <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
 	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
 	                <input type="submit" id="insertBasket" value="장바구니"/>
-                </form>	
+                </form>	 
 			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
 			 			</td>
 			 		</tr>
@@ -282,6 +282,9 @@ font-size:20px;
 	}
 	}
 }
+
+	
+	
 	</script>
 
 	<div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
