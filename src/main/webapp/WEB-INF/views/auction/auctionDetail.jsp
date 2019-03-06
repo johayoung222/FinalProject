@@ -283,25 +283,298 @@ body {
 		</script>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/detail.css" />
 <!-- header 끝 -->
+	<c:forEach items="${auction }" var="a">
+
+  <body>
+  <c:set var="MemberNo" value="${memberLoggedIn.seqMemberNo}" />
+  <c:set var="auctionMemberNo" value="${a.SEQ_MEMBER_NO }" />
+    <!-- Page Content -->
+    <div class="container">
+		<div class="kobayDetail_row">     		
+		<%-- 경매등록 회원이 보는 화면 시작  --%>
+			<div class="kobayDetail_info">
+				<div id="image" class="kobayDetail_info_left" >
+					<table class="kobayDetail_info_imgtable">
+						<tr>
+							<td colspan="3" class="kobayDetail_info_mainimg">
+								<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}" id="main_img" />
+							</td>
+						</tr>
+						<tr>
+							<td class="kobayDetail_info_subimg">
+							<c:choose>
+								<c:when test="${a.AUCTION_IMAGE_SUB1 ne null}">
+									<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_SUB1}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
+								</c:when>
+								<c:otherwise>
+									<img src="${pageContext.request.contextPath }/resources/images/null.png" />
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<td class="kobayDetail_info_subimg">
+							<c:choose>
+								<c:when test="${a.AUCTION_IMAGE_SUB2 ne null}">
+									<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_SUB2}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
+								</c:when>
+								<c:otherwise>
+									<img src="${pageContext.request.contextPath }/resources/images/null.png" />
+								</c:otherwise>
+							</c:choose>
+							</td>
+							<td class="kobayDetail_info_subimg">
+							<c:choose>
+								<c:when test="${a.AUCTION_IMAGE_SUB3 ne null}">
+									<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_SUB3}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
+								</c:when>
+								<c:otherwise>
+									<img src="${pageContext.request.contextPath }/resources/images/null.png" />
+								</c:otherwise>
+							</c:choose>
+							</td>
+						</tr>
+					</table>
+				</div> <!-- /.end of image div -->
+				
+				<div id="content" class="kobayDetail_info_rigth">
+					<table class="kobayDetail_info_rightinfo">
+						<tr>
+							<td>[ <c:out value="${ctgMacroName}"/> > <c:out value="${ctgMicroName}"/>]</td>
+							<td><c:out value="${a.AUCTION_TITLE}"/></td>
+
+							<c:if test="${memberLoggedIn.seqMemberNo ne a.SEQ_MEMBER_NO}">
+								<td rowspan="5">
+									<div id="bidInfo" class="kobayDetail_bidStamp">
+										입찰참여 중<br>
+										<c:out value="${myBid.bidPrice}"/>원
+									</div>
+								</td>
+							</c:if>
+						</tr>
+						<tr>
+							<td>경매기간</td>
+							<td><c:out value="${a.SDATE}"/>  ~  <c:out value="${a.EDATE}"/></td>
+						</tr>
+						<tr>
+							<td>시작 가격</td>
+							<td><c:out value="${a.AUCTION_PRICE}"/>원</td>
+						</tr>
+						<tr>
+							<td>종료 가격</td>
+							<td><c:out value=""/>원</td>
+						</tr>
+						<tr>
+							<td>배송정보</td>
+							<td>
+								<c:if test="${a.AUCTION_STATUS eq 0}"><c:out value="배송"/> | <c:out value="3000"/>원 (도서산간 별도)</c:if>
+								<c:if test="${a.AUCTION_STATUS eq 1}"><c:out value="직접 수령"/></c:if>
+							</td>
+						</tr>
+					</table>
+					
+					<table class="kobayDetail_info_rightbtn">
+						<tr>
+						 <td>
+						  <form name="bid" id="bid">
+							<div class="row">
+								<c:if test="${memberLoggedIn.seqMemberNo eq a.SEQ_MEMBER_NO}">
+									<label for="bidPrice" class="mb-0 ml-4 text-danger" style="font-size: 9pt;">
+										※ 게시글 등록회원은 경매에 참여 할 수 없습니다.</label>
+								</c:if>
+								
+								<div class="col-lg-8">
+									<div class="input-group">				
+										<input type="hidden" name="MemberNo" value="${MemberLoggedIn.seqMemberNo }">
+										<input type="hidden" name="auctionUnq" value="${a.AUCTION_NO}">
+										<input type="text" class="form-control" id="bidPrice" name="bidPrice" placeholder="현재입찰가 : ${history.PRICE}">						
+										<span class="input-group-btn">
+										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
+										  onclick="biding('${detailResult.auctionUnq}','${detailResult.bidPrice}','${detailResult.sDate}','${detailResult.eDate}')">경매 참여</button>
+										</span>
+									</div><!-- /input-group -->
+								</div><!-- /.col-lg-6 -->
+							</div><!-- /.row -->
+						  </form>
+						  </td>
+						</tr>		
+					</table>
+				</div><!-- /.end of content -->
+			</div><!-- /.end of kobayDetail_info -->
+	
+		
+			<table class="kobayDetail_infotable">
+				<tr>
+				<td colspan="2">	
+					<div id="kobayDetail_tabcontainer">
+					    <ul class="tabs">
+					        <li class="active" rel="tab1" onclick="fn_tab('#tab1')">상세정보</li>
+					        <li rel="tab2" onclick="fn_tab('#tab2')">Q&A</li>
+					    </ul>
+					    <div class="kobayDetail_tab_container">  
+					    	<!-- #tab1 상세정보 탭 내용 시작 -->
+					        <div id="tab1" class="tab_content">   
+				          		${a.AUCTIONDETAIL}
+					        </div> <!-- end of div#tab1 -->   
+					  	 	<!-- #tab2 Q&A 탭 내용 시작-->     
+					        <div id="tab2" class="tab_content">
+					        	<form name="kobayDetail_qna" id="kobayDetail_question">
+					        		<!-- 질문 등록 창 게시글 등록자는 보이지 않음-->	
+					        		<c:if test="${auctionMemberNo ne MemberNo}">	        	
+									<div class="kobayDetail_qnabox">
+										<table class="kobayDetail_answertxt">
+											<tr>
+												<td>
+													<input type="hidden" name="memberUnq" value="${a.SEQ_MEMBER_NO }">
+													<input type="hidden" name="auctionUnq" value="${a.AUCTION_NO}">
+													<input type="hidden" name="questionerUnq" value="${memberLoggedIn.seqMemberNo}">	
+													<textarea id="qnaContent" name="qnaContent" rows='5' class="kobayDetail_answertextarea"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="checkbox" name="qnaSecret" value="1"> 비밀글 &nbsp
+													<input id="questionBtn" type="button" value="문의 하기"  class="btn btn-primary btn-sm" onclick="kobayDetail_questionInsert()">
+												</td>
+											</tr>
+										</table>
+									</div> <!-- end of kobayDetail_qnabox -->
+									</c:if>
+								</form><!-- end of form#kobayDetail_question -->
+
+								<!-- 질문목록 -->
+								<div class="kobayDetail_qnalist">
+									<table class="kobayDetail_question">
+										<c:choose>
+											<%-- 질문이 없을 때 --%>
+											<c:when test="${qnaResult.isEmpty() }">
+												<tr>
+													<td class="kobayDetail_question_name"></td>
+													<td class="kobayDetail_question_date"></td>
+												</tr>
+												<tr>
+													<td colspan="2" class="kobayDetail_question_content">
+														등록된 질문이 없습니다.
+													</td>
+												</tr>
+											</c:when>
+											
+											<%-- 질문이 있을 때 --%>
+											<c:otherwise>
+												<c:forEach var="qnalist" items="${qnaResult}" varStatus="status">	
+													<c:if test="${qnalist.qnastep eq 0 && qnalist.delstatus eq 0}">
+														<tr>
+															<td class="kobayDetail_question_name">[질문] <c:out value="${qnalist.questionerunq}"/></td>
+															<td class="kobayDetail_question_date"><c:out value="${qnalist.qnardate}"/></td>
+														</tr>
+														<tr>
+															<td colspan="2" class="kobayDetail_question_content">
+																<c:out value="${qnalist.qnacontent}"/>
+															</td>
+														</tr>
+													</c:if>
+						
+													<%-- 게시글 작성자의 답변 --%>
+													<c:if test="${auctionMemberNo eq MemberNo && qnalist.qnastep eq 0}">
+														<form id="kobayDetail_Answer${status.count }">
+															<tr>
+																<td colspan="2" class="kobayDetail_question_btn">
+																	<a href="#answer${status.count}" class="btn btn-info btn-sm" data-toggle="collapse">답변</a>
+																	<div id="answer${status.count}" class="collapse">
+																		<input type="hidden" name="memberUnq" value="${auctionMemberNo }">
+																		<input type="hidden" name="auctionUnq" value="${detailResult.auctionUnq}">
+																		<input type="hidden" name="questionerUnq" value="${MemberNo}">
+																		<input type="hidden" name="qnaGroup" value="${qnalist.qnaunq}">
+																		<textarea rows='5' class="kobayDetail_answertextarea" name="qnaContent"></textarea>																	
+																		<input type="button" value="답변 등록" class="btn btn-danger btn-sm" onclick="qnaAnswer('kobayDetail_Answer${status.count }')">
+																	</div>
+																</td>
+															</tr>
+														</form>
+													</c:if>
+			
+													<%-- 질문 수정/삭제 --%>
+													<c:if test="${MemberNo eq questionerunq}">
+														<tr>
+															<td colspan="2" class="kobayDetail_question_btn">
+																<input type="button" class="btn btn-warning btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="수정"/> /  
+																<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="삭제"/>
+															</td>
+														</tr>
+													</c:if>
+													
+													<%-- 질문에 대한 답변 --%>
+													<c:if test="${qnalist.qnastep eq 1 && qnalist.delstatus eq 0}">
+														<tr>
+															<td class="kobayDetail_question_name">└[답변] <c:out value="${qnalist.memberunq}"/></td>
+															<td class="kobayDetail_question_date"><c:out value="${qnalist.qnardate}"/></td>
+														</tr>
+														<tr>
+															<td colspan="2" class="kobayDetail_question_content">
+																<blockquote>
+																<c:out value="${qnalist.qnacontent}"/>
+																</blockquote>
+															</td>
+														</tr>
+														
+														<%-- 답변 수정/삭제 --%>
+														<c:if test="${auctionMemberNo eq MemberNo }">
+															<tr>
+																<td colspan="2" class="kobayDetail_question_btn">
+																	<input type="button" class="btn btn-default btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="답변 수정"/>  
+																	<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="답변 삭제"/>
+																</td>
+															</tr>
+														</c:if>
+													</c:if>
+						
+												</c:forEach>
+											</c:otherwise>
+										</c:choose>					
+									</table><!-- end of table.kobayDetail_question -->
+								</div><!-- end of div.kobayDetail_qnalist -->
+								
+							</div> <!-- end of div#tab2 -->
+					    </div><!-- end of div.kobayDetail_tab_container -->
+					   
+					</div><!-- end of div#kobayDetail_tabcontainer -->
+					<!-- #container -->
+				</td>
+				</tr>
+			</table> <!-- end of kobayDetail_infotable -->
+    
+		</div>
+		<!-- kobayDetail_row -->
+    </div>
+    <!-- /.container -->
+    <!-- /.Page Content -->
+
+    <!-- Footer -->
+
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="../../../../vendor/jquery/jquery.min.js"></script> -->
+  </body>
 
 	<script>
 	 var today;
-	$(document).ready(function() {
-		 var bidmemberUnq = ${memberLoggedIn.seqMemberNo};
-		 var registerUnq = ${detailResult.memberUnq };
-		 var edate = '${detailResult.eDate}';
-		 var sdate = '${detailResult.sDate}';
+	$(function() {
+		 var MemberNo = ${memberLoggedIn != null?memberLoggedIn.seqMemberNo:"0"};
+		 var auctionMemberNo = ${a.SEQ_MEMBER_NO };
+		 var edate = '${a.EDATE}';
+		 var sdate = '${a.SDATE}';
 		 today = getTime();
 		 
-		if(bidmemberUnq == registerUnq) {
+		if(MemberNo == auctionMemberNo) {
 			document.getElementById("bidInsetBtn").disabled = true;
+			alert(1);
 		}
 		if(today>edate) {
+			alert(2);
 			document.getElementById("bidInsetBtn").disabled = true;
 			$("#bidPrice").attr("placeholder" ,"이미 종료된 경매입니다.");
 			document.all("bidInfo").innerHTML = "<p>마감되었습니다.</p>";
 		}
 		if(today<sdate) {
+			alert(3);
 			document.getElementById("bidInsetBtn").disabled = true;
 			$("#bidPrice").attr("placeholder" ,"진행 예정인 경매입니다.");
 			document.all("bidInfo").innerHTML = "<p>입찰대기중</p>";
@@ -496,281 +769,12 @@ body {
 	}
 	
 </script>
-
-  <body>
-  <c:set var="bidmemberUnq" value="${sessionScope.unq}" />
-  <c:set var="registerUnq" value="${detailResult.memberUnq }" />
-    <!-- Page Content -->
-    <div class="container">
-		<div class="kobayDetail_row">     		
-		<%-- 경매등록 회원이 보는 화면 시작  --%>
-			<div class="kobayDetail_info">
-				<div id="image" class="kobayDetail_info_left" >
-					<table class="kobayDetail_info_imgtable">
-						<tr>
-							<td colspan="3" class="kobayDetail_info_mainimg">
-								<img src="/upload/${detailResult.aucImageMain}" id="main_img" />
-							</td>
-						</tr>
-						<tr>
-							<td class="kobayDetail_info_subimg">
-							<c:choose>
-								<c:when test="${detailResult.aucImageSub1 ne null}">
-									<img src="/upload/${detailResult.aucImageSub1}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
-								</c:when>
-								<c:otherwise>
-									<img src="/upload/null.png" />
-								</c:otherwise>
-							</c:choose>
-							</td>
-							<td class="kobayDetail_info_subimg">
-							<c:choose>
-								<c:when test="${detailResult.aucImageSub2 ne null}">
-									<img src="/upload/${detailResult.aucImageSub2}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
-								</c:when>
-								<c:otherwise>
-									<img src="/upload/null.png" />
-								</c:otherwise>
-							</c:choose>
-							</td>
-							<td class="kobayDetail_info_subimg">
-							<c:choose>
-								<c:when test="${detailResult.aucImageSub3 ne null}">
-									<img src="/upload/${detailResult.aucImageSub3}" onmouseover="showSub('sub1_'+${detailResult.auctionUnq}+'.jpg');" onmouseout="showMain(${detailResult.auctionUnq}+'.jpg');" />
-								</c:when>
-								<c:otherwise>
-									<img src="/upload/null.png" />
-								</c:otherwise>
-							</c:choose>
-							</td>
-						</tr>
-					</table>
-				</div> <!-- /.end of image div -->
-				
-				<div id="content" class="kobayDetail_info_rigth">
-					<table class="kobayDetail_info_rightinfo">
-						<tr>
-							<td>[ <c:out value="${detailResult.lCtg}"/> ]</td>
-							<td><c:out value="${detailResult.aucTitle}"/></td>
-
-							<c:if test="${bidmemberUnq ne detailResult.memberUnq}">
-								<td rowspan="5">
-									<div id="bidInfo" class="kobayDetail_bidStamp">
-										입찰참여 중<br>
-										<c:out value="${myBid.bidPrice}"/>원
-									</div>
-								</td>
-							</c:if>
-						</tr>
-						<tr>
-							<td>경매기간</td>
-							<td><c:out value="${detailResult.sDate}"/>  ~  <c:out value="${detailResult.eDate}"/></td>
-						</tr>
-						<tr>
-							<td>시작 가격</td>
-							<td><c:out value="${detailResult.sPrice}"/>원</td>
-						</tr>
-						<tr>
-							<td>종료 가격</td>
-							<td><c:out value="${detailResult.ePrice}"/>원</td>
-						</tr>
-						<tr>
-							<td>배송정보</td>
-							<td>
-								<c:if test="${detailResult.deliveryWay eq 0}"><c:out value="배송"/> | <c:out value="${detailResult.deliveryFee}"/>원 (도서산간 별도)</c:if>
-								<c:if test="${detailResult.deliveryWay eq 1}"><c:out value="직접 수령"/></c:if>
-							</td>
-						</tr>
-					</table>
-					
-					<table class="kobayDetail_info_rightbtn">
-						<tr>
-						 <td>
-						  <form name="bid" id="bid">
-							<div class="row">
-								<c:if test="${bidmemberUnq == registerUnq}">
-									<label for="bidPrice" class="mb-0 ml-4 text-danger" style="font-size: 9pt;">
-										※ 게시글 등록회원은 경매에 참여 할 수 없습니다.</label>
-								</c:if>
-								
-								<div class="col-lg-8">
-									<div class="input-group">				
-										<input type="hidden" name="bidmemberUnq" value="${bidmemberUnq }">
-										<input type="hidden" name="auctionUnq" value="${detailResult.auctionUnq}">
-										<input type="text" class="form-control" id="bidPrice" name="bidPrice" placeholder="현재입찰가 : ${detailResult.bidPrice}">						
-										<span class="input-group-btn">
-										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
-										  onclick="biding('${detailResult.auctionUnq}','${detailResult.bidPrice}','${detailResult.sDate}','${detailResult.eDate}')">경매 참여</button>
-										</span>
-									</div><!-- /input-group -->
-								</div><!-- /.col-lg-6 -->
-							</div><!-- /.row -->
-						  </form>
-						  </td>
-						</tr>		
-					</table>
-				</div><!-- /.end of content -->
-			</div><!-- /.end of kobayDetail_info -->
-	
-		
-			<table class="kobayDetail_infotable">
-				<tr>
-				<td colspan="2">	
-					<div id="kobayDetail_tabcontainer">
-					    <ul class="tabs">
-					        <li class="active" rel="tab1" onclick="fn_tab('#tab1')">상세정보</li>
-					        <li rel="tab2" onclick="fn_tab('#tab2')">Q&A</li>
-					    </ul>
-					    <div class="kobayDetail_tab_container">  
-					    	<!-- #tab1 상세정보 탭 내용 시작 -->
-					        <div id="tab1" class="tab_content">   
-				          		${detailResult.aucDetail}
-					        </div> <!-- end of div#tab1 -->   
-					  	 	<!-- #tab2 Q&A 탭 내용 시작-->     
-					        <div id="tab2" class="tab_content">
-					        	<form name="kobayDetail_qna" id="kobayDetail_question">
-					        		<!-- 질문 등록 창 게시글 등록자는 보이지 않음-->	
-					        		<c:if test="${registerUnq ne bidmemberUnq}">	        	
-									<div class="kobayDetail_qnabox">
-										<table class="kobayDetail_answertxt">
-											<tr>
-												<td>
-													<input type="hidden" name="memberUnq" value="${registerUnq }">
-													<input type="hidden" name="auctionUnq" value="${detailResult.auctionUnq}">
-													<input type="hidden" name="questionerUnq" value="${bidmemberUnq}">	
-													<textarea id="qnaContent" name="qnaContent" rows='5' class="kobayDetail_answertextarea"></textarea>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<input type="checkbox" name="qnaSecret" value="1"> 비밀글 &nbsp
-													<input id="questionBtn" type="button" value="문의 하기"  class="btn btn-primary btn-sm" onclick="kobayDetail_questionInsert()">
-												</td>
-											</tr>
-										</table>
-									</div> <!-- end of kobayDetail_qnabox -->
-									</c:if>
-								</form><!-- end of form#kobayDetail_question -->
-
-								<!-- 질문목록 -->
-								<div class="kobayDetail_qnalist">
-									<table class="kobayDetail_question">
-										<c:choose>
-											<%-- 질문이 없을 때 --%>
-											<c:when test="${qnaResult.isEmpty() }">
-												<tr>
-													<td class="kobayDetail_question_name"></td>
-													<td class="kobayDetail_question_date"></td>
-												</tr>
-												<tr>
-													<td colspan="2" class="kobayDetail_question_content">
-														등록된 질문이 없습니다.
-													</td>
-												</tr>
-											</c:when>
-											
-											<%-- 질문이 있을 때 --%>
-											<c:otherwise>
-												<c:forEach var="qnalist" items="${qnaResult}" varStatus="status">	
-													<c:if test="${qnalist.qnastep eq 0 && qnalist.delstatus eq 0}">
-														<tr>
-															<td class="kobayDetail_question_name">[질문] <c:out value="${qnalist.questionerunq}"/></td>
-															<td class="kobayDetail_question_date"><c:out value="${qnalist.qnardate}"/></td>
-														</tr>
-														<tr>
-															<td colspan="2" class="kobayDetail_question_content">
-																<c:out value="${qnalist.qnacontent}"/>
-															</td>
-														</tr>
-													</c:if>
-						
-													<%-- 게시글 작성자의 답변 --%>
-													<c:if test="${registerUnq eq bidmemberUnq && qnalist.qnastep eq 0}">
-														<form id="kobayDetail_Answer${status.count }">
-															<tr>
-																<td colspan="2" class="kobayDetail_question_btn">
-																	<a href="#answer${status.count}" class="btn btn-info btn-sm" data-toggle="collapse">답변</a>
-																	<div id="answer${status.count}" class="collapse">
-																		<input type="hidden" name="memberUnq" value="${registerUnq }">
-																		<input type="hidden" name="auctionUnq" value="${detailResult.auctionUnq}">
-																		<input type="hidden" name="questionerUnq" value="${bidmemberUnq}">
-																		<input type="hidden" name="qnaGroup" value="${qnalist.qnaunq}">
-																		<textarea rows='5' class="kobayDetail_answertextarea" name="qnaContent"></textarea>																	
-																		<input type="button" value="답변 등록" class="btn btn-danger btn-sm" onclick="qnaAnswer('kobayDetail_Answer${status.count }')">
-																	</div>
-																</td>
-															</tr>
-														</form>
-													</c:if>
-			
-													<%-- 질문 수정/삭제 --%>
-													<c:if test="${bidmemberUnq eq questionerunq}">
-														<tr>
-															<td colspan="2" class="kobayDetail_question_btn">
-																<input type="button" class="btn btn-warning btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="수정"/> /  
-																<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="삭제"/>
-															</td>
-														</tr>
-													</c:if>
-													
-													<%-- 질문에 대한 답변 --%>
-													<c:if test="${qnalist.qnastep eq 1 && qnalist.delstatus eq 0}">
-														<tr>
-															<td class="kobayDetail_question_name">└[답변] <c:out value="${qnalist.memberunq}"/></td>
-															<td class="kobayDetail_question_date"><c:out value="${qnalist.qnardate}"/></td>
-														</tr>
-														<tr>
-															<td colspan="2" class="kobayDetail_question_content">
-																<blockquote>
-																<c:out value="${qnalist.qnacontent}"/>
-																</blockquote>
-															</td>
-														</tr>
-														
-														<%-- 답변 수정/삭제 --%>
-														<c:if test="${registerUnq eq bidmemberUnq }">
-															<tr>
-																<td colspan="2" class="kobayDetail_question_btn">
-																	<input type="button" class="btn btn-default btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="답변 수정"/>  
-																	<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="답변 삭제"/>
-																</td>
-															</tr>
-														</c:if>
-													</c:if>
-						
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>					
-									</table><!-- end of table.kobayDetail_question -->
-								</div><!-- end of div.kobayDetail_qnalist -->
-								
-							</div> <!-- end of div#tab2 -->
-					    </div><!-- end of div.kobayDetail_tab_container -->
-					   
-					</div><!-- end of div#kobayDetail_tabcontainer -->
-					<!-- #container -->
-				</td>
-				</tr>
-			</table> <!-- end of kobayDetail_infotable -->
-    
-		</div>
-		<!-- kobayDetail_row -->
-    </div>
-    <!-- /.container -->
-    <!-- /.Page Content -->
-
-    <!-- Footer -->
-
-
-    <!-- Bootstrap core JavaScript -->
-    <!-- <script src="../../../../vendor/jquery/jquery.min.js"></script> -->
+	</c:forEach>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
 	<script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
 
-
-  </body>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
