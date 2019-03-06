@@ -203,12 +203,12 @@ function auction(){
 }
 
 function question(){
-	console.log("1:1문의 비율");
+	//console.log("1:1문의 비율");
 	$.ajax({
     	url:"${pageContext.request.contextPath}/admin/questionCategory.do",
     	dataType:"json",
     	success:function(data){
-    	console.log(data);
+    	//console.log(data);
     	
     	// Load the Visualization API and the corechart package.
        	google.charts.load('current', {'packages':['corechart']});	
@@ -258,7 +258,7 @@ function question(){
 
 
 </style>
-<script async src="//waust.at/d.js"></script>
+
 <br />
 <section id="siteStatistics-container" class="siteStatistics-container">
 <p>사이트 통계</p>
@@ -268,7 +268,6 @@ function question(){
 <button type="button" class="btn btn-outline-dark" id="reigst-btn" onclick="regist();">판매 상품 비율</button>
 <button type="button" class="btn btn-outline-dark" id="auction-btn" onclick="auction();">경매 상품 비율</button>
 <button type="button" class="btn btn-outline-dark" id="question-btn" onclick="question();">1:1문의 비율</button>
-&nbsp;&nbsp; 실시간 회원수 <script id="_waunqi">var _wau = _wau || []; _wau.push(["dynamic", "yg04exy825", "nqi", "ffffff000000", "small"]);</script>
 <hr />
 <div class="site" id="MF"></div>
 
