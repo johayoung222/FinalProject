@@ -528,6 +528,7 @@
 </button>
 </div>
 </div>
+
 <hr />
 <div class="sell-title"
    style="text-align: center; font-style: oblique; font-size: xx-large;">나에게
