@@ -132,13 +132,13 @@ $(function(){
 
 function sendSms(){
 		var target = "smscheck";
-		var popup = open("", target, "left=300px, top=100px, height=135px, width=470px");
+		var popup = open("", target, "left=300px, top=100px, height=150px, width=470px");
 		checkSmsCertifiedFrm.target = target;
 		checkSmsCertifiedFrm.submit();		
 }
 function sendMail(){
 		var target = "emailcheck";
-		var popup = open("", target, "left=300px, top=100px, height=135px, width=470px");
+		var popup = open("", target, "left=300px, top=100px, height=150px, width=470px");
 		checkMailCertifiedFrm.target = target;
 		checkMailCertifiedFrm.submit();		
 }
