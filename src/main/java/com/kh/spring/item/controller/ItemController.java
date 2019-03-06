@@ -11,8 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,6 +75,8 @@ public class ItemController {
 	@RequestMapping("/item/search")
 	public ModelAndView searchItem(ModelAndView mav, @RequestParam(value="searchKeyword", required=false) String searchKeyword) {
 		
+		logger.debug(searchKeyword);
+		
 		List<Map<String,String>> list = basketService.searchItem(searchKeyword);
 		logger.debug(list);
 		
@@ -87,7 +87,15 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value="/item/searchPad",method=RequestMethod.GET)
-	public void searchPad(@RequestBody String myData) {
+	public void searchPad(@RequestParam("myData") String myData, HttpServletResponse response) throws JsonIOException, IOException {
+		
 		logger.debug(myData);
+		
+		List<Map<String,String>> list = basketService.searchItemAjax(myData);
+		
+		logger.debug(list);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 }
