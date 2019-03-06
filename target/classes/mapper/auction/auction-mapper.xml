@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="selectAuctionHistory" resultMap="selectAuctionHistory">
-		select * from auction_history where seq_auction_no = #{auction_no}
+		select * from (SELECT * FROM auction_history ORDER BY price desc) where seq_auction_no = #{auction_no} and rownum = 1
 	</select>
 	<resultMap type="map" id="selectAuctionHistory"></resultMap>
 	
@@ -40,4 +40,7 @@
 		SELECT * FROM (SELECT * FROM auction_history ORDER BY price desc) WHERE rownum = 1 and member_no = #{MemberNo} and seq_auction_no = #{AuctionNo}
 	</select>
 	<resultMap type="map" id="selectMyHistory"></resultMap>
+	<insert id="auctionHistoryInsert">
+		insert into auction_history values(seq_auction_history_no.nextval , #{memberId} , #{memberNo} , #{price} , sysdate , #{AuctionNo} , default)
+	</insert>
 </mapper>

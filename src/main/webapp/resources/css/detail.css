@@ -1,32 +1,32 @@
-.kobayDetail_row{
+.Detail_row{
     		margin: 30px auto;
     	}
     	
-    	.kobayDetail_info{
+    	.Detail_info{
     		width: 100%;
     	}
-    	.kobayDetail_info_left {
+    	.Detail_info_left {
     		width:30%; 
     		height:300px; 
     		float:left;
     	}
 
-    	.kobayDetail_info_imgtable{
+    	.Detail_info_imgtable{
     		width: 100%;
     	}
-    	.kobayDetail_info_mainimg{
+    	.Detail_info_mainimg{
     		height:200px; 
     		border: 1px solid #BDBDBD;
     		border-collapse:collapse;
     		text-align:center;    		
     	}
     	
-    	.kobayDetail_info_mainimg img{
+    	.Detail_info_mainimg img{
     		width:100%;
     		height:100%;
     	}
     	
-    	.kobayDetail_info_subimg{
+    	.Detail_info_subimg{
     		width:30%; 
     		height: 100px; 
     		border: 1px solid #BDBDBD;
@@ -34,12 +34,12 @@
     		text-align:center;
     	}
     	
-    	.kobayDetail_info_subimg img{
+    	.Detail_info_subimg img{
     		width:100%;
     		height:100%;
     	}
     	
-    	.kobayDetail_info_rigth{
+    	.Detail_info_rigth{
     		width:70%; 
     		height:300px; 
     		border: 1px solid #BDBDBD; 
@@ -49,12 +49,12 @@
     		text-align:left;
     	}
 	
-    	.kobayDetail_info_rightinfo{
+    	.Detail_info_rightinfo{
     		width:100%;
     		min-height: 200px;
     	}
     	
-    	.kobayDetail_bidStamp{
+    	.Detail_bidStamp{
 			width:200px; 
 			height:100px; 
 			font:12px; 
@@ -65,16 +65,16 @@
 			padding-top:20px; 
 			float:right;
 		}
-    	.kobayDetail_info_rightbtn{
+    	.Detail_info_rightbtn{
     		width:100%;
     		margin-top:10px;
     	}
     	
-    	.kobayDetail_bidbtn{
+    	.Detail_bidbtn{
     		padding:0.6em;
     		float:right;
     	}
-  		.kobayDetail_bidbtn2{
+  		.Detail_bidbtn2{
     		min-height:50px;
     		margin-left:20px;
     		padding:0.6em;
@@ -83,11 +83,11 @@
     		color: white;
     		font:bold;
     	}
-    	.kobayDetail_infotable{
+    	.Detail_infotable{
     		width: 100%;
     	}
   
-    	#kobayDetail_tabcontainer {
+    	#Detail_tabcontainer {
 		    width: 100%;
 		    margin-top:30px;
 		}
@@ -121,7 +121,7 @@
 		    background: #FFFFFF;
 		    border-bottom: 1px solid #FFFFFF;
 		}
-		.kobayDetail_tab_container {
+		.Detail_tab_container {
 		    border: 1px solid #eee;
 		    border-top: none;
 		    clear: both;
@@ -134,12 +134,12 @@
 		    font-size: 12px;
 		    display: none;
 		}
-		.kobayDetail_tab_container .tab_content ul {
+		.Detail_tab_container .tab_content ul {
 		    width:100%;
 		    margin:0px;
 		    padding:0px;
 		}
-		.kobayDetail_tab_container .tab_content ul li {
+		.Detail_tab_container .tab_content ul li {
 		    padding:5px;
 		    list-style:none;
 		}
@@ -147,56 +147,56 @@
 		
 		
 		/** QnA Css **/
-		.kobayDetail_row{
+		.Detail_row{
 			margin: 30px auto;
 		}
-		.kobayDetail_qnabox{
+		.Detail_qnabox{
 			width:100%;
 			float:center;
 			margin:auto;
 		}
-		.kobayDetail_answertxt{
+		.Detail_answertxt{
 			width:100%; 
 			margin-bottom:1em;
 		}
-		.kobayDetail_answertxt td{
+		.Detail_answertxt td{
 			text-align:right; 
 			padding-bottom: 20px;
 		}
-		.kobayDetail_answertextarea{
+		.Detail_answertextarea{
 			width:100%;
 		}
 		
-		.kobayDetail_qnalist{
+		.Detail_qnalist{
 			width:100%;
 			float:center;
 			margin:auto;
 		}
-		.kobayDetail_question{
+		.Detail_question{
 			width:100%;
 			min-height:50px;	
 		}
-		.kobayDetail_question_name{
+		.Detail_question_name{
 			padding-top:1em;
 			text-align:left;
 			border-top:1px solid #BDBDBD;	
 		}
-		.kobayDetail_question_date{
+		.Detail_question_date{
 			padding-top:1em;
 			text-align:right;
 			border-top:1px solid #BDBDBD;	
 		}
-		.kobayDetail_question_content{
+		.Detail_question_content{
 			padding-top:1em;
 			text-align:left;
 			padding-bottom:1em;
 		}
-		.kobayDetail_question_btn{
+		.Detail_question_btn{
 			padding-top:1em;
 			padding-bottom:1em;
 			text-align:right;
 		}
-		.kobayDetail_answertextarea{
+		.Detail_answertextarea{
 			margin-top:1em;
 			margin-bottom:0.3em;
 		}
