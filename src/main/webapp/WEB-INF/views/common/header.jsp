@@ -109,6 +109,7 @@ body {
 <body>
 	<div id="container">
 		<div id="box-link">
+	<script id="_waufcp">var _wau = _wau || []; _wau.push(["dynamic", "qf4dx0ul5a", "fcp", "ead1dc434343", "small"]);</script><script async src="//waust.at/d.js"></script>
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
 					<c:if test="${memberLoggedIn.memberIsAdmin != null }">

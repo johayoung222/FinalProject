@@ -45,11 +45,8 @@ public class BasketContoller {
 		    	 sum += Integer.parseInt(String.valueOf(map.get("PRODUCT_PRICE")));
 		     }
 		     
-		    
-		    
 		 
 		      mav.addObject("sum", sum);
-
 	          mav.addObject("list",list);
 		      mav.setViewName("item/basket"); 
 	          return mav;

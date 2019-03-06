@@ -19,36 +19,73 @@
 </head>
 <style>
 .content-container{
-	border: 1px solid black;
+
 	width: 100%;
 	height: 100%;
 }
 .find-id-container{
-	border: 1px solid red;
+	height:200px;
 }
-.find-password-container{
-	border: 1px solid blue;
+
+.find-id-text{
+	margin-top:3%;
+	margin-left:10%;
+	font-size:30px;
+	
+	color:#7151FC;
+}
+#findID_{
+	margin-left:10%;
+	
+	padding:0; 
+	
+	font-weight:bold;
+}
+#findID{
+	border-radius:5px;
+}
+#findID2{
+	border-radius:5px;
 }
 </style>
 <body>
 	<div class="content-container">
 		<div class="find-id-container">
-			<div class="find-id-text">이메일로 아이디 찾기</div>
+			<div class="find-id-text">아이디/비밀번호</div><hr style="border:2px solid gray; width:80%; margin-left:10%;">
 			<div class="find-id">
 			<form action="">
-				<label for="findID">이메일 : </label>
-				<input type="email" id="findID" name="findID" placeholder="honggd@naver.com" />
-				<input type="submit" value="인증" />
+				<div style="padding-top:15px;">
+				<label for="findID" id="findID_" style="margin-left:13%;">이메일 : </label>
+				<input type="email" id="findID" name="findID" placeholder=" abcde@naver.com" />
+				<input type="submit" id="findID2" value="인증" />
+				</div>
+				<div style="padding-top:20px;">
+				<label for="findID" id="findID_">인증번호 : </label>
+				<input type="email" id="findID" name="findID"	 />
+				<input type="submit" id="findID2" value="확인" />
+				</div>
+				
 			</form>
 			</div>
 		</div>
+		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
 		<div class="find-password-container">
-			<div class="find-password-text">전화번호로 비밀번호 재설정</div>
-			<div class="find-password">
+			<div class="find-id">
 			<form action="">
-				<label for="findPassword">전화번호 : </label>
-				<input type="text" id="findPassword" name="findPassword" placeholder="-없이 01012345678" />
-				<input type="submit" value="인증" />
+				<div style="padding-top:15px;">
+				<label for="findID" id="findID_" style="margin-left:13%;">아이디 : </label>
+				<input type="email" id="findID" name="findID" placeholder=" admin123" />
+				</div>
+				<div style="padding-top:20px; margin-left:3%;">
+				<label for="findID" id="findID_">핸드폰 : </label>
+				<input type="email" id="findID" name="findID" placeholder=" -없이01012345678"	 />
+				<input type="submit" id="findID2" value="인증" />
+				</div>
+				<div style="padding-top:20px;">
+				<label for="findID" id="findID_">인증번호 : </label>
+				<input type="email" id="findID" name="findID"	 />
+				<input type="submit" id="findID2" value="확인" />
+				</div>
 			</form>
 			</div>
 		</div>

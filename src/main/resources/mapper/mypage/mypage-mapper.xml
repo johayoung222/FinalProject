@@ -6,4 +6,9 @@
 	update member set member_phone = #{memberPhone} 
 			where member_id = #{memberId}
 	</update>
+	<!-- 이메일 인증시 이메일 업데이트 -->
+	<update id="updateemail">
+	update member set member_email = #{memberEmail} 
+			where member_id = #{memberId}
+	</update>
 </mapper>

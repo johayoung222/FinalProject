@@ -19,26 +19,32 @@
     crossorigin="anonymous"></script>
 
 </head>
+<style>
+#emailcertified-container{
+	
+}
+
+</style>
 
 <body>
-	<form action="${pageContext.request.contextPath}/mypage/sendSms.do"name="c">
+	<form action="${pageContext.request.contextPath}/mypage/sendEmail.do"name="c">
 		<div id="emailcertified-container">
-			<label for="memberPhone">전화번호 : </label>
-			<input type="text" name="memberPhone" id="memberPhone"value="${memberPhone}" />
+			<label for="memberEmail">이메일     :</label>
+			<input type="email" name="memberEmail" id="memberEmail"value="${memberEmail}" />
 			<input type="hidden" name="memberId" value="${m.memberId}" />
 			<!-- <input type="submit" value="인증번호요청" /> -->
 			<button onclick="c();">인증번호요청</button>
-		</div>
 	</form>
-	<c:if test="${memberPhone ne null}">
-		<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
+	<c:if test="${memberEmail ne null}">
+		<form action="${pageContext.request.contextPath}/mypage/updateemail.do" name="updateemail" id="updateemail" >
 				<label for="certified">인증번호 : </label>
 				<input type="text"name="certified" id="certified"class="certified"/>
-				<input type="hidden" name="memberPhone" id="memberPhone" value="${memberPhone}" />
+				<input type="hidden" name="memberEmail" id="memberEmail" value="${memberEmail}" />
 				<input type="hidden" name="memberId" id="memberId" value="${memberId}" />
 		</form>
 				<button id="check" onclick="check();">확인</button>
 	</c:if>
+		</div>
 </body>
 <script>
 function c(){
@@ -51,10 +57,10 @@ function check(){
 	console.log(certifiedNum);
 	
 	
-	var memberPhone = $("#memberPhone").val();
+	var memberEmail = $("#memberEmail").val();
 	var memberId = $("#memberId").val();
 	var All = {
-			memberPhone : $("#memberPhone").val(),
+			memberEmail : $("#memberEmail").val(),
 			memberId : $("#memberId").val()
 	}
 	
@@ -66,13 +72,11 @@ function check(){
 		alert("인증번호가 틀렸습니다. 인증번호를 다시입력해주세요.");
 		return false;
 	}else{
-		alert("인증 완료");
-		//document.updatephone.submit();
-		
 		$.ajax({
-			url:"${pageContext.request.contextPath}/mypage/updatephone.do",
+			url:"${pageContext.request.contextPath}/mypage/updateemail.do",
 			data:All,
 			success:function(data){
+				alert("인증 완료");
 				opener.parent.location.reload();
 				self.close();				
 			}
