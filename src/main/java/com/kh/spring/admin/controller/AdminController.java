@@ -313,7 +313,7 @@ public class AdminController {
 	}
 	
 	
-	//상품 리스트
+	//판매 상품 리스트
 	@RequestMapping("/admin/productList.do")
 	public ModelAndView productList(ModelAndView mav, 
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
@@ -399,21 +399,80 @@ public class AdminController {
 			@RequestParam(value="cMi")String cMi) {
 		logger.debug("inAuction 메소드 실행!!");
 		Map<String, Object> map = new HashMap<>();
-		map.put("cMa",cMa);
-		map.put("cMi",cMi);
+		map.put("auctionCategoryMacro",cMa);
+		map.put("auctionCategoryMicro",cMi);
 		
 		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
-		System.out.println(auction);
+		map.put("seqMemberNo",auction.getSeqMemberNo());
+		map.put("sdate",auction.getSdate());
+		map.put("edate",auction.getEdate());
+		map.put("auctionTitle",auction.getAuctionTitle());
+		map.put("auctionImageMain",auction.getAuctionImageMain());
+		map.put("auctionImageSub1",auction.getAuctionImageSub1());
+		map.put("auctionImageSub2",auction.getAuctionImageSub2());
+		map.put("auctionImageSub3",auction.getAuctionImageSub3());
+		map.put("auctionPrice",auction.getAuctionPrice());
+		map.put("auctionStatus",auction.getAuctionStatus());
+		map.put("auctionMember",auction.getAuctionMember());
+		map.put("auctionPhone",auction.getAuctionPhone());
+		map.put("auctiondetail",auction.getAuctiondetail());
 		
-		int result =0;
+		int result = adminService.inAuction(map);
+		int result2 =0;
+		if(result == 1 ) {
+			result2 =adminService.updateAuctionRegist(auctionRegistNo);
+		}
+		logger.debug(result2);
 		return result;
 		
 	}
 		
 	
 	//경매 상품 현황
+	@RequestMapping("/admin/auctionList.do")
+	public ModelAndView auctionList(ModelAndView mav,
+			@RequestParam(value="cPage", defaultValue="1")int cPage) {
+		logger.debug("auctionList메소드 실행!!");
+		String view = "auctionList.do";
+		int numPerPage =7;
+		List<Map<String, String>> list = adminService.auctionList(cPage, numPerPage);
+		int totalContents = adminService.countauctionList();
+		logger.debug(list+","+totalContents);
+		mav.addObject("cPage",cPage);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.setViewName("admin/auctionList");
+		return mav;
+	}
 	
 	
+	@RequestMapping("/admin/auctionListSearch.do")
+	public ModelAndView auctionListSearch(ModelAndView mav, 
+			@RequestParam(value="cPage", defaultValue="1")int cPage,
+			@RequestParam(value="type")String type,
+			@RequestParam(value="search")String search) {
+		logger.debug("auctionListSearch메소드 실행!!");
+		logger.debug(type+","+search);
+		String view = "auctionListSearch.do";
+		int numPerPage =7;
+		Map<String, String>map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
+		List<Map<String, String>> list =adminService.auctionListSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countauctionListSearch(map);
+		
+		mav.addObject("cPage",cPage);
+		mav.addObject("type",type);
+		mav.addObject("search",search);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.setViewName("admin/auctionList");
+		return mav;
+	}
 	
 	
 	//1:1질문 답변

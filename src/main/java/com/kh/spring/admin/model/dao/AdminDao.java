@@ -78,8 +78,18 @@ public interface AdminDao {
 	
 	Auction auctionRegistOne1(int auctionRegistNo);
 	
-	//경매 상품 현황
+	int inAuction(Map<String, Object> map);
+
+	int updateAuctionRegist(int auctionRegistNo);
 	
+	//경매 상품 현황
+	List<Map<String, String>> auctionList(int cPage, int numPerPage);
+
+	int countauctionList();
+	
+	List<Map<String, String>> auctionListSearch(int cPage, int numPerPage, Map<String, String> map);
+
+	int countauctionListSearch(Map<String, String> map);
 	
 	
 	//1:1질문 답변
@@ -101,6 +111,12 @@ public interface AdminDao {
 	List<Map<String, Object>> memberGender();
 
 	List<Map<String, Object>> paidProductCategory();
+
+	
+
+	
+
+	
 
 	
 

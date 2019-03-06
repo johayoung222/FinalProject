@@ -13,12 +13,13 @@
 <style>
 .auctionRegist-container{
 	width:1300px;
+	height:750px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
 	
 }
-#tbl-regist{
+#tbl-auctionRegist{
 	table-layout: fixed;
 }
 .tbl-tr th{
@@ -44,7 +45,7 @@
 			<th>종료일</th>
 			<th>시작가</th>
 			<th>상품설명</th>
-			<th>판매자번호</th>
+			<th>판매자아이디</th>
 		</tr>
 	</table>
 </section> 
@@ -65,7 +66,7 @@ $(function(){
 				html += "<td>"+data[i].EDATE+"</td>";
 				html += "<td>"+data[i].AUCTION_PRICE+"</td>";
 				html += "<td>"+data[i].AUCTIONDETAIL+"</td>";
-				html += "<td>"+data[i].SEQ_MEMBER_NO+"</td></tr>";
+				html += "<td>"+data[i].AUCTION_MEMBER+"</td></tr>";
 			}
 			$("#tbl-auctionRegist").append(html);
 		},error : function(){

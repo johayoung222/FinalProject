@@ -176,10 +176,37 @@ public class AdminServiceImpl implements AdminService {
 	public Auction auctionRegistOne1(int auctionRegistNo) {
 		return adminDao.auctionRegistOne1(auctionRegistNo);
 	}
+	
+	@Override
+	public int inAuction(Map<String, Object> map) {
+		return adminDao.inAuction(map);
+	}
+
+	@Override
+	public int updateAuctionRegist(int auctionRegistNo) {
+		return adminDao.updateAuctionRegist(auctionRegistNo);
+	}
 
 	//경매상품 현황---------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> auctionList(int cPage, int numPerPage) {
+		return adminDao.auctionList(cPage,numPerPage);
+	}
+
+	@Override
+	public int countauctionList() {
+		return adminDao.countauctionList();
+	}
 	
-	
+	@Override
+	public List<Map<String, String>> auctionListSearch(int cPage, int numPerPage, Map<String, String> map) {
+		return adminDao.auctionListSearch(cPage,numPerPage,map);
+	}
+
+	@Override
+	public int countauctionListSearch(Map<String, String> map) {
+		return adminDao.countauctionListSearch(map);
+	}
 	
 	
 	
@@ -226,6 +253,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, Object>> paidProductCategory() {
 		return adminDao.paidProductCategory();
 	}
+
+	
+
+	
+
+	
 
 	
 	
