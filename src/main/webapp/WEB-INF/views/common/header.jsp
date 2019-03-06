@@ -272,7 +272,7 @@ body {
 							</tr>
 							<tr>
 								<td>
-								<c:forEach items="${categoryList }" var="ct">
+								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'A' }">
 										<ul>
 											<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=${ct.CATEGORY_MICRO }">
@@ -283,7 +283,7 @@ body {
 								</c:forEach>
 								</td>
 								<td>
-								<c:forEach items="${categoryList }" var="ct">
+								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'B' }">
 										<ul>
 											<a href="${pageContext.request.contextPath }/category?caKey=B&ciKey=${ct.CATEGORY_MICRO }">
@@ -294,7 +294,7 @@ body {
 								</c:forEach>
 								</td>
 								<td>
-								<c:forEach items="${categoryList }" var="ct">
+								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
 										<ul>
 											<li>${ct.CATEGORY_MICRO_NAME }</li>
@@ -303,7 +303,7 @@ body {
 								</c:forEach>
 								</td>
 								<td>
-								<c:forEach items="${categoryList }" var="ct">
+								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
 										<ul>
 											<li>${ct.CATEGORY_MICRO_NAME }</li>
@@ -312,7 +312,7 @@ body {
 								</c:forEach>
 								</td>
 								<td>
-								<c:forEach items="${categoryList }" var="ct">
+								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
 										<ul>
 											<li>${ct.CATEGORY_MICRO_NAME }</li>

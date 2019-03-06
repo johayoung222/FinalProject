@@ -104,19 +104,22 @@ public class CategoryController {
 	}
 
 	@RequestMapping("/category")
-	public ModelAndView categoryReturn(ModelAndView mav,@RequestParam("cmKey") String cmKey,
+	public ModelAndView categoryReturn(ModelAndView mav,@RequestParam("caKey") String caKey,
 										@RequestParam("ciKey") String ciKey) {
 		
 		Map<String,String> map = new HashMap<>();
-		map.put("cmKey",cmKey);
+		map.put("caKey",caKey);
 		map.put("ciKey",ciKey);
 		
 		List<Product> list = categoryService.selectByCategory(map);
+		logger.debug(list);
+		
+		mav.addObject("aiKey", map);
+		mav.addObject("cpList", list);
+		mav.setViewName("item/item");
 		
 		return mav;
 	}
-
-	
 	
 	
 	

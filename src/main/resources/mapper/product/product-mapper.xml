@@ -9,8 +9,7 @@
 	<resultMap type="map" id="categoryMap">
 	</resultMap>
 	
-	<select id="selectByCategory" resultMap="cMap">
-		select * from product where category_macro = #{cmKey} and category_micro = #{ciKey}
+	<select id="selectByCategory" resultType="product">
+		select * from product where category_macro = #{caKey} and category_micro = #{ciKey}
 	</select>
-	<resultMap type="list" id="cMap"></resultMap>
 </mapper>
