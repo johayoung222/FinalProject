@@ -254,6 +254,21 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.paidProductCategory();
 	}
 
+	@Override
+	public List<Map<String, Object>> registCategory() {
+		return adminDao.registCategory();
+	}
+
+	@Override
+	public List<Map<String, Object>> auctionCategory() {
+		return adminDao.auctionCategory();
+	}
+
+	@Override
+	public List<Map<String, Object>> questionCategory() {
+		return adminDao.questionCategory();
+	}
+
 	
 
 	
