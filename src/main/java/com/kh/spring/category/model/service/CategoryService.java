@@ -11,4 +11,6 @@ public interface CategoryService {
 
 	List<Map<String, String>> selectMacro();
 
+	List<String> MainAuctionSelect();
+
 }

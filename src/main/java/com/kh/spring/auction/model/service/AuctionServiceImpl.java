@@ -1,6 +1,7 @@
 package com.kh.spring.auction.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class AuctionServiceImpl implements AuctionService {
 	public int insertAuctionRegist(Auction auc) {
 		return auctionDao.insertAuctionRegist(auc);
 	}
+
+	@Override
+	public List<Map<String, String>> selectAuctionList() {
+		return auctionDao.selectAuctionList();
+	}
+
 	
 }

@@ -11,4 +11,6 @@ public interface CategoryDao {
 
 	List<Map<String, String>> selectMacro();
 
+	List<String> MainAuctionSelect();
+
 }

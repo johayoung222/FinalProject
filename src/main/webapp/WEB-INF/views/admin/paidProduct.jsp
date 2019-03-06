@@ -22,7 +22,7 @@
 <br />
 <section id="paidProduct-container" class="paidProduct-container">
 <nav class="navbar navbar-light bg-light">
-	<p>결제된 상품 리스트</p>
+	<span>결제된 상품 리스트</span>
 	  <form class="form-inline" id="form-inline" action='${pageContext.request.contextPath }/admin/paidProductSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" id="type" name="type">
   			<option value="product_name" ${type == "product_name"?"selected":""  }>상품명</option>
@@ -31,7 +31,7 @@
 		</select>
 		&nbsp;&nbsp;
 	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search" value=${search}>
-	    <input type="submit" class="btn btn-block btn-outline-success btn-send" value="전송" >
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
 	  </form>
 	</nav>
 <hr />
@@ -74,6 +74,7 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage,type,search , view) %>
 </section>
 <script>
 

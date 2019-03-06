@@ -1,5 +1,6 @@
 package com.kh.spring.item.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -36,6 +37,16 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public void updateProduct(Map<String, String> map) {
 		sqlSession.update("basket.updateProduct",map);
+	}
+
+	@Override
+	public List<Map<String, String>> searchItem(String searchKeyword) {
+		return sqlSession.selectList("basket.searchItems", searchKeyword);
+	}
+
+	@Override
+	public List<Map<String, String>> searchItemAjax(String myData) {
+		return sqlSession.selectList("basket.searchItemsAjax", myData);
 	}
 
 	

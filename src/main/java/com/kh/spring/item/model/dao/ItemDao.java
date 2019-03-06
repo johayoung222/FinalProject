@@ -1,5 +1,6 @@
 package com.kh.spring.item.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.member.model.vo.Member;
@@ -15,5 +16,9 @@ public interface ItemDao {
 	int insertAsk(ProductAsk pAsk);
 
 	void updateProduct(Map<String, String> map);
+
+	List<Map<String, String>> searchItem(String searchKeyword);
+
+	List<Map<String, String>> searchItemAjax(String myData);
 
 }

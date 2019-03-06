@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.model.dao.AdminDao;
+import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
@@ -49,6 +50,12 @@ public class AdminServiceImpl implements AdminService {
 	public List<Map<String, Object>> couponAll() {
 		return adminDao.couponAll();
 	}
+	
+	@Override
+	public int updateisAdmin(Map<String, Object> map) {
+		return adminDao.updateisAdmin(map);
+	}
+
 	
 	@Override
 	public int couponPlus(Map<String, Object> map) {
@@ -154,6 +161,55 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
+	//경매신청 리스트---------------------------------------------------------------
+	@Override
+	public List<Map<String, Object>> auctionRegistList() {
+		return adminDao.auctionRegistList();
+	}
+	
+	@Override
+	public List<Map<String, Object>> auctionRegistOne(int auctionRegistNo) {
+		return adminDao.auctionRegistOne(auctionRegistNo);
+	}
+
+	@Override
+	public Auction auctionRegistOne1(int auctionRegistNo) {
+		return adminDao.auctionRegistOne1(auctionRegistNo);
+	}
+	
+	@Override
+	public int inAuction(Map<String, Object> map) {
+		return adminDao.inAuction(map);
+	}
+
+	@Override
+	public int updateAuctionRegist(int auctionRegistNo) {
+		return adminDao.updateAuctionRegist(auctionRegistNo);
+	}
+
+	//경매상품 현황---------------------------------------------------------------
+	@Override
+	public List<Map<String, String>> auctionList(int cPage, int numPerPage) {
+		return adminDao.auctionList(cPage,numPerPage);
+	}
+
+	@Override
+	public int countauctionList() {
+		return adminDao.countauctionList();
+	}
+	
+	@Override
+	public List<Map<String, String>> auctionListSearch(int cPage, int numPerPage, Map<String, String> map) {
+		return adminDao.auctionListSearch(cPage,numPerPage,map);
+	}
+
+	@Override
+	public int countauctionListSearch(Map<String, String> map) {
+		return adminDao.countauctionListSearch(map);
+	}
+	
+	
+	
 	//1:1질문 답변----------------------------------------------------------------
 	@Override
 	public List<Map<String, String>> questionAnswer(int cPage, int numPerPage) {
@@ -165,18 +221,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.countquestionAnswer();
 	}
 
-	
-	//경매 상품 현황------------------------------------------------------------------
-	@Override
-	public List<Map<String, String>> acutionStatus(int cPage, int numPerPage) {
-		return adminDao.auctionStatus(cPage, numPerPage);
-	}
-
-	@Override
-	public int countauctionStatus() {
-		return adminDao.countauctionStatus();
-	}
-	
 	@Override
 	public List<Map<String, String>> questionAnswerY(int cPage, int numPerPage) {
 		return adminDao.questionAnswerY(cPage, numPerPage);
@@ -199,6 +243,28 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.countreportList();
 	}
 
+	//사이트 통계------------------------
+	@Override
+	public List<Map<String, Object>> memberGender() {
+		return adminDao.memberGender();
+	}
+
+	@Override
+	public List<Map<String, Object>> paidProductCategory() {
+		return adminDao.paidProductCategory();
+	}
+
+	
+
+	
+
+	
+
+	
+	
+	
+
+	
 
 
 	

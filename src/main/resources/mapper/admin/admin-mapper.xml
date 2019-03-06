@@ -29,6 +29,11 @@
 	</select>
 	<resultMap type="map" id="couponAllMap"></resultMap>
 	
+	<!-- 권한 부여 -->
+	<update id="updateisAdmin">
+		update member set member_isAdmin =#{isAdmin} where member_id = #{memberId}
+	</update>
+	
 	<!-- 쿠폰지급 > 쿠폰리스트 테이블에 insert -->
 	<insert id="couponPlus" parameterType="map">
 		insert into coupon_listt values(#{memberNo},sysdate,#{couponNo},'N')
@@ -66,7 +71,7 @@
 	
 	
 	
-	<!-- 판매 신청 리스트 -->
+	<!--상품 판매 신청 리스트 -->
 	<select id="regist" resultMap="registMap">
 		select * from regist where regist_auction = 'N' order by seq_regist_no
 	</select>
@@ -119,7 +124,7 @@
 	
 	
 	
-	<!-- 상품 리스트 -->
+	<!--판매 상품 리스트 -->
 	<select id="productList" resultMap="productListMap">
 		select * from product order by seq_product_no
 	</select>
@@ -137,7 +142,52 @@
 	</select>
 	
 	
+	<!-- 경매 신청 리스트 -->
+	<select id="auctionRegistList" resultMap="auctionRegistListMap">
+		select * from auction_regist where auction_check='N' order by auction_regist_no
+	</select>
+	<resultMap type="map" id="auctionRegistListMap"></resultMap>
 	
+	<!-- auction_regist Map으로 뽑음 -->
+	<select id="auctionRegistOne" resultMap="auctionRegistOneMap">
+		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
+	</select>
+	<resultMap type="map" id="auctionRegistOneMap"></resultMap>
+	
+	<!-- auction_regist Vo로 뽑음 -->
+	<select id="auctionRegistOne1" resultType="auction">
+		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
+	</select>
+	
+	<!-- auctionRegist 승인시 auction테이블로 insert -->
+	<insert id="inAuction" parameterType="map">
+		insert into auction values(seq_auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
+			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
+			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
+			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default)
+	</insert>
+	
+	<!-- auctionRegist 승인시 auction_check='Y' -->
+	<update id="updateAuctionRegist" >
+		update auction_regist set auction_check='Y'where auction_regist_no= #{auctionRegistNo}
+	</update>
+	
+	
+	<!-- 경매 상품 현황 -->
+	<select id="auctionList" resultMap="auctionListMap">
+		select * from auction order by auction_no
+	</select>
+	<resultMap type="map" id="auctionListMap"></resultMap>	
+	<select id="countauctionList" resultType="_int">
+		select count(*) from auction
+	</select>
+	
+	<select id="auctionListSearch" resultMap="auctionListMap">
+		select * from auction where ${type} like '%'||#{search}||'%'
+	</select>
+	<select id="countauctionListSearch" resultType="_int">
+		select count(*) from auction where ${type} like '%'||#{search}||'%'
+	</select>
 	
 	<!-- 1:1질문답변 -->
 	<select id="questionAnswer" resultMap="questionAnswerMap">
@@ -156,14 +206,7 @@
 		select count(*) from question where question_result = 'Y'
 	</select>
 	
-	<!-- 경매 상품 현황 -->
-	<select id="auctionStatus" resultMap="auctionStatusMap">
-		select * from auction order by seq_auction_no
-	</select>
-	<resultMap type="map" id="auctionStatusMap"></resultMap>	
-	<select id="countauctionStatus" resultType="_int">
-		select count(*) from auction
-	</select>
+	
 	
 	<!-- 신고 접수 리스트 -->
 	<select id="reportList" resultMap="reportListMap">
@@ -174,9 +217,26 @@
 		select count(*) from report
 	</select>
 	
+	<!-- 사이트 통계 -->
+	<!-- 남/녀 비율 -->
+	<select resultMap="memberGenderMap" id="memberGender">
+		select count(*) as cnt from member group by gender
+	</select>
+	<resultMap id="memberGenderMap" type="map"/>
 	
-	
-	
+	<!-- 결제된 상품 비율 -->
+	<select id="paidProductCategory" resultMap="paidProductCategoryMap">
+		SELECT A.category_macro as macro, A.category_name as name, nvl(B.cnt, 0) as cnt
+		FROM category_macro A 
+ 		LEFT OUTER JOIN ( 
+   			SELECT 
+    		product_category, COUNT(*) AS cnt 
+     		FROM product_io 
+    		GROUP BY product_category
+  		) B on (A.category_macro = B.product_category)
+		
+	</select>
+	<resultMap type="map" id="paidProductCategoryMap"/>
 	
 	
 </mapper>
