@@ -1,5 +1,6 @@
 package com.kh.spring.item.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -37,6 +38,16 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void updateProduct(Map<String, String> map) {
 		basketDao.updateProduct(map);
+	}
+
+	@Override
+	public List<Map<String, String>> searchItem(String searchKeyword) {
+		return basketDao.searchItem(searchKeyword);
+	}
+
+	@Override
+	public List<Map<String, String>> searchItemAjax(String myData) {
+		return basketDao.searchItemAjax(myData);
 	}
 
 	

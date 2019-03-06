@@ -162,7 +162,7 @@
 					<!-- <input type="text" class="main" /> -->
 					<textarea rows="25" cols="15" class="main" name="incontent"></textarea>
 				</div>
-				<input type="hidden" name="seq_member_no" value="${memberLoggedIn.seqmemberNo}"/>
+				<input type="hidden" name="seq_member_no" value="${memberLoggedIn.seqMemberNo}"/>
 				<input type="submit" class="btn btn-outline-primary" value="문의하기"/>
 			</form>
 		</div>

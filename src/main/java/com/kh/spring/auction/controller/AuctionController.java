@@ -87,8 +87,6 @@ public class AuctionController {
 		out.close();
 	}
 	
-	
-
 	@RequestMapping(value = "/uploadFileSave")
 	@ResponseBody
 	public Map<String, Object> multipartProcess(final MultipartHttpServletRequest multiRequest,
@@ -107,11 +105,13 @@ public class AuctionController {
 		auc.setSeqMemberNo(m.getSeqMemberNo());
 		auc.setAuctionPhone(m.getMemberPhone());
 		String auctionTitle = auc.getAuctionTitle();
-		auc.setAuctionTitle(new String(auctionTitle.getBytes("8859_1"),"utf-8"));
-
-		String auctionDetail = auc.getAuctiondetail();
-		auc.setAuctiondetail(new String(auctionDetail.getBytes("8859_1"),"utf-8"));
+		// auc.setAuctionTitle(new String(auctionTitle.getBytes("8859_1"),"utf-8"));
+		auc.setAuctionTitle(auctionTitle);
 		
+		String auctionDetail = auc.getAuctiondetail();
+		// auc.setAuctiondetail(new String(auctionDetail.getBytes("8859_1"),"utf-8"));
+		auc.setAuctiondetail(auctionDetail);
+				
 		MultipartFile file;
 		String filePath = "";
 		int cnt = 0;
@@ -157,13 +157,17 @@ public class AuctionController {
 		
 		for(int i=0;i<filelist.length;i++){
 			if(i==0){
-				auc.setAuctionImageMain(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				// auc.setAuctionImageMain(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				auc.setAuctionImageMain(filelist[i]);
 			}else if(i==1){
-				auc.setAuctionImageSub1(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				// auc.setAuctionImageSub1(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				auc.setAuctionImageSub1(filelist[i]);
 			}else if(i==2){
-				auc.setAuctionImageSub2(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				// auc.setAuctionImageSub2(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				auc.setAuctionImageSub2(filelist[i]);
 			}else{
-				auc.setAuctionImageSub3(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				// auc.setAuctionImageSub3(new String(filelist[i].getBytes("8859_1"),"utf-8"));
+				auc.setAuctionImageSub3(filelist[i]);
 			}
 		}
 		
@@ -215,6 +219,14 @@ public class AuctionController {
 		
 		System.out.println("제대로 리턴을 시킵니까?");
 		return map;
+	}
+	
+	@RequestMapping("/auctionDetail.do")
+	public String auctionDetail(Model model) {
+		
+		
+		
+		return "auction/auctionDetail";
 	}
 
 }

@@ -21,8 +21,6 @@
 	<select  id="selectSum" resultType="_int">
 	select sum(product_price) from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
 	</select>
-	
-	
 
 	<insert id="insertAsk" parameterType="productAsk">
 		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser})
@@ -33,5 +31,15 @@
 	<update id="updateProduct" parameterType="map">
 		update product set seq_ask_no = #{askNo} where seq_product_no = #{productNo}
 	</update>
+	
+	<select id="searchItems" resultMap="searchMap">
+		select * from product where product_name like '%'||#{searchKeyword}||'%' and product_onsale = 'Y'
+	</select>
+	<resultMap type="map" id="searchMap"></resultMap>
+	
+	<select id="searchItemsAjax" resultMap="searchAjaxMap">
+		select * from product where product_name like '%'||#{myData}||'%' and product_onsale = 'Y'
+	</select>
+	<resultMap type="map" id="searchAjaxMap"></resultMap>
 
 </mapper>

@@ -24,6 +24,11 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryDao.selectMacro();
 	}
 
+	@Override
+	public List<String> MainAuctionSelect() {
+		return categoryDao.MainAuctionSelect();
+	}
+
 	
 	
 	

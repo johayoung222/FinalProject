@@ -30,7 +30,7 @@
 <br />
 <section id="productList-container" class="productList-container">
 <nav class="navbar navbar-light bg-light">
-	<p>상품 리스트</p>
+	<span>판매 상품 리스트</span>
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/productListSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
   			<option value="product_name" ${type == "product_name"?"selected":"" }>상품명</option>
@@ -49,22 +49,15 @@
 			<th>제품코드</th>
 			<th>상품명</th>
 			<th>제품단가</th>
-			<th>경매여부</th>
-			<th>판매여부</th>
 			<th>제조사명</th>
 			<th>수량</th>
-			<th>이미지</th>
-			<th>이미지</th>
 			<th>마일리지</th>
 			<th>상품설명</th>
-			<th>이벤트여부</th>
 			<th>등록일자</th>
 			<th>추천상품여부</th>
 			<th>중고여부</th>
-			<th>소분류코드</th>
 			<th>대분류코드</th>
-			<th>판매자번호</th>
-			<th>경매번호</th>
+			<th>소분류코드</th>
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
@@ -78,22 +71,15 @@
 				<td>${p.SEQ_PRODUCT_NO}</td>
 				<td>${p.PRODUCT_NAME}</td>
 				<td>${p.PRODUCT_PRICE}</td>
-				<td>${p.PRODUCT_AUCTION}</td>
-				<td>${p.PRODUCT_ONSALE}</td>
 				<td>${p.PRODUCT_MANUFACTURER}</td>
 				<td>${p.PRODUCT_STOCK}</td>
-				<td>${p.PRODUCT_IMAGE}</td>
-				<td>${p.PRODUCT_REAL_IMAGE}</td>
 				<td>${p.PRODUCT_MILEGE}</td>
 				<td>${p.PRODUCT_DESCRIPTION}</td>
-				<td>${p.PRODUCT_EVENT}</td>
 				<td>${p.PRODUCT_ENROLL_DATE}</td>
 				<td>${p.PRODUCT_RECOMMEND}</td>
 				<td>${p.PRODUCT_KINDS}</td>
 				<td>${p.CATEGORY_MICRO}</td>
 				<td>${p.CATEGORY_MACRO}</td>
-				<td>${p.SELLER_NO}</td>
-				<td>${p.SEQ_AUCTION_NO}</td>				
 			</tr>			
 			</c:forEach>
 		</c:if>
@@ -106,6 +92,7 @@
 		String search = (String)request.getAttribute("search");
 		String view = (String)request.getAttribute("view");
 	%>
+	<%= com.kh.spring.common.util.Utils2.getPageBar(totalContent , cPage , numPerPage,type,search , view) %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
