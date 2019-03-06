@@ -552,7 +552,33 @@ public class AdminController {
 		return list;
 	}
 	
+	@RequestMapping(value="/admin/registCategory.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> registCategory(){
+		logger.debug("registCategory메소드 실행!!");
+		List<Map<String, Object>> list = adminService.registCategory();
+		logger.debug(list);
+		return list;
+	}
 	
+	@RequestMapping(value="/admin/auctionCategory.do", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> auctionCategory(){
+		logger.debug("auctionCategory메소드 실행!!");
+		List<Map<String, Object>> list = adminService.auctionCategory();
+		logger.debug(list);
+		return list;
+	}
+	
+	@RequestMapping(value="/admin/questionCategory.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> questionCategory(){
+		logger.debug("questionCategory메소드 실행!!");
+		List<Map<String, Object>> list = adminService.questionCategory();
+		logger.debug(list);
+		return list;
+		
+	}
 	
 
 	
