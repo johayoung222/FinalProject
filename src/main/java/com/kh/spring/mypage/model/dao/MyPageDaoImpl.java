@@ -19,4 +19,11 @@ public class MyPageDaoImpl implements MyPageDao {
 		return result;
 	}
 
+	@Override
+	public int updateemail(Member m) {
+		int result = 0;
+		result = SqlSession.update("mypage.updateemail",m);
+		return result;
+	}
+
 }

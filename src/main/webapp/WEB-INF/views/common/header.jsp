@@ -109,6 +109,7 @@ body {
 <body>
 	<div id="container">
 		<div id="box-link">
+	<script id="_waufcp">var _wau = _wau || []; _wau.push(["dynamic", "qf4dx0ul5a", "fcp", "ead1dc434343", "small"]);</script><script async src="//waust.at/d.js"></script>
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
 					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -247,12 +248,82 @@ body {
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<!--     좌우정렬위해 .mr-auto추가 -->
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item" id="nav-item1"><a class="nav-link"
-					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
+				<li class="nav-item" id="nav-item1">
+					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
-
-					</div></li>
+						<table>
+							<tr>
+								<th>
+									전자제품
+								</th>
+								<th>
+									패션의류
+								</th>
+								<th>
+									패션잡화
+								</th>
+								<th>
+									화장품/미용
+								</th>
+								<th>
+									스포츠/레저
+								</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'A' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'B' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=B&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
@@ -302,11 +373,4 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
-			$(document).ready(
-					function() {
-						var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-
-						$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
-
-					});
 		</script>

@@ -18,4 +18,11 @@ public class MyPageServiceImpl implements MyPageService {
 		result = myPageDao.updatephone(m);
 		return result;
 	}
+
+	@Override
+	public int updateemail(Member m) {
+		int result = 0;
+		result = myPageDao.updateemail(m);
+		return result;
+	}
 }

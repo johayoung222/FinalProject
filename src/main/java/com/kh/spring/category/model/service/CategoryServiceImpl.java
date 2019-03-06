@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.category.model.dao.CategoryDao;
+import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
 
 @Service
@@ -27,6 +28,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<String> MainAuctionSelect() {
 		return categoryDao.MainAuctionSelect();
+	}
+
+	@Override
+	public List<Product> selectByCategory(Map<String, String> map) {
+		return categoryDao.selectByCategory(map);
 	}
 
 	

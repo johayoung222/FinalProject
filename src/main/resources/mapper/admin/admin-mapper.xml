@@ -238,5 +238,36 @@
 	</select>
 	<resultMap type="map" id="paidProductCategoryMap"/>
 	
+	<!-- 판매 상품 비율 -->
+	<select id="registCategory" resultMap="registCategoryMap">
+		SELECT A.category_macro as macro, A.category_name as name, nvl(B.cnt, 0) as cnt
+		FROM category_macro A 
+ 		LEFT OUTER JOIN ( 
+    		SELECT category_macro, COUNT(*) AS cnt 
+      		FROM product
+      		GROUP BY category_macro
+  		) B on (A.category_macro = B.category_macro)
+	</select>
+	<resultMap type="map" id="registCategoryMap"></resultMap>
+	
+	<!-- 경매 상품 비율 -->
+	<select id="auctionCategory" resultMap="auctionCategoryMap">
+		select A.category_macro, A.category_name as name, nvl(B.cnt,0) as cnt
+		from  category_macro A
+		left outer join(
+			select auction_category_macro, count(*)as cnt
+			from auction
+			group by auction_category_macro
+		) B on(A.category_macro = B.auction_category_macro)
+	</select>
+	<resultMap type="map" id="auctionCategoryMap"></resultMap>
+	
+	<!-- 1:1질문 비율 -->
+	<select id="questionCategory" resultMap="questionCategoryMap">
+		select distinct question_mkinds as name, count(*) as cnt
+		from question
+		group by question_mkinds
+	</select>
+	<resultMap type="map" id="questionCategoryMap"></resultMap>
 	
 </mapper>
