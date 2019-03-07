@@ -29,6 +29,13 @@ public interface MemberDao {
 
 	int updatePhone(Member member);
 
+	String selectmemberId(String memberEmail);
+
+	int countmember(Member m);
+
+	int updatePwd(Member m);
+
+
 	
 
 }

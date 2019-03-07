@@ -32,21 +32,25 @@
 		update product set seq_ask_no = #{askNo} where seq_product_no = #{productNo}
 	</update>
 	
-	<select id="searchItems" resultMap="searchMap">
+	<select id="searchItems" resultType="product">
 		select * from product where product_name like '%'||#{searchKeyword}||'%' and product_onsale = 'Y'
 	</select>
-	<resultMap type="map" id="searchMap"></resultMap>
 	
 	<select id="searchItemsAjax" resultMap="searchAjaxMap">
 		select * from product where product_name like '%'||#{myData}||'%' and product_onsale = 'Y'
 	</select>
 	<resultMap type="map" id="searchAjaxMap"></resultMap>
-
 	
 	<select id="selectOneBasket" resultType="basket">
 		select * from basket where seq_member_no = #{seqMemberNo} and seq_product_no = #{seqProductNo}	
 	</select>
 	
-
+	<select id="selectAllRegist" resultType="regist">
+		select * from regist order by regist_date
+	</select>
+	
+	<select id="selectNew" resultType="product">
+		select * from product order by product_enroll_date
+	</select>
 
 </mapper>

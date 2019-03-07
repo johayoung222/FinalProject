@@ -396,11 +396,11 @@ function validateForm(){
 
 $(".statusY").on('click',function(){
 	$("#registStatus").val('Y');
-	alert($("#registStatus").val());
+	//alert($("#registStatus").val());
 });
 $(".statusN").on('click',function(){
 	$("#registStatus").val('N');
-	alert($("#registStatus").val());
+	//alert($("#registStatus").val());
 });
 </script>
 

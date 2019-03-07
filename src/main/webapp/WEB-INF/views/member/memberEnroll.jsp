@@ -883,7 +883,7 @@ $("#all").on('click', function(){
        
    		     <fb:login-button id="status" scope="public_profile,email" data-size="large"  data-button-type="login_with"
                data-show-faces="true" data-auto-logout-link="false" data-use-continue-as="flase" onlogin="checkLoginState();"
-               style="padding-left: 8%; width:81%; height:9%;">
+               style="width:85%; height:9%;">
                  FaceBook으로 시작
               </fb:login-button>
  			       </li>

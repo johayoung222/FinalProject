@@ -37,7 +37,7 @@ body {
 #search_ {
 	width: 400px;
 	height: 50px;
-	/* margin-left: 200px; */
+    margin-left: 150px; 
 	border: 2px solid blue;
 }
 
@@ -67,7 +67,8 @@ body {
 #container {
 	padding-left: 55%;
 	border: 0px;
-	margin-right:100px;
+	margin-right:50px;
+ 
 }
 
 #box-link {
@@ -124,6 +125,7 @@ body {
 						href="${pageContext.request.contextPath }/item/basket.do">장바구니</a>
 				</div>
 			</c:if>
+		
 			<div class="box-link1">
 				<c:if test="${memberLoggedIn == null }">
 					<a class="item-link"
@@ -176,7 +178,8 @@ body {
 
 		</div>
 	</div>
-	<style>
+
+<style>
 	#searchList{
 		width: 400px;
 		position: absolute;
@@ -193,9 +196,15 @@ body {
 		background-color: lightgray;
 		cursor: pointer;
 	}
+	
+	form{
+		text-align:center;
+	
+	}
+
 	</style>
 	<div id="header-container">
-		<a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
+		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>
@@ -438,8 +447,8 @@ body {
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">새로 등록된 상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"

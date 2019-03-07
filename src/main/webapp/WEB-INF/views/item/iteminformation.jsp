@@ -45,9 +45,11 @@
 	color:white;
 	width:150px;
 	height:50px;
+	font-weight:bold;
 }
 
 #pur:hover{
+    font-weight:bold;
 	border:1px solid white;
 	background:indigo;
 	color:white;
@@ -62,9 +64,10 @@
 	color:white;
 	width:150px;
 	height:50px;
-	
+	font-weight:bold;
 }
 #insertBasket:hover{
+   font-weight:bold;
     font-family: 'Nanum Gothic', sans-serif;
     border:0px;
 	background: orange;
@@ -285,7 +288,7 @@ function itemAsk(){
 		alert("내용을 입력해주세요.");
 		return;
 	}
-<<<<<<< HEAD
+
 	function itemAsk(){
 		
 		if($("#askContent").val().trim().length == 0){
@@ -316,34 +319,10 @@ function itemAsk(){
 			},
 			error: function(){
 				console.log("ajax요청 에러!");
-=======
-	
-	var asker = ${member.seqMemberNo};
-	var param = {"askContent":$("#askContent").val(),
-				"asker":asker,
-				"productNo":${product.seqProductNo}};
-	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/item/ask",
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		dataType: "json",
-		data: param,
-		type: "post",
-		success: function(data){
-			console.log(data);
-			
-			if(data != null){
-			var html = "<span id='askLeft'>"+data.askContent+"</span><span id='askRight'> 작성자 :"+data.asker+"</span>";
-			$("#askContent").val("");
-			
-			$("#askList").html(html).css("text-align","left");
->>>>>>> 079d7d328e9f5c2bea1e46b710f3600522c4afbf
 			}
-		},
-		error: function(){
-			console.log("ajax요청 에러!");
-		}
-	});
+		});
+
+
 }
 
 		
@@ -494,7 +473,6 @@ function itemAsk(){
 			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
 			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
 		</tr>
-		
 	</table>
 	
    </div>	
