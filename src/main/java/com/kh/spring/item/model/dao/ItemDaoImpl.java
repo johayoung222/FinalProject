@@ -60,6 +60,16 @@ public class ItemDaoImpl implements ItemDao {
 		return sqlSession.selectList("basket.selectNew");
 	}
 
+	@Override
+	public List<Product> selectNowProduct(Map<String, String> map) {
+		return sqlSession.selectList("basket.selectNowProduct",map);
+	}
+
+	@Override
+	public List<ProductAsk> selectAskAll(int productNo) {
+		return sqlSession.selectList("basket.selectAskAll",productNo);
+	}
+
 	
 
 	

@@ -4,18 +4,12 @@
 .footer{
 	height: 180px;
 }
-#container{
-	display: flex;
-	justify-content: space-around;
-	height: 50px;
-	padding-top: 12px;
-	padding-left: 10px;
-}
 #footer-container{
-display: flex;
+	display: flex;
     justify-content: space-around;
     height: 50px;
     padding-top: 12px;
+    padding-left: 10px;
 }
 #footer-link div{
 	width: 150px;
