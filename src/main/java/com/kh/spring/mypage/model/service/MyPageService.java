@@ -5,4 +5,6 @@ import com.kh.spring.member.model.vo.Member;
 public interface MyPageService {
 
 	int updatephone(Member m);
+
+	int updateemail(Member m);
 }

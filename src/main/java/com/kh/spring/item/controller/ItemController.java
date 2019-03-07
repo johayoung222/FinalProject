@@ -67,9 +67,13 @@ public class ItemController {
 		map.put("productNo",String.valueOf(productNo));
 		
 		basketService.updateProduct(map);
+		Member m = basketService.selectJoinMember(asker);
+		
+		map.put("asker",m.getMemberId());
+		map.put("askContent",askContent);
 		
 		response.setContentType("application/json;charset=UTF-8"); 
-		new Gson().toJson(askContent, response.getWriter());
+		new Gson().toJson(map, response.getWriter());
 	}
 	
 	@RequestMapping("/item/search")

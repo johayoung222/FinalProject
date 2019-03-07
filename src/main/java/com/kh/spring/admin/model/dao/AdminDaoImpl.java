@@ -261,6 +261,18 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> paidProductCategory() {
 		return sqlSession.selectList("admin.paidProductCategory");
 	}
+	@Override
+	public List<Map<String, Object>> registCategory() {
+		return sqlSession.selectList("admin.registCategory");
+	}
+	@Override
+	public List<Map<String, Object>> auctionCategory() {
+		return sqlSession.selectList("admin.auctionCategory");
+	}
+	@Override
+	public List<Map<String, Object>> questionCategory() {
+		return sqlSession.selectList("admin.questionCategory");
+	}
 	
 	
 	

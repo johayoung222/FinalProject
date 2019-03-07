@@ -106,7 +106,7 @@
 <script>
 /* 아이디/비밀번호 찾기 팝업 스크립트 */
 function findAccount(){
-	open("${pageContext.request.contextPath}/member/findAccount","_blank","width=500,height=400,left=200,top=200");
+	open("${pageContext.request.contextPath}/member/findAccount","_blank","width=500,height=450,left=500,top=200");
 	
 }
 </script>

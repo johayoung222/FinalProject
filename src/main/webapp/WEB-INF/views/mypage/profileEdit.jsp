@@ -30,6 +30,20 @@
 #info4_{
     margin-left: 7%;
 }
+/* 인증완료후input&버튼 영역 */
+.profedit-form-input {
+    margin-bottom: 34px;
+    width: 295px;
+}
+/* 인증하기버튼 */
+.btn-outline-success{
+	border:1px solid;
+	border-radius: 5px;
+}
+/* 인증완료버튼 */
+.btn-success{
+	border-radius: 5px;
+}
 </style>
 <!-- 폰 인증 -->
 <form action="${pageContext.request.contextPath}/mypage/smscheck.do"
@@ -38,10 +52,15 @@
 			<!-- <input type="hidden" name="memberPhone" value=""/> -->
 			<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
 </form>
-<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
+<form action="${pageContext.request.contextPath}/mypage/emailcheck.do"
+	  			 method="get"
+	  			 name="checkMailCertifiedFrm">
+			<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+</form>
+<%-- <form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
 		<input type="hidden" name="memberPhone" value="" />
 		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
-</form>
+</form> --%>
 <div class="mypage-container" >
 	<div class="real-content-container" style="margin-left:30%;" >
 		<div class="mp-container" >
@@ -54,23 +73,26 @@
 				<div class="profedit-body-title">기본정보</div>
 						<div class="profedit-body">
 							<div class="form-group" id="info_">
+								<c:if test="${memberLoggedIn.memberPhone eq null}">
 									<label for="tel" class="profedit-form-label">전화번호</label>
-									
-									<c:if test="${memberLoggedIn.memberPhone eq null}">
-										<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
-									</c:if>
-									<c:if test="${memberLoggedIn.memberPhone != null}">
-										<input type="text" class="form-control profedit-form-input ng-pristine ng-valid" value="${memberLoggedIn.memberPhone}" readonly/>
-										<button class="btn btn-success" disabled>인증완료</button>
-									</c:if>
-								
-									<input type="tel" name="tel" class="form-control profedit-form-input ng-pristine ng-valid" id="memberPhone" name="memberPhone" />
-									<input type="button" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();" style="background-color:#7151FC; color:white; border:1px solid white; width:75px; height:30px; font-size:13px;">
-									<input type="hidden" name="target" id="result" value="0"/>
+									<input type="button" class="btn btn-outline-success" name="smsclear" id="smsclear" value="인증하기" onclick="sendSms();">
+								</c:if>
+								<c:if test="${memberLoggedIn.memberPhone ne null}">
+									<label for="tel" class="profedit-form-label">전화번호</label>
+									<input type="text" class="form-control profedit-form-input ng-pristine ng-valid" value="${memberLoggedIn.memberPhone}" readonly/>
+									<button class="btn btn-success" disabled>인증완료</button>
+								</c:if>
 							</div>
 							<div class="form-group" id="info2_">	 
-								<label for="email" class="profedit-form-label">이메일</label>
-								<input type="email" class="form-control profedit-form-input ng-pristine ng-valid" id="email" />
+								<c:if test="${memberLoggedIn.memberEmail eq null}">
+									<label for="email" class="profedit-form-label">이메일</label>
+									<input type="button" class="btn btn-outline-success" name="mailclear" id="mailclear" value="인증하기" onclick="sendMail();">
+								</c:if>
+								<c:if test="${memberLoggedIn.memberEmail ne null}">
+									<label for="email" class="profedit-form-label">이메일</label>
+									<input type="text" class="form-control profedit-form-input ng-pristine ng-valid" value="${memberLoggedIn.memberEmail}" readonly/>
+									<button class="btn btn-success" disabled>인증완료</button>
+								</c:if>
 							</div>
 						</div>
 			</div>
@@ -109,24 +131,17 @@ $(function(){
 });
 
 function sendSms(){
-	  /* var memberPhone = $("#memberPhone").val();
-	  if(memberPhone.trim().length == 0){
-		  alert("전화번호를 입력하세요.");
-		  return false;
-	  } */
-	  //팝업창을 target으로 폼전송
 		var target = "smscheck";
-		//첫번째 인자 url은 생략, form의 action값이 이를 대신한다.
-		var popup = open("", target, "left=300px, top=100px, height=135px, width=470px");
-		//폼의 대상을 작성한 popup을 가리키게 한다. 
+		var popup = open("", target, "left=300px, top=100px, height=150px, width=470px");
 		checkSmsCertifiedFrm.target = target;
-		
-		//console.log(memberEmail);
-		
-		//checkSmsCertifiedFrm.memberPhone.value = memberPhone;
-		//updatephone.memberPhone.value=memberPhone;
 		checkSmsCertifiedFrm.submit();		
 }
-$("")
+function sendMail(){
+		var target = "emailcheck";
+		var popup = open("", target, "left=300px, top=100px, height=150px, width=470px");
+		checkMailCertifiedFrm.target = target;
+		checkMailCertifiedFrm.submit();		
+}
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

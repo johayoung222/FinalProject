@@ -112,6 +112,12 @@ public interface AdminDao {
 
 	List<Map<String, Object>> paidProductCategory();
 
+	List<Map<String, Object>> registCategory();
+
+	List<Map<String, Object>> auctionCategory();
+
+	List<Map<String, Object>> questionCategory();
+
 	
 
 	
