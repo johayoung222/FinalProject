@@ -67,7 +67,8 @@ body {
 #container {
 	padding-left: 55%;
 	border: 0px;
-	margin-right:50px;
+	margin-left:500px;
+	
  
 }
 
