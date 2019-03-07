@@ -62,16 +62,16 @@
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 20%;
+	width: 250px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
-	margin-left: 10px;
+
 }
 
 #box2 {
 	display: inline-block;
 	vertical-align: top;
-	width: 20%;
+	width: 230px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
@@ -80,10 +80,11 @@
 #box3 {
 	display: inline-block;
 	vertical-align: top;
-	width: 25%;
+	width: 200px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
+	
 }
 
 #box4 {
@@ -155,6 +156,13 @@ a {
     margin-top: 2px;
     text-decoration: line-through;
 }
+#infoBox{
+	width: 900px;
+	text-align: center;
+	transform: translate(5%,0%);
+}
+
+
 
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -324,7 +332,7 @@ a {
 	</h4>
 </div>
 
-<div style="border:0	">
+<div id="infoBox" style="border:0">
 	<div id="box1" style="text-align: center">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
@@ -348,9 +356,6 @@ a {
 			<h6 style="text-align: center">평일: 10시~19시</h6>
 			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
 		</div>
-	</div>
-	<div id="box5">
-	<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="120px">
 	</div>
 </div>
 
