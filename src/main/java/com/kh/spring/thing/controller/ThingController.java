@@ -52,14 +52,12 @@ public class ThingController {
 	}
 	
 	@RequestMapping("/thing/sell.do")
-	public ModelAndView sell(ModelAndView mav, Regist regist, @RequestParam(name="upFile",required=false) MultipartFile [] upFiles, HttpServletRequest req) {
+	public ModelAndView sell(ModelAndView mav, Regist regist, HttpServletRequest req,
+			@RequestParam(name="upFile",required=false) MultipartFile [] upFiles) {
 		for(int i = 0 ; i<upFiles.length ; i++) {			
 			logger.debug("fileName="+upFiles[i].getOriginalFilename());
 			logger.debug("size="+upFiles[i].getSize());
 		}
-		
-		
-		
 		
 		try{
 			//1. 파일업로드
@@ -102,7 +100,6 @@ public class ThingController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}
 			}
 			regist.setRegistImage(originalName);
@@ -123,9 +120,6 @@ public class ThingController {
 				msg= "게시물 등록 실패";
 			}
 			
-			
-			
-			
 			mav.addObject("loc", loc);
 			mav.addObject("msg", msg);
 			mav.setViewName("common/msg");
@@ -133,8 +127,6 @@ public class ThingController {
 			logger.error("게시물 등록 에러",e);
 			throw new BoardException("게시물 등록 에러",e);
 		}
-		
-		
 	
 	return mav;
 		
