@@ -9,468 +9,77 @@
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
 <style>
-.table-bordered{
-	margin-left:42px
+.content-container{
+	height: 100%;
 }
-#item1{
-	width:20%;
-	height:100px;
+.productOne{
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 31px;
 }
-.font_{
-	text-align:center;
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
+.noProduct{
+	text-align: center;
+	font-size: 30px;
+	margin-top: 20%;
 }
 </style>
-<div>
-	<h2>카테고리 별 상품들 두는 곳</h2>
-</div>
-<hr>
-<div>
-	<h2>인기순, 최신순, 낮은 가격순, 높은 가격순</h2>
-</div>
-<hr>
-<div>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item2" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item3" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table><table class="table table-bordered" id="item4" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	
-</div>
+<c:forEach items="${allCategory }" var="ct">
+	<c:if test="${ct.CATEGORY_MACRO == aiKey.caKey }">
+		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
+		<c:if test="${ct.CATEGORY_MICRO == aiKey.ciKey }">
+			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
+		</c:if>
+	</c:if>
+</c:forEach>
 
-<div>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item2" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item3" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table><table class="table table-bordered" id="item4" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
+<div class="content-container">
+	<div class="category-box">
+	<c:if test="${aiKey != null }">
+		<span>${nowCategory }</span>-
+		<span>${nowCategory2 }</span>
+	</c:if>
+	<c:if test="${brandNew != null }">
+		<h2>새로 등록된 상품 리스트</h2>
+	</c:if>
+	<br />
+	</div>
+	<c:if test="${empty cpList }">
+	<div class="noProduct">새로 등록된 상품이 없습니다.</div>
+	</c:if>
 	
+	<div class="product-container">
+		<c:if test="${not empty cpList }">
+		<c:forEach items="${cpList }" var="p" varStatus="vs">
+		<div class="productOne" id="${p.seqProductNo }">
+			<div class="pImg">
+				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+			</div>
+			<div class="pDesc">
+				<span>${p.productName }</span><br />
+				<span>${p.productPrice } 원</span>
+			</div>
+		</div>
+		<c:if test="${vs.count%3 == 0 }"></c:if>
+		</c:forEach>
+	</c:if>
+	</div>
 </div>
+<script>
+$(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+</script>
 
-<div>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item2" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item3" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table><table class="table table-bordered" id="item4" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	
-</div>
-
-<div>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item2" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item3" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table><table class="table table-bordered" id="item4" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			[새상품]애플 데스크탑
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="#"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	
-</div>
 
 
 

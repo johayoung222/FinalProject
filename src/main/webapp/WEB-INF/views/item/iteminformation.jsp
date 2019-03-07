@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
@@ -44,10 +45,32 @@
 	color:white;
 	width:150px;
 	height:50px;
+	font-weight:bold;
 }
+
+#pur:hover{
+    font-weight:bold;
+	border:1px solid white;
+	background:indigo;
+	color:white;
+	width:150px;
+	height:50px;
+}
+
 #insertBasket{
-    border:1px solid white;
+    font-family: 'Nanum Gothic', sans-serif;
+    border:0px;
 	background:red;
+	color:white;
+	width:150px;
+	height:50px;
+	font-weight:bold;
+}
+#insertBasket:hover{
+   font-weight:bold;
+    font-family: 'Nanum Gothic', sans-serif;
+    border:0px;
+	background: orange;
 	color:white;
 	width:150px;
 	height:50px;
@@ -90,7 +113,7 @@ form {
 				<img src="${pageContext.request.contextPath }/resources/images/galaxy10.PNG" alt="${product.productName } 이미지" width="100%" height="80%" >
 			</td>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/images/Getit2.PNG" id="float1">
+				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
 				<font id="fon">겟잇</font>
 				<font>1등 중고거래 컨시어지 서비스</font>
 			 	<table border="0" style="height:300px; width:400px;">
@@ -118,13 +141,17 @@ form {
 			 		<tr align="center" >
 			 			<td colspan="2">
 			 			
-                        	
-             <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
+                <%--         	
+               <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="">
                     <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
 	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
 	                <input type="submit" id="insertBasket" value="장바구니"/>
-                </form>	 
-			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
+                </form> --%>
+                
+                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
+	                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+	                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
+			 		     <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
 			 			</td>
 			 		</tr>
 			 	</table>
@@ -147,17 +174,20 @@ form {
 	height:200px;
 	color:gray;
 }
-
-
+.product-ask{
+	border: 1px solid black;
+	width: 800px;
+	margin-left: 10%;
+}
 .ask-content{
-	
+	border: 1px solid black;
 	text-align: center;
 }
 .ask-comment{
-	border: 1px solid black;
 	height: 100px;
 	text-align: center;
 	display: none;
+	margin-top: 30px;
 }
 
 #info_{
@@ -170,8 +200,6 @@ form {
 	background-color:#7151FC;
 	width:150px;
 	height:50px;
-	margin-right:10.3%;
-
 }
 .table-bordered{
 	margin-left:2%;
@@ -179,7 +207,13 @@ form {
 #fontt	{
 font-weight:bold;
 font-size:20px;
-}	
+}
+#askLeft{
+	float: left;
+}
+#askRight{
+	float: right;
+}
 </style>
 <div class="productInfo-content">
 
@@ -228,25 +262,33 @@ font-size:20px;
 	</div>
 	
 	<div class="product-ask">
-		<div class="ask-header" style="font-weight:bold;font-size:20px; margin-left:7%;">
+		<div class="ask-header" style="font-weight:bold;font-size:20px;">
 			<span style="margin-left:3%;">상품문의</span>
 			<button onclick="ask();" id="ask_">문의하기</button>
 		</div>
 		<div class="ask-comment">
-			<textarea rows="3" cols="100" id="askContent"></textarea>
+			<textarea rows="3" cols="80" id="askContent"></textarea>
 			<button onclick="itemAsk();">작성</button>
 		</div>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
+		<hr style="border:2px solid gray;">
 		<div class="ask-content" id="askList" >
 			<span >문의하신 내역이 없습니다.</span>
 		</div>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
+		<hr style="border:2px solid gray;">
 	</div>
 	
-	<script>
-	function ask(){
-		$(".ask-comment").show();
+<script>
+function ask(){
+	$(".ask-comment").show();
+}
+	
+function itemAsk(){
+	
+	if($("#askContent").val().trim().length == 0){
+		alert("내용을 입력해주세요.");
+		return;
 	}
+
 	function itemAsk(){
 		
 		if($("#askContent").val().trim().length == 0){
@@ -254,7 +296,7 @@ font-size:20px;
 			return;
 		}
 		
-		var asker = ${member.seqMemberNo};
+		var asker = ${member.seqMemberNo}; 
 		var param = {"askContent":$("#askContent").val(),
 					"asker":asker,
 					"productNo":${product.seqProductNo}};
@@ -279,10 +321,46 @@ font-size:20px;
 				console.log("ajax요청 에러!");
 			}
 		});
-	}
-	}
+
+
 }
 
+		
+	
+	</script>
+	<script>
+
+	
+	function insertBasket(){
+		 var seqMemberNo = $('input[name=seqMemberNo]').val();
+		 var seqProductNo = $('input[name=seqProductNo]').val();
+		 
+		 
+	
+		 
+	 	$.ajax({
+			url: "${pageContext.request.contextPath}/item/checkBasket.do" ,
+			method: "post" ,
+			data: {seqMemberNo: seqMemberNo, seqProductNo:seqProductNo},
+			success: function(data) {
+				
+				if(data.basketisUsable == true) {
+					alert("장바구니에 담겼습니다!");			
+				}else{
+					alert("장바구니에 이미 있어요!!");
+					
+				} 
+			
+			} ,
+			error: function() {
+				console.log("ajax요청 에러!");
+			}
+		});
+		 
+		
+		
+		
+	}
 	
 	
 	</script>
@@ -395,14 +473,10 @@ font-size:20px;
 			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
 			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
 		</tr>
-		
 	</table>
 	
-</div>
-	
-	
-</div>
-
+   </div>	
+  </div>
 </div>	
 	
 

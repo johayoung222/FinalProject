@@ -8,6 +8,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="안녕 스프링!" name="pageTitle" />
 </jsp:include>
+<c:set scope="application" var="allCategory" value="${categoryList }" />
+
 <style>
 .indexphoto {
 	width: 100%;
@@ -60,16 +62,16 @@
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 20%;
+	width: 250px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
-	margin-left: 10px;
+
 }
 
 #box2 {
 	display: inline-block;
 	vertical-align: top;
-	width: 20%;
+	width: 230px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
@@ -78,14 +80,21 @@
 #box3 {
 	display: inline-block;
 	vertical-align: top;
-	width: 25%;
+	width: 200px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
+	
 }
 
 #box4 {
 	padding-top: 0px;
+}
+#box5{
+	float:right; 
+	position:relative; 
+	bottom:130px; 
+	right:50px;"
 }
 
 .font2_ {
@@ -147,6 +156,13 @@ a {
     margin-top: 2px;
     text-decoration: line-through;
 }
+#infoBox{
+	width: 900px;
+	text-align: center;
+	transform: translate(5%,0%);
+}
+
+
 
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -279,20 +295,20 @@ a {
 <c:if test="${not empty auctionList }">
 	<c:forEach items="${auctionList }" var="a">
 			<div class="hm-good">
-				<a class="gdidx-good-info"
-					href="#">
+				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
-						<img src="https://d103rzmewwjpod.cloudfront.net/t_w240_h240_fill_jpg/zfwagui2bqoviims7ldr.jpg">
-						<div class="gdidx-on-hold ng-hide">다른 사용자가 구매중 , 경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide">내가 구매중 , 내가 경매에 참여중</div>
+						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
+						<div class="gdidx-on-hold ng-hide blinkEle">다른 사용자가 구매중 , 경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle">내가 구매중 , 내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
 					<div class="gdidx-name ng-binding">${a.AUCTION_TITLE }</div>
 					<div class="gdidx-prices-wrapper">
-						<div class="gdidx-discount-rate ng-binding ng-hide">0<span>%</span></div>
 						<div class="gdidx-price ng-binding">
-							154,800<span class="gdidx-price-unit">원</span>
+							<fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>
+							
+							<span class="gdidx-price-unit">원</span>
 							<div class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
 						</div>
 						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price">152,100원</div>
@@ -316,7 +332,7 @@ a {
 	</h4>
 </div>
 
-<div>
+<div id="infoBox" style="border:0">
 	<div id="box1" style="text-align: center">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
@@ -341,8 +357,13 @@ a {
 			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
 		</div>
 	</div>
-
 </div>
 
 <hr>
+
+<script>
+setInterval(function(){
+	  $(".blinkEle").toggle();
+	}, 500);
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

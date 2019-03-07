@@ -3,6 +3,7 @@ package com.kh.spring.category.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
 
 public interface CategoryService {
@@ -12,5 +13,7 @@ public interface CategoryService {
 	List<Map<String, String>> selectMacro();
 
 	List<String> MainAuctionSelect();
+
+	List<Product> selectByCategory(Map<String, String> map);
 
 }

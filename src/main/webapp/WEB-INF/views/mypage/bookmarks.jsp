@@ -12,12 +12,13 @@
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
-			<div class="mp-title">
+			<div class="mp"  style="font-size:19px; font-weight:bold;">
 			찜한 상품
 			</div>
-			<div class="mypage-body">
+			<hr style="border-bottom:1px solid gray; width:143%;">
+			<div class="mypage" style="width:130%;">
 				<c:if test="${empty list }">
-					<div class="mypage-content-absent">${msg }</div>
+					<div class="mypage-content">${msg }</div>
 				</c:if>
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="o">

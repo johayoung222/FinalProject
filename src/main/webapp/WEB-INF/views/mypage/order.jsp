@@ -13,17 +13,18 @@
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
-			<div class="mp-title">
+			<div class="mp" style="font-size:19px; font-weight:bold;">
 			판매내역
 			</div>
-			<div class="mp-submenu">
+			<div class="mp" style="padding-top:10px;">
 				<a class="mp-submenu-item ${menuSel =='normal'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=normal">셀잇판매</a>
 				<a class="mp-submenu-item ${menuSel =='c2c'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=c2c">직접판매</a>
 				<a class="mp-submenu-item ${menuSel =='temporarily_saved'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=temporarily_saved">임시저장</a>
 			</div>
-			<div class="mypage-body">
+			<hr style="border-bottom:1px solid gray; width:143%;">
+			<div class="mypage">
 				<c:if test="${empty list }">
-					<div class="mypage-content-absent">${msg }</div>
+					<div class="mypage-content">${msg }</div>
 				</c:if>
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="o">

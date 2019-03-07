@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Nanum+Pen+Script" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/basketheader.jsp">
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <%-- <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>--%>
@@ -41,8 +41,15 @@ dispaly:none;
 }
 form{
 width:20px;
-height:18px;
+height:5px;
+
 }
+#gotoItem{
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
@@ -70,13 +77,14 @@ height:18px;
 			<td colspan="8">장바구니에 물품이 없습니다.</td>
 		</tr>
 	</c:if>
+	
 		
 		<c:if test="${not empty list }">
 			<c:forEach items="${list}" var="p">
 			<tr>
 				<%-- <td id="basketNo">${p.SEQ_BASKET_NO}</td>	 --%>		
-				<td class="prada">${p.SEQ_PRODUCT_NO}</td>	
-				<td class="prada">${p.PRODUCT_NAME}</td>	
+				<td class="prada">${p.SEQ_PRODUCT_NO}</td>   
+				<td class="prada"><a id="gotoItem" href='${pageContext.request.contextPath}/item/iteminformation/${p.SEQ_PRODUCT_NO}'>${p.PRODUCT_NAME}</a></td>	
 				<td class="prada">${p.PRODUCT_DESCRIPTION}</td>		
 				<td class="prada">${p.PRODUCT_PRICE}</td>	
 				<td class="prada">
@@ -95,6 +103,7 @@ height:18px;
   
   </tbody>
 </table>
+<hr/>
          
 				<div class="buy-container">
 		 	      <h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
@@ -114,11 +123,6 @@ function deleteBasket(no,memberNo){
    
 
 }
-
-
-
-
-
 </script>
 
 

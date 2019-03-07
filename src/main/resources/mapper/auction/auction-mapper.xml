@@ -17,4 +17,30 @@
 		SELECT * FROM (SELECT * FROM auction ORDER BY auction_no DESC) WHERE ROWNUM <![CDATA[ < ]]> 5
 	</select>
 	<resultMap type="map" id="selectAuctionList"></resultMap>
+	
+	<select id="selectAuction" resultMap="selectAuction">
+		select * from auction where auction_no = #{auctionNo}
+	</select>
+	<resultMap type="map" id="selectAuction"></resultMap>
+	
+	<select id="selectCtgMacroName" resultType="string">
+		select category_name from category_macro where category_macro = #{category_macro}
+	</select>
+	
+	<select id="selectCtgMicroName" resultType="string">
+		select category_name from category_micro where category_micro = #{MICRO} and category_macro = #{MACRO}
+	</select>
+	
+	<select id="selectAuctionHistory" resultMap="selectAuctionHistory">
+		select * from (SELECT * FROM auction_history ORDER BY price desc) where seq_auction_no = #{auction_no} and rownum = 1
+	</select>
+	<resultMap type="map" id="selectAuctionHistory"></resultMap>
+	
+	<select id="selectMyHistory" resultMap="selectMyHistory">
+		SELECT * FROM (SELECT * FROM auction_history ORDER BY price desc) WHERE rownum = 1 and member_no = #{MemberNo} and seq_auction_no = #{AuctionNo}
+	</select>
+	<resultMap type="map" id="selectMyHistory"></resultMap>
+	<insert id="auctionHistoryInsert">
+		insert into auction_history values(seq_auction_history_no.nextval , #{memberId} , #{memberNo} , #{price} , sysdate , #{AuctionNo} , default)
+	</insert>
 </mapper>

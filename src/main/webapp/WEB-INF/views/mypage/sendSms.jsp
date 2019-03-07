@@ -17,27 +17,48 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
     crossorigin="anonymous"></script>
-
+<style>
+#emailcertified-container{
+	padding-left:8%;
+	padding-top:5%;
+}
+#updatephone{
+	padding-left:8%;
+}
+#check{
+margin-bottom: 6px;
+}
+#button_{
+width: 110px;
+    padding: 0;
+    height: 32px;
+    margin-bottom: 6px;
+}
+</style>
 </head>
 
 <body>
 	<form action="${pageContext.request.contextPath}/mypage/sendSms.do"name="c">
 		<div id="emailcertified-container">
-			<label for="memberPhone">전화번호 : </label>
+			<label for="memberPhone" style="color:lightgray;">전화번호 : </label>
 			<input type="text" name="memberPhone" id="memberPhone"value="${memberPhone}" />
 			<input type="hidden" name="memberId" value="${m.memberId}" />
 			<!-- <input type="submit" value="인증번호요청" /> -->
-			<button onclick="c();">인증번호요청</button>
+			<button   onclick="c();" id="button_" class="btn btn-outline-success">인증번호요청</button>
 		</div>
 	</form>
 	<c:if test="${memberPhone ne null}">
 		<form action="${pageContext.request.contextPath}/mypage/updatephone.do" name="updatephone" id="updatephone" >
-				<label for="certified">인증번호 : </label>
+				<label for="certified" style="color:lightgray;">인증번호 : </label>
 				<input type="text"name="certified" id="certified"class="certified"/>
 				<input type="hidden" name="memberPhone" id="memberPhone" value="${memberPhone}" />
 				<input type="hidden" name="memberId" id="memberId" value="${memberId}" />
+				<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>
+				
 		</form>
-				<button id="check" onclick="check();">확인</button>
+				<div style="float:right;">
+				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="100px" height="30px">
+				</div>
 	</c:if>
 </body>
 <script>

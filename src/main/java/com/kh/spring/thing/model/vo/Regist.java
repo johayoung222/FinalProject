@@ -14,13 +14,21 @@ public class Regist {
 	private String registDescription;
 	private String registKinds;
 	private Date registDate;
+	private String registStatus;
+	
+	public String getRegistStatus() {
+		return registStatus;
+	}
+	public void setRegistStatus(String registStatus) {
+		this.registStatus = registStatus;
+	}
 	public Regist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Regist(int seqMemberNo, int seqRegistNo, String registName, int registPrice, String registAuction,
 			String registImage, String registRealImage, int registAmount, String registDescription, String registKinds,
-			Date registDate) {
+			Date registDate, String registStatus) {
 		super();
 		this.seqMemberNo = seqMemberNo;
 		this.seqRegistNo = seqRegistNo;
@@ -33,6 +41,7 @@ public class Regist {
 		this.registDescription = registDescription;
 		this.registKinds = registKinds;
 		this.registDate = registDate;
+		this.registStatus =registStatus;
 	}
 	public int getSeqMemberNo() {
 		return seqMemberNo;
@@ -105,7 +114,7 @@ public class Regist {
 		return "[seqMemberNo=" + seqMemberNo + ", seqRegistNo=" + seqRegistNo + ", registName=" + registName
 				+ ", registPrice=" + registPrice + ", registAuction=" + registAuction + ", registImage=" + registImage
 				+ ", registRealImage=" + registRealImage + ", registAmount=" + registAmount + ", registDescription="
-				+ registDescription + ", registKinds=" + registKinds + ", registDate=" + registDate + "]";
+				+ registDescription + ", registKinds=" + registKinds + ", registDate=" + registDate +", registStatus"+registStatus+ "]";
 	}
 	
 	

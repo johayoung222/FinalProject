@@ -37,12 +37,14 @@ body {
 #search_ {
 	width: 400px;
 	height: 50px;
-	/* margin-left: 200px; */
+    margin-left: 150px; 
 	border: 2px solid blue;
 }
 
 #search2 {
 	padding: 10px;
+	position:relative;
+	right:50px;
 }
 
 #nav-item1 {
@@ -63,8 +65,10 @@ body {
 }
 
 #container {
-	padding-left: 45%;
+	padding-left: 55%;
 	border: 0px;
+	margin-right:50px;
+ 
 }
 
 #box-link {
@@ -121,6 +125,7 @@ body {
 						href="${pageContext.request.contextPath }/item/basket.do">장바구니</a>
 				</div>
 			</c:if>
+		
 			<div class="box-link1">
 				<c:if test="${memberLoggedIn == null }">
 					<a class="item-link"
@@ -173,7 +178,8 @@ body {
 
 		</div>
 	</div>
-	<style>
+
+<style>
 	#searchList{
 		width: 400px;
 		position: absolute;
@@ -190,9 +196,15 @@ body {
 		background-color: lightgray;
 		cursor: pointer;
 	}
+	
+	form{
+		text-align:center;
+	
+	}
+
 	</style>
 	<div id="header-container">
-		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
+		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>
@@ -232,6 +244,9 @@ body {
 			}
 		});
 	});
+	
+
+	
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
@@ -247,17 +262,193 @@ body {
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<!--     좌우정렬위해 .mr-auto추가 -->
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item" id="nav-item1"><a class="nav-link"
-					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
+				<li class="nav-item" id="nav-item1">
+					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
-
-					</div></li>
+					<style>
+					#cTable tr:first-of-type th{
+						text-align: center;
+					}
+					#cTable tr:not(:first-of-type) td ul{
+						list-style: none;
+						padding-left: 10px;
+						padding-right: 10px;
+					}
+					</style>
+						<table id="cTable" border="1">
+							<tr>
+								<th>
+									전자제품
+								</th>
+								<th>
+									패션의류
+								</th>
+								<th>
+									패션잡화
+								</th>
+								<th>
+									화장품/미용
+								</th>
+								<th>
+									스포츠/레저
+								</th>
+								<th>
+									유아동/출산
+								</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'A' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'B' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=B&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=C&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=D&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=E&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'F' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+									</c:forEach>
+								</td>
+							</tr>
+							<tr>
+								<th>완구/문구/취미</th>
+								<th>해외명품</th>
+								<th>도서/음반/DVD</th>
+								<th>가구/인테리어</th>
+								<th>여행/문화</th>
+								<th>생활/건강</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'G' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=G&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'H' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=H&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'I' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=I&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'J' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=J&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'K' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=K&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'L' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=L&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">새로 등록된 상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
@@ -302,11 +493,9 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
-			$(document).ready(
-					function() {
-						var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-
-						$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
-
-					});
+			
+			$(document).ready(function(){
+				var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
+				$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
+			});
 		</script>

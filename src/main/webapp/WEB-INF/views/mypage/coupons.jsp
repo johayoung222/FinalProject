@@ -12,10 +12,11 @@
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
-			<div class="mp-title">
+			<div class="mp"  style="font-size:19px; font-weight:bold;"> 
 			내 쿠폰
 			</div>
-			<div class="mypage-body">
+			<hr style="border-bottom:1px solid gray; width:143%;">
+			<div class="mypage">
 				<div class="credit-list-table">
 					<c:if test="${empty list }">
 						<div class="credit-list-empty">${msg }</div>
@@ -27,7 +28,7 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="mypage-body">
+			<div class="mypage">
 				<div class="credit-instruction">
 					- 이미 사용하였거나 유효기간이 만료된 쿠폰은 3개월 후 자동 삭제됩니다. <br>
 					- 쿠폰은 중복사용할 수 없습니다. 1회 결제시 1개의 쿠폰만 사용 가능합니다. <br>
