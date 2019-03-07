@@ -44,6 +44,12 @@ width:20px;
 height:5px;
 
 }
+#gotoItem{
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+
 
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
@@ -77,8 +83,8 @@ height:5px;
 			<c:forEach items="${list}" var="p">
 			<tr>
 				<%-- <td id="basketNo">${p.SEQ_BASKET_NO}</td>	 --%>		
-				<td class="prada">${p.SEQ_PRODUCT_NO}</td>	
-				<td class="prada">${p.PRODUCT_NAME}</td>	
+				<td class="prada">${p.SEQ_PRODUCT_NO}</td>   
+				<td class="prada"><a id="gotoItem" href='${pageContext.request.contextPath}/item/iteminformation/${p.SEQ_PRODUCT_NO}'>${p.PRODUCT_NAME}</a></td>	
 				<td class="prada">${p.PRODUCT_DESCRIPTION}</td>		
 				<td class="prada">${p.PRODUCT_PRICE}</td>	
 				<td class="prada">
@@ -97,6 +103,7 @@ height:5px;
   
   </tbody>
 </table>
+<hr/>
          
 				<div class="buy-container">
 		 	      <h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
@@ -116,11 +123,6 @@ function deleteBasket(no,memberNo){
    
 
 }
-
-
-
-
-
 </script>
 
 
