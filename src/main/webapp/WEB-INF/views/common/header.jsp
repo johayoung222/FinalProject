@@ -43,6 +43,8 @@ body {
 
 #search2 {
 	padding: 10px;
+	position:relative;
+	right:50px;
 }
 
 #nav-item1 {
@@ -194,7 +196,7 @@ body {
 	}
 	</style>
 	<div id="header-container">
-		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
+		<a href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>

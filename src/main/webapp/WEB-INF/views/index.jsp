@@ -89,6 +89,12 @@
 #box4 {
 	padding-top: 0px;
 }
+#box5{
+	float:right; 
+	position:relative; 
+	bottom:130px; 
+	right:50px;"
+}
 
 .font2_ {
 	left: 30%;
@@ -318,7 +324,7 @@ a {
 	</h4>
 </div>
 
-<div>
+<div style="border:0	">
 	<div id="box1" style="text-align: center">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
@@ -343,7 +349,9 @@ a {
 			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
 		</div>
 	</div>
-
+	<div id="box5">
+	<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="120px">
+	</div>
 </div>
 
 <hr>

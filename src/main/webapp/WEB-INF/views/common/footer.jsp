@@ -11,6 +11,12 @@
 	height: 50px;
 	padding-top: 12px;
 }
+#footer-container{
+display: flex;
+    justify-content: space-around;
+    height: 50px;
+    padding-top: 12px;
+}
 #footer-link div{
 	width: 150px;
 	display: inline-block;
@@ -20,7 +26,7 @@ p{
 }
 </style>
 	<footer class="footer">
-		<div id="container">
+		<div id="footer-container">
 			<div id="footer-link" >
 				<div>
 					<a href="#">이용약관</a>
