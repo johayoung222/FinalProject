@@ -20,4 +20,7 @@ public interface BasketDao {
 
 	int selectSumProduct(Basket b);
 
+
+	Basket selectOnebasket(Basket b);
+
 }
