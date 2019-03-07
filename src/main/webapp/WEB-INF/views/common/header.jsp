@@ -234,6 +234,9 @@ body {
 			}
 		});
 	});
+	
+
+	
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
@@ -253,7 +256,17 @@ body {
 					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
-						<table>
+					<style>
+					#cTable tr:first-of-type th{
+						text-align: center;
+					}
+					#cTable tr:not(:first-of-type) td ul{
+						list-style: none;
+						padding-left: 10px;
+						padding-right: 10px;
+					}
+					</style>
+						<table id="cTable" border="1">
 							<tr>
 								<th>
 									전자제품
@@ -269,6 +282,9 @@ body {
 								</th>
 								<th>
 									스포츠/레저
+								</th>
+								<th>
+									유아동/출산
 								</th>
 							</tr>
 							<tr>
@@ -298,7 +314,9 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=C&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -307,7 +325,9 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=D&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -316,7 +336,96 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=E&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'F' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+									</c:forEach>
+								</td>
+							</tr>
+							<tr>
+								<th>완구/문구/취미</th>
+								<th>해외명품</th>
+								<th>도서/음반/DVD</th>
+								<th>가구/인테리어</th>
+								<th>여행/문화</th>
+								<th>생활/건강</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'G' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=G&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'H' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=H&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'I' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=I&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'J' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=J&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'K' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=K&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'L' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=L&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -374,4 +483,9 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
+			
+			$(document).ready(function(){
+				var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
+				$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
+			});
 		</script>

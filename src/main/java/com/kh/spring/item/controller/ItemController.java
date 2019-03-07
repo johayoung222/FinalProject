@@ -84,7 +84,7 @@ public class ItemController {
 		List<Map<String,String>> list = basketService.searchItem(searchKeyword);
 		logger.debug(list);
 		
-		mav.addObject("searchItems", list);
+		mav.addObject("cpList", list);
 		mav.setViewName("index");
 		
 		return mav;

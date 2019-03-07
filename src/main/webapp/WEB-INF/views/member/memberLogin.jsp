@@ -84,8 +84,7 @@
 		     </li>
 				 <li class="list-group-item list-group-item-action"
 				 style="border:0">
-				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="6%" style="border-radius:5px; padding-left:7%; border-radius:5px;
-				onclick="kakaoLogin()"/>
+				<img src="${pageContext.request.contextPath }/resources/images/kakaologin.PNG"  width="100%" height="6%" style="border-radius:5px; padding-left:7%; border-radius:5px;" onclick="kakaoLogin();"/>
 				</li>
 				
 			</ul>

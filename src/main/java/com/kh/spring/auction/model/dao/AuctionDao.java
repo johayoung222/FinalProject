@@ -26,4 +26,6 @@ public interface AuctionDao {
 
 	Map<String, String> selectMyHistory(Map<String, Object> temp);
 
+	int auctionHistoryInsert(Map<String, Object> map);
+
 }

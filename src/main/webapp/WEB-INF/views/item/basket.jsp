@@ -41,7 +41,8 @@ dispaly:none;
 }
 form{
 width:20px;
-height:18px;
+height:5px;
+
 }
 
 </style>
@@ -70,6 +71,7 @@ height:18px;
 			<td colspan="8">장바구니에 물품이 없습니다.</td>
 		</tr>
 	</c:if>
+	
 		
 		<c:if test="${not empty list }">
 			<c:forEach items="${list}" var="p">

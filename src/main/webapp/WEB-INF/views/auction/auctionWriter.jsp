@@ -36,7 +36,6 @@
 body {
 	width: 100%;
 }
-
 [name="MainSearchFrm"]{
 	display: inline-block;
 }
@@ -44,7 +43,6 @@ body {
 	width: 400px;
 	height: 50px;
 	/* margin-left: 200px; */
-	margin-left: 11%;
 	border: 2px solid blue;
 }
 
@@ -116,6 +114,7 @@ body {
 <body>
 	<div id="container">
 		<div id="box-link">
+	<script id="_waufcp">var _wau = _wau || []; _wau.push(["dynamic", "qf4dx0ul5a", "fcp", "ead1dc434343", "small"]);</script><script async src="//waust.at/d.js"></script>
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
 					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -180,25 +179,59 @@ body {
 
 		</div>
 	</div>
+	<style>
+	#searchList{
+		width: 400px;
+		position: absolute;
+		left: 20.4%;
+		z-index: 1000;
+		background-color: white;
+	}
+	#searchList table{
+		border-collapse: collapse;
+		width: 400px;
+		border: 1px solid black;
+	}
+	#searchList table tr:hover{
+		background-color: lightgray;
+		cursor: pointer;
+	}
+	</style>
 	<div id="header-container">
 		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
-			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" /> 
-		<a href="${pageContext.request.contextPath }/item/search">
-			<i class="fa fa-search" id="search2"></i>
-		</a>
+			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
+			<div class="searchList" id="searchList"></div>
+			<a href="${pageContext.request.contextPath }/item/search">
+				<i class="fa fa-search" id="search2"></i>
+			</a>
 		</form>
 	</div>
 	<script>
 	$("#search_").on('keyup',function(){
-		var myData = JSON.stringify($("#search_").val().trim());
+		var myData = $("#search_").val().trim();
+		
+		if(myData == ""){
+			return;
+		}
 		console.log(myData);
 		$.ajax({
 			url: "${pageContext.request.contextPath}/item/searchPad",
 			method: "get",
-			data: {"myData":myData},
+			data: "myData="+myData,
 			success: function(data){
 				console.log(data);
+				
+				var table = $("<table></table>");
+				
+				var html = "";
+				
+				for(i=0; i<data.length; i++){
+					html += "<tr><td>"+data[i]['PRODUCT_NAME']+"</td></tr>";
+				}
+				table.html(html);
+				$("#searchList").html(table);
+				
 			},
 			error: function(){
 				console.log("ajax 요청 에러!!");
@@ -208,7 +241,7 @@ body {
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-		<a class="navbar-brand" href="#"> <img
+		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img
 			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
 			alt="스프링로고" width="50px" style="border-radius: 50px;" />
 		</a>
@@ -220,12 +253,82 @@ body {
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<!--     좌우정렬위해 .mr-auto추가 -->
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item" id="nav-item1"><a class="nav-link"
-					href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
+				<li class="nav-item" id="nav-item1">
+					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
-
-					</div></li>
+						<table>
+							<tr>
+								<th>
+									전자제품
+								</th>
+								<th>
+									패션의류
+								</th>
+								<th>
+									패션잡화
+								</th>
+								<th>
+									화장품/미용
+								</th>
+								<th>
+									스포츠/레저
+								</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'A' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'B' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=B&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
+										<ul>
+											<li>${ct.CATEGORY_MICRO_NAME }</li>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</li>
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
@@ -275,13 +378,6 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
-			$(document).ready(
-					function() {
-						var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-
-						$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
-
-					});
 		</script>
 <!-- header 끝 -->
 
