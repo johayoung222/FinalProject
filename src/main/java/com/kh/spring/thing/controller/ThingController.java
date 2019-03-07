@@ -54,6 +54,8 @@ public class ThingController {
 	@RequestMapping("/thing/sell.do")
 	public ModelAndView sell(ModelAndView mav, Regist regist, HttpServletRequest req,
 			@RequestParam(name="upFile",required=false) MultipartFile [] upFiles) {
+		logger.debug(regist);
+		logger.debug(upFiles);
 		for(int i = 0 ; i<upFiles.length ; i++) {			
 			logger.debug("fileName="+upFiles[i].getOriginalFilename());
 			logger.debug("size="+upFiles[i].getSize());
@@ -122,7 +124,7 @@ public class ThingController {
 			
 			mav.addObject("loc", loc);
 			mav.addObject("msg", msg);
-			mav.setViewName("common/msg");
+			mav.setViewName("thing/thingView");
 		} catch(Exception e) {
 			logger.error("게시물 등록 에러",e);
 			throw new BoardException("게시물 등록 에러",e);

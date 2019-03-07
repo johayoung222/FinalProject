@@ -9,7 +9,12 @@
 </jsp:include>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <style>
-
+.btnnn{
+	width:100px;
+	height:40px;
+	display:inline-block;	
+	margin : 5px auto;
+}
 .card-title{
 	color:rgb(103, 105, 201);
 	font-family: 'Nanum Gothic', sans-serif;
@@ -39,10 +44,10 @@
       </ul>
       
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary btn-lg myBtn" data-toggle="modal" data-target="#myModal" >판매하기</button>
+      <button type="button" class="btn btn-primary btn-lg myBtn statusY" data-toggle="modal" data-target="#myModal" >판매하기</button>
 
       <!-- Modal -->
-      <form action="${pageContext.request.contextPath}/thing/sell.do" method="post" enctype="Multipart/form-data">
+      <form name="form" action="${pageContext.request.contextPath}/thing/sell.do" onsubmit="return validateForm();" method="post" enctype="Multipart/form-data">
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -105,12 +110,13 @@
 				</script>
 				      
 	            <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
-	            <input type="hidden" name="registAuction" value="F"/>
+	            <input type="hidden" name="registAuction" id="registAuction" value="N"/>
+	            <input type="hidden" name="registStatus" id="registStatus"/>
 	            
 	            <label for="">상품명을 입력해 주세요 : </label> 
-	            <input type="text" name="registName" /> <br /><br /> 
+	            <input type="text" name="registName" id="registName" required /> <br /><br /> 
 	            <label for="">가격을 입력해 주세요 : </label> 
-	            <input type="text" name="registPrice" /> <br /><br /> 
+	            <input type="text" name="registPrice" id="registPrice" required/> <br /><br /> 
 	            <label for="">중고 상품이십니까?</label>
 	            &nbsp;&nbsp;예. <input type="radio" name="registKinds" class="registKinds" value="Y" /> 
 	            	           아니오. <input type="radio" name="registKinds" class="registKinds" value="N" /> 
@@ -122,7 +128,7 @@
 	                  <span class="input-group-text">첨부파일1</span>
 	               </div>
 	               <div class="custom-file">
-	                  <input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple> 
+	                  <input type="file" class="custom-file-input" name="upFile" id="upFile1" multiple required> 
 	                  <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
 	               </div>
 	            </div>
@@ -132,25 +138,23 @@
 	                  <span class="input-group-text">첨부파일2</span>
 	               </div>
 	               <div class="custom-file">
-	                  <input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple> 
+	                  <input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple required> 
 	                  <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
 	               </div>
 	            </div>
 	            <br />
 	            <label for="">수량을 적어주세요 : </label> 
-	            <input type="number" name="registAmount" /> <br /><br />
+	            <input type="number" name="registAmount" id="registAmount" required /> <br /><br />
 	            <label for="">상품 설명을 적어주세요.</label> <br />
-	            <textarea rows="5" cols="30" name="registDescription"></textarea>
-
+	            <textarea rows="5" cols="30" name="registDescription" id="registDescription" required></textarea>
                 </div>
-                  
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                   <input type="submit" value="Save changes" class="btn btn-primary" />
-                </div>
+                <input type="submit" value="Save" class="btn btn-primary btnnn" />
+           		<button type="button" class="btn btn-default btnnn" data-dismiss="modal">Close</button>
                </div>
             </div>
+            
          </div>
+         
       </form>
 
    </div>
@@ -170,7 +174,7 @@
       </ul>
       
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary btn-lg myBtn" data-toggle="modal" data-target="#myModal"  >판매하기</button>
+      <button type="button" class="btn btn-primary btn-lg myBtn statusN" data-toggle="modal" data-target="#myModal"  >판매하기</button>
 	
 		
       <!-- Modal 
@@ -215,7 +219,7 @@
 	  </div>
 	</div>
    
-//하영부분
+
 <div class="card" style="width: 18rem;">
   <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/경매1.png"  alt="Card image cap">
   <div class="card-body">
@@ -246,7 +250,7 @@
    <p class="lead">2. 안 팔리는 물건, 매입해줬으면 좋겠다.</p>
    
    <!-- Button trigger modal -->
-   <button type="button" class="btn btn-primary btn-lg myBtn" data-toggle="modal" data-target="#myModal" >겟잇 베이직으로 판매하기</button>
+   <button type="button" class="btn btn-primary btn-lg myBtn statusY" data-toggle="modal" data-target="#myModal" >겟잇 베이직으로 판매하기</button>
 
 
    <!-- Modal 
@@ -279,7 +283,7 @@
    <p class="lead">2. 네고, 직거래 없이 안전거래 하고 싶다.</p>
    
    <!-- Button trigger modal -->
-   <button type="button" class="btn btn-primary btn-lg myBtn" data-toggle="modal" data-target="#myModal"  >직접 판매하기</button>
+   <button type="button" class="btn btn-primary btn-lg myBtn statusN" data-toggle="modal" data-target="#myModal"  >직접 판매하기</button>
 
    <!-- Modal 
    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -305,7 +309,7 @@
    </div>-->
    
 </div>
-//하영 부분
+
 
 <div class="jumbotron">
     <h1 class="display-4">안녕! 겟잇 옥션</h1>
@@ -361,7 +365,44 @@
 
 <form name="thingEnrollFrm" action="${pageContext.request.contextPath}/thing/thingEnd.do"></form>
 
+<script>
+function validateForm(){
+	var regExp1 = /^[0-9]{4,}$/;
+	var registName = $("#registName").val();
+	var registPrice = $("#registPrice").val();
+	var registKinds = $(".registKinds:checked").val();
+	var registDescription =$("#registDescription").val();
+	
+	if(registName == ""){
+		alert("상품명을 작성해 주세요.");
+		return false;
+	}else if(registPrice == ""){
+		alert("상품명을 작성해 주세요.");
+		return false;
+	}else if(!regExp1.test(registPrice)){
+		alert("가격은 숫자를 입력해주세요.(천원이상!!)");
+		return false;
+	}else if(registKinds == null){
+		alert("중고 상품인지 여부를 체크해주세요.");
+		return false;
+	}else if(registDescription == ""){
+		alert("상품 설명을 작성해 주세요.")
+		return false;
+	}
+	
+	alert("상품 판매 신청이 되었습니다.");
+	return true;
+} 
 
+$(".statusY").on('click',function(){
+	$("#registStatus").val('Y');
+	alert($("#registStatus").val());
+});
+$(".statusN").on('click',function(){
+	$("#registStatus").val('N');
+	alert($("#registStatus").val());
+});
+</script>
 
 
 
