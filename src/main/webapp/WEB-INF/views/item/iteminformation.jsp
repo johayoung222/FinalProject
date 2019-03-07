@@ -147,17 +147,20 @@ form {
 	height:200px;
 	color:gray;
 }
-
-
+.product-ask{
+	border: 1px solid black;
+	width: 800px;
+	margin-left: 10%;
+}
 .ask-content{
-	
+	border: 1px solid black;
 	text-align: center;
 }
 .ask-comment{
-	border: 1px solid black;
 	height: 100px;
 	text-align: center;
 	display: none;
+	margin-top: 30px;
 }
 
 #info_{
@@ -170,8 +173,6 @@ form {
 	background-color:#7151FC;
 	width:150px;
 	height:50px;
-	margin-right:10.3%;
-
 }
 .table-bordered{
 	margin-left:2%;
@@ -179,7 +180,13 @@ form {
 #fontt	{
 font-weight:bold;
 font-size:20px;
-}	
+}
+#askLeft{
+	float: left;
+}
+#askRight{
+	float: right;
+}
 </style>
 <div class="productInfo-content">
 
@@ -228,59 +235,58 @@ font-size:20px;
 	</div>
 	
 	<div class="product-ask">
-		<div class="ask-header" style="font-weight:bold;font-size:20px; margin-left:7%;">
+		<div class="ask-header" style="font-weight:bold;font-size:20px;">
 			<span style="margin-left:3%;">상품문의</span>
 			<button onclick="ask();" id="ask_">문의하기</button>
 		</div>
 		<div class="ask-comment">
-			<textarea rows="3" cols="100" id="askContent"></textarea>
+			<textarea rows="3" cols="80" id="askContent"></textarea>
 			<button onclick="itemAsk();">작성</button>
 		</div>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
+		<hr style="border:2px solid gray;">
 		<div class="ask-content" id="askList" >
 			<span >문의하신 내역이 없습니다.</span>
 		</div>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
+		<hr style="border:2px solid gray;">
 	</div>
 	
-	<script>
-	function ask(){
-		$(".ask-comment").show();
+<script>
+function ask(){
+	$(".ask-comment").show();
+}
+	
+function itemAsk(){
+	
+	if($("#askContent").val().trim().length == 0){
+		alert("내용을 입력해주세요.");
+		return;
 	}
-	function itemAsk(){
-		
-		if($("#askContent").val().trim().length == 0){
-			alert("내용을 입력해주세요.");
-			return;
-		}
-		
-		var asker = ${member.seqMemberNo};
-		var param = {"askContent":$("#askContent").val(),
-					"asker":asker,
-					"productNo":${product.seqProductNo}};
-		
-		$.ajax({
-			url: "${pageContext.request.contextPath}/item/ask",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			dataType: "json",
-			data: param,
-			type: "post",
-			success: function(data){
-				console.log(data);
-				
-				if(data.length > 0){
-				var html = "<span>"+data+"</span>";
-				$("#askContent").val("");
-				
-				$("#askList").html(html);
-				}
-			},
-			error: function(){
-				console.log("ajax요청 에러!");
+	
+	var asker = ${member.seqMemberNo};
+	var param = {"askContent":$("#askContent").val(),
+				"asker":asker,
+				"productNo":${product.seqProductNo}};
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/item/ask",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		dataType: "json",
+		data: param,
+		type: "post",
+		success: function(data){
+			console.log(data);
+			
+			if(data != null){
+			var html = "<span id='askLeft'>"+data.askContent+"</span><span id='askRight'> 작성자 :"+data.asker+"</span>";
+			$("#askContent").val("");
+			
+			$("#askList").html(html).css("text-align","left");
 			}
-		});
-	}
-	}
+		},
+		error: function(){
+			console.log("ajax요청 에러!");
+		}
+	});
 }
 
 	

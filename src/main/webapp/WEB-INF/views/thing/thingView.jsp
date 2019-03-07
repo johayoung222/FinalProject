@@ -215,27 +215,28 @@
 	  </div>
 	</div>
    
-		//하영부분
-		<div class="card" style="width: 18rem;">
-		  <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/경매1.png"  alt="Card image cap">
-		  <div class="card-body">
-		    <h5 class="card-title"><strong>겟잇 옥션</strong></h5>
-		    <p class="card-text"></p>
-		  </div>
-		  <ul class="list-group list-group-flush">
-		    <li class="list-group-item">한번에 1개 제품 등록</li>
-		    <li class="list-group-item">경매 시작 가격 직접 입력</li>
-		    <li class="list-group-item">구매자 응대 X</li>
-		    <li class="list-group-item">편의점 택배 서비스 이용</li>
-		    <li class="list-group-item">매입 X</li> 
-		  </ul>
+//하영부분
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="${pageContext.request.contextPath }/resources/images/경매1.png"  alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><strong>겟잇 옥션</strong></h5>
+    <p class="card-text"></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">한번에 1개 제품 등록</li>
+    <li class="list-group-item">경매 시작 가격 직접 입력</li>
+    <li class="list-group-item">구매자 응대 X</li>
+    <li class="list-group-item">편의점 택배 서비스 이용</li>
+    <li class="list-group-item">매입 X</li> 
+  </ul>
 
-	  <!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary btn-lg auctionbtn" onclick="auctionV();" data-toggle="modal" data-target="#auctionModalPhone">판매하기</button>
-		</div>
-		//
 
-	</div>
+<button type="button" class="btn btn-primary btn-lg auctionbtn" onclick="auctionV();" data-toggle="modal" data-target="#auctionModalPhone">
+  판매하기
+</button>
+</div>
+</div>
+
 <hr />
 <div class="sell-title" style="text-align: center; font-style: oblique; font-size: xx-large;">나에게   맞는 판매 방법은?</div>
 <div class="jumbotron">

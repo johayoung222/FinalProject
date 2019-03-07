@@ -164,7 +164,7 @@
 		insert into auction values(seq_auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
-			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default)
+			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
 	</insert>
 	
 	<!-- auctionRegist 승인시 auction_check='Y' -->

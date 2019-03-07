@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -100,7 +101,6 @@ public class AuctionController {
 		
 		String addTime = dateFormat.format(calendar.getTime());
 		Member m = (Member)session.getAttribute("memberLoggedIn");
-		
 		auc.setAuctionMember(m.getMemberId());
 		auc.setSeqMemberNo(m.getSeqMemberNo());
 		auc.setAuctionPhone(m.getMemberPhone());
@@ -119,7 +119,7 @@ public class AuctionController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, MultipartFile> files = multiRequest.getFileMap();
 
-		String uploadPath = request.getSession().getServletContext().getRealPath("upload");
+		String uploadPath = request.getSession().getServletContext().getRealPath("resources/upload");
 
 		// 폴더의 존재 유무 및 생성
 
@@ -222,11 +222,75 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionDetail.do")
-	public String auctionDetail(Model model) {
+	public String auctionDetail(Model model , HttpSession session , @RequestParam(value="auctionNo") int auctionNo) {
+		System.out.println("auctionNo = "+auctionNo);
+		List<Map<String,String>> auction = auctionService.selectAuction(auctionNo);
+		String ctgMacroName = auctionService.selectCtgMacroName(auction.get(0).get("AUCTION_CATEGORY_MACRO"));
+		
+		String auctionCtgMicro = auction.get(0).get("AUCTION_CATEGORY_MICRO");
+		
+		if(auctionCtgMicro.length() == 1) {
+			auctionCtgMicro = "0"+auctionCtgMicro;
+		}
+		
+		Map<String , Object> ctg = new HashMap<>();
+		ctg.put("MICRO", auctionCtgMicro);
+		ctg.put("MACRO", auction.get(0).get("AUCTION_CATEGORY_MACRO"));
+		
+		String ctgMicroName = auctionService.selectCtgMicroName(ctg);
+		
+		System.out.println("ctgMacroName = "+ctgMacroName+"/ ctgMicroName = "+ctgMicroName);
+		
+		// 현재 입찰가를 뿌려주기위하여 DB다녀와야 한다.
+		Map<String , Object> history = auctionService.selectAuctionHistory(String.valueOf(auction.get(0).get("AUCTION_NO")));
+		System.out.println("history = "+history);
+		
+		// 본인이 현재 입찰중인가에 대해 뿌려주기 위하여 DB다녀와야 한다.
+		Map<String , Object> temp = new HashMap<>();
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		Map<String , String> myHistory = new HashMap<>();
+		
+		if(m != null) {
+			temp.put("MemberNo" , m.getSeqMemberNo());
+			temp.put("AuctionNo" , auction.get(0).get("AUCTION_NO"));
+			
+			myHistory = auctionService.selectMyHistory(temp);			
+			System.out.println("myHistory = "+myHistory);
+		}
 		
 		
-		
+		model.addAttribute("myHistory" , myHistory);
+		model.addAttribute("history" , history);
+		model.addAttribute("ctgMacroName" , ctgMacroName);
+		model.addAttribute("ctgMicroName" , ctgMicroName);
+		model.addAttribute("auction" , auction);
 		return "auction/auctionDetail";
+	}
+	
+	@RequestMapping (value = "/auctionHistoryInsert")
+	@ResponseBody public Map<String, Object> auctionHistoryInsert(@RequestParam(value="MemberNo") int MemberNo ,
+																@RequestParam(value="auctionUnq") int AuctionNo ,
+																@RequestParam(value="bidPrice") int price  , 
+																HttpSession session) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		if(m != null) {
+			map.put("memberId",m.getMemberId());
+			map.put("memberNo",m.getSeqMemberNo());
+			map.put("price",price);
+			map.put("AuctionNo",AuctionNo);
+		}
+		
+		try {
+			int r = auctionService.auctionHistoryInsert(map);
+			result.put("Result", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("Result", "fail");
+		}
+		
+		return result;
 	}
 
 }
