@@ -447,8 +447,8 @@ body {
 				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">새로 등록된 상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
