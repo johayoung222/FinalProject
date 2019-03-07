@@ -233,6 +233,9 @@ body {
 			}
 		});
 	});
+	
+
+	
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
@@ -373,4 +376,9 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
+			
+			$(document).ready(function(){
+				var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
+				$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
+			});
 		</script>
