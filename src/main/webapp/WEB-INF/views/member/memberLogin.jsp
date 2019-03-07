@@ -305,8 +305,7 @@ function next2(){
 		    };
 
 </script>
-
-
+<br><br><br><br><br><br><br>
 
 	
 	

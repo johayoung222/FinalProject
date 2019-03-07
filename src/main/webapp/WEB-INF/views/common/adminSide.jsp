@@ -54,7 +54,7 @@ div.col-2.5 a:hover{
 <br />
 <section id="adminSideSection">
 <div id="container2">
-  <div class="col-2.5">
+  <div class="col-2">
     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <p class="nav-link">관리자 페이지</p>
       <a class="nav-link" href="${pageContext.request.contextPath}/admin/allMember.do" title="회원리스트조회">회원 리스트조회</a>

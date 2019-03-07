@@ -72,8 +72,8 @@
 		</div><br />
 		<input type="hidden" id="registImage" value="" />
 		<input type="hidden" id="registRealImage" value=""/>
-		<input type="button" id="btn" value="신청YES"  />
-		<input type="reset" value="신청NO" onclick="window.close()" />
+		<input type="button" class="btn btn-primary" id="btn" value="신청YES"  />
+		<input type="reset" class="btn btn-primary" value="신청NO" onclick="window.close()" />
 	</form>
 </div>
 <script>

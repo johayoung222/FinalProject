@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -13,6 +13,7 @@
 <style>
 .siteStatistics-container{
 	width:1300px;
+	min-height:750px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
@@ -69,7 +70,7 @@ function MF() {
     
 function paidProductCategory(){
 	//console.log("결제된 상품 비율");
-	$.ajax({
+		$.ajax({
     	url:"${pageContext.request.contextPath}/admin/paidProductCategory.do",
     	dataType:"json",
     	success:function(data){
@@ -104,6 +105,7 @@ function paidProductCategory(){
     		console.log("ajax요청 실패!!");
     	}
     }); 
+	
 	var x = document.getElementById("paidProductCategory");
 	if (x.style.display === "block") {
   		 x.style.display = "none";
@@ -251,9 +253,14 @@ function question(){
 #MF, #paidProductCategory #regist #auction #question{
 	display:none;
 }
+rect{
+	display:inline;
+	position:relative;
+}
 .site{
+	position:relative;
+	display:inline-block;
 	width:500px;
-	height:500px;
 }
 
 
