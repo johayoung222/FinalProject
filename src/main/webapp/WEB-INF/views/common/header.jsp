@@ -65,11 +65,8 @@ body {
 }
 
 #container {
-	padding-left: 55%;
 	border: 0px;
 	margin-left:500px;
-	
- 
 }
 
 #box-link {
