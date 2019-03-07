@@ -16,6 +16,9 @@ public interface BasketService{
 	int deleteBasket(Basket b);
 
 	int selectSumProduct(Basket b);
+
+
+	Basket selectOneBasket(Basket b);
   
 	
 

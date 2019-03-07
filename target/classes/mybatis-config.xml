@@ -28,6 +28,6 @@
 		<typeAlias type="com.kh.spring.thing.model.vo.CategoryMacro" alias="categoryMacro"/>
 		<typeAlias type="com.kh.spring.thing.model.vo.ProductAsk" alias="productAsk"/>
 		<typeAlias type="com.kh.spring.auction.model.vo.Auction" alias="auction"/>
-		
+		<typeAlias type="com.kh.spring.basket.model.vo.Basket" alias="basket"/> 
 	</typeAliases>
 </configuration>

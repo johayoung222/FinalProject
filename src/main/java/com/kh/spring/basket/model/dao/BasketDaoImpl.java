@@ -55,6 +55,13 @@ public class BasketDaoImpl implements BasketDao {
 		return sqlSession.selectOne("basket.selectSum",b);
 	}
 
+	@Override
+	public Basket selectOnebasket(Basket b) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("basket.selectOneBasket",b);
+	}
+
+	
 	
 	
 	
