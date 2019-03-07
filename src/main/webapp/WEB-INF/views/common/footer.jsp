@@ -3,13 +3,13 @@
 <style>
 .footer{
 	height: 180px;
-	position: relative;
 }
 #container{
 	display: flex;
 	justify-content: space-around;
 	height: 50px;
 	padding-top: 12px;
+	padding-left: 10px;
 }
 #footer-link div{
 	width: 150px;
