@@ -12,8 +12,7 @@
 
 <style>
 .paidProduct-container{
-	
-	height:750px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
