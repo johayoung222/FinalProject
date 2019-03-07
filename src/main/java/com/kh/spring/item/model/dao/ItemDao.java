@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductAsk;
+import com.kh.spring.thing.model.vo.Regist;
 
 public interface ItemDao {
 
@@ -17,8 +18,12 @@ public interface ItemDao {
 
 	void updateProduct(Map<String, String> map);
 
-	List<Map<String, String>> searchItem(String searchKeyword);
+	List<Product> searchItem(String searchKeyword);
 
 	List<Map<String, String>> searchItemAjax(String myData);
+
+	List<Regist> selectAllRegist();
+
+	List<Product> selectNew();
 
 }

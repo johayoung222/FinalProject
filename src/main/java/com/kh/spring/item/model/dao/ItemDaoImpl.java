@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductAsk;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Repository
 public class ItemDaoImpl implements ItemDao {
@@ -40,13 +41,23 @@ public class ItemDaoImpl implements ItemDao {
 	}
 
 	@Override
-	public List<Map<String, String>> searchItem(String searchKeyword) {
+	public List<Product> searchItem(String searchKeyword) {
 		return sqlSession.selectList("basket.searchItems", searchKeyword);
 	}
 
 	@Override
 	public List<Map<String, String>> searchItemAjax(String myData) {
 		return sqlSession.selectList("basket.searchItemsAjax", myData);
+	}
+
+	@Override
+	public List<Regist> selectAllRegist() {
+		return sqlSession.selectList("basket.selectAllRegist");
+	}
+
+	@Override
+	public List<Product> selectNew() {
+		return sqlSession.selectList("basket.selectNew");
 	}
 
 	

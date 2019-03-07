@@ -11,6 +11,7 @@ import com.kh.spring.item.model.dao.ItemDao;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductAsk;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -41,13 +42,23 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<Map<String, String>> searchItem(String searchKeyword) {
+	public List<Product> searchItem(String searchKeyword) {
 		return basketDao.searchItem(searchKeyword);
 	}
 
 	@Override
 	public List<Map<String, String>> searchItemAjax(String myData) {
 		return basketDao.searchItemAjax(myData);
+	}
+
+	@Override
+	public List<Regist> selectAllRegist() {
+		return basketDao.selectAllRegist();
+	}
+
+	@Override
+	public List<Product> selectNew() {
+		return basketDao.selectNew();
 	}
 
 	

@@ -22,6 +22,7 @@ import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.ProductAsk;
+import com.kh.spring.thing.model.vo.Regist;
 
 @Controller
 public class ItemController {
@@ -81,11 +82,11 @@ public class ItemController {
 		
 		logger.debug(searchKeyword);
 		
-		List<Map<String,String>> list = basketService.searchItem(searchKeyword);
+		List<Product> list = basketService.searchItem(searchKeyword);
 		logger.debug(list);
 		
 		mav.addObject("cpList", list);
-		mav.setViewName("index");
+		mav.setViewName("item/item");
 		
 		return mav;
 	}
@@ -101,5 +102,29 @@ public class ItemController {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(list, response.getWriter());
+	}
+	
+	@RequestMapping("/item/regist")
+	public ModelAndView registProduct(ModelAndView mav) {
+		
+		List<Regist> list = basketService.selectAllRegist();
+		
+		mav.addObject("cpList", list);
+		mav.setViewName("item/registItem");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/item/brandNew")
+	public ModelAndView brandNew(ModelAndView mav) {
+		
+		List<Product> list = basketService.selectNew();
+		String brandNew = "Y";
+		
+		mav.addObject("brandNew", brandNew);
+		mav.addObject("cpList", list);
+		mav.setViewName("item/item");
+		
+		return mav;
 	}
 }

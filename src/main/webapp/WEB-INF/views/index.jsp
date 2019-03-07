@@ -58,32 +58,27 @@
 .font_ {
 	margin-left: 50px;
 }
-
+.bottom-box{
+	padding-left: 100px;
+	display: flex;
+	justify-content: space-between;
+}
 #box1 {
-	display: inline-block;
-	vertical-align: top;
-	width: 20%;
+	width: 200px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
-	margin-left: 10px;
 }
 
 #box2 {
-	display: inline-block;
-	vertical-align: top;
-	width: 20%;
+	width: 200px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
-	margin-left: 10px;
 }
 
 #box3 {
-	display: inline-block;
-	vertical-align: top;
-	width: 25%;
+	width: 400px;
 	height: 150px;
 	border: 1px solid #dbdbdb;
-	margin-left: 10px;
 }
 
 #box4 {
@@ -324,8 +319,8 @@ a {
 	</h4>
 </div>
 
-<div style="border:0	">
-	<div id="box1" style="text-align: center">
+<div class="bottom-box">
+	<div id="box1">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
 			id="sound_" width="120px" height="100px" /></a>
@@ -333,7 +328,7 @@ a {
 			<a href="#">겟잇 소식</a>
 		</div>
 	</div>
-	<div id="box2" style="text-align: center">
+	<div id="box2">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
 			id="sound_" width="120px" height="100px" /></a>
@@ -357,8 +352,8 @@ a {
 <hr>
 
 <script>
-setInterval(function(){
+/* setInterval(function(){
 	  $(".blinkEle").toggle();
-	}, 500);
+	}, 500); */
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
