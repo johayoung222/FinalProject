@@ -62,6 +62,11 @@
     margin-bottom: 50px;
     margin-left: 10%;
 }
+.img-fluid{
+	width:100%;
+	height:350px;
+}
+
 </style>
 	<div class="content-container">	
 		<div class="sidebar">
@@ -84,12 +89,16 @@
 		<!-- 콘텐츠 상단 이미지 -->
 		<div class="content">
 			<div class="headline">
-				여기 소개 헤드라인
+				<strong>겟잇 소개</strong>
 			</div>
 			<div class="main">
-				<img src="${pageContext.request.contextPath }/resources/images/logo-spring.png" class="img-fluid" alt="Responsive image">
+				<img src="${pageContext.request.contextPath }/resources/images/intro.PNG" class="img-fluid" alt="Responsive image">
 					<div class="main2">
-						여기는 블라블라 하는곳
+						<h2 style="text-align:center"><strong>새로운 중고거래를 경험해보세요.</strong></h2>
+						이 프로젝트 2019년 2월부터 3월까지 한 달간의 작업으로 진행 되었습니다.
+						팀명은 바로 이거조 이며, 팀원으로는 팀장 : 국경갓!!! 팀원 : 갓하영, 갓규현,
+						갓민성, 갓현빈, 갓현규 6명으로 구성 되어있지만 원래는 7명이 었습니다. 
+						1명은 조영빈으로서 조기취직으로 쓰레기같이 나갔습니다. 
 					</div>
 			</div>	
 		</div>

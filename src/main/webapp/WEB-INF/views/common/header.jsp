@@ -65,7 +65,7 @@ body {
 }
 
 #container {
-	padding-left: 45%;
+	padding-left: 55%;
 	border: 0px;
 	margin-right:100px;
 }

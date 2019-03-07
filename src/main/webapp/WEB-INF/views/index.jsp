@@ -58,7 +58,10 @@
 .font_ {
 	margin-left: 50px;
 }
-
+#box0{
+ border:0; 
+ padding-top:20px; 
+}
 #box1 {
 	display: inline-block;
 	vertical-align: top;
@@ -217,7 +220,7 @@ a {
 			</a>
 			<div>
 
-				<pre><strong>컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
+				<pre><strong>      컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
 		</div>
@@ -324,7 +327,7 @@ a {
 	</h4>
 </div>
 
-<div style="border:0	">
+<div id="box0">
 	<div id="box1" style="text-align: center">
 		<a href="#"><img
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
