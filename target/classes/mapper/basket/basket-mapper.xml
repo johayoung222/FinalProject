@@ -41,5 +41,13 @@
 		select * from product where product_name like '%'||#{myData}||'%' and product_onsale = 'Y'
 	</select>
 	<resultMap type="map" id="searchAjaxMap"></resultMap>
+<<<<<<< HEAD
+=======
+	
+	<select id="selectOneBasket" resultType="basket">
+		select * from basket where seq_member_no = #{seqMemberNo} and seq_product_no = #{seqProductNo}	
+	</select>
+	
+>>>>>>> Choi
 
 </mapper>

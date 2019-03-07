@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
@@ -45,9 +46,28 @@
 	width:150px;
 	height:50px;
 }
+
+#pur:hover{
+	border:1px solid white;
+	background:indigo;
+	color:white;
+	width:150px;
+	height:50px;
+}
+
 #insertBasket{
-    border:1px solid white;
+    font-family: 'Nanum Gothic', sans-serif;
+    border:0px;
 	background:red;
+	color:white;
+	width:150px;
+	height:50px;
+	
+}
+#insertBasket:hover{
+    font-family: 'Nanum Gothic', sans-serif;
+    border:0px;
+	background: orange;
 	color:white;
 	width:150px;
 	height:50px;
@@ -118,13 +138,17 @@ form {
 			 		<tr align="center" >
 			 			<td colspan="2">
 			 			
-                        	
-             <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="insertBasket();">
+                <%--         	
+               <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="">
                     <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
 	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
 	                <input type="submit" id="insertBasket" value="장바구니"/>
-                </form>	 
-			 				<button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
+                </form> --%>
+                
+                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
+	                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+	                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
+			 		     <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
 			 			</td>
 			 		</tr>
 			 	</table>
@@ -261,6 +285,38 @@ function itemAsk(){
 		alert("내용을 입력해주세요.");
 		return;
 	}
+<<<<<<< HEAD
+	function itemAsk(){
+		
+		if($("#askContent").val().trim().length == 0){
+			alert("내용을 입력해주세요.");
+			return;
+		}
+		
+		var asker = ${member.seqMemberNo}; 
+		var param = {"askContent":$("#askContent").val(),
+					"asker":asker,
+					"productNo":${product.seqProductNo}};
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/item/ask",
+			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			dataType: "json",
+			data: param,
+			type: "post",
+			success: function(data){
+				console.log(data);
+				
+				if(data.length > 0){
+				var html = "<span>"+data+"</span>";
+				$("#askContent").val("");
+				
+				$("#askList").html(html);
+				}
+			},
+			error: function(){
+				console.log("ajax요청 에러!");
+=======
 	
 	var asker = ${member.seqMemberNo};
 	var param = {"askContent":$("#askContent").val(),
@@ -281,6 +337,7 @@ function itemAsk(){
 			$("#askContent").val("");
 			
 			$("#askList").html(html).css("text-align","left");
+>>>>>>> 079d7d328e9f5c2bea1e46b710f3600522c4afbf
 			}
 		},
 		error: function(){
@@ -289,6 +346,42 @@ function itemAsk(){
 	});
 }
 
+		
+	
+	</script>
+	<script>
+
+	
+	function insertBasket(){
+		 var seqMemberNo = $('input[name=seqMemberNo]').val();
+		 var seqProductNo = $('input[name=seqProductNo]').val();
+		 
+		 
+	
+		 
+	 	$.ajax({
+			url: "${pageContext.request.contextPath}/item/checkBasket.do" ,
+			method: "post" ,
+			data: {seqMemberNo: seqMemberNo, seqProductNo:seqProductNo},
+			success: function(data) {
+				
+				if(data.basketisUsable == true) {
+					alert("장바구니에 담겼습니다!");			
+				}else{
+					alert("장바구니에 이미 있어요!!");
+					
+				} 
+			
+			} ,
+			error: function() {
+				console.log("ajax요청 에러!");
+			}
+		});
+		 
+		
+		
+		
+	}
 	
 	
 	</script>
@@ -404,11 +497,8 @@ function itemAsk(){
 		
 	</table>
 	
-</div>
-	
-	
-</div>
-
+   </div>	
+  </div>
 </div>	
 	
 

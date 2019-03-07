@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Basket implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int seqBasketNo;
 	private int seqProductNo;
 	private int seqMemberNo;
