@@ -44,6 +44,15 @@ public class BasketServiceImpl implements BasketService{
 		return basketDao.selectSumProduct(b);
 	}
 
+	@Override
+	public Basket selectOneBasket(Basket b) {
+		// TODO Auto-generated method stub
+		return basketDao.selectOnebasket(b);
+	}
+
+	
+
+	
 	
 	
 	

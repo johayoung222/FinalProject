@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -12,7 +12,7 @@
 
 <style>
 .regist-container{
-	width:1300px;
+	
 	position:relative;
 	margin-left:180px;
 	top:-37px;
@@ -83,5 +83,5 @@ $(document).on('click','.tableTr',function(){
 });
 
 </script> 
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
