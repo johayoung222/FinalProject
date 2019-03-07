@@ -43,6 +43,8 @@ body {
 
 #search2 {
 	padding: 10px;
+	position:relative;
+	right:50px;
 }
 
 #nav-item1 {

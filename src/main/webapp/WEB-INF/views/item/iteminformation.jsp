@@ -113,7 +113,7 @@ form {
 				<img src="${pageContext.request.contextPath }/resources/images/galaxy10.PNG" alt="${product.productName } 이미지" width="100%" height="80%" >
 			</td>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/images/Getit2.PNG" id="float1">
+				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
 				<font id="fon">겟잇</font>
 				<font>1등 중고거래 컨시어지 서비스</font>
 			 	<table border="0" style="height:300px; width:400px;">

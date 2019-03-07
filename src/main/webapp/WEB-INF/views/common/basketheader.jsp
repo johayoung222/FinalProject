@@ -43,8 +43,6 @@ body {
 
 #search2 {
 	padding: 10px;
-	position:relative;
-	right:50px;
 }
 
 #nav-item1 {
@@ -112,6 +110,7 @@ body {
 <body>
 	<div id="container">
 		<div id="box-link">
+	<script id="_waufcp">var _wau = _wau || []; _wau.push(["dynamic", "qf4dx0ul5a", "fcp", "ead1dc434343", "small"]);</script><script async src="//waust.at/d.js"></script>
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
 					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -199,10 +198,10 @@ body {
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>
-			<a href="${pageContext.request.contextPath }/item/search">
-				<i class="fa fa-search" id="search2"></i>
-			</a>
 		</form>
+		<a href="${pageContext.request.contextPath }/item/search">
+				<i class="fa fa-search" id="search2" style="position:relative; left:330px;"></i>
+			</a>
 	</div>
 	<script>
 	$("#search_").on('keyup',function(){

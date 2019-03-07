@@ -44,7 +44,7 @@ width: 110px;
 			<input type="text" name="memberPhone" id="memberPhone"value="${memberPhone}" />
 			<input type="hidden" name="memberId" value="${m.memberId}" />
 			<!-- <input type="submit" value="인증번호요청" /> -->
-			<button   onclick="c();" id="button_" class="btn btn-success">인증번호요청</button>
+			<button   onclick="c();" id="button_" class="btn btn-outline-success">인증번호요청</button>
 		</div>
 	</form>
 	<c:if test="${memberPhone ne null}">
@@ -53,7 +53,7 @@ width: 110px;
 				<input type="text"name="certified" id="certified"class="certified"/>
 				<input type="hidden" name="memberPhone" id="memberPhone" value="${memberPhone}" />
 				<input type="hidden" name="memberId" id="memberId" value="${memberId}" />
-				<button class="btn btn-success" id="check" onclick="check();" style=" width:50px; height:30px; padding:0" >확인</button>
+				<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>
 				
 		</form>
 				<div style="float:right;">

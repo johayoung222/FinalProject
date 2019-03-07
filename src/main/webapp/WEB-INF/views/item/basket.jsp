@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding|Nanum+Pen+Script" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/basketheader.jsp">
     <jsp:param value="" name="pageTitle"/>
 </jsp:include>
 <%-- <jsp:include page="/WEB-INF/views/common/basketside.jsp"></jsp:include>--%>
