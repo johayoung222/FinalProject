@@ -94,16 +94,39 @@ form {
     display: inline-block;
    
 }
+.content-container{
+	height: 100%;
+}
+.productOne{
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 31px;
+}
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
 </style>
-
+<c:forEach items="${allCategory }" var="ct">
+	<c:if test="${ct.CATEGORY_MACRO == cpList[0].categoryMacro }">
+		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
+		<c:if test="${ct.CATEGORY_MICRO == cpList[0].categoryMicro }">
+			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
+		</c:if>
+	</c:if>
+</c:forEach>
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
-		<a href="">전자제품</a>
+		<a href="">${nowCategory }</a>
 		<img src="" alt="#" />
-		<a href="">스마트폰</a>
+		<a href="">${nowCategory2 }</a>
 		<img src="" alt="#" />
 	</div>
+</div>
 	
 <div class="productInfo-header">
 
@@ -175,7 +198,6 @@ form {
 	color:gray;
 }
 .product-ask{
-	border: 1px solid black;
 	width: 800px;
 	margin-left: 10%;
 }
@@ -216,9 +238,8 @@ font-size:20px;
 }
 </style>
 <div class="productInfo-content">
-
 	<div class="info-text">
-<img src="${pageContext.request.contextPath }/resources/images/items.PNG" style="width:80%; margin-left:10%;"/>
+		<img src="${pageContext.request.contextPath }/resources/images/items.PNG" margin-left:10%;"/>
 	</div>
 	<hr>
 		<table border="0" id="info_" style="font-weight:bold; color:gray;">
@@ -288,15 +309,15 @@ function itemAsk(){
 		alert("내용을 입력해주세요.");
 		return;
 	}
-
-	function itemAsk(){
+}
+function itemAsk(){
 		
 		if($("#askContent").val().trim().length == 0){
 			alert("내용을 입력해주세요.");
 			return;
 		}
 		
-		var asker = ${member.seqMemberNo}; 
+		var asker = ${member.seqMemberNo};
 		var param = {"askContent":$("#askContent").val(),
 					"asker":asker,
 					"productNo":${product.seqProductNo}};
@@ -310,173 +331,58 @@ function itemAsk(){
 			success: function(data){
 				console.log(data);
 				
-				if(data.length > 0){
-				var html = "<span>"+data+"</span>";
+				if(data != null){
+				var html = "<span id='askLeft'>"+data.askContent+"</span><span id='askRight'> 작성자 :"+data.asker+"</span>";
 				$("#askContent").val("");
 				
-				$("#askList").html(html);
+				$("#askList").html(html).css("text-align","left");
 				}
 			},
 			error: function(){
 				console.log("ajax요청 에러!");
 			}
 		});
-
-
 }
-
-		
-	
-	</script>
-	<script>
-
-	
-	function insertBasket(){
-		 var seqMemberNo = $('input[name=seqMemberNo]').val();
-		 var seqProductNo = $('input[name=seqProductNo]').val();
-		 
-		 
-	
-		 
-	 	$.ajax({
-			url: "${pageContext.request.contextPath}/item/checkBasket.do" ,
-			method: "post" ,
-			data: {seqMemberNo: seqMemberNo, seqProductNo:seqProductNo},
-			success: function(data) {
-				
-				if(data.basketisUsable == true) {
-					alert("장바구니에 담겼습니다!");			
-				}else{
-					alert("장바구니에 이미 있어요!!");
-					
-				} 
+function insertBasket(){
+	var seqMemberNo = $('input[name=seqMemberNo]').val();
+	var seqProductNo = $('input[name=seqProductNo]').val();
+	 
+ 	$.ajax({
+		url: "${pageContext.request.contextPath}/item/checkBasket.do" ,
+		method: "post" ,
+		data: {seqMemberNo: seqMemberNo, seqProductNo:seqProductNo},
+		success: function(data) {
 			
-			} ,
-			error: function() {
-				console.log("ajax요청 에러!");
-			}
-		});
-		 
-		
-		
-		
-	}
-	
-	
-	</script>
+			if(data.basketisUsable == true) {
+				alert("장바구니에 담겼습니다!");			
+			}else{
+				alert("장바구니에 이미 있어요!!");
+			} 
+		} ,
+		error: function() {
+			console.log("ajax요청 에러!");
+		}
+	});
+}
+</script>
 
-	<div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
-	<div>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-		
-	</table>
-	<table class="table table-bordered" id="item1" style="float:left; width:20%;" >
-		<tr>
-			<th colspan="2">
-			회원 아이디 및 이미지
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<img src="${pageContext.request.contextPath }/resources/images/computer.PNG" id="favorite1" width="175px" height="100px"/>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			<a href="${pageContext.request.contextPath }/item/iteminformation.do">[새상품]애플 데스크탑</a>	
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2">
-			890,000원
-			</th>
-		</tr>
-		<tr>
-			<td colspan="1" class="font_"><a href="${pageContext.request.contextPath }/item/basket.do"><img src="${pageContext.request.contextPath }/resources/images/basket.PNG" width="20px" height="20px"/>장바구니</a></td>
-			<td colspan="1" class="font_"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>찜하기</a></td>
-		</tr>
-	</table>
-	
-   </div>	
-  </div>
+<div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
+	<div class="product-container">
+		<c:if test="${not empty cpList }">
+		<c:forEach items="${cpList }" var="p" varStatus="vs" end="3">
+		<div class="productOne" id="${p.seqProductNo }">
+			<div class="pImg">
+				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+			</div>
+			<div class="pDesc">
+				<span>${p.productName }</span><br />
+				<span>${p.productPrice } 원</span>
+			</div>
+		</div>
+		<c:if test="${vs.count%3 == 0 }"></c:if>
+		</c:forEach>
+	</c:if>
+	</div>
 </div>	
 	
 

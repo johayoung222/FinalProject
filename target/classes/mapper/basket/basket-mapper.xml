@@ -23,7 +23,7 @@
 	</select>
 
 	<insert id="insertAsk" parameterType="productAsk">
-		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser})
+		insert into product_ask values ( seq_ask_no.nextval, #{askContent}, 'N', sysdate , #{askUser}, #{seqProductNo})
 		<selectKey order="AFTER" resultType="_int" keyProperty="seqAskNo">
 			select seq_ask_no.currval from dual
 		</selectKey>
@@ -51,6 +51,14 @@
 	
 	<select id="selectNew" resultType="product">
 		select * from product order by product_enroll_date
+	</select>
+	
+	<select id="selectNowProduct" resultType="product">
+		select * from product where category_macro = #{cMacro} and category_micro = #{cMicro} and seq_product_no != #{cProNo}
+	</select>
+	
+	<select id="selectAskAll" resultType="productAsk">
+		select * from product_ask where seq_product_no = #{productNo}
 	</select>
 
 </mapper>

@@ -268,7 +268,7 @@ body {
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
 					<style>
-					#cTable tr:first-of-type th{
+					#cTable tr th{
 						text-align: center;
 					}
 					#cTable tr:not(:first-of-type) td ul{
