@@ -39,46 +39,61 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public int insertFacebookMember(Member m) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.insertFaceBookMember(m);
 	}
 
 	@Override
 	public int insertMember(ModelAndView mav) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 
 	@Override
 	public Member selectOneFBMember(String fbIdcheck) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.selectOneFBMember(fbIdcheck);
 	}
 
 	@Override
 	public Member selectOnekakaoMember(String kIdcheck) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.selectOnekakaoMember(kIdcheck);
 	}
 
 	@Override
 	public int insertKakaoMember(Member m) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.insertKakaoMember(m);
 	}
 
 	@Override
 	public int insertgoogleMember(Member m) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.insertgoogleMember(m);
 	}
 
 	@Override
 	public Member selectOnegoogleMember(String gIdcheck) {
-		// TODO Auto-generated method stub
+		
 		return memberDao.selectOnegoogleMember(gIdcheck);
 	}
-	
+
+	@Override
+	public String selectmemberId(String memberEmail){
+		return memberDao.selectmemberId(memberEmail);
+	}
+
+	@Override
+	public int countmember(Member m) {
+		return memberDao.countmember(m);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return memberDao.updatePwd(m);
+	}
+
 	
 
 }

@@ -64,15 +64,10 @@ body {
 	border-bottom: 2px solid #7151FC;
 }
 
- #container{
- 	width: 1024px;
-	padding-left: 300px;
+#container {
 	border: 0px;
-    margin-right:30px; 
-/*     float: right;
- */
- 
-} 
+	margin-left:500px;
+}
 
 #box-link {
 	display: flex;
@@ -109,7 +104,6 @@ body {
 .item-link{
 	color:gray;
 }
-
 
 </style>
 
@@ -201,11 +195,14 @@ body {
 		cursor: pointer;
 	}
 	
-
+	form{
+		text-align:center;
+	
+	}
 
 	</style>
 	<div id="header-container">
-		<a id=logo href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
+		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>
@@ -268,7 +265,7 @@ body {
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
 					<style>
-					#cTable tr:first-of-type th{
+					#cTable tr th{
 						text-align: center;
 					}
 					#cTable tr:not(:first-of-type) td ul{

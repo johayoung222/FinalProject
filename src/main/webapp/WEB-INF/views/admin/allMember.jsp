@@ -11,9 +11,11 @@
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
 <style>
-.allMember-container{
+#header{
 	width:100%;
-	min-height:600px;
+}
+.allMember-container{	
+	height:750px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;

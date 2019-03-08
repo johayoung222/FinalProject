@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +28,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+
 @Controller
 @SessionAttributes(value = { "memberLoggedIn" })
 public class MemberController {
@@ -34,6 +41,9 @@ public class MemberController {
 
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+    private JavaMailSender mailSender;
 
 	@RequestMapping("/member/memberMoveLogin.do")
 	public String memberLogin() {
@@ -455,5 +465,167 @@ public class MemberController {
     public String moveFindPopup() {
     	return "member/findAccount";
     }
+    
+    //--------------------------------------------------------------------------
+    @RequestMapping("/member/findid.do")
+	public String mailSending(HttpServletRequest request,Model model) {
+		 String memberEmail = request.getParameter("memberEmail");
+		 logger.debug("memberEmail=="+memberEmail);
+		int certified = ((int) (Math.random() * 899999)+100000);
+		
+	    String setfrom = "7sscheduler@gmail.com";         
+	    String tomail  = memberEmail;     // 받는 사람 이메일
+	    String title   = "Get!t 인증번호 입니다!";      // 제목
+	    String content = "인증번호는 ["+certified+"] 입니다 :)";    // 내용
+	   
+	    try {
+	      MimeMessage message = mailSender.createMimeMessage();
+	      MimeMessageHelper messageHelper 
+	                        = new MimeMessageHelper(message, true, "UTF-8");
+	 
+	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+	      messageHelper.setTo(tomail);     // 받는사람 이메일
+	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+	      messageHelper.setText(content);  // 메일 내용
+	     
+	      mailSender.send(message);
+	    } catch(Exception e){
+	      System.out.println(e);
+	    }
+	    model.addAttribute("certified",certified);
+	    model.addAttribute("memberEmail",memberEmail);
+	   
+	    return "member/findAccount";
+	}
+    
+    @RequestMapping("/member/searchId.do")
+    @ResponseBody
+    public Map<String, Object> searchid(HttpServletRequest request) {
+    	String memberEmail = request.getParameter("memberEmail");
+		logger.debug("memberEmail=="+memberEmail);
+		String memberId = null;
+		Map<String, Object> map = new HashMap<>();
+		memberId= memberService.selectmemberId(memberEmail);
+		logger.debug("mm=="+memberId);
+		
+		map.put("memberId",memberId);
+    	
+		return map;
+    }
+    
+    
+	/*@RequestMapping("/member/findpwd.do")
+	public String sendSms(HttpServletRequest request,Model model) throws Exception {
+		
+		String memberId = request.getParameter("memberId");
+		String memberPhone = request.getParameter("memberPhone");
+		logger.debug("memberPhone=="+memberPhone);
+		logger.debug("memberId=="+memberId);
+		
+		String api_key = "NCSFQJJ9HCHO2HEE";
+		String api_secret = "TMVG7ETX4WMP6I1OI4XPMFSCZJBOO0FK";
+		Message coolsms = new Message(api_key, api_secret);
+		
+		int certified = ((int) (Math.random() * 899999)+100000);
+		
+		HashMap<String, String> set = new HashMap<String, String>();
+		
+		
+		/*
+		 * set.put("to", memberPhone); // 수신번호 set.put("from", "01090294425"); // 발신번호
+		 * set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
+		 * set.put("type","sms"); // 문자 타입 set.put("app_version", "test app 1.2"); //
+		 * application nameand version
+		 
+		
+		System.out.println(set);
+		
+		try {
+			JSONObject result = (JSONObject) coolsms.send(set);
+			System.out.println(result.toString());
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+		model.addAttribute("certified",certified);
+		model.addAttribute("memberPhone",memberPhone);
+		model.addAttribute("memberId",memberId);
+		
+		
+		return "member/findAccount";
+	}*/
+	
+	@RequestMapping("/member/findpwd.do")
+    public String findpwd(HttpServletRequest request,Model model) {
+    	String memberPhone = request.getParameter("memberPhone");
+    	String memberId = request.getParameter("memberId");
+		logger.debug("memberPhone=="+memberPhone);
+		logger.debug("memberId=="+memberId);
+		
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberPhone(memberPhone);
+		int count = memberService.countmember(m);
+		//int certified = ((int) (Math.random() * 899999)+100000);
+		int certified = 1;
+		
+		if(count > 0) {
+			String api_key = "NCSFQJJ9HCHO2HEE";
+			String api_secret = "TMVG7ETX4WMP6I1OI4XPMFSCZJBOO0FK";
+			Message coolsms = new Message(api_key, api_secret);
+			
+			
+			HashMap<String, String> set = new HashMap<String, String>();
+			
+			
+			/*
+			 set.put("to", memberPhone); // 수신번호 
+			 set.put("from", "01090294425"); // 발신번호
+			 set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
+			 set.put("type","sms"); // 문자 타입 
+			 set.put("app_version", "test app 1.2"); //application nameand version
+			*/ 
+			
+			System.out.println(set);
+			
+			try {
+				JSONObject result = (JSONObject) coolsms.send(set);
+				System.out.println(result.toString());
+			} catch (CoolsmsException e) {
+				System.out.println(e.getMessage());
+				System.out.println(e.getCode());
+			}
+		}
+		
+		
+	
+		model.addAttribute("count",count);
+		model.addAttribute("memberPhone",memberPhone);
+		model.addAttribute("memberId",memberId);
+		model.addAttribute("certified",certified);
+    	
+		return "member/findAccount";
+    }
+	@RequestMapping("/member/certified.do")
+	public String certified() {
+		return "member/findAccount";
+	}
+	
+	@RequestMapping("/member/updatePwd.do")
+	public String updatePwd(HttpServletRequest request,Model model) {
+		String memberId = request.getParameter("memberId");
+		String memberPassword = request.getParameter("pwd");
+		
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberPassword(bcryptPasswordEncoder.encode(memberPassword));
+		
+		int result = memberService.updatePwd(m);
+		
+		
+		return "member/findAccount";
+	}
+	
+
 	
 }

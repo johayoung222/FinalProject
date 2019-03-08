@@ -31,5 +31,12 @@ public interface MemberService {
 
 	Member selectOnegoogleMember(String gIdcheck);
 
+	String selectmemberId(String memberEmail);
+
+	int countmember(Member m);
+
+	int updatePwd(Member m);
+
+
 
 }

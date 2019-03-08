@@ -81,6 +81,21 @@ public class MemberDaoImpl implements MemberDao {
 		return result;
 	}
 
+	@Override
+	public String selectmemberId(String memberEmail) {
+		return SqlSession.selectOne("member.selectmemberId", memberEmail);
+	}
+
+	@Override
+	public int countmember(Member m) {
+		return SqlSession.selectOne("member.countmember",m);
+	}
+
+	@Override
+	public int updatePwd(Member m) {
+		return SqlSession.update("member.updatePwd",m);
+	}
+
 	
 
 }
