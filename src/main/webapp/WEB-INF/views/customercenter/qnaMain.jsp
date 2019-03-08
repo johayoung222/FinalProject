@@ -71,8 +71,8 @@
 }
 
 .searchkeyword {
-	margin: 0 auto;
 	width: 80%;
+	margin: 0 auto;
 }
 #searchFrm{
 	display: inline-block;
@@ -131,6 +131,11 @@
 	top: -32px;
     left: 45px;	
 }
+.btn-info{
+	width: 16%;
+    height: 35px;
+    margin-top: -6px;
+}
 </style>
 
 <div class="content-container">
@@ -158,7 +163,7 @@
 		<div class="headline">
 			자주 묻는 질문<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
 						<input type="text" class="searchkeyword" name="searchkeyword"id="searchkeyword" placeholder="검색"/>
-						<input type="submit" value="검색" />
+						<input type="submit" class="btn btn-info" value="검색" />
 					</form>
 		</div>
 		<div class="main">

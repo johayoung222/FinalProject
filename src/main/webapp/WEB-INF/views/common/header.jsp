@@ -171,7 +171,7 @@ body {
 			</div>
 			<div class="box-link3">
 				<a class="item-link"
-					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
+					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터</a>
 			</div>
 
 		</div>
@@ -194,12 +194,6 @@ body {
 		background-color: lightgray;
 		cursor: pointer;
 	}
-	
-	form{
-		text-align:center;
-	
-	}
-
 	</style>
 	<div id="header-container">
 		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>

@@ -57,5 +57,8 @@
 		update member set member_password = #{memberPassword} where member_id = #{memberId}
 	</update>
 	
+	<select id="countmemberId" resultType="_int">
+		select count(*) from member where member_Email=#{memberEmail}
+	</select>
 	
 </mapper>

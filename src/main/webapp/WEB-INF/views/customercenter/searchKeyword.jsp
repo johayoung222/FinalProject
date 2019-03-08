@@ -107,6 +107,14 @@
 #space{
 	margin-left: 1%;
 }
+#gomain{
+	text-align:left;
+}
+.btn-info{
+	width: 16%;
+    height: 35px;
+    margin-top: -6px;
+}
 
 
 
@@ -138,14 +146,14 @@
 			자주 묻는 질문
 			<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm">
 				<input type="text" class="searchkeyword" name="searchkeyword" id="searchkeyword" value="${searchkeyword}" placeholder="검색"/>						 
-				<input type="submit" value="검색" />
+				<input type="submit" class="btn btn-info" value="검색" />
 			</form>
 			
 		</div>
 			<c:forEach items="${list}" var="s" varStatus="vs" >
 			<div class="qnaall">
 				<div class="qnatitle">
-					<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" >
+					<form action="${pageContext.request.contextPath}/customercenter/qnamain.do" name="gomain" id="gomain">
 					<input type="submit"id="subm" value="${s.BOARD_TITLE}" />
 						<input type="hidden" name="seq_board_no" value="${s.SEQ_BOARD_NO}" />
 					</form>

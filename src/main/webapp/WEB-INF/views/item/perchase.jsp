@@ -28,6 +28,7 @@ var payAmount = perchaseFrm.payAmount.value;
 var pay_method = perchaseFrm.payMethod.value;
 var dAddressInfo = perchaseFrm.dAddressInfo.value;
 var seqMemberNo = perchaseFrm.seqMemberNo.value;
+var seqProductNo = "${product.seqProductNo}";
 
 console.log(dName, dPhone, dEmail, dAddress, dfAddress, pName, payAmount, pay_method);
 
@@ -81,7 +82,9 @@ IMP.request_pay({ // param
                 "orderMethod": perchaseFrm.payMethod.value,
                 "orderPrice": perchaseFrm.payAmount.value,
                 "orderResult": "Y",
-                "seqMemberNo": seqMemberNo
+                "seqMemberNo": seqMemberNo,
+                "orderAmount": 1,
+                "seqProductNo": seqProductNo
             };
         var jParam = JSON.stringify(param);
         $.ajax({

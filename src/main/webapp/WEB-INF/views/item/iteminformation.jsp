@@ -8,7 +8,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
 </jsp:include>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
 <style>
@@ -109,6 +108,53 @@ form {
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
 }
+.productInfo-content>div{
+	margin-bottom: 20px;
+}
+
+#askList{
+	height:200px;
+	color:gray;
+}
+.product-ask{
+	width: 800px;
+	margin-left: 10%;
+}
+.ask-content{
+	border: 1px solid black;
+	text-align: center;
+}
+.ask-comment{
+	height: 100px;
+	text-align: center;
+	display: none;
+	margin-top: 30px;
+}
+
+#info_{
+	margin-left:13%;
+}
+#ask_{
+	float:right;
+	border:1px solid white;
+	color:white;
+	background-color:#7151FC;
+	width:150px;
+	height:50px;
+}
+.table-bordered{
+	margin-left:2%;
+}
+#fontt	{
+font-weight:bold;
+font-size:20px;
+}
+#askLeft{
+	float: left;
+}
+#askRight{
+	float: right;
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == cpList[0].categoryMacro }">
@@ -184,59 +230,8 @@ form {
 </div><!-- productInfo-header end -->
 
 <div>
- 
-<h2>이미지 슬라이드</h2>
+	<h2>이미지 슬라이드</h2>
 </div>
-<style>
-
-.productInfo-content>div{
-	margin-bottom: 20px;
-}
-
-#askList{
-	height:200px;
-	color:gray;
-}
-.product-ask{
-	width: 800px;
-	margin-left: 10%;
-}
-.ask-content{
-	border: 1px solid black;
-	text-align: center;
-}
-.ask-comment{
-	height: 100px;
-	text-align: center;
-	display: none;
-	margin-top: 30px;
-}
-
-#info_{
-	margin-left:13%;
-}
-#ask_{
-	float:right;
-	border:1px solid white;
-	color:white;
-	background-color:#7151FC;
-	width:150px;
-	height:50px;
-}
-.table-bordered{
-	margin-left:2%;
-}
-#fontt	{
-font-weight:bold;
-font-size:20px;
-}
-#askLeft{
-	float: left;
-}
-#askRight{
-	float: right;
-}
-</style>
 <div class="productInfo-content">
 	<div class="info-text">
 		<img src="${pageContext.request.contextPath }/resources/images/items.PNG" margin-left:10%;"/>
@@ -287,62 +282,15 @@ font-size:20px;
 			<span style="margin-left:3%;">상품문의</span>
 			<button onclick="ask();" id="ask_">문의하기</button>
 		</div>
-		<div class="ask-comment">
-			<textarea rows="3" cols="80" id="askContent"></textarea>
-			<button onclick="itemAsk();">작성</button>
-		</div>
-		<hr style="border:2px solid gray;">
-		<div class="ask-content" id="askList" >
-			<span >문의하신 내역이 없습니다.</span>
-		</div>
+		<br />
 		<hr style="border:2px solid gray;">
 	</div>
 	
 <script>
 function ask(){
-	$(".ask-comment").show();
+	location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 }
 	
-function itemAsk(){
-	
-	if($("#askContent").val().trim().length == 0){
-		alert("내용을 입력해주세요.");
-		return;
-	}
-}
-function itemAsk(){
-		
-		if($("#askContent").val().trim().length == 0){
-			alert("내용을 입력해주세요.");
-			return;
-		}
-		
-		var asker = ${member.seqMemberNo};
-		var param = {"askContent":$("#askContent").val(),
-					"asker":asker,
-					"productNo":${product.seqProductNo}};
-		
-		$.ajax({
-			url: "${pageContext.request.contextPath}/item/ask",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			dataType: "json",
-			data: param,
-			type: "post",
-			success: function(data){
-				console.log(data);
-				
-				if(data != null){
-				var html = "<span id='askLeft'>"+data.askContent+"</span><span id='askRight'> 작성자 :"+data.asker+"</span>";
-				$("#askContent").val("");
-				
-				$("#askList").html(html).css("text-align","left");
-				}
-			},
-			error: function(){
-				console.log("ajax요청 에러!");
-			}
-		});
-}
 function insertBasket(){
 	var seqMemberNo = $('input[name=seqMemberNo]').val();
 	var seqProductNo = $('input[name=seqProductNo]').val();
@@ -366,10 +314,39 @@ function insertBasket(){
 }
 </script>
 
+<div class="naver-test">
+	
+</div>
+<script>
+$(function(){
+	var productName = "${product.productName}";
+	$.ajax({
+		url: "https://openapi.naver.com/v1/search/blog.json",
+		type: "get",
+		headers: {"Access-Control-Allow-Headers":"Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+				"Access-Control-Max-Age":"3600",
+				"Access-Control-Allow-Origin":"*",
+				"Content-Type":"plain/text",
+				"X-Naver-Client-Id":"iRxnV_fRI0U3FGNoPOlk",
+				"X-Naver-Client-Secret":"mdUA9AjMzx"},
+		contentType: "plain/text; charset=UTF-8",
+		data: {"query":productName, "sort":"sim"},
+		success: function(data){
+			console.log(data);
+		},
+		error: function(){
+			console.log("ajax 요청 에러!");
+		}
+	});
+});
+</script>
+
+
+
 <div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
 	<div class="product-container">
 		<c:if test="${not empty cpList }">
-		<c:forEach items="${cpList }" var="p" varStatus="vs" end="3">
+		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
 				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
@@ -383,7 +360,7 @@ function insertBasket(){
 		</c:forEach>
 	</c:if>
 	</div>
-</div>	
+</div>
 	
 
 
