@@ -25,4 +25,8 @@ public interface ItemService {
 
 	List<Product> selectNew();
 
+	List<Product> selectNowProduct(Map<String, String> map);
+
+	List<ProductAsk> selectAskAll(int productNo);
+
 }

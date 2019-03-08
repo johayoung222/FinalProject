@@ -61,5 +61,15 @@ public class ItemServiceImpl implements ItemService {
 		return basketDao.selectNew();
 	}
 
+	@Override
+	public List<Product> selectNowProduct(Map<String, String> map) {
+		return basketDao.selectNowProduct(map);
+	}
+
+	@Override
+	public List<ProductAsk> selectAskAll(int productNo) {
+		return basketDao.selectAskAll(productNo);
+	}
+
 	
 }

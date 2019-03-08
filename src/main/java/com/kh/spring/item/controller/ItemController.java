@@ -41,8 +41,15 @@ public class ItemController {
 		
 		String cMacro = product.getCategoryMacro();
 		String cMicro = product.getCategoryMicro();
-		logger.debug(cMacro+"/"+cMicro);
+		String cProNo = String.valueOf(num);
+		Map<String,String> map = new HashMap<>();
+		map.put("cMacro",cMacro);
+		map.put("cMicro",cMicro);
+		map.put("cProNo",cProNo);
+		
+		List<Product> list = basketService.selectNowProduct(map);
 
+		mav.addObject("cpList", list);
 		mav.addObject("member", member);
 		mav.addObject("product", product);
 		mav.setViewName("item/iteminformation");
@@ -59,6 +66,7 @@ public class ItemController {
 		ProductAsk pAsk = new ProductAsk();
 		pAsk.setAskUser(asker);
 		pAsk.setAskContent(askContent);
+		pAsk.setSeqProductNo(productNo);
 		
 		int result = basketService.insertAsk(pAsk);
 		int askNo = pAsk.getSeqAskNo();
@@ -69,6 +77,8 @@ public class ItemController {
 		
 		basketService.updateProduct(map);
 		Member m = basketService.selectJoinMember(asker);
+		//이 리스트를 넘겨야 한다아아아아아아아아아아..............03.07 -ing.
+		List<ProductAsk> list = basketService.selectAskAll(productNo);
 		
 		map.put("asker",m.getMemberId());
 		map.put("askContent",askContent);

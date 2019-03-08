@@ -20,4 +20,5 @@ public class ProductAsk {
 	private String askAnswer;
 	private Date askDate;
 	private int askUser;
+	private int seqProductNo;
 }
