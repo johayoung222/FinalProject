@@ -149,7 +149,7 @@ public class AuctionController {
 				filePath = uploadPath + "/" + addTime + file.getOriginalFilename();
 				file.transferTo(new File(filePath));
 
-				filename += addTime + file.getOriginalFilename() + "／";		
+				filename += addTime + file.getOriginalFilename() + "/";		
 			}
 		}
 
@@ -174,8 +174,8 @@ public class AuctionController {
 		String[] dr = auc.getDateRange().split(" ~ ");
 
 		try {
-			SimpleDateFormat org_frm = new SimpleDateFormat("yyyy-MM-dd H:mm a", Locale.US);
-			SimpleDateFormat new_frm = new SimpleDateFormat("yyyy-MM-dd H:mm");
+			SimpleDateFormat org_frm = new SimpleDateFormat("yyyy-MM-dd HH:mm a", Locale.US);
+			SimpleDateFormat new_frm = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 			System.out.println(dr[1]);
 
@@ -187,8 +187,14 @@ public class AuctionController {
 			String new_std = new_frm.format(std);
 			String new_end = new_frm.format(end);
 
+			
+			// 테스트를 하기위한 시간설정이 필요하다.
 			auc.setSdate(new_std);
 			auc.setEdate(new_end);
+			System.out.println("std = "+new_std+"  end = "+new_end);
+			// 지금 테스트를 하기위해 설정을 해보도록 하겠다. 
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -291,6 +297,23 @@ public class AuctionController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value = "/auctionBid")
+	@ResponseBody
+	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo") String auctionNo , final MultipartHttpServletRequest multiRequest,
+			HttpServletResponse response, Model model, HttpServletRequest request,HttpSession session ) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		Map<String , Object> temp = new HashMap<>();
+		temp.put("auctionNo", auctionNo);
+		temp.put("memberId", m.getMemberId());
+		
+		
+		
+		
+		return map;
 	}
 
 }

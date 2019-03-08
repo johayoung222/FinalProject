@@ -585,8 +585,6 @@ var dateFlagMsg = "";
 $(function() {
 	
 	$('input[name="dateRange"]').daterangepicker({		
-		timePicker : true,
-		timePickerIncrement : 30,
 	    "singleDatePicker": true,
 		locale : {
 			format : 'YYYY-MM-DD H:mm A',
@@ -607,7 +605,7 @@ $(function() {
 		// alert("오늘날짜 일 : "+todayDateArray[2]+" 끝나는 날짜 일 : "+endDateArray[2]);
 		// alert("밀리세컨드 startDay = "+startD.getTime());
 		// alert("picker.start typeof"+typeof(picker.startDate));
-		var test = new Date(startD.getTime() + (1000*60*60*24*7)).toJSON();
+		var test = new Date(startD.getTime() + (1000*60*60*24*3)).toJSON();
 		// alert("test = "+test);
 		
 		if(startD < todayD) {
@@ -756,6 +754,7 @@ $(function() {
 			
 		} else {
 			alert("원하시는 날짜를 선택해주세요.");
+			return;
 		}
 		
 	   	if (document.frm.auctionTitle.value=="") {
@@ -819,7 +818,7 @@ $(function() {
 			success : function(data) {
 				if (data.cnt > 0) {
 					alert("저장됐습니다.");
-					location.href = "<c:url value='/main'/>";
+					location.href = "${pageContext.request.contextPath }";
 				} else {
 					alert("저장에실패");
 				} 
