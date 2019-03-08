@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -42,6 +43,18 @@ public class ThingDaoImpl implements ThingDao {
 	@Override
 	public int sell(Regist regist) {
 		return sqlSession.insert("thing.sell", regist);
+	}
+
+
+	@Override
+	public void insertOrder(Order order) {
+		sqlSession.insert("thing.insertOrder",order);
+	}
+
+
+	@Override
+	public void updateOnSale(int nProductNo) {
+		sqlSession.update("thing.updateOnSale",nProductNo);
 	}
 
 }

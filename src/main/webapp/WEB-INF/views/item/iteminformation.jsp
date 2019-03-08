@@ -323,8 +323,13 @@ $(function(){
 	$.ajax({
 		url: "https://openapi.naver.com/v1/search/blog.json",
 		type: "get",
-		headers: {"Access-Control":"allow *","Access-Control-Allow-Origin":"*","Content-Type":"plain/text","X-Naver-Client-Id":"iRxnV_fRI0U3FGNoPOlk","X-Naver-Client-Secret":"mdUA9AjMzx"},
-		contentType: "plain/text",
+		headers: {"Access-Control-Allow-Headers":"Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+				"Access-Control-Max-Age":"3600",
+				"Access-Control-Allow-Origin":"*",
+				"Content-Type":"plain/text",
+				"X-Naver-Client-Id":"iRxnV_fRI0U3FGNoPOlk",
+				"X-Naver-Client-Secret":"mdUA9AjMzx"},
+		contentType: "plain/text; charset=UTF-8",
 		data: {"query":productName, "sort":"sim"},
 		success: function(data){
 			console.log(data);

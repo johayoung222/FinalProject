@@ -194,12 +194,6 @@ body {
 		background-color: lightgray;
 		cursor: pointer;
 	}
-	
-	form{
-		text-align:center;
-	
-	}
-
 	</style>
 	<div id="header-container">
 		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
