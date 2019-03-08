@@ -173,7 +173,7 @@ body {
 			</div>
 			<div class="box-link3">
 				<a class="item-link"
-					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
+					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터</a>
 			</div>
 
 		</div>

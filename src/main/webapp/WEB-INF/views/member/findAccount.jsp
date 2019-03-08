@@ -34,19 +34,7 @@
 	
 	color:#7151FC;
 }
-#findID_{
-	margin-left:10%;
-	
-	padding:0; 
-	
-	font-weight:bold;
-}
-#findID{
-	border-radius:5px;
-}
-#findID2{
-	border-radius:5px;
-}
+
 p{
 	margin-left: 22%;
     margin-top: 38px;
@@ -59,21 +47,24 @@ p{
 			<div class="find-id">
 				<form action="${pageContext.request.contextPath}/member/findid.do">
 					<div id="idarea" style="padding-top:15px;">
-						<label for="findID" id="findID_" style="margin-left:13%;">이메일 : </label>
+						<label for="findID" id="findID_" style="margin-left:18%;">이메일 : </label>
 						<input type="email" id="findID" name="memberEmail" placeholder=" abcde@naver.com" value="${memberEmail}" />
 						<!-- <input type="button" name="findID2" id="findID2" value="인증" /> -->
-						<button>인증</button>
+						<button class='btn btn-outline-success btn-sm'>인증</button>
 					</div>
 				</form>
-				<c:if test="${memberEmail ne null}">
+				<c:if test="${countId eq 1}">
 					<%-- <form action="${pageContext.request.contextPath}/member/searchId.do"> --%>
 						<div style="padding-top:20px;">
-						<label for="findID" id="findID_">인증번호 : </label>
-						<input type="text"name="certified" id="certified"class="certified"/>
-						<input type="hidden" name="memberEmail" id="memberEmail" value="${memberEmail}" />
-						<button type="button"onclick="check();">확인</button>
+							<label for="findID" id="findID_" style="margin-left:15%;">인증번호 : </label>
+							<input type="text"name="certified" id="certified"class="certified"/>
+							<input type="hidden" name="memberEmail" id="memberEmail" value="${memberEmail}" />
+							<button type="button" class='btn btn-outline-success btn-sm' onclick="check();">확인</button>
 						</div>
 					<!-- </form> -->	
+				</c:if>
+				<c:if test="${countId eq 0}">
+						<p style="color:red;margin-left: 22%;margin-top: 28px;">이메일과 일치하는 회원정보가 없습니다.</p>
 				</c:if>
 			</div>
 		</div>
@@ -82,27 +73,25 @@ p{
 			<div class="find-pwd">
 			<form action="${pageContext.request.contextPath}/member/findpwd.do">
 				<div style="padding-top:15px;">
-					<label for="findID" id="findID_" style="margin-left:13%;">아이디 : </label>
+					<label for="findID" id="findID_" style="margin-left:18%;">아이디 : </label>
 					<input type="text" id="memberId" name="memberId" placeholder=" admin123"  value="${memberId}"/>
 				</div>
 				<div style="padding-top:20px; margin-left:3%;">
-					<label for="findID" id="findID_">핸드폰 : </label>
+					<label for="findID" id="findID_" style="margin-left:15.3%;">핸드폰 : </label>
 					<input type="text" id="memberPhone" name="memberPhone" placeholder=" -없이01012345678" value="${memberPhone}"/>
-					<button>확인</button>
+					<button class='btn btn-outline-success btn-sm'>확인</button>
 				</div>
 			</form>
 			<c:if test="${count > 0}">
-				<form action="">
 					<div style="padding-top:20px;">
-					<label for="findID" id="findID_">인증번호 : </label>
+					<label for="findID" id="findID_" style="margin-left:15%;">인증번호 : </label>
 					<input type="text"name="certified2" id="certified2"class="certified2"/>
-					<button type="button"onclick="check2();">확인</button>
+					<button type="button" class='btn btn-outline-success btn-sm' onclick="check2();">확인</button>
 					</div>
-				</form>
 			</c:if>
 			<c:if test="${count <= 0}">
-					<div style="padding-top:20px;">
-						<h3 style="color:red;">아이디와 이메일이 일치하는 정보가 없습니다.</h3>
+					<div style="margin-left: 15%;margin-top: 35px;color:red;">
+						아이디와 이메일이 일치하는 회원 정보가 없습니다.
 					</div>
 			</c:if>
 			</div>
@@ -111,15 +100,14 @@ p{
 </body>
 <script>
 function check(){
-	var certified = $("#certified2").val().trim();
+	var certified = $("#certified").val().trim();
 	console.log(certified);
 	var certifiedNum = ${certified};
 	console.log(certifiedNum);
 	
 	
 	var All = {
-			memberPhone : $("#memberPhone").val(),
-			memberId : $("#memberId").val()
+			memberEmail : $("#memberEmail").val()
 	}
 	
 	
@@ -132,19 +120,15 @@ function check(){
 	}else{
 		alert("인증 완료");
 		$.ajax({
-			url:"${pageContext.request.contextPath}/member/searchpwd.do",
+			url:"${pageContext.request.contextPath}/member/searchId.do",
 			data:All,
 			success:function(data){
 				var html="<table>";
 				if(data != null){
-					html +="<p>"+"당신의 아이디는 "+data.memberId+" 입니다."+"</p>";
-				}else{
-					alert("2");
-		           	html += "<p>"+"<bold>"+"이메일과 맞는 아이디가 존재하지 않습니다."+"</bold>"+"</p>";
-		        }
-
+					html +="<p style='margin-left: 28%;margin-top: 64px;'>"+"회원님의 아이디는 "+data.memberId+" 입니다."+"</p>";
+				}
 				html+="</table>";
-				$(".find-id2").html(html);
+				$(".find-id").html(html);
 			}
 		});
 		
@@ -176,16 +160,16 @@ function check2(){
 			url:"${pageContext.request.contextPath}/member/certified.do",
 			data:All,
 			success:function(data){
-				var	html = "<div>";
-					html += "<label style='margin-left:13%;'>새 비밀번호 :</label>";
-					html += "<input type='text' id='pwd' name='pwd' placeholder='새 비밀번호를 입력하세요'/>";
+				var	html = "<div style='margin-bottom: 15px;margin-top: 35px;'>";
+					html += "<label style='margin-left:21%;'>새 비밀번호 :</label>";
+					html += "<input type='text' id='pwd' name='pwd' style='margin-left:3%;' placeholder='비밀번호를 입력하세요'/>";
 					html += "<input type='hidden' id='memberId' name='memberId' value='${memberId}'/>";
 					html += "</div>";
 					html += "<div>";
-					html += "<label style='margin-left:13%;'>새 비밀번호 확인 :</label>";
-					html += "<input type='text' id='repwd' name='repwd' placeholder='새 비밀번호를 다시 입력하세요'/>";
-					html += "<button type='button'onclick='check3();'>확인</button>";
+					html += "<label style='margin-left:13.8%;'>새 비밀번호 확인 :</label>";
+					html += "<input type='text' id='repwd' name='repwd' style='margin-left:3%;' placeholder='비밀번호를 다시 입력하세요'/>";
 					html += "</div>";
+					html += "<button type='button' class='btn btn-outline-success btn-sm' style='margin-left: 46%;margin-top: 15px;' onclick='check3();'>확인</button>";
 				$(".find-pwd").html(html);
 			}
 		});
@@ -212,9 +196,9 @@ function check3(){
 			url:"${pageContext.request.contextPath}/member/updatePwd.do",
 			data:All,
 			success:function(data){
-				var	html = "<div>";
-					html += "<p id='p1'>비밀번호가 변경되었습니다.</p>"
-					html += "<p id='p2'>변경된 비밀번호로 로그인 해주세요 :).</p>"
+				var	html = "<div style='margin-left: 3%;margin-top: 52px;'>";
+					html += "<p>비밀번호가 변경되었습니다.</p>"
+					html += "<p>변경된 비밀번호로 로그인 해주세요 :)</p>"
 					html += "</div>";
 					//html += "</form>";
 				$(".find-pwd").html(html);

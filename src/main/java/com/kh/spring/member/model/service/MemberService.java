@@ -37,6 +37,8 @@ public interface MemberService {
 
 	int updatePwd(Member m);
 
+	int countmemberId(Member m);
+
 
 
 }

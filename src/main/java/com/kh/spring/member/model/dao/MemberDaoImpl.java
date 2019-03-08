@@ -96,6 +96,11 @@ public class MemberDaoImpl implements MemberDao {
 		return SqlSession.update("member.updatePwd",m);
 	}
 
+	@Override
+	public int countmemberId(Member m) {
+		return SqlSession.selectOne("member.countmemberId",m);
+	}
+
 	
 
 }
