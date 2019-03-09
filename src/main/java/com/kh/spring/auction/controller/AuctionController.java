@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,8 +34,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.CategoryMacro;
-import com.kh.spring.thing.model.vo.Product;
+import com.kh.spring.thing.model.vo.Order;
 
 @Controller
 public class AuctionController {
@@ -42,6 +44,9 @@ public class AuctionController {
 	
 	@Autowired
 	AuctionService auctionService;
+	
+	@Autowired
+	ThingService thingService;
 	
 	@RequestMapping("/auctionWriter.do")
 	public String auctionWriter(Model model) {
@@ -323,7 +328,12 @@ public class AuctionController {
 			String memberNo = resultMap.get("MEMBER_ID");
 			
 			if(m.getMemberId().equals(memberNo)) {
-				map.put("cnt" , 1);
+				
+				if(resultMap.get("WINNING_BID").equals("Y")) {
+					map.put("cnt" , 2);
+				} else {
+					map.put("cnt" , 1);					
+				}
 			}
 		} else {
 			map.put("cnt" , 0);
@@ -331,20 +341,59 @@ public class AuctionController {
 
 		return map;
 	}
-	/*
-	@RequestMapping(value="/auction/auctionPerchase/{productNo}", method=RequestMethod.GET)
-	public ModelAndView movePerchase(@PathVariable("productNo") int productNo,
+	
+	@RequestMapping(value="/auction/auctionPerchase/{auctionNo}", method=RequestMethod.GET)
+	public ModelAndView movePerchase(@PathVariable("auctionNo") int auctionNo,
 							ModelAndView mav,HttpSession session) {
 		
 		Member m = (Member) session.getAttribute("memberLoggedIn");
-		Product p = thingService.selectOne(productNo);
-		logger.debug(m);
+		
+		// 넘겨줄 값이 시퀀스 번호 , 이름 , 가격
+		Map<String , Object > auction = auctionService.selectAuctionHistory(String.valueOf(auctionNo));
+		
+		String auctionTitle = auctionService.selectAuctionTitle(auctionNo);
+		
+		Map<String , String> result = new HashMap<>();
+		String mainImg = auctionService.selectMainImg(auctionNo);
+		result.put("auctionNo", String.valueOf(auctionNo));
+		result.put("auctionTitle", auctionTitle);
+		result.put("auctionPrice", String.valueOf(auction.get("PRICE")));
+		result.put("auctionMainImg", mainImg);
 		
 		mav.addObject("member", m);
-		mav.addObject("product",p);
-		mav.setViewName("item/perchase");
+		mav.addObject("auction",result);
+		mav.setViewName("auction/auctionPerchase");
 		
 		return mav;
 	}
-	*/
+	
+	
+	 	@RequestMapping(value="/auction/perchase/complete", method=RequestMethod.POST)
+	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
+		
+		int nProductNo = order.getSeqProductNo(); 
+		int auctionPrice = order.getOrderPrice();
+		
+		Map<String , Object> temp = new HashMap<>();
+		temp.put("nProductNo" , nProductNo);
+		temp.put("auctionPrice" , auctionPrice);
+		
+		
+		thingService.insertOrder(order);
+		// 결제 되었을시에 
+		// auction 테이블의 auction_check컬럼의 값을 Y로 바꾼다.
+		// auction_history테이블의 winning_bid컬럼의 값을 Y로 바꾼다.
+		
+		// thingService.updateOnSale(nProductNo);
+		
+		auctionService.updateAuctionCheck(nProductNo);
+		auctionService.updateWinningBid(temp);
+		
+		mav.addObject("order", order);
+		mav.setViewName("mypage/purchases");
+		
+		return mav;
+	}
+	 
+	
 }

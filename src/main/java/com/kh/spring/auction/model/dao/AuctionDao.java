@@ -30,4 +30,12 @@ public interface AuctionDao {
 
 	Map<String, String> selectAuctionBid(Map<String, Object> temp);
 
+	String selectMainImg(int auctionNo);
+
+	void updateAuctionCheck(int nProductNo);
+
+	void updateWinningBid(Map<String , Object> temp);
+
+	String selectAuctionTitle(int auctionNo);
+
 }

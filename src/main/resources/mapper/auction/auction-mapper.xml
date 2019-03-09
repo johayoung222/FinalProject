@@ -49,5 +49,19 @@
 	</select>
 	<resultMap type="map" id="selectAuctionBid"></resultMap>
 	
+	<select id="selectMainImg" resultType="string">
+		select auction_image_main from auction where auction_no = #{auctionNo}
+	</select>
 	
+	<update id="updateAuctionCheck">
+		update auction set auction_check = 'Y' where auction_no = #{nProductNo}
+	</update>
+	
+	<update id="updateWinningBid">
+		update auction_history set winning_bid = 'Y' where seq_auction_no = #{nProductNo} and price = #{auctionPrice}
+	</update>
+	
+	<select id="selectAuctionTitle" resultType="string">
+		select auction_title from auction where auction_no = #{auctionNo}
+	</select>
 </mapper>
