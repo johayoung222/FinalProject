@@ -25,6 +25,9 @@
 	white-space : nowrap;
 	text-overflow: ellipsis;
 }
+#tbl-productList{
+	text-align:center;
+}
 </style>
 <br />
 <section id="productList-container" class="productList-container">
@@ -53,10 +56,6 @@
 			<th>마일리지</th>
 			<th>상품설명</th>
 			<th>등록일자</th>
-			<th>추천상품여부</th>
-			<th>중고여부</th>
-			<th>대분류코드</th>
-			<th>소분류코드</th>
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
@@ -75,10 +74,6 @@
 				<td>${p.PRODUCT_MILEGE}</td>
 				<td>${p.PRODUCT_DESCRIPTION}</td>
 				<td>${p.PRODUCT_ENROLL_DATE}</td>
-				<td>${p.PRODUCT_RECOMMEND}</td>
-				<td>${p.PRODUCT_KINDS}</td>
-				<td>${p.CATEGORY_MICRO}</td>
-				<td>${p.CATEGORY_MACRO}</td>
 			</tr>			
 			</c:forEach>
 		</c:if>

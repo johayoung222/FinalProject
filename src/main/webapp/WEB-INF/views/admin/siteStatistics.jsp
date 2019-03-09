@@ -162,7 +162,7 @@ function regist(){
 function auction(){
 	//console.log("경매 상품 비율");
 	$.ajax({
-    	url:"${pageContext.request.contextPath}/admin/auctionCategory.do",
+    	url:"${pageContext.request.contextPath}/admin/siteAuctionCategory.do",
     	dataType:"json",
     	success:function(data){
     	//console.log(data);

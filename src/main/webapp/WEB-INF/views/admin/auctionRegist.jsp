@@ -21,6 +21,7 @@
 }
 #tbl-auctionRegist{
 	table-layout: fixed;
+	text-align:center;
 }
 .tbl-tr th{
 	width:100px;
@@ -31,6 +32,10 @@
 	overflow:hidden;
 	white-space : nowrap;
 	text-overflow: ellipsis;
+}
+.auctionRegistImg{
+	width:70px;
+	height:50px;
 }
 </style>
 <br />
@@ -44,7 +49,7 @@
 			<th>시작일</th>
 			<th>종료일</th>
 			<th>시작가</th>
-			<th>상품설명</th>
+			<th>사진</th>
 			<th>판매자아이디</th>
 		</tr>
 	</table>
@@ -65,7 +70,7 @@ $(function(){
 				html += "<td>"+data[i].SDATE+"</td>";
 				html += "<td>"+data[i].EDATE+"</td>";
 				html += "<td>"+data[i].AUCTION_PRICE+"</td>";
-				html += "<td>"+data[i].AUCTIONDETAIL+"</td>";
+				html += "<td><img class='auctionRegistImg' src='${pageContext.request.contextPath}/resources/upload/"+data[i].AUCTION_IMAGE_MAIN+"' ></td>";
 				html += "<td>"+data[i].AUCTION_MEMBER+"</td></tr>";
 			}
 			$("#tbl-auctionRegist").append(html);
@@ -78,7 +83,7 @@ $(function(){
 $(document).on('click','.tableTr',function(){
 	//$("#tbl-regist").css("display","none");
 	var auctionRegistNo = $(this).children("td:first").text();
-	console.log(auctionRegistNo);
+	//console.log(auctionRegistNo);
 	var win = window.open("${pageContext.request.contextPath}/admin/auctionCategory.do?auctionRegistNo="+auctionRegistNo, "대/소분류 선택", "width=400,height=500,location=no,status=no,top=150,left=600");
 });
 

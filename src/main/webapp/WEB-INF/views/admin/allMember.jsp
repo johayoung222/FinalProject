@@ -33,6 +33,9 @@ input[type=submit].btn-block {
 .allmember-nav{
 	width:100%;
 }
+#tbl-allMember{
+	text-align:center;
+}
 
 </style>
 <br />
@@ -57,7 +60,7 @@ input[type=submit].btn-block {
 			<th>아이디</th>
 			<th>이름</th>
 			<th>성별</th>
-			<th>나이</th>
+			<th>생년월일</th>
 			<th>주소</th>
 			<th>우편번호</th>
 			<th>전화번호</th>

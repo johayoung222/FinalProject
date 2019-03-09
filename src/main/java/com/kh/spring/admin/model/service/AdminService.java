@@ -62,6 +62,19 @@ public interface AdminService {
 
 	void updateRegist(int registNo);
 	
+	int registAuction(int registNo);
+	
+	List<Map<String, Object>> registCancel();
+	
+	List<Map<String, String>> registList(int cPage, int numPerPage);
+
+	int countpaidregistList();
+	
+	List<Map<String, String>> registListMore(int cPage, int numPerPage);
+
+	int countpaidregistListMore();
+	
+	
 	//상품 리스트
 	List<Map<String, String>> productList(int cPage, int numPerPage);
 	
@@ -101,13 +114,6 @@ public interface AdminService {
 	
 	int countquestionAnswerY();
 	
-
-	//신고접수 리스트
-	List<Map<String, String>> reportList(int cPage, int numPerPage);
-
-	int countreportList();
-
-	
 	//사이트 통계
 	List<Map<String, Object>> memberGender();
 
@@ -118,6 +124,14 @@ public interface AdminService {
 	List<Map<String, Object>> auctionCategory();
 
 	List<Map<String, Object>> questionCategory();
+
+	
+
+	
+
+	
+
+	
 
 	
 

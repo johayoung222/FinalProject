@@ -14,11 +14,21 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ProductIo {
+	private int seqMemberNo;
 	private int seqProductNo;
 	private String productName;
 	private int productIoPrice;
+	private String productIoAuction;
+	private String productIoManuFacturer;
 	private int productIoAmount;
-	private String productBuyer;
-	private String productCategory;
-	private String productOrderNo;
+	private String productIoImage;
+	private String productIoRealImage;
+	private int productIoMilege;
+	private String productIoDescription;
+	private Date productIoDate;
+	private String productKinds;
+	private String categoryMicro;
+	private String categoryMacro;
+	private String productAdminDescription;
+	
 }

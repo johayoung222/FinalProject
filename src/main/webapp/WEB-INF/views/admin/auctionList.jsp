@@ -20,6 +20,7 @@
 }
 #tbl-auctionList{
 	table-layout: fixed;
+	text-align:center;
 }
 .tbl-tr th{
 	width:100px;
@@ -30,6 +31,10 @@
 	overflow:hidden;
 	white-space : nowrap;
 	text-overflow: ellipsis;
+}
+.auctionRegistImg{
+	width:70px;
+	height:50px;
 }
 
 </style>
@@ -56,7 +61,7 @@
 			<th>시작일</th>
 			<th>종료일</th>
 			<th>시작가</th>
-			<th>상품설명</th>
+			<th>메인사진</th>
 			<th>판매자아이디</th>
 			<th>판매자핸드폰</th>
 			<th>대분류</th>
@@ -75,7 +80,7 @@
 				<td>${a.SDATE}</td>
 				<td>${a.EDATE}</td>
 				<td>${a.AUCTION_PRICE}</td>
-				<td>${a.AUCTIONDETAIL}</td>
+				<td><img class="auctionRegistImg" src="${pageContext.request.contextPath}/resources/upload/${a.AUCTION_IMAGE_MAIN}"></td>
 				<td>${a.AUCTION_MEMBER}</td>
 				<td>${a.AUCTION_PHONE}</td>
 				<td>${a.AUCTION_CATEGORY_MACRO}</td>
