@@ -48,6 +48,9 @@
 	<c:if test="${brandNew != null }">
 		<h2>새로 등록된 상품 리스트</h2>
 	</c:if>
+	<c:if test="${isRecommend != null }">
+		<h2>에디터 추천 상품 리스트</h2>
+	</c:if>
 	<br />
 	</div>
 	<c:if test="${empty cpList }">

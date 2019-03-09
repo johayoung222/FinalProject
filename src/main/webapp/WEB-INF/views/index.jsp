@@ -177,6 +177,11 @@ a {
 	cursor: pointer;
 	font-size: 20px;
 }
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -254,6 +259,7 @@ a {
 </h3>
 <br />
 <br />
+
 <div class="new-product">
 	<c:if test="${not empty cpList }">
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
@@ -269,6 +275,7 @@ a {
 		<c:if test="${vs.count%3 == 0 }"></c:if>
 		</c:forEach>
 	</c:if>
+
 </div>
 
 <br /><br />

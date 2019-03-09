@@ -29,4 +29,6 @@ public interface ItemService {
 
 	List<ProductAsk> selectAskAll(int productNo);
 
+	List<Product> selectUpItems();
+
 }
