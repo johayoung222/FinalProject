@@ -28,7 +28,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body {
+body{
 	width: 100%;
 }
 [name="MainSearchFrm"]{
@@ -40,63 +40,49 @@ body {
     margin-left: 150px; 
 	border: 2px solid blue;
 }
-
 #search2 {
 	padding: 10px;
 	position:relative;
 	right:50px;
 }
-
 #nav-item1 {
 	border-left: 1px solid lightgray;
 }
-
 .nav-link {
 	border-right: 1px solid lightgray;
 }
-
 #button_ {
 	background: white;
 }
-
 .nav-link:hover {
 	color: #7151FC;
 	border-bottom: 2px solid #7151FC;
 }
-
-#container {
-	border: 0px;
-	margin-left:500px;
-}
-
-#box-link {
+#box-link{
 	display: flex;
 	justify-content: space-between;
+	margin-left: 65%;
 	background-color: rgb(246, 241, 252);
+	width: 330px;
 	border-radius: 5px;
 	height: 30px;
 }
-
 #box-link>div {
 	width: 100px;
 	text-align: center;
 	padding-top: 4px;
 	border-right: 1px solid white;
 }
-
 #box-link a {
 	text-decoration: none;
 }
-
 #box-link a:hover {
 	color: white;
 }
-
 #collapseExample {
 	width: 260px;
 	margin-left: -40px;
 }
-
 #button_ {
 	cursor: pointer;
 	background-color: inherit;
@@ -104,26 +90,52 @@ body {
 .item-link{
 	color:gray;
 }
-
+#searchList{
+	width: 400px;
+	position: absolute;
+	left: 35.3%;
+	z-index: 1000;
+	background-color: white;
+}
+#searchList table{
+	border-collapse: collapse;
+	width: 400px;
+	border: 1px solid black;
+}
+#searchList table tr:hover{
+	background-color: lightgray;
+	cursor: pointer;
+}
 </style>
 
 </head>
 <body>
-	<div id="container">
+	<div id="re-container">
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
-				<div id="box-link5">
-					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+			<style>
+			#box-link{
+				width: 430px;
+				margin-left: 55%;
+			}
+			</style>
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<style>
+				#box-link{
+					width: 530px;
+					margin-left: 45%;
+				}
+				</style>
+					<div id="box-link5">
 						<a class="item-link"
 							href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-					</c:if>
-				</div>
+					</div>
+				</c:if>
 				<div id="box-link4">
 					<i class="fa fa-truck"></i> <a class="item-link" id="gotobasket"
-						href="${pageContext.request.contextPath }/item/basket.do">장바구니</a>
+						href="${pageContext.request.contextPath }/item/basket.do?memberNo=${memberLoggedIn.getSeqMemberNo()}">장바구니</a>
 				</div>
 			</c:if>
-		
 			<div class="box-link1">
 				<c:if test="${memberLoggedIn == null }">
 					<a class="item-link"
@@ -136,8 +148,8 @@ body {
 			</div>
 			<div class="box-link2">
 				<c:if test="${memberLoggedIn == null }">
-					<a class="item-link"
-						href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
+						<a class="item-link"
+							href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
 				</c:if>
 				<c:if test="${memberLoggedIn != null }">
 					<a id="button_" data-toggle="collapse"
@@ -173,28 +185,9 @@ body {
 				<a class="item-link"
 					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터</a>
 			</div>
-
 		</div>
 	</div>
 
-<style>
-	#searchList{
-		width: 400px;
-		position: absolute;
-		left: 35.3%;
-		z-index: 1000;
-		background-color: white;
-	}
-	#searchList table{
-		border-collapse: collapse;
-		width: 400px;
-		border: 1px solid black;
-	}
-	#searchList table tr:hover{
-		background-color: lightgray;
-		cursor: pointer;
-	}
-	</style>
 	<div id="header-container">
 		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
@@ -241,16 +234,23 @@ body {
 			}
 		});
 	});
-	
-
-	
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
+	<style>
+	#navbarNav{
+	}
+	#navbarNav ul{
+	}
+	#navbarNav ul li{
+		width: 130px;	
+		text-align: center;
+	}
+	.nav-link{
+		font-size: 14px;
+		border: none;
+	}
+	</style>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img
-			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
-			alt="스프링로고" width="50px" style="border-radius: 50px;" />
-		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -490,9 +490,4 @@ body {
 			function logout() {
 				window.locatiom.href = "${pageContext.request.contextPath}/member/memberLogout.do";
 			}
-			
-			$(document).ready(function(){
-				var seqMemberNo = ${memberLoggedIn.getSeqMemberNo()};
-				$("#gotobasket").attr("href","${pageContext.request.contextPath}/item/basket.do?memberNo="+ seqMemberNo)
-			});
 		</script>
