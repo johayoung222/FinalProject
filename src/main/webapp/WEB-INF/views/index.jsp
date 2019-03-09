@@ -106,10 +106,7 @@
 
 .hm-good {
 	display: inline-block;
-}
-
-.hm-good {
-    width: 271px;
+    width: 241px;
     height: 344px;
     padding: 8px 18px;
 }
@@ -181,6 +178,10 @@ a {
 	border-radius: 5px;
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
+}
+
+.blinkEle1 , .blinkEle2{
+	display:none;
 }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -283,19 +284,21 @@ a {
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
-
+<jsp:useBean id="now" class="java.util.Date" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+ 
 <c:if test="${empty auctionList }">
 	<div>새로 등록된 경매 상품이 없습니다.</div>
 </c:if>
 <div class="hm-container">
 <c:if test="${not empty auctionList }">
-	<c:forEach items="${auctionList }" var="a">
+	<c:forEach items="${auctionList }" var="a" varStatus="vs">
 			<div class="hm-good">
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle">다른 사용자가 구매중 , 경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide blinkEle">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle2">내가 구매중 , 내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
@@ -311,6 +314,9 @@ a {
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
 					</div></a>
 			</div>
+			<input type="hidden" id="sdate${vs.count }" value="${a.SDATE }" />
+			<input type="hidden" id="edate${vs.count }" value="${a.EDATE }" />
+
 		</c:forEach>
 </c:if>
 </div>
@@ -359,6 +365,48 @@ a {
 <hr>
 
 <script>
+/* 현재 시간을 구하는 함수 */
+function getTime() {
+	today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var MM = today.getMinutes();
+	var MM = today.getMinutes();
+	var ss = today.getSeconds();
+
+	if(dd<10) { dd='0'+dd } 
+	if(mm<10) { mm='0'+mm } 
+	if(hh<10) { hh='0'+hh }
+	
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	return today;
+}
+
+
+// 온로드 됬을때 경매 진행중인지 ? 아니면 내가 경매에 참여중인지 찍어주기 위한 소스코드
+	$(function(){
+		for(var i = 1; i <= 4;i++) {
+			var sdate = $("#sdate"+i).prop("value");
+			var edate = $("#edate"+i).prop("value");
+			today = getTime();			
+			
+			var result = 0;
+			if(today>sdate) {
+				result++;
+			}
+			if(today<=edate) {
+				result++;
+			}
+			
+			if(result == 2) {
+				alert(i+"경매진행중인게 있다.");
+			}
+		}
+		
+	});
+	
 setInterval(function(){
 	  $(".blinkEle").toggle();
 	}, 500);

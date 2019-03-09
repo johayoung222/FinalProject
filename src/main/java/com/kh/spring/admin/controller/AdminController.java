@@ -452,8 +452,11 @@ public class AdminController {
 		
 		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
 		map.put("seqMemberNo",auction.getSeqMemberNo());
-		map.put("sdate",auction.getSdate());
-		map.put("edate",auction.getEdate());
+		String sdate = auction.getSdate()+":00";
+		map.put("sdate",sdate);
+		String edate = auction.getEdate()+":00";
+		map.put("edate",edate);
+		
 		map.put("auctionTitle",auction.getAuctionTitle());
 		map.put("auctionImageMain",auction.getAuctionImageMain());
 		map.put("auctionImageSub1",auction.getAuctionImageSub1());

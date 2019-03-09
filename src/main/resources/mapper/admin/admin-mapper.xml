@@ -192,7 +192,7 @@
 	
 	<!-- auctionRegist 승인시 auction테이블로 insert -->
 	<insert id="inAuction" parameterType="map">
-		insert into auction values(seq_auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
+		insert into auction values(auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
 			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
