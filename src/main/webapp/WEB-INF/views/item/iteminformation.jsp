@@ -343,6 +343,8 @@ function itemAsk(){
 			}
 		});
 }
+</script>
+<script>
 function insertBasket(){
 	var seqMemberNo = $('input[name=seqMemberNo]').val();
 	var seqProductNo = $('input[name=seqProductNo]').val();

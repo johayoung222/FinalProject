@@ -195,10 +195,7 @@ body {
 		cursor: pointer;
 	}
 	
-	form{
-		text-align:center;
 	
-	}
 
 	</style>
 	<div id="header-container">

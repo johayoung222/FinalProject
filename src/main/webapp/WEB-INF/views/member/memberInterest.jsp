@@ -47,11 +47,11 @@
 		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
 		<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label><br />
 		</c:if>
-		<c:if test="${vs.count%3!=0 }">
-		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
-		<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label>
-		</c:if>
-		</c:forEach>
+		  <c:if test="${vs.count%3!=0 }">
+		  <input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
+		  <label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label>
+		   </c:if>
+		 </c:forEach>
 		<br />
 		<input type="submit" value="선택 완료" />
 		<button onclick="skip();">건너뛰기</button>
@@ -67,7 +67,7 @@ function interestEnd(){
 			interest += $(item).val();
 		}
 	});
-	console.log(interest);
+
 	
 	opener.memberEnrollFrm.memberInterest.value = interest;
 	opener.memberEnrollFrm.submit();
@@ -77,25 +77,8 @@ function skip(){
 	opener.memberEnrollFrm.submit();
 	self.close();
 }
+
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
