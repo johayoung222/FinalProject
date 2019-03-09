@@ -28,4 +28,6 @@ public interface AuctionService {
 
 	int auctionHistoryInsert(Map<String, Object> map);
 
+	Map<String, String> selectAuctionBid(Map<String, Object> temp);
+
 }

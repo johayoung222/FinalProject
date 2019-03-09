@@ -379,6 +379,7 @@ body {
 		</script>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/detail.css" />
 <!-- header 끝 -->
+
 	<c:forEach items="${auction }" var="a">
 
   <body>
@@ -485,6 +486,9 @@ body {
 										<span class="input-group-btn">
 										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
 										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}')">경매 참여</button>
+
+										  <button class="btn btn-danger" type="button" id="bidSubmit"
+										  onclick="location.href='${pageContext.request.contextPath}/auction/auctionPerchase/${product.seqProductNo }'">결제 하기</button>
 										</span>
 									</div><!-- /input-group -->
 								</div><!-- /.col-lg-6 -->
@@ -653,6 +657,7 @@ body {
 	<script>
 	 var today;
 	$(function() {
+		$("#bidSubmit").hide();
 		 var MemberNo = ${memberLoggedIn != null?memberLoggedIn.seqMemberNo:"0"};
 		 var auctionMemberNo = ${a.SEQ_MEMBER_NO };
 		 var edate = '${a.EDATE}';
@@ -692,12 +697,14 @@ body {
 		var yyyy = today.getFullYear();
 		var hh = today.getHours();
 		var MM = today.getMinutes();
+		var MM = today.getMinutes();
+		var ss = today.getSeconds();
 
 		if(dd<10) { dd='0'+dd } 
 		if(mm<10) { mm='0'+mm } 
 		if(hh<10) { hh='0'+hh }
 		
-		today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+		today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
 		return today;
 	}
 	<%-- 경매 참여	 --%>		
@@ -866,39 +873,40 @@ body {
 	
 	
 	playAlert = setInterval(function() {
-		// alert("${a.EDATE}");
+		console.log("${a.EDATE}:00");
 		var today = getTime();
-		// alert(today);
-		var end = "${a.EDATE}";
+		console.log(today);
+		var end = "${a.EDATE}:00";
 		
-		if(today== end){
+		var auctionNo = ${a.AUCTION_NO};
+		
+		
+		if(today >= end){
 			if(${memberLoggedIn != null}) {
-				
-				alert("낙찰 되었습니다.");
-				
 				$.ajax({
-					type : 'POST',
-					data : "auctionNo": ${a.AUCTION_NO} ,
-					url : "<c:url value='/auctionBid'/>",
-					dataType : "json",
-					processData: false,
-					contentType: false, 
+					url : "${pageContext.request.contextPath}/auctionBid.do",
+					data: {auctionNo:auctionNo} ,
+					dataType: "json",
 					success : function(data) {
 						if (data.cnt > 0) {
-							alert("저장됐습니다.");
-							location.href = "${pageContext.request.contextPath }";
+							$("#bidSubmit").show();
+							alert("버튼보임");
+							clearInterval(playAlert);
+							// location.href = "${pageContext.request.contextPath }";
 						} else {
-							alert("저장에실패");
+							alert("버튼안보임");
+							clearInterval(playAlert);
+							// 낙찰자가 아닌 경우 아무런 행동하지 않는다.
 						} 
 					},
 					error : function(error) {
 						  alert("error" + error);
-	
+							clearInterval(playAlert);
 					}
 				});
 				
 				// 반복 종료를 위한 코드
-				clearInterval(playAlert);
+				// clearInterval(playAlert);
 			}
 			
 		}

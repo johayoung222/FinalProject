@@ -69,5 +69,10 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.auctionHistoryInsert(map);
 	}
 
+	@Override
+	public Map<String, String> selectAuctionBid(Map<String, Object> temp) {
+		return auctionDao.selectAuctionBid(temp);
+	}
+
 	
 }
