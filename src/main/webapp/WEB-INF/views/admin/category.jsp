@@ -34,8 +34,15 @@
 #exampleFormControlTextarea1{
 	width:300px;
 }
+#registAdminDescription{
+	width:300px;
+}
 .form-control:disabled, .form-control[readonly]{
 	background-color : #ffffff;
+}
+.main_img{
+	width:400px;
+	height:400px;
 }
 </style>
 
@@ -55,7 +62,7 @@
 		<label for="registNo">상품명</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="registName" type="text" readonly> <br />
 		
-		<label for="registNo">제조사</label>&nbsp;&nbsp;
+		<label for="registNo" >제조사</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="registManufacturer" type="text" placeholder="입력하세요"> <br />
 		
 		<label for="registNo">상품가격</label>&nbsp;&nbsp;
@@ -65,15 +72,26 @@
 		<input class="form-control form-control-sm" id="registAmount" type="text" readonly> <br />
 		
 		<label for="registNo">신청날짜</label>&nbsp;&nbsp;
-		<input class="form-control form-control-sm" id="registDate" type="text" readonly> <br /><br />
+		<input class="form-control form-control-sm" id="registDate" type="text" readonly> <br />
 		
+		
+		<label for="registNo">메인 이미지</label>&nbsp;&nbsp;
+		<img class="main_img" src="" /><br />
+		
+		<label for="exampleFormControlTextarea1">사용자 상세설명</label>
 		<div class="form-group">
 		    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" readonly></textarea>
+		</div>
+		
+		<label for="registAdminDescription">관리자 상세설명</label>
+		<div class="form-group">
+		    <textarea class="form-control" id="registAdminDescription" rows="3" ></textarea>
 		</div><br />
 		<input type="hidden" id="registImage" value="" />
 		<input type="hidden" id="registRealImage" value=""/>
 		<input type="button" class="btn btn-primary" id="btn" value="신청YES"  />
-		<input type="reset" class="btn btn-primary" value="신청NO" onclick="window.close()" />
+		<input type="button" class="btn btn-danger" value="신청NO" id="btnn" />
+		<input type="reset" class="btn btn-secondary" value="닫기" onclick="window.close()" />
 	</form>
 </div>
 <script>
@@ -92,6 +110,7 @@ $(function(){
 			$("#registAmount").val(data[0].REGIST_AMOUNT);
 			$("#registDate").val(data[0].registDate);
 			$("#exampleFormControlTextarea1").html(data[0].REGIST_DESCRIPTION);
+			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/thing/"+data[0].REGIST_REAL_IMAGE);
 		},error:function(){
 			console.log("ajax요청 실패");
 		}
@@ -140,50 +159,56 @@ $("#btn").on('click',function(){
 	var cMa = $("#categoryMa option:selected").val();
 	var cMi = $("#categoryMi option:selected").val();
 	var registManufacturer = $("#registManufacturer").val();
-	alert("판매신청OK 판매리스트로 이동!");
-	//opener.parent.location.reload();
-	//window.close();
 	var registNo = $("#registNo").val();
-	
-	//var registName = $("#registName").val();
-	//var registPrice = $("#registPrice").val();
-	//var registAmount = $("#registAmount").val();
-	//var registDate = $("#registDate").val();
-	//var registDescription = $("#exampleFormControlTextarea1").text();
-	//var registImage = $("#registImage").val();
-	//var registRealImage = $("#registRealImage").val();
-	
-	
-	//var param = {
-	//		registNo:registNo,
-	//		registName:registName,
-	//		registPrice:registPrice,
-	//		registAmount:registAmount,
-	//		registDate:registDate,
-	//		registDescription:registDescription,
-	//		registImage:registImage,
-	//		registRealImage:registRealImage,
-	//		cMa:cMa,
-	//		cMi:cMi};
-	//console.log(param);
-	
-	$.ajax({
-		url : "${pageContext.request.contextPath}/admin/inProduct.do",
-		data : {registNo:registNo,
-			cMa:cMa,
-			cMi:cMi,
-			registManufacturer:registManufacturer},
-		type : "GET",
-		dataType : "json",
-		success :function(data){
-			opener.parent.location.reload();
-			window.close();
-		},error : function(){
-			console.log("ajax 요청 실패!!");
-		}
-	});
+	var registAdminDescription = $("#registAdminDescription").val();
+	console.log(registAdminDescription);
+		
+	if((cMa == "") || (cMi == "")){
+		alert("대소분류를 선택하세요.");
+	}else if(registManufacturer==""){
+		alert("제조사를 작성해 주세요.");
+	}else if(registAdminDescription==""){
+		alert("관리자 상세설명을 작성하세요");
+	}else{
+		$.ajax({
+			url : "${pageContext.request.contextPath}/admin/inProduct.do",
+			data : {registNo:registNo,
+				cMa:cMa,
+				cMi:cMi,
+				registManufacturer:registManufacturer,
+				registAdminDescription:registAdminDescription},
+			type : "GET",
+			dataType : "json",
+			success :function(data){
+				opener.parent.location.reload();
+				window.close();
+			},error : function(){
+				console.log("ajax 요청 실패!!");
+			}
+		});
+		alert("판매신청OK 판매리스트로 이동!");
+	}
 });
 
+$("#btnn").on('click',function(){
+	var registNo = $("#registNo").val();
+	if(confirm("정말 판매신청을 취소 하시겠습니까??")==true){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/admin/registAuction.do",
+			data:{registNo:registNo},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				alert("판매신청 취소 성공!!");
+				opener.parent.location.reload();
+				window.close();
+			},error:function(){
+				console.log("ajax 요청 실패!!");
+			}
+		})
 
+	}
+	
+});
 
 </script>

@@ -226,47 +226,7 @@ a {
 <br />
 <br />
 <div id="newThing">
-	<script>
-	window.onload = function() {
-		$.ajax({
-    		url: "<%=request.getContextPath()%>/category/laptopPcEnd.do",
-			type : "get",
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-				
-				var attImage;
-				attImage=data[0].registRealImage.split(',');
-				
-				var attCopy= attImage[1];
-				
-				for(var i=1; i<data.length; i++){
-					attImage=data[i].registRealImage.split(',');
-					attCopy= attCopy +","+ attImage[1]; 
-					console.log(attCopy);
-				}
-				
-				var realImage=attCopy.split(',');
-				console.log(realImage);
-				
-				var html="";
-				for(var i=realImage.length-1; i>=0; i--){
-					var newThing = document.getElementById("newThing");
-					html = html + "<a href='${pageContext.request.contextPath}/category/laptopPc'> <img "+
-					 "src='${pageContext.request.contextPath }/resources/upload/thing/"+realImage[i]+"' "+
-					 "id='favorite1' width='120px' height='100px' />";
-				}
-				newThing.innerHTML = html;				
-				
-				
-			}
-
-			});
-
-			
-
-		}
-	</script>
+	
 
 </div>
 <br /><br />
