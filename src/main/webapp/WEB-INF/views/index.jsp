@@ -138,9 +138,6 @@
 }
 
 a {
-    cursor: pointer;
-}
-a {
     color: inherit;
     text-decoration: none;
 }
@@ -181,6 +178,10 @@ a {
 	border-radius: 5px;
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
+}
+.pImg{
+	width: 200px;
+	height: 180px;
 }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -244,7 +245,6 @@ a {
 				id="favorite5" width="120px" height="100px" />
 			</a>
 			<div>
-
 				<pre><strong>      컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
@@ -265,14 +265,13 @@ a {
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" height="180px" width="240px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
 				<span>${p.productPrice } 원</span>
 			</div>
 		</div>
-		<c:if test="${vs.count%3 == 0 }"></c:if>
 		</c:forEach>
 	</c:if>
 
