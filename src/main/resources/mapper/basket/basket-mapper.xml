@@ -11,7 +11,7 @@
 		insert into basket values (seq_basket_no.nextval, #{seqMemberNo}, #{seqProductNo})
 	</insert>
 	<select id="selectProductList" resultMap="basketMap">
-	select * from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo}
+	select * from basket b join product p  on b.seq_product_no =p.seq_product_no join member m on b.seq_member_no =  m.seq_member_no where m.seq_member_no = #{seqMemberNo} and product_onsale = 'Y'
 	</select>
 	<resultMap type="map" id="basketMap"></resultMap>
 	<delete id="deletBasketList">
@@ -50,7 +50,7 @@
 	</select>
 	
 	<select id="selectNew" resultType="product">
-		select * from product order by product_enroll_date
+		select * from product where product_onsale = 'Y' order by product_enroll_date
 	</select>
 	
 	<select id="selectNowProduct" resultType="product">

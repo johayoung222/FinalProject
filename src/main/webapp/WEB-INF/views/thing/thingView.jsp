@@ -212,7 +212,7 @@
 	        <p>로그인을 하지 않은 회원은 판매하기를 이용할 수 없습니다..</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }member/memberMoveLogin.do';">로그인 하러가기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/member/memberMoveLogin.do';">로그인 하러가기</button>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>
