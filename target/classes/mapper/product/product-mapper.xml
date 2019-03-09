@@ -10,6 +10,6 @@
 	</resultMap>
 	
 	<select id="selectByCategory" resultType="product">
-		select * from product where category_macro = #{caKey} and category_micro = #{ciKey}
+		select * from product where category_macro = #{caKey} and category_micro = #{ciKey} and product_onsale = 'Y'
 	</select>
 </mapper>

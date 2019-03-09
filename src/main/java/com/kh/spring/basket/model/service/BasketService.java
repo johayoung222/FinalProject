@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.spring.basket.model.vo.Basket;
+import com.kh.spring.thing.model.vo.Product;
 
 public interface BasketService{
 
@@ -19,7 +20,6 @@ public interface BasketService{
 
 
 	Basket selectOneBasket(Basket b);
-  
-	
+
 
 }

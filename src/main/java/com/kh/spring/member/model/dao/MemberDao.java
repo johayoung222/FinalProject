@@ -35,6 +35,8 @@ public interface MemberDao {
 
 	int updatePwd(Member m);
 
+	int countmemberId(Member m);
+
 
 	
 

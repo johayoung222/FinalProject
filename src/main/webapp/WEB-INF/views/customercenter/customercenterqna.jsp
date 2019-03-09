@@ -96,7 +96,7 @@
 	height: 150px;
 }
 .btn-outline-primary{
-	width:70%;
+	width:75%;
 	height:100px;
 }
 
@@ -106,13 +106,18 @@
 	height: 45px;
 }
 
-.searchkeyword {
-	width: 60%;
+#searchkeyword {
+	width: 80%;
 	margin: 0 auto;
 }
 #searchFrm{
 	display: inline-block;
 	float:right;
+}
+.btn-info{
+	width: 16%;
+    height: 35px;
+    margin-top: -6px;
 }
 
 /* 버튼|서브밋 */
@@ -172,7 +177,6 @@
 			<c:if test="${memberLoggedIn.memberIsAdmin != null }">
 			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 				data-target="#exampleModalLong">자주 묻는 질문 쓰기</button>
-			</c:if>
 				<div class="modal fade" id="exampleModalLong" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalLongTitle"
 				aria-hidden="true">
@@ -205,10 +209,11 @@
 					</div>
 				</div>
 			</div>
+			</c:if>
 				
 			<form action="${pageContext.request.contextPath}/customercenter/searchKeyword.do" id="searchFrm" class="navbar-search pull-left">
-				<input type="text" name="searchkeyword" id="searchkeyword" class="search-query" placeholder="검색" />
-				<input type="submit" value="검색"/>
+				<input type="text" name="searchkeyword" id="searchkeyword" class="searchkeyword" placeholder="검색" />
+				<input type="submit" class="btn btn-info" value="검색"/>
 			</form>	
 		</div>
 		

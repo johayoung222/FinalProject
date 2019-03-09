@@ -692,13 +692,12 @@ body {
 		var yyyy = today.getFullYear();
 		var hh = today.getHours();
 		var MM = today.getMinutes();
-		var ss = today.getSeconds();
 
 		if(dd<10) { dd='0'+dd } 
 		if(mm<10) { mm='0'+mm } 
 		if(hh<10) { hh='0'+hh }
 		
-		today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
+		today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
 		return today;
 	}
 	<%-- 경매 참여	 --%>		
@@ -707,14 +706,17 @@ body {
 		var unq = aunq;
 		var curPrice=curprice;
 		var startDate=sdate;
-		var endDate =edate;	
+		var endDate =edate;
+		
+		console.log(edate);
+		console.log(today);
 		var inputBid =  document.getElementById("bidPrice").value;
 		var bidParams = $("#bid").serialize();
 		alert(bidParams);
 		if(today<startDate){
 			alert('경매진행 대기중 입니다.');
 			
-		} else if(today>endDate){
+		} else if(today>=endDate){
 			alert('종료 된 경매입니다.');
 		} else {
 			if(inputBid != null){
@@ -862,6 +864,46 @@ body {
 		});
 	}
 	
+	
+	playAlert = setInterval(function() {
+		// alert("${a.EDATE}");
+		var today = getTime();
+		// alert(today);
+		var end = "${a.EDATE}";
+		
+		if(today== end){
+			if(${memberLoggedIn != null}) {
+				
+				alert("낙찰 되었습니다.");
+				
+				$.ajax({
+					type : 'POST',
+					data : "auctionNo": ${a.AUCTION_NO} ,
+					url : "<c:url value='/auctionBid'/>",
+					dataType : "json",
+					processData: false,
+					contentType: false, 
+					success : function(data) {
+						if (data.cnt > 0) {
+							alert("저장됐습니다.");
+							location.href = "${pageContext.request.contextPath }";
+						} else {
+							alert("저장에실패");
+						} 
+					},
+					error : function(error) {
+						  alert("error" + error);
+	
+					}
+				});
+				
+				// 반복 종료를 위한 코드
+				clearInterval(playAlert);
+			}
+			
+		}
+		
+	}, 1000);
 </script>
 	</c:forEach>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>

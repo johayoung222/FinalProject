@@ -28,7 +28,6 @@ var payAmount = perchaseFrm.payAmount.value;
 var pay_method = perchaseFrm.payMethod.value;
 var dAddressInfo = perchaseFrm.dAddressInfo.value;
 var seqMemberNo = perchaseFrm.seqMemberNo.value;
-var seqProductNo = "${product.seqProductNo}";
 
 console.log(dName, dPhone, dEmail, dAddress, dfAddress, pName, payAmount, pay_method);
 
@@ -82,9 +81,7 @@ IMP.request_pay({ // param
                 "orderMethod": perchaseFrm.payMethod.value,
                 "orderPrice": perchaseFrm.payAmount.value,
                 "orderResult": "Y",
-                "seqMemberNo": seqMemberNo,
-                "orderAmount": 1,
-                "seqProductNo": seqProductNo
+                "seqMemberNo": seqMemberNo
             };
         var jParam = JSON.stringify(param);
         $.ajax({
@@ -180,24 +177,24 @@ IMP.request_pay({ // param
 			<div class="deliverInfo">
 				<div class="deliver-text"><span>배송정보</span></div>
 				<div class="deliver-name">
-					<label for="dName" class="text-success font-weight-bold">이름:</label><br />
+					<label for="dName" class="text-success font-weight-bold">이름</label><br />
 					<input type="text" id="dName" name="dName" class="form-control" value="${member.memberName }"/>
 				</div>
 				<div class="deliver-phone">
-					<label for="dPhone" class="text-success font-weight-bold">전화번호:</label>
+					<label for="dPhone" class="text-success font-weight-bold">전화번호</label>
 					<input type="text" id="dPhone" name="dPhone" class="form-control" value="${member.memberPhone }"/>
 				</div>
 				<div class="deliver-email">
-					<label for="dEmail" class="text-success font-weight-bold">이메일:</label>
+					<label for="dEmail" class="text-success font-weight-bold">이메일</label>
 					<input type="email" id="dEmail" name="dEmail" class="form-control" value="${member.memberEmail }"/>
 				</div>
 				<div class="deliver-address">
-					<label for="dfAddress" class="text-success font-weight-bold">우편번호:</label><br />
+					<label for="dfAddress" class="text-success font-weight-bold">우편번호</label><br />
 					<input type="text" id="dfAddress" class="form-control" name="dfAddress" />
 					<input type="button" id="findAddress" value="검색" class="btn btn-outline-info"/><br />
-					<label for="dAddress" class="text-success font-weight-bold">주소:</label>
+					<label for="dAddress" class="text-success font-weight-bold">주소</label>
 					<input type="text" id="dAddress" class="form-control" name="dAddress" />
-					<label for="dAddressInfo" class="text-success font-weight-bold">상세 주소:</label>
+					<label for="dAddressInfo" class="text-success font-weight-bold">상세 주소</label>
 					<input type="text" id="dAddressInfo" class="form-control" name="dAddressInfo" />
 				</div>
 				<hr />

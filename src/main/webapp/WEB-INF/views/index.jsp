@@ -164,9 +164,24 @@ a {
 	text-align: center;
 	transform: translate(5%,0%);
 }
-
-
-
+.productOne{
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 31px;
+}
+.moreItems{
+	float: right;
+	margin-right: 100px;
+	cursor: pointer;
+	font-size: 20px;
+}
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -207,21 +222,23 @@ a {
 	</div>
 	<div id="favorite">
 		<div>
-			<a href="${pageContext.request.contextPath}/category/laptopPc"> <img
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
+			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
 				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/Phone"> <img
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+			<img
 				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
 				id="favorite2" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/appliance">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/electronic.PNG"
 				id="favorite3" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/lifeFood">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/food.PNG"
 				id="favorite4" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/lifeHousehold">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
 				id="favorite5" width="120px" height="100px" />
@@ -238,53 +255,29 @@ a {
 
 <h3>
 	새로 등록된 상품 <span class="badge badge-secondary">New</span>
+	<span class="moreItems" id="moreItems">더 보기</span>
 </h3>
 <br />
 <br />
-<div id="newThing">
-	<script>
-	window.onload = function() {
-		$.ajax({
-    		url: "<%=request.getContextPath()%>/category/laptopPcEnd.do",
-			type : "get",
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-				
-				var attImage;
-				attImage=data[0].registRealImage.split(',');
-				
-				var attCopy= attImage[1];
-				
-				for(var i=1; i<data.length; i++){
-					attImage=data[i].registRealImage.split(',');
-					attCopy= attCopy +","+ attImage[1]; 
-					console.log(attCopy);
-				}
-				
-				var realImage=attCopy.split(',');
-				console.log(realImage);
-				
-				var html="";
-				for(var i=realImage.length-1; i>=0; i--){
-					var newThing = document.getElementById("newThing");
-					html = html + "<a href='${pageContext.request.contextPath}/category/laptopPc'> <img "+
-					 "src='${pageContext.request.contextPath }/resources/upload/thing/"+realImage[i]+"' "+
-					 "id='favorite1' width='120px' height='100px' />";
-				}
-				newThing.innerHTML = html;				
-				
-				
-			}
 
-			});
-
-			
-
-		}
-	</script>
+<div class="new-product">
+	<c:if test="${not empty cpList }">
+		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
+		<div class="productOne" id="${p.seqProductNo }">
+			<div class="pImg">
+				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+			</div>
+			<div class="pDesc">
+				<span>${p.productName }</span><br />
+				<span>${p.productPrice } 원</span>
+			</div>
+		</div>
+		<c:if test="${vs.count%3 == 0 }"></c:if>
+		</c:forEach>
+	</c:if>
 
 </div>
+
 <br /><br />
 <hr />	
 <h3>
@@ -369,5 +362,15 @@ a {
 setInterval(function(){
 	  $(".blinkEle").toggle();
 	}, 500);
+	
+$("#moreItems").on('click',function(){
+	location.href = "${pageContext.request.contextPath}/item/brandNew";
+});
+$(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -235,7 +235,8 @@ $("#couponList").on('click',function(){
 					}else if(data[i].COUPON_BENEFITS == 2){
 						html += "<td>15%</td>";
 					}
-					html += "<td>"+data[i].COUPON_EXPIRATION_DATE+"</td>";
+		            var day = new Date(data[i].COUPON_EXPIRATION_DATE); 
+					html += "<td>"+day+"</td>";
 					html += "<td>"+data[i].COUPON_STATUS+"</td></tr>";
 				}
 			}

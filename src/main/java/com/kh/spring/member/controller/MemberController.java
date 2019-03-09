@@ -467,37 +467,49 @@ public class MemberController {
     }
     
     //--------------------------------------------------------------------------
+	/* 아이디찾기 정보있을시 메일발송 */
     @RequestMapping("/member/findid.do")
-	public String mailSending(HttpServletRequest request,Model model) {
-		 String memberEmail = request.getParameter("memberEmail");
-		 logger.debug("memberEmail=="+memberEmail);
-		int certified = ((int) (Math.random() * 899999)+100000);
+    public String findid(HttpServletRequest request,Model model) {
+    	String memberEmail = request.getParameter("memberEmail");
+		logger.debug("memberEmail=="+memberEmail);
 		
-	    String setfrom = "7sscheduler@gmail.com";         
-	    String tomail  = memberEmail;     // 받는 사람 이메일
-	    String title   = "Get!t 인증번호 입니다!";      // 제목
-	    String content = "인증번호는 ["+certified+"] 입니다 :)";    // 내용
-	   
-	    try {
-	      MimeMessage message = mailSender.createMimeMessage();
-	      MimeMessageHelper messageHelper 
-	                        = new MimeMessageHelper(message, true, "UTF-8");
-	 
-	      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
-	      messageHelper.setTo(tomail);     // 받는사람 이메일
-	      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-	      messageHelper.setText(content);  // 메일 내용
-	     
-	      mailSender.send(message);
-	    } catch(Exception e){
-	      System.out.println(e);
-	    }
-	    model.addAttribute("certified",certified);
-	    model.addAttribute("memberEmail",memberEmail);
-	   
-	    return "member/findAccount";
-	}
-    
+		Member m = new Member();
+		m.setMemberEmail(memberEmail);
+		
+		int countId = memberService.countmemberId(m);
+		//int certified = ((int) (Math.random() * 899999)+100000);
+		
+		int certified = 1;
+		
+		if(countId > 0) {
+			String setfrom = "7sscheduler@gmail.com";         
+		    String tomail  = memberEmail;     // 받는 사람 이메일
+		    String title   = "Get!t 인증번호 입니다!";      // 제목
+		    String content = "인증번호는 ["+certified+"] 입니다 :)";    // 내용
+		   
+		    try {
+		      MimeMessage message = mailSender.createMimeMessage();
+		      MimeMessageHelper messageHelper 
+		                        = new MimeMessageHelper(message, true, "UTF-8");
+		 
+		      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+		      messageHelper.setTo(tomail);     // 받는사람 이메일
+		      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+		      messageHelper.setText(content);  // 메일 내용
+		     
+		      mailSender.send(message);
+		    } catch(Exception e){
+		      System.out.println(e);
+		    }
+		}
+		
+		model.addAttribute("countId",countId);
+		model.addAttribute("memberEmail",memberEmail);
+		model.addAttribute("certified",certified);
+		return "member/findAccount";
+    }
+
+	/* 아이디 가져오기 */
     @RequestMapping("/member/searchId.do")
     @ResponseBody
     public Map<String, Object> searchid(HttpServletRequest request) {
@@ -512,49 +524,8 @@ public class MemberController {
     	
 		return map;
     }
-    
-    
-	/*@RequestMapping("/member/findpwd.do")
-	public String sendSms(HttpServletRequest request,Model model) throws Exception {
-		
-		String memberId = request.getParameter("memberId");
-		String memberPhone = request.getParameter("memberPhone");
-		logger.debug("memberPhone=="+memberPhone);
-		logger.debug("memberId=="+memberId);
-		
-		String api_key = "NCSFQJJ9HCHO2HEE";
-		String api_secret = "TMVG7ETX4WMP6I1OI4XPMFSCZJBOO0FK";
-		Message coolsms = new Message(api_key, api_secret);
-		
-		int certified = ((int) (Math.random() * 899999)+100000);
-		
-		HashMap<String, String> set = new HashMap<String, String>();
-		
-		
-		/*
-		 * set.put("to", memberPhone); // 수신번호 set.put("from", "01090294425"); // 발신번호
-		 * set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
-		 * set.put("type","sms"); // 문자 타입 set.put("app_version", "test app 1.2"); //
-		 * application nameand version
-		 
-		
-		System.out.println(set);
-		
-		try {
-			JSONObject result = (JSONObject) coolsms.send(set);
-			System.out.println(result.toString());
-		} catch (CoolsmsException e) {
-			System.out.println(e.getMessage());
-			System.out.println(e.getCode());
-		}
-		model.addAttribute("certified",certified);
-		model.addAttribute("memberPhone",memberPhone);
-		model.addAttribute("memberId",memberId);
-		
-		
-		return "member/findAccount";
-	}*/
 	
+	/* 비밀번호찾기 */
 	@RequestMapping("/member/findpwd.do")
     public String findpwd(HttpServletRequest request,Model model) {
     	String memberPhone = request.getParameter("memberPhone");
@@ -606,11 +577,13 @@ public class MemberController {
     	
 		return "member/findAccount";
     }
+	
 	@RequestMapping("/member/certified.do")
 	public String certified() {
 		return "member/findAccount";
 	}
-	
+
+	/* 비밀번호 찾기후 비밀번호변경 */
 	@RequestMapping("/member/updatePwd.do")
 	public String updatePwd(HttpServletRequest request,Model model) {
 		String memberId = request.getParameter("memberId");

@@ -154,6 +154,10 @@ public class ThingController {
 	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
 		
 		logger.debug(order);
+		int nProductNo = order.getSeqProductNo(); 
+		
+		thingService.insertOrder(order);
+		thingService.updateOnSale(nProductNo);
 		
 		mav.addObject("order", order);
 		mav.setViewName("mypage/purchases");
