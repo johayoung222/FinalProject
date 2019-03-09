@@ -21,17 +21,20 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Product;
 
 @Controller
 public class AuctionController {
@@ -299,21 +302,49 @@ public class AuctionController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/auctionBid")
+	@RequestMapping(value = "/auctionBid.do")
 	@ResponseBody
-	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo") String auctionNo , final MultipartHttpServletRequest multiRequest,
+	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo" , required=false) int auctionNo , 
 			HttpServletResponse response, Model model, HttpServletRequest request,HttpSession session ) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();	// 결과 값 넘길 맵
+		
+		System.out.println("여기 안오죠????????????????????????");
 		
 		Member m = (Member)session.getAttribute("memberLoggedIn");
 		Map<String , Object> temp = new HashMap<>();
 		temp.put("auctionNo", auctionNo);
 		temp.put("memberId", m.getMemberId());
+		temp.put("memberNo", m.getSeqMemberNo());
 		
-		
-		
-		
+		Map<String , String > resultMap = auctionService.selectAuctionBid(temp);
+		// auction_history 테이블에서 auction_no 로 조회한 가격이 가장큰행을 뽑았다.
+		// 그 행의 seqMemberNo와 로그인한 회원의 memberNo를 비교하고 맞으면 true값을 넘겨준다.
+		if(resultMap != null) {
+			String memberNo = resultMap.get("MEMBER_ID");
+			
+			if(m.getMemberId().equals(memberNo)) {
+				map.put("cnt" , 1);
+			}
+		} else {
+			map.put("cnt" , 0);
+		}
+
 		return map;
 	}
-
+	/*
+	@RequestMapping(value="/auction/auctionPerchase/{productNo}", method=RequestMethod.GET)
+	public ModelAndView movePerchase(@PathVariable("productNo") int productNo,
+							ModelAndView mav,HttpSession session) {
+		
+		Member m = (Member) session.getAttribute("memberLoggedIn");
+		Product p = thingService.selectOne(productNo);
+		logger.debug(m);
+		
+		mav.addObject("member", m);
+		mav.addObject("product",p);
+		mav.setViewName("item/perchase");
+		
+		return mav;
+	}
+	*/
 }

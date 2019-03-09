@@ -43,4 +43,11 @@
 	<insert id="auctionHistoryInsert">
 		insert into auction_history values(seq_auction_history_no.nextval , #{memberId} , #{memberNo} , #{price} , sysdate , #{AuctionNo} , default)
 	</insert>
+	
+	<select id="selectAuctionBid" resultMap="selectAuctionBid">
+		SELECT * FROM (SELECT * FROM auction_history order by price desc) WHERE rownum = 1 and seq_auction_no = #{auctionNo}
+	</select>
+	<resultMap type="map" id="selectAuctionBid"></resultMap>
+	
+	
 </mapper>
