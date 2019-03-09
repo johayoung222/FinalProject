@@ -29,15 +29,15 @@ public class ItemController {
 	Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	ItemService basketService;
+	ItemService itemService;
 	
 	@RequestMapping("/item/iteminformation/{productNo}")
 	public ModelAndView iteminformation(ModelAndView mav, @PathVariable("productNo") int num) {
 		
-		Product product = basketService.selectOneProduct(num);
+		Product product = itemService.selectOneProduct(num);
 		logger.debug(product);
 		
-		Member member = basketService.selectJoinMember(product.getSellerNo());
+		Member member = itemService.selectJoinMember(product.getSellerNo());
 		
 		String cMacro = product.getCategoryMacro();
 		String cMicro = product.getCategoryMicro();
@@ -47,7 +47,7 @@ public class ItemController {
 		map.put("cMicro",cMicro);
 		map.put("cProNo",cProNo);
 		
-		List<Product> list = basketService.selectNowProduct(map);
+		List<Product> list = itemService.selectNowProduct(map);
 
 		mav.addObject("cpList", list);
 		mav.addObject("member", member);
@@ -68,17 +68,17 @@ public class ItemController {
 		pAsk.setAskContent(askContent);
 		pAsk.setSeqProductNo(productNo);
 		
-		int result = basketService.insertAsk(pAsk);
+		int result = itemService.insertAsk(pAsk);
 		int askNo = pAsk.getSeqAskNo();
 		
 		Map<String,String> map = new HashMap<>();
 		map.put("askNo", String.valueOf(askNo));
 		map.put("productNo",String.valueOf(productNo));
 		
-		basketService.updateProduct(map);
-		Member m = basketService.selectJoinMember(asker);
+		itemService.updateProduct(map);
+		Member m = itemService.selectJoinMember(asker);
 		//이 리스트를 넘겨야 한다아아아아아아아아아아..............03.07 -ing.
-		List<ProductAsk> list = basketService.selectAskAll(productNo);
+		List<ProductAsk> list = itemService.selectAskAll(productNo);
 		
 		map.put("asker",m.getMemberId());
 		map.put("askContent",askContent);
@@ -92,7 +92,7 @@ public class ItemController {
 		
 		logger.debug(searchKeyword);
 		
-		List<Product> list = basketService.searchItem(searchKeyword);
+		List<Product> list = itemService.searchItem(searchKeyword);
 		logger.debug(list);
 		
 		mav.addObject("cpList", list);
@@ -106,7 +106,7 @@ public class ItemController {
 		
 		logger.debug(myData);
 		
-		List<Map<String,String>> list = basketService.searchItemAjax(myData);
+		List<Map<String,String>> list = itemService.searchItemAjax(myData);
 		
 		logger.debug(list);
 		
@@ -117,7 +117,7 @@ public class ItemController {
 	@RequestMapping("/item/regist")
 	public ModelAndView registProduct(ModelAndView mav) {
 		
-		List<Regist> list = basketService.selectAllRegist();
+		List<Regist> list = itemService.selectAllRegist();
 		
 		mav.addObject("cpList", list);
 		mav.setViewName("item/registItem");
@@ -128,13 +128,34 @@ public class ItemController {
 	@RequestMapping("/item/brandNew")
 	public ModelAndView brandNew(ModelAndView mav) {
 		
-		List<Product> list = basketService.selectNew();
+		List<Product> list = itemService.selectNew();
 		String brandNew = "Y";
 		
 		mav.addObject("brandNew", brandNew);
 		mav.addObject("cpList", list);
 		mav.setViewName("item/item");
 		
+		return mav;
+	}
+	
+	@RequestMapping("/item/recommend")
+	public ModelAndView upItem(ModelAndView mav) {
+		
+		List<Product> list = itemService.selectUpItems();
+		String isRecommend = "Y";
+		
+		mav.addObject("isRecommend", isRecommend);
+		mav.addObject("cpList", list);
+		mav.setViewName("item/item");
+		
+		return mav;
+	}
+	
+	@RequestMapping("/item/interest")
+	public ModelAndView interestItems(ModelAndView mav) {
+		//typehandler적용 관심상품 구현
+		//로그인 필요한 url접근 intercepter or aop 구현
+		//민성이형 DB update code받기
 		return mav;
 	}
 }

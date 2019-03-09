@@ -60,5 +60,9 @@
 	<select id="selectAskAll" resultType="productAsk">
 		select * from product_ask where seq_product_no = #{productNo}
 	</select>
+	
+	<select id="selectUpItems" resultType="product">
+		select * from product where product_onsale = 'Y' and product_recommend = 'Y'
+	</select>
 
 </mapper>

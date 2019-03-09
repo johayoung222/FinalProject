@@ -177,6 +177,11 @@ a {
 	cursor: pointer;
 	font-size: 20px;
 }
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
