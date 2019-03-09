@@ -157,9 +157,9 @@ font-size:20px;
 }
 </style>
 <c:forEach items="${allCategory }" var="ct">
-	<c:if test="${ct.CATEGORY_MACRO == cpList[0].categoryMacro }">
+	<c:if test="${ct.CATEGORY_MACRO == product.categoryMacro }">
 		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
-		<c:if test="${ct.CATEGORY_MICRO == cpList[0].categoryMicro }">
+		<c:if test="${ct.CATEGORY_MICRO == product.categoryMicro }">
 			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
 		</c:if>
 	</c:if>
@@ -167,10 +167,8 @@ font-size:20px;
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
-		<a href="">${nowCategory }</a>
-		<img src="" alt="#" />
-		<a href="">${nowCategory2 }</a>
-		<img src="" alt="#" />
+		<span>${nowCategory }</span>-
+		<span>${nowCategory2 }</span>
 	</div>
 </div>
 	

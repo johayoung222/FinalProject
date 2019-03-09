@@ -181,7 +181,7 @@ body {
 	#searchList{
 		width: 400px;
 		position: absolute;
-		left: 20.4%;
+		left: 35.3%;
 		z-index: 1000;
 		background-color: white;
 	}
@@ -220,7 +220,7 @@ body {
 			success: function(data){
 				console.log(data);
 				
-				var table = $("<table></table>");
+				var table = $("<table id='resultList'></table>");
 				
 				var html = "";
 				
@@ -229,6 +229,11 @@ body {
 				}
 				table.html(html);
 				$("#searchList").html(table);
+				
+				$("#resultList tr td").on('click',function(){
+					MainSearchFrm.searchKeyword.value = $(this).html();
+					MainSearchFrm.submit();
+				});
 				
 			},
 			error: function(){
@@ -436,8 +441,8 @@ body {
 						</table>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/interest">관심상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
