@@ -12,17 +12,15 @@
 
 <style>
 .productList-container{
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
-	margin-right:15px;
-	
 }
 #tbl-productList{
+	table-layout:fixed;
 	text-align:center;
-}
-.tbl-tr th{
-	width:100px;
 }
 .tableTr td{
 	width:100px;

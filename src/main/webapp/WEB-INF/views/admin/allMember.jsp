@@ -24,15 +24,12 @@
 	white-space : nowrap;
 	text-overflow: ellipsis;
 }
-input[type=submit].btn-block {
-    width: 100px;
-    color:#007bff;
-}
 .allmember-nav{
 	width:100%;
 	padding-right:0px;
 }
 #tbl-allMember{
+	table-layout:fixed;
 	text-align:center;
 }
 

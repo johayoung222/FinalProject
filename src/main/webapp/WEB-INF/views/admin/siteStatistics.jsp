@@ -12,9 +12,8 @@
 
 <style>
 .siteStatistics-container{
-	width:1300px;
-	min-height:750px;
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;

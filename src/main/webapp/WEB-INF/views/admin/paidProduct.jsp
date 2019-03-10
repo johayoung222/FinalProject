@@ -22,10 +22,11 @@
 	top:-37px;
 }
 .tbl-paidProduct{
+	table-layout:fixed;	
 	text-align:center;
 }
 
-.auctionRegistImg{
+.img_main{
 	width:70px;
 	height:50px;
 }
@@ -91,7 +92,7 @@
 			<td>${p.PRODUCT_IO_PRICE }</td>
 			<td>${p.PRODUCT_IO_AMOUNT }</td>
 			<td>${p.SEQ_MEMBER_NO }</td>
-			<td><img class="" src="${pageContext.request.contextPath }/resources/upload/${p.PRODUCT_IO_IMAGE }"  /></td>
+			<td><img class="img_main" src="${pageContext.request.contextPath }/resources/upload/${p.PRODUCT_IO_IMAGE }"  /></td>
 			<td>${p.CATEGORY_MACRO }</td>
 		</tr>			
 		</c:forEach>
