@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -195,6 +196,7 @@ public class ItemController {
 		return mav;
 	}
 	
+
 	@RequestMapping("/itme/moreInfo")
 	public void moreInfo(@RequestParam(value="searchKeyword") String searchKeyword, HttpServletResponse response) throws JsonIOException, IOException {
 		
@@ -206,5 +208,14 @@ public class ItemController {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(searchResult, response.getWriter());
+
+	@RequestMapping(value="/item/couponList.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> couponList (@RequestParam(value="buyerNo")String buyerNo){
+		logger.debug("couponList 메소드 실행!!");
+		List<Map<String, Object>> list = itemService.couponList(buyerNo);
+		logger.debug(list);
+		return list;
+
 	}
 }

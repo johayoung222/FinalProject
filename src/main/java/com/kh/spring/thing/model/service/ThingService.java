@@ -1,6 +1,7 @@
 package com.kh.spring.thing.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.Order;
@@ -17,6 +18,8 @@ public interface ThingService {
 
 	void insertOrder(Order order);
 
-	void updateOnSale(int nProductNo);
+	void updateOnSale(Map<String, Object> map);
+
+	void updateCoupon(Map<String, Object> map);
 
 }

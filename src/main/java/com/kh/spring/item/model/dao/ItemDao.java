@@ -36,4 +36,7 @@ public interface ItemDao {
 
 	String selectMemberInterest(int memberNo);
 
+	List<Map<String, Object>> couponList(String buyerNo);
+
+
 }

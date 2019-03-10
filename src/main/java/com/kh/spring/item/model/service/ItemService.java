@@ -35,4 +35,6 @@ public interface ItemService {
 
 	String selectMemberInterest(int memberNo);
 
+	List<Map<String, Object>> couponList(String buyerNo);
+
 }
