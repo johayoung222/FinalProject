@@ -31,4 +31,6 @@ public interface ItemService {
 
 	List<Product> selectUpItems();
 
+	List<Map<String, Object>> couponList(String buyerNo);
+
 }

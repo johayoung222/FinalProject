@@ -43,7 +43,7 @@
 	<select id="couponList" resultMap="couponAllMap">
 		select C.*,l.coupon_status,l.user_date as endDay 
 		from coupon c join  coupon_listt l on c.seq_coupon_no = l.seq_coupon_no
-   		where l.seq_member_no = #{memberNo} order by coupon_date desc
+   		where l.seq_member_no = #{memberNo} order by l.user_date desc
 	</select>
 	
 	<!-- 관리자가 고객 쿠폰 삭제 -->

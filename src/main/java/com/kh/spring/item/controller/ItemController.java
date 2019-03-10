@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -164,5 +165,14 @@ public class ItemController {
 		//로그인 필요한 url접근 intercepter or aop 구현
 		//민성이형 DB update code받기
 		return mav;
+	}
+	
+	@RequestMapping(value="/item/couponList.do",method=RequestMethod.GET)
+	@ResponseBody
+	public List<Map<String, Object>> couponList (@RequestParam(value="buyerNo")String buyerNo){
+		logger.debug("couponList 메소드 실행!!");
+		List<Map<String, Object>> list = itemService.couponList(buyerNo);
+		logger.debug(list);
+		return list;
 	}
 }

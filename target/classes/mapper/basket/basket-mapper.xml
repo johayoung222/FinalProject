@@ -64,5 +64,11 @@
 	<select id="selectUpItems" resultType="product">
 		select * from product where product_onsale = 'Y' and product_recommend = 'Y'
 	</select>
-
+	
+	<select id="couponList" resultMap="couponListMap">
+		select c.*,ct.user_date 
+		from coupon_listt ct join coupon c on ct.seq_coupon_no = c.seq_coupon_no
+		where ct.seq_member_no = #{buyerNo} and ct.coupon_status='N'
+	</select>
+	<resultMap type="map" id="couponListMap"></resultMap>
 </mapper>

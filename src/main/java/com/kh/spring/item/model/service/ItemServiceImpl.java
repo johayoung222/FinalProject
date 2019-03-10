@@ -76,5 +76,10 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.selectUpItems();
 	}
 
+	@Override
+	public List<Map<String, Object>> couponList(String buyerNo) {
+		return itemDao.couponList(buyerNo);
+	}
+
 	
 }
