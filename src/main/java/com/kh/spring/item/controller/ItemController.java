@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
@@ -30,6 +31,9 @@ public class ItemController {
 	
 	@Autowired
 	ItemService itemService;
+	
+	@Autowired
+	AuctionService auctionService;
 	
 	@RequestMapping("/item/iteminformation/{productNo}")
 	public ModelAndView iteminformation(ModelAndView mav, @PathVariable("productNo") int num) {
@@ -93,8 +97,11 @@ public class ItemController {
 		logger.debug(searchKeyword);
 		
 		List<Product> list = itemService.searchItem(searchKeyword);
+		List<Map<String,String>> auctionList = auctionService.selectAuctionList();
+		
 		logger.debug(list);
 		
+		mav.addObject("auctionList", auctionList);
 		mav.addObject("cpList", list);
 		mav.setViewName("item/item");
 		

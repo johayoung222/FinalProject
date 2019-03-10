@@ -24,19 +24,11 @@
 	font-size:15px;
 	font-weight:bold;
 	color:lightgray;
-	
 }
 #itempro{
 	font-size:30px;
 	font-weight:bold;
 	
-}
-#bask{
-	border: 1px solid #7151FC;
-	background:white;
-	color:#7151FC;
-	width:150px;
-	height:50px;
 }
 #pur{
 	border:1px solid white;
@@ -75,19 +67,11 @@
 	height:50px;
 	
 }
-
 #float1{
 width:50px;
 height:50px; 
-margin-left:30px;
-margin-bottom:25px; 
 border:3px solid #7151FC; 
 border-radius:50px;
-}
-#fon{
-	font-size:15px;
-	color:lightgray;
-	
 }
 .content-container{
 	height: 100%;
@@ -152,8 +136,17 @@ font-size:20px;
 	float: right;
 }
 .productInfo-table tr td:first-of-type {
-	border: 1px solid black;
 	width: 250px;
+}
+.productInfo-table tr td:not(:first-of-type) {
+	text-align: center;
+}
+.productInfo-table-text{
+	width: 400px;
+	height: 250px;
+}
+.productInfo-table-text tr td:first-child{
+	width: 150px; 
 }
 </style>
 <c:forEach items="${allCategory }" var="ct">
@@ -180,9 +173,8 @@ font-size:20px;
 			</td>
 			<td>
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
-				<font id="fon">겟잇</font>
 				<font>1등 중고거래 컨시어지 서비스</font>
-			 	<table border="0" style="height:300px; width:400px;">
+			 	<table border="0" class="productInfo-table-text">
 			 		<tr align="center">
 			 			<td class="itemsell">판매자</td>
 			 			<td>${member.memberName }</td>
@@ -275,7 +267,7 @@ function insertBasket(){
 $(function(){
 	var productName = "${product.productName}";
 	$.ajax({
-		url: "https://openapi.naver.com/v1/search/blog.json",
+		url: "https://openapi.naver.com/v1/search/blog",
 		type: "get",
 		headers: {"Access-Control-Allow-Headers":"Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
 				"Access-Control-Max-Age":"3600",

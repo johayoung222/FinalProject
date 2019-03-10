@@ -12,14 +12,14 @@
 .content-container{
 	height: 100%;
 }
-.productOne{
+.productOne, .auctionOne{
 	width: 250px;
 	height: 250px;
 	text-align: center;
 	display: inline-block;
 	margin: 10px 31px;
 }
-.productOne:hover{
+.productOne:hover, .auctionOne:hover{
 	border-radius: 5px;
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
@@ -53,7 +53,7 @@
 	</c:if>
 	<br />
 	</div>
-	<c:if test="${empty cpList }">
+	<c:if test="${empty cpList and empty auctionList}">
 	<div class="noProduct">새로 등록된 상품이 없습니다.</div>
 	</c:if>
 	
@@ -66,12 +66,24 @@
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
-				<span>${p.productPrice } 원</span>
+				<span><fmt:formatNumber value="${p.productPrice}" pattern="#,###"/> 원</span>
 			</div>
 		</div>
-		<c:if test="${vs.count%3 == 0 }"></c:if>
 		</c:forEach>
-	</c:if>
+		</c:if>
+		<c:if test="${not empty auctionList }">
+			<c:forEach items="${auctionList }" var="a">
+				<div class="auctionOne" id="${a.AUCTION_NO }">
+					<div class="pImg">
+						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}" width="240px" height="180px" />
+					</div>
+					<div class="pDesc">
+						<span>${a.AUCTION_TITLE }</span><br />
+						<span><fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/> 원</span>
+					</div>
+				</div>
+			</c:forEach>
+		</c:if>
 	</div>
 </div>
 <script>
@@ -79,6 +91,13 @@ $(".productOne").each(function(item, idx){
 	$(this).on('click',function(){
 		var pId = $(this).attr("id");
 		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+
+$(".auctionOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath }/auctionDetail.do?auctionNo="+pId;
 	});
 });
 </script>

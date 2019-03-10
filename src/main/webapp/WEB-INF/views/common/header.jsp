@@ -250,7 +250,7 @@ body{
 		border: none;
 	}
 	</style>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -262,7 +262,7 @@ body{
 				<li class="nav-item" id="nav-item1">
 					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
+					<div class="dropdown-menu" aria-labelledby="dropdown MenuLink">
 					<style>
 					#cTable tr th{
 						text-align: center;
@@ -443,7 +443,6 @@ body{
 				</li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/interest">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>
