@@ -2,6 +2,7 @@ package com.kh.spring.thing.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,8 +47,14 @@ public class ThingServiceImpl implements ThingService {
 
 
 	@Override
-	public void updateOnSale(int nProductNo) {
-		thingDao.updateOnSale(nProductNo);
+	public void updateOnSale(Map<String, Object>map) {
+		thingDao.updateOnSale(map);
+	}
+
+
+	@Override
+	public void updateCoupon(Map<String, Object> map) {
+		thingDao.updateCoupon(map);
 	}
 
 }

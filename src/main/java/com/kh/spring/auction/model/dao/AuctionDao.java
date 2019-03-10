@@ -38,4 +38,6 @@ public interface AuctionDao {
 
 	String selectAuctionTitle(int auctionNo);
 
+	List<Map<String, String>> selectAuctionListBySearch(String searchKeyword);
+
 }

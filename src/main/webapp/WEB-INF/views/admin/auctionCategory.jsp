@@ -36,6 +36,10 @@
 .form-control:disabled, .form-control[readonly]{
 	background-color : #ffffff;
 }
+.main_img{
+	width:400px;
+	height:400px;
+}
 </style>
 
 <div class="alert alert-primary" role="alert">경매 신청 리스트</div>
@@ -48,8 +52,8 @@
 		<select id="categoryMi" class="form-control form-control-sm">
 		</select> <br />
 		
-		<label for="auctionRegistNo">고유번호</label> &nbsp;&nbsp;
-		<input class="form-control form-control-sm" id="auctionRegistNo" type="text" value="${auctionRegistNo }" readonly> <br />
+		
+		<input class="form-control form-control-sm" id="auctionRegistNo" type="hidden" value="${auctionRegistNo }" readonly> <br />
 		
 		<label for="auctionTitle">상품명</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="auctionTitle" type="text" readonly> <br />
@@ -62,7 +66,11 @@
 		
 		<label for="auctionPrice">시작가</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="auctionPrice" type="text" readonly> <br />
+		<br />
+		<label for="main_img">메인 이미지</label>&nbsp;&nbsp;
+		<img class="main_img" src="" /><br /><br />
 		
+		<label for="auctionDetail">상품 설명</label>&nbsp;&nbsp;
 		<div class="form-group">
 		    <textarea class="form-control" id="auctionDetail" rows="3" readonly></textarea>
 		</div><br />
@@ -89,6 +97,7 @@ $(function(){
 			$("#edate").val(data[0].EDATE);
 			$("#auctionPrice").val(data[0].AUCTION_PRICE);
 			$("#auctionDetail").html(data[0].AUCTIONDETAIL);
+			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/"+data[0].AUCTION_IMAGE_MAIN);
 		},error:function(){
 			console.log("ajax요청 실패");
 		}
@@ -156,6 +165,26 @@ $("#btn").on('click',function(){
 	});
 });
 
+$("#btnn").on('click',function(){
+	var auctionRegistNo = $("#auctionRegistNo").val();
+	if(confirm("정말 경매신청을 취소 하시겠습니까??")==true){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/admin/auctionCencel.do",
+			data:{auctionRegistNo:auctionRegistNo},
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				alert("경매신청 취소 성공!!");
+				opener.parent.location.reload();
+				window.close();
+			},error:function(){
+				console.log("ajax 요청 실패!!");
+			}
+		})
+
+	}
+	
+});
 
 
 </script>

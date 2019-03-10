@@ -3,7 +3,9 @@ package com.kh.spring.thing.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -155,10 +157,29 @@ public class ThingController {
 		
 		logger.debug(order);
 		int nProductNo = order.getSeqProductNo(); 
+		int seqMemberNo = order.getSeqMemberNo();
+		String coupon = order.getOrderCoupon();
+		logger.debug(coupon);
+		int couponL = 0;
+		if("0.05".equals(coupon)) {
+			couponL = 1;
+		}else if("0.1".equals(coupon)) {
+			couponL = 2;
+		}else if("0.15".equals(coupon)) {
+			couponL = 3;
+		}
+		logger.debug(couponL);
+		Map<String, Object> map = new HashMap<>();
+		map.put("seqMemberNo",seqMemberNo);
+		map.put("nProductNo",nProductNo);
+		map.put("couponL",couponL);
+		
 		
 		thingService.insertOrder(order);
-		thingService.updateOnSale(nProductNo);
-		
+		thingService.updateOnSale(map);
+		if(coupon != null) {
+		thingService.updateCoupon(map);
+		}
 		mav.addObject("order", order);
 		mav.setViewName("mypage/purchases");
 		

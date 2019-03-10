@@ -74,6 +74,11 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.delete("admin.deleteCoupon",map);
 	}
 	
+	@Override
+	public int couponAutoDelete() {
+		return sqlSession.delete("admin.couponAutoDelete");
+	}
+	
 	
 	
 	
@@ -90,6 +95,17 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	@Override
+	public List<Map<String, String>> paidAuction(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
+		return sqlSession.selectList("admin.paidAuction",null, rowBounds);
+	}
+	@Override
+	public int countpaidAuction() {
+		return sqlSession.selectOne("admin.countpaidAuction");
+	}
+	
+	
+	@Override
 	public List<Map<String,String>> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
 		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
 		return sqlSession.selectList("admin.paidProductSearch",map,rowBounds);
@@ -97,6 +113,16 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int countpaidProductSearch(Map<String, String> map) {
 		return sqlSession.selectOne("admin.countpaidProductSearch",map);
+	}
+	
+	@Override
+	public List<Map<String, String>> paidAuctionSearch(int cPage, int numPerPage, Map<String, String> map) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.paidAuctionSearch",map,rowBounds);
+	}
+	@Override
+	public int countpaidAuctionSearch(Map<String, String> map) {
+		return sqlSession.selectOne("admin.countpaidAuctionSearch",map);
 	}
 
 	
@@ -227,6 +253,11 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.update("admin.updateAuctionRegist",auctionRegistNo);
 	}
 	
+	@Override
+	public int auctionCencel(int auctionRegistNo) {
+		return sqlSession.update("admin.auctionCencel",auctionRegistNo);
+	}
+	
 	
 	//경매 상품 현황---------------------------------------------------------------------
 	@Override
@@ -295,6 +326,8 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> questionCategory() {
 		return sqlSession.selectList("admin.questionCategory");
 	}
+	
+	
 	
 	
 	
