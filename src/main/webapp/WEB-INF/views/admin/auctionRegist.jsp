@@ -34,7 +34,7 @@
 	text-overflow: ellipsis;
 }
 .auctionRegistImg{
-	width:70px;
+	width:90px;
 	height:50px;
 }
 </style>

@@ -31,7 +31,7 @@
 	text-overflow: ellipsis;
 }
 .td_img{
-	width:100px;
+	width:90px;
 	height:50px;
 }
 </style>

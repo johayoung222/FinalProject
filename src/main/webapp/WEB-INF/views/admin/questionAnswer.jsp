@@ -28,9 +28,7 @@
 	table-layout: fixed;
 	text-align:center;
 }
-.tbl-tr th{
-	width:100px;
-}
+
 .tableTr td{
 	width:100px;
 	height:70px;

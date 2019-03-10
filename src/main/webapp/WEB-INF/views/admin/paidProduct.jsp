@@ -27,7 +27,7 @@
 }
 
 .img_main{
-	width:70px;
+	width:90px;
 	height:50px;
 }
 
@@ -74,9 +74,10 @@
 		<th>상품명</th>
 		<th>상품가격</th>
 		<th>수량</th>
-		<th>구매자번호</th>
+		<th>판매자ID</th>
 		<th>이미지</th>
 		<th>상품카테고리</th>
+		<th>결제일</th>
 	</tr>
 	<c:if test="${empty list }">
 	<tr>
@@ -91,9 +92,10 @@
 			<td>${p.PRODUCT_NAME }</td>
 			<td>${p.PRODUCT_IO_PRICE }</td>
 			<td>${p.PRODUCT_IO_AMOUNT }</td>
-			<td>${p.SEQ_MEMBER_NO }</td>
+			<td>${p.MEMBERID }</td>
 			<td><img class="img_main" src="${pageContext.request.contextPath }/resources/upload/${p.PRODUCT_IO_IMAGE }"  /></td>
 			<td>${p.CATEGORY_MACRO }</td>
+			<td>${p.PRODUCT_IO_DATE }</td>
 		</tr>			
 		</c:forEach>
 	</c:if>
