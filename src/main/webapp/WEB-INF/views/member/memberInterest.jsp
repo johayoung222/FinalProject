@@ -45,7 +45,7 @@
 		<form action="javascript:interestEnd();" name="interestFrm">
 		</c:if>
 		<c:if test="${param.memberNo != null }">
-		<form action="javascript:interestEnd2();" name="interestFrm">
+		<form action="javascript:difInterestEnd();" name="interestFrm2">
 		</c:if>
 		<c:forEach items="${category }" var="c" varStatus="vs">
 		<c:if test="${vs.count%3==0 }">
@@ -59,10 +59,16 @@
 		 </c:forEach>
 		<br />
 		<input type="submit" value="선택 완료" />
-		<button onclick="skip();">건너뛰기</button>
+		<c:if test="${param.memberNo == null }">
+		<button type="button" onclick="skip();">건너뛰기</button>
+		</c:if>
+		<c:if test="${param.memberNo != null }">
+		<button type="button" onclick="difSkip();">건너뛰기</button>
+		</c:if>
 		</form>
 	</div>
 </div>
+
 <script>
 function interestEnd(){
 	var category = $("[name='categoryMacro']");
@@ -78,7 +84,8 @@ function interestEnd(){
 	opener.memberEnrollFrm.submit();
 	self.close();
 }
-function interestEnd2(){
+
+function difInterestEnd(){
 	var category = $("[name='categoryMacro']");
 	var interest = "";
 	category.each(function(idx, item){
@@ -103,8 +110,14 @@ function interestEnd2(){
 		}
 	});
 }
+
 function skip(){
 	opener.memberEnrollFrm.submit();
+	self.close();
+}
+
+function difSkip(){
+	opener.location.href = "${pageContext.request.contextPath}";
 	self.close();
 }
 

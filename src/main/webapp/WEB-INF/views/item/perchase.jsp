@@ -60,6 +60,7 @@ if(pName == "" || payAmount == ""){
 	alert("주문 정보가 올바르지 않습니다.");
 	return;
 }
+
 IMP.init("imp25216490");
 	
 IMP.request_pay({ // param

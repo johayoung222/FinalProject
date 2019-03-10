@@ -59,7 +59,7 @@
 		<c:forEach items="${cpList }" var="p" varStatus="vs">
 		<div class="productOne">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.registRealImage}" width="240px" height="180px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.registName }</span><br />
