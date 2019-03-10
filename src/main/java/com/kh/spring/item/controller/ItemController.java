@@ -208,6 +208,7 @@ public class ItemController {
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(searchResult, response.getWriter());
+	}
 
 	}
 	
