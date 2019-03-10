@@ -71,16 +71,19 @@
 	
 	
 	
-	<!--상품 판매 신청 리스트 -->
+	<!--상품 판매 신청 리스트 겟잇 베이직 -->
 	<select id="regist" resultMap="registMap">
-		select * from regist where regist_auction = 'N' order by seq_regist_no
+		select * from regist where regist_auction = 'N' and regist_status = 'Y'  order by seq_regist_no
 	</select>
 	<resultMap type="map" id="registMap">
 		<result column="REGIST_DATE" property="registDate" javaType="String"></result>
 	</resultMap>	
 	<select id="countregist" resultType="_int">
-		select count(*) from regist where regist_auction = 'N'
+		select count(*) from regist where regist_auction = 'N' and regist_status = 'Y'
 	</select>
+	
+	
+	
 	
 	<!-- 하나의 판매신청 가져오기 Map타입 -->
 	<select id="registOne" resultMap="registMap">
@@ -108,12 +111,13 @@
 	PRODUCT_ONSALE, PRODUCT_MANUFACTURER, PRODUCT_STOCK, PRODUCT_IMAGE, 
 	PRODUCT_REAL_IMAGE, PRODUCT_MILEGE, PRODUCT_DESCRIPTION, PRODUCT_EVENT, 
 	PRODUCT_ENROLL_DATE, PRODUCT_RECOMMEND, PRODUCT_KINDS, CATEGORY_MICRO, 
-	CATEGORY_MACRO, SELLER_NO,SEQ_AUCTION_NO) 
-		values(seq_product_no.nextval,#{registName},#{registPrice},'Y',
-		'N',#{registManufacturer},#{registAmount},#{registImage},
+	CATEGORY_MACRO, SELLER_NO,SEQ_AUCTION_NO,PRODUCT_ADMIN_DESCRIPTION) 
+	
+		values(seq_product_no.nextval,#{registName},#{registPrice},#{registStatus},
+		'Y',#{registManufacturer},#{registAmount},#{registImage},
 		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
-		,#{registDate},'N','Y',#{cMi},#{cMa},21,
-		SEQ_AUCTION_NO.nextval)
+		,sysdate,'N',#{registKinds},#{cMi},#{cMa},#{seqMemberNo},
+		SEQ_AUCTION_NO.nextval,#{registAdminDescription})
 	</insert>
 	
 	<!-- 판매신청 승인시, regist테이블 reigst_auction값 Y로 update -->
@@ -121,7 +125,34 @@
 		update regist set regist_auction = 'Y' where seq_regist_no= #{registNo}
 	</update>
 	
+	<!-- 판매 신청 취소시, regist테이블 regist_auction값 C로 update -->
+	<update id="registAuction">
+		update regist set regist_auction = 'C' where seq_regist_no= #{registNo}
+	</update>
 	
+	<!-- 판매취소 된 목록 가져오기 -->
+	<select id="registCancel" resultMap="registCancelMap">
+		select * from regist where regist_auction = 'C' order by seq_regist_no
+	</select>
+	<resultMap type="map" id="registCancelMap"></resultMap>
+	
+	<!-- 판매신청 리스트 페이징 겟잇베이직 -->
+	<select id="registList" resultMap="registListMap">
+		select * from regist where regist_auction = 'N' and regist_status='Y' order by seq_regist_no
+	</select>
+	<resultMap type="map" id="registListMap"></resultMap>	
+	<select id="countpaidregistList" resultType="_int">
+		select count(*) from regist where regist_auction = 'N' and regist_status='Y'
+	</select>
+	
+	<!-- 상품 판매 신청 리스트 직접 판매 -->
+	<select id="registListMore" resultMap="registListMoreMap">
+		select * from regist where regist_auction = 'N' and regist_status='N' order by seq_regist_no
+	</select>
+	<resultMap type="map" id="registListMoreMap"></resultMap>	
+	<select id="countpaidregistListMore" resultType="_int">
+		select count(*) from regist where regist_auction = 'N' and regist_status='N'
+	</select>
 	
 	
 	<!--판매 상품 리스트 -->
@@ -161,7 +192,7 @@
 	
 	<!-- auctionRegist 승인시 auction테이블로 insert -->
 	<insert id="inAuction" parameterType="map">
-		insert into auction values(seq_auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
+		insert into auction values(auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
 			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
@@ -206,16 +237,6 @@
 		select count(*) from question where question_result = 'Y'
 	</select>
 	
-	
-	
-	<!-- 신고 접수 리스트 -->
-	<select id="reportList" resultMap="reportListMap">
-		select * from report order by seq_report_no
-	</select>
-	<resultMap type="map" id="reportListMap"></resultMap>	
-	<select id="countreportList" resultType="_int">
-		select count(*) from report
-	</select>
 	
 	<!-- 사이트 통계 -->
 	<!-- 남/녀 비율 -->

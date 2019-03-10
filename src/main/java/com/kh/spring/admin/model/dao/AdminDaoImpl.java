@@ -144,6 +144,39 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.update("admin.updateRegist",registNo);
 	}
 	
+	@Override
+	public int registAuction(int registNo) {
+		return sqlSession.update("admin.registAuction",registNo);
+	}
+	
+	@Override
+	public List<Map<String, Object>> registCancel() {
+		return sqlSession.selectList("admin.registCancel");
+	}
+	
+	@Override
+	public List<Map<String, String>> registList(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.registList",null,rowBounds);
+	}
+	@Override
+	public int countpaidregistList() {
+		return sqlSession.selectOne("admin.countpaidregistList");
+	}
+	
+	@Override
+	public List<Map<String, String>> registListMore(int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return sqlSession.selectList("admin.registListMore",null,rowBounds);
+	}
+	@Override
+	public int countpaidregistListMore() {
+		return sqlSession.selectOne("admin.countpaidregistListMore");
+	}
+	
+	
+	
+	
 	
 	
 	//상품 리스트--------------------------------------------------------------------
@@ -240,17 +273,6 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	
-	//신고 접수 리스트-----------------------------------------------------------------
-	@Override
-	public List<Map<String, String>> reportList(int cPage, int numPerPage) {
-		RowBounds rowBounds = new RowBounds((cPage-1)*numPerPage, numPerPage);
-		return sqlSession.selectList("admin.reportList",null, rowBounds);
-	}
-
-	@Override
-	public int countreportList() {
-		return sqlSession.selectOne("admin.countreportList");
-	}
 	
 	//사이트 통계 -----------------------------------------------------------
 	@Override
@@ -273,6 +295,8 @@ public class AdminDaoImpl implements AdminDao {
 	public List<Map<String, Object>> questionCategory() {
 		return sqlSession.selectList("admin.questionCategory");
 	}
+	
+	
 	
 	
 	

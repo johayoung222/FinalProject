@@ -29,5 +29,6 @@ public class Order {
 	private int seqMemberNo;
 	private String merchantUid;
 	private String impUid;
+	private int seqProductNo;
 
 }

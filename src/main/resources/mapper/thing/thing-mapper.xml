@@ -13,10 +13,19 @@
 	</select>
 	
 	<insert id="sell" parameterType="regist">
-		insert into regist(seq_regist_no,regist_name,regist_price,regist_auction,regist_amount,regist_description,regist_date,seq_member_no, regist_kinds,regist_status)  values(seq_regist_no.nextval, #{registName}, 
+		insert into regist(seq_regist_no,regist_name,regist_price,regist_auction,regist_image,regist_real_image,regist_amount,regist_description,regist_date,seq_member_no, regist_kinds,regist_status) 
+		values(seq_regist_no.nextval, #{registName}, 
 		#{registPrice} , #{registAuction},#{registImage},#{registRealImage},
 		#{registAmount},#{registDescription}, SYSDATE,#{seqMemberNo},#{registKinds},#{registStatus})
 	
 	</insert>
+	
+	<insert id="insertOrder" parameterType="order">
+		insert into order_ values ( seq_order_no.nextval, sysdate, #{orderPrice}, #{orderAmount}, #{orderMethod}, #{orderEtc}, #{orderTraceMethod}, #{orderResult}, #{orderPoint}, #{orderCoupon}, #{seqBasketNo}, #{seqMemberNo}, #{merchantUid}, #{impUid} )
+	</insert>
+	
+	<update id="updateOnSale">
+		update product set product_onsale = 'N' where seq_product_no = #{nProductNo}
+	</update>
 	
 </mapper>

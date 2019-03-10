@@ -138,6 +138,38 @@ public class AdminServiceImpl implements AdminService {
 		adminDao.updateRegist(registNo);
 	}
 	
+	@Override
+	public int registAuction(int registNo) {
+		return adminDao.registAuction(registNo);
+	}
+	
+	@Override
+	public List<Map<String, Object>> registCancel() {
+		return adminDao.registCancel();
+	}
+
+	@Override
+	public List<Map<String, String>> registList(int cPage, int numPerPage) {
+		return adminDao.registList(cPage,numPerPage);
+	}
+
+	@Override
+	public int countpaidregistList() {
+		return adminDao.countpaidregistList();
+	}
+	
+	@Override
+	public List<Map<String, String>> registListMore(int cPage, int numPerPage) {
+		return adminDao.registListMore(cPage,numPerPage);
+	}
+
+	@Override
+	public int countpaidregistListMore() {
+		return adminDao.countpaidregistListMore();
+	}
+	
+	
+
 	
 	//상품 리스트-------------------------------------------------------------
 	@Override
@@ -232,17 +264,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	//신고접수 리스트----------------------------------------------------------------
-	@Override
-	public List<Map<String, String>> reportList(int cPage, int numPerPage) {
-		return adminDao.reportList(cPage,numPerPage);
-	}
-
-	@Override
-	public int countreportList() {
-		return adminDao.countreportList();
-	}
-
 	//사이트 통계------------------------
 	@Override
 	public List<Map<String, Object>> memberGender() {
@@ -269,6 +290,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.questionCategory();
 	}
 
+	
+
+	
+	
+
+	
 	
 
 	

@@ -69,5 +69,30 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.auctionHistoryInsert(map);
 	}
 
+	@Override
+	public Map<String, String> selectAuctionBid(Map<String, Object> temp) {
+		return auctionDao.selectAuctionBid(temp);
+	}
+
+	@Override
+	public String selectMainImg(int auctionNo) {
+		return auctionDao.selectMainImg(auctionNo);
+	}
+
+	@Override
+	public void updateAuctionCheck(int nProductNo) {
+		auctionDao.updateAuctionCheck(nProductNo);
+	}
+
+	@Override
+	public void updateWinningBid(Map<String , Object> temp) {
+		auctionDao.updateWinningBid(temp);
+	}
+
+	@Override
+	public String selectAuctionTitle(int auctionNo) {
+		return auctionDao.selectAuctionTitle(auctionNo);
+	}
+
 	
 }

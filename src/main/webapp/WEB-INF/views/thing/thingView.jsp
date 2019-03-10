@@ -138,7 +138,7 @@
 	                  <span class="input-group-text">첨부파일2</span>
 	               </div>
 	               <div class="custom-file">
-	                  <input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple required> 
+	                  <input type="file" class="custom-file-input" name="upFile" id="upFile2" multiple> 
 	                  <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
 	               </div>
 	            </div>
@@ -175,28 +175,6 @@
       
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg myBtn statusN" data-toggle="modal" data-target="#myModal"  >판매하기</button>
-	
-		
-      <!-- Modal 
-      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal"
-                     aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
-                  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-               </div>
-               <div class="modal-body">...</div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save
-                     changes</button>
-               </div>
-            </div>
-         </div>
-      </div>-->
    </div>
    <!-- 로그인 권유 -->
 	<div class="modal" tabindex="-1" role="dialog" id="memberMoveLogin">
@@ -212,7 +190,7 @@
 	        <p>로그인을 하지 않은 회원은 판매하기를 이용할 수 없습니다..</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }member/memberMoveLogin.do';">로그인 하러가기</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/member/memberMoveLogin.do'">로그인 하러가기</button>
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 	      </div>
 	    </div>

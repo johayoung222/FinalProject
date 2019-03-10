@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -16,6 +16,9 @@
 	position:relative;
 	margin-left:180px;
 	top:-37px;
+}
+#tbl-paidProduct{
+	text-align:center;
 }
 </style>
 <br />
@@ -40,9 +43,9 @@
 			<th>상품명</th>
 			<th>상품가격</th>
 			<th>판매량</th>
-			<th>구매자아이디</th>
+			<th>구매자번호</th>
+			<th>이미지</th>
 			<th>상품카테고리</th>
-			<th>주문번호</th>
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
@@ -57,9 +60,9 @@
 				<td>${p.PRODUCT_NAME }</td>
 				<td>${p.PRODUCT_IO_PRICE }</td>
 				<td>${p.PRODUCT_IO_AMOUNT }</td>
-				<td>${p.PRODUCT_BUYER }</td>
-				<td>${p.PRODUCT_CATEGORY }</td>
-				<td>${p.PRODUCT_ORDER_NO }</td>
+				<td>${p.SEQ_MEMBER_NO }</td>
+				<td><img class="" src="${pageContext.request.contextPath }/resources/upload/${p.PRODUCT_IO_IMAGE }"  /></td>
+				<td>${p.CATEGORY_MACRO }</td>
 			</tr>			
 			</c:forEach>
 		</c:if>

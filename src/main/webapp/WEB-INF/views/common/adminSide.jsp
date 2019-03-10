@@ -64,7 +64,6 @@ div.col-2.5 a:hover{
       <a class="nav-link" id="v-pills-sellPutin-tab"  href="${pageContext.request.contextPath}/admin/auctionRegist.do" role="tab" aria-controls="v-pills-auctionList" aria-selected="false" title="경매 신청 리스트">경매 신청 리스트</a>
       <a class="nav-link" id="v-pills-acutionStatus-tab"  href="${pageContext.request.contextPath}/admin/auctionList.do" role="tab" aria-controls="v-pills-acutionStatus" aria-selected="false" title="경매 상품 현황">경매 상품 리스트</a>
       <a class="nav-link" id="v-pills-QA-tab"  href="${pageContext.request.contextPath}/admin/questionAnswer.do" role="tab" aria-controls="v-pills-QA" aria-selected="false" title="1:1질문 답변">1:1질문 답변</a>
-      <a class="nav-link" id="v-pills-declarationList-tab"  href="${pageContext.request.contextPath}/admin/reportList.do" role="tab" aria-controls="v-pills-declarationList" aria-selected="false" title="신고접수 리스트">신고접수 리스트</a>
       <a class="nav-link" id="v-pills-site-tab"  href="${pageContext.request.contextPath}/admin/siteStatistics.do" role="tab" aria-controls="v-pills-site" aria-selected="false" title="사이트 통계">사이트 통계</a>
     </div>
   </div> 

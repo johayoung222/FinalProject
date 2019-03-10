@@ -4,9 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
+
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.js"></script>
 <!-- 부트스트랩관련 라이브러리 -->
 <link rel="stylesheet"
@@ -19,6 +17,7 @@
     crossorigin="anonymous"></script>
 <%
 	int auctionRegistNo = (int)request.getAttribute("auctionRegistNo");
+	System.out.println(auctionRegistNo);
 %>
 <style>
 .form-control{
@@ -68,11 +67,13 @@
 		    <textarea class="form-control" id="auctionDetail" rows="3" readonly></textarea>
 		</div><br />
 		
-		<input type="button" id="btn" value="신청YES"  />
-		<input type="reset" value="신청NO" onclick="window.close()" />
+		<input type="button" class="btn btn-primary" id="btn" value="신청YES"  />
+		<input type="button" class="btn btn-danger" value="신청NO" id="btnn" />
+		<input type="reset" class="btn btn-secondary" value="닫기" onclick="window.close()" />
 	</form>
 </div>
 <script>
+
 $(function(){
 	var auctionRegistNo = $("#auctionRegistNo").val();
 	console.log(auctionRegistNo);

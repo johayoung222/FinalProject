@@ -101,10 +101,7 @@
 
 .hm-good {
 	display: inline-block;
-}
-
-.hm-good {
-    width: 271px;
+    width: 241px;
     height: 344px;
     padding: 8px 18px;
 }
@@ -133,9 +130,6 @@
 }
 
 a {
-    cursor: pointer;
-}
-a {
     color: inherit;
     text-decoration: none;
 }
@@ -159,9 +153,31 @@ a {
 	text-align: center;
 	transform: translate(5%,0%);
 }
-
-
-
+.productOne{
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	display: inline-block;
+	margin: 10px 31px;
+}
+.moreItems{
+	float: right;
+	margin-right: 100px;
+	cursor: pointer;
+	font-size: 20px;
+}
+.productOne:hover{
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 7px lightgray;
+	cursor: pointer;
+}
+.pImg{
+	width: 200px;
+	height: 180px;
+}
+.blinkEle1 , .blinkEle2{
+	display:none;
+}
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -202,27 +218,28 @@ a {
 	</div>
 	<div id="favorite">
 		<div>
-			<a href="${pageContext.request.contextPath}/category/laptopPc"> <img
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
+			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
 				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/Phone"> <img
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+			<img
 				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
 				id="favorite2" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/appliance">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/electronic.PNG"
 				id="favorite3" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/lifeFood">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/food.PNG"
 				id="favorite4" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath}/category/lifeHousehold">
+			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
 				<img
 				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
 				id="favorite5" width="120px" height="100px" />
 			</a>
 			<div>
-
 				<pre><strong>      컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
 				</pre>
 			</div>
@@ -233,71 +250,48 @@ a {
 
 <h3>
 	새로 등록된 상품 <span class="badge badge-secondary">New</span>
+	<span class="moreItems" id="moreItems">더 보기</span>
 </h3>
 <br />
 <br />
-<div id="newThing">
-	<script>
-	window.onload = function() {
-		$.ajax({
-    		url: "<%=request.getContextPath()%>/category/laptopPcEnd.do",
-			type : "get",
-			dataType : "json",
-			success : function(data) {
-				console.log(data);
-				
-				var attImage;
-				attImage=data[0].registRealImage.split(',');
-				
-				var attCopy= attImage[1];
-				
-				for(var i=1; i<data.length; i++){
-					attImage=data[i].registRealImage.split(',');
-					attCopy= attCopy +","+ attImage[1]; 
-					console.log(attCopy);
-				}
-				
-				var realImage=attCopy.split(',');
-				console.log(realImage);
-				
-				var html="";
-				for(var i=realImage.length-1; i>=0; i--){
-					var newThing = document.getElementById("newThing");
-					html = html + "<a href='${pageContext.request.contextPath}/category/laptopPc'> <img "+
-					 "src='${pageContext.request.contextPath }/resources/upload/thing/"+realImage[i]+"' "+
-					 "id='favorite1' width='120px' height='100px' />";
-				}
-				newThing.innerHTML = html;				
-				
-				
-			}
 
-			});
-
-			
-
-		}
-	</script>
+<div class="new-product">
+	<c:if test="${not empty cpList }">
+		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
+		<div class="productOne" id="${p.seqProductNo }">
+			<div class="pImg">
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" height="180px" width="240px" />
+			</div>
+			<div class="pDesc">
+				<span>${p.productName }</span><br />
+				<span>${p.productPrice } 원</span>
+			</div>
+		</div>
+		</c:forEach>
+	</c:if>
 
 </div>
+
 <br /><br />
 <hr />	
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
-
+<jsp:useBean id="now" class="java.util.Date" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+ 
 <c:if test="${empty auctionList }">
 	<div>새로 등록된 경매 상품이 없습니다.</div>
 </c:if>
 <div class="hm-container">
 <c:if test="${not empty auctionList }">
-	<c:forEach items="${auctionList }" var="a">
+	<c:forEach items="${auctionList }" var="a" varStatus="vs">
 			<div class="hm-good">
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle">다른 사용자가 구매중 , 경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide blinkEle">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle2">내가 구매중 , 내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
@@ -313,6 +307,9 @@ a {
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
 					</div></a>
 			</div>
+			<input type="hidden" id="sdate${vs.count }" value="${a.SDATE }" />
+			<input type="hidden" id="edate${vs.count }" value="${a.EDATE }" />
+
 		</c:forEach>
 </c:if>
 </div>
@@ -362,8 +359,60 @@ a {
 <hr>
 
 <script>
+/* 현재 시간을 구하는 함수 */
+function getTime() {
+	today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var MM = today.getMinutes();
+	var MM = today.getMinutes();
+	var ss = today.getSeconds();
+
+	if(dd<10) { dd='0'+dd } 
+	if(mm<10) { mm='0'+mm } 
+	if(hh<10) { hh='0'+hh }
+	
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	return today;
+}
+
+
+// 온로드 됬을때 경매 진행중인지 ? 아니면 내가 경매에 참여중인지 찍어주기 위한 소스코드
+	$(function(){
+		for(var i = 1; i <= 4;i++) {
+			var sdate = $("#sdate"+i).prop("value");
+			var edate = $("#edate"+i).prop("value");
+			today = getTime();			
+			
+			var result = 0;
+			if(today>sdate) {
+				result++;
+			}
+			if(today<=edate) {
+				result++;
+			}
+			
+			if(result == 2) {
+				alert(i+"경매진행중인게 있다.");
+			}
+		}
+		
+	});
+	
 setInterval(function(){
 	  $(".blinkEle").toggle();
 	}, 500);
+	
+$("#moreItems").on('click',function(){
+	location.href = "${pageContext.request.contextPath}/item/brandNew";
+});
+$(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

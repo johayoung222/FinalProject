@@ -8,7 +8,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
     <jsp:param value="Get It :: ${product.productName } 상세보기" name="pageTitle"/>
 </jsp:include>
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
 <style>
@@ -90,10 +89,6 @@ border-radius:50px;
 	color:lightgray;
 	
 }
-form {
-    display: inline-block;
-   
-}
 .content-container{
 	height: 100%;
 }
@@ -109,86 +104,6 @@ form {
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
 }
-</style>
-<c:forEach items="${allCategory }" var="ct">
-	<c:if test="${ct.CATEGORY_MACRO == cpList[0].categoryMacro }">
-		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
-		<c:if test="${ct.CATEGORY_MICRO == cpList[0].categoryMicro }">
-			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
-		</c:if>
-	</c:if>
-</c:forEach>
-
-<div class="productInfo-container">
-	<div class="productInfo-category">
-		<a href="">${nowCategory }</a>
-		<img src="" alt="#" />
-		<a href="">${nowCategory2 }</a>
-		<img src="" alt="#" />
-	</div>
-</div>
-	
-<div class="productInfo-header">
-
-	<table border="0">
-		<tr>
-			<td>
-				<img src="${pageContext.request.contextPath }/resources/images/galaxy10.PNG" alt="${product.productName } 이미지" width="100%" height="80%" >
-			</td>
-			<td>
-				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
-				<font id="fon">겟잇</font>
-				<font>1등 중고거래 컨시어지 서비스</font>
-			 	<table border="0" style="height:300px; width:400px;">
-			 		<tr align="center">
-			 			<td class="itemsell">판매자</td>
-			 			<td>${member.memberName }</td>
-			 		</tr>
-			 		<tr align="center">
-			 			<td class="itemsell">상품명</td>
-			 			<td id="itempro">${product.productName}</td>
-			 		</tr>
-			 		<tr align="center">
-			 			<td class="itemsell">가격</td>
-			 			 <td><fmt:formatNumber pattern="###,###" value="${product.productPrice }" />원</td>
-			 		</tr>
-			 		<tr align="center">
-			 			<td class="itemsell">상품소개</td>
-			 			<td>${product.productDescription}</td>
-			 		</tr>
-			 		<tr align="center">
-			 			<td class="itemsell">수량</td>
-			 			<td>1</td>
-			 		</tr>
-			 		
-			 		<tr align="center" >
-			 			<td colspan="2">
-			 			
-                <%--         	
-               <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="">
-                    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
-	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
-	                <input type="submit" id="insertBasket" value="장바구니"/>
-                </form> --%>
-                
-                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
-	                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
-	                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
-			 		     <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
-			 			</td>
-			 		</tr>
-			 	</table>
-			</td>
-		</tr>
-	</table>
-</div><!-- productInfo-header end -->
-
-<div>
- 
-<h2>이미지 슬라이드</h2>
-</div>
-<style>
-
 .productInfo-content>div{
 	margin-bottom: 20px;
 }
@@ -236,45 +151,79 @@ font-size:20px;
 #askRight{
 	float: right;
 }
+.productInfo-table tr td:first-of-type {
+	border: 1px solid black;
+	width: 250px;
+}
 </style>
+<c:forEach items="${allCategory }" var="ct">
+	<c:if test="${ct.CATEGORY_MACRO == product.categoryMacro }">
+		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
+		<c:if test="${ct.CATEGORY_MICRO == product.categoryMicro }">
+			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
+		</c:if>
+	</c:if>
+</c:forEach>
+
+<div class="productInfo-container">
+	<div class="productInfo-category">
+		<span>${nowCategory }</span>-
+		<span>${nowCategory2 }</span>
+	</div>
+</div>
+	
+<div class="productInfo-header">
+	<table border="0" class="productInfo-table">
+		<tr>
+			<td>
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="80%" >
+			</td>
+			<td>
+				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
+				<font id="fon">겟잇</font>
+				<font>1등 중고거래 컨시어지 서비스</font>
+			 	<table border="0" style="height:300px; width:400px;">
+			 		<tr align="center">
+			 			<td class="itemsell">판매자</td>
+			 			<td>${member.memberName }</td>
+			 		</tr>
+			 		<tr align="center">
+			 			<td class="itemsell">상품명</td>
+			 			<td id="itempro">${product.productName}</td>
+			 		</tr>
+			 		<tr align="center">
+			 			<td class="itemsell">가격</td>
+			 			 <td><fmt:formatNumber pattern="###,###" value="${product.productPrice }" />원</td>
+			 		</tr>
+			 		<tr align="center">
+			 			<td class="itemsell">상품소개</td>
+			 			<td>${product.productDescription}</td>
+			 		</tr>
+			 		<tr align="center">
+			 			<td class="itemsell">수량</td>
+			 			<td>1</td>
+			 		</tr>
+			 		<tr align="center" >
+			 			<td colspan="2">
+	                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
+		                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+		                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
+				 		    <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
+			 			</td>
+			 		</tr>
+			 	</table>
+			</td>
+		</tr>
+	</table>
+</div><!-- productInfo-header end -->
+
+<div>
+	<h2>이미지 슬라이드</h2>
+</div>
 <div class="productInfo-content">
 	<div class="info-text">
-		<img src="${pageContext.request.contextPath }/resources/images/items.PNG" margin-left:10%;"/>
 	</div>
 	<hr>
-		<table border="0" id="info_" style="font-weight:bold; color:gray;">
-			<tr>
-				<td style="padding-right:100px; ">상품상태</td>
-				<td>사용</td>
-			</tr>
-				<tr>
-				<td>작동상태</td>
-				<td>생활기스</td>
-			</tr>
-				<tr>
-				<td>찍힘 또는 깨짐</td>
-				<td>없음</td>
-			</tr>
-				<tr>
-				<td>구성품</td>
-				<td>제품박스</td>
-			</tr>
-				<tr>
-				<td>구매일</td>
-				<td>2019년2월11일</td>
-			</tr>
-				<tr>
-				<td>구매경로</td>
-				<td>국내 정식 발매 제품</td>
-			</tr>
-				<tr>
-				<td>추가정보</td>
-				<td><pre style="color:gray; font-weight:bold;">*젠더 미포함 입니다.
-*전반적으로 사용감이 다소 있지만, 기능은 정상 작동 합니다.</pre></td>
-			</tr>
-			
-		</table>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
 	<div class="info-delivery" style="margin-left:13%;">
 		<span style="font-size:20px; font-weight:bold; color:gray">배송정보</span><br />
 		<br>
@@ -287,62 +236,15 @@ font-size:20px;
 			<span style="margin-left:3%;">상품문의</span>
 			<button onclick="ask();" id="ask_">문의하기</button>
 		</div>
-		<div class="ask-comment">
-			<textarea rows="3" cols="80" id="askContent"></textarea>
-			<button onclick="itemAsk();">작성</button>
-		</div>
-		<hr style="border:2px solid gray;">
-		<div class="ask-content" id="askList" >
-			<span >문의하신 내역이 없습니다.</span>
-		</div>
+		<br />
 		<hr style="border:2px solid gray;">
 	</div>
 	
 <script>
 function ask(){
-	$(".ask-comment").show();
+	location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 }
 	
-function itemAsk(){
-	
-	if($("#askContent").val().trim().length == 0){
-		alert("내용을 입력해주세요.");
-		return;
-	}
-}
-function itemAsk(){
-		
-		if($("#askContent").val().trim().length == 0){
-			alert("내용을 입력해주세요.");
-			return;
-		}
-		
-		var asker = ${member.seqMemberNo};
-		var param = {"askContent":$("#askContent").val(),
-					"asker":asker,
-					"productNo":${product.seqProductNo}};
-		
-		$.ajax({
-			url: "${pageContext.request.contextPath}/item/ask",
-			contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			dataType: "json",
-			data: param,
-			type: "post",
-			success: function(data){
-				console.log(data);
-				
-				if(data != null){
-				var html = "<span id='askLeft'>"+data.askContent+"</span><span id='askRight'> 작성자 :"+data.asker+"</span>";
-				$("#askContent").val("");
-				
-				$("#askList").html(html).css("text-align","left");
-				}
-			},
-			error: function(){
-				console.log("ajax요청 에러!");
-			}
-		});
-}
 function insertBasket(){
 	var seqMemberNo = $('input[name=seqMemberNo]').val();
 	var seqProductNo = $('input[name=seqProductNo]').val();
@@ -366,13 +268,42 @@ function insertBasket(){
 }
 </script>
 
+<div class="naver-test">
+	
+</div>
+<script>
+$(function(){
+	var productName = "${product.productName}";
+	$.ajax({
+		url: "https://openapi.naver.com/v1/search/blog.json",
+		type: "get",
+		headers: {"Access-Control-Allow-Headers":"Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
+				"Access-Control-Max-Age":"3600",
+				"Access-Control-Allow-Origin":"*",
+				"Content-Type":"plain/text",
+				"X-Naver-Client-Id":"iRxnV_fRI0U3FGNoPOlk",
+				"X-Naver-Client-Secret":"mdUA9AjMzx"},
+		contentType: "plain/text; charset=UTF-8",
+		data: {"query":productName, "sort":"sim"},
+		success: function(data){
+			console.log(data);
+		},
+		error: function(){
+			console.log("ajax 요청 에러!");
+		}
+	});
+});
+</script>
+
+
+
 <div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
 	<div class="product-container">
 		<c:if test="${not empty cpList }">
-		<c:forEach items="${cpList }" var="p" varStatus="vs" end="3">
+		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="240px" height="180px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
@@ -383,7 +314,7 @@ function insertBasket(){
 		</c:forEach>
 	</c:if>
 	</div>
-</div>	
+</div>
 	
 
 

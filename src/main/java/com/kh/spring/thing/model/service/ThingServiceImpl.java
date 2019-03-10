@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.thing.model.dao.ThingDao;
 import com.kh.spring.thing.model.vo.Category;
+import com.kh.spring.thing.model.vo.Order;
 import com.kh.spring.thing.model.vo.Product;
 import com.kh.spring.thing.model.vo.Regist;
 
@@ -35,6 +36,18 @@ public class ThingServiceImpl implements ThingService {
 	@Override
 	public int sell(Regist regist) {
 		return thingDao.sell(regist);
+	}
+
+
+	@Override
+	public void insertOrder(Order order) {
+		thingDao.insertOrder(order);
+	}
+
+
+	@Override
+	public void updateOnSale(int nProductNo) {
+		thingDao.updateOnSale(nProductNo);
 	}
 
 }

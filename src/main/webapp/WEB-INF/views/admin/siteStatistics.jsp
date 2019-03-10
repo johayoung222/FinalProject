@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -162,7 +162,7 @@ function regist(){
 function auction(){
 	//console.log("경매 상품 비율");
 	$.ajax({
-    	url:"${pageContext.request.contextPath}/admin/auctionCategory.do",
+    	url:"${pageContext.request.contextPath}/admin/siteAuctionCategory.do",
     	dataType:"json",
     	success:function(data){
     	//console.log(data);
