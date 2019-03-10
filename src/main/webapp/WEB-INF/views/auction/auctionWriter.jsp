@@ -11,9 +11,6 @@
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
 <!-- header 끝 -->
-
-
-
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Gamja+Flower|Jua|Nanum+Brush+Script|Nanum+Gothic|Nanum+Myeongjo|Nanum+Pen+Script|Noto+Sans+KR|Sunflower:300" rel="stylesheet">
 <!-- Include Date Range Picker -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/daterangepicker.css" />
@@ -32,10 +29,6 @@
     crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/dist/summernote.css" />
-
-
-  
-
 
 <script type="text/javascript">
 //onload함수에 summernote 적용부분

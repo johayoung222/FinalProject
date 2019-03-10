@@ -4,11 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<!-- header 시작 -->
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
-<!-- header 끝 -->
 
 <script>
 /* 현재 시간을 구하는 함수 */
@@ -363,7 +361,6 @@ function getTime() {
 		console.log(today);
 		var inputBid =  document.getElementById("bidPrice").value;
 		var bidParams = $("#bid").serialize();
-		alert(bidParams);
 		if(today<startDate){
 			alert('경매진행 대기중 입니다.');
 			
@@ -371,8 +368,8 @@ function getTime() {
 			alert('종료 된 경매입니다.');
 		} else {
 			if(inputBid != null){
+				
 				if (Number(inputBid) > Number(curPrice) && Number(inputBid) > Number(basicPrice)){
-					alert(typeof(inputBid) + " "+typeof(curPrice));
 					$.ajax({
 						data: bidParams,
 						url:"${pageContext.request.contextPath}/auctionHistoryInsert",
