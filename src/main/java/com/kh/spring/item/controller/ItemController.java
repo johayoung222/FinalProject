@@ -209,6 +209,8 @@ public class ItemController {
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(searchResult, response.getWriter());
 
+	}
+	
 	@RequestMapping(value="/item/couponList.do",method=RequestMethod.GET)
 	@ResponseBody
 	public List<Map<String, Object>> couponList (@RequestParam(value="buyerNo")String buyerNo){

@@ -40,4 +40,6 @@ public interface AuctionService {
 
 	List<Map<String, String>> selectAuctionListBySearch(String searchKeyword);
 
+	List<Map<String, String>> checkHistory(Map<String, Object> temp);
+
 }
