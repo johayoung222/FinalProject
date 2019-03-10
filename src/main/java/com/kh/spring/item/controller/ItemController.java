@@ -1,11 +1,13 @@
 package com.kh.spring.item.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.kh.spring.auction.model.service.AuctionService;
+import com.kh.spring.common.naverapi.NaverApi;
 import com.kh.spring.item.model.service.ItemService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Product;
@@ -97,7 +100,7 @@ public class ItemController {
 		logger.debug(searchKeyword);
 		
 		List<Product> list = itemService.searchItem(searchKeyword);
-		List<Map<String,String>> auctionList = auctionService.selectAuctionList();
+		List<Map<String,String>> auctionList = auctionService.selectAuctionListBySearch(searchKeyword);
 		
 		logger.debug(list);
 		
@@ -125,7 +128,9 @@ public class ItemController {
 	public ModelAndView registProduct(ModelAndView mav) {
 		
 		List<Regist> list = itemService.selectAllRegist();
+		String isRegist = "Y";
 		
+		mav.addObject("isRegist", isRegist);
 		mav.addObject("cpList", list);
 		mav.setViewName("item/registItem");
 		
@@ -159,10 +164,47 @@ public class ItemController {
 	}
 	
 	@RequestMapping("/item/interest")
-	public ModelAndView interestItems(ModelAndView mav) {
-		//typehandler적용 관심상품 구현
-		//로그인 필요한 url접근 intercepter or aop 구현
-		//민성이형 DB update code받기
+	public ModelAndView interestItems(ModelAndView mav, HttpSession session) {
+		
+		Member m = (Member) session.getAttribute("memberLoggedIn");
+		int memberNo = m.getSeqMemberNo();
+		String itrList = itemService.selectMemberInterest(memberNo);
+		
+		List<Product> list = null;
+		
+		if(itrList != null) {
+			
+		String[] itrArr = itrList.split("");
+		List<String> itrArrList = new ArrayList<>();
+		for(String i : itrArr) {
+			itrArrList.add(i);
+		}
+		logger.debug(itrArrList);
+		
+		list = itemService.selectItr(itrArrList);
+		
+		}
+		
+		logger.debug(list);
+		String isInterest = "Y";
+		
+		mav.addObject("isInterest", isInterest);
+		mav.addObject("cpList", list);
+		mav.setViewName("item/item");
+		
 		return mav;
+	}
+	
+	@RequestMapping("/itme/moreInfo")
+	public void moreInfo(@RequestParam(value="searchKeyword") String searchKeyword, HttpServletResponse response) throws JsonIOException, IOException {
+		
+		logger.debug(searchKeyword);
+		
+		String searchResult = new NaverApi().searchNaver(searchKeyword);
+		
+		logger.debug(searchResult);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(searchResult, response.getWriter());
 	}
 }

@@ -45,6 +45,9 @@
 		<span>${nowCategory }</span>-
 		<span>${nowCategory2 }</span>
 	</c:if>
+	<c:if test="${isRegist != null }">
+		<h2>미등록 상품 리스트</h2>
+	</c:if>
 	<br />
 	</div>
 	<c:if test="${empty cpList }">

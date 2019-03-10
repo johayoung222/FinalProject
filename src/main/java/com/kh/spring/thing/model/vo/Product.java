@@ -34,5 +34,7 @@ public class Product {
 	private String categoryMacro;
 	private int sellerNo;
 	private int seqAuctionNo;
+	private int seqAskNo;
+	private String productAdminDescription;
 	
 }
