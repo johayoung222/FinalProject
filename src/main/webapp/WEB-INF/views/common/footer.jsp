@@ -23,7 +23,7 @@ p{
 		<div id="footer-container">
 			<div id="footer-link" >
 				<div>
-					<a href="#">이용약관</a>
+					<a href="${pageContext.request.contextPath}/customercenter/gotoUserRule.do">이용약관</a>
 				</div>
 				<div>
 					<a href="#">개인정보 취급방침</a>

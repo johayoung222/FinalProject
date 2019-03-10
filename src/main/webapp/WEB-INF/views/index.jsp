@@ -66,7 +66,8 @@
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 25%;
+    width: 22%;
+
 	height: 150px;
 	border: 1px solid #dbdbdb;
 
@@ -208,16 +209,30 @@ a {
 		class="sr-only">Next</span>
 	</a>
 </div>
+<style>
+#popular{
+text-align: left;
+font-family: 'Nanum Gothic', sans-serif;
+margin-top: 30px;
+margin-bottom: 20px;
+}
+#favorite{
+	margin-top: 50px;
+     margin-bottom: 20px;
+	margin-left: 130px;
+}
+</style>
 
-
-<div style="text-align: center;">
+<!-- <div style="text-align: center;"> -->
+	<div id="popular">
 	<div>
 		<h3>
-			<bold>인기 카테고리</bold>
+		인기 카테고리
+		<span class="badge badge-secondary">HIT</span>
 		</h3>
 	</div>
 	<div id="favorite">
-		<div>
+		<div id= "fimages">
 			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
 			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
@@ -238,11 +253,9 @@ a {
 				<img
 				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
 				id="favorite5" width="120px" height="100px" />
+
 			</a>
-			<div>
-				<pre><strong>      컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
-				</pre>
-			</div>
+		
 		</div>
 	</div>
 </div>
@@ -348,11 +361,10 @@ a {
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
 		<h5 style="text-align: center">1577-1577</h5>
-		<div id="box4">
-			<h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
-			
-			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
-		</div>
+
+	    <h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
+		<h6 style="text-align: center">주말, 공휴일 휴무</h6>
+	
 	</div>
 </div>
 
