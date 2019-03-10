@@ -12,16 +12,15 @@
 
 <style>
 .auctionList-container{
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
 }
 #tbl-auctionList{
+	table-layout:fixed;
 	text-align:center;
-}
-.tbl-tr th{
-	width:100px;
 }
 .tableTr td{
 	width:100px;
@@ -31,7 +30,7 @@
 	text-overflow: ellipsis;
 }
 .auctionRegistImg{
-	width:70px;
+	width:100px;
 	height:50px;
 }
 
@@ -66,7 +65,7 @@
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
-			<td colspan="8">상품이 없습니다.</td>
+			<td colspan="9">상품이 없습니다.</td>
 		</tr>
 		</c:if>
 		
