@@ -1398,11 +1398,11 @@ function fbvalidate(){
 					alert("등록이가능합니다");
 					$("#kakaoenroll-container").show();
 					$("input[name=ksubmit]").show();
-	               var interest = false;
-	            /* 관심상품 팝업 */
+	          /*      var interest = false;
+	           
 	            open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
 	             return false;
-				
+				 */
 				}else{
 					alert("이미 등록된 회원이 있습니다 ");	
 					$("#kakaoenroll-container").hide();
