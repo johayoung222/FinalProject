@@ -64,5 +64,21 @@
 	<select id="selectUpItems" resultType="product">
 		select * from product where product_onsale = 'Y' and product_recommend = 'Y'
 	</select>
-
+	
+	<select id="selectItr" resultType="product" parameterType="java.util.ArrayList">
+		select * from product
+		<where>
+		<if test="list.size != 0">
+		category_macro in
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+		#{item}
+		</foreach>
+		</if>
+		and product_onsale = 'Y'
+		</where>
+	</select>
+	
+	<select id="selectMemberInterest" resultType="string">
+		select member_interest from member where seq_member_no = #{memberNo}
+	</select>
 </mapper>

@@ -61,4 +61,8 @@
 		select count(*) from member where member_Email=#{memberEmail}
 	</select>
 	
+	<update id="updateItr" parameterType="map">
+		update member set member_interest = #{interest} where seq_member_no = #{memberNo}
+	</update>
+	
 </mapper>

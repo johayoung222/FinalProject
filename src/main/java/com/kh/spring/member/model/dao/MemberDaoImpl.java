@@ -13,26 +13,26 @@ import com.kh.spring.member.model.vo.Member;
 public class MemberDaoImpl implements MemberDao {
 
 	@Autowired
-	SqlSessionTemplate SqlSession;
+	SqlSessionTemplate sqlSession;
 	
 	@Override
 	public int insertMember(Member m) {
-		return SqlSession.insert("member.insertMember" , m);
+		return sqlSession.insert("member.insertMember" , m);
 	}
 
 	@Override
 	public Member selectOneMember(String memberId) {
-		return SqlSession.selectOne("member.selectOneMember", memberId);
+		return sqlSession.selectOne("member.selectOneMember", memberId);
 	}
 
 	@Override
 	public int memberUpdate(Member temp) {
-		return SqlSession.update("member.memberUpdate" , temp);
+		return sqlSession.update("member.memberUpdate" , temp);
 	}
 
 	@Override
 	public List<Map<String, String>> selectAllCategory() {
-		List<Map<String,String>> list = SqlSession.selectList("system.selectAllCategory");
+		List<Map<String,String>> list = sqlSession.selectList("system.selectAllCategory");
 		System.out.println(list);
 		return list;
 	}
@@ -40,65 +40,70 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int insertFaceBookMember(Member m) {
 		// TODO Auto-generated method stub
-		return SqlSession.insert("member.insertFaceBookMember" , m);
+		return sqlSession.insert("member.insertFaceBookMember" , m);
 	}
 
 	@Override
 	public Member selectOneFBMember(String fbIdcheck) {
 		// TODO Auto-generated method stub
-		return SqlSession.selectOne("member.selectOneMember", fbIdcheck);
+		return sqlSession.selectOne("member.selectOneMember", fbIdcheck);
 	}
 
 	@Override
 	public Member selectOnekakaoMember(String kIdcheck) {
 		// TODO Auto-generated method stub
-		return SqlSession.selectOne("member.selectOneMember",kIdcheck);
+		return sqlSession.selectOne("member.selectOneMember",kIdcheck);
 	}
 
 	@Override
 	public int insertKakaoMember(Member m) {
 		// TODO Auto-generated method stub
-		return SqlSession.insert("member.insertKakaoMember" , m);
+		return sqlSession.insert("member.insertKakaoMember" , m);
 	}
 
 	@Override
 	public int insertgoogleMember(Member m) {
 		// TODO Auto-generated method stub
-		return SqlSession.insert("member.insertgoogleMember",m);
+		return sqlSession.insert("member.insertgoogleMember",m);
 		
 	}
 
 	@Override
 	public Member selectOnegoogleMember(String gIdcheck) {
 		// TODO Auto-generated method stub
-		return SqlSession.selectOne("member.selectOneMember",gIdcheck);
+		return sqlSession.selectOne("member.selectOneMember",gIdcheck);
 	}
 
 	@Override
 	public int updatePhone(Member member) {
 		int result = 0;
-		result = SqlSession.update("member.updatePhone",member);
+		result = sqlSession.update("member.updatePhone",member);
 		return result;
 	}
 
 	@Override
 	public String selectmemberId(String memberEmail) {
-		return SqlSession.selectOne("member.selectmemberId", memberEmail);
+		return sqlSession.selectOne("member.selectmemberId", memberEmail);
 	}
 
 	@Override
 	public int countmember(Member m) {
-		return SqlSession.selectOne("member.countmember",m);
+		return sqlSession.selectOne("member.countmember",m);
 	}
 
 	@Override
 	public int updatePwd(Member m) {
-		return SqlSession.update("member.updatePwd",m);
+		return sqlSession.update("member.updatePwd",m);
 	}
 
 	@Override
 	public int countmemberId(Member m) {
-		return SqlSession.selectOne("member.countmemberId",m);
+		return sqlSession.selectOne("member.countmemberId",m);
+	}
+
+	@Override
+	public int updateItr(Map<String, String> map) {
+		return sqlSession.update("member.updateItr", map);
 	}
 
 	

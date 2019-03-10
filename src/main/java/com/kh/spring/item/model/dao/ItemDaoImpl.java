@@ -75,6 +75,16 @@ public class ItemDaoImpl implements ItemDao {
 		return sqlSession.selectList("basket.selectUpItems");
 	}
 
+	@Override
+	public List<Product> selectItr(List<String> itrArrList) {
+		return sqlSession.selectList("basket.selectItr", itrArrList);
+	}
+
+	@Override
+	public String selectMemberInterest(int memberNo) {
+		return sqlSession.selectOne("basket.selectMemberInterest",memberNo);
+	}
+
 	
 
 	

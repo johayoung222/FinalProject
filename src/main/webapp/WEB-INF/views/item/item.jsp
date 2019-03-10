@@ -51,10 +51,21 @@
 	<c:if test="${isRecommend != null }">
 		<h2>에디터 추천 상품 리스트</h2>
 	</c:if>
+	<c:if test="${isInterest != null }">
+		<h2>관심 상품 리스트</h2>
+	</c:if>
 	<br />
 	</div>
 	<c:if test="${empty cpList and empty auctionList}">
-	<div class="noProduct">새로 등록된 상품이 없습니다.</div>
+	<c:if test="${isInterest == null }">
+	<div class="noProduct">해당 상품이 없습니다.</div>
+	</c:if>
+	<c:if test="${isInterest != null }">
+		<div class="noProduct">
+			<button onclick="open('${pageContext.request.contextPath}/member/memberInterest.do?memberNo=${memberLoggedIn.seqMemberNo }','_blank',
+		 'width=500,height=400,left=200,top=200');">관심상품 등록하기</button>
+		</div>
+	</c:if>
 	</c:if>
 	
 	<div class="product-container">

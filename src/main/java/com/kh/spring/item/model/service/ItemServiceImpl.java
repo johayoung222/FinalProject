@@ -76,5 +76,15 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.selectUpItems();
 	}
 
+	@Override
+	public List<Product> selectItr(List<String> itrArrList) {
+		return itemDao.selectItr(itrArrList);
+	}
+
+	@Override
+	public String selectMemberInterest(int memberNo) {
+		return itemDao.selectMemberInterest(memberNo);
+	}
+
 	
 }

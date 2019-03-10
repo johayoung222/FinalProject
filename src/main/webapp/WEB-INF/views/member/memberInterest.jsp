@@ -41,7 +41,12 @@
 		<span>관심 카테고리를 선택해주세요.</span>
 	</div>
 	<div class="interest-content">
+		<c:if test="${param.memberNo == null }">
 		<form action="javascript:interestEnd();" name="interestFrm">
+		</c:if>
+		<c:if test="${param.memberNo != null }">
+		<form action="javascript:interestEnd2();" name="interestFrm">
+		</c:if>
 		<c:forEach items="${category }" var="c" varStatus="vs">
 		<c:if test="${vs.count%3==0 }">
 		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
@@ -72,6 +77,31 @@ function interestEnd(){
 	opener.memberEnrollFrm.memberInterest.value = interest;
 	opener.memberEnrollFrm.submit();
 	self.close();
+}
+function interestEnd2(){
+	var category = $("[name='categoryMacro']");
+	var interest = "";
+	category.each(function(idx, item){
+		if($(item).prop("checked") == true){
+			interest += $(item).val();
+		}
+	});
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/member/memberItrUpdate?memberNo="+${param.memberNo}+"&interest="+interest,
+		type: "get",
+		success: function(data){
+			console.log(data);
+			if(data == 1){
+				alert("관심 상품이 등록되었습니다.");
+				opener.location.href = "${pageContext.request.contextPath}";
+				self.close();
+			}
+		},
+		error: function(){
+			console.log("ajax 요청 에러!");
+		}
+	});
 }
 function skip(){
 	opener.memberEnrollFrm.submit();
