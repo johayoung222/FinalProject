@@ -72,13 +72,13 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="a">
 			<tr class="tableTr">				
-				<td>${a.AUCTION_NO}</td>
+				<td><a href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">${a.AUCTION_NO}</a></td>
 				<td>${a.AUCTION_TITLE}</td>
 				<td>${a.SDATE}</td>
 				<td>${a.EDATE}</td>
 				<td>${a.AUCTION_PRICE}</td>
 				<td><img class="auctionRegistImg" src="${pageContext.request.contextPath}/resources/upload/${a.AUCTION_IMAGE_MAIN}"></td>
-				<td>${a.AUCTION_MEMBER}</td>
+				<td><a href="#" onclick="window.open('${pageContext.request.contextPath}/admin/memberPage.do?memberId=${a.AUCTION_MEMBER}', '사용자 정보', 'width=500,height=600,location=no,status=no,top=100,left=500');">${a.AUCTION_MEMBER}</a></td>
 				<td>${a.AUCTION_PHONE}</td>
 				<td>${a.AUCTION_CATEGORY_MACRO}</td>
 			</tr>			

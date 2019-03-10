@@ -68,14 +68,14 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="p">
 			<tr class="tableTr">				
-				<td>${p.SEQ_PRODUCT_NO}</td>
+				<td><a href="${pageContext.request.contextPath }/item/iteminformation/${p.SEQ_PRODUCT_NO }">${p.SEQ_PRODUCT_NO }</a></td>
 				<td>${p.PRODUCT_NAME}</td>
 				<td>${p.PRODUCT_PRICE}</td>
 				<td>${p.PRODUCT_MANUFACTURER}</td>
 				<td>${p.PRODUCT_STOCK}</td>
 				<td>${p.PRODUCT_MILEGE}</td>
 				<td>${p.PRODUCT_DESCRIPTION}</td>
-				<td>${p.MEMBERID}</td>
+				<td><a href="#" onclick="window.open('${pageContext.request.contextPath}/admin/memberPage.do?memberId=${p.MEMBERID}', '사용자 정보', 'width=500,height=600,location=no,status=no,top=100,left=500');">${p.MEMBERID}</a></td>
 				<td>${p.PRODUCT_ENROLL_DATE}</td>
 			</tr>			
 			</c:forEach>
