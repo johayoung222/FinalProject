@@ -1,12 +1,13 @@
 package com.kh.spring.member.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -25,6 +26,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
@@ -599,6 +602,21 @@ public class MemberController {
 		return "member/findAccount";
 	}
 	
+	@RequestMapping("/member/memberItrUpdate")
+	public void interestUpdate(@RequestParam(value="memberNo") String memberNo,@RequestParam(value="interest") String interest,
+							HttpServletResponse response) throws JsonIOException, IOException {
+		
+		logger.debug(interest+"/"+memberNo);
+		
+		Map<String,String> map = new HashMap<>();
+		map.put("memberNo",memberNo);
+		map.put("interest",interest);
+		
+		int result = memberService.updateItr(map);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(result,response.getWriter());
+	}
 
 	
 }

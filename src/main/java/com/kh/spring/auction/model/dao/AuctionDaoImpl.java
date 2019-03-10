@@ -92,4 +92,9 @@ public class AuctionDaoImpl implements AuctionDao {
 		return sqlSession.selectOne("auction.selectAuctionTitle", auctionNo);
 	}
 
+	@Override
+	public List<Map<String, String>> selectAuctionListBySearch(String searchKeyword) {
+		return sqlSession.selectList("auction.selectAuctionBySearch", searchKeyword);
+	}
+
 }
