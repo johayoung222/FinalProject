@@ -97,4 +97,9 @@ public class AuctionDaoImpl implements AuctionDao {
 		return sqlSession.selectList("auction.selectAuctionBySearch", searchKeyword);
 	}
 
+	@Override
+	public List<Map<String, String>> checkHistory(Map<String, Object> temp) {
+		return sqlSession.selectList("auction.checkHistory" , temp);
+	}
+
 }

@@ -30,8 +30,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 <style>
-body {
+body{
 	width: 100%;
 }
 [name="MainSearchFrm"]{
@@ -40,64 +42,52 @@ body {
 #search_ {
 	width: 400px;
 	height: 50px;
-	/* margin-left: 200px; */
+    margin-left: 150px; 
 	border: 2px solid blue;
 }
-
 #search2 {
 	padding: 10px;
+	position:relative;
+	right:50px;
 }
-
 #nav-item1 {
 	border-left: 1px solid lightgray;
 }
-
 .nav-link {
 	border-right: 1px solid lightgray;
 }
-
 #button_ {
 	background: white;
 }
-
 .nav-link:hover {
 	color: #7151FC;
 	border-bottom: 2px solid #7151FC;
 }
-
-#container {
-	padding-left: 45%;
-	border: 0px;
-}
-
-#box-link {
+#box-link{
 	display: flex;
 	justify-content: space-between;
+	margin-left: 65%;
 	background-color: rgb(246, 241, 252);
+	width: 330px;
 	border-radius: 5px;
 	height: 30px;
 }
-
 #box-link>div {
 	width: 100px;
 	text-align: center;
 	padding-top: 4px;
 	border-right: 1px solid white;
 }
-
 #box-link a {
 	text-decoration: none;
 }
-
 #box-link a:hover {
 	color: white;
 }
-
 #collapseExample {
 	width: 260px;
 	margin-left: -40px;
 }
-
 #button_ {
 	cursor: pointer;
 	background-color: inherit;
@@ -105,23 +95,53 @@ body {
 .item-link{
 	color:gray;
 }
-
+#searchList{
+	width: 400px;
+	position: absolute;
+	left: 35.3%;
+	z-index: 1000;
+	background-color: white;
+}
+#searchList table{
+	border-collapse: collapse;
+	width: 400px;
+	border: 1px solid black;
+}
+#searchList table tr:hover{
+	background-color: lightgray;
+	cursor: pointer;
+}
 </style>
 
 </head>
 <body>
-	<div id="container">
+	<div id="re-container">
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
-				<div id="box-link5">
-					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+			<style>
+			#box-link{
+				width: 430px;
+				margin-left: 55%;
+
+				background: rgb(248,248,248);
+				
+			}
+			</style>
+				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<style>
+				#box-link{
+					width: 530px;
+					margin-left: 45%;
+				}
+				</style>
+					<div id="box-link5">
 						<a class="item-link"
 							href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
-					</c:if>
-				</div>
+					</div>
+				</c:if>
 				<div id="box-link4">
 					<i class="fa fa-truck"></i> <a class="item-link" id="gotobasket"
-						href="${pageContext.request.contextPath }/item/basket.do">장바구니</a>
+						href="${pageContext.request.contextPath }/item/basket.do?memberNo=${memberLoggedIn.getSeqMemberNo()}">장바구니</a>
 				</div>
 			</c:if>
 			<div class="box-link1">
@@ -136,8 +156,8 @@ body {
 			</div>
 			<div class="box-link2">
 				<c:if test="${memberLoggedIn == null }">
-					<a class="item-link"
-						href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
+						<a class="item-link"
+							href="${pageContext.request.contextPath }/member/memberEnroll.do">회원가입</a>
 				</c:if>
 				<c:if test="${memberLoggedIn != null }">
 					<a id="button_" data-toggle="collapse"
@@ -171,31 +191,13 @@ body {
 			</div>
 			<div class="box-link3">
 				<a class="item-link"
-					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터▼</a>
+					href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터</a>
 			</div>
-
 		</div>
 	</div>
-	<style>
-	#searchList{
-		width: 400px;
-		position: absolute;
-		left: 20.4%;
-		z-index: 1000;
-		background-color: white;
-	}
-	#searchList table{
-		border-collapse: collapse;
-		width: 400px;
-		border: 1px solid black;
-	}
-	#searchList table tr:hover{
-		background-color: lightgray;
-		cursor: pointer;
-	}
-	</style>
+
 	<div id="header-container">
-		<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px">
+		<a  href="${pageContext.request.contextPath }"><img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="200px" height="80px"></a>
 		<form action="${pageContext.request.contextPath }/item/search" name="MainSearchFrm">
 			<input type="text" name="searchKeyword" placeholder="상품명으로 검색해보세요." id="search_" autocomplete="off" />
 			<div class="searchList" id="searchList"></div>
@@ -219,7 +221,7 @@ body {
 			success: function(data){
 				console.log(data);
 				
-				var table = $("<table></table>");
+				var table = $("<table id='resultList'></table>");
 				
 				var html = "";
 				
@@ -229,6 +231,11 @@ body {
 				table.html(html);
 				$("#searchList").html(table);
 				
+				$("#resultList tr td").on('click',function(){
+					MainSearchFrm.searchKeyword.value = $(this).html();
+					MainSearchFrm.submit();
+				});
+				
 			},
 			error: function(){
 				console.log("ajax 요청 에러!!");
@@ -237,11 +244,21 @@ body {
 	});
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
-		<a class="navbar-brand" href="${pageContext.request.contextPath }"> <img
-			src="${pageContext.request.contextPath }/resources/images/Getit_.PNG"
-			alt="스프링로고" width="50px" style="border-radius: 50px;" />
-		</a>
+	<style>
+	#navbarNav{
+	}
+	#navbarNav ul{
+	}
+	#navbarNav ul li{
+		width: 130px;	
+		text-align: center;
+	}
+	.nav-link{
+		font-size: 14px;
+		border: none;
+	}
+	</style>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -253,8 +270,52 @@ body {
 				<li class="nav-item" id="nav-item1">
 					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
-						<table>
+					<div class="dropdown-menu" aria-labelledby="dropdown MenuLink">
+					<style>
+					.dropdown-menu{
+							background: rgb(250,250,250);
+							
+					}
+					#cTable{
+						font-family: 'Nanum Gothic', sans-serif;
+						background: rgb(250,250,250);
+			
+					
+					}
+					#cTable tr th{
+					  font-family: 'Noto Sans KR', sans-serif;
+					   /*  background: rgb(250,250,250); */
+					     background: #5853EB;
+					    color: white;
+						text-align: center;
+						font-weight: bolder;
+						text-decoration: none;
+					}
+					#cTable tr:not(:first-of-type) td ul{
+					    font-family: 'Nanum Gothic', sans-serif;
+						list-style: none;
+						padding-left: 10px;
+						padding-right: 10px;
+					
+						
+					}
+				    #cTable tr:not(:first-of-type) td ul:hover{
+					 	    background: #368AFF;
+					 	  border-radius:15px;
+						
+					}
+					
+					#cTable tr:not(:first-of-type) td ul>a{
+						text-decoration: none;
+					}
+					#cTable tr:not(:first-of-type) td ul>a:hover{
+					    font-family: 'Noto Sans KR', sans-serif;
+						text-decoration: none;
+					    color: white;
+					    font-weight: bolder;
+					}
+					</style>
+						<table id="cTable" border="0">
 							<tr>
 								<th>
 									전자제품
@@ -270,6 +331,9 @@ body {
 								</th>
 								<th>
 									스포츠/레저
+								</th>
+								<th>
+									유아동/출산
 								</th>
 							</tr>
 							<tr>
@@ -299,7 +363,9 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'C' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=C&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -308,7 +374,9 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'D' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=D&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -317,7 +385,96 @@ body {
 								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'E' }">
 										<ul>
-											<li>${ct.CATEGORY_MICRO_NAME }</li>
+											<a href="${pageContext.request.contextPath }/category?caKey=E&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+									<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'F' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+									</c:forEach>
+								</td>
+							</tr>
+							<tr>
+								<th>완구/문구/취미</th>
+								<th>해외명품</th>
+								<th>도서/음반/DVD</th>
+								<th>가구/인테리어</th>
+								<th>여행/문화</th>
+								<th>생활/건강</th>
+							</tr>
+							<tr>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'G' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=G&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'H' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=H&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'I' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=I&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'J' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=J&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'K' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=K&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'L' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=L&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
 										</ul>
 									</c:if>
 								</c:forEach>
@@ -326,11 +483,10 @@ body {
 						</table>
 					</div>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">관심상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추천상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">새로 등록된 상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/interest">관심상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
+				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
@@ -732,7 +888,6 @@ function getTime() {
 		console.log(today);
 		var inputBid =  document.getElementById("bidPrice").value;
 		var bidParams = $("#bid").serialize();
-		alert(bidParams);
 		if(today<startDate){
 			alert('경매진행 대기중 입니다.');
 			
@@ -740,8 +895,8 @@ function getTime() {
 			alert('종료 된 경매입니다.');
 		} else {
 			if(inputBid != null){
+				
 				if (Number(inputBid) > Number(curPrice) && Number(inputBid) > Number(basicPrice)){
-					alert(typeof(inputBid) + " "+typeof(curPrice));
 					$.ajax({
 						data: bidParams,
 						url:"${pageContext.request.contextPath}/auctionHistoryInsert",
