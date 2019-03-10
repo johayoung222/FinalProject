@@ -12,18 +12,17 @@
 
 <style>
 .regist-container{
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
-	margin-right:15px;
-	
 }
 #tbl-regist{
+	table-layout:fixed;	
 	text-align:center;
 }
-.tbl-tr th{
-	width:100px;
-}
+
 .tableTr td{
 	width:100px;
 	height:70px;
@@ -32,8 +31,8 @@
 	text-overflow: ellipsis;
 }
 .td_img{
-	width:100px;
-	height:60px;
+	width:90px;
+	height:50px;
 }
 </style>
 <br />
