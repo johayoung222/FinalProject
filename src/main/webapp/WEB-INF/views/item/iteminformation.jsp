@@ -341,28 +341,13 @@ $(function(){
 		</div>
 	</div>
 </c:if>
-
-<form id="myform">
-    URL입력:  <input type="text" id="url" value="https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"><br/>
-    Title입력:  <input type="text" id="title" value="네이버개발자센터 검색결과"><br/>
-  </form>
-  <input type="button" value="네이버공유하기" onclick="share()"/>
-  <script>
-  $(".productOne").each(function(item, idx){
-		$(this).on('click',function(){
-			var pId = $(this).attr("id");
-			location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
-		});
+ <script>
+ $(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
 	});
-  
-    function share() {
-      var url = encodeURI(encodeURIComponent(myform.url.value));
-      var title = encodeURI(myform.title.value);
-      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
-      document.location = shareURL;
-    }
-  </script>
-	
-
+});
+ </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
