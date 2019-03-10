@@ -13,6 +13,7 @@
 	height:750px;
 	position:relative;
 	margin-left:180px;
+	margin-right:15px;
 	top:-37px;
 }
 #image_{

@@ -71,6 +71,12 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteCoupon(Map<String, Object> map) {
 		return adminDao.deleteCoupon(map);
 	}
+	
+	@Override
+	public int couponAutoDelete() {
+		return adminDao.couponAutoDelete();
+	}
+
 
 
 
@@ -87,6 +93,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
+	public List<Map<String, String>> paidAuction(int cPage, int numPerPage) {
+		return adminDao.paidAuction(cPage,numPerPage);
+	}
+
+	@Override
+	public int countpaidAuction() {
+		return adminDao.countpaidAuction();
+	}
+
+	
+	@Override
 	public List<Map<String,String>> paidProductSearch(int cPage, int numPerPage, Map<String, String> map) {
 		return adminDao.paidProductSearch(cPage,numPerPage,map);
 	}
@@ -94,6 +111,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int countpaidProductSearch(Map<String, String> map) {
 		return adminDao.countpaidProductSearch(map);
+	}
+	
+	@Override
+	public List<Map<String, String>> paidAuctionSearch(int cPage, int numPerPage, Map<String, String> map) {
+		return adminDao.paidAuctionSearch(cPage,numPerPage,map);
+	}
+
+	@Override
+	public int countpaidAuctionSearch(Map<String, String> map) {
+		return adminDao.countpaidAuctionSearch(map);
 	}
 	
 	
@@ -218,6 +245,12 @@ public class AdminServiceImpl implements AdminService {
 	public int updateAuctionRegist(int auctionRegistNo) {
 		return adminDao.updateAuctionRegist(auctionRegistNo);
 	}
+	
+	@Override
+	public int auctionCencel(int auctionRegistNo) {
+		return adminDao.auctionCencel(auctionRegistNo);
+	}
+
 
 	//경매상품 현황---------------------------------------------------------------
 	@Override
@@ -290,6 +323,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.questionCategory();
 	}
 
+	
+
+	
+	
 	
 
 	

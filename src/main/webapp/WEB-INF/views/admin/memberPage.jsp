@@ -168,6 +168,18 @@ $(function(){
 			console.log("ajax요청 실패!!");
 		}
 	});
+	
+	$.ajax({
+		url:"${pageContext.request.contextPath}/admin/couponAutoDelete",
+		dataType:"json",
+		success:function(data){
+			console.log("유효기간 쿠폰 삭제!!");
+		},error:function(){
+			alert("ajax 요청 처리 실패!!");
+		}
+		
+	});
+	
 });
 
 $("#isadmin").on('click',function(){
@@ -235,8 +247,9 @@ $("#couponList").on('click',function(){
 					}else if(data[i].COUPON_BENEFITS == 2){
 						html += "<td>15%</td>";
 					}
-		            var day = new Date(data[i].COUPON_EXPIRATION_DATE); 
-					html += "<td>"+day+"</td>";
+					var date = new Date(data[i].ENDDAY);		
+					var str = date.toJSON();	
+					html += "<td>"+str.substring(0,10)+"</td>";
 					html += "<td>"+data[i].COUPON_STATUS+"</td></tr>";
 				}
 			}

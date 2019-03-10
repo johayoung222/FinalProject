@@ -12,14 +12,12 @@
 
 <style>
 .auctionList-container{
-	
 	height:750px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
 }
 #tbl-auctionList{
-	table-layout: fixed;
 	text-align:center;
 }
 .tbl-tr th{

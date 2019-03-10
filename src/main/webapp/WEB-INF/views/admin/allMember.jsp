@@ -15,6 +15,7 @@
 	width:100%;
 }
 .allMember-container{	
+margin-right:15px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
@@ -112,7 +113,7 @@ input[type=submit].btn-block {
 
 $(document).on('click','.tableTr',function(){
 	var memberId = $(this).children("td:first").text();
-	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=400");
+	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=500");
 });
 
 </script> 
