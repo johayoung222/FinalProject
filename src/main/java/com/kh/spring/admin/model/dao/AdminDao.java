@@ -31,15 +31,25 @@ public interface AdminDao {
 	List<Map<String, Object>> couponList(int memberNo);
 	
 	int deleteCoupon(Map<String, Object> map);
+	
+	int couponAutoDelete();
 
 	//결제된 상품 리스트
 	List<Map<String, String>> paidProduct(int cPage, int numPerPage);
 	
 	int countpaidProduct();
 	
+	List<Map<String, String>> paidAuction(int cPage, int numPerPage);
+
+	int countpaidAuction();
+	
 	List<Map<String, String>> paidProductSearch(int cPage, int numPerPage, Map<String, String> map);
 	
 	int countpaidProductSearch(Map<String, String> map);
+	
+	List<Map<String, String>> paidAuctionSearch(int cPage, int numPerPage, Map<String, String> map);
+
+	int countpaidAuctionSearch(Map<String, String> map);
 	
 	
 	
@@ -96,6 +106,8 @@ public interface AdminDao {
 
 	int updateAuctionRegist(int auctionRegistNo);
 	
+	int auctionCencel(int auctionRegistNo);
+	
 	//경매 상품 현황
 	List<Map<String, String>> auctionList(int cPage, int numPerPage);
 
@@ -126,6 +138,14 @@ public interface AdminDao {
 	List<Map<String, Object>> auctionCategory();
 
 	List<Map<String, Object>> questionCategory();
+
+
+
+	
+
+	
+
+	
 
 	
 

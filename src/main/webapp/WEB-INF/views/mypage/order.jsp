@@ -7,7 +7,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+<style>
 
+</style>
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
 <div class="mypage-container">
@@ -19,7 +21,6 @@
 			<div class="mp" style="padding-top:10px;">
 				<a class="mp-submenu-item ${menuSel =='normal'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=normal">셀잇판매</a>
 				<a class="mp-submenu-item ${menuSel =='c2c'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=c2c">직접판매</a>
-				<a class="mp-submenu-item ${menuSel =='temporarily_saved'?'active':'' }" href="${pageContext.request.contextPath}/mypage/order?filter=temporarily_saved">임시저장</a>
 			</div>
 			<hr style="border-bottom:1px solid gray; width:143%;">
 			<div class="mypage">
@@ -27,9 +28,16 @@
 					<div class="mypage-content">${msg }</div>
 				</c:if>
 				<c:if test="${not empty list }">
-					<c:forEach items="${list }" var="o">
-						
+				<table>
+					<c:forEach items="${list }" var="o" varStatus="vs">
+						<td>
+						${o.PRODUCT_IO_MANUFACTURER}						
+					
+						${o.PRODUCT_NAME} <br />
+						${o.PRODUCT_IO_PRICE} <br />
+						</td>
 					</c:forEach>
+				</table>
 				</c:if>
 			</div>
 		</div>	

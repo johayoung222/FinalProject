@@ -61,11 +61,12 @@
 #box0{
  border:0; 
  padding-top:20px; 
+ width:100%;
 }
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 250px;
+    width: 22%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 
@@ -74,7 +75,7 @@
 #box2 {
 	display: inline-block;
 	vertical-align: top;
-	width: 230px;
+	width: 22%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
@@ -83,21 +84,15 @@
 #box3 {
 	display: inline-block;
 	vertical-align: top;
-	width: 200px;
+	width: 20%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
-	
 }
 
 #box4 {
+	display: inline-block;
 	padding-top: 0px;
-}
-#box5{
-	float:right; 
-	position:relative; 
-	bottom:130px; 
-	right:50px;"
 }
 
 .font2_ {
@@ -106,10 +101,7 @@
 
 .hm-good {
 	display: inline-block;
-}
-
-.hm-good {
-    width: 271px;
+    width: 241px;
     height: 344px;
     padding: 8px 18px;
 }
@@ -137,9 +129,6 @@
     height: 364px;
 }
 
-a {
-    cursor: pointer;
-}
 a {
     color: inherit;
     text-decoration: none;
@@ -182,6 +171,13 @@ a {
 	box-shadow: 3px 3px 5px 7px lightgray;
 	cursor: pointer;
 }
+.pImg{
+	width: 200px;
+	height: 180px;
+}
+.blinkEle1 , .blinkEle2{
+	display:none;
+}
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -212,16 +208,30 @@ a {
 		class="sr-only">Next</span>
 	</a>
 </div>
+<style>
+#popular{
+text-align: left;
+font-family: 'Nanum Gothic', sans-serif;
+margin-top: 30px;
+margin-bottom: 20px;
+}
+#favorite{
+	margin-top: 50px;
+     margin-bottom: 20px;
+	margin-left: 130px;
+}
+</style>
 
-
-<div style="text-align: center;">
+<!-- <div style="text-align: center;"> -->
+	<div id="popular">
 	<div>
 		<h3>
-			<bold>인기 카테고리</bold>
+		인기 카테고리
+		<span class="badge badge-secondary">HIT</span>
 		</h3>
 	</div>
 	<div id="favorite">
-		<div>
+		<div id= "fimages">
 			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
 			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
@@ -242,12 +252,7 @@ a {
 				<img
 				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
 				id="favorite5" width="120px" height="100px" />
-			</a>
-			<div>
-
-				<pre><strong>      컴퓨터                 핸드폰                 전자기기                 식품            생활/주방/미용가전</strong>
-				</pre>
-			</div>
+			</a>			
 		</div>
 	</div>
 </div>
@@ -265,14 +270,13 @@ a {
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" height="180px" width="240px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
 				<span>${p.productPrice } 원</span>
 			</div>
 		</div>
-		<c:if test="${vs.count%3 == 0 }"></c:if>
 		</c:forEach>
 	</c:if>
 
@@ -283,19 +287,21 @@ a {
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
-
+<jsp:useBean id="now" class="java.util.Date" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+ 
 <c:if test="${empty auctionList }">
 	<div>새로 등록된 경매 상품이 없습니다.</div>
 </c:if>
 <div class="hm-container">
 <c:if test="${not empty auctionList }">
-	<c:forEach items="${auctionList }" var="a">
+	<c:forEach items="${auctionList }" var="a" varStatus="vs">
 			<div class="hm-good">
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle">다른 사용자가 구매중 , 경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide blinkEle">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle2">내가 구매중 , 내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
@@ -311,6 +317,9 @@ a {
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
 					</div></a>
 			</div>
+			<input type="hidden" id="sdate${vs.count }" value="${a.SDATE }" />
+			<input type="hidden" id="edate${vs.count }" value="${a.EDATE }" />
+
 		</c:forEach>
 </c:if>
 </div>
@@ -335,7 +344,7 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">겟잇 소식</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 		</div>
 	</div>
 	<div id="box2" style="text-align: center">
@@ -343,22 +352,63 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">자주 묻는 질문</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
 	</div>
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
-		<h5 style="text-align: center">1833-6479</h5>
-		<div id="box4">
-			<h6 style="text-align: center">평일: 10시~19시</h6>
-			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
-		</div>
+		<h5 style="text-align: center">1577-1577</h5>
+	    <h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
+		<h6 style="text-align: center">주말, 공휴일 휴무</h6>
+	
 	</div>
 </div>
 
 <hr>
 
 <script>
+/* 현재 시간을 구하는 함수 */
+function getTime() {
+	today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var MM = today.getMinutes();
+	var MM = today.getMinutes();
+	var ss = today.getSeconds();
+
+	if(dd<10) { dd='0'+dd } 
+	if(mm<10) { mm='0'+mm } 
+	if(hh<10) { hh='0'+hh }
+	
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	return today;
+}
+
+
+// 온로드 됬을때 경매 진행중인지 ? 아니면 내가 경매에 참여중인지 찍어주기 위한 소스코드
+	$(function(){
+		for(var i = 1; i <= 4;i++) {
+			var sdate = $("#sdate"+i).prop("value");
+			var edate = $("#edate"+i).prop("value");
+			today = getTime();			
+			
+			var result = 0;
+			if(today>sdate) {
+				result++;
+			}
+			if(today<=edate) {
+				result++;
+			}
+			
+			if(result == 2) {
+				alert(i+"경매진행중인게 있다.");
+			}
+		}
+		
+	});
+	
 setInterval(function(){
 	  $(".blinkEle").toggle();
 	}, 500);

@@ -4,18 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
 <style>
-#header{
-	width:100%;
-}
 .allMember-container{	
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
@@ -32,6 +30,7 @@ input[type=submit].btn-block {
 }
 .allmember-nav{
 	width:100%;
+	padding-right:0px;
 }
 #tbl-allMember{
 	text-align:center;
@@ -112,7 +111,7 @@ input[type=submit].btn-block {
 
 $(document).on('click','.tableTr',function(){
 	var memberId = $(this).children("td:first").text();
-	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=400");
+	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=500");
 });
 
 </script> 

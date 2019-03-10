@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -12,7 +12,7 @@
 
 <style>
 .auctionRegist-container{
-	
+	margin-right:15px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
@@ -84,7 +84,7 @@ $(document).on('click','.tableTr',function(){
 	//$("#tbl-regist").css("display","none");
 	var auctionRegistNo = $(this).children("td:first").text();
 	//console.log(auctionRegistNo);
-	var win = window.open("${pageContext.request.contextPath}/admin/auctionCategory.do?auctionRegistNo="+auctionRegistNo, "대/소분류 선택", "width=400,height=500,location=no,status=no,top=150,left=600");
+	var win = window.open("${pageContext.request.contextPath}/admin/auctionCategory.do?auctionRegistNo="+auctionRegistNo, "대/소분류 선택", "width=500,height=600,location=no,status=no,top=50,left=600");
 });
 
 </script> 

@@ -23,7 +23,7 @@ p{
 		<div id="footer-container">
 			<div id="footer-link" >
 				<div>
-					<a href="#">이용약관</a>
+					<a href="${pageContext.request.contextPath}/customercenter/gotoUserRule.do">이용약관</a>
 				</div>
 				<div>
 					<a href="#">개인정보 취급방침</a>
@@ -32,10 +32,10 @@ p{
 					<a href="#">판매 및 환불 약관</a>
 				</div>
 				<div>
-					<a href="#">공지사항</a>
+					<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">공지사항</a>
 				</div>
 				<div>
-					<a href="#">고객센터</a>
+					<a href="${pageContext.request.contextPath}/customercenter/ccintro.do">고객센터</a>
 				</div>
 			</div>
 		</div>

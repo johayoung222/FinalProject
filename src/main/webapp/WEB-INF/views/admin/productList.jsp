@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 
@@ -12,11 +12,17 @@
 
 <style>
 .productList-container{
-
-	height:750px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
+	margin-right:15px;
+	
+}
+#tbl-productList{
+	text-align:center;
+}
+.tbl-tr th{
+	width:100px;
 }
 .tableTr td{
 	width:100px;
@@ -24,9 +30,6 @@
 	overflow:hidden;
 	white-space : nowrap;
 	text-overflow: ellipsis;
-}
-#tbl-productList{
-	text-align:center;
 }
 </style>
 <br />
@@ -47,7 +50,7 @@
 	</nav>
 <hr />
 	<table id="tbl-productList" class="table table-striped table-hover">
-		<tr>
+		<tr class="tbl-tr">
 			<th>제품코드</th>
 			<th>상품명</th>
 			<th>제품단가</th>
@@ -55,6 +58,7 @@
 			<th>수량</th>
 			<th>마일리지</th>
 			<th>상품설명</th>
+			<th>판매자ID</th>
 			<th>등록일자</th>
 		</tr>
 		<c:if test="${empty list }">
@@ -73,6 +77,7 @@
 				<td>${p.PRODUCT_STOCK}</td>
 				<td>${p.PRODUCT_MILEGE}</td>
 				<td>${p.PRODUCT_DESCRIPTION}</td>
+				<td>${p.MEMBERID}</td>
 				<td>${p.PRODUCT_ENROLL_DATE}</td>
 			</tr>			
 			</c:forEach>

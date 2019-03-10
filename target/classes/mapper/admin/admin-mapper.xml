@@ -36,12 +36,13 @@
 	
 	<!-- 쿠폰지급 > 쿠폰리스트 테이블에 insert -->
 	<insert id="couponPlus" parameterType="map">
-		insert into coupon_listt values(#{memberNo},sysdate,#{couponNo},'N')
+		insert into coupon_listt values(#{memberNo},sysdate+1,#{couponNo},'N')
 	</insert>
 	
 	<!-- 개인 쿠폰 지급 내역 -->
 	<select id="couponList" resultMap="couponAllMap">
-		select C.*,l.coupon_status from coupon c join  coupon_listt l on c.seq_coupon_no = l.seq_coupon_no
+		select C.*,l.coupon_status,l.user_date as endDay 
+		from coupon c join  coupon_listt l on c.seq_coupon_no = l.seq_coupon_no
    		where l.seq_member_no = #{memberNo} order by coupon_date desc
 	</select>
 	
@@ -50,13 +51,27 @@
 		delete from coupon_listt where seq_member_no = #{memberNo} and seq_coupon_no = #{seqcouponNo}
 	</delete>
 	
-	<!-- 결제된 상품 리스트 -->
+	<!-- 유효기간 지난 쿠폰 삭제 -->
+	<delete id="couponAutoDelete">
+		delete from coupon_listt where user_date <![CDATA[ < ]]> sysdate
+	</delete>
+	
+	<!-- 결제된 판매 리스트 -->
 	<select id="paidProduct" resultMap="padiProductMap">
 		select * from product_io order by seq_product_no
 	</select>
 	<resultMap type="map" id="padiProductMap"></resultMap>	
 	<select id="countpaidProduct" resultType="_int">
 		select count(*) from product_io
+	</select>
+	
+	<!-- 결제된 경매 리스트 -->
+	<select id="paidAuction" resultMap="paidAuctionMap">
+		select * from auction where auction_check='Y' order by auction_no
+	</select>
+	<resultMap type="map" id="paidAuctionMap"></resultMap>	
+	<select id="countpaidAuction" resultType="_int">
+		select count(*) from auction where auction_check='Y' order by auction_no
 	</select>
 	
 	<!-- 결제된 상품리스트 검색(type/search) -->
@@ -66,6 +81,15 @@
 	<resultMap type="map" id="paidProductSearch"></resultMap>
 	<select id="countpaidProductSearch" resultType="_int">
 		select count(*) from product_io where ${type} like '%'||#{search}||'%'
+	</select>
+	
+	<!-- 결제된 경매리스트 검색(type/search) -->
+	<select id="paidAuctionSearch" resultMap="paidAuctionSearchMap">
+		select * from auction where auction_check='Y' and ${type} like '%'||#{search}||'%' order auction_no desc
+	</select>
+	<resultMap type="map" id="paidAuctionSearchMap"></resultMap>
+	<select id="countpaidAuctionSearch" resultType="_int">
+		select count(*) from auction where auction_check='Y'and ${type} like '%'||#{search}||'%'
 	</select>
 	
 	
@@ -116,7 +140,7 @@
 		values(seq_product_no.nextval,#{registName},#{registPrice},#{registStatus},
 		'Y',#{registManufacturer},#{registAmount},#{registImage},
 		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
-		,sysdate,'N',#{registKinds},#{cMi},#{cMa},#{seqMemberNo},
+		,sysdate,'N',#{registKinds},#{cMi0},#{cMa},#{seqMemberNo},
 		SEQ_AUCTION_NO.nextval,#{registAdminDescription})
 	</insert>
 	
@@ -138,7 +162,9 @@
 	
 	<!-- 판매신청 리스트 페이징 겟잇베이직 -->
 	<select id="registList" resultMap="registListMap">
-		select * from regist where regist_auction = 'N' and regist_status='Y' order by seq_regist_no
+		select r.*,m.member_id as memberId 
+		from regist r join member m on r.seq_member_no = m.seq_member_no
+		where r.regist_auction = 'N' and r.regist_status='Y' order by r.seq_regist_no
 	</select>
 	<resultMap type="map" id="registListMap"></resultMap>	
 	<select id="countpaidregistList" resultType="_int">
@@ -147,7 +173,9 @@
 	
 	<!-- 상품 판매 신청 리스트 직접 판매 -->
 	<select id="registListMore" resultMap="registListMoreMap">
-		select * from regist where regist_auction = 'N' and regist_status='N' order by seq_regist_no
+		select r.*,m.member_id as memberId 
+		from regist r join member m on r.seq_member_no = m.seq_member_no
+		where r.regist_auction = 'N' and r.regist_status='N' order by r.seq_regist_no
 	</select>
 	<resultMap type="map" id="registListMoreMap"></resultMap>	
 	<select id="countpaidregistListMore" resultType="_int">
@@ -157,11 +185,14 @@
 	
 	<!--판매 상품 리스트 -->
 	<select id="productList" resultMap="productListMap">
-		select * from product order by seq_product_no
+		select p.*,m.member_id as memberId
+		from product p join member m on p.seller_no = m.seq_member_no
+		where p.product_onsale ='N' 
+		order by p.seq_product_no
 	</select>
 	<resultMap type="map" id="productListMap"></resultMap>	
 	<select id="countproductList" resultType="_int">
-		select count(*) from product
+		select count(*) from product where product_onsale ='N'
 	</select>
 	
 	
@@ -192,7 +223,7 @@
 	
 	<!-- auctionRegist 승인시 auction테이블로 insert -->
 	<insert id="inAuction" parameterType="map">
-		insert into auction values(seq_auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
+		insert into auction values(auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
 			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
@@ -203,6 +234,10 @@
 		update auction_regist set auction_check='Y'where auction_regist_no= #{auctionRegistNo}
 	</update>
 	
+	<!-- auction 취소시 auction_check='C' -->
+	<update id="auctionCencel" >
+		update auction_regist set auction_check='C'where auction_regist_no= #{auctionRegistNo}
+	</update>
 	
 	<!-- 경매 상품 현황 -->
 	<select id="auctionList" resultMap="auctionListMap">
@@ -251,11 +286,10 @@
 		FROM category_macro A 
  		LEFT OUTER JOIN ( 
    			SELECT 
-    		product_category, COUNT(*) AS cnt 
+    		category_macro, COUNT(*) AS cnt 
      		FROM product_io 
-    		GROUP BY product_category
-  		) B on (A.category_macro = B.product_category)
-		
+    		GROUP BY category_macro
+  		) B on (A.category_macro = B.category_macro)
 	</select>
 	<resultMap type="map" id="paidProductCategoryMap"/>
 	

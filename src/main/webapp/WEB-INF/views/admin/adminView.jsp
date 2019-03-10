@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="adminView" name="pageTitle"/>
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
@@ -13,6 +13,7 @@
 	height:750px;
 	position:relative;
 	margin-left:180px;
+	margin-right:15px;
 	top:-37px;
 }
 #image_{

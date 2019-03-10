@@ -1,10 +1,13 @@
 package com.kh.spring.mypage.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.vo.ProductIo;
 
 @Repository
 public class MyPageDaoImpl implements MyPageDao {
@@ -24,6 +27,12 @@ public class MyPageDaoImpl implements MyPageDao {
 		int result = 0;
 		result = SqlSession.update("mypage.updateemail",m);
 		return result;
+	}
+
+	@Override
+	public List<String> sellList(ProductIo pi) {
+		List<String>list = SqlSession.selectList("mypage.sellList", pi);
+		return list;
 	}
 
 }
