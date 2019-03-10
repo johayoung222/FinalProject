@@ -73,7 +73,7 @@
 		<c:forEach items="${cpList }" var="p" varStatus="vs">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" width="240px" height="180px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />

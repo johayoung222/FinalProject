@@ -77,7 +77,7 @@ border-radius:50px;
 	height: 100%;
 }
 .productOne{
-	width: 250px;
+	width: 220px;
 	height: 250px;
 	text-align: center;
 	display: inline-block;
@@ -169,7 +169,7 @@ font-size:20px;
 	<table border="0" class="productInfo-table">
 		<tr>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="80%" >
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="200px" >
 			</td>
 			<td>
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
@@ -329,7 +329,7 @@ $(function(){
 			<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 			<div class="productOne" id="${p.seqProductNo }">
 				<div class="pImg">
-					<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="240px" height="180px" />
+					<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="220px" height="180px" />
 				</div>
 				<div class="pDesc">
 					<span>${p.productName }</span><br />
@@ -348,6 +348,13 @@ $(function(){
   </form>
   <input type="button" value="네이버공유하기" onclick="share()"/>
   <script>
+  $(".productOne").each(function(item, idx){
+		$(this).on('click',function(){
+			var pId = $(this).attr("id");
+			location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+		});
+	});
+  
     function share() {
       var url = encodeURI(encodeURIComponent(myform.url.value));
       var title = encodeURI(myform.title.value);
