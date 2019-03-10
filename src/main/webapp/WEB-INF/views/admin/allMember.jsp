@@ -11,12 +11,9 @@
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
 <style>
-#header{
-	width:100%;
-}
 .allMember-container{	
-margin-right:15px;
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
@@ -33,6 +30,7 @@ input[type=submit].btn-block {
 }
 .allmember-nav{
 	width:100%;
+	padding-right:0px;
 }
 #tbl-allMember{
 	text-align:center;

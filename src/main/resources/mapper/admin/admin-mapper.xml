@@ -140,7 +140,7 @@
 		values(seq_product_no.nextval,#{registName},#{registPrice},#{registStatus},
 		'Y',#{registManufacturer},#{registAmount},#{registImage},
 		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
-		,sysdate,'N',#{registKinds},#{cMi},#{cMa},#{seqMemberNo},
+		,sysdate,'N',#{registKinds},#{cMi0},#{cMa},#{seqMemberNo},
 		SEQ_AUCTION_NO.nextval,#{registAdminDescription})
 	</insert>
 	

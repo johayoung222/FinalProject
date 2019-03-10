@@ -386,6 +386,13 @@ public class AdminController {
 		
 		Regist regist = adminService.registOne1(registNo);
 		Map<String, Object> map = new HashMap<>();
+		String cMi0 = "0";
+		if(cMi.length()==1) {
+			cMi0 += cMi; 
+		}else {
+			cMi0 = cMi;
+		}
+		logger.debug(cMi0);
 
 		map.put("seqRegistNo",regist.getSeqRegistNo());
 		map.put("registName",regist.getRegistName());
@@ -399,7 +406,7 @@ public class AdminController {
 		map.put("registKinds",regist.getRegistKinds());
 		map.put("registStatus",regist.getRegistStatus());
 		map.put("registManufacturer",registManufacturer);
-		map.put("cMi",cMi);
+		map.put("cMi0",cMi0);
 		map.put("cMa",cMa);
 		map.put("registAdminDescription",registAdminDescription);
 				
@@ -508,8 +515,14 @@ public class AdminController {
 			@RequestParam(value="cMi")String cMi) {
 		logger.debug("inAuction 메소드 실행!!");
 		Map<String, Object> map = new HashMap<>();
+		String cMi0 = "0";
+		if(cMi.length()==1) {
+			cMi0 += cMi; 
+		}else {
+			cMi0 = cMi;
+		}
 		map.put("auctionCategoryMacro",cMa);
-		map.put("auctionCategoryMicro",cMi);
+		map.put("auctionCategoryMicro",cMi0);
 		
 		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
 		map.put("seqMemberNo",auction.getSeqMemberNo());

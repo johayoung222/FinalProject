@@ -96,21 +96,18 @@
 <script>
 $(function(){
 	var registNo = $("#registNo").val();
-	console.log(registNo);
 	$.ajax({
 		url: "${pageContext.request.contextPath}/admin/registOne.do",
 		data:{registNo:registNo},
 		dataType : "json",
 		type:"get",
 		success : function(data){
-			console.log(data);
 			$("#registName").val(data[0].REGIST_NAME);
 			$("#registPrice").val(data[0].REGIST_PRICE);
 			$("#registAmount").val(data[0].REGIST_AMOUNT);
 			$("#registDate").val(data[0].registDate);
 			$("#exampleFormControlTextarea1").html(data[0].REGIST_DESCRIPTION);
 			var image = data[0].REGIST_REAL_IMAGE.split(',');
-			console.log(image[0]);
 			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/thing/"+image[0]);
 		},error:function(){
 			console.log("ajax요청 실패");
