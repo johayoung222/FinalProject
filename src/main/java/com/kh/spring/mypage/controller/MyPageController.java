@@ -11,17 +11,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSender;
 
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.mypage.model.service.MyPageService;
+import com.kh.spring.thing.model.vo.ProductIo;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -38,10 +38,16 @@ public class MyPageController {
     private JavaMailSender mailSender;
 
 	@RequestMapping(value= {"/mypage/order.do" , "/mypage/order"})
-	public String order(Model model , @RequestParam(name="filter" , required=false) String filter) {
+	public String order(HttpSession session,Model model , @RequestParam(name="filter" , required=false) String filter) {
 		// 넘겨줄 값이 판매내역리스트 , 값이 없을 경우에 3가지로 분기해서 메시지를 넘겨준다.
 		// 3가지로 분기가 되는데 -> 기본 normal c2c temporarily_saved 이다.
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		ProductIo pi = new ProductIo();
+		pi.setSeqMemberNo(m.getSeqMemberNo());
+		
 		List<String> list = new ArrayList<>();	// 예비 물건 판매내역 리스트
+		
+		list = myPageService.sellList(pi);
 		
 		if(!("normal".equals(filter) || "c2c".equals(filter) || "temporarily_saved".equals(filter))) {
 			filter = "normal";			
@@ -56,9 +62,6 @@ public class MyPageController {
 		} else if("c2c".equals(filter)) {
 			view = "mypage/order";						
 			menuSel = "c2c";
-		} else if("temporarily_saved".equals(filter)) {
-			view = "mypage/order";									
-			menuSel = "temporarily_saved";
 		}
 		
 		if(list.isEmpty()) {

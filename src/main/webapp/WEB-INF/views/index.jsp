@@ -61,11 +61,12 @@
 #box0{
  border:0; 
  padding-top:20px; 
+ width:100%;
 }
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 250px;
+	width: 25%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 
@@ -74,7 +75,7 @@
 #box2 {
 	display: inline-block;
 	vertical-align: top;
-	width: 230px;
+	width: 22%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
@@ -83,21 +84,15 @@
 #box3 {
 	display: inline-block;
 	vertical-align: top;
-	width: 200px;
+	width: 20%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
-	
 }
 
 #box4 {
+	display: inline-block;
 	padding-top: 0px;
-}
-#box5{
-	float:right; 
-	position:relative; 
-	bottom:130px; 
-	right:50px;"
 }
 
 .font2_ {
@@ -342,7 +337,7 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">겟잇 소식</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 		</div>
 	</div>
 	<div id="box2" style="text-align: center">
@@ -350,14 +345,15 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">자주 묻는 질문</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
 	</div>
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
-		<h5 style="text-align: center">1833-6479</h5>
+		<h5 style="text-align: center">1577-1577</h5>
 		<div id="box4">
-			<h6 style="text-align: center">평일: 10시~19시</h6>
+			<h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
+			
 			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
 		</div>
 	</div>

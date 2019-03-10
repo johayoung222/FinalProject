@@ -169,8 +169,9 @@
 		int totalContent = (int)request.getAttribute("totalContents");
 		int numPerPage = (int)request.getAttribute("numPerPage");
 		int cPage = (int)request.getAttribute("cPage");
+		String view = (String)request.getAttribute("view");
 	%>
-	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , "questionAnswer.do") %>
+	<%= com.kh.spring.common.util.Utils.getPageBar(totalContent , cPage , numPerPage , view) %>
 </section> 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

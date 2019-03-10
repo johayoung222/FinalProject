@@ -63,15 +63,14 @@ body {
 }
 
 #container {
-	padding-left: 45%;
+	padding-left: 44%;
 	border: 0px;
-	margin-right:100px;
 }
 
 #box-link {
 	display: flex;
 	justify-content: space-between;
-	background-color: rgb(246, 241, 252);
+	/* background-color: rgb(246, 241, 252); */
 	border-radius: 5px;
 	height: 30px;
 }

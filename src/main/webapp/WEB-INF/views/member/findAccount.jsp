@@ -180,6 +180,7 @@ function check2(){
 function check3(){
 	var pwd = $("#pwd").val().trim();
 	var repwd = $("#repwd").val().trim();
+	var regExp2 = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,15}$/;
 	var All = {
 			memberId : $("#memberId").val(),
 			pwd : $("#pwd").val()
@@ -191,6 +192,9 @@ function check3(){
 	}else if(pwd != repwd){
 		alert("비밀번호가 맞지않습니다.");
 		return false;
+	}else if(!regExp2.test(pwd)){
+        alert("비밀번호는 숫자 / 문자 / 특수문자를 포함한 형태여야 합니다. (8~15자리) ");
+        return false;
 	}else{
 		$.ajax({
 			url:"${pageContext.request.contextPath}/member/updatePwd.do",
