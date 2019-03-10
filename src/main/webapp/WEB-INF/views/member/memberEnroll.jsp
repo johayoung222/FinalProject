@@ -33,7 +33,9 @@
 	<div class="enroll-text">회원가입</div>
 	<div class="enroll-table">
 		<div class="select-first">1.약관동의</div>
+		&nbsp;&nbsp;
 		<div class="select-second">2.가입 방법 선택</div>
+		&nbsp;&nbsp;
 		<div class="select-third">3.정보입력</div>
 	</div><br /><br />
 <!-- ---------------------------------------------------------------------------------------------------------------- -->
@@ -770,7 +772,7 @@ MMS로 게시물을 등록할 경우 발생하는 요금은 이동통신사의 �
 
 다. 분쟁조정센터의 조정에 대하여 회원은 신의칙에 따라 성실히 응하여야 합니다.</pre>
 		</div>
-		<hr style="border:2px solid gray; width:90%">
+		<hr style="border:2px solid white; width:90%">
 		<div class="agree2">
 		<span>개인정보 수집 및 이용 동의</span>
 		<table class="table table-bordered">
@@ -792,7 +794,7 @@ MMS로 게시물을 등록할 경우 발생하는 요금은 이동통신사의 �
 			</tbody>
 		</table>
 		</div>
-		<hr style="border:2px solid gray; width:90%">
+		<hr style="border:2px solid white; width:90%">
 		<div class="agree3">
 			<span>개인정보 국외 이전 동의</span>
 			<pre>
@@ -900,6 +902,8 @@ $("#all").on('click', function(){
 			</ul>
 			</div>
 			<span>또는</span>
+			<br />
+			<br />
 			<div class="nextPage" >
 				<button class="btn btn-outline-primary nextBtn2" style="width:222px" onclick="next2();">직접 가입</button>
 			</div>
@@ -1026,39 +1030,7 @@ window.fbAsyncInit = function() {
 
   
 
-  <script>
-  /* 구글 로그인 */
-  function Googlelogin(googleUser) {
-       // Useful data for your client-side scripts:
-       var profile = googleUser.getBasicProfile();
   
-    /*    console.log("ID: " + profile.getId()); 
-       console.log('Full Name: ' + profile.getName());
-       console.log("Email: " + profile.getEmail()); */
-       var gId = profile.getId();
-       var gName = profile.getName();
-       var gEmail = profile.getEmail();
-
-       var id_token = googleUser.getAuthResponse().id_token;
-       
-       $.ajax({
-   		url: "${pageContext.request.contextPath}/member/googleEnroll",
-   		method:"post",
-   		data: {gId : gId, gName : gName, gEmail : gEmail}, 
-   		success: function(data){
-   			
-   			$("#googleEnroll-container").show();
-    		$('input[name=gId]').attr('value',gId); 
-    		$('input[name=gName]').attr('value',gName); 	
-    		$('input[name=gEmail]').attr('value',gEmail); 	
-   		},
-   		error:function(){
-   			console.log("ajax요청 실패 에러!");
-   		}
-   	}); 
-     
-     }
-</script>
 <!-- ------------------------------------------------------------------------------------------------------------ -->
 <style>
 	div#enroll-container{
@@ -1394,7 +1366,6 @@ function fbvalidate(){
                var interest = false;
             /* 관심상품 팝업 */
            
-			
 			}else{
 				alert("이미 등록된 회원이 있습니다 ");	
 				$("#facebookenroll-container").hide();
@@ -1447,43 +1418,7 @@ function fbvalidate(){
 	 
 	}
 
-//구글 회원 등록
-function googleIdValidate(){
-	
-	 var gIdcheck = document.getElementById("gId").value;
-	    
-	    $.ajax({
-			url: "${pageContext.request.contextPath}/member/googleCheckDuplicate.do",
-			method: "get",
-			data: {gIdcheck : gIdcheck} ,
-			success: function(data) {
-				console.log("ajax요청 성공 googlecheck확인 할게요!!");
-				
-				 if(data.gisUsable == true) {
-					alert("등록이가능합니다");
-					$("#googleEnroll-container").show();
-					$("input[name=gsubmit]").show();
-	               var interest = false;
-	            /* 관심상품 팝업 */
-	             open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
-	             return false;
-				
-				}else{
-					alert("이미 등록된 회원이 있습니다 ");	
-					$("#googleEnroll-container").hide();
-					$("input[name=gsubmit]").hide();
-					window.location.href ="${pageContext.request.contextPath}/member/memberMoveLogin.do";	
-					
-				} 
-				
-			
-		
-			},
-			error: function() {
-				console.log("ajax요청 에러!");
-			}
-		});
-}
+
  
  
 function fbCancel(){
@@ -1495,18 +1430,13 @@ function kakaoCancel(){
 	$("#kakaoenroll-container").hide();
 	
 }
-function googleCancel(){
-	$("#googleEnroll-container").hide();
-	
-}
+
 
 function snsValidate(){
 	 /* 관심상품 팝업 */
     open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
    		 "width=500,height=400,left=200,top=200");
     return true;
-	
-	
 }
 
 </script>

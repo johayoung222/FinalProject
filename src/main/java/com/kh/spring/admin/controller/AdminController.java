@@ -513,8 +513,11 @@ public class AdminController {
 		
 		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
 		map.put("seqMemberNo",auction.getSeqMemberNo());
-		map.put("sdate",auction.getSdate());
-		map.put("edate",auction.getEdate());
+		String sdate = auction.getSdate()+":00";
+		map.put("sdate",sdate);
+		String edate = auction.getEdate()+":00";
+		map.put("edate",edate);
+		
 		map.put("auctionTitle",auction.getAuctionTitle());
 		map.put("auctionImageMain",auction.getAuctionImageMain());
 		map.put("auctionImageSub1",auction.getAuctionImageSub1());
@@ -599,12 +602,14 @@ public class AdminController {
 			,@RequestParam(value="cPage", defaultValue="1")int cPage) {
 		System.out.println("questionAnswer메소드 실행!!");
 		int numPerPage = 7;
+		String view = "questionAnswer.do";
 		List<Map<String, String>> list = adminService.questionAnswer(cPage,numPerPage);
 		int totalContents = adminService.countquestionAnswer();
 		mav.addObject("cPage",cPage);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
 		mav.setViewName("admin/questionAnswer");
 		return mav;
 	}
@@ -614,12 +619,15 @@ public class AdminController {
 			,@RequestParam(value="cPage", defaultValue="1")int cPage) {
 		System.out.println("questionAnswer메소드 실행!!");
 		int numPerPage = 7;
+		String view = "questionAnswerY.do";
 		List<Map<String, String>> list = adminService.questionAnswerY(cPage,numPerPage);
 		int totalContents = adminService.countquestionAnswer();
 		mav.addObject("cPage",cPage);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("totalContents",totalContents);
 		mav.addObject("list",list);
+		mav.addObject("view",view);
+		
 		mav.setViewName("admin/questionAnswer");
 		return mav;
 	}

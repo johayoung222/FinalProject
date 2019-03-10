@@ -379,6 +379,28 @@ body {
 		</script>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/detail.css" />
 <!-- header 끝 -->
+
+<script>
+/* 현재 시간을 구하는 함수 */
+function getTime() {
+	today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var MM = today.getMinutes();
+	var MM = today.getMinutes();
+	var ss = today.getSeconds();
+
+	if(dd<10) { dd='0'+dd } 
+	if(mm<10) { mm='0'+mm } 
+	if(hh<10) { hh='0'+hh }
+	
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
+	return today;
+}
+</script>
+
 	<c:forEach items="${auction }" var="a">
 
   <body>
@@ -438,12 +460,21 @@ body {
 							<td><c:out value="${a.AUCTION_TITLE}"/></td>
 
 							<c:if test="${memberLoggedIn.seqMemberNo ne a.SEQ_MEMBER_NO}">
+								<c:if test="${empty myHistory }">
+								<td rowspan="5">
+									<div id="bidInfo" class="Detail_bidStamp">
+										입찰 대기중<br>
+									</div>
+								</td>
+								</c:if>
+								<c:if test="${not empty myHistory }">
 								<td rowspan="5">
 									<div id="bidInfo" class="Detail_bidStamp">
 										입찰참여 중<br>
 										<c:out value="${myHistory.PRICE}"/>원
 									</div>
 								</td>
+								</c:if>
 							</c:if>
 						</tr>
 						<tr>
@@ -484,7 +515,10 @@ body {
 										<input type="text" class="form-control" id="bidPrice" name="bidPrice" placeholder="현재입찰가 : ${history.PRICE}">						
 										<span class="input-group-btn">
 										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
-										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}')">경매 참여</button>
+										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}' , '${a.AUCTION_PRICE }')">경매 참여</button>
+
+										  <button class="btn btn-danger" type="button" id="bidSubmit"
+										  onclick="location.href='${pageContext.request.contextPath}/auction/auctionPerchase/${a.AUCTION_NO }'">결제 하기</button>
 										</span>
 									</div><!-- /input-group -->
 								</div><!-- /.col-lg-6 -->
@@ -653,6 +687,7 @@ body {
 	<script>
 	 var today;
 	$(function() {
+		// $("#bidSubmit").hide();
 		 var MemberNo = ${memberLoggedIn != null?memberLoggedIn.seqMemberNo:"0"};
 		 var auctionMemberNo = ${a.SEQ_MEMBER_NO };
 		 var edate = '${a.EDATE}';
@@ -665,12 +700,12 @@ body {
 		if(today>edate) {
 			document.getElementById("bidInsetBtn").disabled = true;
 			$("#bidPrice").attr("placeholder" ,"이미 종료된 경매입니다.");
-			document.all("bidInfo").innerHTML = "<p>마감되었습니다.</p>";
+			// document.all("bidInfo").innerHTML = "<p>되었습니다.</p>";
 		}
 		if(today<sdate) {
 			document.getElementById("bidInsetBtn").disabled = true;
 			$("#bidPrice").attr("placeholder" ,"진행 예정인 경매입니다.");
-			document.all("bidInfo").innerHTML = "<p>입찰대기중</p>";
+			$("#bidInfo").html = "<p>입찰대기중</p>";
 		}
 	});
 	
@@ -684,29 +719,15 @@ body {
 		//mobj.src = "../../../images/main_" + val;
 	};
 	
-	/* 현재 시간을 구하는 함수 */
-	function getTime() {
-		today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0!
-		var yyyy = today.getFullYear();
-		var hh = today.getHours();
-		var MM = today.getMinutes();
 
-		if(dd<10) { dd='0'+dd } 
-		if(mm<10) { mm='0'+mm } 
-		if(hh<10) { hh='0'+hh }
-		
-		today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
-		return today;
-	}
 	<%-- 경매 참여	 --%>		
-	function biding(aunq,curprice,sdate,edate){
+	function biding(aunq,curprice,sdate,edate , basicPrice){
 		var today = getTime();
 		var unq = aunq;
 		var curPrice=curprice;
 		var startDate=sdate;
 		var endDate =edate;
+		var basicPrice = basicPrice;
 		
 		console.log(edate);
 		console.log(today);
@@ -720,7 +741,7 @@ body {
 			alert('종료 된 경매입니다.');
 		} else {
 			if(inputBid != null){
-				if (Number(inputBid) > Number(curPrice)){
+				if (Number(inputBid) > Number(curPrice) && Number(inputBid) > Number(basicPrice)){
 					alert(typeof(inputBid) + " "+typeof(curPrice));
 					$.ajax({
 						data: bidParams,
@@ -740,7 +761,7 @@ body {
 							alert("ersssror: "+error);
 						}
 					});
-				} else if(Number(inputBid) <= Number(curPrice)) {
+				} else {
 					alert("가격을 올려서 입력하세요");
 				}
 			} <%-- if(inputBid != null) --%>
@@ -866,39 +887,43 @@ body {
 	
 	
 	playAlert = setInterval(function() {
-		// alert("${a.EDATE}");
+		console.log("${a.EDATE}");
 		var today = getTime();
-		// alert(today);
+		console.log(today);
 		var end = "${a.EDATE}";
 		
-		if(today== end){
+		var auctionNo = ${a.AUCTION_NO};
+		
+		
+		if(today >= end){
 			if(${memberLoggedIn != null}) {
-				
-				alert("낙찰 되었습니다.");
-				
 				$.ajax({
-					type : 'POST',
-					data : "auctionNo": ${a.AUCTION_NO} ,
-					url : "<c:url value='/auctionBid'/>",
-					dataType : "json",
-					processData: false,
-					contentType: false, 
+					url : "${pageContext.request.contextPath}/auctionBid.do",
+					data: {auctionNo:auctionNo} ,
+					dataType: "json",
 					success : function(data) {
-						if (data.cnt > 0) {
-							alert("저장됐습니다.");
-							location.href = "${pageContext.request.contextPath }";
-						} else {
-							alert("저장에실패");
+						if (data.cnt == 1) {
+							$("#bidSubmit").show();
+							clearInterval(playAlert);
+							// location.href = "${pageContext.request.contextPath }";
+						} else if (data.cnt == 2) {
+							$("#bidSubmit").show();
+							$("#bidSubmit").attr("disabled" , true);
+							$("#bidInfo").html("결제 완료되었습니다.");
+							clearInterval(playAlert);
+						} else if (data.cnt == 0) {
+							clearInterval(playAlert);
+							// 낙찰자가 아닌 경우 아무런 행동하지 않는다.
 						} 
 					},
 					error : function(error) {
 						  alert("error" + error);
-	
+							clearInterval(playAlert);
 					}
 				});
 				
 				// 반복 종료를 위한 코드
-				clearInterval(playAlert);
+				// clearInterval(playAlert);
 			}
 			
 		}

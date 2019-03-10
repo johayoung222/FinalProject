@@ -89,10 +89,6 @@ border-radius:50px;
 	color:lightgray;
 	
 }
-form {
-    display: inline-block;
-   
-}
 .content-container{
 	height: 100%;
 }
@@ -155,11 +151,15 @@ font-size:20px;
 #askRight{
 	float: right;
 }
+.productInfo-table tr td:first-of-type {
+	border: 1px solid black;
+	width: 250px;
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
-	<c:if test="${ct.CATEGORY_MACRO == cpList[0].categoryMacro }">
+	<c:if test="${ct.CATEGORY_MACRO == product.categoryMacro }">
 		<c:set var="nowCategory" value="${ct.CATEGORY_MACRO_NAME }" />
-		<c:if test="${ct.CATEGORY_MICRO == cpList[0].categoryMicro }">
+		<c:if test="${ct.CATEGORY_MICRO == product.categoryMicro }">
 			<c:set var="nowCategory2" value="${ct.CATEGORY_MICRO_NAME }" />
 		</c:if>
 	</c:if>
@@ -167,19 +167,16 @@ font-size:20px;
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
-		<a href="">${nowCategory }</a>
-		<img src="" alt="#" />
-		<a href="">${nowCategory2 }</a>
-		<img src="" alt="#" />
+		<span>${nowCategory }</span>-
+		<span>${nowCategory2 }</span>
 	</div>
 </div>
 	
 <div class="productInfo-header">
-
-	<table border="0">
+	<table border="0" class="productInfo-table">
 		<tr>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/images/galaxy10.PNG" alt="${product.productName } 이미지" width="100%" height="80%" >
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="80%" >
 			</td>
 			<td>
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
@@ -206,21 +203,12 @@ font-size:20px;
 			 			<td class="itemsell">수량</td>
 			 			<td>1</td>
 			 		</tr>
-			 		
 			 		<tr align="center" >
 			 			<td colspan="2">
-			 			
-                <%--         	
-               <form action="${pageContext.request.contextPath }/item/insertbasket.do" method="post" onsubmit="">
-                    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
-	                <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
-	                <input type="submit" id="insertBasket" value="장바구니"/>
-                </form> --%>
-                
-                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
-	                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
-	                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
-			 		     <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
+	                	    <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
+		                    <input type="hidden" name="seqProductNo" id="seqProductNo" value="${product.seqProductNo}"/>
+		                    <input type="button" id="insertBasket" value="장바구니" onclick="insertBasket();"/>
+				 		    <button onclick="location.href='${pageContext.request.contextPath}/item/perchase/${product.seqProductNo }'" id="pur">구매하기</button>
 			 			</td>
 			 		</tr>
 			 	</table>
@@ -234,42 +222,8 @@ font-size:20px;
 </div>
 <div class="productInfo-content">
 	<div class="info-text">
-		<img src="${pageContext.request.contextPath }/resources/images/items.PNG" margin-left:10%;"/>
 	</div>
 	<hr>
-		<table border="0" id="info_" style="font-weight:bold; color:gray;">
-			<tr>
-				<td style="padding-right:100px; ">상품상태</td>
-				<td>사용</td>
-			</tr>
-				<tr>
-				<td>작동상태</td>
-				<td>생활기스</td>
-			</tr>
-				<tr>
-				<td>찍힘 또는 깨짐</td>
-				<td>없음</td>
-			</tr>
-				<tr>
-				<td>구성품</td>
-				<td>제품박스</td>
-			</tr>
-				<tr>
-				<td>구매일</td>
-				<td>2019년2월11일</td>
-			</tr>
-				<tr>
-				<td>구매경로</td>
-				<td>국내 정식 발매 제품</td>
-			</tr>
-				<tr>
-				<td>추가정보</td>
-				<td><pre style="color:gray; font-weight:bold;">*젠더 미포함 입니다.
-*전반적으로 사용감이 다소 있지만, 기능은 정상 작동 합니다.</pre></td>
-			</tr>
-			
-		</table>
-		<hr style="border:2px solid gray; width:80%; margin-left:10%;">
 	<div class="info-delivery" style="margin-left:13%;">
 		<span style="font-size:20px; font-weight:bold; color:gray">배송정보</span><br />
 		<br>
@@ -349,7 +303,7 @@ $(function(){
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 		<div class="productOne" id="${p.seqProductNo }">
 			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG" width="240px" height="180px" />
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="240px" height="180px" />
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />

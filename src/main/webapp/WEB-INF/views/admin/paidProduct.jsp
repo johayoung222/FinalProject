@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="UTF-8" />
-<jsp:include page="/WEB-INF/views/common/adminHeader.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="allMember" name="pageTitle"/>
 </jsp:include>
 <%

@@ -19,56 +19,61 @@ public class ItemServiceImpl implements ItemService {
 	Logger logger = Logger.getLogger(getClass());
 	
 	@Autowired
-	ItemDao basketDao;
+	ItemDao itemDao;
 
 	@Override
 	public Product selectOneProduct(int num) {
-		return basketDao.selectOneProduct(num);
+		return itemDao.selectOneProduct(num);
 	}
 
 	@Override
 	public Member selectJoinMember(int sellerNo) {
-		return basketDao.selectJoinMember(sellerNo);
+		return itemDao.selectJoinMember(sellerNo);
 	}
 
 	@Override
 	public int insertAsk(ProductAsk pAsk) {
-		return basketDao.insertAsk(pAsk);
+		return itemDao.insertAsk(pAsk);
 	}
 
 	@Override
 	public void updateProduct(Map<String, String> map) {
-		basketDao.updateProduct(map);
+		itemDao.updateProduct(map);
 	}
 
 	@Override
 	public List<Product> searchItem(String searchKeyword) {
-		return basketDao.searchItem(searchKeyword);
+		return itemDao.searchItem(searchKeyword);
 	}
 
 	@Override
 	public List<Map<String, String>> searchItemAjax(String myData) {
-		return basketDao.searchItemAjax(myData);
+		return itemDao.searchItemAjax(myData);
 	}
 
 	@Override
 	public List<Regist> selectAllRegist() {
-		return basketDao.selectAllRegist();
+		return itemDao.selectAllRegist();
 	}
 
 	@Override
 	public List<Product> selectNew() {
-		return basketDao.selectNew();
+		return itemDao.selectNew();
 	}
 
 	@Override
 	public List<Product> selectNowProduct(Map<String, String> map) {
-		return basketDao.selectNowProduct(map);
+		return itemDao.selectNowProduct(map);
 	}
 
 	@Override
 	public List<ProductAsk> selectAskAll(int productNo) {
-		return basketDao.selectAskAll(productNo);
+		return itemDao.selectAskAll(productNo);
+	}
+
+	@Override
+	public List<Product> selectUpItems() {
+		return itemDao.selectUpItems();
 	}
 
 	

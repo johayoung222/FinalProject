@@ -21,17 +21,22 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.auction.model.service.AuctionService;
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Order;
 
 @Controller
 public class AuctionController {
@@ -39,6 +44,9 @@ public class AuctionController {
 	
 	@Autowired
 	AuctionService auctionService;
+	
+	@Autowired
+	ThingService thingService;
 	
 	@RequestMapping("/auctionWriter.do")
 	public String auctionWriter(Model model) {
@@ -299,21 +307,93 @@ public class AuctionController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/auctionBid")
+	@RequestMapping(value = "/auctionBid.do")
 	@ResponseBody
-	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo") String auctionNo , final MultipartHttpServletRequest multiRequest,
+	public Map<String, Object> auctionBid(@RequestParam(value="auctionNo" , required=false) int auctionNo , 
 			HttpServletResponse response, Model model, HttpServletRequest request,HttpSession session ) {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();	// 결과 값 넘길 맵
+		
+		System.out.println("여기 안오죠????????????????????????");
 		
 		Member m = (Member)session.getAttribute("memberLoggedIn");
 		Map<String , Object> temp = new HashMap<>();
 		temp.put("auctionNo", auctionNo);
 		temp.put("memberId", m.getMemberId());
+		temp.put("memberNo", m.getSeqMemberNo());
 		
-		
-		
-		
+		Map<String , String > resultMap = auctionService.selectAuctionBid(temp);
+		// auction_history 테이블에서 auction_no 로 조회한 가격이 가장큰행을 뽑았다.
+		// 그 행의 seqMemberNo와 로그인한 회원의 memberNo를 비교하고 맞으면 true값을 넘겨준다.
+		if(resultMap != null) {
+			String memberNo = resultMap.get("MEMBER_ID");
+			
+			if(m.getMemberId().equals(memberNo)) {
+				
+				if(resultMap.get("WINNING_BID").equals("Y")) {
+					map.put("cnt" , 2);
+				} else {
+					map.put("cnt" , 1);					
+				}
+			}
+		} else {
+			map.put("cnt" , 0);
+		}
+
 		return map;
 	}
-
+	
+	@RequestMapping(value="/auction/auctionPerchase/{auctionNo}", method=RequestMethod.GET)
+	public ModelAndView movePerchase(@PathVariable("auctionNo") int auctionNo,
+							ModelAndView mav,HttpSession session) {
+		
+		Member m = (Member) session.getAttribute("memberLoggedIn");
+		
+		// 넘겨줄 값이 시퀀스 번호 , 이름 , 가격
+		Map<String , Object > auction = auctionService.selectAuctionHistory(String.valueOf(auctionNo));
+		
+		String auctionTitle = auctionService.selectAuctionTitle(auctionNo);
+		
+		Map<String , String> result = new HashMap<>();
+		String mainImg = auctionService.selectMainImg(auctionNo);
+		result.put("auctionNo", String.valueOf(auctionNo));
+		result.put("auctionTitle", auctionTitle);
+		result.put("auctionPrice", String.valueOf(auction.get("PRICE")));
+		result.put("auctionMainImg", mainImg);
+		
+		mav.addObject("member", m);
+		mav.addObject("auction",result);
+		mav.setViewName("auction/auctionPerchase");
+		
+		return mav;
+	}
+	
+	
+	 	@RequestMapping(value="/auction/perchase/complete", method=RequestMethod.POST)
+	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
+		
+		int nProductNo = order.getSeqProductNo(); 
+		int auctionPrice = order.getOrderPrice();
+		
+		Map<String , Object> temp = new HashMap<>();
+		temp.put("nProductNo" , nProductNo);
+		temp.put("auctionPrice" , auctionPrice);
+		
+		
+		thingService.insertOrder(order);
+		// 결제 되었을시에 
+		// auction 테이블의 auction_check컬럼의 값을 Y로 바꾼다.
+		// auction_history테이블의 winning_bid컬럼의 값을 Y로 바꾼다.
+		
+		// thingService.updateOnSale(nProductNo);
+		
+		auctionService.updateAuctionCheck(nProductNo);
+		auctionService.updateWinningBid(temp);
+		
+		mav.addObject("order", order);
+		mav.setViewName("mypage/purchases");
+		
+		return mav;
+	}
+	 
+	
 }

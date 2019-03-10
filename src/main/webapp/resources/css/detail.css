@@ -204,4 +204,6 @@
 			border-left: 5px solid #BDBDBD;
 			padding-left:1em;
 		}
-		
+		#bidSubmit{
+			display: none;
+		}

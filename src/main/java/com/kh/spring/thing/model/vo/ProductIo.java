@@ -16,6 +16,7 @@ import lombok.ToString;
 public class ProductIo {
 	private int seqMemberNo;
 	private int seqProductNo;
+	private int seqMemberNo;
 	private String productName;
 	private int productIoPrice;
 	private String productIoAuction;

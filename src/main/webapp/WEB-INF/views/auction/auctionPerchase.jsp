@@ -28,6 +28,7 @@ var payAmount = perchaseFrm.payAmount.value;
 var pay_method = perchaseFrm.payMethod.value;
 var dAddressInfo = perchaseFrm.dAddressInfo.value;
 var seqMemberNo = perchaseFrm.seqMemberNo.value;
+var seqProductNo = "${auction.auctionNo}";
 
 console.log(dName, dPhone, dEmail, dAddress, dfAddress, pName, payAmount, pay_method);
 
@@ -81,11 +82,13 @@ IMP.request_pay({ // param
                 "orderMethod": perchaseFrm.payMethod.value,
                 "orderPrice": perchaseFrm.payAmount.value,
                 "orderResult": "Y",
-                "seqMemberNo": seqMemberNo
+                "seqMemberNo": seqMemberNo,
+                "orderAmount": 1,
+                "seqProductNo": seqProductNo
             };
         var jParam = JSON.stringify(param);
         $.ajax({
-            url: "${pageContext.request.contextPath}/item/perchase/complete", // 가맹점 서버
+            url: "${pageContext.request.contextPath}/auction/perchase/complete", // 가맹점 서버
             method: "POST",
             headers: { "Content-Type": "application/json" },
             data: jParam
@@ -167,6 +170,11 @@ IMP.request_pay({ // param
 	width: 200px;
 	display: inline-block;
 }
+#MainImg{
+	width: 230px;
+	height: 230px;
+}
+
 </style>
 		
 <div class="content-container">
@@ -213,15 +221,15 @@ IMP.request_pay({ // param
 			<div class="productInfo-container">
 				<div class="product-text"><span>결제상품</span></div>
 				<div class="productInfo">
-					<input type="hidden" name="pName" value="${product.productName }"/>
-					<img src="" alt="제품이미지" />
-					<span class="font-weight-bold">${product.productName }</span>
+					<input type="hidden" name="pName" value="${auction.auctionTitle }"/>
+					<img id="MainImg" src="${pageContext.request.contextPath }/resources/upload/${auction.auctionMainImg}" alt="제품이미지" />
+					<span class="font-weight-bold">${auction.auctionTitle }</span>
 				</div>
 			</div>
 			<hr />
 			<div class="payment-price clearfix">
 				<span class="float-left">상품금액</span>
-				<span class="float-right">${product.productPrice }원</span>
+				<span class="float-right">${auction.auctionPrice }원</span>
 			</div>
 			<div class="payment-coupon">
 				<span>쿠폰 사용</span>
@@ -246,7 +254,7 @@ IMP.request_pay({ // param
 			<hr />
 			<div class="payment-result">
 				<span>결제하실 금액</span>
-				<input type="number" name="payAmount" disabled value="${product.productPrice }" id="payAmount"/>원<br /><br />
+				<input type="number" name="payAmount" disabled value="${auction.auctionPrice }" id="payAmount"/>원<br /><br />
 				<button type="button" onclick="perchaseProduct();" class="btn btn-outline-info">결제하기</button>
 			</div>
 		</div>
