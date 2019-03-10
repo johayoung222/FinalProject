@@ -11,4 +11,11 @@
 	update member set member_email = #{memberEmail} 
 			where member_id = #{memberId}
 	</update>
+	<select id="sellList" resultMap="sellList">
+		select * from product_io where seq_member_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="sellList">
+	
+	</resultMap>
+	
 </mapper>

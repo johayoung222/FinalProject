@@ -56,8 +56,7 @@
 		<select id="categoryMi" class="form-control form-control-sm">
 		</select> <br />
 		
-		<label for="registNo">고유번호</label> &nbsp;&nbsp;
-		<input class="form-control form-control-sm" id="registNo" type="text" value="${registNo }" readonly> <br />
+		<input class="form-control form-control-sm" id="registNo" type="hidden" value="${registNo }" readonly> <br />
 		
 		<label for="registNo">상품명</label>&nbsp;&nbsp;
 		<input class="form-control form-control-sm" id="registName" type="text" readonly> <br />
@@ -75,7 +74,7 @@
 		<input class="form-control form-control-sm" id="registDate" type="text" readonly> <br />
 		
 		
-		<label for="registNo">메인 이미지</label>&nbsp;&nbsp;
+		<label for="main_img">메인 이미지</label>&nbsp;&nbsp;
 		<img class="main_img" src="" /><br />
 		
 		<label for="exampleFormControlTextarea1">사용자 상세설명</label>
@@ -97,20 +96,19 @@
 <script>
 $(function(){
 	var registNo = $("#registNo").val();
-	console.log(registNo);
 	$.ajax({
 		url: "${pageContext.request.contextPath}/admin/registOne.do",
 		data:{registNo:registNo},
 		dataType : "json",
 		type:"get",
 		success : function(data){
-			console.log(data);
 			$("#registName").val(data[0].REGIST_NAME);
 			$("#registPrice").val(data[0].REGIST_PRICE);
 			$("#registAmount").val(data[0].REGIST_AMOUNT);
 			$("#registDate").val(data[0].registDate);
 			$("#exampleFormControlTextarea1").html(data[0].REGIST_DESCRIPTION);
-			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/thing/"+data[0].REGIST_REAL_IMAGE);
+			var image = data[0].REGIST_REAL_IMAGE.split(',');
+			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/thing/"+image[0]);
 		},error:function(){
 			console.log("ajax요청 실패");
 		}
@@ -129,6 +127,9 @@ $(function(){
 			console.log("ajax 요청 실패!!");
 		}
 	}); 
+	
+	
+	
 });
 
 $("#categoryMa").on("change",function(){

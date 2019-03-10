@@ -61,11 +61,12 @@
 #box0{
  border:0; 
  padding-top:20px; 
+ width:100%;
 }
 #box1 {
 	display: inline-block;
 	vertical-align: top;
-	width: 250px;
+	width: 25%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 
@@ -74,7 +75,7 @@
 #box2 {
 	display: inline-block;
 	vertical-align: top;
-	width: 230px;
+	width: 22%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
@@ -83,21 +84,15 @@
 #box3 {
 	display: inline-block;
 	vertical-align: top;
-	width: 200px;
+	width: 20%;
 	height: 150px;
 	border: 1px solid #dbdbdb;
 	margin-left: 10px;
-	
 }
 
 #box4 {
+	display: inline-block;
 	padding-top: 0px;
-}
-#box5{
-	float:right; 
-	position:relative; 
-	bottom:130px; 
-	right:50px;"
 }
 
 .font2_ {
@@ -106,10 +101,7 @@
 
 .hm-good {
 	display: inline-block;
-}
-
-.hm-good {
-    width: 271px;
+    width: 241px;
     height: 344px;
     padding: 8px 18px;
 }
@@ -182,6 +174,9 @@ a {
 .pImg{
 	width: 200px;
 	height: 180px;
+}
+.blinkEle1 , .blinkEle2{
+	display:none;
 }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -282,19 +277,21 @@ a {
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 </h3>
-
+<jsp:useBean id="now" class="java.util.Date" />
+<c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+ 
 <c:if test="${empty auctionList }">
 	<div>새로 등록된 경매 상품이 없습니다.</div>
 </c:if>
 <div class="hm-container">
 <c:if test="${not empty auctionList }">
-	<c:forEach items="${auctionList }" var="a">
+	<c:forEach items="${auctionList }" var="a" varStatus="vs">
 			<div class="hm-good">
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle">다른 사용자가 구매중 , 경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide blinkEle">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="gdidx-on-hold ng-hide blinkEle2">내가 구매중 , 내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
@@ -310,6 +307,9 @@ a {
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
 					</div></a>
 			</div>
+			<input type="hidden" id="sdate${vs.count }" value="${a.SDATE }" />
+			<input type="hidden" id="edate${vs.count }" value="${a.EDATE }" />
+
 		</c:forEach>
 </c:if>
 </div>
@@ -334,7 +334,7 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">겟잇 소식</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 		</div>
 	</div>
 	<div id="box2" style="text-align: center">
@@ -342,14 +342,15 @@ a {
 			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
 			id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
-			<a href="#">자주 묻는 질문</a>
+			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
 	</div>
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
-		<h5 style="text-align: center">1833-6479</h5>
+		<h5 style="text-align: center">1577-1577</h5>
 		<div id="box4">
-			<h6 style="text-align: center">평일: 10시~19시</h6>
+			<h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
+			
 			<h6 style="text-align: center">주말, 공휴일 휴무</h6>
 		</div>
 	</div>
@@ -358,6 +359,48 @@ a {
 <hr>
 
 <script>
+/* 현재 시간을 구하는 함수 */
+function getTime() {
+	today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; //January is 0!
+	var yyyy = today.getFullYear();
+	var hh = today.getHours();
+	var MM = today.getMinutes();
+	var MM = today.getMinutes();
+	var ss = today.getSeconds();
+
+	if(dd<10) { dd='0'+dd } 
+	if(mm<10) { mm='0'+mm } 
+	if(hh<10) { hh='0'+hh }
+	
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	return today;
+}
+
+
+// 온로드 됬을때 경매 진행중인지 ? 아니면 내가 경매에 참여중인지 찍어주기 위한 소스코드
+	$(function(){
+		for(var i = 1; i <= 4;i++) {
+			var sdate = $("#sdate"+i).prop("value");
+			var edate = $("#edate"+i).prop("value");
+			today = getTime();			
+			
+			var result = 0;
+			if(today>sdate) {
+				result++;
+			}
+			if(today<=edate) {
+				result++;
+			}
+			
+			if(result == 2) {
+				alert(i+"경매진행중인게 있다.");
+			}
+		}
+		
+	});
+	
 setInterval(function(){
 	  $(".blinkEle").toggle();
 	}, 500);

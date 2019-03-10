@@ -12,7 +12,7 @@
 
 <style>
 .reportList-container{
-	
+	margin-right:15px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
