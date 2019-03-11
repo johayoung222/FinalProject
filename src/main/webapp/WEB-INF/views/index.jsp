@@ -150,6 +150,17 @@ a {
 	border-radius: 7px;
 	box-shadow: 0px 0px 3px 5px yellow;
 }
+#moreItems1{
+	float: right;
+	margin-right: 100px;
+	cursor: pointer;
+	font-size: 20px;
+}
+#moreItems1:hover{
+	background-color: yellow;
+	border-radius: 7px;
+	box-shadow: 0px 0px 3px 5px yellow;
+}
 .productOne:hover{
 	border-radius: 5px;
 	box-shadow: 3px 3px 5px 7px lightgray;
