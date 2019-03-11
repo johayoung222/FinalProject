@@ -16,7 +16,7 @@
 	height: 300px;
 }
 
-#favorite {"src/main/webapp/index.jsp"
+#favorite {
 	padding-left: 90px;
 }
 
@@ -35,10 +35,11 @@
 #favorite5 {
 	margin-left: 50px;
 }
-
 #sell_ {
-	border: 1px solid gray;
-	height: 180px;
+    border: 2px solid lightgray;
+    height: 180px;
+    width:95%;
+    margin-left:25px;
 }
 
 #sell2 {
