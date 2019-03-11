@@ -44,6 +44,11 @@
 		select count(*) from auction where seq_member_no = #{seqMemberNo}
 	</select>
 	
-
+	<select id="coupons" resultMap="couponsMap">
+		select c.*,ct.user_date,ct.coupon_status
+		from coupon_listt ct join coupon c on ct.seq_coupon_no = c.seq_coupon_no
+		where ct.seq_member_no = #{memberNo}
+	</select>
+	<resultMap type="map" id="couponsMap"></resultMap>
 	
 </mapper>

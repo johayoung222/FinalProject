@@ -69,4 +69,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countbuy(int seqMemberNo) {
 		return myPageDao.countbuy(seqMemberNo);
 	}
+
+	@Override
+	public List<Map<String, Object>> coupons(int memberNo) {
+		return myPageDao.coupons(memberNo);
+	}
 }
