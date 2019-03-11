@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.auction.model.dao.AuctionDao;
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Product;
 
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -107,6 +108,16 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public void updateBuyerNo(Map<String, Object> temp1) {
 		auctionDao.updateBuyerNo(temp1);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAuctionAllList() {
+		return auctionDao.selectAuctionAllList();
+	}
+
+	@Override
+	public int auctionCount() {
+		return auctionDao.auctionCount();
 	}
 
 	

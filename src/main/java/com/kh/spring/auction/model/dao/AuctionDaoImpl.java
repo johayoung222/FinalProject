@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Product;
 
 @Repository
 public class AuctionDaoImpl implements AuctionDao {
@@ -105,6 +106,17 @@ public class AuctionDaoImpl implements AuctionDao {
 	@Override
 	public void updateBuyerNo(Map<String, Object> temp1) {
 		sqlSession.update("auction.updateBuyerNo" , temp1);
+	}
+
+	@Override
+	public List<Map<String, String>> selectAuctionAllList() {
+		return sqlSession.selectList("auction.selectAuctionAllList");
+	}
+
+	@Override
+	public int auctionCount() {
+		
+		return sqlSession.selectOne("auction.auctionCount");
 	}
 
 }

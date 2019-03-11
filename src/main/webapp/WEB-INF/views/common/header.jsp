@@ -253,6 +253,9 @@ body{
 		width: 130px;	
 		text-align: center;
 	}
+	.last{
+	width: 155px;
+	}
 	.nav-link{
 		font-size: 14px;
 		border: none;
@@ -487,6 +490,7 @@ body{
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link last" href="${pageContext.request.contextPath }/auction/brandNew">새로 등록된 경매상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
