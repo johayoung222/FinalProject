@@ -114,7 +114,7 @@
 	
 	<!-- category_micro 호출 -->
 	<select id="categoryMi" resultType="category">
-		select* from category_micro where category_macro = #{macro} 
+		select* from category_micro where category_macro = #{macro} 	
 	</select>
 	
 	<!-- 판매신청 승인, Reigst테이블 >> Product테이블 insert -->
