@@ -79,4 +79,12 @@
 		update auction set buyer_no = #{memberNo} where auction_no = #{auctionNo}
 	</update>
 	
+	<select id="selectAuctionAllList" resultMap="selectAuctionAllList">
+		select * from auction order by auction_create_date desc
+	</select>
+	<resultMap type="map" id="selectAuctionAllList"></resultMap>
+	
+	<select id="auctionCount" resultType="_int">
+		select count(*) from auction
+	</select>
 </mapper>

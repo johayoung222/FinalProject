@@ -278,6 +278,7 @@ a {
 <div class="popular">
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
+	<span class="moreItems" id="moreItems1">더 보기</span>
 </h3>
 <jsp:useBean id="now" class="java.util.Date" />
 <c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
@@ -371,8 +372,9 @@ function getTime() {
 	if(dd<10) { dd='0'+dd } 
 	if(mm<10) { mm='0'+mm } 
 	if(hh<10) { hh='0'+hh }
+	if(ss<10) { ss='0'+ss }
 	
-	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
 	return today;
 }
 
@@ -400,7 +402,7 @@ function getTime() {
 			if(today>sdate) {
 				result++;
 			}
-			if(today<=edate) {
+			if(today<edate) {
 				result++;
 			}
 			
@@ -462,6 +464,9 @@ setInterval(function(){
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";
+});
+$("#moreItems1").on('click',function(){
+	location.href = "${pageContext.request.contextPath}/auction/brandNew";
 });
 $(".productOne").each(function(item, idx){
 	$(this).on('click',function(){

@@ -284,6 +284,23 @@ body{
 	});
 	</script>
 	<!--https://getbootstrap.com/docs/4.1/components/navbar/-->
+	<style>
+	#navbarNav{
+	}
+	#navbarNav ul{
+	}
+	#navbarNav ul li{
+		width: 130px;	
+		text-align: center;
+	}
+	.last{
+	width: 155px;
+	}
+	.nav-link{
+		font-size: 14px;
+		border: none;
+	}
+	</style>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
@@ -469,6 +486,7 @@ body{
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link last" href="${pageContext.request.contextPath }/auction/brandNew">새로 등록된 경매상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"
