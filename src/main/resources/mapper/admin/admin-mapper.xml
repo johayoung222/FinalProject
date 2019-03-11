@@ -64,7 +64,9 @@
 	</select>
 	<resultMap type="map" id="padiProductMap"></resultMap>	
 	<select id="countpaidProduct" resultType="_int">
-		select count(*) from product_io
+		select count(*)
+		from product_io pi join member m on pi.seq_member_no = m.seq_member_no
+		order by pi.seq_product_no
 	</select>
 	
 	<!-- 결제된 경매 리스트 -->
@@ -228,7 +230,7 @@
 		insert into auction values(auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
-			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
+			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default,null)
 	</insert>
 	
 	<!-- auctionRegist 승인시 auction_check='Y' -->
