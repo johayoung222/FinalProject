@@ -29,4 +29,6 @@ public interface MyPageService {
 	List<Map<String, Object>> buyList(int cPage, int numPerPage,int seqMemberNo);
 
 	int countbuy(int seqMemberNo);
+
+	List<Map<String, Object>> coupons(int memberNo);
 }

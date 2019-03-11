@@ -9,6 +9,16 @@
 </jsp:include>
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
+<style>
+#tbl-allMember{
+	table-layout:fixed;
+	text-align:center;
+}
+#tbl-allMember th{
+	width:175px;
+}
+
+</style>
 <div class="mypage-container">
 	<div class="real-content-container">
 		<div class="mp-container">
@@ -22,9 +32,22 @@
 						<div class="credit-list-empty">${msg }</div>
 					</c:if>
 					<c:if test="${not empty list }">
+					<table id="tbl-allMember" class="table table-striped table-hover" >
+						<tr>
+							<th>쿠폰명</th>
+							<th>유효기간</th>
+							<th>할인률</th>
+							<th>사용여부</th>
+						</tr>
 						<c:forEach items="${list }" var="o">
-							
+							<tr class="tbl">
+								<td>${o.COUPON_NAME }</td>
+								<td>${o.USER_DATE }</td>
+								<td>${o.COUPON_RATE }%</td>
+								<td>${o.COUPON_STATUS }</td>
+							</tr>
 						</c:forEach>
+						</table>
 					</c:if>
 				</div>
 			</div>
