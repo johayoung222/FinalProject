@@ -145,7 +145,7 @@ function getTime() {
 										<input type="text" class="form-control" id="bidPrice" name="bidPrice" placeholder="현재입찰가 : ${history.PRICE}">						
 										<span class="input-group-btn">
 										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
-										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}' , '${a.AUCTION_PRICE }')" data-toggle="modal" data-target="#auctionModalPhone">경매 참여</button>
+										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}' , '${a.AUCTION_PRICE }')" data-toggle="modal" data-target="">경매 참여</button>
 
 										  <button class="btn btn-danger" type="button" id="bidSubmit"
 										  onclick="location.href='${pageContext.request.contextPath}/auction/auctionPerchase/${a.AUCTION_NO }'">결제 하기</button>
@@ -423,6 +423,8 @@ function getTime() {
 			
 		} else if(${memberLoggedIn.memberPhone == null}) {
 			
+		} else if("${bidCheck.check}" == "Y") {
+			alert("이미 최고가로 입찰 진행중입니다.");
 		} else {
 			if(inputBid != null){
 				

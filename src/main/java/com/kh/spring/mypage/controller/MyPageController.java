@@ -54,7 +54,7 @@ public class MyPageController {
 		List<Map<String, Object>> list = null;
 		int totalContents = 0;
 		
-		if(!("normal".equals(filter) || "c2c".equals(filter) || "temporarily_saved".equals(filter))) {
+		if(!("normal".equals(filter) || "c2c".equals(filter) || "auction".equals(filter))) {
 			filter = "normal";			
 		}
 		
@@ -73,6 +73,12 @@ public class MyPageController {
 			loce = "/spring/mypage/order?filter=c2c";
 			view = "mypage/order";						
 			menuSel = "c2c";
+		} else if("auction".equals(filter)) {
+			list = myPageService.sellList3(cPage,numPerPage,seqMemberNo);
+			totalContents = myPageService.countproduct3(seqMemberNo);
+			loce = "/spring/mypage/order?filter=auction";
+			view = "mypage/order";						
+			menuSel = "auction";
 		}
 		
 		if(list.isEmpty()) {
@@ -304,6 +310,31 @@ public class MyPageController {
 		    
 			return mav;
 		}
-	 
+	 @RequestMapping("/mypage/addressupdate.do")
+	 public ModelAndView updateaddress(ModelAndView mav,HttpServletRequest request,HttpSession session) {
+		 String address = request.getParameter("addressMail");
+		 String address2 = request.getParameter("addressMail2");
+		 String address3 = request.getParameter("addressMail3");
+		 String memberId = request.getParameter("memberId");
+		 String memberAddress = address+" "+address2+" "+address3;
+		 logger.debug("address~"+address+"||"+address2+"||"+address3);
+		 
+		 Member m = (Member)session.getAttribute("memberLoggedIn");
+		 m.setMemberId(memberId);
+		 m.setMemberAddress(memberAddress);
+		 logger.debug("member=="+m);
+		 
+		 String loc = "/mypage/profile/edit.do";
+		 
+		 int result = myPageService.updateaddress(m);
+		 
+		 mav.addObject("loc", loc);
+		 mav.addObject("address",address);
+		 mav.addObject("address2",address2);
+		 mav.addObject("address3",address3);
+		 mav.setViewName("mypage/profileEdit");
+		 
+		 return mav;
+	 }
 
 }

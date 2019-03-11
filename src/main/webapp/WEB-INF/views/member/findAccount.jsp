@@ -91,7 +91,7 @@ p{
 			</c:if>
 			<c:if test="${count <= 0}">
 					<div style="margin-left: 15%;margin-top: 35px;color:red;">
-						아이디와 이메일이 일치하는 회원 정보가 없습니다.
+						아이디와 전화번호가 일치하는 회원 정보가 없습니다.
 					</div>
 			</c:if>
 			</div>

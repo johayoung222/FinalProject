@@ -33,17 +33,34 @@
 		select count(*) from product where product_auction = 'N' and seller_no = #{seqMemberNo}
 	</select>
 	
-	<select id="buyList" resultMap="buyList">
+	<select id="sellList3" resultMap="sellList3">
 		select * from auction where seq_member_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="sellList3">
+	
+	</resultMap>
+	
+	<select id="countproduct3" resultType="_int">
+		select count(*) from auction where seq_member_no = #{seqMemberNo}
+	</select>
+	
+	
+	<select id="buyList" resultMap="buyList">
+		select * from product where buyer_no =#{seqMemberNo}
 	</select>
 	<resultMap type="map" id="buyList">
 	
 	</resultMap>
 	
 	<select id="countbuy" resultType="_int">
-		select count(*) from auction where seq_member_no = #{seqMemberNo}
+		select count(*) from product where buyer_no =#{seqMemberNo}
 	</select>
 	
+	<update id="updateaddress">
+		update member set member_address = #{memberAddress} 
+				where member_id = #{memberId}
+	</update>
+
 	<select id="coupons" resultMap="couponsMap">
 		select c.*,ct.user_date,ct.coupon_status
 		from coupon_listt ct join coupon c on ct.seq_coupon_no = c.seq_coupon_no
