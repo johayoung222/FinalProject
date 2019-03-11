@@ -29,9 +29,7 @@
 #info3_{
     margin-left: 7%;
 }
-#info4_{
-    margin-left: 7%;
-}
+
 /* 인증완료후input&버튼 영역 */
 .profedit-form-input {
     margin-bottom: 34px;
@@ -99,37 +97,65 @@
 						</div>
 			</div>
 			<hr style="width:130%;">
-			<form action="" name="perchaseFrm">
-			<div class="mypage-profile">
-				<div class="profedit-body-title" >배송정보</div>
-						<div class="profedit-body"id="info3_">
-							<label class="profedit-form-label">주소</label>
-							<div class="form-group profedit-addr-wrapper">
-								<div class="dropdown">
-									<input name="addressMail" autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text">
-									<a id="findAddress" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;">검색</a>
-								</div>
-								<div>
-									<input name="addressMail2" class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_" >  <br /> <br />							
-								</div>
-								<div>
-									<input name="addressMail3" class="form-control profedit-addr-form ng-pristine ng-valid" id="user-addr2" ng-model="profile.addr2" placeholder="상세주소" >							
-								</div>
-							</div>
-						</div>		
-			</div>
-			</form>
-			<hr style="width:130%;">
+			<c:if test="${memberLoggedIn.memberAddress eq null}">
+				<form action="${pageContext.request.contextPath}/mypage/addressupdate.do" name="perchaseFrm">
+				<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+					<div class="mypage-profile">
+						<div class="profedit-body-title" >배송정보</div>
+								<div class="profedit-body"id="info3_">
+									<label class="profedit-form-label" style="margin: 7px 12px 7px -15px; padding-left: 18px;">주소</label>
+									<div class="form-group profedit-addr-wrapper" style="margin-left: 80px;">
+										<div class="dropdown" style="width:500px;">
+											<input name="addressMail" autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text"">
+											<a id="findAddress" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;border-radius:5px;margin-left: -1.5px;">검색</a>
+										</div>
+										<div style="height: 50px;">
+											<input name="addressMail2" id="address2" class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_"">  <br /> <br />							
+										</div>
+										<div style="width:500px;">
+											<input name="addressMail3" id="address3" class="form-control profedit-addr-form ng-pristine ng-valid"  ng-model="profile.addr2" placeholder="상세주소">							
+											<button class="btn profedit-success-btn profedit-search-btn btn-primary" onclick="insert();" style="width:85px;border-radius:5px;margin-left: -1.5px;">정보 수정</button>
+										</div>
+									</div>
+								</div>		
+					</div>
+				</form>
+			</c:if>
+			
+			<c:if test="${memberLoggedIn.memberAddress ne null}">
+				<form action="${pageContext.request.contextPath}/mypage/addressupdate.do" name="perchaseFrm">
+				<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+					<div class="mypage-profile">
+						<div class="profedit-body-title" >배송정보</div>
+								<div class="profedit-body"id="info3_">
+									<label class="profedit-form-label" style="margin: 7px 12px 7px -15px; padding-left: 18px;">주소</label>
+									<div class="form-group profedit-addr-wrapper" style="margin-left: 80px;">
+										<div class="dropdown" style="width:500px;">
+											<input name="addressMail" autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text" value="${address}">
+											<a id="findAddress" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;border-radius:5px;margin-left: -1.5px;">검색</a>
+										</div>
+										<div style="height: 50px;">
+											<input name="addressMail2" id="address2" class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_" value="${address2}">  <br /> <br />							
+										</div>
+										<div style="width:500px;">
+											<input name="addressMail3" id="address3" class="form-control profedit-addr-form ng-pristine ng-valid"  ng-model="profile.addr2" placeholder="상세주소" value="${address3}">							
+											<button class="btn profedit-success-btn profedit-search-btn btn-primary" onclick="insert();" style="width:85px;border-radius:5px;margin-left: -1.5px;">정보 수정</button>
+										</div>
+									</div>
+								</div>		
+					</div>
+				</form>
+			</c:if>
+			<!-- <hr style="width:130%;">
 			<style>
 			.info-update{
 				text-align: center;
 			}
-			</style>
-			<div class="mypage-profile" id="info4_">
+			</style> -->
+			<!-- <div class="mypage-profile" id="info4_">
 				<div class="info-update">
-					<button class="btn profedit-search-btn profedit-search-btn btn-primary" onclick="alert('정보 수정 완료!');">정보 수정</button>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -199,5 +225,8 @@ $("#findAddress").on('click',function(){
         }
     }).open();
 });
+function insert(){
+	document.perchaseFrm.submit();
+}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

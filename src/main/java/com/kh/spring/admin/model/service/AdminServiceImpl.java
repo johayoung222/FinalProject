@@ -126,16 +126,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	//판매 신청 리스트----------------------------------------------------------------
 	@Override
-	public List<Map<String, Object>> regist() {
-		return adminDao.regist();
-	}
-
-	@Override
-	public int countregist() {
-		return adminDao.countregist();
-	}
-
-	@Override
 	public List<CategoryMacro> categoryMa() {
 		return adminDao.categoryMa();
 	}

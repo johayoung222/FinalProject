@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
 <style>
-#tbl-allMember{
+#tbl-coupon{
 	table-layout:fixed;
 	text-align:center;
 }
@@ -32,7 +32,7 @@
 						<div class="credit-list-empty">${msg }</div>
 					</c:if>
 					<c:if test="${not empty list }">
-					<table id="tbl-allMember" class="table table-striped table-hover" >
+					<table id="tbl-coupon" class="table table-striped table-hover" >
 						<tr>
 							<th>쿠폰명</th>
 							<th>유효기간</th>
@@ -53,7 +53,7 @@
 			</div>
 			<div class="mypage">
 				<div class="credit-instruction">
-					- 이미 사용하였거나 유효기간이 만료된 쿠폰은 3개월 후 자동 삭제됩니다. <br>
+					- 유효기간이 만료된 쿠폰은 자동 삭제됩니다. <br>
 					- 쿠폰은 중복사용할 수 없습니다. 1회 결제시 1개의 쿠폰만 사용 가능합니다. <br>
 					- 모든 쿠폰은 셀잇 검증 상품에만 사용 가능합니다. (상품권 제외)
 				</div>

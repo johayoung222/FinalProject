@@ -29,11 +29,12 @@
 	background-color:lightgray;
 }
 #x{
-	color:red;
+	color:white;
 	font-size:35px;
 	display: inline-block;
 	position: absolute;
     margin-top: 50px;
+    margin-left: -70px;
 }
 .page{
 	margin-left: 41%;
@@ -55,15 +56,16 @@
 				</c:if>
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="b">
-						<c:if test="${b.AUCTION_CHECK eq 'N'}">
-							<div class="main">
-						</c:if>
-						<c:if test="${b.AUCTION_CHECK eq 'Y'}">
-							<div class="main2">
-							<span id="x">경매종료</span>
-						</c:if>
-							${b.AUCTION_TITLE}
-							${b.AUCTION_PRICE}
+						<div class="main2">
+							<span id="x">구매완료</span>
+							<div class="lImg">
+									<img src="${pageContext.request.contextPath }/resources/upload/thing/${b.PRODUCT_REAL_IMAGE}" alt="${b.PRODUCT_IMAGE}" height="80px" width="160px"/>
+								</div>
+								<div class="lDesc">
+									<span>${b.PRODUCT_NAME }</span><br />
+									<span>${b.PRODUCT_PRICE } 원</span> <br />
+									<span><fmt:formatDate value="${b.PRODUCT_ENROLL_DATE}" pattern="yyyy.MM.dd" /></span> <br />
+								</div>
 						</div>	
 					</c:forEach>
 				</c:if>

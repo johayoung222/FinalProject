@@ -55,9 +55,9 @@ public interface AdminService {
 	
 	
 	//판매신청 리스트
-	List<Map<String, Object>> regist();
-
-	int countregist();
+	List<Map<String, String>> registList(int cPage, int numPerPage);
+	
+	int countpaidregistList();
 	
 	List<CategoryMacro> categoryMa();
 
@@ -75,9 +75,6 @@ public interface AdminService {
 	
 	List<Map<String, Object>> registCancel();
 	
-	List<Map<String, String>> registList(int cPage, int numPerPage);
-
-	int countpaidregistList();
 	
 	List<Map<String, String>> registListMore(int cPage, int numPerPage);
 

@@ -171,17 +171,17 @@ body{
 							</div>
 							<div>
 								<a href="${pageContext.request.contextPath}/mypage/order.do"
-									style="color: red"><strong>판매내역</strong></a>|<a
+									style="color: black"><strong>판매내역</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/purchases.do"
-									style="color: orange">구매내역</a>|<a
-									href="${pageContext.request.contextPath}/mypage/bookmarks.do"
-									style="color: green">찜한상품</a>| <a
+									style="color: black">구매내역</a>|<a
+									href="${pageContext.request.contextPath}/item/basket.do?memberNo=${memberLoggedIn.seqMemberNo}"
+									style="color: black">장바구니</a>| <a
 									href="${pageContext.request.contextPath}/mypage/coupons.do"
-									style="color: blue"><strong>쿠폰</strong></a>|<a
+									style="color: black"><strong>쿠폰</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/credit.do"
-									style="color: purple"><strong>프로모션</strong></a>|<a
+									style="color: black"><strong>프로모션</strong></a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/edit.do"
-									style="color: pink">내정보</a>|<a
+									style="color: black">내정보</a>|<a
 									href="${pageContext.request.contextPath}/mypage/wishlist.do"
 									style="color: black"><strong>알림설정</strong></a>
 							</div>

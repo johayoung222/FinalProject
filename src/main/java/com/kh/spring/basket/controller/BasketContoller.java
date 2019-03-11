@@ -30,7 +30,7 @@ public class BasketContoller {
 
 	  @RequestMapping("/item/basket.do")
        public ModelAndView selectBasketList(ModelAndView mav, HttpServletRequest request) {
-		  
+		  	  
 		      int memberNo =Integer.parseInt((request.getParameter("memberNo")));
 		      System.out.println("memberNo:"+memberNo);
 		      
