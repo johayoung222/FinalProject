@@ -162,12 +162,12 @@ function check2(){
 			success:function(data){
 				var	html = "<div style='margin-bottom: 15px;margin-top: 35px;'>";
 					html += "<label style='margin-left:21%;'>새 비밀번호 :</label>";
-					html += "<input type='text' id='pwd' name='pwd' style='margin-left:3%;' placeholder='비밀번호를 입력하세요'/>";
+					html += "<input type='password' id='pwd' name='pwd' style='margin-left:3%;' placeholder='비밀번호를 입력하세요'/>";
 					html += "<input type='hidden' id='memberId' name='memberId' value='${memberId}'/>";
 					html += "</div>";
 					html += "<div>";
 					html += "<label style='margin-left:13.8%;'>새 비밀번호 확인 :</label>";
-					html += "<input type='text' id='repwd' name='repwd' style='margin-left:3%;' placeholder='비밀번호를 다시 입력하세요'/>";
+					html += "<input type='password' id='repwd' name='repwd' style='margin-left:3%;' placeholder='비밀번호를 다시 입력하세요'/>";
 					html += "</div>";
 					html += "<button type='button' class='btn btn-outline-success btn-sm' style='margin-left: 46%;margin-top: 15px;' onclick='check3();'>확인</button>";
 				$(".find-pwd").html(html);

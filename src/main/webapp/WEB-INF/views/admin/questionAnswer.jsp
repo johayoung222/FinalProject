@@ -31,10 +31,11 @@
 
 .tableTr td{
 	width:100px;
-	height:70px;
+	height:50px;
 	overflow:hidden;
 	white-space : nowrap;
 	text-overflow: ellipsis;
+	text-align: center;
 }
 </style>
 <br />
@@ -52,7 +53,7 @@
 <br />
 	<table id="tbl-questionAnswer" class="table table-striped table-hover">
 		<tr class="tbl-tr">
-			<th>고유번호</th>
+			<th style="width:76px;">고유번호</th>
 			<th>문의시간</th>
 			<th>문의내용</th>
 			<th>문의종류</th>
@@ -70,8 +71,8 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="q">
 			<tr class="tableTr">				
-				<td>${q.SEQ_QUESTION_NO}</td>
-				<td><fmt:formatDate value="${q.QUESTION_DATE}" pattern="yyyy년MM월dd일 hh:mm"/></td>
+				<td style="width:76px;">${q.SEQ_QUESTION_NO}</td>
+				<td  style="white-space : normal;"><fmt:formatDate value="${q.QUESTION_DATE}" pattern="yy.MM.dd hh:mm"/></td>
 				<td>${q.QUESTION_LKINDS}</td>
 				<td>${q.QUESTION_MKINDS}</td>
 				<td>${q.QUESTION_CONTENT}</td>

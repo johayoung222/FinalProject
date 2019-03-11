@@ -77,7 +77,7 @@ border-radius:50px;
 	height: 100%;
 }
 .productOne{
-	width: 250px;
+	width: 220px;
 	height: 250px;
 	text-align: center;
 	display: inline-block;
@@ -169,7 +169,7 @@ font-size:20px;
 	<table border="0" class="productInfo-table">
 		<tr>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="80%" >
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="200px" >
 			</td>
 			<td>
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
@@ -329,7 +329,7 @@ $(function(){
 			<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
 			<div class="productOne" id="${p.seqProductNo }">
 				<div class="pImg">
-					<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="240px" height="180px" />
+					<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="220px" height="180px" />
 				</div>
 				<div class="pDesc">
 					<span>${p.productName }</span><br />
@@ -341,21 +341,13 @@ $(function(){
 		</div>
 	</div>
 </c:if>
-
-<form id="myform">
-    URL입력:  <input type="text" id="url" value="https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"><br/>
-    Title입력:  <input type="text" id="title" value="네이버개발자센터 검색결과"><br/>
-  </form>
-  <input type="button" value="네이버공유하기" onclick="share()"/>
-  <script>
-    function share() {
-      var url = encodeURI(encodeURIComponent(myform.url.value));
-      var title = encodeURI(myform.title.value);
-      var shareURL = "https://share.naver.com/web/shareView.nhn?url=" + url + "&title=" + title;
-      document.location = shareURL;
-    }
-  </script>
-	
-
+ <script>
+ $(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+ </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
