@@ -37,5 +37,5 @@ public interface MyPageDao {
 
 	int updateaddress(Member m);
 
-
+	List<Map<String, Object>> coupons(int memberNo);
 }

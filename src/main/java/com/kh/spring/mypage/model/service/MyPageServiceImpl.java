@@ -85,6 +85,10 @@ public class MyPageServiceImpl implements MyPageService {
 	public int updateaddress(Member m) {
 		int result = 0;
 		result = myPageDao.updateaddress(m);
-		return result; 
+		return result;
+	}	
+	@Override
+	public List<Map<String, Object>> coupons(int memberNo) {
+		return myPageDao.coupons(memberNo);
 	}
 }

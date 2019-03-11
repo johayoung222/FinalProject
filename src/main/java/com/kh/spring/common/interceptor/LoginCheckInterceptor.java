@@ -27,7 +27,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		if(logger.isDebugEnabled()) { 
 			if(memberLoggedIn == null) {
-				request.setAttribute("loc", "/");
+				request.setAttribute("loc", "/member/memberMoveLogin.do");
 				request.setAttribute("msg", "로그인후에 이용하세요");
 				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);					
 				return false;

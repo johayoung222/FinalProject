@@ -145,10 +145,12 @@ $("#categoryMa").on("change",function(){
 $("#btn").on('click',function(){
 	var cMa = $("#categoryMa option:selected").val();
 	var cMi = $("#categoryMi option:selected").val();
-	alert("경매신청OK 경매리스트로 이동!");
-	
 	var auctionRegistNo = $("#auctionRegistNo").val();
 	console.log(cMa+","+cMi+","+auctionRegistNo);
+	
+	if((cMa == "") || (cMi == "")){
+		alert("대소분류를 선택하세요.");
+	}else{
 	$.ajax({
 		url : "${pageContext.request.contextPath}/admin/inAuction.do",
 		data : {auctionRegistNo:auctionRegistNo,
@@ -163,6 +165,7 @@ $("#btn").on('click',function(){
 			console.log("ajax 요청 실패!!");
 		}
 	});
+	}
 });
 
 $("#btnn").on('click',function(){

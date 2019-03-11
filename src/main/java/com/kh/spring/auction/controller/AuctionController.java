@@ -161,7 +161,7 @@ public class AuctionController {
 			}
 		}
 
-		String[] filelist = filename.split("／");		
+		String[] filelist = filename.split("/");		
 		
 		for(int i=0;i<filelist.length;i++){
 			if(i==0){
@@ -271,8 +271,17 @@ public class AuctionController {
 			myHistory = auctionService.selectMyHistory(temp);			
 			System.out.println("myHistory = "+myHistory);
 		}
+		System.out.println("ddddddddd"+history.get("MEMBER_NO"));
+		System.out.println("ddddddddd"+m.getSeqMemberNo());
+		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
+		Map<String , String> bidCheck = new HashMap<>();
+		bidCheck.put("check" , "N");
+		if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
+			bidCheck.put("check" , "Y");
+			System.out.println("니가 최대 입찰자야");
+		}
 		
-		
+		model.addAttribute("bidCheck" , bidCheck);
 		model.addAttribute("myHistory" , myHistory);
 		model.addAttribute("history" , history);
 		model.addAttribute("ctgMacroName" , ctgMacroName);
@@ -282,7 +291,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping (value = "/auctionHistoryInsert")
-	@ResponseBody public Map<String, Object> auctionHistoryInsert(@RequestParam(value="MemberNo") int MemberNo ,
+	@ResponseBody public Map<String, Object> auctionHistoryInsert(@RequestParam(value="MemberNo" , required=false) int MemberNo ,
 																@RequestParam(value="auctionUnq") int AuctionNo ,
 																@RequestParam(value="bidPrice") int price  , 
 																HttpSession session) {
@@ -369,10 +378,11 @@ public class AuctionController {
 	
 	
 	 	@RequestMapping(value="/auction/perchase/complete", method=RequestMethod.POST)
-	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order) {
+	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order , HttpSession session) {
 		
 		int nProductNo = order.getSeqProductNo(); 
 		int auctionPrice = order.getOrderPrice();
+		Member m = (Member)session.getAttribute("memberLoggedIn");
 		
 		Map<String , Object> temp = new HashMap<>();
 		temp.put("nProductNo" , nProductNo);
@@ -385,12 +395,17 @@ public class AuctionController {
 		// auction_history테이블의 winning_bid컬럼의 값을 Y로 바꾼다.
 		
 		// thingService.updateOnSale(nProductNo);
+
+		Map<String , Object> temp1 = new HashMap<>();
+		temp1.put("memberNo", m.getSeqMemberNo());
+		temp1.put("auctionNo", nProductNo);
 		
 		auctionService.updateAuctionCheck(nProductNo);
 		auctionService.updateWinningBid(temp);
+		auctionService.updateBuyerNo(temp1);
 		
 		mav.addObject("order", order);
-		mav.setViewName("mypage/purchases");
+		mav.setViewName("auction/auctionDetail.do?auctionNo="+nProductNo);
 		
 		return mav;
 	}

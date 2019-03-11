@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.mypage.model.service.MyPageService;
 
@@ -32,6 +33,8 @@ public class MyPageController {
 
 	Logger logger = Logger.getLogger(getClass());
 	
+	@Autowired
+	AdminService adminService;
 	@Autowired
 	MyPageService myPageService;
 	@Autowired
@@ -133,13 +136,12 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("/mypage/coupons.do")
-	public String coupons(Model model) {
-		List<String> list = new ArrayList<>();
-		
-		if(list.isEmpty()) {
-			model.addAttribute("msg" , "지급된 쿠폰이 없습니다.");			
-		}
-		
+	public String coupons(Model model,HttpSession session) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		int memberNo = m.getSeqMemberNo();
+		adminService.couponAutoDelete();
+		List<Map<String, Object>> list = myPageService.coupons(memberNo);
+		logger.debug(list);
 		model.addAttribute("list" , list);
 		return "mypage/coupons";
 	}

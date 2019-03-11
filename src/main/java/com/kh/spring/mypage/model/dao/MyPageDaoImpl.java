@@ -91,5 +91,9 @@ public class MyPageDaoImpl implements MyPageDao {
 		result = SqlSession.update("mypage.updateaddress",m);
 		return result;
 	}
+	@Override
+	public List<Map<String, Object>> coupons(int memberNo) {
+		return SqlSession.selectList("mypage.coupons",memberNo);
+	}
 
 }

@@ -7,6 +7,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/detail.css" />
 
 <script>
 /* 현재 시간을 구하는 함수 */
@@ -138,12 +140,12 @@ function getTime() {
 								
 								<div class="col-lg-8">
 									<div class="input-group">				
-										<input type="hidden" name="MemberNo" value="${memberLoggedIn.seqMemberNo }">
+										<input type="hidden" name="MemberNo" value="${memberLoggedIn != null?memberLoggedIn.seqMemberNo:'0' }">
 										<input type="hidden" name="auctionUnq" value="${a.AUCTION_NO}">
 										<input type="text" class="form-control" id="bidPrice" name="bidPrice" placeholder="현재입찰가 : ${history.PRICE}">						
 										<span class="input-group-btn">
 										  <button class="btn btn-primary" type="button" id="bidInsetBtn"
-										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}' , '${a.AUCTION_PRICE }')">경매 참여</button>
+										  onclick="biding('${a.AUCTION_NO}','${history.PRICE}','${a.SDATE}','${a.EDATE}' , '${a.AUCTION_PRICE }')" data-toggle="modal" data-target="">경매 참여</button>
 
 										  <button class="btn btn-danger" type="button" id="bidSubmit"
 										  onclick="location.href='${pageContext.request.contextPath}/auction/auctionPerchase/${a.AUCTION_NO }'">결제 하기</button>
@@ -307,6 +309,50 @@ function getTime() {
 
     <!-- Footer -->
 
+	   <!-- 로그인 권유 -->
+	<div class="modal" tabindex="-1" role="dialog" id="memberMoveLogin">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">경매하기</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p>로그인을 하지 않은 회원은 경매를 이용할 수 없습니다.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/member/memberMoveLogin.do'">로그인 하러가기</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+		<!-- 휴대폰인증 팝업 모달 -->
+	<div class="modal" tabindex="-1" role="dialog" id="auctionModalPhone">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">판매하기</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        <p>휴대폰 인증을 하지 않은 회원은 겟잇 옥션 이용이 불가합니다.</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/mypage/profile/edit.do'">휴대폰 인증하러가기</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+
 
     <!-- Bootstrap core JavaScript -->
     <!-- <script src="../../../../vendor/jquery/jquery.min.js"></script> -->
@@ -335,6 +381,13 @@ function getTime() {
 			$("#bidPrice").attr("placeholder" ,"진행 예정인 경매입니다.");
 			$("#bidInfo").html = "<p>입찰대기중</p>";
 		}
+		
+	      /* 휴대폰 인증이 된 회원인 경우에 버튼의 data-target 값을 변경한다. */
+	      if(${memberLoggedIn == null}) {
+			$("#bidInsetBtn").attr("data-target","#memberMoveLogin");    	  
+	      } else if(${memberLoggedIn.memberPhone == null}) {
+			$("#bidInsetBtn").attr("data-target","#auctionModalPhone");
+	      }
 	});
 	
 	<%-- 메인/서브이미지 mouseover 이벤트 --%>
@@ -366,6 +419,12 @@ function getTime() {
 			
 		} else if(today>=endDate){
 			alert('종료 된 경매입니다.');
+		} else if(${memberLoggedIn == null}) {
+			
+		} else if(${memberLoggedIn.memberPhone == null}) {
+			
+		} else if("${bidCheck.check}" == "Y") {
+			alert("이미 최고가로 입찰 진행중입니다.");
 		} else {
 			if(inputBid != null){
 				
@@ -558,11 +617,11 @@ function getTime() {
 	}, 1000);
 </script>
 	</c:forEach>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script>
-	<script
+    
+<!-- 	<script
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

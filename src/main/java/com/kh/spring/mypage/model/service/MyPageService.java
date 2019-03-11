@@ -35,4 +35,6 @@ public interface MyPageService {
 	int countbuy(int seqMemberNo);
 	
 	int updateaddress(Member m);
+
+	List<Map<String, Object>> coupons(int memberNo);
 }
