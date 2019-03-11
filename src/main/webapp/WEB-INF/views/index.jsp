@@ -267,7 +267,7 @@ a {
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
-				<span>${p.productPrice } 원</span>
+				<span><fmt:formatNumber value="${p.productPrice}" pattern="#,###"/> 원</span>
 			</div>
 		</div>
 		</c:forEach>
