@@ -66,6 +66,7 @@
 			<mapping path="/board/**/*.do"/>
 			<mapping path="/item/perchase*/*"/>
 			<mapping path="/item/basket.do*"/>
+			<mapping path="/item/interest*"/>
 			<mapping path="/admin/*"/>
 			<!-- 스프링 3.2부터 exclude-mapping 지원 -->
 			<exclude-mapping path="/board/boardList.do"/>

@@ -130,6 +130,14 @@ public class AdminController {
 		return list;
 	}
 	
+	@RequestMapping("/admin/couponAutoDelete")
+	@ResponseBody
+	public int couponAutoDelete() {
+		logger.debug("couponAutoDelete메소드 실행!!");
+		int result = adminService.couponAutoDelete();
+		return result;
+	}
+	
 	@RequestMapping(value="/admin/updateisAdmin.do",method=RequestMethod.GET)
 	@ResponseBody
 	public int updateisAdmin(@RequestParam(value="isAdmin")String isAdmin,
@@ -192,12 +200,32 @@ public class AdminController {
 		List<Map<String, String>> list = adminService.paidProduct(cPage, numPerPage);
 		int totalContents = adminService.countpaidProduct();
 		String view = "paidProduct.do";
+		int flag = 0;
 		
 		mav.addObject("totalContents", totalContents);
 		mav.addObject("cPage", cPage);
 		mav.addObject("numPerPage", numPerPage);
 		mav.addObject("list",list);
 		mav.addObject("view",view);
+		mav.addObject("flag",flag);
+		mav.setViewName("admin/paidProduct");
+				
+		return mav;
+	}
+	
+	@RequestMapping("/admin/paidAuction.do")
+	public ModelAndView paidAuction(ModelAndView mav, @RequestParam(value="cPage", defaultValue="1")int cPage) {
+		int numPerPage = 7;
+		List<Map<String, String>> list = adminService.paidAuction(cPage, numPerPage);
+		int totalContents = adminService.countpaidAuction();
+		String view = "paidProduct.do";
+		int flag =1;
+		mav.addObject("totalContents", totalContents);
+		mav.addObject("cPage", cPage);
+		mav.addObject("numPerPage", numPerPage);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.addObject("flag",flag);
 		mav.setViewName("admin/paidProduct");
 				
 		return mav;
@@ -214,6 +242,7 @@ public class AdminController {
 		Map<String,String> map = new HashMap<>();
 		map.put("type",type);
 		map.put("search",search);
+		int flag=0;
 		
 		int numPerPage = 7;
 		List<Map<String, String>> list = adminService.paidProductSearch(cPage,numPerPage,map);
@@ -225,12 +254,44 @@ public class AdminController {
 		mav.addObject("totalContents",totalContents);
 		mav.addObject("numPerPage",numPerPage);
 		mav.addObject("list",list);
+		mav.addObject("flag",flag);
 		mav.addObject("view",view);
 		mav.setViewName("admin/paidProduct");
 		
 		return mav;
 	}
 	
+	@RequestMapping("/admin/paidAuctionSearch.do")
+	@ResponseBody
+	public ModelAndView paidAuctionSearch(ModelAndView mav,
+			@RequestParam(value="cPage", defaultValue="1")int cPage,
+			@RequestParam(value="type")String type,
+			@RequestParam(value="search")String search) {
+		logger.debug("paidAuctionSearch메소드 실행!!");
+		String view = "paidAuctionSearch.do";
+		Map<String,String> map = new HashMap<>();
+		map.put("type",type);
+		map.put("search",search);
+		int flag =1;
+		
+		int numPerPage = 7;
+		List<Map<String, String>> list = adminService.paidAuctionSearch(cPage,numPerPage,map);
+		int totalContents = adminService.countpaidAuctionSearch(map);
+		logger.debug(list);
+		mav.addObject("cPage",cPage);
+		mav.addObject("type",type);
+		mav.addObject("search",search);
+		mav.addObject("totalContents",totalContents);
+		mav.addObject("numPerPage",numPerPage);
+		mav.addObject("list",list);
+		mav.addObject("view",view);
+		mav.addObject("flag",flag);
+		mav.setViewName("admin/paidProduct");
+		
+		return mav;
+	}
+		
+		
 	//판매 신청 리스트
 	@RequestMapping("/admin/registList.do")
 	public ModelAndView registList(ModelAndView mav,
@@ -256,7 +317,7 @@ public class AdminController {
 	public ModelAndView registListt(ModelAndView mav,
 			@RequestParam(value="cPage", defaultValue="1")int cPage) {
 		logger.debug("registListt메소드 실행!!");
-		String view = "registList.do";
+		String view = "registListMore.do";
 		
 		int numPerPage = 7;
 		List<Map<String, String>> list = adminService.registListMore(cPage,numPerPage);
@@ -325,6 +386,13 @@ public class AdminController {
 		
 		Regist regist = adminService.registOne1(registNo);
 		Map<String, Object> map = new HashMap<>();
+		String cMi0 = "0";
+		if(cMi.length()==1) {
+			cMi0 += cMi; 
+		}else {
+			cMi0 = cMi;
+		}
+		logger.debug(cMi0);
 
 		map.put("seqRegistNo",regist.getSeqRegistNo());
 		map.put("registName",regist.getRegistName());
@@ -338,7 +406,7 @@ public class AdminController {
 		map.put("registKinds",regist.getRegistKinds());
 		map.put("registStatus",regist.getRegistStatus());
 		map.put("registManufacturer",registManufacturer);
-		map.put("cMi",cMi);
+		map.put("cMi0",cMi0);
 		map.put("cMa",cMa);
 		map.put("registAdminDescription",registAdminDescription);
 				
@@ -447,8 +515,14 @@ public class AdminController {
 			@RequestParam(value="cMi")String cMi) {
 		logger.debug("inAuction 메소드 실행!!");
 		Map<String, Object> map = new HashMap<>();
+		String cMi0 = "0";
+		if(cMi.length()==1) {
+			cMi0 += cMi; 
+		}else {
+			cMi0 = cMi;
+		}
 		map.put("auctionCategoryMacro",cMa);
-		map.put("auctionCategoryMicro",cMi);
+		map.put("auctionCategoryMicro",cMi0);
 		
 		Auction auction = adminService.auctionRegistOne1(auctionRegistNo);
 		map.put("seqMemberNo",auction.getSeqMemberNo());
@@ -477,6 +551,15 @@ public class AdminController {
 		return result;
 		
 	}
+	
+	@RequestMapping(value="/admin/auctionCencel.do", method=RequestMethod.GET)
+	@ResponseBody
+	public int auctionCencel(@RequestParam(value="auctionRegistNo")int auctionRegistNo) {
+		logger.debug("auctionCencel메소드 실행!!");
+		int result = adminService.auctionCencel(auctionRegistNo);
+		return result;
+	}
+	
 		
 	
 	//경매 상품 현황

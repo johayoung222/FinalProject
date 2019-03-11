@@ -39,6 +39,8 @@ public interface MemberService {
 
 	int countmemberId(Member m);
 
+	int updateItr(Map<String, String> map);
+
 
 
 }

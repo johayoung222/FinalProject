@@ -32,4 +32,11 @@ public interface ItemDao {
 
 	List<Product> selectUpItems();
 
+	List<Product> selectItr(List<String> itrArrList);
+
+	String selectMemberInterest(int memberNo);
+
+	List<Map<String, Object>> couponList(String buyerNo);
+
+
 }

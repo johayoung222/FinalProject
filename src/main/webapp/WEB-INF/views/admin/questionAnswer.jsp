@@ -12,7 +12,7 @@
 
 <style>
 .questionAnswer-container{
-	
+	margin-right:15px;
 	height:750px;
 	position:relative;
 	margin-left:180px;
@@ -28,9 +28,7 @@
 	table-layout: fixed;
 	text-align:center;
 }
-.tbl-tr th{
-	width:100px;
-}
+
 .tableTr td{
 	width:100px;
 	height:50px;

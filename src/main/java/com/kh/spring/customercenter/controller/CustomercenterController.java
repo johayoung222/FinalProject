@@ -445,6 +445,23 @@ public class CustomercenterController {
 
 		}
 		
+		@RequestMapping("/customercenter/gotoUserRule.do")
+		public ModelAndView gotoUserRule(ModelAndView mav) {
+
+		mav.setViewName("common/userRule");
+	    return mav;
+		}
+		
+		
+
+	/*
+	 * @RequestMapping("/customercenter/gotoUserRule.do") public String
+	 * memberLogin() {
+	 * 
+	 * return ""; }
+	 */
+        
+		
 		
 	
 

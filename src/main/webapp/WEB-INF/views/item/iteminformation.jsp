@@ -24,19 +24,11 @@
 	font-size:15px;
 	font-weight:bold;
 	color:lightgray;
-	
 }
 #itempro{
 	font-size:30px;
 	font-weight:bold;
 	
-}
-#bask{
-	border: 1px solid #7151FC;
-	background:white;
-	color:#7151FC;
-	width:150px;
-	height:50px;
 }
 #pur{
 	border:1px solid white;
@@ -75,25 +67,17 @@
 	height:50px;
 	
 }
-
 #float1{
 width:50px;
 height:50px; 
-margin-left:30px;
-margin-bottom:25px; 
 border:3px solid #7151FC; 
 border-radius:50px;
-}
-#fon{
-	font-size:15px;
-	color:lightgray;
-	
 }
 .content-container{
 	height: 100%;
 }
 .productOne{
-	width: 250px;
+	width: 220px;
 	height: 250px;
 	text-align: center;
 	display: inline-block;
@@ -152,8 +136,17 @@ font-size:20px;
 	float: right;
 }
 .productInfo-table tr td:first-of-type {
-	border: 1px solid black;
 	width: 250px;
+}
+.productInfo-table tr td:not(:first-of-type) {
+	text-align: center;
+}
+.productInfo-table-text{
+	width: 400px;
+	height: 250px;
+}
+.productInfo-table-text tr td:first-child{
+	width: 150px; 
 }
 </style>
 <c:forEach items="${allCategory }" var="ct">
@@ -176,13 +169,12 @@ font-size:20px;
 	<table border="0" class="productInfo-table">
 		<tr>
 			<td>
-				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="80%" >
+				<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productImage }" width="100%" height="200px" >
 			</td>
 			<td>
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" id="float1">
-				<font id="fon">겟잇</font>
 				<font>1등 중고거래 컨시어지 서비스</font>
-			 	<table border="0" style="height:300px; width:400px;">
+			 	<table border="0" class="productInfo-table-text">
 			 		<tr align="center">
 			 			<td class="itemsell">판매자</td>
 			 			<td>${member.memberName }</td>
@@ -216,16 +208,31 @@ font-size:20px;
 		</tr>
 	</table>
 </div><!-- productInfo-header end -->
-
-<div>
-	<h2>이미지 슬라이드</h2>
-</div>
+<style>
+.info-text{
+	padding-left: 100px;
+}
+.info-text>span{
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.pDesc{
+	margin-top: 20px;
+}
+</style>
 <div class="productInfo-content">
+	<c:if test="${product.productAdminDescription != null}">
 	<div class="info-text">
+		<span>상품 상세 설명</span>
+		<div class="pDesc">
+			<pre>${product.productAdminDescription }</pre>
+		</div>
 	</div>
+	</c:if>
 	<hr>
 	<div class="info-delivery" style="margin-left:13%;">
-		<span style="font-size:20px; font-weight:bold; color:gray">배송정보</span><br />
+		<span style="font-size:20px; font-weight:bold;">배송정보</span><br />
 		<br>
 		<span>1. 판매자가 제품을 발송하면 택배사, 송장번호를 안내해드립니다.</span><br />
 		<span>2. 결제 후 3일내 판매자가 제품을 발송하지 않으면 거래가 자동 취소됩니다.</span>
@@ -267,26 +274,45 @@ function insertBasket(){
 	});
 }
 </script>
-
-<div class="naver-test">
-	
+<style>
+.naver-search{
+	padding-left: 100px;
+}
+.naver-search>span{
+	font-size: 20px;
+	margin-left: 20px;
+	font-weight: bold;
+}
+.search-result{
+	width: 500px;
+	margin-top: 20px;
+}
+.search-result a{
+	text-decoration: none;
+}
+</style>
+<div class="naver-search">
+	<span>상품 관련 리뷰</span>
+	<div class="search-result"></div>
 </div>
 <script>
 $(function(){
 	var productName = "${product.productName}";
 	$.ajax({
-		url: "https://openapi.naver.com/v1/search/blog.json",
+		url: "${pageContext.request.contextPath}/itme/moreInfo",
 		type: "get",
-		headers: {"Access-Control-Allow-Headers":"Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization",
-				"Access-Control-Max-Age":"3600",
-				"Access-Control-Allow-Origin":"*",
-				"Content-Type":"plain/text",
-				"X-Naver-Client-Id":"iRxnV_fRI0U3FGNoPOlk",
-				"X-Naver-Client-Secret":"mdUA9AjMzx"},
-		contentType: "plain/text; charset=UTF-8",
-		data: {"query":productName, "sort":"sim"},
+		data: "searchKeyword="+productName,
 		success: function(data){
-			console.log(data);
+			var result = JSON.parse(data).items;
+			
+			var html = "";
+			for(var i=0; i<result.length; i++){
+				html+= "<a href='"+result[i].link+"' target='_blank'><span>▶"+result[i].title+"</span></a><br>";
+			}
+			
+			$(".search-result").append(html);
+			
+			
 		},
 		error: function(){
 			console.log("ajax 요청 에러!");
@@ -295,27 +321,33 @@ $(function(){
 });
 </script>
 
+<hr />
 
-
-<div class="product-recommend" style="margin-left:5%; border:0;"><p id="fontt">이런 상품은 어때요?</p>
-	<div class="product-container">
-		<c:if test="${not empty cpList }">
-		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
-		<div class="productOne" id="${p.seqProductNo }">
-			<div class="pImg">
-				<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="240px" height="180px" />
+<c:if test="${not empty cpList }">
+	<div class="product-recommend" style="margin-left:100px; border:0;"><p id="fontt">이런 상품은 어때요?</p>
+		<div class="product-container">
+			<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
+			<div class="productOne" id="${p.seqProductNo }">
+				<div class="pImg">
+					<img src="${pageContext.request.contextPath }/resources/upload/thing/${p.productRealImage}" alt="${p.productImage }" width="220px" height="180px" />
+				</div>
+				<div class="pDesc">
+					<span>${p.productName }</span><br />
+					<span>${p.productPrice } 원</span>
+				</div>
 			</div>
-			<div class="pDesc">
-				<span>${p.productName }</span><br />
-				<span>${p.productPrice } 원</span>
-			</div>
+			<c:if test="${vs.count%3 == 0 }"></c:if>
+			</c:forEach>
 		</div>
-		<c:if test="${vs.count%3 == 0 }"></c:if>
-		</c:forEach>
-	</c:if>
 	</div>
-</div>
-	
-
+</c:if>
+ <script>
+ $(".productOne").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+ </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

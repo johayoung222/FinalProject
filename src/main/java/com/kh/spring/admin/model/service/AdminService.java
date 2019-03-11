@@ -28,8 +28,12 @@ public interface AdminService {
 	int updateisAdmin(Map<String, Object> map);
 	
 	List<Map<String, Object>> couponList(int memberNo);
+
+	int couponPlus(Map<String, Object> map);
 	
 	int deleteCoupon(Map<String, Object> map);
+	
+	int couponAutoDelete();
 	
 	
 	//결제된 상품 리스트 
@@ -37,12 +41,17 @@ public interface AdminService {
 	
 	int countpaidProduct();
 	
+	List<Map<String, String>> paidAuction(int cPage, int numPerPage);
+
+	int countpaidAuction();
+	
 	List<Map<String, String>> paidProductSearch(int cPage, int numPerPage, Map<String, String> map);
 
 	int countpaidProductSearch(Map<String, String> map);
 	
-	int couponPlus(Map<String, Object> map);
-	
+	List<Map<String, String>> paidAuctionSearch(int cPage, int numPerPage, Map<String, String> map);
+
+	int countpaidAuctionSearch(Map<String, String> map);
 	
 	
 	//판매신청 리스트
@@ -96,6 +105,8 @@ public interface AdminService {
 
 	int updateAuctionRegist(int auctionRegistNo);
 	
+	int auctionCencel(int auctionRegistNo);
+	
 	//경매 상품 현황
 	List<Map<String, String>> auctionList(int cPage, int numPerPage);
 
@@ -124,6 +135,14 @@ public interface AdminService {
 	List<Map<String, Object>> auctionCategory();
 
 	List<Map<String, Object>> questionCategory();
+
+	
+
+	
+
+
+
+	
 
 	
 

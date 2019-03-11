@@ -11,11 +11,9 @@
 <jsp:include page="/WEB-INF/views/common/adminSide.jsp"></jsp:include>
 
 <style>
-#header{
-	width:100%;
-}
 .allMember-container{	
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
@@ -26,14 +24,12 @@
 	white-space : nowrap;
 	text-overflow: ellipsis;
 }
-input[type=submit].btn-block {
-    width: 100px;
-    color:#007bff;
-}
 .allmember-nav{
 	width:100%;
+	padding-right:0px;
 }
 #tbl-allMember{
+	table-layout:fixed;
 	text-align:center;
 }
 
@@ -79,7 +75,7 @@ input[type=submit].btn-block {
 				<td>${m.MEMBER_ID }</td>
 				<td>${m.MEMBER_NAME }</td>
 				<td>
-				${m.GENDER  == 'Y'?"남자":"여자"}				
+				${m.GENDER  == 'M'?"남자":"여자"}				
 				</td>
 				<td>${m.MEMBER_BIRTH }</td>
 				<td>${m.MEMBER_ADDRESS }</td>
@@ -112,7 +108,7 @@ input[type=submit].btn-block {
 
 $(document).on('click','.tableTr',function(){
 	var memberId = $(this).children("td:first").text();
-	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=400");
+	var win = window.open("${pageContext.request.contextPath}/admin/memberPage.do?memberId="+memberId, "사용자 정보", "width=500,height=600,location=no,status=no,top=100,left=500");
 });
 
 </script> 

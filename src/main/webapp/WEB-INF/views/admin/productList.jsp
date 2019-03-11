@@ -12,11 +12,15 @@
 
 <style>
 .productList-container{
-
-	height:750px;
+	margin-right:15px;
+	min-height:600px;
 	position:relative;
 	margin-left:180px;
 	top:-37px;
+}
+#tbl-productList{
+	table-layout:fixed;
+	text-align:center;
 }
 .tableTr td{
 	width:100px;
@@ -24,9 +28,6 @@
 	overflow:hidden;
 	white-space : nowrap;
 	text-overflow: ellipsis;
-}
-#tbl-productList{
-	text-align:center;
 }
 </style>
 <br />
@@ -47,7 +48,7 @@
 	</nav>
 <hr />
 	<table id="tbl-productList" class="table table-striped table-hover">
-		<tr>
+		<tr class="tbl-tr">
 			<th>제품코드</th>
 			<th>상품명</th>
 			<th>제품단가</th>
@@ -55,6 +56,7 @@
 			<th>수량</th>
 			<th>마일리지</th>
 			<th>상품설명</th>
+			<th>판매자ID</th>
 			<th>등록일자</th>
 		</tr>
 		<c:if test="${empty list }">
@@ -66,13 +68,14 @@
 		<c:if test="${not empty list }">
 			<c:forEach items="${list }" var="p">
 			<tr class="tableTr">				
-				<td>${p.SEQ_PRODUCT_NO}</td>
+				<td><a href="${pageContext.request.contextPath }/item/iteminformation/${p.SEQ_PRODUCT_NO }">${p.SEQ_PRODUCT_NO }</a></td>
 				<td>${p.PRODUCT_NAME}</td>
 				<td>${p.PRODUCT_PRICE}</td>
 				<td>${p.PRODUCT_MANUFACTURER}</td>
 				<td>${p.PRODUCT_STOCK}</td>
 				<td>${p.PRODUCT_MILEGE}</td>
 				<td>${p.PRODUCT_DESCRIPTION}</td>
+				<td><a href="#" onclick="window.open('${pageContext.request.contextPath}/admin/memberPage.do?memberId=${p.MEMBERID}', '사용자 정보', 'width=500,height=600,location=no,status=no,top=100,left=500');">${p.MEMBERID}</a></td>
 				<td>${p.PRODUCT_ENROLL_DATE}</td>
 			</tr>			
 			</c:forEach>

@@ -64,4 +64,14 @@
 	<select id="selectAuctionTitle" resultType="string">
 		select auction_title from auction where auction_no = #{auctionNo}
 	</select>
+	
+	<select id="selectAuctionBySearch" resultMap="searchListMap">
+		select * from auction where auction_title like '%'||#{searchKeyword}||'%'
+	</select>
+	<resultMap type="map" id="searchListMap"></resultMap>
+	
+	<select id="checkHistory" resultMap="checkHistory">
+		select * from auction_history where seq_auction_no = #{auctionNo} and member_id = #{memberId}
+	</select>
+	<resultMap type="map" id="checkHistory"></resultMap>
 </mapper>

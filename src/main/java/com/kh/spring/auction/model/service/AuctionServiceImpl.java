@@ -94,5 +94,15 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.selectAuctionTitle(auctionNo);
 	}
 
+	@Override
+	public List<Map<String, String>> selectAuctionListBySearch(String searchKeyword) {
+		return auctionDao.selectAuctionListBySearch(searchKeyword);
+	}
+
+	@Override
+	public List<Map<String, String>> checkHistory(Map<String, Object> temp) {
+		return auctionDao.checkHistory(temp);
+	}
+
 	
 }

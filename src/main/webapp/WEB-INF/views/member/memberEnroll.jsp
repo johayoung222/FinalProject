@@ -1288,6 +1288,7 @@ label{
      var memberId = document.getElementById("memberId_").value;
      var regExp2 = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{8,15}$/;
      var password = document.getElementById("password_").value;
+     var password2 = document.getElementById("password2").value;
      
      if(!regExp1.test(memberId)){
          alert("아이디는 영소문자 / 숫자만 가능하고 , 단 소문자로 시작해야합니다. (4~14자리)");
@@ -1297,6 +1298,12 @@ label{
          return false;
      } else if($("#idDuplicateCheck").val() == 0) {
     	 alert("아이디 중복검사를 해주세요.");
+    	 return false;
+     }
+     
+     if(password != password2){
+    	 alert("비밀번호가 일치하지 않습니다.");
+    	 $("#password_").val("").focus();
     	 return false;
      }
      
@@ -1398,11 +1405,11 @@ function fbvalidate(){
 					alert("등록이가능합니다");
 					$("#kakaoenroll-container").show();
 					$("input[name=ksubmit]").show();
-	               var interest = false;
-	            /* 관심상품 팝업 */
+	          /*      var interest = false;
+	           
 	            open("${pageContext.request.contextPath}/member/memberInterest.do","_blank","width=500,height=400,left=200,top=200");
 	             return false;
-				
+				 */
 				}else{
 					alert("이미 등록된 회원이 있습니다 ");	
 					$("#kakaoenroll-container").hide();

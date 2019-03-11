@@ -99,6 +99,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.countmemberId(m);
 	}
 
+	@Override
+	public int updateItr(Map<String, String> map) {
+		return memberDao.updateItr(map);
+	}
+
 	
 
 }

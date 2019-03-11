@@ -25,7 +25,11 @@
 	</insert>
 	
 	<update id="updateOnSale">
-		update product set product_onsale = 'N' where seq_product_no = #{nProductNo}
+		update product set product_onsale = 'N', buyer_no=#{seqMemberNo} where seq_product_no = #{nProductNo}
+	</update>
+	
+	<update id="updateCoupon">
+		update coupon_listt set coupon_status='Y' where seq_member_no =#{seqMemberNo} and seq_coupon_no = #{couponL}
 	</update>
 	
 </mapper>

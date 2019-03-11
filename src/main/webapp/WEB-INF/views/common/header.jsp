@@ -28,6 +28,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 <style>
 body{
 	width: 100%;
@@ -118,6 +120,9 @@ body{
 			#box-link{
 				width: 430px;
 				margin-left: 55%;
+
+				background: rgb(248,248,248);
+				
 			}
 			</style>
 				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
@@ -251,7 +256,7 @@ body{
 		border: none;
 	}
 	</style>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" id="center_">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -263,18 +268,52 @@ body{
 				<li class="nav-item" id="nav-item1">
 					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown	MenuLink">
+					<div class="dropdown-menu" aria-labelledby="dropdown MenuLink">
 					<style>
+					.dropdown-menu{
+							background: rgb(250,250,250);
+							
+					}
+					#cTable{
+						font-family: 'Nanum Gothic', sans-serif;
+						background: rgb(250,250,250);
+			
+					
+					}
 					#cTable tr th{
+					  font-family: 'Noto Sans KR', sans-serif;
+					   /*  background: rgb(250,250,250); */
+					     background: #5853EB;
+					    color: white;
 						text-align: center;
+						font-weight: bolder;
+						text-decoration: none;
 					}
 					#cTable tr:not(:first-of-type) td ul{
+					    font-family: 'Nanum Gothic', sans-serif;
 						list-style: none;
 						padding-left: 10px;
 						padding-right: 10px;
+					
+						
+					}
+				    #cTable tr:not(:first-of-type) td ul:hover{
+					 	    background: #368AFF;
+					 	  border-radius:15px;
+						
+					}
+					
+					#cTable tr:not(:first-of-type) td ul>a{
+						text-decoration: none;
+					}
+					#cTable tr:not(:first-of-type) td ul>a:hover{
+					    font-family: 'Noto Sans KR', sans-serif;
+						text-decoration: none;
+					    color: white;
+					    font-weight: bolder;
 					}
 					</style>
-						<table id="cTable" border="1">
+						<table id="cTable" border="0">
 							<tr>
 								<th>
 									전자제품
@@ -444,7 +483,6 @@ body{
 				</li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/interest">관심상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">추가할인</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
 			</ul>

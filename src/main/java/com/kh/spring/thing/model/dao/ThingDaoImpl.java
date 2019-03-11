@@ -2,6 +2,7 @@ package com.kh.spring.thing.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,8 +54,14 @@ public class ThingDaoImpl implements ThingDao {
 
 
 	@Override
-	public void updateOnSale(int nProductNo) {
-		sqlSession.update("thing.updateOnSale",nProductNo);
+	public void updateOnSale(Map<String, Object> map) {
+		sqlSession.update("thing.updateOnSale",map);
+	}
+
+
+	@Override
+	public void updateCoupon(Map<String, Object> map) {
+		sqlSession.update("thing.updateCoupon",map);
 	}
 
 }

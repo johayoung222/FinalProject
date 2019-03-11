@@ -46,11 +46,11 @@
 	</select>
 	
 	<select id="selectAllRegist" resultType="regist">
-		select * from regist order by regist_date
+		select * from regist where regist_auction = 'Y' order by regist_date
 	</select>
 	
 	<select id="selectNew" resultType="product">
-		select * from product where product_onsale = 'Y' order by product_enroll_date
+		select * from product where product_onsale = 'N' order by product_enroll_date
 	</select>
 	
 	<select id="selectNowProduct" resultType="product">
@@ -64,5 +64,28 @@
 	<select id="selectUpItems" resultType="product">
 		select * from product where product_onsale = 'Y' and product_recommend = 'Y'
 	</select>
-
+	
+	<select id="selectItr" resultType="product" parameterType="java.util.ArrayList">
+		select * from product
+		<where>
+		<if test="list.size != 0">
+		category_macro in
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+		#{item}
+		</foreach>
+		</if>
+		and product_onsale = 'Y'
+		</where>
+	</select>
+	
+	<select id="selectMemberInterest" resultType="string">
+		select member_interest from member where seq_member_no = #{memberNo}
+	</select>
+	
+	<select id="couponList" resultMap="couponListMap">
+		select c.*,ct.user_date 
+		from coupon_listt ct join coupon c on ct.seq_coupon_no = c.seq_coupon_no
+		where ct.seq_member_no = #{buyerNo} and ct.coupon_status='N'
+	</select>
+	<resultMap type="map" id="couponListMap"></resultMap>
 </mapper>
