@@ -10,8 +10,8 @@
 </jsp:include>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <style>
-
 .productInfo-header>table{
 	margin: 0 auto;
 }
@@ -19,6 +19,10 @@
 	margin-left:15%;
 	margin-bottom:30px;
 	margin-top:30px;
+}
+.productInfo-category span{
+	font-size: 20px;
+	font-family: 'Jua', sans-serif;
 }
 .itemsell{
 	font-size:15px;
@@ -160,7 +164,7 @@ font-size:20px;
 
 <div class="productInfo-container">
 	<div class="productInfo-category">
-		<span>${nowCategory }</span>-
+		<span>${nowCategory }</span> -
 		<span>${nowCategory2 }</span>
 	</div>
 </div>
@@ -220,12 +224,23 @@ font-size:20px;
 .pDesc{
 	margin-top: 20px;
 }
+.detailDesc{
+	border: 1px solid gray;
+	margin-left: 30px;
+	border-radius: 5px;
+	width: 800px;
+	padding: 10px;
+}
+.detailDesc pre{
+	font-family: 'Jua', sans-serif;
+	font-size: 16px;
+}
 </style>
 <div class="productInfo-content">
 	<c:if test="${product.productAdminDescription != null}">
 	<div class="info-text">
 		<span>상품 상세 설명</span>
-		<div class="pDesc">
+		<div class="pDesc detailDesc">
 			<pre>${product.productAdminDescription }</pre>
 		</div>
 	</div>
@@ -246,7 +261,7 @@ font-size:20px;
 		<br />
 		<hr style="border:2px solid gray;">
 	</div>
-	
+</div>
 <script>
 function ask(){
 	location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
