@@ -37,7 +37,6 @@
 	  <form class="form-inline" action='${pageContext.request.contextPath }/admin/productListSearch.do?cPage="+${cPage}+"&numPerPage="+${numPerPage}'>
 		<select class="form-control" name="type">
   			<option value="product_name" ${type == "product_name"?"selected":"" }>상품명</option>
-  			<option value="product_onsale" ${type == "product_onsale"?"selected":"" }>판매여부</option>
   			<option value="product_manufacturer" ${type == "product_manufacturer"?"selected":"" }>제조사명</option>
   			<option value="category_macro" ${type == "product_macro"?"selected":"" }>대분류코드</option>
 		</select>
