@@ -58,6 +58,17 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countproduct2(int seqMemberNo) {
 		return myPageDao.countproduct2(seqMemberNo);
 	}
+	
+	@Override
+	public List<Map<String, Object>> sellList3(int cPage, int numPerPage, int seqMemberNo) {
+		List<Map<String, Object>> list = myPageDao.sellList3(seqMemberNo,cPage,numPerPage);
+		return list;
+	}
+
+	@Override
+	public int countproduct3(int seqMemberNo) {
+		return myPageDao.countproduct3(seqMemberNo);
+	}
 
 	@Override
 	public List<Map<String, Object>> buyList(int cPage, int numPerPage,int seqMemberNo) {
@@ -68,5 +79,12 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int countbuy(int seqMemberNo) {
 		return myPageDao.countbuy(seqMemberNo);
+	}
+
+	@Override
+	public int updateaddress(Member m) {
+		int result = 0;
+		result = myPageDao.updateaddress(m);
+		return result; 
 	}
 }

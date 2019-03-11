@@ -36,5 +36,6 @@ public class Product {
 	private int seqAuctionNo;
 	private int seqAskNo;
 	private String productAdminDescription;
+	private int buyerNo;
 	
 }

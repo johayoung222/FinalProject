@@ -57,6 +57,18 @@ public class MyPageDaoImpl implements MyPageDao {
 	public int countproduct(int seqMemberNo) {
 		return SqlSession.selectOne("mypage.countproduct", seqMemberNo);
 	}
+	
+	@Override
+	public List<Map<String, Object>> sellList3(int seqMemberNo, int cPage, int numPerPage) {
+		RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage,numPerPage); 
+		return SqlSession.selectList("mypage.sellList3" , seqMemberNo, rowBounds); 
+	}
+
+	@Override
+	public int countproduct3(int seqMemberNo) {
+		return SqlSession.selectOne("mypage.countproduct3", seqMemberNo);
+	}
+	
 	@Override
 	public int countproduct2(int seqMemberNo) {
 		return SqlSession.selectOne("mypage.countproduct2", seqMemberNo);
@@ -71,6 +83,13 @@ public class MyPageDaoImpl implements MyPageDao {
 	@Override
 	public int countbuy(int seqMemberNo) {
 		return SqlSession.selectOne("mypage.countbuy",seqMemberNo);
+	}
+
+	@Override
+	public int updateaddress(Member m) {
+		int result = 0;
+		result = SqlSession.update("mypage.updateaddress",m);
+		return result;
 	}
 
 }

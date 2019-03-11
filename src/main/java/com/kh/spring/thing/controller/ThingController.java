@@ -181,7 +181,7 @@ public class ThingController {
 		thingService.updateCoupon(map);
 		}
 		mav.addObject("order", order);
-		mav.setViewName("mypage/purchases");
+		mav.setViewName("redirect:/mypage/purchases.do");
 		
 		return mav;
 	}

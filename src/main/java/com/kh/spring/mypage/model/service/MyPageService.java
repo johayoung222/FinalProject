@@ -22,11 +22,17 @@ public interface MyPageService {
 	
 	List<Map<String, Object>> sellList2(int cPage, int numPerPage, int seqMemberNo);
 
+	List<Map<String, Object>> sellList3(int cPage, int numPerPage, int seqMemberNo);
+	
 	int countproduct(int seqMemberNo);
 
 	int countproduct2(int seqMemberNo);
 
+	int countproduct3(int seqMemberNo);
+	
 	List<Map<String, Object>> buyList(int cPage, int numPerPage,int seqMemberNo);
-
+	
 	int countbuy(int seqMemberNo);
+	
+	int updateaddress(Member m);
 }
