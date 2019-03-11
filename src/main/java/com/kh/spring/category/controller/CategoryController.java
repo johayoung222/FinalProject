@@ -47,6 +47,7 @@ public class CategoryController {
 		String auctionNo = "";
 		Map<String , Object> temp = new HashMap<>();
 		Map<String , String > result = new HashMap<>();
+		Map<String , String > resultTemp = new HashMap<>();
 		Map<String , String > resultPrice = new HashMap<>();
 		
 		
@@ -59,10 +60,10 @@ public class CategoryController {
 				auctionNo = String.valueOf(auctionList.get(i-1).get("AUCTION_NO"));
 				temp.put("memberId" , memberId);
 				temp.put("auctionNo" , auctionNo);
-				
-				
 				List<Map<String,String>> checkList = auctionService.checkHistory(temp);
-				// Map<String , String> result
+
+				
+				
 				
 				if(checkList.size() == 0) {
 					result.put(String.valueOf("check"+i), "N");
@@ -77,8 +78,27 @@ public class CategoryController {
 			}
 		}
 		
+		for(int i = 1;i <= 4;i++) {
+			resultPrice.put("bidCheck"+i, "Y");
+			auctionNo = String.valueOf(auctionList.get(i-1).get("AUCTION_NO"));
+			temp.put("auctionNo" , auctionNo);
+			resultTemp = auctionService.selectAuctionBid(temp);
+			String price = "";
+			if(resultTemp == null) {
+				price = String.valueOf(auctionList.get(i-1).get("AUCTION_PRICE"));
+				resultPrice.put("bidCheck"+i, "N");
+			} else {
+				price = String.valueOf(resultTemp.get("PRICE"));
+			}
+			
+			System.out.println("priceeeeeeeeeee"+price);
+			resultPrice.put(String.valueOf("Price"+i), price);
+		}
+		
+		
 
 
+		mav.addObject("resultPrice" , resultPrice);
 		mav.addObject("result" , result);
 		mav.addObject("cpList", newList);
 		mav.addObject("auctionList" , auctionList);

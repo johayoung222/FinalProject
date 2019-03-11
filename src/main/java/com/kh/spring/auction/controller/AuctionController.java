@@ -271,14 +271,17 @@ public class AuctionController {
 			myHistory = auctionService.selectMyHistory(temp);			
 			System.out.println("myHistory = "+myHistory);
 		}
-		System.out.println("ddddddddd"+history.get("MEMBER_NO"));
-		System.out.println("ddddddddd"+m.getSeqMemberNo());
-		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
+
 		Map<String , String> bidCheck = new HashMap<>();
-		bidCheck.put("check" , "N");
-		if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
-			bidCheck.put("check" , "Y");
-			System.out.println("니가 최대 입찰자야");
+		if(m != null) {
+			if(myHistory != null) {
+				// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
+				bidCheck.put("check" , "N");
+				if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
+					bidCheck.put("check" , "Y");
+					System.out.println("니가 최대 입찰자야");
+				}				
+			}
 		}
 		
 		model.addAttribute("bidCheck" , bidCheck);
