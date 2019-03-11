@@ -15,9 +15,10 @@
 	width: 100%;
 	height: 300px;
 }
-
-#favorite {
-	padding-left: 90px;
+#favorite{
+	margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 #favorite2 {
@@ -222,11 +223,7 @@ font-family: 'Nanum Gothic', sans-serif;
 margin-top: 30px;
 margin-bottom: 20px;
 }
-#favorite{
-	margin-top: 50px;
-     margin-bottom: 20px;
-	margin-left: 130px;
-}
+
 </style>
 
 <!-- <div style="text-align: center;"> -->
@@ -243,7 +240,7 @@ margin-bottom: 20px;
 			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
 				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+			</a><a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
 			<img
 				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
 				id="favorite2" width="120px" height="100px" />
