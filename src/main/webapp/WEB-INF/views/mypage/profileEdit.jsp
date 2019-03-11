@@ -199,6 +199,5 @@ $("#findAddress").on('click',function(){
         }
     }).open();
 });
-
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

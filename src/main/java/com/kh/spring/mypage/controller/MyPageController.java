@@ -3,6 +3,7 @@ package com.kh.spring.mypage.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -38,16 +39,18 @@ public class MyPageController {
     private JavaMailSender mailSender;
 
 	@RequestMapping(value= {"/mypage/order.do" , "/mypage/order"})
-	public String order(HttpSession session,Model model , @RequestParam(name="filter" , required=false) String filter) {
+	public String order(HttpSession session,Model model,
+						@RequestParam(name="filter" , required=false) String filter,
+						@RequestParam(value = "cPage", defaultValue = "1") int cPage) {
 		// 넘겨줄 값이 판매내역리스트 , 값이 없을 경우에 3가지로 분기해서 메시지를 넘겨준다.
 		// 3가지로 분기가 되는데 -> 기본 normal c2c temporarily_saved 이다.
 		Member m = (Member)session.getAttribute("memberLoggedIn");
-		ProductIo pi = new ProductIo();
-		pi.setSeqMemberNo(m.getSeqMemberNo());
+		int seqMemberNo = m.getSeqMemberNo();
 		
-		List<String> list = new ArrayList<>();	// 예비 물건 판매내역 리스트
-		
-		list = myPageService.sellList(pi);
+		int numPerPage = 4;
+		String loce = "";
+		List<Map<String, Object>> list = null;
+		int totalContents = 0;
 		
 		if(!("normal".equals(filter) || "c2c".equals(filter) || "temporarily_saved".equals(filter))) {
 			filter = "normal";			
@@ -57,9 +60,15 @@ public class MyPageController {
 		String menuSel = "";
 		
 		if("normal".equals(filter)) {
+			list = myPageService.sellList(cPage,numPerPage,seqMemberNo);
+			totalContents = myPageService.countproduct(seqMemberNo);
+			loce = "/spring/mypage/order";
 			view = "mypage/order";
 			menuSel = "normal";
 		} else if("c2c".equals(filter)) {
+			list = myPageService.sellList2(cPage,numPerPage,seqMemberNo);
+			totalContents = myPageService.countproduct2(seqMemberNo);
+			loce = "/spring/mypage/order?filter=c2c";
 			view = "mypage/order";						
 			menuSel = "c2c";
 		}
@@ -68,29 +77,40 @@ public class MyPageController {
 			model.addAttribute("msg" , "아직 거래내역이 없습니다.");			
 		}
 		
-
+		model.addAttribute("cPage",cPage);
+		model.addAttribute("numPerPage",numPerPage);
+		model.addAttribute("totalContents",totalContents);
 		model.addAttribute("menuSel" , menuSel);
 		model.addAttribute("list" , list);
+		model.addAttribute("loce" , loce);
 		
 		return view;
 	}
 	
 	@RequestMapping("/mypage/purchases.do")
-	public String purchases(Model model) {
-		List<String> list = new ArrayList<>();
+	public String purchases(HttpSession session,Model model,@RequestParam(value = "cPage",defaultValue = "1")int cPage) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		int seqMemberNo = m.getSeqMemberNo();
+		int	numPerPage = 4;
+		List<Map<String, Object>> list = myPageService.buyList(cPage,numPerPage,seqMemberNo);
+		int totalContents = myPageService.countbuy(seqMemberNo);
 		
 		if(list.isEmpty()) {
 			model.addAttribute("msg" , "아직 구매내역이 없습니다. 셀잇에서 스마트하게 쇼핑해보세요.");			
 		}
-		
+		String view = "mypage/purchases";	
+		model.addAttribute("cPage",cPage);
+		model.addAttribute("numPerPage",numPerPage);
+		model.addAttribute("totalContents",totalContents);
 		model.addAttribute("list" , list);
 		
-		return "mypage/purchases";
+		return view;
 	}
 	
 	@RequestMapping("/mypage/bookmarks.do")
 	public String bookmarks(Model model) {
 		List<String> list = new ArrayList<>();
+		
 		
 		if(list.isEmpty()) {
 			model.addAttribute("msg" , "등록한 찜 상품이 없습니다. 제품 상세 페이지에서 찜하기 버튼을 이용하여 상품을 등록해 보세요.");			

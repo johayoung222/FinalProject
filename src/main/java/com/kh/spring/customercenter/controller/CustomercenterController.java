@@ -132,6 +132,7 @@ public class CustomercenterController {
 		logger.debug("board=" + board);
 
 		int result = customerService.deleteNews(board);
+		logger.debug("cont1 result" + result);
 
 		String loc = "/customercenter/ccnews.do";
 		String msg = "";

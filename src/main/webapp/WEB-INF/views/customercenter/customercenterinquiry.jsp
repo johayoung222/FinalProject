@@ -73,7 +73,7 @@
 }
 
 #selone{
-	/* margin-left:24%; */
+	margin-left:24%;
 	margin-right:1%;
 	width:25%;
 	display: inline-block;
@@ -86,7 +86,7 @@
 	border: 1px solid black;
 }
 .main{
-	/* margin-left:24%; */
+	margin-left:24%;
 	margin-bottom:10px;
 	width:51.5%;
 	height:200px;
@@ -95,7 +95,9 @@
 	resize: none;
 }
 .btn-outline-primary{
-	/* margin-left:24%; */
+	/* margin-left:24%;  이거이상*/	
+	
+	margin-left:24%;
 	width:51.5%;
 	margin-bottom:50px;
 
@@ -109,6 +111,7 @@
 	margin-bottom:5px;
 	font-size: 20px;
 	font-weight: bold;
+	
 }
 .answer{
 	margin-bottom:15px;

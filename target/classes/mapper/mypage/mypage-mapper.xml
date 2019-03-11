@@ -12,10 +12,38 @@
 			where member_id = #{memberId}
 	</update>
 	<select id="sellList" resultMap="sellList">
-		select * from product_io where seq_member_no = #{seqMemberNo}
+		select * from product where product_auction = 'Y' and seller_no = #{seqMemberNo} order by product_enroll_date desc
 	</select>
 	<resultMap type="map" id="sellList">
 	
 	</resultMap>
+	
+	<select id="sellList2" resultMap="sellList2">
+		select * from product where product_auction = 'N' and seller_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="sellList2">
+	
+	</resultMap>
+	
+	<select id="countproduct" resultType="_int">
+		select count(*) from product where product_auction = 'Y' and seller_no = #{seqMemberNo}
+	</select>
+	
+	<select id="countproduct2" resultType="_int">
+		select count(*) from product where product_auction = 'N' and seller_no = #{seqMemberNo}
+	</select>
+	
+	<select id="buyList" resultMap="buyList">
+		select * from auction where seq_member_no = #{seqMemberNo}
+	</select>
+	<resultMap type="map" id="buyList">
+	
+	</resultMap>
+	
+	<select id="countbuy" resultType="_int">
+		select count(*) from auction where seq_member_no = #{seqMemberNo}
+	</select>
+	
+
 	
 </mapper>
