@@ -101,7 +101,7 @@ IMP.request_pay({ // param
             msg += '결제 금액 : ' + rsp.paid_amount;
             msg += '카드 승인번호 : ' + rsp.apply_num;
             
-            alert(msg);
+            alert("결제가 완료되었습니다.");
             console.log(data);
             location.href = "${pageContext.request.contextPath}/mypage/order";
         })

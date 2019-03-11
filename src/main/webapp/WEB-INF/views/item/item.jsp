@@ -8,6 +8,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <style>
 .content-container{
 	height: 100%;
@@ -29,6 +31,22 @@
 	font-size: 30px;
 	margin-top: 20%;
 }
+.pImg{
+	margin-top: 5px;
+	width: 250px;
+	height: 180px;
+}
+.category-box>h2{
+	margin-left: 30px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.category-name{
+	padding-left: 60px;
+}
+.category-name span{
+	font-size: 20px;
+	font-family: 'Jua', sans-serif;
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == aiKey.caKey }">
@@ -42,8 +60,10 @@
 <div class="content-container">
 	<div class="category-box">
 	<c:if test="${aiKey != null }">
-		<span>${nowCategory }</span>-
-		<span>${nowCategory2 }</span>
+		<div class="category-name">
+			<span>${nowCategory }</span> -
+			<span>${nowCategory2 }</span>
+		</div>
 	</c:if>
 	<c:if test="${brandNew != null }">
 		<h2>새로 등록된 상품 리스트</h2>

@@ -15,32 +15,39 @@
 	width: 100%;
 	height: 300px;
 }
-
-#favorite {"src/main/webapp/index.jsp"
-	padding-left: 90px;
+#favorite{
+	width: 80%;
+	margin: 0 auto;
 }
-
-#favorite2 {
-	margin-left: 50px;
+#fimages{
+	display: flex;
+	justify-content: space-between;
 }
-
-#favorite3 {
-	margin-left: 50px;
+#fimages a{
+	text-align: center;
 }
-
-#favorite4 {
-	margin-left: 50px;
+#fimages a img{
+	width: 120px;
+	height: 100px;
+	display: block;
 }
-
-#favorite5 {
-	margin-left: 50px;
+#favorite a{
+	text-decoration: none;
 }
-
+.popular{
+	font-family: 'Nanum Gothic', sans-serif;
+	margin-top: 30px;
+}
+.popular>h3{
+	margin-left: 30px;
+}
 #sell_ {
-	border: 1px solid gray;
-	height: 180px;
+    border: 2px solid lightgray;
+    height: 180px;
+    width:95%;
+    margin-left:25px;
+    margin-top: 20px;
 }
-
 #sell2 {
 	position: relative;
 	bottom: 90px;
@@ -54,52 +61,23 @@
 	text-align: center;
 	padding: 30px;
 }
-
 .font_ {
 	margin-left: 50px;
 }
 #box0{
- border:0; 
- padding-top:20px; 
- width:100%;
+	margin-top: 20px;
+	width:100%;
+	display: flex;
+	justify-content: space-around;
 }
-#box1 {
-	display: inline-block;
-	vertical-align: top;
-    width: 22%;
-
+#box0>div{
 	height: 150px;
 	border: 1px solid #dbdbdb;
-
-}
-
-#box2 {
-	display: inline-block;
-	vertical-align: top;
 	width: 22%;
-	height: 150px;
-	border: 1px solid #dbdbdb;
-	margin-left: 10px;
 }
-
 #box3 {
-	display: inline-block;
-	vertical-align: top;
-	width: 20%;
-	height: 150px;
-	border: 1px solid #dbdbdb;
-	margin-left: 10px;
+	width: 30% !important;
 }
-
-#box4 {
-	display: inline-block;
-	padding-top: 0px;
-}
-
-.font2_ {
-	left: 30%;
-}
-
 .hm-good {
 	display: inline-block;
     width: 241px;
@@ -161,11 +139,16 @@ a {
 	display: inline-block;
 	margin: 10px 31px;
 }
-.moreItems{
+#moreItems{
 	float: right;
 	margin-right: 100px;
 	cursor: pointer;
 	font-size: 20px;
+}
+#moreItems:hover{
+	background-color: yellow;
+	border-radius: 7px;
+	box-shadow: 0px 0px 3px 5px yellow;
 }
 .productOne:hover{
 	border-radius: 5px;
@@ -173,7 +156,8 @@ a {
 	cursor: pointer;
 }
 .pImg{
-	width: 200px;
+	margin-top: 5px;
+	width: 250px;
 	height: 180px;
 }
 
@@ -184,6 +168,28 @@ a {
 .myblinkEle1 , .myblinkEle2 , .myblinkEle3 , .myblinkEle4{
 	visibility: hidden;
 }
+.badge{
+	animation-name: myani1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+@Keyframes myani1{
+        0%{
+            background-color: blue;
+        }
+        50%{
+            background-color: red;
+        }
+        80%{
+            transform: rotateY(360deg);
+        }
+        100%{
+            background-color: blueviolet;
+            border-radius: 50%;
+        }
+    }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -214,65 +220,44 @@ a {
 		class="sr-only">Next</span>
 	</a>
 </div>
-<style>
-#popular{
-text-align: left;
-font-family: 'Nanum Gothic', sans-serif;
-margin-top: 30px;
-margin-bottom: 20px;
-}
-#favorite{
-	margin-top: 50px;
-     margin-bottom: 20px;
-	margin-left: 130px;
-}
-</style>
 
-<!-- <div style="text-align: center;"> -->
-	<div id="popular">
-	<div>
-		<h3>
+<div class="popular">
+	<h3>
 		인기 카테고리
 		<span class="badge badge-secondary">HIT</span>
-		</h3>
-	</div>
+	</h3>
 	<div id="favorite">
 		<div id= "fimages">
 			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
-			<img
-				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
-				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
-			<img
-				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
-				id="favorite2" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/electronic.PNG"
-				id="favorite3" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/food.PNG"
-				id="favorite4" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
-				id="favorite5" width="120px" height="100px" />
-
+				<img src="${pageContext.request.contextPath }/resources/images/computer.PNG"/>
+				<span>노트북/PC</span>
 			</a>
-		
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG"/>
+				<span>스마트폰</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
+				<img src="${pageContext.request.contextPath }/resources/images/electronic.PNG" />
+				<span>노트북/PC 주변기기</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
+				<img src="${pageContext.request.contextPath }/resources/images/food.PNG"/>
+				<span>분유/이유식/간식</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
+				<img src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"/>
+				<span>생활/주방/미용가전</span>
+			</a>
 		</div>
 	</div>
 </div>
 <hr />
 
+<div class="popular">
 <h3>
 	새로 등록된 상품 <span class="badge badge-secondary">New</span>
-	<span class="moreItems" id="moreItems">더 보기</span>
+	<span id="moreItems">더 보기</span>
 </h3>
-<br />
-<br />
-
 <div class="new-product">
 	<c:if test="${not empty cpList }">
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
@@ -282,16 +267,15 @@ margin-bottom: 20px;
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
-				<span>${p.productPrice } 원</span>
+				<span><fmt:formatNumber value="${p.productPrice}" pattern="#,###"/> 원</span>
 			</div>
 		</div>
 		</c:forEach>
 	</c:if>
-
 </div>
-
-<br /><br />
-<hr />	
+</div>
+<hr />
+<div class="popular">
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
 	<span class="moreItems" id="moreItems1">더 보기</span>
@@ -332,6 +316,7 @@ margin-bottom: 20px;
 		</c:forEach>
 </c:if>
 </div>
+</div>
 
 
 <div id="sell_">
@@ -349,17 +334,15 @@ margin-bottom: 20px;
 
 <div id="box0">
 	<div id="box1" style="text-align: center">
-		<a href="#"><img
-			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
-			id="sound_" width="120px" height="100px" /></a>
+		<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">
+			<img src="${pageContext.request.contextPath }/resources/images/sound.PNG" id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
 			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 		</div>
 	</div>
 	<div id="box2" style="text-align: center">
-		<a href="#"><img
-			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
-			id="sound_" width="120px" height="100px" /></a>
+		<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">
+			<img src="${pageContext.request.contextPath }/resources/images/sound2.PNG" id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
 			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
@@ -367,10 +350,8 @@ margin-bottom: 20px;
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
 		<h5 style="text-align: center">1577-1577</h5>
-
 	    <h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
 		<h6 style="text-align: center">주말, 공휴일 휴무</h6>
-	
 	</div>
 </div>
 

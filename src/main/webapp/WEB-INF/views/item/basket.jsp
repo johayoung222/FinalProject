@@ -114,9 +114,7 @@ height:5px;
 		</table>
 		</div>
 			<hr/>
-			<div class="buy-container">
-			 	  <h4>상품구매 금액 합계:<fmt:formatNumber pattern="###,###" value="${sum }" />원</h4>		     
-			</div>
+			
 	</div>	
 </div>
 </div>
