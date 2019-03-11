@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
 <style>
-#tbl-allMember{
+#tbl-coupon{
 	table-layout:fixed;
 	text-align:center;
 }
@@ -32,7 +32,7 @@
 						<div class="credit-list-empty">${msg }</div>
 					</c:if>
 					<c:if test="${not empty list }">
-					<table id="tbl-allMember" class="table table-striped table-hover" >
+					<table id="tbl-coupon" class="table table-striped table-hover" >
 						<tr>
 							<th>쿠폰명</th>
 							<th>유효기간</th>
