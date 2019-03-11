@@ -282,7 +282,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping (value = "/auctionHistoryInsert")
-	@ResponseBody public Map<String, Object> auctionHistoryInsert(@RequestParam(value="MemberNo") int MemberNo ,
+	@ResponseBody public Map<String, Object> auctionHistoryInsert(@RequestParam(value="MemberNo" , required=false) int MemberNo ,
 																@RequestParam(value="auctionUnq") int AuctionNo ,
 																@RequestParam(value="bidPrice") int price  , 
 																HttpSession session) {
@@ -390,7 +390,7 @@ public class AuctionController {
 		auctionService.updateWinningBid(temp);
 		
 		mav.addObject("order", order);
-		mav.setViewName("mypage/purchases");
+		mav.setViewName("auction/auctionDetail.do?auctionNo="+nProductNo);
 		
 		return mav;
 	}
