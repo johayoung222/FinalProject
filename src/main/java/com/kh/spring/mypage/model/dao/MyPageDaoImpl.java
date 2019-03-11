@@ -73,4 +73,9 @@ public class MyPageDaoImpl implements MyPageDao {
 		return SqlSession.selectOne("mypage.countbuy",seqMemberNo);
 	}
 
+	@Override
+	public List<Map<String, Object>> coupons(int memberNo) {
+		return SqlSession.selectList("mypage.coupons",memberNo);
+	}
+
 }
