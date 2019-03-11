@@ -15,7 +15,7 @@
 	</select>
 	<!-- 공지사항 작성 -->
 	<insert id="insertNews" parameterType="cc">
-    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,'1',1,0 )
+    	insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,'1',1)
     </insert>
     <!-- 공지사항 수정 -->
     <update id="updateNews">

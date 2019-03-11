@@ -176,7 +176,12 @@ a {
 	width: 200px;
 	height: 180px;
 }
-.blinkEle1 , .blinkEle2{
+
+.blinkEle1 , .blinkEle2 , .blinkEle3 , .blinkEle4{
+	display:none;
+}
+
+.myblinkEle1 , .myblinkEle2 , .myblinkEle3 , .myblinkEle4{
 	display:none;
 }
 </style>
@@ -304,7 +309,7 @@ margin-bottom: 20px;
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
 						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide blinkEle2">내가 구매중 , 내가 경매에 참여중</div>
+						<div class="gdidx-on-hold ng-hide myblinkEle${vs.count }">내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
@@ -316,7 +321,7 @@ margin-bottom: 20px;
 							<span class="gdidx-price-unit">원</span>
 							<div class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
 						</div>
-						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price">152,100원</div>
+						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price"><fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>원</div>
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
 					</div></a>
 			</div>
@@ -392,13 +397,20 @@ function getTime() {
 
 
 // 온로드 됬을때 경매 진행중인지 ? 아니면 내가 경매에 참여중인지 찍어주기 위한 소스코드
+
 	$(function(){
+		var mainAuction1 = "${result.check1}";
+		var mainAuction2 = "${result.check2}";
+		var mainAuction3 = "${result.check3}";
+		var mainAuction4 = "${result.check4}";
+		
 		for(var i = 1; i <= 4;i++) {
 			var sdate = $("#sdate"+i).prop("value");
 			var edate = $("#edate"+i).prop("value");
 			today = getTime();			
 			
 			var result = 0;
+			
 			if(today>sdate) {
 				result++;
 			}
@@ -407,15 +419,33 @@ function getTime() {
 			}
 			
 			if(result == 2) {
-				alert(i+"경매진행중인게 있다.");
+				$(".blinkEle"+i).show();
 			}
+			
+			
+			
 		}
+	// 여기서부터는 입찰에 참여하였는지에 대한 출력
+	if(mainAuction1 == "Y") {
+		$(".myblinkEle1").show();
+	}
+	if(mainAuction2 == "Y") {
+		$(".myblinkEle2").show();
+	}
+	if(mainAuction3 == "Y") {
+		$(".myblinkEle3").show();
+	}
+	if(mainAuction4 == "Y") {
+		$(".myblinkEle4").show();
+	}
 		
 	});
 	
-setInterval(function(){
-	  $(".blinkEle").toggle();
-	}, 500);
+/* setInterval(function(){
+	for(var i = 1; i <= 4;i++) {
+	  $(".blinkEle"+i).toggle();
+	}
+}, 500); */
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";

@@ -75,7 +75,7 @@
 				<td>${m.MEMBER_ID }</td>
 				<td>${m.MEMBER_NAME }</td>
 				<td>
-				${m.GENDER  == 'Y'?"남자":"여자"}				
+				${m.GENDER  == 'M'?"남자":"여자"}				
 				</td>
 				<td>${m.MEMBER_BIRTH }</td>
 				<td>${m.MEMBER_ADDRESS }</td>

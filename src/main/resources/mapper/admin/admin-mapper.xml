@@ -43,7 +43,7 @@
 	<select id="couponList" resultMap="couponAllMap">
 		select C.*,l.coupon_status,l.user_date as endDay 
 		from coupon c join  coupon_listt l on c.seq_coupon_no = l.seq_coupon_no
-   		where l.seq_member_no = #{memberNo} order by coupon_date desc
+   		where l.seq_member_no = #{memberNo} order by l.user_date desc
 	</select>
 	
 	<!-- 관리자가 고객 쿠폰 삭제 -->
@@ -64,7 +64,9 @@
 	</select>
 	<resultMap type="map" id="padiProductMap"></resultMap>	
 	<select id="countpaidProduct" resultType="_int">
-		select count(*) from product_io
+		select count(*)
+		from product_io pi join member m on pi.seq_member_no = m.seq_member_no
+		order by pi.seq_product_no
 	</select>
 	
 	<!-- 결제된 경매 리스트 -->
@@ -228,7 +230,7 @@
 		insert into auction values(auction_no.nextval , #{seqMemberNo}, #{sdate} , #{edate} ,#{auctionTitle}
 			, #{auctionImageMain} , #{auctionImageSub1} , #{auctionImageSub2} , #{auctionImageSub3} 
 			, #{auctionPrice} , #{auctionStatus} , #{auctionMember} , #{auctionPhone} , #{auctiondetail}
-			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default)
+			, #{auctionCategoryMicro} ,#{auctionCategoryMacro},default,default,null)
 	</insert>
 	
 	<!-- auctionRegist 승인시 auction_check='Y' -->
