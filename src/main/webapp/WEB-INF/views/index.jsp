@@ -178,11 +178,11 @@ a {
 }
 
 .blinkEle1 , .blinkEle2 , .blinkEle3 , .blinkEle4{
-	display:none;
+	visibility: hidden;
 }
 
 .myblinkEle1 , .myblinkEle2 , .myblinkEle3 , .myblinkEle4{
-	display:none;
+	visibility: hidden;
 }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
@@ -419,7 +419,7 @@ function getTime() {
 			}
 			
 			if(result == 2) {
-				$(".blinkEle"+i).show();
+				$(".blinkEle"+i).css("visibility", "visible");
 			}
 			
 			
@@ -427,25 +427,25 @@ function getTime() {
 		}
 	// 여기서부터는 입찰에 참여하였는지에 대한 출력
 	if(mainAuction1 == "Y") {
-		$(".myblinkEle1").show();
+		$(".myblinkEle1").css("visibility", "visible");
 	}
 	if(mainAuction2 == "Y") {
-		$(".myblinkEle2").show();
+		$(".myblinkEle2").css("visibility", "visible");
 	}
 	if(mainAuction3 == "Y") {
-		$(".myblinkEle3").show();
+		$(".myblinkEle3").css("visibility", "visible");
 	}
 	if(mainAuction4 == "Y") {
-		$(".myblinkEle4").show();
+		$(".myblinkEle4").css("visibility", "visible");
 	}
 		
 	});
 	
-/* setInterval(function(){
+setInterval(function(){
 	for(var i = 1; i <= 4;i++) {
 	  $(".blinkEle"+i).toggle();
 	}
-}, 500); */
+}, 500);
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";

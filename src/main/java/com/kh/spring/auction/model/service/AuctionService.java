@@ -42,4 +42,6 @@ public interface AuctionService {
 
 	List<Map<String, String>> checkHistory(Map<String, Object> temp);
 
+	void updateBuyerNo(Map<String, Object> temp1);
+
 }

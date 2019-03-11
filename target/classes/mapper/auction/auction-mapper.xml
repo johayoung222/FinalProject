@@ -74,4 +74,9 @@
 		select * from auction_history where seq_auction_no = #{auctionNo} and member_id = #{memberId}
 	</select>
 	<resultMap type="map" id="checkHistory"></resultMap>
+		
+	<update id="updateBuyerNo">
+		update auction set buyer_no = #{memberNo} where auction_no = #{auctionNo}
+	</update>
+	
 </mapper>

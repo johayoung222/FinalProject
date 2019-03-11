@@ -104,5 +104,10 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDao.checkHistory(temp);
 	}
 
+	@Override
+	public void updateBuyerNo(Map<String, Object> temp1) {
+		auctionDao.updateBuyerNo(temp1);
+	}
+
 	
 }
