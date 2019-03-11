@@ -15,9 +15,10 @@
 	width: 100%;
 	height: 300px;
 }
-
-#favorite {"src/main/webapp/index.jsp"
-	padding-left: 90px;
+#favorite{
+	margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 #favorite2 {
@@ -35,10 +36,11 @@
 #favorite5 {
 	margin-left: 50px;
 }
-
 #sell_ {
-	border: 1px solid gray;
-	height: 180px;
+    border: 2px solid lightgray;
+    height: 180px;
+    width:95%;
+    margin-left:25px;
 }
 
 #sell2 {
@@ -221,11 +223,7 @@ font-family: 'Nanum Gothic', sans-serif;
 margin-top: 30px;
 margin-bottom: 20px;
 }
-#favorite{
-	margin-top: 50px;
-     margin-bottom: 20px;
-	margin-left: 130px;
-}
+
 </style>
 
 <!-- <div style="text-align: center;"> -->
@@ -242,7 +240,7 @@ margin-bottom: 20px;
 			<img
 				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
 				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+			</a><a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
 			<img
 				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
 				id="favorite2" width="120px" height="100px" />
@@ -308,18 +306,18 @@ margin-bottom: 20px;
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide myblinkEle${vs.count }">내가 경매에 참여중</div>
+						<div class="auctionIng gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="auctionIn gdidx-on-hold ng-hide myblinkEle${vs.count }">내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
-					<div class="gdidx-name ng-binding">${a.AUCTION_TITLE }</div>
+					<div class="gdidx-name ng-binding">[중고] ${a.AUCTION_TITLE }</div>
 					<div class="gdidx-prices-wrapper">
 						<div class="gdidx-price ng-binding">
-							<fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>
-							
+							<div id="bidcheck${vs.count }" class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
+							<span class="resultPrice${vs.count }"></span><%-- <fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/> --%>
 							<span class="gdidx-price-unit">원</span>
-							<div class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
+							
 						</div>
 						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price"><fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>원</div>
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
@@ -404,6 +402,11 @@ function getTime() {
 		var mainAuction3 = "${result.check3}";
 		var mainAuction4 = "${result.check4}";
 		
+		var resultPrice1 = "${resultPrice.Price1}";
+		var resultPrice2 = "${resultPrice.Price2}";
+		var resultPrice3 = "${resultPrice.Price3}";
+		var resultPrice4 = "${resultPrice.Price4}";
+		
 		for(var i = 1; i <= 4;i++) {
 			var sdate = $("#sdate"+i).prop("value");
 			var edate = $("#edate"+i).prop("value");
@@ -422,9 +425,14 @@ function getTime() {
 				$(".blinkEle"+i).css("visibility", "visible");
 			}
 			
-			
-			
 		}
+		
+		$(".resultPrice1").html(addComma(resultPrice1));
+		$(".resultPrice2").html(addComma(resultPrice2));
+		$(".resultPrice3").html(addComma(resultPrice3));
+		$(".resultPrice4").html(addComma(resultPrice4));
+		
+		
 	// 여기서부터는 입찰에 참여하였는지에 대한 출력
 	if(mainAuction1 == "Y") {
 		$(".myblinkEle1").css("visibility", "visible");
@@ -438,14 +446,36 @@ function getTime() {
 	if(mainAuction4 == "Y") {
 		$(".myblinkEle4").css("visibility", "visible");
 	}
-		
-	});
 	
+	var bidCheck1 = "${resultPrice.bidCheck1}";
+	var bidCheck2 = "${resultPrice.bidCheck2}";
+	var bidCheck3 = "${resultPrice.bidCheck3}";
+	var bidCheck4 = "${resultPrice.bidCheck4}";
+	
+	if("${resultPrice.bidCheck1}" == "N") {
+		$("#bidcheck1").html("기준가");
+	}
+	if("${resultPrice.bidCheck2}" == "N") {
+		$("#bidcheck2").html("기준가");
+	}
+	if("${resultPrice.bidCheck3}" == "N") {
+		$("#bidcheck3").html("기준가");
+	}
+	if("${resultPrice.bidCheck4}" == "N") {
+		$("#bidcheck4").html("기준가");
+	}
+});
+	
+function addComma(num) {
+	var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	return num.toString().replace(regexp, ',');
+}
+/* 
 setInterval(function(){
 	for(var i = 1; i <= 4;i++) {
 	  $(".blinkEle"+i).toggle();
 	}
-}, 500);
+}, 500); */
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";
@@ -457,4 +487,15 @@ $(".productOne").each(function(item, idx){
 	});
 });
 </script>
+<style>
+.auctionIng {
+	color: red;
+	font-weight: bold;
+}
+
+.auctionIn{
+	color: #7151FC;
+	font-weight: bold;
+}
+</style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
