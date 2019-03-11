@@ -47,6 +47,7 @@ public class CategoryController {
 		String auctionNo = "";
 		Map<String , Object> temp = new HashMap<>();
 		Map<String , String > result = new HashMap<>();
+		Map<String , String > resultPrice = new HashMap<>();
 		
 		
 		if(m != null) {
@@ -61,7 +62,7 @@ public class CategoryController {
 				
 				
 				List<Map<String,String>> checkList = auctionService.checkHistory(temp);
-				
+				// Map<String , String> result
 				
 				if(checkList.size() == 0) {
 					result.put(String.valueOf("check"+i), "N");

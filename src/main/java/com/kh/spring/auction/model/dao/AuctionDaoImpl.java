@@ -102,4 +102,9 @@ public class AuctionDaoImpl implements AuctionDao {
 		return sqlSession.selectList("auction.checkHistory" , temp);
 	}
 
+	@Override
+	public void updateBuyerNo(Map<String, Object> temp1) {
+		sqlSession.update("auction.updateBuyerNo" , temp1);
+	}
+
 }
