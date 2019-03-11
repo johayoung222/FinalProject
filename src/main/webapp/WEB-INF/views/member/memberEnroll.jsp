@@ -1249,30 +1249,7 @@ label{
 </div>
 
 
-<!-- ----------------------------google관련 회원가입!-------------------------------------------------->
-<div id="googleEnroll-container">
-	<form name="gmemberEnrollFrm" action="${pageContext.request.contextPath}/member/googleEnrollEnd" method="post" method="post" onsubmit="return googleIdValidate();" >
-		<input type="hidden" name="memberAlarm"/>
-		 <div id="kakaoId-container">
-			<input type="hidden" class="form-control" placeholder="아이디 (4글자이상)" name="gId" id="gId" readonly>
-		<!-- 	중복체크관련태그 -->
-			<input type="hidden" name="googleDuplicateCheck" id="googleDuplicateCheck" value="0" />
-			<input type="button" value="구글로 등록된 회원인지 확인하기"  onclick="googleIdValidate();"/>
-		</div> 
-		<input type="text" class="form-control" placeholder="이름" name="gName" id="gName" readonly>
-		<input type="text" class="form-control" placeholder="생일을 입력해주세요 ex)940214" name="gBirth" id="gBirth" required>
-		<input type="email" class="form-control" placeholder="이메일을 입력해주세요" name="gEmail" id="gEmail" readonly>
-		<select class="form-control" name="ggender" required> 
-			<option value="" disabled selected>성별</option>
-			<option value="M">남</option>
-			<option value="F">여</option>
-		</select>
-		<input type="hidden" name="gmemberInterest"/>
-		<br />
-		<input type="submit" name="gsubmit" class="btn btn-outline-success" value="가입" >&nbsp;
-		<input type="button" class="btn btn-outline-success" value="취소" onclick="googleCancel();">
-	</form>
-</div>
+
 
 
 
@@ -1363,7 +1340,7 @@ function fbvalidate(){
 				alert("등록이가능합니다");
 				$("#facebookenroll-container").show();
 				$("input[name=fbsubmit]").show();
-               var interest = false;
+              /*  var interest = false; */
             /* 관심상품 팝업 */
            
 			}else{
