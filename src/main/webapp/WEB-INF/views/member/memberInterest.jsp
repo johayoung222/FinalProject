@@ -19,6 +19,7 @@
 	border: 1px solid black;
 }
 </style>
+</head>
 <body>
 <div class="interest-container">
 	<div class="interest-text">
@@ -26,21 +27,24 @@
 	</div>
 	<div class="interest-content">
 		<c:if test="${param.memberNo == null }">
-		<form action="javascript:interestEnd();" name="interestFrm">
+		<form action="javascript:interestEnd()" name="interestFrm">
 		</c:if>
 		<c:if test="${param.memberNo != null }">
-		<form action="javascript:difInterestEnd();" name="interestFrm2">
+		<form action="javascript:difInterestEnd()" name="interestFrm">
+		<input type="hidden" name="cMemberNo" value="${param.memberNo}" />
 		</c:if>
+		
 		<c:forEach items="${category }" var="c" varStatus="vs">
-		<c:if test="${vs.count%3==0 }">
-		<input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
-		<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label><br />
-		</c:if>
-		  <c:if test="${vs.count%3!=0 }">
-		  <input type="checkbox" name="categoryMacro" id="${c.CATEGORY_NAME }" value="${c.CATEGORY_MACRO }" />
-		  <label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label>
-		   </c:if>
-		 </c:forEach>
+			<c:if test="${vs.count%3==0 }">
+				<input type="checkbox" name="categoryMacro" value="${c.CATEGORY_MACRO }" />
+				<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label><br />
+			</c:if>
+			<c:if test="${vs.count%3!=0 }">
+				<input type="checkbox" name="categoryMacro" value="${c.CATEGORY_MACRO }" />
+				<label for="${c.CATEGORY_NAME }">${c.CATEGORY_NAME }</label>
+			</c:if>
+		</c:forEach>
+		 
 		<br />
 		<input type="submit" value="선택 완료" />
 		<c:if test="${param.memberNo == null }">
@@ -69,6 +73,16 @@ function interestEnd(){
 	self.close();
 }
 
+function choiceSkip(){
+	opener.memberEnrollFrm.submit();
+	self.close();
+}
+
+function itrSkip(){
+	opener.location.href = "${pageContext.request.contextPath}";
+	self.close();
+}
+
 function difInterestEnd(){
 	var category = $("[name='categoryMacro']");
 	var interest = "";
@@ -79,7 +93,7 @@ function difInterestEnd(){
 	});
 	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/member/memberItrUpdate?memberNo="+${param.memberNo}+"&interest="+interest,
+		url: "${pageContext.request.contextPath}/member/memberItrUpdate?memberNo="+interestFrm.cMemberNo.value+"&interest="+interest,
 		type: "get",
 		success: function(data){
 			console.log(data);
@@ -94,17 +108,6 @@ function difInterestEnd(){
 		}
 	});
 }
-
-function choiceSkip(){
-	opener.memberEnrollFrm.submit();
-	self.close();
-}
-
-function itrSkip(){
-	opener.location.href = "${pageContext.request.contextPath}";
-	self.close();
-}
-
 </script>
 </body>
 </html>

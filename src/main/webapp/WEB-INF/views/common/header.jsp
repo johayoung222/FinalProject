@@ -84,7 +84,8 @@ body{
 }
 #collapseExample {
 	width: 260px;
-	margin-left: -40px;
+	margin-left: -80px;
+	z-index: 1;
 }
 #button_ {
 	cursor: pointer;
