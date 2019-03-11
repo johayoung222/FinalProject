@@ -8,7 +8,40 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 <style>
-
+.mypage{
+	width:143%;
+}
+.main{
+	display: inline-block;
+	width:23.5%;
+	height:150px;
+	margin-right: 1%;
+	text-align: center;
+	
+}
+.main2{
+	display: inline-block;
+	width:23.5%;
+	height:150px;
+	margin-right: 1%;
+	text-align: center;
+	background-color:lightgray;
+}
+.lImg{
+	display: inline-block;
+}
+#x{
+	color:white;
+	font-size:35px;
+	display: inline-block;
+	position: absolute;
+    margin-top: 50px;
+    margin-left: 11px;
+}
+.page{
+	margin-left: 41%;
+    margin-top: 17px;
+}
 </style>
 <jsp:include page="/WEB-INF/views/common/mypageSide.jsp"></jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/mypage.css" />
@@ -28,19 +61,36 @@
 					<div class="mypage-content">${msg }</div>
 				</c:if>
 				<c:if test="${not empty list }">
-				<table>
-					<c:forEach items="${list }" var="o" varStatus="vs">
-						<td>
-						${o.PRODUCT_IO_MANUFACTURER}						
-					
-						${o.PRODUCT_NAME} <br />
-						${o.PRODUCT_IO_PRICE} <br />
-						</td>
+					<c:forEach items="${list }" var="l" varStatus="vs">
+						<c:if test="${l.PRODUCT_ONSALE eq 'Y '}">
+							<div class="main" id="${l.SEQ_PRODUCT_NO}">					
+						</c:if>
+						<c:if test="${l.PRODUCT_ONSALE eq 'N '}">
+							<div class="main2" id="${l.SEQ_PRODUCT_NO}">
+							<span id="x">판매완료</span>					
+						</c:if>
+								<div class="lImg">
+									<img src="${pageContext.request.contextPath }/resources/upload/thing/${l.PRODUCT_REAL_IMAGE}" alt="${l.PRODUCT_IMAGE}" height="80px" width="160px" style="background:gray;"/>
+								</div>
+								<div class="lDesc">
+									<span>${l.PRODUCT_NAME }</span><br />
+									<span>${l.PRODUCT_PRICE } 원</span> <br />
+									<span><fmt:formatDate value="${l.PRODUCT_ENROLL_DATE}" pattern="yyyy.MM.dd" /></span> <br />
+								</div>
+							</div>
 					</c:forEach>
-				</table>
 				</c:if>
 			</div>
+		<%
+			int totalContent = (int) request.getAttribute("totalContents");
+			int numPerPage = (int) request.getAttribute("numPerPage");
+			int cPage = (int) request.getAttribute("cPage");
+			String loce = (String)request.getAttribute("loce");
+		%>
+		<div class="page">
+			<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, loce)%>
 		</div>	
+		</div>
 	</div>
 </div>
 <script>
@@ -61,6 +111,11 @@ $(".mp-submenu a").on("click" , function(){
 	$(".active").removeClass("active");
 	$(this).addClass("active");
 });
-
+$(".main").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -33,6 +33,8 @@ width: 110px;
     padding: 0;
     height: 32px;
     margin-bottom: 6px;
+    margin-left: 59.7%;
+    margin-top: -51px;
 }
 </style>
 </head>
@@ -53,16 +55,20 @@ width: 110px;
 				<input type="text"name="certified" id="certified"class="certified"/>
 				<input type="hidden" name="memberPhone" id="memberPhone" value="${memberPhone}" />
 				<input type="hidden" name="memberId" id="memberId" value="${memberId}" />
-				<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>
-				
 		</form>
+				<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>	
+	</c:if>
 				<div style="float:right;">
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="100px" height="30px">
 				</div>
-	</c:if>
 </body>
 <script>
 function c(){
+	var phone = document.getElementById("memberPhone");
+	if(phone == null){
+		alert("번호를 입력하세요");
+		return false;
+	}
 	document.c.submit();
 }
 function check(){
@@ -88,8 +94,6 @@ function check(){
 		return false;
 	}else{
 		alert("인증 완료");
-		//document.updatephone.submit();
-		
 		$.ajax({
 			url:"${pageContext.request.contextPath}/mypage/updatephone.do",
 			data:All,

@@ -32,6 +32,8 @@ width: 110px;
     padding: 0;
     height: 32px;
     margin-bottom: 6px;
+    margin-left: 59.7%;
+    margin-top: -51px;
 }
 
 </style>
@@ -52,8 +54,8 @@ width: 110px;
 				<input type="text"name="certified" id="certified"class="certified"/>
 				<input type="hidden" name="memberEmail" id="memberEmail" value="${memberEmail}" />
 				<input type="hidden" name="memberId" id="memberId" value="${memberId}" />
-			<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>
 		</form>
+			<button class="btn btn-outline-success" id="check" onclick="check();" style=" width:110px; height:30px; padding:0" >확인</button>
 			<div style="float:right;">
 				<img src="${pageContext.request.contextPath }/resources/images/Getit_.PNG" width="100px" height="30px">
 				</div>
@@ -62,6 +64,11 @@ width: 110px;
 </body>
 <script>
 function c(){
+	var email = document.getElementById("memberEmail");
+	if(email == null){
+		alert("번호를 입력하세요");
+		return false;
+	}
 	document.c.submit();
 }
 function check(){
