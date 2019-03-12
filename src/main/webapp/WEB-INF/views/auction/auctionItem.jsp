@@ -17,7 +17,7 @@
 	height: 300px;
 }
 
-#favorite {"src/main/webapp/index.jsp"
+#favorite {
 	padding-left: 90px;
 }
 

@@ -168,132 +168,13 @@ function getTime() {
 					<div id="Detail_tabcontainer">
 					    <ul class="tabs">
 					        <li class="active" rel="tab1" onclick="fn_tab('#tab1')">상세정보</li>
-					        <li rel="tab2" onclick="fn_tab('#tab2')">Q&A</li>
+					        <li rel="tab2" onclick="fn_tab('#tab2')">문의하기</li>
 					    </ul>
 					    <div class="Detail_tab_container">  
 					    	<!-- #tab1 상세정보 탭 내용 시작 -->
 					        <div id="tab1" class="tab_content">   
 				          		${a.AUCTIONDETAIL}
 					        </div> <!-- end of div#tab1 -->   
-					  	 	<!-- #tab2 Q&A 탭 내용 시작-->     
-					        <div id="tab2" class="tab_content">
-					        	<form name="Detail_qna" id="Detail_question">
-					        		<!-- 질문 등록 창 게시글 등록자는 보이지 않음-->	
-					        		<c:if test="${memberLoggedIn != null?memberLoggedIn.seqMemberNo:'0' ne a.SEQ_MEMBER_NO }">	        	
-									<div class="Detail_qnabox">
-										<table class="Detail_answertxt">
-											<tr>
-												<td>
-													<input type="hidden" name="memberUnq" value="${a.SEQ_MEMBER_NO }">
-													<input type="hidden" name="auctionUnq" value="${a.AUCTION_NO}">
-													<input type="hidden" name="questionerUnq" value="${memberLoggedIn.seqMemberNo}">	
-													<textarea id="qnaContent" name="qnaContent" rows='5' class="Detail_answertextarea"></textarea>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<input type="checkbox" name="qnaSecret" value="1"> 비밀글 &nbsp
-													<input id="questionBtn" type="button" value="문의 하기"  class="btn btn-primary btn-sm" onclick="Detail_questionInsert()">
-												</td>
-											</tr>
-										</table>
-									</div> <!-- end of Detail_qnabox -->
-									</c:if>
-								</form><!-- end of form#Detail_question -->
-
-								<!-- 질문목록 -->
-								<div class="Detail_qnalist">
-									<table class="Detail_question">
-										<c:choose>
-											<%-- 질문이 없을 때 --%>
-											<c:when test="${qnaResult.isEmpty() }">
-												<tr>
-													<td class="Detail_question_name"></td>
-													<td class="Detail_question_date"></td>
-												</tr>
-												<tr>
-													<td colspan="2" class="Detail_question_content">
-														등록된 질문이 없습니다.
-													</td>
-												</tr>
-											</c:when>
-											
-											<%-- 질문이 있을 때 --%>
-											<c:otherwise>
-												<c:forEach var="qnalist" items="${qnaResult}" varStatus="status">	
-													<c:if test="${qnalist.qnastep eq 0 && qnalist.delstatus eq 0}">
-														<tr>
-															<td class="Detail_question_name">[질문] <c:out value="${qnalist.questionerunq}"/></td>
-															<td class="Detail_question_date"><c:out value="${qnalist.qnardate}"/></td>
-														</tr>
-														<tr>
-															<td colspan="2" class="Detail_question_content">
-																<c:out value="${qnalist.qnacontent}"/>
-															</td>
-														</tr>
-													</c:if>
-						
-													<%-- 게시글 작성자의 답변 --%>
-													<c:if test="${auctionMemberNo eq MemberNo && qnalist.qnastep eq 0}">
-														<form id="Detail_Answer${status.count }">
-															<tr>
-																<td colspan="2" class="Detail_question_btn">
-																	<a href="#answer${status.count}" class="btn btn-info btn-sm" data-toggle="collapse">답변</a>
-																	<div id="answer${status.count}" class="collapse">
-																		<input type="hidden" name="memberUnq" value="${auctionMemberNo }">
-																		<input type="hidden" name="auctionUnq" value="${detailResult.auctionUnq}">
-																		<input type="hidden" name="questionerUnq" value="${MemberNo}">
-																		<input type="hidden" name="qnaGroup" value="${qnalist.qnaunq}">
-																		<textarea rows='5' class="Detail_answertextarea" name="qnaContent"></textarea>																	
-																		<input type="button" value="답변 등록" class="btn btn-danger btn-sm" onclick="qnaAnswer('Detail_Answer${status.count }')">
-																	</div>
-																</td>
-															</tr>
-														</form>
-													</c:if>
-			
-													<%-- 질문 수정/삭제 --%>
-													<c:if test="${MemberNo eq questionerunq}">
-														<tr>
-															<td colspan="2" class="Detail_question_btn">
-																<input type="button" class="btn btn-warning btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="수정"/> /  
-																<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="삭제"/>
-															</td>
-														</tr>
-													</c:if>
-													
-													<%-- 질문에 대한 답변 --%>
-													<c:if test="${qnalist.qnastep eq 1 && qnalist.delstatus eq 0}">
-														<tr>
-															<td class="Detail_question_name">└[답변] <c:out value="${qnalist.memberunq}"/></td>
-															<td class="Detail_question_date"><c:out value="${qnalist.qnardate}"/></td>
-														</tr>
-														<tr>
-															<td colspan="2" class="Detail_question_content">
-																<blockquote>
-																<c:out value="${qnalist.qnacontent}"/>
-																</blockquote>
-															</td>
-														</tr>
-														
-														<%-- 답변 수정/삭제 --%>
-														<c:if test="${auctionMemberNo eq MemberNo }">
-															<tr>
-																<td colspan="2" class="Detail_question_btn">
-																	<input type="button" class="btn btn-default btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'M')" value="답변 수정"/>  
-																	<input type="button" class="btn btn-danger btn-sm" onclick="fn_action('${qnalist.qnaunq}', 'D')" value="답변 삭제"/>
-																</td>
-															</tr>
-														</c:if>
-													</c:if>
-						
-												</c:forEach>
-											</c:otherwise>
-										</c:choose>					
-									</table><!-- end of table.Detail_question -->
-								</div><!-- end of div.Detail_qnalist -->
-								
-							</div> <!-- end of div#tab2 -->
 					    </div><!-- end of div.Detail_tab_container -->
 					   
 					</div><!-- end of div#Detail_tabcontainer -->
