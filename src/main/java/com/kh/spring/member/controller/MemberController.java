@@ -480,9 +480,8 @@ public class MemberController {
 		m.setMemberEmail(memberEmail);
 		
 		int countId = memberService.countmemberId(m);
-		//int certified = ((int) (Math.random() * 899999)+100000);
+		int certified = ((int) (Math.random() * 899999)+100000);
 		
-		int certified = 1;
 		
 		if(countId > 0) {
 			String setfrom = "7sscheduler@gmail.com";         
@@ -540,8 +539,7 @@ public class MemberController {
 		m.setMemberId(memberId);
 		m.setMemberPhone(memberPhone);
 		int count = memberService.countmember(m);
-		//int certified = ((int) (Math.random() * 899999)+100000);
-		int certified = 1;
+		int certified = ((int) (Math.random() * 899999)+100000);
 		
 		if(count > 0) {
 			String api_key = "NCSFQJJ9HCHO2HEE";

@@ -37,4 +37,8 @@ public interface MyPageService {
 	int updateaddress(Member m);
 
 	List<Map<String, Object>> coupons(int memberNo);
+
+	List<Map<String, Object>> abuyList(int cPage, int numPerPage, int seqMemberNo);
+
+	int acountbuy(int seqMemberNo);
 }

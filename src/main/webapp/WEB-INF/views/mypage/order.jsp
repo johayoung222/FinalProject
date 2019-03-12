@@ -73,7 +73,7 @@
 								<span id="x">판매완료</span>					
 							</c:if>
 									<div class="lImg">
-										<img src="${pageContext.request.contextPath }/resources/upload/thing/${l.PRODUCT_REAL_IMAGE}" alt="${l.PRODUCT_IMAGE}" height="80px" width="160px" style="background:gray;"/>
+										<img src="${pageContext.request.contextPath }/resources/upload/thing/${fn:split(l.PRODUCT_REAL_IMAGE,',')[0]}" alt="${l.PRODUCT_IMAGE}" height="80px" width="160px" style="background:gray;"/>
 									</div>
 									<div class="lDesc">
 										<span>${l.PRODUCT_NAME }</span><br />
@@ -93,12 +93,12 @@
 								<span id="x">경매완료</span>					
 							</c:if>
 									<div class="lImg">
-										<img src="${pageContext.request.contextPath }/resources/upload/${l.AUCTION_IMAGE_MAIN}" alt="${l.AUCTION_IMAGE_MAIN}" height="80px" width="160px" style="background:gray;"/>
+										<img src="${pageContext.request.contextPath }/resources/upload/${l.AUCTION_IMAGE_MAIN}" alt="${l.AUCTION_IMAGE_MAIN}" height="80px" width="160px"/>
 									</div>
 									<div class="lDesc">
 										<span>${l.AUCTION_TITLE }</span><br />
 										<span>${l.AUCTION_PRICE } 원</span> <br />
-										<span>20${EDATE}</span> <br />
+										<span>${l.EDATE}</span> <br />
 									</div>
 								</div>
 						</c:forEach>
@@ -112,9 +112,11 @@
 			int cPage = (int) request.getAttribute("cPage");
 			String loce = (String)request.getAttribute("loce");
 		%>
+		<c:if test="${list ne null}">
 		<div class="page">
 			<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, loce)%>
 		</div>	
+		</c:if>
 		</div>
 	</div>
 </div>
@@ -132,10 +134,6 @@ $(function(){
 });
 
 
-$(".mp-submenu a").on("click" , function(){
-	$(".active").removeClass("active");
-	$(this).addClass("active");
-});
 $(".main").each(function(item, idx){
 	$(this).on('click',function(){
 		var pId = $(this).attr("id");

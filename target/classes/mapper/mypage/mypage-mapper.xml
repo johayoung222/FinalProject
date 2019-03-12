@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="sellList3" resultMap="sellList3">
-		select * from auction where seq_member_no = #{seqMemberNo}
+		select * from auction where seq_member_no = #{seqMemberNo} order by auction_create_date desc
 	</select>
 	<resultMap type="map" id="sellList3">
 	
@@ -46,14 +46,25 @@
 	
 	
 	<select id="buyList" resultMap="buyList">
-		select * from product where buyer_no =#{seqMemberNo}
+		select * from product where buyer_no = #{seqMemberNo}
 	</select>
 	<resultMap type="map" id="buyList">
 	
 	</resultMap>
-	
 	<select id="countbuy" resultType="_int">
-		select count(*) from product where buyer_no =#{seqMemberNo}
+		select count(*) from product  where buyer_no = #{seqMemberNo}
+	</select>
+	
+	<select id="abuyList" resultMap="abuyList">
+		select * from auction where buyer_no = #{seqMemberNo}
+		
+	</select>
+	<resultMap type="map" id="abuyList">
+	
+	</resultMap>
+	
+	<select id="acountbuy" resultType="_int">
+		select count(*) from auction where buyer_no = #{seqMemberNo}
 	</select>
 	
 	<update id="updateaddress">

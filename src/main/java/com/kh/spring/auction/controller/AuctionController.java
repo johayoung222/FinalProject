@@ -271,8 +271,7 @@ public class AuctionController {
 			myHistory = auctionService.selectMyHistory(temp);			
 			System.out.println("myHistory = "+myHistory);
 		}
-		System.out.println("ddddddddd"+history.get("MEMBER_NO"));
-		System.out.println("ddddddddd"+m.getSeqMemberNo());
+
 		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
 		Map<String , String> bidCheck = new HashMap<>();
 		bidCheck.put("check" , "N");

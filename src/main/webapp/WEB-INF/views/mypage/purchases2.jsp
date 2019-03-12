@@ -49,8 +49,8 @@
 			<div class="mp" style="font-size:19px; font-weight:bold;">
 			구매내역
 			</div>
-			<div class="mp" style="padding-top:10px;">
-				<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇판매</a>
+			<div class="mp" style="padding-top:10px;width:300px;height:40px;">
+					<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇판매</a>
 					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매판매</a>
 			</div>
 			<hr style="border-bottom:1px solid gray; width:143%;">
@@ -61,14 +61,14 @@
 				<c:if test="${not empty list }">
 					<c:forEach items="${list }" var="b">
 						<div class="main2">
-							<span id="x">구매완료</span>
+							<span id="x">경매완료</span>
 							<div class="lImg">
-									<img src="${pageContext.request.contextPath }/resources/upload/thing/${fn:split(b.PRODUCT_REAL_IMAGE,',')[0]}" alt="${b.PRODUCT_IMAGE}" height="80px" width="160px"/>
+									<img src="${pageContext.request.contextPath }/resources/upload/${b.AUCTION_IMAGE_MAIN}" alt="${b.AUCTION_IMAGE_MAIN}" height="80px" width="160px"/>
 								</div>
 								<div class="lDesc">
-									<span>${b.PRODUCT_NAME }</span><br />
-									<span>${b.PRODUCT_PRICE } 원</span> <br />
-									<span><fmt:formatDate value="${b.PRODUCT_ENROLL_DATE}" pattern="yyyy.MM.dd" /></span> <br />
+									<span>${b.AUCTION_TITLE }</span><br />
+									<span>${b.AUCTION_PRICE } 원</span> <br />
+									<span><fmt:formatDate value="${b.EDATE}" pattern="yyyy.MM.dd" /></span> <br />
 								</div>
 						</div>	
 					</c:forEach>
@@ -79,9 +79,11 @@
 				int numPerPage = (int) request.getAttribute("numPerPage");
 				int cPage = (int) request.getAttribute("cPage");
 			%>
-			<div class="page">
-				<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, "purchases.do")%>
-			</div>	
+			<c:if test="${list ne null}">
+				<div class="page">
+					<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, "purchases2.do")%>
+				</div>	
+			</c:if>
 		</div>	
 	</div>
 </div>

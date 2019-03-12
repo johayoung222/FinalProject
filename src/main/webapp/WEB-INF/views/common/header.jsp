@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -164,26 +163,22 @@ body{
 						data-target="#collapseExample" aria-expanded="false"
 						aria-controls="collapseExample"> 마이페이지 </a>
 					<div class="collapse" id="collapseExample">
-						<div class="card card-body">
+						<div class="card card-body" style="z-index:1;">
 							<div>
 								<a class="item-link"
 									href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a>
 							</div>
 							<div>
 								<a href="${pageContext.request.contextPath}/mypage/order.do"
-									style="color: black"><strong>판매내역</strong></a>|<a
+									style="color: black">판매내역</a>|<a
 									href="${pageContext.request.contextPath}/mypage/purchases.do"
 									style="color: black">구매내역</a>|<a
 									href="${pageContext.request.contextPath}/item/basket.do?memberNo=${memberLoggedIn.seqMemberNo}"
 									style="color: black">장바구니</a>| <a
 									href="${pageContext.request.contextPath}/mypage/coupons.do"
-									style="color: black"><strong>쿠폰</strong></a>|<a
-									href="${pageContext.request.contextPath}/mypage/profile/credit.do"
-									style="color: black"><strong>프로모션</strong></a>|<a
+									style="color: black">쿠폰</a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/edit.do"
-									style="color: black">내정보</a>|<a
-									href="${pageContext.request.contextPath}/mypage/wishlist.do"
-									style="color: black"><strong>알림설정</strong></a>
+									style="color: black">내정보</a>
 							</div>
 						</div>
 					</div>
