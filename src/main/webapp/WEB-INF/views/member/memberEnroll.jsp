@@ -1286,7 +1286,7 @@ label{
      
      /* 관심상품 팝업 */
      open("${pageContext.request.contextPath}/member/memberInterest.do","_blank",
-    		 "width=500,height=400,left=200,top=200");
+    		 "width=500,height=230,left=200,top=200");
      
      return false;
 }

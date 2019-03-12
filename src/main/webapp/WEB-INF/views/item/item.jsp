@@ -47,6 +47,23 @@
 	font-size: 20px;
 	font-family: 'Jua', sans-serif;
 }
+#enrollItr{
+	border: none;
+	border-radius: 5px;
+	background-color: orange;
+	animation-name: myani2;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@Keyframes myani2{
+	0%{
+		transform: rotate(15deg);
+	}
+	100%{
+		transform: rotate(-15deg);
+	}
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == aiKey.caKey }">
@@ -82,8 +99,8 @@
 	</c:if>
 	<c:if test="${isInterest != null }">
 		<div class="noProduct">
-			<button onclick="open('${pageContext.request.contextPath}/member/memberInterest.do?memberNo=${memberLoggedIn.seqMemberNo }','_blank',
-		 'width=500,height=400,left=200,top=200');">관심상품 등록하기</button>
+			<button id="enrollItr" onclick="open('${pageContext.request.contextPath}/member/memberInterest.do?memberNo=${memberLoggedIn.seqMemberNo }','_blank',
+		 'width=500,height=230,left=200,top=200');">관심상품 등록하기</button>
 		</div>
 	</c:if>
 	</c:if>

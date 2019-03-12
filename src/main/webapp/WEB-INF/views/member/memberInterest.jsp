@@ -11,12 +11,24 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.js"></script>
 <style>
 .interest-text{
-	border: 1px solid black;
 	text-align: center;
+	font-size: 20px;
 }
 .interest-content{
+	margin-top: 20px;
 	text-align: center;
-	border: 1px solid black;
+}
+.interest-content [type=button], .interest-content [type=submit]{
+	margin-top: 20px;
+	border: none;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 20px;
+	border-radius: 5px;
+}
+.interest-container{
+	border-radius: 5px;
+	background-color: #8cb8ff;
 }
 </style>
 </head>
