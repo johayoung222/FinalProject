@@ -19,11 +19,11 @@ function getTime() {
 	var yyyy = today.getFullYear();
 	var hh = today.getHours();
 	var MM = today.getMinutes();
-	var MM = today.getMinutes();
 	var ss = today.getSeconds();
 
 	if(dd<10) { dd='0'+dd } 
 	if(mm<10) { mm='0'+mm } 
+	if(MM<10) { MM='0'+MM } 
 	if(hh<10) { hh='0'+hh }
 	if(ss<10) { ss='0'+ss }
 	
