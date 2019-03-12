@@ -83,7 +83,7 @@ public class MemberController {
 		logger.debug(m);
 		int result = memberService.insertMember(m);
 
-		String loc = "/";
+		String loc = "/member/memberMoveLogin.do";
 		String msg = "";
 		if (result > 0) {
 			msg = "회원가입성공!";

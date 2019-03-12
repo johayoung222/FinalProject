@@ -54,10 +54,6 @@ public interface AdminDao {
 	
 	
 	//판매 신청 리스트
-	List<Map<String, Object>> regist();
-
-	int countregist();
-
 	List<CategoryMacro> categoryMa();
 
 	List<Category> categoryMi(String macro);

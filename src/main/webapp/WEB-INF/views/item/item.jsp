@@ -8,6 +8,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua" rel="stylesheet">
 <style>
 .content-container{
 	height: 100%;
@@ -29,6 +31,39 @@
 	font-size: 30px;
 	margin-top: 20%;
 }
+.pImg{
+	margin-top: 5px;
+	width: 250px;
+	height: 180px;
+}
+.category-box>h2{
+	margin-left: 30px;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.category-name{
+	padding-left: 60px;
+}
+.category-name span{
+	font-size: 20px;
+	font-family: 'Jua', sans-serif;
+}
+#enrollItr{
+	border: none;
+	border-radius: 5px;
+	background-color: orange;
+	animation-name: myani2;
+    animation-duration: .5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+@Keyframes myani2{
+	0%{
+		transform: rotate(15deg);
+	}
+	100%{
+		transform: rotate(-15deg);
+	}
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == aiKey.caKey }">
@@ -42,8 +77,10 @@
 <div class="content-container">
 	<div class="category-box">
 	<c:if test="${aiKey != null }">
-		<span>${nowCategory }</span>-
-		<span>${nowCategory2 }</span>
+		<div class="category-name">
+			<span>${nowCategory }</span> -
+			<span>${nowCategory2 }</span>
+		</div>
 	</c:if>
 	<c:if test="${brandNew != null }">
 		<h2>새로 등록된 상품 리스트</h2>
@@ -62,8 +99,8 @@
 	</c:if>
 	<c:if test="${isInterest != null }">
 		<div class="noProduct">
-			<button onclick="open('${pageContext.request.contextPath}/member/memberInterest.do?memberNo=${memberLoggedIn.seqMemberNo }','_blank',
-		 'width=500,height=400,left=200,top=200');">관심상품 등록하기</button>
+			<button id="enrollItr" onclick="open('${pageContext.request.contextPath}/member/memberInterest.do?memberNo=${memberLoggedIn.seqMemberNo }','_blank',
+		 'width=500,height=230,left=200,top=200');">관심상품 등록하기</button>
 		</div>
 	</c:if>
 	</c:if>

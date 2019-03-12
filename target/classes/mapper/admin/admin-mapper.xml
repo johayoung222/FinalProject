@@ -96,27 +96,11 @@
 		select count(*) from auction where auction_check='Y'and ${type} like '%'||#{search}||'%'
 	</select>
 	
-	
-	
-	
-	<!--상품 판매 신청 리스트 겟잇 베이직 -->
-	<select id="regist" resultMap="registMap">
-		select * from regist where regist_auction = 'N' and regist_status = 'Y'  order by seq_regist_no
-	</select>
-	<resultMap type="map" id="registMap">
-		<result column="REGIST_DATE" property="registDate" javaType="String"></result>
-	</resultMap>	
-	<select id="countregist" resultType="_int">
-		select count(*) from regist where regist_auction = 'N' and regist_status = 'Y'
-	</select>
-	
-	
-	
-	
 	<!-- 하나의 판매신청 가져오기 Map타입 -->
 	<select id="registOne" resultMap="registMap">
 		select * from regist where seq_regist_no = #{registNo}
 	</select>
+	<resultMap type="map" id="registMap"></resultMap>
 	
 	<!-- 하나의 판매신청 가져오기 VO타입(regist) -->
 	<select id="registOne1" resultType="regist">
@@ -130,7 +114,7 @@
 	
 	<!-- category_micro 호출 -->
 	<select id="categoryMi" resultType="category">
-		select* from category_micro where category_macro = #{macro} 
+		select* from category_micro where category_macro = #{macro} 	
 	</select>
 	
 	<!-- 판매신청 승인, Reigst테이블 >> Product테이블 insert -->

@@ -60,7 +60,7 @@
 		</tr>
 				<c:if test="${empty list }">
 		<tr>
-			<td colspan="8">게시글이 존재하지 않습니다.</td>
+			<td colspan="9">게시글이 존재하지 않습니다.</td>
 		</tr>
 		</c:if>
 		<c:if test="${not empty list }">

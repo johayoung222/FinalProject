@@ -16,33 +16,42 @@
 	height: 300px;
 }
 
-#favorite {
-	padding-left: 90px;
+#favorite{
+	width: 80%;
+	margin: 0 auto;
 }
-
-#favorite2 {
-	margin-left: 50px;
+#fimages{
+	display: flex;
+	justify-content: space-between;
 }
-
-#favorite3 {
-	margin-left: 50px;
+#fimages a{
+	text-align: center;
 }
-
-#favorite4 {
-	margin-left: 50px;
+#fimages a img{
+	width: 120px;
+	height: 100px;
+	display: block;
 }
-
-#favorite5 {
-	margin-left: 50px;
+#favorite a{
+	text-decoration: none;
 }
-
+.popular{
+	font-family: 'Nanum Gothic', sans-serif;
+	margin-top: 30px;
+}
+.popular>h3{
+	margin-left: 30px;
+}
 #sell_ {
     border: 2px solid lightgray;
     height: 180px;
     width:95%;
     margin-left:25px;
+<<<<<<< HEAD
+=======
+    margin-top: 20px;
+>>>>>>> 97a7ae9f462005da88f359f692aac556e305fb64
 }
-
 #sell2 {
 	position: relative;
 	bottom: 90px;
@@ -56,15 +65,16 @@
 	text-align: center;
 	padding: 30px;
 }
-
 .font_ {
 	margin-left: 50px;
 }
 #box0{
- border:0; 
- padding-top:20px; 
- width:100%;
+	margin-top: 20px;
+	width:100%;
+	display: flex;
+	justify-content: space-around;
 }
+<<<<<<< HEAD
 #box1 {
 	display: inline-block;
 	vertical-align: top;
@@ -77,30 +87,16 @@
 #box2 {
 	display: inline-block;
 	vertical-align: top;
+=======
+#box0>div{
+	height: 150px;
+	border: 1px solid #dbdbdb;
+>>>>>>> 97a7ae9f462005da88f359f692aac556e305fb64
 	width: 22%;
-	height: 150px;
-	border: 1px solid #dbdbdb;
-	margin-left: 10px;
 }
-
 #box3 {
-	display: inline-block;
-	vertical-align: top;
-	width: 20%;
-	height: 150px;
-	border: 1px solid #dbdbdb;
-	margin-left: 10px;
+	width: 30% !important;
 }
-
-#box4 {
-	display: inline-block;
-	padding-top: 0px;
-}
-
-.font2_ {
-	left: 30%;
-}
-
 .hm-good {
 	display: inline-block;
     width: 241px;
@@ -162,11 +158,27 @@ a {
 	display: inline-block;
 	margin: 10px 31px;
 }
-.moreItems{
+#moreItems{
 	float: right;
 	margin-right: 100px;
 	cursor: pointer;
 	font-size: 20px;
+}
+#moreItems:hover{
+	background-color: yellow;
+	border-radius: 7px;
+	box-shadow: 0px 0px 3px 5px yellow;
+}
+#moreItems1{
+	float: right;
+	margin-right: 100px;
+	cursor: pointer;
+	font-size: 20px;
+}
+#moreItems1:hover{
+	background-color: yellow;
+	border-radius: 7px;
+	box-shadow: 0px 0px 3px 5px yellow;
 }
 .productOne:hover{
 	border-radius: 5px;
@@ -174,7 +186,8 @@ a {
 	cursor: pointer;
 }
 .pImg{
-	width: 200px;
+	margin-top: 5px;
+	width: 250px;
 	height: 180px;
 }
 
@@ -185,6 +198,28 @@ a {
 .myblinkEle1 , .myblinkEle2 , .myblinkEle3 , .myblinkEle4{
 	visibility: hidden;
 }
+.badge{
+	animation-name: myani1;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+@Keyframes myani1{
+        0%{
+            background-color: blue;
+        }
+        50%{
+            background-color: red;
+        }
+        80%{
+            transform: rotateY(360deg);
+        }
+        100%{
+            background-color: blueviolet;
+            border-radius: 50%;
+        }
+    }
 </style>
 <div id="carouselExampleFade" class="carousel slide carousel-fade"
 	data-ride="carousel">
@@ -215,65 +250,44 @@ a {
 		class="sr-only">Next</span>
 	</a>
 </div>
-<style>
-#popular{
-text-align: left;
-font-family: 'Nanum Gothic', sans-serif;
-margin-top: 30px;
-margin-bottom: 20px;
-}
-#favorite{
-	margin-top: 50px;
-     margin-bottom: 20px;
-	margin-left: 130px;
-}
-</style>
 
-<!-- <div style="text-align: center;"> -->
-	<div id="popular">
-	<div>
-		<h3>
+<div class="popular">
+	<h3>
 		인기 카테고리
 		<span class="badge badge-secondary">HIT</span>
-		</h3>
-	</div>
+	</h3>
 	<div id="favorite">
 		<div id= "fimages">
 			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=03"> 
-			<img
-				src="${pageContext.request.contextPath }/resources/images/computer.PNG"
-				id="favorite1" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
-			<img
-				src="${pageContext.request.contextPath }/resources/images/phone.PNG"
-				id="favorite2" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/electronic.PNG"
-				id="favorite3" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/food.PNG"
-				id="favorite4" width="120px" height="100px" />
-			</a> <a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
-				<img
-				src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"
-				id="favorite5" width="120px" height="100px" />
-
+				<img src="${pageContext.request.contextPath }/resources/images/computer.PNG"/>
+				<span>노트북/PC</span>
 			</a>
-		
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=01"> 
+				<img src="${pageContext.request.contextPath }/resources/images/phone.PNG"/>
+				<span>스마트폰</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=04">
+				<img src="${pageContext.request.contextPath }/resources/images/electronic.PNG" />
+				<span>노트북/PC 주변기기</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=F&ciKey=12">
+				<img src="${pageContext.request.contextPath }/resources/images/food.PNG"/>
+				<span>분유/이유식/간식</span>
+			</a>
+			<a href="${pageContext.request.contextPath }/category?caKey=A&ciKey=10">
+				<img src="${pageContext.request.contextPath }/resources/images/kitchen.PNG"/>
+				<span>생활/주방/미용가전</span>
+			</a>
 		</div>
 	</div>
 </div>
 <hr />
 
+<div class="popular">
 <h3>
 	새로 등록된 상품 <span class="badge badge-secondary">New</span>
-	<span class="moreItems" id="moreItems">더 보기</span>
+	<span id="moreItems">더 보기</span>
 </h3>
-<br />
-<br />
-
 <div class="new-product">
 	<c:if test="${not empty cpList }">
 		<c:forEach items="${cpList }" var="p" varStatus="vs" end="2">
@@ -283,18 +297,18 @@ margin-bottom: 20px;
 			</div>
 			<div class="pDesc">
 				<span>${p.productName }</span><br />
-				<span>${p.productPrice } 원</span>
+				<span><fmt:formatNumber value="${p.productPrice}" pattern="#,###"/> 원</span>
 			</div>
 		</div>
 		</c:forEach>
 	</c:if>
-
 </div>
-
-<br /><br />
-<hr />	
+</div>
+<hr />
+<div class="popular">
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
+	<span id="moreItems1">더 보기</span>
 </h3>
 <jsp:useBean id="now" class="java.util.Date" />
 <c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
@@ -309,18 +323,18 @@ margin-bottom: 20px;
 				<a class="gdidx-good-info" href="${pageContext.request.contextPath }/auctionDetail.do?auctionNo=${a.AUCTION_NO}">
 					<div class="gdidx-img">
 						<img src="${pageContext.request.contextPath }/resources/upload/${a.AUCTION_IMAGE_MAIN}">
-						<div class="gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
-						<div class="gdidx-on-hold ng-hide myblinkEle${vs.count }">내가 경매에 참여중</div>
+						<div class="auctionIng gdidx-on-hold ng-hide blinkEle${vs.count }">경매가 진행중</div>
+						<div class="auctionIn gdidx-on-hold ng-hide myblinkEle${vs.count }">내가 경매에 참여중</div>
 						<div class="gdidx-labels">
 						</div>
 					</div>
-					<div class="gdidx-name ng-binding">${a.AUCTION_TITLE }</div>
+					<div class="gdidx-name ng-binding">[중고] ${a.AUCTION_TITLE }</div>
 					<div class="gdidx-prices-wrapper">
 						<div class="gdidx-price ng-binding">
-							<fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>
-							
+							<div id="bidcheck${vs.count }" class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
+							<span class="resultPrice${vs.count }"></span><%-- <fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/> --%>
 							<span class="gdidx-price-unit">원</span>
-							<div class="gdidx-expected-price ng-hide">현재 낙찰 가격</div>
+							
 						</div>
 						<div class="gdidx-original-price ng-binding" ng-show="item.prices.original_price"><fmt:formatNumber value="${a.AUCTION_PRICE}" pattern="#,###"/>원</div>
 						<div class="gdidx-original-price ng-binding ng-hide"></div>
@@ -331,6 +345,7 @@ margin-bottom: 20px;
 
 		</c:forEach>
 </c:if>
+</div>
 </div>
 
 
@@ -349,17 +364,15 @@ margin-bottom: 20px;
 
 <div id="box0">
 	<div id="box1" style="text-align: center">
-		<a href="#"><img
-			src="${pageContext.request.contextPath }/resources/images/sound.PNG"
-			id="sound_" width="120px" height="100px" /></a>
+		<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">
+			<img src="${pageContext.request.contextPath }/resources/images/sound.PNG" id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
 			<a href="${pageContext.request.contextPath}/customercenter/ccnews.do">겟잇 소식</a>
 		</div>
 	</div>
 	<div id="box2" style="text-align: center">
-		<a href="#"><img
-			src="${pageContext.request.contextPath }/resources/images/sound2.PNG"
-			id="sound_" width="120px" height="100px" /></a>
+		<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">
+			<img src="${pageContext.request.contextPath }/resources/images/sound2.PNG" id="sound_" width="120px" height="100px" /></a>
 		<div style="text-align: center">
 			<a href="${pageContext.request.contextPath}/customercenter/ccqna.do">자주 묻는 질문</a>
 		</div>
@@ -367,10 +380,8 @@ margin-bottom: 20px;
 	<div id="box3">
 		<h6 style="text-align: center">고객센터</h6>
 		<h5 style="text-align: center">1577-1577</h5>
-
 	    <h6 style="text-align: center"> 평일: 15시30분~21시30분</h6>
 		<h6 style="text-align: center">주말, 공휴일 휴무</h6>
-	
 	</div>
 </div>
 
@@ -391,8 +402,9 @@ function getTime() {
 	if(dd<10) { dd='0'+dd } 
 	if(mm<10) { mm='0'+mm } 
 	if(hh<10) { hh='0'+hh }
+	if(ss<10) { ss='0'+ss }
 	
-	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM;
+	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
 	return today;
 }
 
@@ -405,6 +417,11 @@ function getTime() {
 		var mainAuction3 = "${result.check3}";
 		var mainAuction4 = "${result.check4}";
 		
+		var resultPrice1 = "${resultPrice.Price1}";
+		var resultPrice2 = "${resultPrice.Price2}";
+		var resultPrice3 = "${resultPrice.Price3}";
+		var resultPrice4 = "${resultPrice.Price4}";
+		
 		for(var i = 1; i <= 4;i++) {
 			var sdate = $("#sdate"+i).prop("value");
 			var edate = $("#edate"+i).prop("value");
@@ -415,7 +432,7 @@ function getTime() {
 			if(today>sdate) {
 				result++;
 			}
-			if(today<=edate) {
+			if(today<edate) {
 				result++;
 			}
 			
@@ -423,9 +440,14 @@ function getTime() {
 				$(".blinkEle"+i).css("visibility", "visible");
 			}
 			
-			
-			
 		}
+		
+		$(".resultPrice1").html(addComma(resultPrice1));
+		$(".resultPrice2").html(addComma(resultPrice2));
+		$(".resultPrice3").html(addComma(resultPrice3));
+		$(".resultPrice4").html(addComma(resultPrice4));
+		
+		
 	// 여기서부터는 입찰에 참여하였는지에 대한 출력
 	if(mainAuction1 == "Y") {
 		$(".myblinkEle1").css("visibility", "visible");
@@ -439,17 +461,42 @@ function getTime() {
 	if(mainAuction4 == "Y") {
 		$(".myblinkEle4").css("visibility", "visible");
 	}
-		
-	});
 	
+	var bidCheck1 = "${resultPrice.bidCheck1}";
+	var bidCheck2 = "${resultPrice.bidCheck2}";
+	var bidCheck3 = "${resultPrice.bidCheck3}";
+	var bidCheck4 = "${resultPrice.bidCheck4}";
+	
+	if("${resultPrice.bidCheck1}" == "N") {
+		$("#bidcheck1").html("기준가");
+	}
+	if("${resultPrice.bidCheck2}" == "N") {
+		$("#bidcheck2").html("기준가");
+	}
+	if("${resultPrice.bidCheck3}" == "N") {
+		$("#bidcheck3").html("기준가");
+	}
+	if("${resultPrice.bidCheck4}" == "N") {
+		$("#bidcheck4").html("기준가");
+	}
+});
+	
+function addComma(num) {
+	var regexp = /\B(?=(\d{3})+(?!\d))/g;
+	return num.toString().replace(regexp, ',');
+}
+/* 
 setInterval(function(){
 	for(var i = 1; i <= 4;i++) {
 	  $(".blinkEle"+i).toggle();
 	}
-}, 500);
+}, 500); */
 	
 $("#moreItems").on('click',function(){
 	location.href = "${pageContext.request.contextPath}/item/brandNew";
+});
+$("#moreItems1").on('click',function(){
+	location.href = "${pageContext.request.contextPath}/auction/brandNew";
 });
 $(".productOne").each(function(item, idx){
 	$(this).on('click',function(){
@@ -458,4 +505,15 @@ $(".productOne").each(function(item, idx){
 	});
 });
 </script>
+<style>
+.auctionIng {
+	color: red;
+	font-weight: bold;
+}
+
+.auctionIn{
+	color: #7151FC;
+	font-weight: bold;
+}
+</style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

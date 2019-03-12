@@ -25,6 +25,7 @@ function getTime() {
 	if(dd<10) { dd='0'+dd } 
 	if(mm<10) { mm='0'+mm } 
 	if(hh<10) { hh='0'+hh }
+	if(ss<10) { ss='0'+ss }
 	
 	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
 	return today;
@@ -178,7 +179,7 @@ function getTime() {
 					        <div id="tab2" class="tab_content">
 					        	<form name="Detail_qna" id="Detail_question">
 					        		<!-- 질문 등록 창 게시글 등록자는 보이지 않음-->	
-					        		<c:if test="${auctionMemberNo ne MemberNo}">	        	
+					        		<c:if test="${memberLoggedIn != null?memberLoggedIn.seqMemberNo:'0' ne a.SEQ_MEMBER_NO }">	        	
 									<div class="Detail_qnabox">
 										<table class="Detail_answertxt">
 											<tr>
@@ -460,117 +461,16 @@ function getTime() {
 		$(".tab_content:first").show();
 		
 	    $("ul.tabs li").click(function () {
-	        $("ul.tabs li").removeClass("active").css("color", "#333");
-	        //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
-	        $(this).addClass("active").css("color", "#0100FF");
-	        $(".tab_content").hide()
-	        var activeTab = $(this).attr("rel");
-	        
-	        $("#" + activeTab).fadeIn()
+	    	location.href = "${pageContext.request.contextPath}/customercenter/ccinquiry.do";
 	    });
 	});
-		
+
+	
 	<%-- tab이름 지정 --%>
 	function fn_tab(name){
 		var tabid = name;
 		
 	}
-		
-	<%-- 질문 입력 시작 --%>
-	function Detail_questionInsert(){
-		var content = document.getElementById("qnaContent").value;
-		var params = $("#Detail_question").serialize();
-		
-		if(content == "") {
-			alert("질문을 입력해 주세요");
-			return;
-		}
-		$.ajax({
-			type: 'POST',
-			data: params,
-			url: "<c:url value='/Detail_insertQuestion'/>",
-			dataType: "json",
-			success: function(data) {
-				if(data.qnaResult == "success") {
-					alert("질문이 등록되었습니다.");
-					self.location.reload();
-				
-				} else {
-					alert("다시 시도해 주세요.");	
-				}
-				
-			},
-			error: function(error) {
-				alert("ersssror: "+error);
-			}
-			
-		});
-			
-	}
-		
-	<%-- 수정 /삭제 열기 시작 --%>
-	function fn_action(qUnq, actionVal) {
-		var questionUnq = qUnq;
-		var action = actionVal;
-	
-		<%-- 질문 수정 팝업 --%>
-		if(action=='M') {
-			var url = "/Detail_modifyQuestion_popup?qnaUnq="+questionUnq;
-			var setting = "width=800,height=200,left=100,top=150";
-			
-			window.open( url, "post_popup", setting);
-			self.location.reload();
-		}
-			
-		<%-- 질문 삭제 --%>	
-		if(action=='D'){
-			alert('삭제하시겠습니까?');
-			var del = "qnaUnq=" + questionUnq + "&delStatus=" + 1;
-							
-			$.ajax({
-				type: 'POST',
-				data: del,
-				url: "<c:url value='/Detail_deleteQuestion'/>",
-				dataType: "json",
-				success: function(data) {
-					if(data.qnaResult == "success") {
-						alert("삭제되었습니다.");
-						self.location.reload();	
-					} else {
-						alert("다시 시도해 주세요.");	
-					}
-				},
-				error: function(error) {
-					alert("ersssror: "+error);
-				}
-			});
-		}		   
-	}
-		
-		
-	<%-- 답변 달기 --%>
-	function qnaAnswer(formID) {
-		var params = $("form[id=" +formID +"]").serialize();
-		
-		$.ajax({
-			type: 'POST',
-			data: params,
-			url: "<c:url value='/Detail_insertAnswer'/>",
-			dataType: "json",
-			success: function(data) {
-				if(data.qnaResult == "success") {
-					alert("답변이 등록되었습니다.");
-					self.location.reload();
-				} else {
-					alert("다시 시도해 주세요.");	
-				}
-			},
-			error: function(error) {
-				alert("ersssror: "+error);
-			}
-		});
-	}
-	
 	
 	playAlert = setInterval(function() {
 		console.log("${a.EDATE}");

@@ -128,17 +128,6 @@ public class AdminDaoImpl implements AdminDao {
 	
 	//판매 신청 리스트-----------------------------------------------------------
 	@Override
-	public List<Map<String, Object>> regist() {
-		//RowBounds rowBounds = new RowBounds((cPage-1) * numPerPage, numPerPage);
-		return sqlSession.selectList("admin.regist");
-	}
-
-	@Override
-	public int countregist() {
-		return sqlSession.selectOne("admin.countregist");
-	}
-
-	@Override
 	public List<CategoryMacro> categoryMa() {
 		return sqlSession.selectList("admin.categoryMa");
 	}

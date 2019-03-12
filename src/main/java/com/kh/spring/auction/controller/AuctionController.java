@@ -37,6 +37,7 @@ import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.service.ThingService;
 import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Order;
+import com.kh.spring.thing.model.vo.Product;
 
 @Controller
 public class AuctionController {
@@ -274,10 +275,15 @@ public class AuctionController {
 
 		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
 		Map<String , String> bidCheck = new HashMap<>();
-		bidCheck.put("check" , "N");
-		if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
-			bidCheck.put("check" , "Y");
-			System.out.println("니가 최대 입찰자야");
+		if(m != null) {
+			if(myHistory != null) {
+				// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
+				bidCheck.put("check" , "N");
+				if(String.valueOf(myHistory.get("MEMBER_NO")).equals(String.valueOf(m.getSeqMemberNo()))) {
+					bidCheck.put("check" , "Y");
+					System.out.println("니가 최대 입찰자야");
+				}				
+			}
 		}
 		
 		model.addAttribute("bidCheck" , bidCheck);
@@ -376,17 +382,24 @@ public class AuctionController {
 	}
 	
 	
-	 	@RequestMapping(value="/auction/perchase/complete", method=RequestMethod.POST)
+	 	@RequestMapping(value="/auction/perchase/complete")
 	public ModelAndView paymentComplete(ModelAndView mav, @RequestBody Order order , HttpSession session) {
 		
 		int nProductNo = order.getSeqProductNo(); 
 		int auctionPrice = order.getOrderPrice();
 		Member m = (Member)session.getAttribute("memberLoggedIn");
-		
+		String coupon = order.getOrderCoupon();
 		Map<String , Object> temp = new HashMap<>();
 		temp.put("nProductNo" , nProductNo);
 		temp.put("auctionPrice" , auctionPrice);
-		
+		int couponL = 0;
+		if("0.05".equals(coupon)) {
+			couponL = 1;
+		}else if("0.1".equals(coupon)) {
+			couponL = 2;
+		}else if("0.15".equals(coupon)) {
+			couponL = 3;
+		}
 		
 		thingService.insertOrder(order);
 		// 결제 되었을시에 
@@ -398,16 +411,94 @@ public class AuctionController {
 		Map<String , Object> temp1 = new HashMap<>();
 		temp1.put("memberNo", m.getSeqMemberNo());
 		temp1.put("auctionNo", nProductNo);
-		
+		temp1.put("couponL", couponL);
 		auctionService.updateAuctionCheck(nProductNo);
 		auctionService.updateWinningBid(temp);
 		auctionService.updateBuyerNo(temp1);
 		
 		mav.addObject("order", order);
-		mav.setViewName("auction/auctionDetail.do?auctionNo="+nProductNo);
+		mav.setViewName("redirect:/auctionDetail.do?auctionNo="+nProductNo);
 		
 		return mav;
 	}
-	 
+	 	
+	@RequestMapping("/auction/brandNew")
+	public ModelAndView brandNew(ModelAndView mav , HttpSession session) {
+		
+
+
+		Member m = (Member) session.getAttribute("memberLoggedIn");
+		
+		List<Map<String,String>> auctionList = auctionService.selectAuctionList();
+		System.out.println("경매물품리스트"+auctionList);
+		List<Map<String , String>> list = auctionService.selectAuctionAllList();
+		String auctionNo = "";
+		Map<String , Object> temp = new HashMap<>();
+		Map<String , String > result = new HashMap<>();
+		Map<String , String > resultTemp = new HashMap<>();
+		Map<String , String > resultPrice = new HashMap<>();
+		
+		int auctionCount = auctionService.auctionCount();
+		
+		if(m != null) {
+			String memberId = m.getMemberId();
+			// index에 내가 그 경매 상품에 입찰을 진행중인지 뛰우기 위한 소스코드 작성
+			// 글번호와 현재 session아이디를 가져가서 조회해서 그 값이 있으면 입찰중이다.
+			// 그리고 최근 것이 1번으로 되는거임 for문안에서
+			for(int i = 1;i <= auctionCount;i++) {
+				auctionNo = String.valueOf(list.get(i-1).get("AUCTION_NO"));
+				temp.put("memberId" , memberId);
+				temp.put("auctionNo" , auctionNo);
+				List<Map<String,String>> checkList = auctionService.checkHistory(temp);
+
+				
+				
+				
+				if(checkList.size() == 0) {
+					result.put(String.valueOf("check"+i), "N");
+				} else {
+					result.put(String.valueOf("check"+i), "Y");
+				}
+				
+			}	
+		} else {
+			for(int i = 1;i <= auctionCount;i++) {
+				result.put(String.valueOf("check"+i), "F");
+			}
+		}
+		
+		for(int i = 1;i <= auctionCount;i++) {
+			resultPrice.put("bidCheck"+i, "Y");
+			auctionNo = String.valueOf(list.get(i-1).get("AUCTION_NO"));
+			temp.put("auctionNo" , auctionNo);
+			resultTemp = auctionService.selectAuctionBid(temp);
+			String price = "";
+			if(resultTemp == null) {
+				price = String.valueOf(list.get(i-1).get("AUCTION_PRICE"));
+				resultPrice.put("bidCheck"+i, "N");
+			} else {
+				price = String.valueOf(resultTemp.get("PRICE"));
+			}
+			
+			System.out.println("priceeeeeeeeeee"+price);
+			resultPrice.put(String.valueOf("Price"+i), price);
+		}
+		
+		
+
+		
+		String brandNew = "Y";
+
+		mav.addObject("resultPrice" , resultPrice);
+		mav.addObject("result" , result);
+		mav.addObject("auctionList" , list);
+		
+		
+		
+		mav.addObject("brandNew", brandNew);
+		mav.setViewName("auction/auctionItem");
+		
+		return mav;
+	} 	 
 	
 }
