@@ -229,7 +229,7 @@ IMP.request_pay({ // param
 				<div class="product-text"><span>결제상품</span></div>
 				<div class="productInfo">
 					<input type="hidden" name="pName" value="${product.productName }"/>
-					<img src="" alt="제품이미지" />
+					<img src="${pageContext.request.contextPath }/resources/upload/thing/${product.productRealImage}" alt="${product.productName }" width="60px" height="60px" />
 					<span class="font-weight-bold">${product.productName }</span>
 				</div>
 			</div>

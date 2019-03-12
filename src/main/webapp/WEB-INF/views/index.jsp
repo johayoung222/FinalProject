@@ -289,7 +289,7 @@ a {
 <div class="popular">
 <h3>
 	새로 등록된 경매 상품 <span class="badge badge-secondary">New</span>
-	<span class="moreItems" id="moreItems1">더 보기</span>
+	<span id="moreItems1">더 보기</span>
 </h3>
 <jsp:useBean id="now" class="java.util.Date" />
 <c:set var="today"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>

@@ -290,7 +290,7 @@ body{
 	#navbarNav ul{
 	}
 	#navbarNav ul li{
-		width: 130px;	
+		width: 125px;	
 		text-align: center;
 	}
 	.last{
