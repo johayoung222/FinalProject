@@ -100,7 +100,7 @@
 	
 	<!-- 자주묻는질문작성 -->
 	<insert id="insertQna" parameterType="cc">
-		insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,#{boardkinds},1,0 )
+		insert into board values(seq_board_no.nextval, #{boardtitle},#{boardcontent},default,'관리자',null,#{boardkinds},1)
 	</insert>
 	
 	<!-- 자주묻는질문 수정 -->
