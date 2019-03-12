@@ -18,6 +18,13 @@
 	margin-right: 1%;
 	text-align: center;
 }
+.main1{
+	display: inline-block;
+	width:23.5%;
+	height:150px;
+	margin-right: 1%;
+	text-align: center;
+}
 .main2{
 	display: inline-block;
 	width:23.5%;
@@ -86,10 +93,10 @@
 					<c:if test="${menuSel eq 'auction'}">
 						<c:forEach items="${list }" var="l" varStatus="vs">
 							<c:if test="${l.AUCTION_CHECK eq 'N'}">
-								<div class="main" id="${l.SEQ_AUCTION_NO}">					
+								<div class="main1" id="${l.AUCTION_NO}">					
 							</c:if>
 							<c:if test="${l.AUCTION_CHECK eq 'Y'}">
-								<div class="main2" id="${l.SEQ_AUCTION_NO}">
+								<div class="main2" id="${l.AUCTION_NO}">
 								<span id="x">경매완료</span>					
 							</c:if>
 									<div class="lImg">
@@ -138,6 +145,12 @@ $(".main").each(function(item, idx){
 	$(this).on('click',function(){
 		var pId = $(this).attr("id");
 		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+$(".main1").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/auctionDetail.do?auctionNo="+pId;
 	});
 });
 </script>

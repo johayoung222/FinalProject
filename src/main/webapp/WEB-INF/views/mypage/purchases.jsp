@@ -50,8 +50,8 @@
 			구매내역
 			</div>
 			<div class="mp" style="padding-top:10px;">
-				<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇판매</a>
-					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매판매</a>
+				<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇구매</a>
+					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매구매</a>
 			</div>
 			<hr style="border-bottom:1px solid gray; width:143%;">
 			<div class="mypage">
