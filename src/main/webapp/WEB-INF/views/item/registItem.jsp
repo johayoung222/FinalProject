@@ -8,6 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="Get It :: 중고거래의 중심" name="pageTitle" />
 </jsp:include>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
 <style>
 .content-container{
 	height: 100%;
@@ -28,6 +29,10 @@
 	text-align: center;
 	font-size: 30px;
 	margin-top: 20%;
+}
+.category-box>h2{
+	margin-left: 30px;
+	font-family: 'Do Hyeon', sans-serif;
 }
 </style>
 <c:forEach items="${allCategory }" var="ct">

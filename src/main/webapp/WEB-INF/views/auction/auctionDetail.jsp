@@ -25,6 +25,7 @@ function getTime() {
 	if(dd<10) { dd='0'+dd } 
 	if(mm<10) { mm='0'+mm } 
 	if(hh<10) { hh='0'+hh }
+	if(ss<10) { ss='0'+ss }
 	
 	today = yyyy + '-' + mm+'-'+dd + " " + hh + ":" + MM + ":" + ss;
 	return today;

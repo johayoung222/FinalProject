@@ -17,7 +17,7 @@
 <script>
 
 function perchaseProduct(){
-
+var couponL = $("#couponList option:selected").val();
 var dName = perchaseFrm.dName.value;
 var dPhone = perchaseFrm.dPhone.value;
 var dEmail = perchaseFrm.dEmail.value;
@@ -84,6 +84,7 @@ IMP.request_pay({ // param
                 "orderResult": "Y",
                 "seqMemberNo": seqMemberNo,
                 "orderAmount": 1,
+                "orderCoupon": couponL,
                 "seqProductNo": seqProductNo
             };
         var jParam = JSON.stringify(param);
@@ -101,7 +102,7 @@ IMP.request_pay({ // param
             
             alert(msg);
             console.log(data);
-            location.href = "${pageContext.request.contextPath}/mypage/order";
+            location.href = "${pageContext.request.contextPath}/auctionDetail.do?auctionNo="+seqProductNo;
         })
     } else {
         // 결제 실패 시 로직,
@@ -174,7 +175,16 @@ IMP.request_pay({ // param
 	width: 230px;
 	height: 230px;
 }
-
+#couponList{
+	width:200px;
+	display:inline-block;
+}
+.couponbtn{
+	display:inline-block;
+}
+.rate{
+	visibility:hidden;
+}
 </style>
 		
 <div class="content-container">
@@ -231,26 +241,21 @@ IMP.request_pay({ // param
 				<span class="float-left">상품금액</span>
 				<span class="float-right">${auction.auctionPrice }원</span>
 			</div>
+			<div class="payment-price rate">
+				<span class="float-left">할인률</span>
+				<span class="float-right price-rate"></span>
+			</div>
+			<br /><br />
 			<div class="payment-coupon">
-				<span>쿠폰 사용</span>
-				<span>사용 가능한 쿠폰이 없습니다.</span>
-			</div>
-			<div class="payment-point clearfix">
-				<span class="float-left">겟잇 포인트 사용</span>
-				<div class="float-right">
-				- <input type="number" name="payPoint" id="payPoint" step="1000" min="0" value="0"/>
-				<label for="payPoint" >원</label>
-				</div>
-			</div>
-			<div class="member-point clearfix">
-				<span class="float-left">보유 포인트</span>&nbsp;&nbsp;
-				<span>${member.memberMilage==null?"0":member.memberMilage }원</span>
-				<button class="btn btn-outline-info float-right">전액 사용</button>
-			</div>
-			<div class="payment-deliverPay clearfix">
-				<span class="float-left">배송료</span>
-				<span class="float-right">0원</span>
-			</div>
+				<span>쿠폰 사용</span><br />
+				<select id="couponList" class="form-control form-control-sm">
+					<option value="" disabled selected>쿠폰</option>
+				</select>
+				<button type="button" onclick="couponBtn();" class="couponbtn btn btn-outline-info">적용</button>
+				<button type="button" onclick="couponBtnn();" class="couponbtn btn btn-outline-info">미적용</button>
+				<br />
+				
+			
 			<hr />
 			<div class="payment-result">
 				<span>결제하실 금액</span>
@@ -258,11 +263,49 @@ IMP.request_pay({ // param
 				<button type="button" onclick="perchaseProduct();" class="btn btn-outline-info">결제하기</button>
 			</div>
 		</div>
+		</div>
 	</div>
 	</form>
 </div>
 
 <script>
+
+$(function(){
+	var buyerNo = ${member.seqMemberNo };
+	//console.log(buyerNo);
+	
+	$.ajax({
+		url : "${pageContext.request.contextPath}/item/couponList.do",
+		dataType : "json",
+		data:{buyerNo:buyerNo},
+		success : function(data){
+			var html ="";
+			for(var i in data){
+			html += "<option name='couponL' id='couponL' class='couponL' value="+data[i].COUPON_RATE+">"+data[i].COUPON_NAME+"</option>";
+			}
+			$("#couponList").append(html);
+		},error : function(){
+			console.log("ajax 요청 실패!!");
+		}
+	}); 
+});
+
+function couponBtn(){
+	var rate = $("#couponList option:selected").val();
+	var payAmount = ${auction.auctionPrice };
+	$("#payAmount").val(Math.floor(payAmount-(payAmount*rate)));
+	$(".rate").css("visibility","visible");
+	$(".price-rate").text("-"+Math.floor(payAmount*rate)+"원");
+	//console.log(rate);
+	
+}
+
+function couponBtnn(){
+	$("#payAmount").val(${auction.auctionPrice });
+	$(".rate").css("visibility","hidden");
+	$(".price-rate").text("");
+}
+
 $("#findAddress").on('click',function(){
 	new daum.Postcode({
         oncomplete: function(data) {

@@ -46,7 +46,7 @@
 	</select>
 	
 	<select id="selectAllRegist" resultType="regist">
-		select * from regist where regist_auction = 'Y' order by regist_date desc
+		select * from regist where regist_auction = 'N' order by regist_date desc
 	</select>
 	
 	<select id="selectNew" resultType="product">
