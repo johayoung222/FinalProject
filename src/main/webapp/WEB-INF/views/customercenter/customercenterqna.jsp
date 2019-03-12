@@ -70,7 +70,7 @@
 .qnatable {
 	width: 80%;
 	margin-bottom: 50px;
-	margin-left: 10%;
+	margin-left: -5%;
 	
 	/* th간격띄우는 css */
 	border-collapse: separate;
