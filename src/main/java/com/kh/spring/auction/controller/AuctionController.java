@@ -273,6 +273,7 @@ public class AuctionController {
 			System.out.println("myHistory = "+myHistory);
 		}
 
+		// 현재 그 글에대해서 입찰 중인데 그가격이 최대라면 입찰 하지 못하게 끔 하는 쿼리
 		Map<String , String> bidCheck = new HashMap<>();
 		if(m != null) {
 			if(myHistory != null) {

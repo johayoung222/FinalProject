@@ -102,7 +102,7 @@ public class MyPageController {
 		int	numPerPage = 4;
 		List<Map<String, Object>> list = myPageService.buyList(cPage,numPerPage,seqMemberNo);
 		int totalContents = myPageService.countbuy(seqMemberNo);
-		
+		int v = 1;
 		if(list.isEmpty()) {
 			model.addAttribute("msg" , "아직 구매내역이 없습니다. 셀잇에서 스마트하게 쇼핑해보세요.");			
 		}
@@ -111,6 +111,28 @@ public class MyPageController {
 		model.addAttribute("numPerPage",numPerPage);
 		model.addAttribute("totalContents",totalContents);
 		model.addAttribute("list" , list);
+		model.addAttribute("v",v);
+		
+		return view;
+	}
+	@RequestMapping("/mypage/purchases2.do")
+	public String purchases2(HttpSession session,Model model,@RequestParam(value = "cPage",defaultValue = "1")int cPage) {
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		int seqMemberNo = m.getSeqMemberNo();
+		int	numPerPage = 4;
+		List<Map<String, Object>> list = myPageService.abuyList(cPage,numPerPage,seqMemberNo);
+		int totalContents = myPageService.acountbuy(seqMemberNo);
+		logger.debug("list-===="+list);
+		int v = 2;
+		if(list.isEmpty()) {
+			model.addAttribute("msg" , "아직 구매내역이 없습니다. 셀잇에서 스마트하게 쇼핑해보세요.");			
+		}
+		String view = "mypage/purchases2";	
+		model.addAttribute("cPage",cPage);
+		model.addAttribute("numPerPage",numPerPage);
+		model.addAttribute("totalContents",totalContents);
+		model.addAttribute("list" , list);
+		model.addAttribute("v",v);
 		
 		return view;
 	}

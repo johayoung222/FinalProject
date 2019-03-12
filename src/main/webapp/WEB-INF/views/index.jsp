@@ -15,6 +15,7 @@
 	width: 100%;
 	height: 300px;
 }
+
 #favorite{
 	width: 80%;
 	margin: 0 auto;
@@ -46,7 +47,10 @@
     height: 180px;
     width:95%;
     margin-left:25px;
+<<<<<<< HEAD
+=======
     margin-top: 20px;
+>>>>>>> 97a7ae9f462005da88f359f692aac556e305fb64
 }
 #sell2 {
 	position: relative;
@@ -70,9 +74,24 @@
 	display: flex;
 	justify-content: space-around;
 }
+<<<<<<< HEAD
+#box1 {
+	display: inline-block;
+	vertical-align: top;
+    width: 19%;
+	height: 150px;
+	border: 1px solid #dbdbdb;
+	margin-left:3%;
+}
+
+#box2 {
+	display: inline-block;
+	vertical-align: top;
+=======
 #box0>div{
 	height: 150px;
 	border: 1px solid #dbdbdb;
+>>>>>>> 97a7ae9f462005da88f359f692aac556e305fb64
 	width: 22%;
 }
 #box3 {
