@@ -66,7 +66,7 @@
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
-			<td colspan="15">게시글이 존재하지 않습니다.</td>
+			<td colspan="9">회원이 존재하지 않습니다.</td>
 		</tr>
 		</c:if>
 		<c:if test="${not empty list }">
@@ -75,7 +75,7 @@
 				<td>${m.MEMBER_ID }</td>
 				<td>${m.MEMBER_NAME }</td>
 				<td>
-				${m.GENDER  == 'M'?"남자":"여자"}				
+				${m.GENDER=='M'?"남자":"여자"}				
 				</td>
 				<td>${m.MEMBER_BIRTH }</td>
 				<td>${m.MEMBER_ADDRESS }</td>
