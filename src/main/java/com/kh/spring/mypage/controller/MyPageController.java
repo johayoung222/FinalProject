@@ -280,12 +280,13 @@ public class MyPageController {
 	    HashMap<String, String> set = new HashMap<String, String>();
 		
 		
-		/*
-		 * set.put("to", memberPhone); // 수신번호 set.put("from", "01090294425"); // 발신번호
-		 * set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
-		 * set.put("type","sms"); // 문자 타입 set.put("app_version", "test app 1.2"); //
-		 * application nameand version
-		 */
+		
+		 set.put("to", memberPhone); // 수신번호 
+		 set.put("from", "01090294425"); // 발신번호
+		 set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
+		 set.put("type","sms"); // 문자 타입 
+		 set.put("app_version", "test app 1.2"); //application nameand version
+		 
 		 		 
 	    System.out.println(set);
 

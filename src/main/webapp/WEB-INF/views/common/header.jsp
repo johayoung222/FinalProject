@@ -167,7 +167,7 @@ body{
 				background: rgb(248,248,248);
 			}
 			</style>
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y' }">
 				<style>
 				#box-link{
 					width: 530px;
