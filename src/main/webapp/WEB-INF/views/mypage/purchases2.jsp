@@ -50,8 +50,8 @@
 			구매내역
 			</div>
 			<div class="mp" style="padding-top:10px;width:300px;height:40px;">
-					<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇판매</a>
-					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매판매</a>
+					<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇구매</a>
+					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매구매</a>
 			</div>
 			<hr style="border-bottom:1px solid gray; width:143%;">
 			<div class="mypage">
@@ -79,7 +79,7 @@
 				int numPerPage = (int) request.getAttribute("numPerPage");
 				int cPage = (int) request.getAttribute("cPage");
 			%>
-			<c:if test="${list ne null}">
+			<c:if test="${list eq ''}">
 				<div class="page">
 					<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, "purchases2.do")%>
 				</div>	
