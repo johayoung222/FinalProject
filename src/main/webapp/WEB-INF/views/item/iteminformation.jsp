@@ -152,6 +152,9 @@ font-size:20px;
 .productInfo-table-text tr td:first-child{
 	width: 150px; 
 }
+.productInfo-table-text tr:last-of-type td{
+	padding-left: 40px;
+}
 </style>
 <c:forEach items="${allCategory }" var="ct">
 	<c:if test="${ct.CATEGORY_MACRO == product.categoryMacro }">

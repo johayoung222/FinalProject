@@ -68,6 +68,7 @@
 			<mapping path="/item/basket.do*"/>
 			<mapping path="/item/interest*"/>
 			<mapping path="/admin/*"/>
+			<mapping path="/customercenter/ccinquiry.do*"/>
 			<!-- 스프링 3.2부터 exclude-mapping 지원 -->
 			<exclude-mapping path="/board/boardList.do"/>
 			<exclude-mapping path="/board/boardView.do"/>
