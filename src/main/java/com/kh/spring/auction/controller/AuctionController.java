@@ -498,7 +498,6 @@ public class AuctionController {
 		mav.setViewName("auction/auctionItem");
 		
 		return mav;
-	} 	
-	 
+	} 	 
 	
 }
