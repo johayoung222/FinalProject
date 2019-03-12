@@ -78,8 +78,8 @@
 		
 		<label for="memberSnsaccount">SNS연동여부</label>&nbsp;&nbsp;
 		<select class="form-control" id="memberSnsaccount" name="memberSnsaccount" >
-			<option value="Y" class="memberSnsaccount" >연동o</option>
-			<option value="N" class="memberSnsaccount" >연동x</option>
+			<option value="y" class="memberSnsaccount" >연동o</option>
+			<option value="n" class="memberSnsaccount" >연동x</option>
 		</select><br />
 		
 		<label for="coupon">쿠폰</label>&nbsp;&nbsp;
@@ -140,7 +140,7 @@ $(function(){
 			console.log(data);
 			$("#memberNo").val(data[0].SEQ_MEMBER_NO);
 			$("#memberName").val(data[0].MEMBER_NAME);
-			$(".gender").val(data[0].GENDER).attr('selected','selected');
+			$('.gender option[value="'+ $.trim(data[0].GENDER) +'"]').attr('selected','selected');
 			$("#memberAddress").val(data[0].MEMBER_ADDRESS);
 			$("#membermailNo").val(data[0].MEMBER_MAIL_NO);
 			$("#memberPhone").val(data[0].MEMBER_PHONE);
