@@ -143,7 +143,7 @@
 	</div>
 	<div class="content">
 
-		<div class="headline">1:1 문의다</div>
+		<div class="headline">1:1 문의</div>
 		<div class="quirycontent">
 			<form action="${pageContext.request.contextPath}/customercenter/insertInquiry.do">
 				<div class="select">

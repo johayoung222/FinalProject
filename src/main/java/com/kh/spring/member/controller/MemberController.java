@@ -83,7 +83,7 @@ public class MemberController {
 		logger.debug(m);
 		int result = memberService.insertMember(m);
 
-		String loc = "/";
+		String loc = "/member/memberMoveLogin.do";
 		String msg = "";
 		if (result > 0) {
 			msg = "회원가입성공!";
@@ -480,9 +480,8 @@ public class MemberController {
 		m.setMemberEmail(memberEmail);
 		
 		int countId = memberService.countmemberId(m);
-		//int certified = ((int) (Math.random() * 899999)+100000);
+		int certified = ((int) (Math.random() * 899999)+100000);
 		
-		int certified = 1;
 		
 		if(countId > 0) {
 			String setfrom = "7sscheduler@gmail.com";         
@@ -540,8 +539,7 @@ public class MemberController {
 		m.setMemberId(memberId);
 		m.setMemberPhone(memberPhone);
 		int count = memberService.countmember(m);
-		//int certified = ((int) (Math.random() * 899999)+100000);
-		int certified = 1;
+		int certified = ((int) (Math.random() * 899999)+100000);
 		
 		if(count > 0) {
 			String api_key = "NCSFQJJ9HCHO2HEE";
@@ -552,13 +550,13 @@ public class MemberController {
 			HashMap<String, String> set = new HashMap<String, String>();
 			
 			
-			/*
+			
 			 set.put("to", memberPhone); // 수신번호 
 			 set.put("from", "01090294425"); // 발신번호
 			 set.put("text", "인증번호 ["+certified+"]입니다 :) "); // 문자내용
 			 set.put("type","sms"); // 문자 타입 
 			 set.put("app_version", "test app 1.2"); //application nameand version
-			*/ 
+			
 			
 			System.out.println(set);
 			

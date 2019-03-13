@@ -111,7 +111,7 @@ body {
 		<div id="box-link">
 			<c:if test="${memberLoggedIn != null }">
 				<div id="box-link5">
-					<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+					<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y' }">
 						<a class="item-link"
 							href="${pageContext.request.contextPath }/admin/adminView.do">관리자페이지</a>
 					</c:if>

@@ -27,6 +27,8 @@
 }
 #check{
 margin-bottom: 6px;
+margin-left: 298px;
+    margin-top: -50px;
 }
 #button_{
 width: 110px;
@@ -34,7 +36,7 @@ width: 110px;
     height: 32px;
     margin-bottom: 6px;
     margin-left: 59.7%;
-    margin-top: -51px;
+    margin-top: -35.5px;
 }
 </style>
 </head>

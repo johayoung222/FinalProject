@@ -84,6 +84,17 @@ public class MyPageDaoImpl implements MyPageDao {
 	public int countbuy(int seqMemberNo) {
 		return SqlSession.selectOne("mypage.countbuy",seqMemberNo);
 	}
+	
+	@Override
+	public List<Map<String, Object>> abuyList(int cPage, int numPerPage,int seqMemberNo) {
+		RowBounds rowbounds = new RowBounds((cPage-1)*numPerPage,numPerPage);
+		return SqlSession.selectList("mypage.abuyList", seqMemberNo,rowbounds);
+	}
+
+	@Override
+	public int acountbuy(int seqMemberNo) {
+		return SqlSession.selectOne("mypage.acountbuy",seqMemberNo);
+	}
 
 	@Override
 	public int updateaddress(Member m) {

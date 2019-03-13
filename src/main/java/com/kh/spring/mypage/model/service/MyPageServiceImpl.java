@@ -80,6 +80,17 @@ public class MyPageServiceImpl implements MyPageService {
 	public int countbuy(int seqMemberNo) {
 		return myPageDao.countbuy(seqMemberNo);
 	}
+	
+	@Override
+	public List<Map<String, Object>> abuyList(int cPage, int numPerPage,int seqMemberNo) {
+		List<Map<String, Object>> list = myPageDao.abuyList(cPage,numPerPage,seqMemberNo);
+		return list;
+	}
+
+	@Override
+	public int acountbuy(int seqMemberNo) {
+		return myPageDao.acountbuy(seqMemberNo);
+	}
 
 	@Override
 	public int updateaddress(Member m) {

@@ -70,7 +70,7 @@
 .qnatable {
 	width: 80%;
 	margin-bottom: 50px;
-	margin-left: 10%;
+	margin-left: -5%;
 	
 	/* th간격띄우는 css */
 	border-collapse: separate;
@@ -174,7 +174,7 @@
 	<div class="content">
 		<div class="headline">
 			자주 묻는 질문
-			<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+			<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y' }">
 			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 				data-target="#exampleModalLong">자주 묻는 질문 쓰기</button>
 				<div class="modal fade" id="exampleModalLong" tabindex="-1"

@@ -38,4 +38,8 @@ public interface MyPageDao {
 	int updateaddress(Member m);
 
 	List<Map<String, Object>> coupons(int memberNo);
+
+	int acountbuy(int seqMemberNo);
+
+	List<Map<String, Object>> abuyList(int cPage, int numPerPage, int seqMemberNo);
 }

@@ -18,6 +18,13 @@
 	margin-right: 1%;
 	text-align: center;
 }
+.main1{
+	display: inline-block;
+	width:23.5%;
+	height:150px;
+	margin-right: 1%;
+	text-align: center;
+}
 .main2{
 	display: inline-block;
 	width:23.5%;
@@ -73,7 +80,7 @@
 								<span id="x">판매완료</span>					
 							</c:if>
 									<div class="lImg">
-										<img src="${pageContext.request.contextPath }/resources/upload/thing/${l.PRODUCT_REAL_IMAGE}" alt="${l.PRODUCT_IMAGE}" height="80px" width="160px" style="background:gray;"/>
+										<img src="${pageContext.request.contextPath }/resources/upload/thing/${fn:split(l.PRODUCT_REAL_IMAGE,',')[0]}" alt="${l.PRODUCT_IMAGE}" height="80px" width="160px" style="background:gray;"/>
 									</div>
 									<div class="lDesc">
 										<span>${l.PRODUCT_NAME }</span><br />
@@ -86,19 +93,19 @@
 					<c:if test="${menuSel eq 'auction'}">
 						<c:forEach items="${list }" var="l" varStatus="vs">
 							<c:if test="${l.AUCTION_CHECK eq 'N'}">
-								<div class="main" id="${l.SEQ_AUCTION_NO}">					
+								<div class="main1" id="${l.AUCTION_NO}">					
 							</c:if>
 							<c:if test="${l.AUCTION_CHECK eq 'Y'}">
-								<div class="main2" id="${l.SEQ_AUCTION_NO}">
+								<div class="main2" id="${l.AUCTION_NO}">
 								<span id="x">경매완료</span>					
 							</c:if>
 									<div class="lImg">
-										<img src="${pageContext.request.contextPath }/resources/upload/${l.AUCTION_IMAGE_MAIN}" alt="${l.AUCTION_IMAGE_MAIN}" height="80px" width="160px" style="background:gray;"/>
+										<img src="${pageContext.request.contextPath }/resources/upload/${l.AUCTION_IMAGE_MAIN}" alt="${l.AUCTION_IMAGE_MAIN}" height="80px" width="160px"/>
 									</div>
 									<div class="lDesc">
 										<span>${l.AUCTION_TITLE }</span><br />
 										<span>${l.AUCTION_PRICE } 원</span> <br />
-										<span>20${EDATE}</span> <br />
+										<span>${l.EDATE}</span> <br />
 									</div>
 								</div>
 						</c:forEach>
@@ -112,9 +119,11 @@
 			int cPage = (int) request.getAttribute("cPage");
 			String loce = (String)request.getAttribute("loce");
 		%>
+		<c:if test="${list ne null}">
 		<div class="page">
 			<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, loce)%>
 		</div>	
+		</c:if>
 		</div>
 	</div>
 </div>
@@ -132,14 +141,16 @@ $(function(){
 });
 
 
-$(".mp-submenu a").on("click" , function(){
-	$(".active").removeClass("active");
-	$(this).addClass("active");
-});
 $(".main").each(function(item, idx){
 	$(this).on('click',function(){
 		var pId = $(this).attr("id");
 		location.href = "${pageContext.request.contextPath}/item/iteminformation/"+pId;
+	});
+});
+$(".main1").each(function(item, idx){
+	$(this).on('click',function(){
+		var pId = $(this).attr("id");
+		location.href = "${pageContext.request.contextPath}/auctionDetail.do?auctionNo="+pId;
 	});
 });
 </script>

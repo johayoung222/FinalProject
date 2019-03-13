@@ -191,7 +191,7 @@
 			겟잇 공지사항
 
 
-			<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+			<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y' }">
 			<button type="button" class="btn btn-outline-dark" data-toggle="modal"
 				data-target="#exampleModalLong">공지사항 쓰기</button>
 			</c:if>
@@ -239,7 +239,7 @@
 				</div>
 				
 				
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y'}">
 				<div class="ng-binding">
 					<button type="button" id="update" class="btn btn-outline-primary"
 						data-toggle="modal"

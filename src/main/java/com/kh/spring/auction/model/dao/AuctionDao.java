@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.kh.spring.auction.model.vo.Auction;
 import com.kh.spring.thing.model.vo.CategoryMacro;
+import com.kh.spring.thing.model.vo.Product;
 
 public interface AuctionDao {
 
@@ -43,5 +44,9 @@ public interface AuctionDao {
 	List<Map<String, String>> checkHistory(Map<String, Object> temp);
 
 	void updateBuyerNo(Map<String, Object> temp1);
+
+	List<Map<String, String>> selectAuctionAllList();
+
+	int auctionCount();
 
 }

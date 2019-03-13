@@ -49,6 +49,10 @@
 			<div class="mp" style="font-size:19px; font-weight:bold;">
 			구매내역
 			</div>
+			<div class="mp" style="padding-top:10px;">
+				<a class="mp-submenu-item ${v == 1?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases.do">겟잇구매</a>
+					<a class="mp-submenu-item ${v == 2?'active':'' }" href="${pageContext.request.contextPath}/mypage/purchases2.do">경매구매</a>
+			</div>
 			<hr style="border-bottom:1px solid gray; width:143%;">
 			<div class="mypage">
 				<c:if test="${empty list }">
@@ -59,7 +63,7 @@
 						<div class="main2">
 							<span id="x">구매완료</span>
 							<div class="lImg">
-									<img src="${pageContext.request.contextPath }/resources/upload/thing/${b.PRODUCT_REAL_IMAGE}" alt="${b.PRODUCT_IMAGE}" height="80px" width="160px"/>
+									<img src="${pageContext.request.contextPath }/resources/upload/thing/${fn:split(b.PRODUCT_REAL_IMAGE,',')[0]}" alt="${b.PRODUCT_IMAGE}" height="80px" width="160px"/>
 								</div>
 								<div class="lDesc">
 									<span>${b.PRODUCT_NAME }</span><br />
@@ -71,9 +75,9 @@
 				</c:if>
 			</div>
 			<%
-			int totalContent = (int) request.getAttribute("totalContents");
-			int numPerPage = (int) request.getAttribute("numPerPage");
-			int cPage = (int) request.getAttribute("cPage");
+				int totalContent = (int) request.getAttribute("totalContents");
+				int numPerPage = (int) request.getAttribute("numPerPage");
+				int cPage = (int) request.getAttribute("cPage");
 			%>
 			<div class="page">
 				<%=com.kh.spring.common.util.Utils.getPageBar(totalContent, cPage, numPerPage, "purchases.do")%>
@@ -86,6 +90,9 @@ $(function(){
 	$(".purchases").css("color" , "#7151FC");
 	$(".purchases").css("font-weight" , "bold");
 	$(".purchases").css("background" , "#f2f2f2");
+	$(".active").css("color" , "7151FC");
+	$(".active").css("border-bottom" , "2px solid #7151FC");
 });
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

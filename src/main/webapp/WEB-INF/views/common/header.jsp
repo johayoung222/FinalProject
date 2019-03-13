@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -57,6 +56,8 @@ body{
 }
 #button_ {
 	background: white;
+	cursor: pointer;
+	background-color: inherit;
 }
 .nav-link:hover {
 	color: #7151FC;
@@ -88,10 +89,6 @@ body{
 	margin-left: -80px;
 	z-index: 1;
 }
-#button_ {
-	cursor: pointer;
-	background-color: inherit;
-}
 .item-link{
 	color:gray;
 }
@@ -111,6 +108,51 @@ body{
 	background-color: lightgray;
 	cursor: pointer;
 }
+#navbarNav ul li{
+	width: 130px;	
+	text-align: center;
+}
+.nav-link{
+	font-size: 14px;
+	border: none;
+}
+.dropdown-menu{
+	background: rgb(250,250,250);
+}
+#cTable{
+	font-family: 'Nanum Gothic', sans-serif;
+	background: rgb(250,250,250);
+}
+#cTable tr td:not(:first-of-type){
+	border-left: 1px solid black;
+}
+#cTable tr th{
+	font-family: 'Noto Sans KR', sans-serif;
+    background: #5853EB;
+    color: white;
+	text-align: center;
+	font-weight: bolder;
+	text-decoration: none;
+}
+#cTable tr:not(:first-of-type) td ul{
+    font-family: 'Nanum Gothic', sans-serif;
+	list-style: none;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#cTable tr:not(:first-of-type) td ul:hover{
+	background: #368AFF;
+ 	border-radius:15px;
+}
+#cTable tr:not(:first-of-type) td ul>a{
+	text-decoration: none;
+}
+#cTable tr:not(:first-of-type) td ul>a:hover{
+    font-family: 'Noto Sans KR', sans-serif;
+	text-decoration: none;
+    color: white;
+    font-weight: bolder;
+}
 </style>
 
 </head>
@@ -122,12 +164,10 @@ body{
 			#box-link{
 				width: 430px;
 				margin-left: 55%;
-
 				background: rgb(248,248,248);
-				
 			}
 			</style>
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y' }">
 				<style>
 				#box-link{
 					width: 530px;
@@ -164,26 +204,22 @@ body{
 						data-target="#collapseExample" aria-expanded="false"
 						aria-controls="collapseExample"> 마이페이지 </a>
 					<div class="collapse" id="collapseExample">
-						<div class="card card-body">
+						<div class="card card-body" style="z-index:1;">
 							<div>
 								<a class="item-link"
 									href="${pageContext.request.contextPath }/mypage/order.do">마이페이지</a>
 							</div>
 							<div>
 								<a href="${pageContext.request.contextPath}/mypage/order.do"
-									style="color: black"><strong>판매내역</strong></a>|<a
+									style="color: black">판매내역</a>|<a
 									href="${pageContext.request.contextPath}/mypage/purchases.do"
 									style="color: black">구매내역</a>|<a
 									href="${pageContext.request.contextPath}/item/basket.do?memberNo=${memberLoggedIn.seqMemberNo}"
 									style="color: black">장바구니</a>| <a
 									href="${pageContext.request.contextPath}/mypage/coupons.do"
-									style="color: black"><strong>쿠폰</strong></a>|<a
-									href="${pageContext.request.contextPath}/mypage/profile/credit.do"
-									style="color: black"><strong>프로모션</strong></a>|<a
+									style="color: black">쿠폰</a>|<a
 									href="${pageContext.request.contextPath}/mypage/profile/edit.do"
-									style="color: black">내정보</a>|<a
-									href="${pageContext.request.contextPath}/mypage/wishlist.do"
-									style="color: black"><strong>알림설정</strong></a>
+									style="color: black">내정보</a>
 							</div>
 						</div>
 					</div>
@@ -250,8 +286,11 @@ body{
 	#navbarNav ul{
 	}
 	#navbarNav ul li{
-		width: 130px;	
+		width: 125px;	
 		text-align: center;
+	}
+	.last{
+	width: 155px;
 	}
 	.nav-link{
 		font-size: 14px;
@@ -271,50 +310,6 @@ body{
 					<a class="nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">전체 카테고리</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown MenuLink">
-					<style>
-					.dropdown-menu{
-							background: rgb(250,250,250);
-							
-					}
-					#cTable{
-						font-family: 'Nanum Gothic', sans-serif;
-						background: rgb(250,250,250);
-			
-					
-					}
-					#cTable tr th{
-					  font-family: 'Noto Sans KR', sans-serif;
-					   /*  background: rgb(250,250,250); */
-					     background: #5853EB;
-					    color: white;
-						text-align: center;
-						font-weight: bolder;
-						text-decoration: none;
-					}
-					#cTable tr:not(:first-of-type) td ul{
-					    font-family: 'Nanum Gothic', sans-serif;
-						list-style: none;
-						padding-left: 10px;
-						padding-right: 10px;
-					
-						
-					}
-				    #cTable tr:not(:first-of-type) td ul:hover{
-					 	    background: #368AFF;
-					 	  border-radius:15px;
-						
-					}
-					
-					#cTable tr:not(:first-of-type) td ul>a{
-						text-decoration: none;
-					}
-					#cTable tr:not(:first-of-type) td ul>a:hover{
-					    font-family: 'Noto Sans KR', sans-serif;
-						text-decoration: none;
-					    color: white;
-					    font-weight: bolder;
-					}
-					</style>
 						<table id="cTable" border="0">
 							<tr>
 								<th>
@@ -437,17 +432,6 @@ body{
 								</td>
 								<td>
 								<c:forEach items="${allCategory }" var="ct">
-									<c:if test="${ct.CATEGORY_MACRO == 'I' }">
-										<ul>
-											<a href="${pageContext.request.contextPath }/category?caKey=I&ciKey=${ct.CATEGORY_MICRO }">
-												<li>${ct.CATEGORY_MICRO_NAME }</li>
-											</a>
-										</ul>
-									</c:if>
-								</c:forEach>
-								</td>
-								<td>
-								<c:forEach items="${allCategory }" var="ct">
 									<c:if test="${ct.CATEGORY_MACRO == 'J' }">
 										<ul>
 											<a href="${pageContext.request.contextPath }/category?caKey=J&ciKey=${ct.CATEGORY_MICRO }">
@@ -479,6 +463,17 @@ body{
 									</c:if>
 								</c:forEach>
 								</td>
+								<td>
+								<c:forEach items="${allCategory }" var="ct">
+									<c:if test="${ct.CATEGORY_MACRO == 'M' }">
+										<ul>
+											<a href="${pageContext.request.contextPath }/category?caKey=M&ciKey=${ct.CATEGORY_MICRO }">
+												<li>${ct.CATEGORY_MICRO_NAME }</li>
+											</a>
+										</ul>
+									</c:if>
+								</c:forEach>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -487,6 +482,7 @@ body{
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/recommend">추천상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/brandNew">새로 등록된 상품</a></li>
 				<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath }/item/regist">판매예정상품</a></li>
+				<li class="nav-item"><a class="nav-link last" href="${pageContext.request.contextPath }/auction/brandNew">새로 등록된 경매상품</a></li>
 			</ul>
 		</div>
 		<a class="nav-link"

@@ -170,7 +170,7 @@
 			<div class="maintitle">
 				${board.boardtitle}
 				
-				<c:if test="${memberLoggedIn.memberIsAdmin != null }">
+				<c:if test="${memberLoggedIn.memberIsAdmin eq 'Y'}">
 				<div class="ng-binding">
 					<button type="button" id="update" class="btn btn-outline-primary"
 						data-toggle="modal"
