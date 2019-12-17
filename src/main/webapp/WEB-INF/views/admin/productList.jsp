@@ -60,7 +60,7 @@
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
-			<td colspan="19">상품이 없습니다.</td>
+			<td colspan="9">상품이 없습니다.</td>
 		</tr>
 		</c:if>
 		

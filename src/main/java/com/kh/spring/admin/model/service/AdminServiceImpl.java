@@ -313,6 +313,20 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.questionCategory();
 	}
 
+	@Override
+	public int interestDelete(int memberNo) {
+		return adminDao.interestDelete(memberNo);
+	}
+
+	@Override
+	public int memberUpdate(Map<String, Object> map) {
+		return adminDao.memberUpdate(map);
+	}
+
+	@Override
+	public int memberUpdate1(Member m) {
+		return adminDao.memberUpdate1(m);
+	}
 	
 
 	

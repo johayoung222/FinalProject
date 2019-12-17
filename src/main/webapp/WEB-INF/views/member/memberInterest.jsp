@@ -101,8 +101,10 @@ function difInterestEnd(){
 	category.each(function(idx, item){
 		if($(item).prop("checked") == true){
 			interest += $(item).val();
+			console.log("interest : ",interest);
 		}
 	});
+
 	
 	$.ajax({
 		url: "${pageContext.request.contextPath}/member/memberItrUpdate?memberNo="+interestFrm.cMemberNo.value+"&interest="+interest,
@@ -111,8 +113,10 @@ function difInterestEnd(){
 			console.log(data);
 			if(data == 1){
 				alert("관심 상품이 등록되었습니다.");
-				opener.location.href = "${pageContext.request.contextPath}";
-				self.close();
+				//opener.location.href = "${pageContext.request.contextPath}";
+				//self.close();
+				window.opener.location.reload();
+				window.close();
 			}
 		},
 		error: function(){

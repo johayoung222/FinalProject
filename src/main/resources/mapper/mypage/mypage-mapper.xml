@@ -79,4 +79,9 @@
 	</select>
 	<resultMap type="map" id="couponsMap"></resultMap>
 	
+	<update id="memberAddressUpdate">
+		update member set member_mail_no=#{memberMailNo},member_address=#{memberAddress},
+		member_addressDetail=#{memberAddressDetail} where member_id=#{memberId}		
+	</update>
+	
 </mapper>

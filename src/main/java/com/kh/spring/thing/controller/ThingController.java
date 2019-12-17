@@ -56,7 +56,7 @@ public class ThingController {
 	@RequestMapping("/thing/sell.do")
 	public ModelAndView sell(ModelAndView mav, Regist regist, HttpServletRequest req,
 			@RequestParam(name="upFile",required=false) MultipartFile [] upFiles) {
-		logger.debug(regist);
+		logger.debug("sell regist : "+regist);
 		logger.debug(upFiles);
 		for(int i = 0 ; i<upFiles.length ; i++) {			
 			logger.debug("fileName="+upFiles[i].getOriginalFilename());

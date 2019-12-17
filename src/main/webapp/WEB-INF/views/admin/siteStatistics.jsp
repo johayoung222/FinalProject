@@ -29,7 +29,7 @@ function MF() {
       	url:"${pageContext.request.contextPath}/admin/memberGender.do",
       	dataType:"json",
       	success:function(data){
-      	//console.log(data);
+      	console.log(data);
 
       	// Load the Visualization API and the corechart package.
       	google.charts.load('current', {'packages':['corechart']});	
@@ -43,7 +43,7 @@ function MF() {
       	    data1.addColumn('number', 'number');
       	    data1.addRows([
       	      ['남자', data[0].CNT],
-      	      ['여자', data[1].CNT],
+      	      ['여자', data[1].CNT]
       	    ]);
 
       	    // Set chart options
@@ -253,17 +253,17 @@ function question(){
 	display:none;
 }
 rect{
-	display:inline;
+	display:inline-block;
 	position:relative;
 }
 .site{
-	position:relative;
 	display:inline-block;
 	width:500px;
+	margin: 1em;
 }
 
 
-</style>
+</style> 
 
 <br />
 <section id="siteStatistics-container" class="siteStatistics-container">
@@ -275,6 +275,7 @@ rect{
 <button type="button" class="btn btn-outline-dark" id="auction-btn" onclick="auction();">경매 상품 비율</button>
 <button type="button" class="btn btn-outline-dark" id="question-btn" onclick="question();">1:1문의 비율</button>
 <hr />
+
 <div class="site" id="MF"></div>
 
 <div class="site" id="paidProductCategory"></div>

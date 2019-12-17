@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.auction.model.vo.Auction;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.thing.model.vo.Category;
 import com.kh.spring.thing.model.vo.CategoryMacro;
 import com.kh.spring.thing.model.vo.Regist;
+
+import oracle.sql.DATE;
 
 
 /**
@@ -61,8 +67,11 @@ public class AdminController {
 	//회원리스트 조회
 	@RequestMapping("/admin/allMember.do")
 	public ModelAndView allMember(@RequestParam(value="cPage" , defaultValue="1") int cPage ,
-			ModelAndView mav) {
+			ModelAndView mav, HttpSession session) {
 		logger.debug("allMember메소드 실행!!");
+		
+		Member m = (Member)session.getAttribute("memberLoggedIn");
+		logger.debug("allMember m : "+m);
 		int numPerPage = 7;
 		List<Map<String, String>> list = adminService.allMember(cPage , numPerPage);
 		int totalContents = adminService.countallMember();
@@ -140,14 +149,19 @@ public class AdminController {
 	
 	@RequestMapping(value="/admin/updateisAdmin.do",method=RequestMethod.GET)
 	@ResponseBody
-	public int updateisAdmin(@RequestParam(value="isAdmin")String isAdmin,
+	public List updateisAdmin(@RequestParam(value="isAdmin")String isAdmin,
 			@RequestParam(value="memberId")String memberId) {
 		logger.debug("updateisAdmin메소드 실행!!");
 		Map<String,Object> map = new HashMap<>();
 		map.put("isAdmin",isAdmin);
 		map.put("memberId",memberId);
+		logger.debug("updateisAdmin Map : "+map);
 		int result = adminService.updateisAdmin(map);
-		return result;
+		List list = new ArrayList();
+		list.add(isAdmin);
+		list.add(result);
+		logger.debug("updateisAdmin list : "+list);
+		return list;
 		
 	}
 	
@@ -382,7 +396,8 @@ public class AdminController {
 			@RequestParam(value="cMa")String cMa,
 			@RequestParam(value="cMi")String cMi,
 			@RequestParam(value="registManufacturer")String registManufacturer,
-			@RequestParam(value="registAdminDescription")String registAdminDescription) {
+			@RequestParam(value="registAdminDescription")String registAdminDescription,
+			@RequestParam(value="dateRange")DATE dateRange) {
 		
 		Regist regist = adminService.registOne1(registNo);
 		Map<String, Object> map = new HashMap<>();
@@ -409,6 +424,7 @@ public class AdminController {
 		map.put("cMi0",cMi0);
 		map.put("cMa",cMa);
 		map.put("registAdminDescription",registAdminDescription);
+		map.put("registNo",registNo);
 				
 		int result = adminService.insertProduct(map);
 		if(result ==1) {
@@ -661,7 +677,7 @@ public class AdminController {
 	public List<Map<String,Object>> memberGender(){
 		logger.debug("memberGender 메소드 실행!!");
 		List<Map<String, Object>> list = adminService.memberGender();
-		logger.debug(list);
+		logger.debug("memberGender List : "+list);
 		return list;
 	}
 	
@@ -702,8 +718,27 @@ public class AdminController {
 		
 	}
 	
-
+	@RequestMapping(value="/admin/interestDelete.do", method=RequestMethod.GET)
+	@ResponseBody
+	public int interestDelete(@RequestParam(value="memberNo") int memberNo) {
+		logger.debug("inerestDelete 메소드 실행!!");
+		int result = adminService.interestDelete(memberNo);
+		logger.debug("inerestDelete result"+result);		
+		return result;
+		
+	}
 	
+
+
+	@RequestMapping(value="/admin/memberUpdate.do", method=RequestMethod.GET)
+	@ResponseBody
+	public int memberUpdate(Member m) {
+		logger.debug("memberUpdate 메소드 실행!!");
+		logger.debug("memberUpdate m : "+m);
+		
+		int result = adminService.memberUpdate1(m);
+		return result;
+	}
 	
 	
 	

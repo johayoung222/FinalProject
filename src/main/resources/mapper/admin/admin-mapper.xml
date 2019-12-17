@@ -98,7 +98,18 @@
 	
 	<!-- 하나의 판매신청 가져오기 Map타입 -->
 	<select id="registOne" resultMap="registMap">
-		select * from regist where seq_regist_no = #{registNo}
+		select R.*,CA.category_name AS exCategoryMacro ,CI.category_name AS exCategoryMicro 
+		from regist R,
+			category_micro CI,
+		    category_macro CA
+		where 
+		    R.category_macro = CA.category_macro
+		    and
+		    R.category_micro = CI.category_micro
+		    and
+		    CA.category_macro = CI.category_macro
+		    and
+		    R.seq_regist_no = #{registNo}
 	</select>
 	<resultMap type="map" id="registMap"></resultMap>
 	
@@ -128,7 +139,7 @@
 		values(seq_product_no.nextval,#{registName},#{registPrice},#{registStatus},
 		'Y',#{registManufacturer},#{registAmount},#{registImage},
 		#{registRealImage},#{registPrice}*0.001,#{registDescription},'N'
-		,sysdate,'N',#{registKinds},#{cMi0},#{cMa},#{seqMemberNo},
+		,#{registDate},'N',#{registKinds},#{cMi0},#{cMa},#{seqMemberNo},
 		SEQ_AUCTION_NO.nextval,#{registAdminDescription})
 	</insert>
 	
@@ -200,7 +211,17 @@
 	
 	<!-- auction_regist Map으로 뽑음 -->
 	<select id="auctionRegistOne" resultMap="auctionRegistOneMap">
-		select * from auction_regist where auction_regist_no = #{auctionRegistNo}
+		select R.* ,CA.category_name AS exCategoryMacro ,CI.category_name AS exCategoryMicro 
+		from auction_regist R,
+		    category_micro CI,
+		    category_macro CA 
+		where  R.category_macro = CA.category_macro
+		    and
+		    R.category_micro = CI.category_micro
+		    and
+		    CA.category_macro = CI.category_macro
+		    and
+		    auction_regist_no = #{acutionRegistNo}
 	</select>
 	<resultMap type="map" id="auctionRegistOneMap"></resultMap>
 	
@@ -312,5 +333,21 @@
 		group by question_mkinds
 	</select>
 	<resultMap type="map" id="questionCategoryMap"></resultMap>
+	
+	<update id="interestDelete" >
+		update member set member_interest = NULL where seq_member_no = #{memberNo}
+	</update>
+	
+	<update id="memberUpdate" >
+		update member set member_name= #{memberName},gender=#{gender},member_mail_no=#{memberMailNo},
+		member_address=#{memberAddress},member_addressDetail=#{memberAddressDetail},member_phone=#{memberPhone},
+		member_mileage=#{memberMileage}, member_email=#{memberEmail}, member_birth = #{memberBirth} where seq_member_no = #{seqMemberNo}
+	</update>
+	
+	<update id="memberUpdate1" >
+		update member set member_name= #{memberName},gender=#{gender},member_mail_no=#{memberMailNo},
+		member_address=#{memberAddress},member_addressDetail=#{memberAddressDetail},member_phone=#{memberPhone},
+		member_mileage=#{memberMileage}, member_email=#{memberEmail}, member_birth = #{memberBirth} where seq_member_no = #{seqMemberNo}
+	</update>
 	
 </mapper>

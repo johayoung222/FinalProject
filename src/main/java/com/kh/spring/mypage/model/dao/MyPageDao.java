@@ -42,4 +42,6 @@ public interface MyPageDao {
 	int acountbuy(int seqMemberNo);
 
 	List<Map<String, Object>> abuyList(int cPage, int numPerPage, int seqMemberNo);
+
+	int memberAddressUpdate(Member m);
 }

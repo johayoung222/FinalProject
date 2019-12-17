@@ -88,7 +88,8 @@
 				$("#categoryMa").on("change",function(){
 					var macro = $(this).val();
 					console.log("change 시 macro :"+macro);
-					var none = "";
+					$("#categoryMacro").val(macro);
+					var none = "";					
 					$("#categoryMi").append(none);
 					$.ajax({
 						url : "${pageContext.request.contextPath}/admin/categoryMi.do",
@@ -107,11 +108,20 @@
 						}
 					});	
 				});
+				
+				$("#categoryMi").on("change",function(){
+					var micro = $(this).val();
+					console.log("change 시 micro :"+micro);
+					$("#categoryMicro").val(micro);
+				});
+				
 				</script>
 				      
 	            <input type="hidden" name="seqMemberNo" id="seqMemberNo" value="${memberLoggedIn.getSeqMemberNo()}"/>
 	            <input type="hidden" name="registAuction" id="registAuction" value="N"/>
 	            <input type="hidden" name="registStatus" id="registStatus"/>
+	            <input type="hidden" name="categoryMacro" id="categoryMacro"/>
+	            <input type="hidden" name="categoryMicro" id="categoryMicro"/>
 	            
 	            <label for="">상품명을 입력해 주세요 : </label> 
 	            <input type="text" name="registName" id="registName" required /> <br /><br /> 
@@ -380,49 +390,45 @@ $(".statusN").on('click',function(){
 	$("#registStatus").val('N');
 	//alert($("#registStatus").val());
 });
-</script>
 
 
+function categoryClick(type){
+    console.log(type); 
+//  var category = $('#'+type).val();  
+    
+    $("button[name=category]").prop("disabled", true);   
+    
+}
 
-
-
-<script>
-   function categoryClick(type){
-      console.log(type); 
-//      var category = $('#'+type).val();  
-      
-      $("button[name=category]").prop("disabled", true);   
-      
-   }
-   //부트스트랩 파일변경시 파일명 보이기
-   $(function(){
-      $("[name=upFile]").on('change',function(){
-         //var fileName = $(this).val();
-         console.log($(this));
-         var fileName = $(this).prop("files")[0].name;
-         $(this).next(".custom-file-label").html(fileName);
-      });
-      
-      /* 휴대폰 인증이 된 회원인 경우에 버튼의 data-target 값을 변경한다. */
-      if(${memberLoggedIn == null}) {
+//부트스트랩 파일변경시 파일명 보이기
+$(function(){
+    $("[name=upFile]").on('change',function(){
+       //var fileName = $(this).val();
+       console.log($(this));
+       var fileName = $(this).prop("files")[0].name;
+       $(this).next(".custom-file-label").html(fileName);
+    });
+    
+    /* 휴대폰 인증이 된 회원인 경우에 버튼의 data-target 값을 변경한다. */
+    if(${memberLoggedIn == null}) {
 		$(".auctionbtn").attr("data-target","#auctionModalEnroll");    	  
 		$(".myBtn").attr("data-target","#memberMoveLogin");    	  
-      } else if(${memberLoggedIn.memberPhone != null}) {
+    } else if(${memberLoggedIn.memberPhone != null}) {
 		$(".auctionbtn").attr("data-target","");
 		$(".myBtn").attr("data-target","#myModal"); 
-      }
-      
-   });
+    }
+ });
+ 
 
-   
-   /* 핸드폰 인증이 안된 회원일시에 confirm창 뛰우기 */
-	function auctionV() {
-		if(${memberLoggedIn.memberPhone != null}) {
-			location.href='${pageContext.request.contextPath }/auctionWriter.do';
-		}
-		
+
+
+/* 핸드폰 인증이 안된 회원일시에 confirm창 뛰우기 */
+ function auctionV() {
+	if(${memberLoggedIn.memberPhone != null}) {
+		location.href='${pageContext.request.contextPath }/auctionWriter.do';
 	}
-   
+}
+ 
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

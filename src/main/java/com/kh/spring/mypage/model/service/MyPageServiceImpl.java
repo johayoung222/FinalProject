@@ -102,4 +102,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<Map<String, Object>> coupons(int memberNo) {
 		return myPageDao.coupons(memberNo);
 	}
+
+	@Override
+	public int memberAddressUpdate(Member m) {
+		return myPageDao.memberAddressUpdate(m);
+	}
 }

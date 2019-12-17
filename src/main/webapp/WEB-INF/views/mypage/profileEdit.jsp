@@ -61,6 +61,7 @@
 		<input type="hidden" name="memberPhone" value="" />
 		<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
 </form> --%>
+<input type="hidden" id="memberId" value="${memberLoggedIn.memberId}" />
 <div class="mypage-container" >
 	<div class="real-content-container" style="margin-left:30%;" >
 		<div class="mp-container" >
@@ -98,8 +99,7 @@
 			</div>
 			<hr style="width:130%;">
 			<c:if test="${memberLoggedIn.memberAddress eq null}">
-				<form action="${pageContext.request.contextPath}/mypage/addressupdate.do" name="perchaseFrm">
-				<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+				<form  id="perchaseFrm" name="perchaseFrm">
 					<div class="mypage-profile">
 						<div class="profedit-body-title" >배송정보</div>
 								<div class="profedit-body"id="info3_">
@@ -108,6 +108,7 @@
 										<div class="dropdown" style="width:500px;">
 											<input name="addressMail" autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text"">
 											<a id="findAddress" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;border-radius:5px;margin-left: -1.5px;">검색</a>
+											<input type="button" id="findAddress" value="검색" class="btn profedit-search-btn profedit-search-btn btn-primary"/><br />
 										</div>
 										<div style="height: 50px;">
 											<input name="addressMail2" id="address2" class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_"">  <br /> <br />							
@@ -123,22 +124,21 @@
 			</c:if>
 			
 			<c:if test="${memberLoggedIn.memberAddress ne null}">
-				<form action="${pageContext.request.contextPath}/mypage/addressupdate.do" name="perchaseFrm">
-				<input type="hidden" name="memberId" value="${memberLoggedIn.memberId}" />
+				<form  id="perchaseFrm" name="perchaseFrm">
 					<div class="mypage-profile">
 						<div class="profedit-body-title" >배송정보</div>
 								<div class="profedit-body"id="info3_">
 									<label class="profedit-form-label" style="margin: 7px 12px 7px -15px; padding-left: 18px;">주소</label>
 									<div class="form-group profedit-addr-wrapper" style="margin-left: 80px;">
 										<div class="dropdown" style="width:500px;">
-											<input name="addressMail" autocomplete="off" class="form-control profedit-addr-form ng-pristine ng-valid" id="address" ng-model="addressKeyword" placeholder="읍, 면, 동으로 검색해주세요." type="text" value="${address}">
-											<a id="findAddress" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;border-radius:5px;margin-left: -1.5px;">검색</a>
+											<input name="memberMailNo" class="form-control profedit-addr-form ng-pristine ng-valid" id="memberMailNo" type="text"  >
+											<input type="button" id="findAddress" value="검색" class="btn profedit-search-btn profedit-search-btn btn-primary" style="color:white;border-radius:5px;margin-left: -1.5px;"/><br />
 										</div>
 										<div style="height: 50px;">
-											<input name="addressMail2" id="address2" class="form-control profedit-addr-form ng-pristine ng-valid" ng-model="profile.addr1" placeholder="주소검색을 이용해주세요" readonly="readonly" id="address_" value="${address2}">  <br /> <br />							
+											<input name="memberAddress" id="memberAddress" class="form-control profedit-addr-form ng-pristine ng-valid" readonly="readonly"   >  <br /> <br />							
 										</div>
 										<div style="width:500px;">
-											<input name="addressMail3" id="address3" class="form-control profedit-addr-form ng-pristine ng-valid"  ng-model="profile.addr2" placeholder="상세주소" value="${address3}">							
+											<input name="memberAddressDetail" id="memberAddressDetail" class="form-control profedit-addr-form ng-pristine ng-valid"  >							
 											<button class="btn profedit-success-btn profedit-search-btn btn-primary" onclick="insert();" style="width:85px;border-radius:5px;margin-left: -1.5px;">정보 수정</button>
 										</div>
 									</div>
@@ -179,7 +179,7 @@ function sendMail(){
 		checkMailCertifiedFrm.submit();		
 }
 $("#findAddress").on('click',function(){
-	    new daum.Postcode({
+	new daum.Postcode({
         oncomplete: function(data) {
         	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
@@ -211,22 +211,57 @@ $("#findAddress").on('click',function(){
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                perchaseFrm.addressMail2.value = extraAddr;
+                perchaseFrm.memberAddress.value = extraAddr;
             
             } else {
-                perchaseFrm.addressMail2.value = extraAddr;
+            	perchaseFrm.memberAddress.value = extraAddr;
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            perchaseFrm.addressMail.value = data.zonecode;
-            perchaseFrm.addressMail2.value = addr;
-            
-            perchaseFrm.addressMail3.focus();
+            perchaseFrm.memberMailNo.value = data.zonecode;
+            perchaseFrm.memberAddress.value = addr;
+                        
+            perchaseFrm.memberAddressDetail.focus();
         }
     }).open();
 });
 function insert(){
-	document.perchaseFrm.submit();
+	var memberId = $("#memberId").val();
+	var memberMailNo = $("#memberMailNo").val();
+	var memberAddress = $("#memberAddress").val();
+	var memberAddressDetail = $("#memberAddressDetail").val();
+	console.log(memberMailNo,	memberAddress,	memberAddressDetail);
+	$.ajax({
+		url:"${pageContext.request.contextPath}/mypage/memberAddressUpdate.do",
+		data:{memberId:memberId,
+			memberMailNo:memberMailNo,
+			memberAddress:memberAddress,
+			memberAddressDetail:memberAddressDetail},
+		success:function(data){
+			console.log(data);
+			alert("주소 변경 완료!");
+		},error:function(){
+			alert("ajax 요청 실패!!");
+		}
+	});
 }
+
+$(function(){
+	var memberId = $('#memberId').val();
+	console.log(memberId);
+	$.ajax({
+		url:"${pageContext.request.contextPath}/admin/memberOne.do",
+		data:{memberId:memberId},		
+		success:function(data){
+			console.log(data);
+			$("#memberMailNo").val(data[0].MEMBER_MAIL_NO);
+			$("#memberAddress").val(data[0].MEMBER_ADDRESS);
+			$("#memberAddressDetail").val(data[0].MEMBER_ADDRESSDETAIL);
+		},error:function(){
+			alert("ajax요청 실패!");
+		}
+	});
+});
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

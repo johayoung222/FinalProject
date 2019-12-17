@@ -15,6 +15,8 @@ public class Regist {
 	private String registKinds;
 	private Date registDate;
 	private String registStatus;
+	private String categoryMicro;
+	private String categoryMacro;
 	
 	public String getRegistStatus() {
 		return registStatus;
@@ -22,13 +24,25 @@ public class Regist {
 	public void setRegistStatus(String registStatus) {
 		this.registStatus = registStatus;
 	}
+	public String getCategoryMicro() {
+		return categoryMicro;
+	}
+	public void setCategoryMicro(String categoryMicro) {
+		this.categoryMicro = categoryMicro;
+	}
+	public String getCategoryMacro() {
+		return categoryMacro;
+	}
+	public void setCategoryMacro(String categoryMacro) {
+		this.categoryMacro = categoryMacro;
+	}
 	public Regist() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Regist(int seqMemberNo, int seqRegistNo, String registName, int registPrice, String registAuction,
 			String registImage, String registRealImage, int registAmount, String registDescription, String registKinds,
-			Date registDate, String registStatus) {
+			Date registDate, String registStatus, String categoryMicro,String categoryMacro) {
 		super();
 		this.seqMemberNo = seqMemberNo;
 		this.seqRegistNo = seqRegistNo;
@@ -42,6 +56,8 @@ public class Regist {
 		this.registKinds = registKinds;
 		this.registDate = registDate;
 		this.registStatus =registStatus;
+		this.categoryMicro=categoryMicro;
+		this.categoryMacro=categoryMacro;
 	}
 	public int getSeqMemberNo() {
 		return seqMemberNo;
@@ -111,11 +127,13 @@ public class Regist {
 	}
 	@Override
 	public String toString() {
-		return "[seqMemberNo=" + seqMemberNo + ", seqRegistNo=" + seqRegistNo + ", registName=" + registName
+		return "Regist [seqMemberNo=" + seqMemberNo + ", seqRegistNo=" + seqRegistNo + ", registName=" + registName
 				+ ", registPrice=" + registPrice + ", registAuction=" + registAuction + ", registImage=" + registImage
 				+ ", registRealImage=" + registRealImage + ", registAmount=" + registAmount + ", registDescription="
-				+ registDescription + ", registKinds=" + registKinds + ", registDate=" + registDate +", registStatus"+registStatus+ "]";
+				+ registDescription + ", registKinds=" + registKinds + ", registDate=" + registDate + ", registStatus="
+				+ registStatus + ", categoryMicro=" + categoryMicro + ", categoryMacro=" + categoryMacro + "]";
 	}
+	
 	
 	
 	

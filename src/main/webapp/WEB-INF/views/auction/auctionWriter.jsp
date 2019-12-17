@@ -93,14 +93,14 @@ function sendFile(file, el) {
 		
 			<label for="field1">
 			<span>카테고리: </span>
-						<select class="select-field" id="lctg" name="lctg" onchange="fn_next(this.value)">
+						<select class="select-field" id="categoryMacro" name="categoryMacro" onchange="fn_next(this.value)">
 							<option value="" hidden="true">대분류</option>
 							<c:forEach var="rs" items="${ctgList}" varStatus="status">
-								<option value="${rs.categoryMacro}">${rs.categoryName}</option>
+								<option id="categoryMacro" value="${rs.categoryMacro}">${rs.categoryName}</option>
 							</c:forEach>
 						</select> 
 						
-						<select class="select-field" id="mctg" name="mctg">
+						<select class="select-field" id="categoryMicro" name="categoryMicro">
 							<option value="" hidden="true">소분류</option>
 						</select></label>
 						<p id="ctgchk" style = "font-style: italic ; font-weight: bold; font-size:0.8em;  color: red;"></p>
@@ -274,15 +274,15 @@ function fn_next(ctgcode) {
 		dataType : "json",
 		success : function(data) {
 			if(data.resultMList != null) {
-				$('#mctg').children("option").remove();
+				$('#categoryMicro').children("option").remove();
 				//data.rows 에 코드, 이름 형태로 되어있다고 가정.
 				var codeList = data.resultMList;
-				$('#mctg').append( "<option value='' hidden='true'>소분류</option>");
+				$('#categoryMicro').append( "<option value='' id='categoryMicro' hidden='true'>소분류</option>");
 				
 				for (var i = 0; i < codeList.length; i++) {
-					var option = "<option value='" + codeList[i].categoryMacro + "'>"+ codeList[i].categoryName + "</option>";
+					var option = "<option value='" + codeList[i].categoryMicro + "'>"+ codeList[i].categoryName + "</option>";
 					//대상 콤보박스에 추가
-					$('#mctg').append(option);
+					$('#categoryMicro').append(option);
 				}
 			}
 		},
@@ -356,19 +356,19 @@ $(function() {
 		//null값 체크
 		var text;
 	    
-		if (document.frm.lctg.value=="") {
+		if (document.frm.categoryMacro.value=="") {
 	    	text = "대분류를 입력해주세용.";
 	    	document.getElementById("ctgchk").innerHTML = text;
-	    	document.frm.lctg.focus();
+	    	document.frm.categoryMacro.focus();
 	        return;
 	    }else{
 	    	document.getElementById("ctgchk").innerHTML = "";
 	    }
 		
-		if (document.frm.mctg.value=="") {
+		if (document.frm.categoryMicro.value=="") {
 	    	text = "소분류를 입력해주세용";
 	    	document.getElementById("ctgchk").innerHTML = text;
-	    	document.frm.mctg.focus();
+	    	document.frm.categoryMicro.focus();
 	        return;
 	    }else{
 	    	document.getElementById("ctgchk").innerHTML = "";
@@ -472,6 +472,8 @@ function removeChar(event) {
 	else
 		event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
+
+
 </script>
 
 

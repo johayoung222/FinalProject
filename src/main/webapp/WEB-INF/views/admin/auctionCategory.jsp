@@ -17,7 +17,7 @@
     crossorigin="anonymous"></script>
 <%
 	int auctionRegistNo = (int)request.getAttribute("auctionRegistNo");
-	System.out.println(auctionRegistNo);
+	//System.out.println(auctionRegistNo);
 %>
 <style>
 .form-control{
@@ -45,10 +45,14 @@
 <div class="alert alert-primary" role="alert">경매 신청 리스트</div>
 <div class="alert">
 	<form id="inAuction">
+		<label for="registNo">기존 분류</label>&nbsp;&nbsp;
+		<input class="form-control form-control-sm" id="exCategoryMacro" type="text" readonly>
+		<input class="form-control form-control-sm" id="exCategoryMicro" type="text" readonly> <br />
+		
+		<label for="registNo">선택 분류</label>&nbsp;&nbsp;
 		<select id="categoryMa" class="form-control form-control-sm">
 			<option value="" disabled selected>대분류</option>
 		</select>
-		&nbsp;&nbsp;&nbsp;
 		<select id="categoryMi" class="form-control form-control-sm">
 		</select> <br />
 		
@@ -97,6 +101,8 @@ $(function(){
 			$("#edate").val(data[0].EDATE);
 			$("#auctionPrice").val(data[0].AUCTION_PRICE);
 			$("#auctionDetail").html(data[0].AUCTIONDETAIL);
+			$("#exCategoryMacro").val(data[0].EXCATEGORYMACRO);
+			$("#exCategoryMicro").val(data[0].EXCATEGORYMICRO);
 			$(".main_img").attr("src","${pageContext.request.contextPath}/resources/upload/"+data[0].AUCTION_IMAGE_MAIN);
 		},error:function(){
 			console.log("ajax요청 실패");

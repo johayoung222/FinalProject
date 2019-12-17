@@ -17,7 +17,9 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
@@ -334,30 +336,45 @@ public class MyPageController {
 			return mav;
 		}
 	 @RequestMapping("/mypage/addressupdate.do")
-	 public ModelAndView updateaddress(ModelAndView mav,HttpServletRequest request,HttpSession session) {
-		 String address = request.getParameter("addressMail");
-		 String address2 = request.getParameter("addressMail2");
-		 String address3 = request.getParameter("addressMail3");
-		 String memberId = request.getParameter("memberId");
-		 String memberAddress = address+" "+address2+" "+address3;
-		 logger.debug("address~"+address+"||"+address2+"||"+address3);
+	 public ModelAndView updateaddress(ModelAndView mav,HttpServletRequest request,HttpSession session, Member m) {
+//		 String address = request.getParameter("addressMail");
+//		 String address2 = request.getParameter("addressMail2");
+//		 String address3 = request.getParameter("addressMail3");
+//		 String memberId = request.getParameter("memberId");
+//		 String memberAddress = address+" "+address2+" "+address3;
+//		 logger.debug("address~"+address+"||"+address2+"||"+address3);
+//		 
+//		 Member m = (Member)session.getAttribute("memberLoggedIn");
+//		 m.setMemberId(memberId);
+//		 m.setMemberAddress(memberAddress);
+//		 logger.debug("member=="+m);
+		 String memberMailNo = m.getMemberMailNo();
+		 logger.debug("addressUpdate memberMailNo : "+memberMailNo);
 		 
-		 Member m = (Member)session.getAttribute("memberLoggedIn");
-		 m.setMemberId(memberId);
-		 m.setMemberAddress(memberAddress);
-		 logger.debug("member=="+m);
+		 logger.debug("addressUpdate 메소드 실행!");
 		 
 		 String loc = "/mypage/profile/edit.do";
 		 
 		 int result = myPageService.updateaddress(m);
 		 
 		 mav.addObject("loc", loc);
-		 mav.addObject("address",address);
-		 mav.addObject("address2",address2);
-		 mav.addObject("address3",address3);
+		 mav.addObject("memberMailNo",m.getMemberMailNo());
+//		 mav.addObject("address2",address2);
+//		 mav.addObject("address3",address3);
 		 mav.setViewName("mypage/profileEdit");
 		 
 		 return mav;
 	 }
+	 
+	@RequestMapping(value="/mypage/memberAddressUpdate.do", method=RequestMethod.GET)
+	@ResponseBody
+	public int memberAddressUpdate(Member m) {
+		logger.debug("memberAddressUpdate 메소드 실행!!");
+		logger.debug("memberAddressUpdate m : "+m);
+		
+		int result = myPageService.memberAddressUpdate(m);
+		return result;
+	}
 
+	
 }

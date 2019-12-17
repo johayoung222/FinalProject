@@ -135,6 +135,12 @@ public interface AdminDao {
 
 	List<Map<String, Object>> questionCategory();
 
+	int interestDelete(int memberNo);
+
+	int memberUpdate(Map<String, Object> map);
+
+	int memberUpdate1(Member m);
+
 
 
 	

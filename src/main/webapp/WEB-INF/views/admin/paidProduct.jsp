@@ -81,7 +81,7 @@
 	</tr>
 	<c:if test="${empty list }">
 	<tr>
-		<td colspan="7">결제된 상품이 존재하지 않습니다..</td>
+		<td colspan="8">결제된 상품이 존재하지 않습니다..</td>
 	</tr>
 	</c:if>
 		

@@ -316,6 +316,19 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.questionCategory");
 	}
 	
+	@Override
+	public int interestDelete(int memberNo) {
+		return sqlSession.update("admin.interestDelete",memberNo);
+	}
+	@Override
+	public int memberUpdate(Map<String, Object> map) {
+		return sqlSession.update("admin.memberUpdate",map);
+	}
+	@Override
+	public int memberUpdate1(Member m) {
+		return sqlSession.update("admin.memberUpdate1",m);
+	}
+	
 	
 	
 	

@@ -55,16 +55,16 @@
 		<tr class="tbl-tr">
 			<th style="width:76px;">고유번호</th>
 			<th>문의시간</th>
-			<th>문의내용</th>
 			<th>문의종류</th>
 			<th>상세분류</th>
+			<th>문의내용</th>
 			<th>회원코드</th>
 			<th>답변여부</th>
 			<th>답변</th>			
 		</tr>
 		<c:if test="${empty list }">
 		<tr>
-			<td colspan="7">질문이 없습니다.</td>
+			<td colspan="8">질문이 없습니다.</td>
 		</tr>
 		</c:if>
 		
